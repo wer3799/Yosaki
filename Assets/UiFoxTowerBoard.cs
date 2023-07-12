@@ -130,10 +130,23 @@ public class UiFoxTowerBoard : MonoBehaviour
 
 
     int instanClearGetNum = (int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue * inputNum;
+
+    string desc = "";
+    if (PlayerStats.GetFoxRelicGainValue() > 0f)
+    {
+        desc +=
+            $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}(+{instanClearGetNum*PlayerStats.GetFoxRelicGainValue()})개를 획득 하시겠습니까?\n" +
+            $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}(+{(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue*PlayerStats.GetFoxRelicGainValue()})개 획득)</color>";
+    }
+    else
+    {
+        desc +=
+            $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}개를 획득 하시겠습니까?\n" +
+            $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}개 획득)</color>";
+    }
     
     PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-        $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}개를 획득 하시겠습니까?\n" +
-        $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}개 획득)</color>",
+        desc,
         () =>
         {
             int remainItemNum = (int)ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value;
@@ -168,7 +181,7 @@ public class UiFoxTowerBoard : MonoBehaviour
     
             //실제소탕
             ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value -= inputNum;
-            ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value += instanClearGetNum;
+            ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value += instanClearGetNum + (instanClearGetNum * PlayerStats.GetFoxRelicGainValue());
     
             List<TransactionValue> transactions = new List<TransactionValue>();
     
@@ -178,11 +191,11 @@ public class UiFoxTowerBoard : MonoBehaviour
     
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
     
-            ServerData.SendTransaction(transactions,
+            ServerData.SendTransactionV2(transactions,
                 successCallBack: () =>
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}개 획득!", null);
+                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum+ (instanClearGetNum * PlayerStats.GetFoxRelicGainValue())}개 획득!", null);
                 });
         }, null);
      }

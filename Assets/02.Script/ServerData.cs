@@ -64,6 +64,8 @@ public static class ServerData
 
     public static RelicServerTable relicServerTable { get; private set; } = new RelicServerTable();
     public static StageRelicServerTable stageRelicServerTable { get; private set; } = new StageRelicServerTable();
+    
+    public static GuimoonServerTable guimoonServerTable { get; private set; } = new GuimoonServerTable();
 
     public static MonthlyPassServerTable2 monthlyPassServerTable2 { get; private set; } = new MonthlyPassServerTable2();
     public static RankTable_MiniGame rankTable_MiniGame { get; private set; } = new RankTable_MiniGame();
@@ -155,6 +157,8 @@ public static class ServerData
         relicServerTable.Initialize();
 
         stageRelicServerTable.Initialize();
+        
+        guimoonServerTable.Initialize();
 
         monthlyPassServerTable2.Initialize();
         
@@ -231,6 +235,50 @@ public static class ServerData
             {
                 Debug.LogError($"SendTransaction error!!! {bro.GetMessage()}");
 
+                if (retry)
+                {
+                    CoroutineExecuter.Instance.StartCoroutine(TransactionRetryRoutine(transactionList));
+                }
+                else
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n앱을 재실행 합니다.",
+                        () => { Utils.RestartApplication(); });
+                }
+            }
+
+            completeCallBack?.Invoke();
+        });
+    }
+    public static void SendTransactionV2(List<TransactionValue> transactionList, bool retry = true,
+        Action completeCallBack = null, Action successCallBack = null)
+    {
+        SendQueue.Enqueue(Backend.GameData.TransactionWrite, transactionList, (bro) =>
+        {
+            if (bro.IsSuccess())
+            {
+                successCallBack?.Invoke();
+            #if UNITY_EDITOR
+                for (int i = 0; i < transactionList.Count; i++)
+                {
+                    var paramlist = transactionList[i].param;
+                    
+                    string log = "";
+                    log += $"Table : {transactionList[i].table}\n";
+                    var keys = paramlist.Keys.GetEnumerator();
+                    var values = paramlist.Values.GetEnumerator();
+                    while (keys.MoveNext()&&values.MoveNext())
+                    {
+                        log += $"Param : {keys.Current} / Value : {values.Current}\n";
+                    }
+                    Debug.LogError(log);
+                }
+            #endif
+            }
+            else
+            {
+                #if UNITY_EDITOR
+                Debug.LogError($"SendTransaction error!!! {bro.GetMessage()}");
+                #endif
                 if (retry)
                 {
                     CoroutineExecuter.Instance.StartCoroutine(TransactionRetryRoutine(transactionList));
@@ -626,6 +674,9 @@ public static class ServerData
             case Item_Type.HyungsuRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value += rewardValue;
                 break;
+            case Item_Type.ChunguRelic:
+                ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value += rewardValue;
+                break;
             case Item_Type.FoxRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxRelic).Value += rewardValue;
                 break;
@@ -831,6 +882,8 @@ public static class ServerData
             case Item_Type.costume135:
             case Item_Type.costume136:
             case Item_Type.costume137:
+            case Item_Type.costume138:
+            case Item_Type.costume139:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -844,6 +897,12 @@ public static class ServerData
                 break;
             case Item_Type.StageRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += rewardValue;
+                break;
+            case Item_Type.GuimoonRelic:
+                ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value += rewardValue;
+                break;
+            case Item_Type.GuimoonRelicClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += rewardValue;
                 break;
             case Item_Type.PeachReal:
                 ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += rewardValue;
@@ -1027,6 +1086,8 @@ public static class ServerData
             case Item_Type.costume135:
             case Item_Type.costume136:
             case Item_Type.costume137:
+            case Item_Type.costume138:
+            case Item_Type.costume139:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1069,6 +1130,13 @@ public static class ServerData
                 passParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            case Item_Type.GuimoonRelic:
+                passParam.Add(GoodsTable.GuimoonRelic, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.GuimoonRelicClearTicket:
+                passParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
             case Item_Type.PeachReal:
                 passParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -1108,6 +1176,10 @@ public static class ServerData
 
             case Item_Type.HyungsuRelic:
                 passParam.Add(GoodsTable.HyungsuRelic, ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.ChunguRelic:
+                passParam.Add(GoodsTable.ChunguRelic, ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.FoxRelic:
@@ -1659,6 +1731,16 @@ public static class ServerData
                 param.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.GuimoonRelic:
+                ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value += amount;
+                param.Add(GoodsTable.GuimoonRelic, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.GuimoonRelicClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += amount;
+                param.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.Event_Item_0:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value += amount;
                 param.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
@@ -1847,6 +1929,11 @@ public static class ServerData
             case Item_Type.HyungsuRelic:
                 ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value += amount;
                 param.Add(GoodsTable.HyungsuRelic, ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.ChunguRelic:
+                ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value += amount;
+                param.Add(GoodsTable.ChunguRelic, ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.FoxRelic:
@@ -3535,6 +3622,9 @@ public static class ServerData
                 case Item_Type.HyungsuRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value += amount;
                     break;
+                case Item_Type.ChunguRelic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value += amount;
+                    break;
                 case Item_Type.FoxRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.FoxRelic).Value += amount;
                     break;
@@ -3700,6 +3790,12 @@ public static class ServerData
                 //
                 case Item_Type.StageRelic:
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
+                    break;
+                case Item_Type.GuimoonRelic:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value += amount;
+                    break;
+                case Item_Type.GuimoonRelicClearTicket:
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += amount;
                     break;
                 case Item_Type.PeachReal:
                     ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += amount;

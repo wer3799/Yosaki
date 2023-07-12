@@ -212,7 +212,7 @@ public class UiStageCell : MonoBehaviour
 
         string sufix = stageMapData.Id <= lastClearData ? "(클리어)" : "";
 
-        stageName.SetText($"{(stageMapData.Id + 1).ToString()}단계{sufix}");
+        stageName.SetText($"{Utils.ConvertStage(stageMapData.Id + 1)}단계{sufix}");
 
         Subscribe();
     }

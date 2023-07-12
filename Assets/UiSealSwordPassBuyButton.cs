@@ -92,10 +92,12 @@ public class UiSealSwordPassBuyButton : MonoBehaviour
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 
+        //요도소탕권 지급
         ServerData.goodsTable.TableDatas[GoodsTable.SealWeaponClear].Value += 30;
         
-        ServerData.goodsTable.UpData(GoodsTable.SealWeaponClear,false);
+        ServerData.goodsTable.UpDataV2(GoodsTable.SealWeaponClear,false);
 
+        //
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 
         ServerData.iapServerTable.UpData(tableData.Productid);

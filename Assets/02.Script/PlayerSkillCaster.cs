@@ -41,6 +41,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     public ReactiveProperty<int> visionChargeCount;
     public ReactiveProperty<float> sealChargeCount;//상단전속도증가
     public ReactiveProperty<float> sealChargeCount2;//요도해방으로 인한 속도증가
+    public ReactiveProperty<float> sealChargeCount3;//능력치로 증가
     public ReactiveProperty<bool> useVisionSkill;
     
     
@@ -91,7 +92,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             //봉인검기술
             if (TableManager.Instance.SkillTable.dataArray[skillIdx].SKILLCASTTYPE == SkillCastType.Player)
             {
-                SealSkillCaster.currentHitCount.Value += sealChargeCount.Value + sealChargeCount2.Value;
+                SealSkillCaster.currentHitCount.Value += sealChargeCount.Value + sealChargeCount2.Value+ sealChargeCount3.Value;
             }
 
             
@@ -211,6 +212,10 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             {
                 sealChargeCount2.Value = TableManager.Instance.SealSwordAwakeTable.dataArray[grade].Addchargevalue;
             }
+        }).AddTo(this);
+        ServerData.guimoonServerTable.TableDatas["guimoon16"].level2.AsObservable().Subscribe(e =>
+        {
+            sealChargeCount3.Value = PlayerStats.GetSealSwordAttackSpeed();
         }).AddTo(this);
 
     }

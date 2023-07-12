@@ -102,6 +102,8 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle showFoxCup;
     [SerializeField]
     private Toggle showWolfRing;
+    [SerializeField]
+    private Toggle showDragonBracelet;
 
     [SerializeField]
     private Toggle showRingEffect; 
@@ -183,6 +185,7 @@ public class UiSettingBoard : MonoBehaviour
 
         showFoxCup.isOn = PlayerPrefs.GetInt(SettingKey.showFoxCup) == 1;
         showWolfRing.isOn = PlayerPrefs.GetInt(SettingKey.showWolfRing) == 1;
+        showDragonBracelet.isOn = PlayerPrefs.GetInt(SettingKey.showDragonBracelet) == 1;
         
         showRingEffect.isOn = PlayerPrefs.GetInt(SettingKey.showRingEffect) == 1;
         newUi.isOn = PlayerPrefs.GetInt(SettingKey.newUi) == 1;
@@ -606,6 +609,17 @@ public class UiSettingBoard : MonoBehaviour
 
         SettingData.showWolfRing.Value = on ? 1 : 0;
     }
+    public void ShowDragonBraceletOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showDragonBracelet.Value = on ? 1 : 0;
+    }
 
     public void ShowRingEffectOnOff(bool on)
     {
@@ -756,6 +770,7 @@ public static class SettingKey
 
     public static string showFoxCup = "showFoxCup";
     public static string showWolfRing = "showWolfRing";
+    public static string showDragonBracelet = "showDragonBracelet";
     public static string showRingEffect = "showRingEffect";
     public static string newUi = "newUi";
     public static string towerAutoMode = "towerAutoMode";
@@ -764,6 +779,44 @@ public static class SettingKey
     public static string autoVisionSkill = "autoVisionSkill";
     public static string showVisionSkill = "showVisionSkill";
     public static string showDosulSkill = "showDosulSkill";
+
+    public static string showBanditUi = "showBanditUi";
+    public static string showTowerUi = "showTowerUi";
+    public static string showSmithUi = "showSmithUi";
+    public static string showDokebiUi = "showDokebiUi";
+    public static string showSoulForestUi = "showSoulForestUi";
+    public static string showTaegeukUi = "showTaegeukUi";
+    public static string showBackguiUi = "showBackguiUi";
+    public static string showSonUi = "showSonUi";
+    public static string showSusanoUi = "showSusanoUi";
+    public static string showFoxmaskUi = "showFoxmaskUi";
+    public static string showKingTestUi = "showKingTestUi";
+    public static string showGradeTestUi = "showGradeTestUi";
+    public static string showVisionTowerUi = "showVisionTowerUi";
+    public static string showSuhoTowerUi = "showSuhoTowerUi";
+    public static string showFoxTowerUi = "showFoxTowerUi";
+    public static string showGodTrialUi = "showGodTrialUi";
+
+    public static string showCatUi = "showCatUi";
+    public static string showTwelveUi = "showTwelveUi";
+    public static string showHwansuUi = "showHwansuUi";
+    public static string showGumihoUi = "showGumihoUi";
+    public static string showNewYoguiUi = "showNewYoguiUi";
+    public static string showSuhosinUi = "showSuhosinUi";
+    public static string showSasinsuUi = "showSasinsuUi";
+    public static string showSahyungsuUi = "showSahyungsuUi";
+    public static string showVisionBossUi = "showVisionBossUi";
+    public static string showFoxUi = "showFoxUi";
+    public static string showSangoonUi= "showSangoonUi";
+    public static string showChunguUi= "showChunguUi";
+
+    public static string showHellUi = "showHellUi";
+    public static string showChunUi = "showChunUi";
+    public static string showDoUi = "showDoUi";
+    public static string showSumiUi = "showSumiUi";
+    public static string showThiefUi = "showThiefUi";
+    public static string showDarkUi = "showDarkUi";
+    public static string showSinsunUi = "showSinsunUi";
 
 }
 
@@ -811,6 +864,7 @@ public static class SettingData
 
     public static ReactiveProperty<int> showFoxCup = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showWolfRing = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> showDragonBracelet = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showRingEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> newUi = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> towerAutoMode = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
@@ -820,6 +874,46 @@ public static class SettingData
     public static ReactiveProperty<int> showVisionSkill = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showDosulSkill = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
+    //한계돌파
+    public static ReactiveProperty<int> showBanditUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showTowerUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSmithUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showDokebiUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSoulForestUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showTaegeukUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showBackguiUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSonUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSusanoUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showFoxmaskUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showKingTestUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showGradeTestUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showVisionTowerUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSuhoTowerUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showFoxTowerUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showGodTrialUi = new ReactiveProperty<int>();
+
+    //보스도전
+    public static ReactiveProperty<int> showCatUi    = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showTwelveUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showHwansuUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showGumihoUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showNewYoguiUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSuhosinUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSasinsuUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSahyungsuUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showVisionBossUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showFoxUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSangoonUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showChunguUi = new ReactiveProperty<int>();
+
+    //삼천세계
+    public static ReactiveProperty<int> showHellUi  = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showChunUi  = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showDoUi    = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSumiUi  = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showThiefUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showDarkUi  = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSinsunUi = new ReactiveProperty<int>();
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
 
@@ -936,6 +1030,9 @@ public static class SettingData
         
         if (PlayerPrefs.HasKey(SettingKey.showWolfRing) == false)
             PlayerPrefs.SetInt(SettingKey.showWolfRing, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showDragonBracelet) == false)
+            PlayerPrefs.SetInt(SettingKey.showDragonBracelet, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.showRingEffect) == false)
             PlayerPrefs.SetInt(SettingKey.showRingEffect, 1); 
@@ -957,6 +1054,56 @@ public static class SettingData
         
         if (PlayerPrefs.HasKey(SettingKey.autoVisionSkill) == false)
             PlayerPrefs.SetInt(SettingKey.autoVisionSkill, 1);
+        //한계돌파
+        if (PlayerPrefs.HasKey(SettingKey.showBanditUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showBanditUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showTowerUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showTowerUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showSmithUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showSmithUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showDokebiUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showDokebiUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showTaegeukUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showTaegeukUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showSoulForestUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showSoulForestUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showBackguiUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showBackguiUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showSonUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showSonUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showSusanoUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showSusanoUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showFoxmaskUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showFoxmaskUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showKingTestUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showKingTestUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showGradeTestUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showGradeTestUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showVisionTowerUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showVisionTowerUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showSuhoTowerUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showSuhoTowerUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showFoxTowerUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showFoxTowerUi, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showGodTrialUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showGodTrialUi, 1);
+        
+        //
 
     }
 
@@ -1002,6 +1149,7 @@ public static class SettingData
 
         showFoxCup.Value = PlayerPrefs.GetInt(SettingKey.showFoxCup, 1);
         showWolfRing.Value = PlayerPrefs.GetInt(SettingKey.showWolfRing, 1);
+        showDragonBracelet.Value = PlayerPrefs.GetInt(SettingKey.showDragonBracelet, 1);
         showRingEffect.Value = PlayerPrefs.GetInt(SettingKey.showRingEffect, 1);
         
         newUi.Value = PlayerPrefs.GetInt(SettingKey.newUi, 1);
@@ -1015,6 +1163,78 @@ public static class SettingData
         showVisionSkill.Value = PlayerPrefs.GetInt(SettingKey.showVisionSkill, 1);
         
         showDosulSkill.Value = PlayerPrefs.GetInt(SettingKey.showDosulSkill, 1);
+        
+        showBanditUi.Value = PlayerPrefs.GetInt(SettingKey.showBanditUi, 1);
+        
+        showTowerUi.Value = PlayerPrefs.GetInt(SettingKey.showTowerUi, 1);
+        
+        showSmithUi.Value = PlayerPrefs.GetInt(SettingKey.showSmithUi, 1);
+
+        showDokebiUi.Value = PlayerPrefs.GetInt(SettingKey.showDokebiUi, 1);
+        
+        showSoulForestUi.Value = PlayerPrefs.GetInt(SettingKey.showSoulForestUi, 1);
+        
+        showTaegeukUi.Value = PlayerPrefs.GetInt(SettingKey.showTaegeukUi, 1);
+
+        showBackguiUi.Value = PlayerPrefs.GetInt(SettingKey.showBackguiUi, 1);
+        
+        showSonUi.Value = PlayerPrefs.GetInt(SettingKey.showSonUi, 1);
+        
+        showSusanoUi.Value = PlayerPrefs.GetInt(SettingKey.showSusanoUi, 1);
+
+        showFoxmaskUi.Value = PlayerPrefs.GetInt(SettingKey.showFoxmaskUi, 1);
+        
+        showKingTestUi.Value = PlayerPrefs.GetInt(SettingKey.showKingTestUi, 1);
+        
+        showGradeTestUi.Value = PlayerPrefs.GetInt(SettingKey.showGradeTestUi, 1);
+        
+        showVisionTowerUi.Value = PlayerPrefs.GetInt(SettingKey.showVisionTowerUi, 1);
+        
+        showSuhoTowerUi.Value = PlayerPrefs.GetInt(SettingKey.showSuhoTowerUi, 1);
+        
+        showFoxTowerUi.Value = PlayerPrefs.GetInt(SettingKey.showFoxTowerUi, 1);
+        
+        showGodTrialUi.Value = PlayerPrefs.GetInt(SettingKey.showGodTrialUi, 1);
+        
+        
+        //보스도전
+        showCatUi.Value = PlayerPrefs.GetInt(SettingKey.showCatUi, 1);
+
+        showTwelveUi.Value = PlayerPrefs.GetInt(SettingKey.showTwelveUi, 1);
+
+        showHwansuUi.Value = PlayerPrefs.GetInt(SettingKey.showHwansuUi, 1);
+
+        showGumihoUi.Value = PlayerPrefs.GetInt(SettingKey.showGumihoUi, 1);
+
+        showNewYoguiUi.Value = PlayerPrefs.GetInt(SettingKey.showNewYoguiUi, 1);
+
+        showSuhosinUi.Value = PlayerPrefs.GetInt(SettingKey.showSuhosinUi, 1);
+
+        showSasinsuUi.Value = PlayerPrefs.GetInt(SettingKey.showSasinsuUi, 1);
+
+        showSahyungsuUi.Value = PlayerPrefs.GetInt(SettingKey.showSahyungsuUi, 1);
+
+        showVisionBossUi.Value = PlayerPrefs.GetInt(SettingKey.showVisionBossUi, 1);
+
+        showFoxUi.Value = PlayerPrefs.GetInt(SettingKey.showFoxUi, 1);
+
+        showSangoonUi.Value = PlayerPrefs.GetInt(SettingKey.showSangoonUi, 1);
+
+        showChunguUi.Value = PlayerPrefs.GetInt(SettingKey.showChunguUi, 1);
+
+        showHellUi.Value = PlayerPrefs.GetInt(SettingKey.showHellUi, 1);
+
+        showChunUi.Value = PlayerPrefs.GetInt(SettingKey.showChunUi, 1);
+
+        showDoUi.Value = PlayerPrefs.GetInt(SettingKey.showDoUi, 1);
+
+        showSumiUi.Value = PlayerPrefs.GetInt(SettingKey.showSumiUi, 1);
+
+        showThiefUi.Value = PlayerPrefs.GetInt(SettingKey.showThiefUi, 1);
+
+        showDarkUi.Value = PlayerPrefs.GetInt(SettingKey.showDarkUi, 1);
+
+        showSinsunUi.Value = PlayerPrefs.GetInt(SettingKey.showSinsunUi, 1);
 
         Subscribe();
     }
@@ -1176,6 +1396,11 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.showWolfRing, e);
         });
 
+        showDragonBracelet.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showDragonBracelet, e);
+        });
+
         showRingEffect.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showRingEffect, e);
@@ -1197,6 +1422,148 @@ public static class SettingData
         autoVisionSkill.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.autoVisionSkill, e);
+        });
+        showBanditUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showBanditUi, e);
+        });
+        showTowerUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showTowerUi, e);
+        });
+        showSmithUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSmithUi, e);
+        });
+        showDokebiUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showDokebiUi, e);
+        });
+        showSoulForestUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSoulForestUi, e);
+        });
+        showTaegeukUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showTaegeukUi, e);
+        });
+        showBackguiUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showBackguiUi, e);
+        });
+        showSonUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSonUi, e);
+        });
+        showSusanoUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSusanoUi, e);
+        });
+        showFoxmaskUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showFoxmaskUi, e);
+        });
+        showKingTestUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showKingTestUi, e);
+        });
+        showGradeTestUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showGradeTestUi, e);
+        });
+        showVisionTowerUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showVisionTowerUi, e);
+        });
+        showSuhoTowerUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSuhoTowerUi, e);
+        });
+        showFoxTowerUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showFoxTowerUi, e);
+        });
+        showGodTrialUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showGodTrialUi, e);
+        });
+//
+        showCatUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showCatUi, e);
+        });
+        showTwelveUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showTwelveUi, e);
+        });
+        showHwansuUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showHwansuUi, e);
+        });
+        showGumihoUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showGumihoUi, e);
+        });
+        showNewYoguiUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showNewYoguiUi, e);
+        });
+        showSuhosinUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSuhosinUi, e);
+        });
+        showSasinsuUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSasinsuUi, e);
+        });
+        showSahyungsuUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSahyungsuUi, e);
+        });
+        showVisionBossUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showVisionBossUi, e);
+        });
+        showFoxUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showFoxUi, e);
+        });
+        showSangoonUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSangoonUi, e);
+        });
+        showChunguUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showChunguUi, e);
+        });
+        
+        showHellUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showHellUi, e);
+        });
+        showChunUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showChunUi, e);
+        });
+        showDoUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showDoUi, e);
+        });
+        showSumiUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSumiUi, e);
+        });
+        showThiefUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showThiefUi, e);
+        });
+        showDarkUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showDarkUi, e);
+        });
+        showSinsunUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSinsunUi, e);
         });
 
     }

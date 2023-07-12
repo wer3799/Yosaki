@@ -29,7 +29,7 @@ public class UiFoxCupButton : MonoBehaviour
             }
             else 
             {
-                buttonText.SetText("보주"); 
+                buttonText.SetText("장비 정보"); 
             }
         }).AddTo(this);
     }

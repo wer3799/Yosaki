@@ -148,6 +148,11 @@ public class UiPetHomeView : MonoBehaviour
             skeletonGraphic.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
             skeletonGraphic.transform.localPosition = new Vector3(-8f, -65.75f, 1f);
         }
+        else if (idx >= 48 && idx <= 51)
+        {
+            skeletonGraphic.transform.localScale = new Vector3(1.2f, 1.2f, 1f);
+            skeletonGraphic.transform.localPosition = new Vector3(1.6f, -177.1f, 1f);
+        }
         else
         {
             skeletonGraphic.transform.localScale = new Vector3(0.7f, 0.7f, 1f);

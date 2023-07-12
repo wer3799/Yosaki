@@ -33,18 +33,37 @@ public class UiSuhoAnimalInstantClearPopup : MonoBehaviour
 
         string description = string.Empty;
 
-        for (int i = 0; i < tableData.Length; i++)
+        if (PlayerStats.GetSuhoGainValue() > 0f)
         {
-            if(tableData[i].SUHOPETTYPE!=SuhoPetType.Basic) continue;
-            
-            description += $"{tableData[i].Gradedescription}({tableData[i].Name}) 1회 소탕시 {tableData[i].Sweepvalue}개 획득";
-
-            if (i != tableData.Length - 1)
+            for (int i = 0; i < tableData.Length; i++)
             {
-                description += "\n";
-            }
-        }
+                if(tableData[i].SUHOPETTYPE!=SuhoPetType.Basic) continue;
+            
+                description += $"{tableData[i].Gradedescription}({tableData[i].Name}) 1회 소탕시 {tableData[i].Sweepvalue}(+{tableData[i].Sweepvalue*PlayerStats.GetSuhoGainValue()})개 획득";
 
+                if (i != tableData.Length - 1)
+                {
+                    description += "\n";
+                }
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i < tableData.Length; i++)
+            {
+                if(tableData[i].SUHOPETTYPE!=SuhoPetType.Basic) continue;
+            
+                description += $"{tableData[i].Gradedescription}({tableData[i].Name}) 1회 소탕시 {tableData[i].Sweepvalue}개 획득";
+
+                if (i != tableData.Length - 1)
+                {
+                    description += "\n";
+                }
+            }
+
+        }
+   
         allRewardDescription.SetText(description);
     }
 
@@ -71,9 +90,16 @@ public class UiSuhoAnimalInstantClearPopup : MonoBehaviour
         var petTableData = TableManager.Instance.suhoPetTable.dataArray[lastIdx];
         
         petIcon.Initialize(petTableData);
-
-        rewardDescription.SetText(
-            $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {petTableData.Sweepvalue}개 획득!");
+        if (PlayerStats.GetSuhoGainValue() > 0f)
+        {
+            rewardDescription.SetText(
+                $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {petTableData.Sweepvalue}(+{petTableData.Sweepvalue*PlayerStats.GetSuhoGainValue()})개 획득!");
+        }
+        else
+        {
+            rewardDescription.SetText(
+                $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {petTableData.Sweepvalue}개 획득!");
+        }
     }
     
 }

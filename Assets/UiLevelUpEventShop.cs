@@ -27,7 +27,7 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
     {
         ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].AsObservable().Subscribe(e =>
         {
-            topClearStageId.SetText($"최고 스테이지 : {e + 1}");
+            topClearStageId.SetText($"최고 스테이지 : {Utils.ConvertStage((int)e + 1)}");
         }).AddTo(this);
     }
 
@@ -677,6 +677,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value += amount;
                     param.Add(GoodsTable.HyungsuRelic, ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value);
+                }
+                break;
+            case Item_Type.ChunguRelic:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value += amount;
+                    param.Add(GoodsTable.ChunguRelic, ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value);
                 }
                 break;
             case Item_Type.FoxRelic:

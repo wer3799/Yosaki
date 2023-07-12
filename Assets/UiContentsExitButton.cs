@@ -96,6 +96,7 @@ public class UiContentsExitButton : MonoBehaviour
             case GameManager.ContentsType.Sumi:
             case GameManager.ContentsType.Thief:
             case GameManager.ContentsType.Dark:
+            case GameManager.ContentsType.Sinsun:
             case GameManager.ContentsType.GradeTest:
             case GameManager.ContentsType.Sasinsu:
             case GameManager.ContentsType.SumisanTower:

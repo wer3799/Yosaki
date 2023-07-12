@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
@@ -34,11 +35,15 @@ public class UiContentsPopup : MonoBehaviour
             t.Initialize(TableManager.Instance.BossTable.dataArray[0]);
         }
 
+
+        Subscribe();
+    }
+
+    private void Awake()
+    {
         tower1.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() == false));
         tower2.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() && ServerData.userInfoTable.IsLastFloor2() == false));
         tower3.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor2()));
-
-        Subscribe();
     }
 
     [SerializeField]

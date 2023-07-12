@@ -104,4 +104,12 @@ public class StageMapData
   float goldbar;
   public float Goldbar { get {return goldbar; } set { this.goldbar = value;} }
   
+  [SerializeField]
+  float guimoonpoint;
+  public float Guimoonpoint { get {return guimoonpoint; } set { this.guimoonpoint = value;} }
+  
+  [SerializeField]
+  int chapteridx;
+  public int Chapteridx { get {return chapteridx; } set { this.chapteridx = value;} }
+  
 }

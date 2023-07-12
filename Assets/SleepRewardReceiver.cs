@@ -131,6 +131,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         //지옥 추가소환
         plusSpawnNum += (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+        
+        //요괴소환능력치
+        plusSpawnNum += PlayerStats.GetAddSummonYogui();
 
         //천계 추가소환
         if (PlayerStats.IsChunMonsterSpawnAdd())
@@ -199,22 +202,22 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             peachItem =
                 (killedEnemyPerMin * stageTableData.Peachamount * GameBalance.sleepRewardRatio * elapsedMinutes) *
-                (1+PlayerStats.GetMonkeyGodAbil1());
+                (1+PlayerStats.GetPeachGainValue());
         }
 
-        //복숭아
+        //불멸석
         float helItem = 0;
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateHel).Value > 0)
         {
             helItem = (killedEnemyPerMin * stageTableData.Helamount * GameBalance.sleepRewardRatio * elapsedMinutes) *
-                      (1 + PlayerStats.GetHellGodAbil1());
+                      (1 + PlayerStats.GetHellGainValue());
         }
 
         float chunItem = 0;
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
         {
             chunItem = (killedEnemyPerMin * stageTableData.Chunfloweramount * GameBalance.sleepRewardRatio *
-                        elapsedMinutes) * (1 + PlayerStats.GetChunGodAbil1());
+                        elapsedMinutes) * (1 + PlayerStats.GetChunGainValue());
         }
 
         float dokebiItem = 0;
@@ -222,7 +225,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             dokebiItem =
                 (killedEnemyPerMin * stageTableData.Dokebifireamount * GameBalance.sleepRewardRatio * elapsedMinutes) *
-                (1 + PlayerStats.GetDoGodAbil1());
+                (1 + PlayerStats.GetDokebiFireGainValue());
         }
 
         int hotTimeItem = 0;
@@ -370,7 +373,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value += sleepRewardInfo.killCount;
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason2].Value += sleepRewardInfo.killCount;
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason3].Value += sleepRewardInfo.killCount;
+        
         ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.foxFirePassKill].Value += sleepRewardInfo.killCount;
+        ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulPassKill].Value += sleepRewardInfo.killCount;
+        
         if (ServerData.userInfoTable.IsEventPassPeriod())
         {
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.killCountTotalSeason0].Value +=
@@ -477,6 +483,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         userInfo_2Param.Add(UserInfoTable_2.foxFirePassKill, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.foxFirePassKill].Value);
+        userInfo_2Param.Add(UserInfoTable_2.dosulPassKill, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulPassKill].Value);
         if (ServerData.userInfoTable.IsEventPassPeriod())
         {
             userInfo_2Param.Add(UserInfoTable_2.killCountTotalSeason0,
@@ -545,6 +552,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         //지옥 추가소환
         plusSpawnNum += (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 
+        //요괴소환능력치
+        plusSpawnNum += PlayerStats.GetAddSummonYogui();
+        
         //천계 추가소환
         if (PlayerStats.IsChunMonsterSpawnAdd())
         {

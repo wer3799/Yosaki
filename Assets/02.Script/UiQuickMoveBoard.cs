@@ -59,7 +59,7 @@ public class UiQuickMoveBoard : MonoBehaviour
         }
 
         var stageTableData = TableManager.Instance.StageMapData[myLastStageId];
-        currentPresetId.Value = stageTableData.Mappreset;
+        currentPresetId.Value = stageTableData.Chapteridx;
 
         RefreshStage(currentPresetId.Value);
     }
@@ -81,7 +81,7 @@ public class UiQuickMoveBoard : MonoBehaviour
     {
         var stageDatas = TableManager.Instance.StageMapTable.dataArray;
 
-        var selectedPresets = stageDatas.ToList().Where(e => e.Mappreset == mapPreset).Select(cell => cell).ToList();
+        var selectedPresets = stageDatas.ToList().Where(e => e.Chapteridx == mapPreset).Select(cell => cell).ToList();
 
         int makeCount = selectedPresets.Count - stageCellList.Count;
 

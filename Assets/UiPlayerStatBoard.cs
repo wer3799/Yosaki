@@ -92,7 +92,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         //경험치 추가 획득
         description2 +=
-            $"{CommonString.GetStatusName(StatusType.ExpGainPer)} : {PlayerStats.GetExpPlusValue_WithAllBuff() * 100f}\n";
+            $"{CommonString.GetStatusName(StatusType.ExpGainPer)} : {Utils.ConvertNum(PlayerStats.GetExpPlusValue_WithAllBuff() * 100f)}\n";
 
         //아이템 획득량
         description2 +=
@@ -122,7 +122,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
             $"{CommonString.GetStatusName(StatusType.SkillAttackCount)} : {PlayerStats.GetSkillHitAddValue()}\n";
         //타격수
         description1 +=
-            $"요도 시전 속도 강화: {Utils.ConvertNum((PlayerSkillCaster.Instance.sealChargeCount.Value + PlayerSkillCaster.Instance.sealChargeCount2.Value -1) * 100)}%\n";
+            $"요도 시전 속도 강화: {Utils.ConvertNum((PlayerSkillCaster.Instance.sealChargeCount.Value + PlayerSkillCaster.Instance.sealChargeCount2.Value + PlayerSkillCaster.Instance.sealChargeCount3.Value- 1) * 100)}%\n";
         //방무 GetIgnoreDefenseValue
         
         //천공베기 확률
@@ -169,13 +169,28 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 //         int plusSpawnNum = 71;
 // #else
         int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value) +
-                           hellPlusSpawnNum + chunPlusSpawnNum;
+                           hellPlusSpawnNum + chunPlusSpawnNum + PlayerStats.GetAddSummonYogui();
 //#endif
         //지옥베기
         description3 +=
             $"크리티컬 7단계 {CommonString.GetStatusName(StatusType.SuperCritical3DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical3DamPer() * 100f)}\n";
 
         description2 += $"요괴 추가소환 : {plusSpawnNum}\n";
+        //획득
+        description2 += $"{CommonString.GetStatusName(StatusType.PeachGainPer)}: {Utils.ConvertNum(PlayerStats.GetPeachGainValue()*100)}\n";
+        //획득
+        description2 += $"{CommonString.GetStatusName(StatusType.HellGainPer)}: {Utils.ConvertNum(PlayerStats.GetHellGainValue()*100)}\n";
+        //획득
+        description2 += $"{CommonString.GetStatusName(StatusType.ChunGainPer)}: {Utils.ConvertNum(PlayerStats.GetChunGainValue()*100)}\n";
+        //획득
+        description2 += $"{CommonString.GetStatusName(StatusType.DokebiFireGainPer)}: {Utils.ConvertNum(PlayerStats.GetDokebiFireGainValue()*100)}\n";
+        //수호환획득
+        description2 += $"{CommonString.GetStatusName(StatusType.SuhoGainPer)}: {Utils.ConvertNum(PlayerStats.GetSuhoGainValue()*100)}\n";
+        //여우불획득
+        description2 += $"{CommonString.GetStatusName(StatusType.FoxRelicGainPer)}: {Utils.ConvertNum(PlayerStats.GetFoxRelicGainValue()*100)}\n";
+        //도술꽃획득
+        description2 += $"{CommonString.GetStatusName(StatusType.DosulGainPer)}: {Utils.ConvertNum(PlayerStats.GetDosulGainValue()*100)}\n";
+        
         //천상베기
         description3 +=
             $"크리티컬 8단계 {CommonString.GetStatusName(StatusType.SuperCritical4DamPer)} : {Utils.ConvertBigNum(PlayerStats.GetSuperCritical4DamPer() * 100f)}\n";
@@ -225,7 +240,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
             //도술
             description1 +=
-                $"도술 피해량 증가 : {(PlayerStats.GetCurrentDosulAddValue() * 100f).ToString("F3")}\n";
+                $"{CommonString.GetStatusName(StatusType.DosulDamPer)} : {Utils.ConvertNum(PlayerStats.GetDosulDamPer() * 100f)}\n";
 
     
         descriptionBoard1.SetText(description1);

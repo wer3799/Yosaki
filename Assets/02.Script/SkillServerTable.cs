@@ -407,7 +407,7 @@ public class SkillServerTable
             {
                 var sealTableData = TableManager.Instance.SealSwordAwakeTable.dataArray[getSealAwakeGrade];
                 //ret->originDamage       
-                originDamage += sealTableData.Awakevalue;
+                originDamage += sealTableData.Awakevalue + PlayerStats.GetSealSwordDam();
             }
         }
 
@@ -416,9 +416,7 @@ public class SkillServerTable
 
         if (tableData.SKILLCASTTYPE == SkillCastType.Dosul)
         {
-            float addValue = PlayerStats.GetCurrentDosulAddValue();
-          
-            return ret + ret * addValue;
+            return ret * (1 + PlayerStats.GetDosulDamPer());
         }
 
         if (tableData.SKILLCASTTYPE == SkillCastType.Vision)

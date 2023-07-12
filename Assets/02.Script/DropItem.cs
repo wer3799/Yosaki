@@ -505,6 +505,8 @@ public enum Item_Type
     costume135 = 1435, // 현상수배     
     costume136 = 1436, // 수박이벤트외형     
     costume137 = 1437, // 이벤트외형     
+    costume138 = 1438, // 현상수배     
+    costume139 = 1439, // 현상수배     
 
 
     gumiho0 = 5000,
@@ -585,11 +587,17 @@ public enum Item_Type
     SasinsuWeapon1 = 7041,
     SasinsuWeapon2 = 7042,
     SasinsuWeapon3 = 7043,
-
+    
+    //사신수 진
     SasinsuPet0 = 7050,
     SasinsuPet1 = 7051,
     SasinsuPet2 = 7052,
     SasinsuPet3 = 7053,
+    //사신수 극
+    SasinsuPet4 = 7054,
+    SasinsuPet5 = 7055,
+    SasinsuPet6 = 7056,
+    SasinsuPet7 = 7057,
 
     SahyungWeapon0 = 7060,
     SahyungWeapon1 = 7061,
@@ -728,9 +736,13 @@ public enum Item_Type
     
     HyunSangWeapon0 = 7240,
     HyunSangWeapon1 = 7241,
+    HyunSangWeapon2 = 7242,
+    HyunSangWeapon3 = 7243,
     
     HyunSangNorigae0 = 7250,
     HyunSangNorigae1 = 7251,
+    HyunSangNorigae2 = 7252,
+    HyunSangNorigae3 = 7253,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -863,14 +875,14 @@ public enum Item_Type
     SealWeaponClear= 9028, 
     SinsunTreasure= 9029, 
     GoldBar= 9030, 
-    GwisalTreasure= 9031, 
-    
+    GwisalTreasure= 9031,
     DosulGoods= 9032, 
-    DosulClear= 9033, 
-    
+    DosulClear= 9033,
     ChunguTreasure= 9034,
-    
     SleepRewardItem=9035,
+    ChunguRelic = 9036,
+    GuimoonRelic = 9037,
+    GuimoonRelicClearTicket = 9038,
 }
 //
 public class DropItem : PoolItem

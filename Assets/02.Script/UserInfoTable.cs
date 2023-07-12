@@ -128,6 +128,7 @@ public class UserInfoTable
     public const string foxfirepension = "foxfirepension";
     public const string sealswordpension = "sealswordpension";
     public const string dosulpension = "dosulpension";
+    public const string guimoonpension = "guimoonpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -438,6 +439,7 @@ public class UserInfoTable
         { foxfirepension, 0f },
         { sealswordpension, 0f },
         { dosulpension, 0f },
+        { guimoonpension, 0f },
 
         { marblePackChange, 0f },
         { yoguiSogulLastClear, 0f },
@@ -1240,6 +1242,10 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.dosulpension).Value++;
             }
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.guimoonpension].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.guimoonpension).Value++;
+            }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
@@ -1303,6 +1309,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.foxfirepension, ServerData.userInfoTable.GetTableData(UserInfoTable.foxfirepension).Value);
         userInfoParam.Add(UserInfoTable.sealswordpension, ServerData.userInfoTable.GetTableData(UserInfoTable.sealswordpension).Value);
         userInfoParam.Add(UserInfoTable.dosulpension, ServerData.userInfoTable.GetTableData(UserInfoTable.dosulpension).Value);
+        userInfoParam.Add(UserInfoTable.guimoonpension, ServerData.userInfoTable.GetTableData(UserInfoTable.guimoonpension).Value);
 
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
@@ -1476,6 +1483,12 @@ public class UserInfoTable
         {
             ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value += GameBalance.FoxTowerTicketDailyGetAmount;
             goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
+        }  
+        //귀문
+        if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.guimoonRelicStart].Value != 0)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += GameBalance.GuimoonTicketDailyGetAmount;
+            goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
         }  
         
         //봉인검

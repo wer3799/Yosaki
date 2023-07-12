@@ -47,6 +47,17 @@ public class AlarmHitObject : MonoBehaviour
             transform.Rotate(0, 0, 90);
             transform.position = PlayerMoveController.Instance.transform.position;
         }
+        if (bossId == 167||bossId==168)
+        {
+            var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
+            transform.position = PlayerMoveController.Instance.transform.position + addPostion;
+        }
+        if (bossId == 166)
+        {
+            var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
+            transform.position = PlayerMoveController.Instance.transform.position + addPostion;
+            transform.Rotate(0, 0, 90);
+        }
     }
 
     private bool isMove = false;

@@ -46,9 +46,9 @@ public class UiDosulBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 298)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 297)
         {
-            PopupManager.Instance.ShowAlarmMessage("300 스테이지 달성시 개방!");
+            PopupManager.Instance.ShowAlarmMessage($"{Utils.ConvertStage(299)} 스테이지 달성시 개방!");
             dosulPopup.SetActive(false);
             return;
         }

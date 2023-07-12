@@ -60,7 +60,7 @@ public class PetServerTable
                 {
                     float value = petTableData.Hasvalue1 + e.Current.Value.level.Value * petTableData.Hasaddvalue1;
 
-                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    if (statusType.IsAbsoluteStatus()==false)
                     {
                         value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
                         value += value * GetSusanoZibaePlus();
@@ -73,7 +73,7 @@ public class PetServerTable
                 {
                     float value = petTableData.Hasvalue2 + e.Current.Value.level.Value * petTableData.Hasaddvalue2;
 
-                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    if (statusType.IsAbsoluteStatus()==false)
                     {
                         value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
                         value += value * GetSusanoZibaePlus();
@@ -86,7 +86,7 @@ public class PetServerTable
                 {
                     float value = petTableData.Hasvalue3 + e.Current.Value.level.Value * petTableData.Hasaddvalue3;
 
-                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    if (statusType.IsAbsoluteStatus()==false)
                     {
                         value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
                         value += value * GetSusanoZibaePlus();
@@ -99,7 +99,7 @@ public class PetServerTable
                 {
                     float value = petTableData.Hasvalue4 + e.Current.Value.level.Value * petTableData.Hasaddvalue4;
 
-                    if (statusType != StatusType.ExpGainPer && statusType != StatusType.GoldGainPer)
+                    if (statusType.IsAbsoluteStatus()==false)
                     {
                         value += value * ((float)petAwakeLevel * GameBalance.PetAwakeValuePerLevel);
                         value += value * GetSusanoZibaePlus();

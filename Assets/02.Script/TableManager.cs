@@ -143,7 +143,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public int GetLastStagePreset()
     {
-        return stageMapTable.dataArray[stageMapTable.dataArray.Length - 1].Mappreset;
+        return stageMapTable.dataArray[stageMapTable.dataArray.Length - 1].Chapteridx;
     }
 
     private void LoadStageMapData()
@@ -780,6 +780,7 @@ public class TableManager : SingletonMono<TableManager>
     public SumiTable sumiTable;
     public ThiefTable ThiefTable;
     public DarkTable DarkTable;
+    public SinsunTable SinsunTable;
 
     //사신수
     public SasinsuTable sasinsuTable;
@@ -837,6 +838,7 @@ public class TableManager : SingletonMono<TableManager>
     public SinsunTreasureAbilBase SinsunTreasureAbilBase;
     public GwisalTreasureAbilBase GwisalTreasureAbilBase;
     public BlackWolfRing BlackWolfRing;
+    public DragonBracelet DragonBracelet;
     public TowerTable8 gyungRockTowerTable2;
     public FoxTower FoxTowerTable;
     public FoxFire FoxFire;
@@ -850,8 +852,12 @@ public class TableManager : SingletonMono<TableManager>
     public SealSword sealSwordTable;
     public SealSwordPass SealSwordPass;
     public FoxFirePass FoxFirePass;
+    public DosulPass DosulPass;
     public SinsunTowerTable sinsunTowerTable;
     public SoulForestPass SoulForestPass;
+    public SwordPass SwordPass;
+    public GuimoonTable GuimoonTable;
+    public GuimoonPass GuimoonPass;
     
     
     private Dictionary<int, SealSwordData> sealSwordData = null;

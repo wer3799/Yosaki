@@ -170,7 +170,7 @@ public class MapInfo : SingletonMono<MapInfo>
                 chunPlusSpawnNum = 5;
             }
 
-            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum;
+            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum + PlayerStats.GetAddSummonYogui();
 
             while (canSpawnEnemy.Value == false)
             {

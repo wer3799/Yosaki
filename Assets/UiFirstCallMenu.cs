@@ -7,6 +7,8 @@ public class UiFirstCallMenu : MonoBehaviour
     [SerializeField]
     private List<MainTabButtons> buttons;
 
+    [SerializeField] private GameObject prefab;
+
     private static bool isFirst = true;
 
     void Start()

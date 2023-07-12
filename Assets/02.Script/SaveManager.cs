@@ -281,6 +281,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.DokebiBundle,
         GoodsTable.SinsuRelic,
         GoodsTable.HyungsuRelic,
+        GoodsTable.ChunguRelic,
         GoodsTable.FoxRelic,
         GoodsTable.FoxRelicClearTicket,
         GoodsTable.EventDice,

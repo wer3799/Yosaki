@@ -78,6 +78,7 @@ public class GameManager : SingletonMono<GameManager>
         DosulBoss,
         TestSumi,
         VisionTower,
+        Sinsun,
     }
 
     public bool SpawnMagicStone => IsNormalField;

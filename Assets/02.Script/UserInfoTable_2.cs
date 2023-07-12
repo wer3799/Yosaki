@@ -22,7 +22,8 @@ public class UserInfoTable_2
     public const string GangChulReset = "GangChulReset";
     public const string stagePassFree = "stagePassFree";
     public const string stagePassAd = "stagePassAd";
-    public const string foxFirePassKill = "pass0";
+    public const string foxFirePassKill = "pass0"; //요도 여우불 같은거씀
+    public const string dosulPassKill = "pass1"; // 도술꽃
     
     
 
@@ -43,6 +44,7 @@ public class UserInfoTable_2
     public const string KingTrialGraduateIdx = "ktgi";
     public const string GodTrialGraduateIdx = "gtgi";
     public const string darkScore = "ds";
+    public const string sinsunScore = "ss";
     public const string graduateGold = "gg";
     public const string gyungRockTower3 = "grt3";
     public const string graduateSeolEvent = "gse";
@@ -55,7 +57,14 @@ public class UserInfoTable_2
     public const string dosulStart = "dst";
     
     public const string visionTowerScore = "vts";
+    public const string getDragonBracelet = "gdb";
+    
+    public const string guimoonRelicStart = "grs";
+    
+    public const string usedGuimoonRelicTicket = "ugrt";
 
+    
+    
     public bool isInitialize = false;
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
     {
@@ -74,6 +83,7 @@ public class UserInfoTable_2
         { sumiGodScore, 0f },
         { relicTestScore, 0f },
         { foxFirePassKill, 0f },
+        { dosulPassKill, 0f },
         { evenMonthKillCount, 0f },
         { oddMonthKillCount, 0f },
         { SealSwordAwakeScore, 0f },
@@ -83,6 +93,7 @@ public class UserInfoTable_2
         { KingTrialGraduateIdx, 0f },
         { GodTrialGraduateIdx, 0f },
         { darkScore, 0f },
+        { sinsunScore, 0f },
         { graduateGold, 0f },
         { gyungRockTower3, 0f },
         { graduateSeolEvent, 0f },
@@ -92,6 +103,9 @@ public class UserInfoTable_2
         { dosulRewardIdx, -1f },
         { dosulStart, 0f },
         { visionTowerScore, 0f },
+        { getDragonBracelet, 0f },
+        { guimoonRelicStart, 0f },
+        { usedGuimoonRelicTicket, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -228,6 +242,7 @@ public class UserInfoTable_2
             userInfo_2Param.Add(oddMonthKillCount, tableDatas[oddMonthKillCount].Value);
         }
         userInfo_2Param.Add(foxFirePassKill, tableDatas[foxFirePassKill].Value);
+        userInfo_2Param.Add(dosulPassKill, tableDatas[dosulPassKill].Value);
         
         if (ServerData.userInfoTable.IsEventPassPeriod())
         {
@@ -266,6 +281,7 @@ public class UserInfoTable_2
             totalKillCount = 0;
 
             tableDatas[foxFirePassKill].Value += updateRequireNum;
+            tableDatas[dosulPassKill].Value += updateRequireNum;
         }
     }
     public void UpData(string key, bool LocalOnly)
@@ -296,6 +312,46 @@ public class UserInfoTable_2
 
             SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
             {
+                if (e.IsSuccess() == false)
+                {
+                    failCallBack?.Invoke();
+                    Debug.LogError($"UserInfoTable {key} up failed");
+                    return;
+                }
+            });
+        }
+    }
+    public void UpDataV2(string key, bool LocalOnly)
+    {
+        if (tableDatas.ContainsKey(key) == false)
+        {
+            Debug.Log($"UserInfoTable {key} is not exist");
+            return;
+        }
+
+        UpDataV2(key, tableDatas[key].Value, LocalOnly);
+    }
+
+    public void UpDataV2(string key, double data, bool LocalOnly, Action failCallBack = null)
+    {
+        if (tableDatas.ContainsKey(key) == false)
+        {
+            Debug.Log($"UserInfoTable {key} is not exist");
+            return;
+        }
+
+        tableDatas[key].Value = data;
+
+        if (LocalOnly == false)
+        {
+            Param param = new Param();
+            param.Add(key, tableDatas[key].Value);
+
+            SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
+            {
+                #if UNITY_EDITOR
+                    Debug.LogError($"테이블 : {tableName} / 키 : {key} / 수량 : {tableDatas[key].Value}");
+#endif
                 if (e.IsSuccess() == false)
                 {
                     failCallBack?.Invoke();

@@ -150,6 +150,8 @@ public Sprite SinsunWeapon8;
 
 public Sprite HyunSangWeapon0;
 public Sprite HyunSangWeapon1;
+public Sprite HyunSangWeapon2;
+public Sprite HyunSangWeapon3;
     
 [Header ("Weapon_View")]
 
@@ -264,6 +266,8 @@ public Sprite RecommendWeapon22;
     public Sprite SinsunNorigae8;
     public Sprite HyunSangNorigae0;
     public Sprite HyunSangNorigae1;
+    public Sprite HyunSangNorigae2;
+    public Sprite HyunSangNorigae3;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -302,6 +306,10 @@ public Sprite RecommendWeapon22;
     public Sprite SasinsuPet1;
     public Sprite SasinsuPet2;
     public Sprite SasinsuPet3;
+    public Sprite SasinsuPet4;
+    public Sprite SasinsuPet5;
+    public Sprite SasinsuPet6;
+    public Sprite SasinsuPet7;
     
     public Sprite SahyungPet0;
     public Sprite SahyungPet1;
@@ -424,6 +432,8 @@ public Sprite RecommendWeapon22;
     public Sprite Fw;
     public Sprite Cw;
     public Sprite StageRelic;
+    public Sprite GuimoonRelic;
+    public Sprite GuimoonRelicClearTicket;
     public Sprite Peach;
     public Sprite relic;
     public Sprite FoxMaskPartial;
@@ -454,6 +464,7 @@ public Sprite RecommendWeapon22;
     public Sprite DokebiBundle;
     public Sprite SinsuRelic;
     public Sprite HyungsuRelic;
+    public Sprite ChunguRelic;
     public Sprite FoxRelic;
     public Sprite FoxRelicClearTicket;
     [Header ("Goods_Event")]
@@ -892,6 +903,10 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[136];
             case Item_Type.costume137:
                 return costumeThumbnail[137];
+            case Item_Type.costume138:
+                return costumeThumbnail[138];
+            case Item_Type.costume139:
+                return costumeThumbnail[139];
 
 
             case Item_Type.RankFrame1:
@@ -1220,6 +1235,11 @@ public Sprite RecommendWeapon22;
 
             case Item_Type.StageRelic:
                 return StageRelic;
+            
+            case Item_Type.GuimoonRelic:
+                return GuimoonRelic;
+            case Item_Type.GuimoonRelicClearTicket:
+                return GuimoonRelicClearTicket;
 
 
 
@@ -1280,6 +1300,8 @@ public Sprite RecommendWeapon22;
                 return SinsuRelic;
             case Item_Type.HyungsuRelic:
                 return HyungsuRelic;
+            case Item_Type.ChunguRelic:
+                return ChunguRelic;
             case Item_Type.FoxRelic:
                 return FoxRelic;
             case Item_Type.FoxRelicClearTicket:
@@ -1600,6 +1622,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae0;
             case Item_Type.HyunSangNorigae1:
                 return HyunSangNorigae1;
+            case Item_Type.HyunSangNorigae2:
+                return HyunSangNorigae2;
+            case Item_Type.HyunSangNorigae3:
+                return HyunSangNorigae3;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -1736,14 +1762,20 @@ public Sprite RecommendWeapon22;
 
             case Item_Type.SasinsuPet0:
                 return SasinsuPet0;
-
-
             case Item_Type.SasinsuPet1:
                 return SasinsuPet1;
             case Item_Type.SasinsuPet2:
                 return SasinsuPet2;
             case Item_Type.SasinsuPet3:
-                return SasinsuPet3;
+                return SasinsuPet3;            
+            case Item_Type.SasinsuPet4:
+                return SasinsuPet4;
+            case Item_Type.SasinsuPet5:
+                return SasinsuPet5;
+            case Item_Type.SasinsuPet6:
+                return SasinsuPet6;
+            case Item_Type.SasinsuPet7:
+                return SasinsuPet7;
 
 
             case Item_Type.SahyungPet0:
@@ -2217,6 +2249,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangWeapon0;
             case Item_Type.HyunSangWeapon1:
                 return HyunSangWeapon1;
+            case Item_Type.HyunSangWeapon2:
+                return HyunSangWeapon2;
+            case Item_Type.HyunSangWeapon3:
+                return HyunSangWeapon3;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
@@ -2421,6 +2457,9 @@ public Sprite RecommendWeapon22;
 
     public List<Sprite> relicIconList;
     public List<Sprite> stageRelicIconList;
+    public List<Sprite> guimoonIcon1List;
+    public List<Sprite> guimoonIcon2List;
+    
 
     public List<RuntimeAnimatorController> sonAnimators;
     public List<Sprite> sonThumbNail;

@@ -417,6 +417,8 @@ public class ChatManager : SingletonMono<ChatManager>
         Debug.LogError("채팅 SendMessage");
 #endif
 
+        ReplaceBracket(ref message);
+        
         AddRankInfo(ref message);
 
         AddCostumeInfo(ref message);
@@ -463,6 +465,11 @@ public class ChatManager : SingletonMono<ChatManager>
     }
 
 
+    private void ReplaceBracket(ref string message)
+    {
+        message = message.Replace("<", "＜");
+        message = message.Replace(">", "＞");
+    }
     private void AddFrameInfo(ref string message)
     {
         message = $"{message}{CommonString.ChatSplitChar}{(int)ServerData.userInfoTable.TableDatas[UserInfoTable.chatFrame].Value}";

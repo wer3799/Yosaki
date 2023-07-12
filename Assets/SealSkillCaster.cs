@@ -29,6 +29,7 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
 
     private float chargeCount = 1f;
     private float chargeCount2 = 0f;
+    private float chargeCount3 = 0f;
     
     void Start()
     {
@@ -66,6 +67,10 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
         {
             chargeCount2 = e;
         }).AddTo(this);
+        PlayerSkillCaster.Instance.sealChargeCount3.AsObservable().Subscribe(e =>
+        {
+            chargeCount3 = e;
+        }).AddTo(this);
 
     }
 
@@ -85,7 +90,7 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
             {
                 if (count_Showing <= currentHitCount.Value)
                 {
-                    count_Showing += chargeCount + chargeCount2;
+                    count_Showing += chargeCount + chargeCount2+ chargeCount3;
                 }
 
                 if (count_Showing >= count_Max -10)

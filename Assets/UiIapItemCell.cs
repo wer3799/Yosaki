@@ -231,7 +231,7 @@ public class UiIapItemCell : MonoBehaviour
 
             if (currentLevel < productData.Needlevel)
             {
-                PopupManager.Instance.ShowAlarmMessage($"스테이지 {productData.Needlevel}이상일때 보상을 받으실 수 있습니다!");
+                PopupManager.Instance.ShowAlarmMessage($"스테이지 {Utils.ConvertStage(productData.Needlevel)}이상일때 보상을 받으실 수 있습니다!");
                 return;
             }
         }
@@ -293,7 +293,7 @@ public class UiIapItemCell : MonoBehaviour
 
             if (currentLevel < productData.Needlevel)
             {
-                PopupManager.Instance.ShowAlarmMessage($"스테이지 {productData.Needlevel}이상일때 보상을 받으실 수 있습니다!");
+                PopupManager.Instance.ShowAlarmMessage($"스테이지 {Utils.ConvertStage(productData.Needlevel)}이상일때 보상을 받으실 수 있습니다!");
                 return;
             }
         }

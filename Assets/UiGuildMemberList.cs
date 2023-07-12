@@ -152,9 +152,35 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
 
         RefreshMemberList();
 
+
+        
         initialized = true;
     }
 
+    private void RelocateGuildMember()
+    {
+        for (int i = 0; i < memberCells.Count; i++)
+        {
+            if (memberCells[i].guildMemberInfo != null)
+            {
+                if (memberCells[i].guildMemberInfo.guildGrade == GuildGrade.ViceMaster)
+                {
+                    memberCells[i].gameObject.transform.SetAsFirstSibling();
+                }
+            }
+        }
+        for (int i = 0; i < memberCells.Count; i++)
+        {
+            if (memberCells[i].guildMemberInfo != null)
+            {
+                if (memberCells[i].guildMemberInfo.guildGrade == GuildGrade.Master)
+                {
+                    memberCells[i].gameObject.transform.SetAsFirstSibling();
+                }
+            }
+        }
+    }
+    
     private void RefreshGuildMemberCountText()
     {
         memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}");
@@ -169,7 +195,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             if (memberCells[i].guildMemberInfo != null)
                 memberCells[i].guildMemberInfo.guildTowerFloor = 0;
         }
-
+        
         GetGuildGoods6AmountByIndateV3();
 
         if (goodsDictionary.Count == 0)
@@ -333,6 +359,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                 }
 
                 PopupManager.Instance.ShowAlarmMessage("갱신 완료");
+                RelocateGuildMember();
             }
             else
             {

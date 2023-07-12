@@ -458,6 +458,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.HyungsuRelic, ServerData.goodsTable.GetTableData(GoodsTable.HyungsuRelic).Value);
                 }
                 break;  
+            case Item_Type.ChunguRelic:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value += amount;
+                    param.Add(GoodsTable.ChunguRelic, ServerData.goodsTable.GetTableData(GoodsTable.ChunguRelic).Value);
+                }
+                break;  
             case Item_Type.FoxRelic:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.FoxRelic).Value += amount;
@@ -981,6 +987,19 @@ public class UiShop : SingletonMono<UiShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value += amount;
                     param.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
+                }
+                break;
+
+            case Item_Type.GuimoonRelic:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value += amount;
+                    param.Add(GoodsTable.GuimoonRelic, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value);
+                }
+                break;
+            case Item_Type.GuimoonRelicClearTicket:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += amount;
+                    param.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
                 }
                 break;
 

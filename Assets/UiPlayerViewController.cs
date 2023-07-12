@@ -51,6 +51,9 @@ public class UiPlayerViewController : MonoBehaviour
     private GameObject showWolfRing;
 
     [SerializeField]
+    private GameObject showDragonBracelet;
+
+    [SerializeField]
     private GameObject showRingEffect; 
     
     [SerializeField]
@@ -145,6 +148,10 @@ public class UiPlayerViewController : MonoBehaviour
         SettingData.showWolfRing.AsObservable().Subscribe(e =>
         {
             showWolfRing.gameObject.SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDragonBracelet.AsObservable().Subscribe(e =>
+        {
+            showDragonBracelet.gameObject.SetActive(e == 1);
         }).AddTo(this);
 
         SettingData.showRingEffect.AsObservable().Subscribe(e =>

@@ -227,6 +227,8 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
             int prefFoxCup = PlayerStats.GetCurrentFoxCupIdx();
             
             int prefWolfRing = PlayerStats.GetCurrentWolfRingIdx();
+            
+            int prefDragonBracelet = PlayerStats.GetCurrentDragonBraceletIdx();
 
 
             float currentMarble = ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value;
@@ -272,6 +274,8 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
                 int currentFoxCup = PlayerStats.GetCurrentFoxCupIdx();
                 
                 int currentWolfRing = PlayerStats.GetCurrentWolfRingIdx();
+                
+                int currentDragonBracelet = PlayerStats.GetCurrentDragonBraceletIdx();
 
                 if (prefDragonBall < currentDragonBall)
                 {
@@ -285,6 +289,10 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
                 if (prefWolfRing < currentWolfRing)
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "흑랑 반지 단계 상승!", null);
+                }
+                if (prefDragonBracelet < currentDragonBracelet)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "천룡 팔찌 단계 상승!", null);
                 }
             });
         }, null);

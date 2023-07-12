@@ -27,7 +27,7 @@ public class BonusDefenseEnterView : MonoBehaviour
         //int increaseJade = GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor((float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value / GameBalance.bandiPlusStageDevideValue);
         if (increaseByStage != null)
         {
-            increaseByStage.SetText($"1000스테이지 돌파할 때 마다 획득량 {GameBalance.bandiPlusStageJadeValue * 100}% 증가!"); 
+            increaseByStage.SetText($"10 챕터를 돌파할 때 마다 획득량 {GameBalance.bandiPlusStageJadeValue * 100}% 증가!"); 
         }
     }
 }

@@ -47,7 +47,7 @@ public class StageJumpingButton : MonoBehaviour
     {
         if ((int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value < GameBalance.JumpStageStartValue - 2)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.JumpStageStartValue} 스테이지부터 사용 가능합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{Utils.ConvertStage(GameBalance.JumpStageStartValue)} 스테이지부터 사용 가능합니다.");
             return;
         }
 
@@ -69,7 +69,7 @@ public class StageJumpingButton : MonoBehaviour
             return;
         }
 
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"<size=75><color=yellow>권장 스테이지 : {arriveStageNum + 1}</color></size>\n바로 도전 할까요?\n<color=red>(권장 스테이지는 강철이전 점수 기준 입니다)</color>", () =>
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"<size=75><color=yellow>권장 스테이지 : {Utils.ConvertStage(arriveStageNum + 1)}</color></size>\n바로 도전 할까요?\n<color=red>(권장 스테이지는 강철이전 점수 기준 입니다)</color>", () =>
         {
             GameManager.Instance.IsJumpBoss = true;
             PlayerSkillCaster.Instance.InitializeVisionSkill();

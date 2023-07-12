@@ -51,6 +51,8 @@ public class GoodsTable
     public static string Event_Item_SnowMan = "Event4_0"; //어린이날.
     public static string Event_Item_SnowMan_All = "Event4_1"; //어린이날.
     public static string StageRelic = "StageRelic";
+    public static string GuimoonRelic = "GuimoonRelic";
+    public static string GuimoonRelicClearTicket = "GRCT";
     public static string Peach = "PeachReal";
     public static string MiniGameReward = "MiniGameReward";
     public static string MiniGameReward2 = "mgr2";
@@ -224,6 +226,7 @@ public class GoodsTable
     public static string DokebiBundle = "DB";
     public static string SinsuRelic = "SinsuRelic";
     public static string HyungsuRelic = "HyungsuRelic";
+    public static string ChunguRelic = "ChunguRelic";
     public static string FoxRelic = "FR";
     public static string FoxRelicClearTicket = "FRCT";
 
@@ -269,6 +272,8 @@ public class GoodsTable
         { Event_Item_SnowMan_All, 0f },
         { DragonStone, 0f },
         { StageRelic, 0f },
+        { GuimoonRelic, 0f },
+        { GuimoonRelicClearTicket, 0f },
         { SnakeStone, 0f },
         { Peach, 0f },
         { HorseStone, 0f },
@@ -441,6 +446,7 @@ public class GoodsTable
         { DokebiBundle, 0f },
         { SinsuRelic, 0f },
         { HyungsuRelic, 0f },
+        { ChunguRelic, 0f },
         { FoxRelic, 0f },
         { FoxRelicClearTicket, 0f },
 
@@ -619,7 +625,7 @@ public class GoodsTable
 
     public void GetPeachItem(float amount)
     {
-        peachItemAddNum += amount * (1 + PlayerStats.GetMonkeyGodAbil1());
+        peachItemAddNum += amount * (1 + PlayerStats.GetPeachGainValue());
 
         //100킬마다 얻게하기 위해서
         if (peachItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Peachamount, 1))
@@ -637,7 +643,7 @@ public class GoodsTable
 
     public void GetHelItem(float amount)
     {
-        helItemAddNum += amount * (1 + PlayerStats.GetHellGodAbil1());
+        helItemAddNum += amount * (1 + PlayerStats.GetHellGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
         if (helItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Helamount, 1))
@@ -656,7 +662,7 @@ public class GoodsTable
 
     public void GetChunItem(float amount)
     {
-        chunItemAddNum += amount * (1 + PlayerStats.GetChunGodAbil1());
+        chunItemAddNum += amount * (1 + PlayerStats.GetChunGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
         if (chunItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Chunfloweramount, 1))
@@ -672,7 +678,7 @@ public class GoodsTable
     static float dokebiItemAddNum = 0;
     public void GetDokebiItem(float amount)
     {
-        dokebiItemAddNum += amount * (1 + PlayerStats.GetDoGodAbil1());
+        dokebiItemAddNum += amount * (1 + PlayerStats.GetDokebiFireGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
         if (dokebiItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Dokebifireamount, 1))
@@ -934,6 +940,32 @@ public class GoodsTable
             SyncToServerEach(key);
         }
     }
+    public void UpDataV2(string key, bool LocalOnly)
+    {
+        if (tableDatas.ContainsKey(key) == false)
+        {
+            Debug.Log($"Status {key} is not exist");
+            return;
+        }
+
+        UpDataV2(key, tableDatas[key].Value, LocalOnly);
+    }
+
+    public void UpDataV2(string key, float data, bool LocalOnly)
+    {
+        if (tableDatas.ContainsKey(key) == false)
+        {
+            Debug.Log($"Growth {key} is not exist");
+            return;
+        }
+
+        tableDatas[key].Value = data;
+
+        if (LocalOnly == false)
+        {
+            SyncToServerEachV2(key);
+        }
+    }
 
     public void SyncToServerEach(string key, Action whenSyncSuccess = null, Action whenRequestComplete = null, Action whenRequestFailed = null)
     {
@@ -943,7 +975,33 @@ public class GoodsTable
         SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
         {
             whenRequestComplete?.Invoke();
+            if (e.IsSuccess())
+            {
+                whenSyncSuccess?.Invoke();
+            }
+            else if (e.IsSuccess() == false)
+            {
+                if (whenRequestFailed != null)
+                {
+                    whenRequestFailed.Invoke();
+                }
 
+                Debug.Log($"Growth {key} sync failed");
+                return;
+            }
+        });
+    }
+    public void SyncToServerEachV2(string key, Action whenSyncSuccess = null, Action whenRequestComplete = null, Action whenRequestFailed = null)
+    {
+        Param param = new Param();
+        param.Add(key, tableDatas[key].Value);
+
+        SendQueue.Enqueue(Backend.GameData.Update, tableName, Indate, param, e =>
+        {
+            whenRequestComplete?.Invoke();
+#if UNITY_EDITOR
+            Debug.LogError($"테이블 : {tableName} / 키 : {key} / 수량 : {tableDatas[key].Value}");
+#endif
             if (e.IsSuccess())
             {
                 whenSyncSuccess?.Invoke();
@@ -1464,6 +1522,16 @@ public class GoodsTable
                 return GoodsTable.StageRelic;
             }
 
+            case Item_Type.GuimoonRelic:
+            {
+                return GoodsTable.GuimoonRelic;
+            }
+
+            case Item_Type.GuimoonRelicClearTicket:
+            {
+                return GoodsTable.GuimoonRelicClearTicket;
+            }
+
 
             case Item_Type.PeachReal:
             {
@@ -1530,6 +1598,10 @@ public class GoodsTable
             case Item_Type.HyungsuRelic:
             {
                 return GoodsTable.HyungsuRelic;
+            }
+            case Item_Type.ChunguRelic:
+            {
+                return GoodsTable.ChunguRelic;
             }
             case Item_Type.FoxRelic:
             {
@@ -2077,6 +2149,16 @@ public class GoodsTable
         {
             return Item_Type.StageRelic;
         }
+        
+        else if (GoodsTable.GuimoonRelic == type)
+        {
+            return Item_Type.GuimoonRelic;
+        }
+
+        else if (GoodsTable.GuimoonRelicClearTicket == type)
+        {
+            return Item_Type.GuimoonRelicClearTicket;
+        }
 
 
         else if (GoodsTable.Peach == type)
@@ -2141,6 +2223,15 @@ public class GoodsTable
             return Item_Type.SealWeaponClear;
         }
 
+        else if (GoodsTable.DosulGoods == type)
+        {
+            return Item_Type.DosulGoods;
+        }
+        else if (GoodsTable.DosulClear == type)
+        {
+            return Item_Type.DosulClear;
+        }
+
         else if (GoodsTable.SinsuRelic == type)
         {
             return Item_Type.SinsuRelic;
@@ -2148,6 +2239,10 @@ public class GoodsTable
         else if (GoodsTable.HyungsuRelic == type)
         {
             return Item_Type.HyungsuRelic;
+        }
+        else if (GoodsTable.ChunguRelic == type)
+        {
+            return Item_Type.ChunguRelic;
         }
         else if (GoodsTable.FoxRelic == type)
         {

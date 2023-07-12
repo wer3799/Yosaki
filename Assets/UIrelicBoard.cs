@@ -273,7 +273,7 @@ public class UIrelicBoard : MonoBehaviour
             }
             else
             {
-                ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value = interval;
+                ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += interval;
                 ServerData.goodsTable.UpData(GoodsTable.Relic, false);
             }
 

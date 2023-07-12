@@ -46,7 +46,16 @@ public class UiDosulGradeDescription : MonoBehaviour
 
         //
         abilDescription.SetText($"달성 보상 : {Utils.ConvertBigNum(tableData.Rewardvalue)}");
-        abilDescription1.SetText($"소탕 보상 : {Utils.ConvertBigNum(tableData.Sweepvalue)}");
+
+        if (PlayerStats.GetDosulGainValue() > 0f)
+        {
+            abilDescription1.SetText($"소탕 보상 : {Utils.ConvertBigNum(tableData.Sweepvalue)}(+{Utils.ConvertBigNum(tableData.Sweepvalue*PlayerStats.GetDosulGainValue())})");
+        }
+        else
+        {
+            abilDescription1.SetText($"소탕 보상 : {Utils.ConvertBigNum(tableData.Sweepvalue)}");
+        }
+        
         
         //
     }

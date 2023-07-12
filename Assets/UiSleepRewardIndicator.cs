@@ -48,7 +48,7 @@ public class UiSleepRewardIndicator : SingletonMono<UiSleepRewardIndicator>
 
     public void OnClickGetRewardButton()
     {
-        if(ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value> 2E+38)
+        if(ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value> GameBalance.GoldLimit)
         {
             PopupManager.Instance.ShowAlarmMessage("금화가 너무 많습니다!\n기본 무공을 올려주세요!");
             return;

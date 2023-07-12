@@ -163,6 +163,10 @@ public class SinsuTowerManager : ContentsManagerBase
         {
             autoCoroutine = StartCoroutine(StartAutoStart());
         }
+        else
+        {
+            //autoCoroutine = StartCoroutine(GoToNormalFiled());
+        }
     }
 
     private readonly WaitForSeconds toNextStage = new WaitForSeconds(2f);
@@ -180,6 +184,24 @@ public class SinsuTowerManager : ContentsManagerBase
             {
                 GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField);
             }
+        }
+        
+    }
+
+    private readonly WaitForSeconds oneSecond = new WaitForSeconds(1f);
+
+    private int count = 3;
+    private IEnumerator GoToNormalFiled()
+    {
+        while (true)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{count}초 후 스테이지로 이동합니다.");
+            count--;
+            if (count <= 0)
+            {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField);
+            }
+            yield return oneSecond;
         }
     }
 

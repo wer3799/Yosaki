@@ -27,7 +27,7 @@ public class KingTrialSort : MonoBehaviour
                     }
                 }
 
-                if (e >= GameBalance.darkKingGraduate)
+                if (e >= GameBalance.sinsunKingGraduate)
                 {
                     _seletableTab.OnSelect(0);
                 }

@@ -115,10 +115,21 @@ public class UiDosulSweepBoard : MonoBehaviour
         }
 
         int instanClearGetNum = (int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue * inputNum;
-
+        string desc = "";
+        if (PlayerStats.GetDosulGainValue() > 0f)
+        {
+            desc +=
+                $"{currentGradeId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.DosulGoods)} {Utils.ConvertNum(instanClearGetNum)}(+{Utils.ConvertNum(instanClearGetNum * PlayerStats.GetDosulGainValue())})개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({currentGradeId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.DosulGoods)} {(int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue}(+{(int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue * PlayerStats.GetDosulGainValue()})개 획득)</color>";
+        }
+        else
+        {
+            desc +=
+                $"{currentGradeId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.DosulGoods)} {Utils.ConvertNum(instanClearGetNum)}개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({currentGradeId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.DosulGoods)} {Utils.ConvertNum(TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue)}개 획득)</color>";
+        }
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-            $"{currentGradeId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.DosulGoods)} {instanClearGetNum}개를 획득 하시겠습니까?\n" +
-            $"<color=yellow>({currentGradeId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.DosulGoods)} {(int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue}개 획득)</color>",
+            desc,
             () =>
             {
                 int remainItemNum = (int)ServerData.goodsTable.TableDatas[GoodsTable.DosulClear].Value;
@@ -153,7 +164,7 @@ public class UiDosulSweepBoard : MonoBehaviour
 
                 //실제소탕
                 ServerData.goodsTable.TableDatas[GoodsTable.DosulClear].Value -= inputNum;
-                ServerData.goodsTable.TableDatas[GoodsTable.DosulGoods].Value += instanClearGetNum;
+                ServerData.goodsTable.TableDatas[GoodsTable.DosulGoods].Value += instanClearGetNum+(PlayerStats.GetDosulGainValue()*instanClearGetNum);
 
                 List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -168,10 +179,10 @@ public class UiDosulSweepBoard : MonoBehaviour
                     successCallBack: () =>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.DosulGoods)} {instanClearGetNum}개 획득!", null);
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.DosulGoods)} {instanClearGetNum+(PlayerStats.GetDosulGainValue()*instanClearGetNum)}개 획득!", null);
 
                         //남은재화(소탕권) / 사용한재화(소탕권) / 획득한 재화갯수
-                        LogManager.Instance.SendLogType("Dosul", "Clear", $"{ServerData.goodsTable.TableDatas[GoodsTable.DosulClear].Value},{inputNum},{instanClearGetNum}");
+                        LogManager.Instance.SendLogType("Dosul", "Clear", $"{ServerData.goodsTable.TableDatas[GoodsTable.DosulClear].Value},{inputNum},{instanClearGetNum+(PlayerStats.GetDosulGainValue()*instanClearGetNum)}");
                     });
             }, null);
     }

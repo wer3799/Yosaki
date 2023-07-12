@@ -22,6 +22,13 @@ public static class Utils
     {
         return type == Item_Type.SleepRewardItem;
     }
+    //지배 영향 안받는 능력치
+    public static bool IsAbsoluteStatus(this StatusType type)
+    {
+        return type == StatusType.ExpGainPer||
+               type == StatusType.GoldGainPer|
+               type == StatusType.GoldBarGainPer;
+    }
     public static bool IsCostumeItem(this Item_Type type)
     {
         return type == Item_Type.costume0 ||
@@ -161,7 +168,9 @@ public static class Utils
                type == Item_Type.costume134||
                type == Item_Type.costume135||
                type == Item_Type.costume136||
-               type == Item_Type.costume137
+               type == Item_Type.costume137||
+               type == Item_Type.costume138||
+               type == Item_Type.costume139
             ;
     }
 
@@ -302,6 +311,10 @@ public static class Utils
                type == Item_Type.SasinsuPet1 ||
                type == Item_Type.SasinsuPet2 ||
                type == Item_Type.SasinsuPet3 ||
+               type == Item_Type.SasinsuPet4 ||
+               type == Item_Type.SasinsuPet5 ||
+               type == Item_Type.SasinsuPet6 ||
+               type == Item_Type.SasinsuPet7 ||
                type == Item_Type.SahyungPet0 ||
                type == Item_Type.SahyungPet1 ||
                type == Item_Type.SahyungPet2 ||
@@ -411,6 +424,7 @@ public static class Utils
                type == Item_Type.RelicTicket ||
                type == Item_Type.SinsuRelic ||
                type == Item_Type.HyungsuRelic ||
+               type == Item_Type.ChunguRelic ||
                type == Item_Type.FoxRelic ||
                type == Item_Type.FoxRelicClearTicket ||
                type == Item_Type.NewGachaEnergy ||
@@ -456,7 +470,9 @@ public static class Utils
             type != StatusType.Mp &&
             type != StatusType.IgnoreDefense &&
             type != StatusType.DashCount &&
-            type != StatusType.SkillAttackCount;
+            type != StatusType.SkillAttackCount &&
+            type != StatusType.SealSwordDam &&
+            type != StatusType.AddSummonYogui;
     }
 
     public static bool IsBossContents(this GameManager.ContentsType type)
@@ -476,7 +492,8 @@ public static class Utils
                type == GameManager.ContentsType.Sumi ||
                type == GameManager.ContentsType.PartyRaid_Guild || //O
                type == GameManager.ContentsType.Thief|| //O
-               type == GameManager.ContentsType.Dark; //O
+               type == GameManager.ContentsType.Dark| //O
+               type == GameManager.ContentsType.Sinsun; //O
     }
 
     public static bool IsRankFrameItem(this Item_Type type)
@@ -617,6 +634,27 @@ public static class Utils
         DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         return origin.AddSeconds(timestamp + 1620000000f);
     }
+    public static string ConvertStage(int currentStage)
+    {
+        string stage="";
+
+        var firstInt = currentStage / 100;
+        var secondInt = currentStage - (firstInt * 100);
+        var firststring = (firstInt + 1).ToString();
+        var secondstring = "";
+        if (firstInt > 0)
+        {
+            secondstring = (secondInt+1).ToString();
+        }
+        else
+        {
+            secondstring = (secondInt).ToString();
+            
+        }
+        stage += firststring + "-" + secondstring;
+        return stage;
+
+    }
 
     public static double ConvertToUnixTimestamp(DateTime date)
     {
@@ -658,7 +696,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","미정1","미정2","미정3","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","미정2","미정3","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16",
         
     };
 

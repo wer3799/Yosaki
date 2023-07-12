@@ -46,7 +46,7 @@ public class UiNewDailyMissionBoard : MonoBehaviour
         else
         {
             var tableData = TableManager.Instance.StageMapData[currentStage];
-            dailyGetNum.SetText($"현재 스테이지 {currentStage + 1} 요괴 처치당 전리품 획득량 : {tableData.Dailyitemgetamount * tableData.Marbleamount}개");
+            dailyGetNum.SetText($"현재 스테이지 {Utils.ConvertStage(currentStage + 1)} 요괴 처치당 전리품 획득량 : {tableData.Dailyitemgetamount * tableData.Marbleamount}개");
         }
     }
 

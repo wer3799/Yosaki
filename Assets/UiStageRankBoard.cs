@@ -53,7 +53,7 @@ public class UiStageRankBoard : MonoBehaviour
             if (e != null)
             {   
                                                                 //스테이지 -1부터 시작함
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score+2}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx,e.suhoAnimal);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertStage((int)e.Score+2)}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx,e.suhoAnimal);
             }
             else
             {
@@ -151,7 +151,7 @@ public class UiStageRankBoard : MonoBehaviour
                         {
                             guildName = splitData[7];
                         }
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{level+2}단계", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx,guildName, maskIdx,hornIdx,suhoAnimal);
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertStage(level+2)}단계", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx,guildName, maskIdx,hornIdx,suhoAnimal);
                     }
                     else
                     {

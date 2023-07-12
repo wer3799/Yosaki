@@ -823,6 +823,13 @@ public class ColdSeasonPassServerTable
     public static string gangChuldAd = "a7";
     public static string SoulForestFree = "f9";
     public static string SoulForestdAd = "a9";
+    public static string SwordFree = "f10";
+    public static string SwordAd = "a11";
+    public static string dosulFree = "f12";
+    public static string dosulAd = "a12";
+
+    public static string guimoonFree = "f13";
+    public static string guimoonAd = "a13";
 
     public static string coldseasonFree_Atten = "fa2";
 
@@ -842,7 +849,13 @@ public class ColdSeasonPassServerTable
         { gangChulFree,string.Empty},
         { gangChuldAd,string.Empty},
         { SoulForestFree,string.Empty},
-        { SoulForestdAd,string.Empty}
+        { SoulForestdAd,string.Empty},
+        { SwordFree,string.Empty},
+        { SwordAd,string.Empty},
+        { dosulFree,string.Empty},
+        { dosulAd,string.Empty},
+        { guimoonFree,string.Empty},
+        { guimoonAd,string.Empty},
 
     };
 

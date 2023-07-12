@@ -250,7 +250,9 @@ public static class GameBalance
 
     public readonly static ObscuredInt DokebiKeyUseCount = 5;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
+    public readonly static ObscuredInt GuimoonUnlockLevel = 1000;
     public readonly static ObscuredFloat StageRelicUpgradePrice = 1000;
+    public readonly static ObscuredFloat GuimoonRelicUpgradePrice = 1000;
 
     public readonly static ObscuredFloat BossScoreSmallizeValue = 0.00000000000000000000000000000001f;
     public readonly static ObscuredFloat BossScoreConvertToOrigin = 100000000000000000000000000000000f;
@@ -352,6 +354,7 @@ public static class GameBalance
     public static ObscuredFloat GuildTowerTicketDailyGetAmount = 1; // 
     public static ObscuredFloat FoxTowerTicketDailyGetAmount = 2; // 
     public static ObscuredFloat SealSwordTicketDailyGetAmount = 4; // 
+    public static ObscuredFloat GuimoonTicketDailyGetAmount = 4; // 
     
     public static ObscuredFloat GuildTowerChimAbilUpValue = 0.01f; // 
     
@@ -391,6 +394,7 @@ public static class GameBalance
     public static ObscuredDouble sumiGraduateScore = 1E+101;
     public static ObscuredDouble thiefGraduateScore = 1E+109;
     public static ObscuredDouble darkGraduateScore = 1E+119;
+    public static ObscuredDouble sinsunGraduateScore = 1E+127;
     
     public static ObscuredFloat yumGraduateValue = 2;
     public static ObscuredFloat okGraduateValue = 2;
@@ -398,6 +402,7 @@ public static class GameBalance
     public static ObscuredFloat sumiGraduateValue = 2;
     public static ObscuredFloat thiefGraduateValue = 2;
     public static ObscuredFloat darkGraduateValue = 2;
+    public static ObscuredFloat sinsunGraduateValue = 2;
     
         
     public static ObscuredInt yumKingGraduate = 1;
@@ -406,6 +411,7 @@ public static class GameBalance
     public static ObscuredInt sumiKingGraduate = 4;
     public static ObscuredInt thiefKingGraduate = 5;
     public static ObscuredInt darkKingGraduate = 6;
+    public static ObscuredInt sinsunKingGraduate = 7;
     // 신의 시련
 
     public static ObscuredInt swordGodGraduate = 1;
@@ -417,13 +423,13 @@ public static class GameBalance
     
     public static ObscuredFloat swordGodGraduateValue = 1.5f;
     public static ObscuredFloat monkeyGodGraduateValue = 1.3f;
-    public static ObscuredFloat hellGodGraduateValue = 2f;
+    public static ObscuredFloat hellGodGraduateValue = 1.15f;
     public static ObscuredFloat doGodGraduateValue = 2f;
     public static ObscuredFloat sumiGodGraduateValue = 2f;
         
     public static ObscuredDouble swordGodGraduateScore = 2E+122;
     public static ObscuredDouble monkeyGodGraduateScore = 5E+122;
-    public static ObscuredDouble hellGodGraduateScore = 1E+119;
+    public static ObscuredDouble hellGodGraduateScore = 1E+124;
     public static ObscuredDouble chunGodGraduateScore = 1E+119;
     public static ObscuredDouble doGodGraduateScore = 1E+119;
     public static ObscuredDouble sumiGodGraduateScore = 1E+119;
@@ -470,6 +476,13 @@ public static class GameBalance
     public static ObscuredInt visionSkill6GainIdx = 0;
     public static ObscuredInt visionSkill7GainIdx = 112;
     
+    //사신수 업그레이드
+    public static ObscuredInt goldBarBlack = 300000;
+    public static ObscuredInt goldBarWhite = 500000;
+    public static ObscuredInt goldBarRed = 700000;
+    public static ObscuredInt goldBarBlue = 1000000;
+
+    public static ObscuredDouble GoldLimit = 1E+38;// 해당금화 이상 소지시 휴식보상 받을수없음.
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

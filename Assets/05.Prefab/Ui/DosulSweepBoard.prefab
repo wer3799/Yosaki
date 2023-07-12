@@ -502,6 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5505637311259260683}
   - component: {fileID: 3914417817308884730}
+  - component: {fileID: 1873153622611585932}
   m_Layer: 5
   m_Name: DosulSweepBoard
   m_TagString: Untagged
@@ -544,6 +545,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instantClearNum: {fileID: 5287724218185750289}
+--- !u!114 &1873153622611585932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020237970532065133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed713c3b10b79af41a80d418461a6ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilDescription: {fileID: 7754657810935761551}
+  abilDescription1: {fileID: 1525468285773360360}
+  gradeText: {fileID: 8589739790000685367}
+  unlockDesc: {fileID: 8807008734920901017}
+  equipFrame: {fileID: 4108266352267034894}
 --- !u!1 &1079379190930411538
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +682,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1873153622611585932}
         m_TargetAssemblyTypeName: UiDosulGradeDescription, Assembly-CSharp
         m_MethodName: OnClickRightButton
         m_Mode: 1
@@ -979,7 +997,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1873153622611585932}
         m_TargetAssemblyTypeName: UiDosulGradeDescription, Assembly-CSharp
         m_MethodName: OnClickLeftButton
         m_Mode: 1

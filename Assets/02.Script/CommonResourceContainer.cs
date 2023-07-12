@@ -15,6 +15,7 @@ public static class CommonResourceContainer
     private static List<Sprite> dragonBall;
     private static List<Sprite> foxCup;
     private static List<Sprite> wolfRing;
+    private static List<Sprite> dragonBracelet;
     private static List<Sprite> chunIcons;
     private static List<Sprite> SuhoAnimal;
     private static List<Sprite> DarkRoomIcon;
@@ -287,11 +288,28 @@ public static class CommonResourceContainer
 
         var require = TableManager.Instance.BlackWolfRing.dataArray[idx].Require - TableManager.Instance.BlackWolfRing.dataArray[0].Require;
         require /= GameBalance.BlackWolfRingDevideIdx;
-        if (require > 4)
+        return wolfRing[Mathf.Min(require,4)];
+     
+    }
+    public static Sprite GetDragonBraceletSprite(int idx)
+    {
+        
+        if (dragonBracelet == null)
         {
-            require = 4;
+            var maksIcons = Resources.LoadAll<Sprite>("DragonBracelet/");
+            dragonBracelet = maksIcons.ToList();
+
+
+            dragonBracelet.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
         }
-        return wolfRing[require];
+
+        return dragonBracelet[0];
      
     }
 

@@ -1,4 +1,5 @@
-﻿using BackEnd;
+﻿using System;
+using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
 using Coffee.UIEffects;
 using System.Collections;
@@ -21,6 +22,8 @@ public class UiPensionObjectView : MonoBehaviour
     [SerializeField]
     private UiPensionItemCell cellPrefab;
 
+    private List<UiPensionItemCell> cellContainer = new List<UiPensionItemCell>();
+
     [SerializeField]
     private Transform cellParents;
 
@@ -32,6 +35,8 @@ public class UiPensionObjectView : MonoBehaviour
 
     [SerializeField]
     private GameObject buyButton;
+    [SerializeField]
+    private GameObject buyAfter;
 
     [SerializeField]
     private TextMeshProUGUI instantRewardDesc;
@@ -55,6 +60,7 @@ public class UiPensionObjectView : MonoBehaviour
             var cell = Instantiate<UiPensionItemCell>(cellPrefab, cellParents);
             cell.gameObject.SetActive(true);
             cell.Initialize(pensionKey, i, dailyReceiveValue, dayCountMax);
+            cellContainer.Add(cell);
         }
 
         instantRewardDesc.SetText(Utils.ConvertBigNum(instantReceiveValue));
@@ -70,6 +76,8 @@ public class UiPensionObjectView : MonoBehaviour
             string price = IAPManager.m_StoreController.products.WithID(pensionKey).metadata.localizedPrice.ToString("N0");
 
             buyButton.SetActive(e == 0);
+
+            buyAfter.SetActive(e == 1);
 
             buyButtonDesc.SetText(e > 0 ? "구매함" : $"{price}");
 
@@ -88,7 +96,52 @@ public class UiPensionObjectView : MonoBehaviour
             attendanceCount.SetText($"{e + 1}일차");
         }).AddTo(this);
     }
+    private Tuple<Item_Type, string> itemTuple;
+    public void OnClickAllReceiveItem()
+    {
+        var e = cellContainer.GetEnumerator();
 
+        int rewardCount = 0;
+
+        while (e.MoveNext())
+        {
+            if (e.Current != null)
+            {
+                var tuple = e.Current.OnClickRewardButton_All();
+
+                if (tuple != null)
+                {
+                    itemTuple = tuple;
+                    rewardCount++;   
+                }
+            }
+        }
+
+        if (rewardCount > 0)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(itemTuple.Item1),ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString(itemTuple.Item1)).Value);
+
+            Param pensionParam = new Param();
+            pensionParam.Add(itemTuple.Item2, ServerData.pensionServerTable.TableDatas[itemTuple.Item2].Value);
+            
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            transactions.Add(TransactionValue.SetUpdate(PensionServerTable.tableName, PensionServerTable.Indate, pensionParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowAlarmMessage("보상 전부 수령 완료!");
+            });
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("받을 보상이 없습니다!");
+        }
+    }
+    
     public void GetPackageItem(string productId)
     {
         if (productId.Equals("removeadios"))
@@ -171,6 +224,10 @@ public class UiPensionObjectView : MonoBehaviour
         else if (pensionKey == "dosulpension")
         {
             itemType = Item_Type.DosulClear;
+        }
+        else if (pensionKey == "guimoonpension")
+        {
+            itemType = Item_Type.GuimoonRelicClearTicket;
         }
 
         List<TransactionValue> transactions = new List<TransactionValue>();

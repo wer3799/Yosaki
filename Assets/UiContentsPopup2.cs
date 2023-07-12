@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Debug = System.Diagnostics.Debug;
 
 public class UiContentsPopup2 : MonoBehaviour
@@ -42,11 +44,79 @@ public class UiContentsPopup2 : MonoBehaviour
         VisionTowerBoard,
         SinSkillBoard,
     }
+    //한계돌파
+    private enum GrowthContentsDoor
+    {
+        Bandit0,
+        Bandit1,
+        NormalTower,
+        HardTower,
+        SinsuTower,
+        Smith,
+        Dokebi,
+        Relic,
+        Taegeuk,
+        YoguiSogul,
+        Son,
+        Susano,
+        FoxMask,
+        KingTest,
+        GradeTest,
+        Vision,
+        SuhoPet,
+        Fox,
+        GodTest,
+        
+        
+        
+    }
+    //보스도전
+    private enum BossChallengeDoor
+    {
+        Cat,
+        Twelve,
+        PetTest,
+        NineTales,
+        Monster,
+        SuhoGod,
+        Sasinsu,
+        Sahyung,
+        Saryong,
+        FoxStory,
+        Sangun,
+        Chungu,
+        
+    }
+    //삼천세계 
+    private enum AdventureDoor
+    {
+        Hell,
+        Chun,
+        DokebiWorld,
+        Sumi,
+        Thief,
+        Dark,
+        Sinsun,
+    }
+    
     [SerializeField]
     private List<GameObject> lastBoards;
     [SerializeField]
+    private List<GameObject> newGrowthDoors;
+    [SerializeField]
+    private List<GameObject> oldGrowthDoors;
+    [SerializeField]
+    private List<GameObject> newBossDoors;
+    [SerializeField]
+    private List<GameObject> oldBossDoors;
+    [SerializeField]
+    private List<GameObject> newAdventureDoors;
+    [SerializeField]
+    private List<GameObject> oldAdventureDoors;
+    [SerializeField]
     private List <UiContentsEnterButton> uiContentsEnterButtons;
-    void Start()
+
+    private void LoadLastContentPopup()
     {
         
         GameManager.ContentsType type = GameManager.Instance.lastContentsType2;
@@ -286,6 +356,8 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 159:
                     case 160:
                     case 161:
+                    case 167:
+                    case 168:
                         lastBoards[(int)ContentsBoard.HyunSanganBoard].SetActive(true);
                         break;
                     
@@ -293,6 +365,7 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 163:
                     case 164:
                     case 165:
+                    case 166:
                         lastBoards[(int)ContentsBoard.ChunGuBoard].SetActive(true);
                         break;
                         
@@ -328,6 +401,7 @@ public class UiContentsPopup2 : MonoBehaviour
             case GameManager.ContentsType.Sumi:
             case GameManager.ContentsType.Thief:
             case GameManager.ContentsType.Dark:
+            case GameManager.ContentsType.Sinsun:
                 lastBoards[(int)ContentsBoard.YumAndOkBoard].SetActive(true);
                 break;
             case GameManager.ContentsType.TestMonkey:
@@ -383,5 +457,220 @@ public class UiContentsPopup2 : MonoBehaviour
         }
         
         GameManager.Instance.ResetLastContents2();
+    }
+
+    private void Subscribe()
+    {
+        SettingData.showBanditUi.AsObservable().Subscribe(e =>
+        {
+            if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < GameBalance.banditUpgradeLevel)
+            {
+                    newGrowthDoors[(int)GrowthContentsDoor.Bandit0].SetActive(e == 1);
+                    oldGrowthDoors[(int)GrowthContentsDoor.Bandit0].SetActive(e == 1);
+            }
+            else
+            {
+                    newGrowthDoors[(int)GrowthContentsDoor.Bandit1].SetActive(e == 1);
+                    oldGrowthDoors[(int)GrowthContentsDoor.Bandit1].SetActive(e == 1);
+            }
+        }).AddTo(this);
+        SettingData.showTowerUi.AsObservable().Subscribe(e =>
+        {
+            if (ServerData.userInfoTable.IsLastFloor()==false)
+            {
+                newGrowthDoors[(int)GrowthContentsDoor.NormalTower].SetActive(e == 1);
+                oldGrowthDoors[(int)GrowthContentsDoor.NormalTower].SetActive(e == 1);
+            }
+            else if(ServerData.userInfoTable.IsLastFloor2()==false)
+            {
+                newGrowthDoors[(int)GrowthContentsDoor.HardTower].SetActive(e == 1);
+                oldGrowthDoors[(int)GrowthContentsDoor.HardTower].SetActive(e == 1);
+            }
+            else if (ServerData.userInfoTable.IsLastFloor3() == false)
+            {
+                newGrowthDoors[(int)GrowthContentsDoor.SinsuTower].SetActive(e == 1);
+                oldGrowthDoors[(int)GrowthContentsDoor.SinsuTower].SetActive(e == 1);
+            }
+            else
+            {
+                newGrowthDoors[(int)GrowthContentsDoor.SinsuTower].SetActive(e == 1);
+                oldGrowthDoors[(int)GrowthContentsDoor.SinsuTower].SetActive(e == 1);
+            }
+        }).AddTo(this);
+        SettingData.showSmithUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Smith].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Smith].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDokebiUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Dokebi].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Dokebi].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSoulForestUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Relic].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Relic].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showTaegeukUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Taegeuk].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Taegeuk].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showBackguiUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.YoguiSogul].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.YoguiSogul].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSonUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Son].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Son].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSusanoUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Susano].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Susano].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showFoxmaskUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.FoxMask].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.FoxMask].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showKingTestUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.KingTest].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.KingTest].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showGradeTestUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.GradeTest].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.GradeTest].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showVisionTowerUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Vision].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Vision].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSuhoTowerUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.SuhoPet].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.SuhoPet].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showFoxTowerUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.Fox].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.Fox].SetActive(e == 1);
+        }).AddTo(this);       
+        SettingData.showGodTrialUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.GodTest].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.GodTest].SetActive(e == 1);
+        }).AddTo(this);
+        
+        ////////////보스도전
+        
+        SettingData.showCatUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Cat].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Cat].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showTwelveUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Twelve].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Twelve].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showHwansuUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.PetTest].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.PetTest].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showGumihoUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.NineTales].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.NineTales].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showNewYoguiUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Monster].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Monster].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSuhosinUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.SuhoGod].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.SuhoGod].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSasinsuUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Sasinsu].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Sasinsu].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSahyungsuUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Sahyung].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Sahyung].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showVisionBossUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Saryong].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Saryong].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showFoxUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.FoxStory].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.FoxStory].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSangoonUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Sangun].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Sangun].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showChunguUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.Chungu].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.Chungu].SetActive(e == 1);
+        }).AddTo(this);;
+        
+        ///////삼천세계
+        SettingData.showHellUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Hell].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Hell].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showChunUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Chun].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Chun].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDoUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.DokebiWorld].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.DokebiWorld].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSumiUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Sumi].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Sumi].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showThiefUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Thief].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Thief].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDarkUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Dark].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Dark].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showSinsunUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Sinsun].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Sinsun].SetActive(e == 1);
+        }).AddTo(this);
+    }
+    void Start()
+    {
+        LoadLastContentPopup();
+        Subscribe();
     }
 }

@@ -294,6 +294,8 @@ public static class CommonString
             case Item_Type.costume135: return TableManager.Instance.Costume.dataArray[135].Name;
             case Item_Type.costume136: return TableManager.Instance.Costume.dataArray[136].Name;
             case Item_Type.costume137: return TableManager.Instance.Costume.dataArray[137].Name;
+            case Item_Type.costume138: return TableManager.Instance.Costume.dataArray[138].Name;
+            case Item_Type.costume139: return TableManager.Instance.Costume.dataArray[139].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -328,6 +330,8 @@ public static class CommonString
             case Item_Type.Event_Item_0: return "눈송이";
             case Item_Type.Event_Item_1: return "벚꽃";
             case Item_Type.StageRelic: return "유물 파편";
+            case Item_Type.GuimoonRelic: return "귀문석";
+            case Item_Type.GuimoonRelicClearTicket: return "귀문석 소탕권";
             case Item_Type.DragonBossStone: return "천공의 증표";
             case Item_Type.SnakeStone: return "치명의 증표";
             case Item_Type.PeachReal: return "천도 복숭아";
@@ -510,6 +514,7 @@ public static class CommonString
 
             case Item_Type.SinsuRelic: return "황룡의 여의주";
             case Item_Type.HyungsuRelic: return "흑호의 보주";
+            case Item_Type.ChunguRelic: return "천신의 보주";
             case Item_Type.FoxRelic: return "여우불씨";
             case Item_Type.FoxRelicClearTicket: return "여우불씨 소탕권";
             case Item_Type.EventDice: return "이벤트 주사위";
@@ -675,6 +680,8 @@ public static class CommonString
                 return "도적단 보물 레벨당 섬광베기 피해량 증가(%)";
             case StatusType.DarkHasValueUpgrade:
                 return "심연의 정수 레벨당 심연베기 피해량 증가(%)";
+            case StatusType.SinsunHasValueUpgrade:
+                return "신선의 보옥 레벨당 신선베기 피해량 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:
@@ -706,6 +713,30 @@ public static class CommonString
                 return "귀살베기 피해(%)";
             case StatusType.SuperCritical20DamPer:
                 return "천구베기 피해(%)";
+            case StatusType.SealSwordDam:
+                return "요도 피해량 증가";
+            case StatusType.DosulDamPer:
+                return "도술 추가 피해량 증가(%)";
+            case StatusType.PeachGainPer:
+                return "각성 시 복숭아 방치 획득량 증가 (%)";
+            case StatusType.HellGainPer:
+                return "각성 시 불멸석 방치 획득량 증가 (%)";
+            case StatusType.ChunGainPer:
+                return "각성 시 천계꽃 방치 획득량 증가 (%)";
+            case StatusType.DokebiFireGainPer:
+                return "각성 시 도깨비불 방치 획득량 증가(%)";
+            case StatusType.SealAttackSpeed:
+                return "요도 시전 속도 증가 (%)";
+            case StatusType.SuhoGainPer:
+                return "수호환 소탕량 증가 (%)";
+            case StatusType.FoxRelicGainPer:
+                return "여우불 소탕량 증가 (%)";
+            case StatusType.PeachAbilUpgradePer:
+                return "복숭아 능력치 효과 (%)";
+            case StatusType.DosulGainPer:
+                return "도술꽃 소탕량 증가 (%)";
+            case StatusType.AddSummonYogui:
+                return "요괴 추가 소환";
         }
 
         return "등록필요";

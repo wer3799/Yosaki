@@ -418,6 +418,17 @@ public class StatusTable
         return 0f;
     }
 
+    public int GoldBarUpgradeSum()
+    {
+
+        var soul0 = tableDatas[Special0_GoldBar].Value;
+        var soul1 = tableDatas[Special1_GoldBar].Value;
+        var soul2 = tableDatas[Special2_GoldBar].Value;
+        var sum = soul0 + soul1 + soul2;
+        
+        return sum;
+    }
+    
     public float GetStatusUpgradePrice(string key, int level)
     {
         if (TableManager.Instance.StatusDatas.TryGetValue(key, out var data))

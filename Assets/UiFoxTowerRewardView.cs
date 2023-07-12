@@ -42,7 +42,15 @@ public class UiFoxTowerRewardView : MonoBehaviour
        rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)towerTableData.Rewardtype);
        
        rewardDescription.SetText($"클리어 보상 : {Utils.ConvertBigNum(towerTableData.Rewardvalue)}개");
-       sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}개");
+
+       if (PlayerStats.GetFoxRelicGainValue() > 0f)
+       {
+           sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}(+{towerTableData.Sweepvalue * PlayerStats.GetFoxRelicGainValue()})개");
+       }
+       else
+       {
+           sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}개");
+       }
        
        rewardName.SetText(CommonString.GetItemName((Item_Type)towerTableData.Rewardtype));
         

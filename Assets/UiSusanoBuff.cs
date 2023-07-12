@@ -21,6 +21,7 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.Sumi) return;
         if (GameManager.contentsType == GameManager.ContentsType.Thief) return;
         if (GameManager.contentsType == GameManager.ContentsType.Dark) return;
+        if (GameManager.contentsType == GameManager.ContentsType.Sinsun) return;
         if (GameManager.contentsType == GameManager.ContentsType.Sasinsu) return;
         if (GameManager.contentsType == GameManager.ContentsType.Online_Tower) return;
         if (GameManager.contentsType == GameManager.ContentsType.GradeTest) return;
