@@ -24,7 +24,7 @@ public class UiGuimoonInstantClearPopup : MonoBehaviour
     {
         var currentFloor= ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
         
-        rewardDescription.SetText($"현재 스테이지 {Utils.ConvertStage((int)currentFloor)}단계\n" +
+        rewardDescription.SetText($"현재 스테이지 {Utils.ConvertStage((int)currentFloor+2)}단계\n" +
             $"소탕시 귀문석 {GameManager.Instance.CurrentStageData.Guimoonpoint}개  획득!");
     }
 
@@ -74,8 +74,8 @@ public class UiGuimoonInstantClearPopup : MonoBehaviour
         string desc = "";
 
             desc +=
-                $"{Utils.ConvertStage(GameManager.Instance.CurrentStageData.Id)}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.GuimoonRelic)} {instanClearGetNum}개를 획득 하시겠습니까?\n" +
-                $"<color=yellow>({Utils.ConvertStage(GameManager.Instance.CurrentStageData.Id)}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.GuimoonRelic)} {(int)GameManager.Instance.CurrentStageData.Guimoonpoint}개 획득)</color>";
+                $"{Utils.ConvertStage(GameManager.Instance.CurrentStageData.Id+2)}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.GuimoonRelic)} {instanClearGetNum}개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({Utils.ConvertStage(GameManager.Instance.CurrentStageData.Id+2)}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.GuimoonRelic)} {(int)GameManager.Instance.CurrentStageData.Guimoonpoint}개 획득)</color>";
         
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
             desc,
