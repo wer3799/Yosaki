@@ -14,8 +14,6 @@ public class UiDosulBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
 
-    [SerializeField]
-    private TextMeshProUGUI gradeText;
 
     [SerializeField]
     private TextMeshProUGUI currentDosulLevel;
@@ -165,16 +163,7 @@ public class UiDosulBoard : MonoBehaviour
     {
         scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
-        int grade = PlayerStats.GetDosulGrade();
 
-        if (grade != -1)
-        {
-            gradeText.SetText($"{grade + 1}단계");
-        }
-        else
-        {
-            gradeText.SetText("없음");
-        }
     }
 
     public void OnClickEnterButton()
