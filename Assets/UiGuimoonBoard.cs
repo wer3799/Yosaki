@@ -94,6 +94,7 @@ public class UiGuimoonBoard : SingletonMono<UiGuimoonBoard>
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
+                PlayerStats.ResetSuperCritical11CalculatedValue();
                 PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
             });
 

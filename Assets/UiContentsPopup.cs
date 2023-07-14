@@ -44,6 +44,8 @@ public class UiContentsPopup : MonoBehaviour
         tower1.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() == false));
         tower2.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() && ServerData.userInfoTable.IsLastFloor2() == false));
         tower3.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor2()));
+        
+        RefreshBandit();
     }
 
     [SerializeField]
@@ -65,15 +67,16 @@ public class UiContentsPopup : MonoBehaviour
 
     private void OnEnable()
     {
-        RefreshBandit();
+        //RefreshBandit();
     }
 
     private void RefreshBandit()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
         int requireLv = GameBalance.banditUpgradeLevel;
-        bandit1.ForEach(e => e.SetActive(level < requireLv));
-        bandit2.ForEach(e => e.SetActive(level >= requireLv));
+   
+            bandit1.ForEach(e => e.SetActive(level < requireLv));
+            bandit2.ForEach(e => e.SetActive(level >= requireLv));
 
         banditDescription.ForEach(e => e.SetText($"레벨 {Utils.ConvertBigNum(GameBalance.banditUpgradeLevel)}에 대왕반딧불전 해금!"));
     }

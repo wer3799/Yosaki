@@ -1781,7 +1781,7 @@ public static class PlayerStats
     {
         float ret = 0f;
       
-        ret += GetGuimoonHasEffect1(StatusType.SealAttackSpeed);
+        ret += GetGuimoonHasEffect2(StatusType.SealAttackSpeed);
         
         return ret;
     }
