@@ -282,6 +282,45 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }   
+        else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae8)
+        {
+            //로컬
+            ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+
+            if (ServerData.magicBookTable.TableDatas["magicBook101"].hasItem.Value == 1)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
+                return;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            ServerData.magicBookTable.TableDatas["magicBook101"].amount.Value += 1;
+            ServerData.magicBookTable.TableDatas["magicBook101"].hasItem.Value = 1;
+
+            Param magicBookParam = new Param();
+
+            magicBookParam.Add("magicBook101", ServerData.magicBookTable.TableDatas["magicBook101"].ConvertToString());
+
+            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+
+            //패스 보상
+            Param passParam = new Param();
+            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
+            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
+
+
+            //킬카운트
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable_2.evenMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).Value);
+            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
+            ServerData.SendTransaction(transactionList, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.MonthNorigae8)} 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
         else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae6)
         {
             //로컬

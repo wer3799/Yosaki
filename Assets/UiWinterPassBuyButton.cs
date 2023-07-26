@@ -14,7 +14,7 @@ public class UiWinterPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string productKey = "winterpass0";
+    public static readonly string productKey = "snorkelingpass";
 
     private Button buyButton;
 
@@ -36,7 +36,7 @@ public class UiWinterPassBuyButton : MonoBehaviour
 
         ServerData.iapServerTable.TableDatas[productKey].buyCount.AsObservable().Subscribe(e =>
         {
-            descText.SetText(e >= 1 ? "구매완료" : "패스권 구매");
+            descText.SetText(e >= 1 ? "구매완료" : "훈련권 구매");
             this.gameObject.SetActive(e <= 0);
         }).AddTo(disposable);
 

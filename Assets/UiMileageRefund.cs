@@ -34,6 +34,59 @@ public class UiMileageRefund : MonoBehaviour
         InitializeXMasEvent();
         InitializeCollectionEvent();
         ShopItemRefundRoutine();
+        InitializeTrainingEvent();
+        
+        #if UNITY_EDITOR
+        CheckServerTime();
+        #endif
+    }
+
+    private bool checkServerTime = false;
+    private void CheckServerTime()
+    {
+        if (checkServerTime == false)
+        {
+            checkServerTime = true;
+            var time = ServerData.userInfoTable.currentServerTime; 
+            Debug.LogError("현재 서버 시간 : "+time.ToLongDateString()+ " " + time.ToLongTimeString());   
+        }
+    }
+    //7월 28일 업데이트
+    private void InitializeTrainingEvent()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.trainingEventInitialize0).Value <1)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.trainingEventInitialize0).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+            
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = string.Empty;
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = string.Empty;
+
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value = 0;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+        
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.trainingEventInitialize0, ServerData.userInfoTable.GetTableData(UserInfoTable.trainingEventInitialize0).Value);
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+
+            Param passParam = new Param();
+            passParam.Add(ChildPassServerTable.childFree,ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+            passParam.Add(ChildPassServerTable.childAd,ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+        
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Event_HotTime,ServerData.goodsTable.TableDatas[GoodsTable.Event_HotTime].Value);
+            
+            
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("스노클링 이벤트, 핫타임 재화 초기화!");
+            });
+        }    
     }
     private void InitializeCollectionEvent()
     {
@@ -79,42 +132,85 @@ public class UiMileageRefund : MonoBehaviour
 
     private void InitializeXMasEvent()
     {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value > 0)
-            return;
-
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 1;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_0).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_1).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_2).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_3).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_4).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_5).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_6).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_7).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_8).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_9).Value = 0;
-        
-        List<TransactionValue> transactions = new List<TransactionValue>();
-        
-        Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_0).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_1).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_2).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_3).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_4).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_5).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_6).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_7).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_8).Value);
-        userInfoParam.Add(UserInfoTable.eventMission0_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_9).Value);
-
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-        
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 1)
         {
-            Debug.LogError("이벤트 교환 횟수 초기화!!");
-        });
+                    
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 1;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_9).Value = 0;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_9).Value);
+    
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("이벤트 교환 횟수 초기화!!");
+            });
+        }
+
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 2)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 2;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value = 0;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_10, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_11, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value);
+    
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("2주년 핫타임 이벤트 교환 횟수 초기화!!");
+            });
+        }
+        
     }
     
     private void CommonAttendEventStart()
@@ -123,6 +219,11 @@ public class UiMileageRefund : MonoBehaviour
         {
             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttendCount).Value = 1;
             ServerData.userInfoTable_2.UpData(UserInfoTable_2.commonAttendCount, false);
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendCount).Value == 0)
+        {
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendCount).Value = 1;
+            ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.secondAttendCount, false);
         }
     }    
     private void ShopItemRefundRoutine()
@@ -307,6 +408,57 @@ public class UiMileageRefund : MonoBehaviour
                                                                             $"{CommonString.GetItemName(Item_Type.DokebiFire)} {dokebifireSum}개 환급\n" +
                                                                             $"{CommonString.GetItemName(Item_Type.NewGachaEnergy)} {newGachaEnergySum}개 환급 ", null);
             });
+        }
+        //귀문소탕권
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.RefundIdx).Value < 5)
+        {
+           
+            ServerData.userInfoTable.GetTableData(UserInfoTable.RefundIdx).Value++;
+
+            int package1Count = 0;
+            int package2Count = 0;
+
+            package1Count = ServerData.iAPServerTableTotal.TableDatas["monthpackage1"].buyCount.Value;
+            package2Count = ServerData.iAPServerTableTotal.TableDatas["monthpackage2"].buyCount.Value;
+
+            if (package1Count == 0 && package2Count == 0)
+            {
+                ServerData.userInfoTable.UpData(UserInfoTable.RefundIdx, false);
+            }
+            else
+            {
+                
+                int amount1 = 5 * package1Count;
+            
+                if (package1Count > 0)
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += amount1;
+                }
+            
+                int amount2 = 10 * package2Count;
+            
+                if (package2Count > 0)
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += amount2;
+                }
+
+                List<TransactionValue> transactions = new List<TransactionValue>();
+
+                Param goodsParam = new Param();
+                goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
+
+                Param userInfoParam = new Param();
+                userInfoParam.Add(UserInfoTable.RefundIdx, ServerData.userInfoTable.GetTableData(UserInfoTable.RefundIdx).Value);
+
+                transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+                transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+                ServerData.SendTransactionV2(transactions, successCallBack: () =>
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"월간 소탕권 세트 {CommonString.GetItemName(Item_Type.GuimoonRelicClearTicket)} {amount1+amount2}개 소급 완료!\n", null);
+                });
+            }
+
         }
         else
         {

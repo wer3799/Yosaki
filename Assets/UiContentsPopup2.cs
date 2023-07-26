@@ -39,10 +39,11 @@ public class UiContentsPopup2 : MonoBehaviour
         GodTrialBoard,
         TaegeukBoard,
         SangunBoard,
-        HyunSanganBoard,
+        HyunSangBoard,
         ChunGuBoard,
         VisionTowerBoard,
         SinSkillBoard,
+        TransBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -66,7 +67,8 @@ public class UiContentsPopup2 : MonoBehaviour
         SuhoPet,
         Fox,
         GodTest,
-        
+        TransBoard,
+
         
         
     }
@@ -358,7 +360,10 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 161:
                     case 167:
                     case 168:
-                        lastBoards[(int)ContentsBoard.HyunSanganBoard].SetActive(true);
+                    case 169:
+                    case 170:
+                    case 171:
+                        lastBoards[(int)ContentsBoard.HyunSangBoard].SetActive(true);
                         break;
                     
                     case 162:
@@ -410,6 +415,7 @@ public class UiContentsPopup2 : MonoBehaviour
             case GameManager.ContentsType.TestChun:
             case GameManager.ContentsType.TestDo:
             case GameManager.ContentsType.TestSumi:
+            case GameManager.ContentsType.TestThief:
                 lastBoards[(int)ContentsBoard.GodTrialBoard].SetActive(true);
                 break;
             case GameManager.ContentsType.GradeTest:
@@ -452,6 +458,12 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.VisionTower :
                 lastBoards[(int)ContentsBoard.VisionTowerBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.HyunSangTower :
+                lastBoards[(int)ContentsBoard.HyunSangBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.TransTower :
+                lastBoards[(int)ContentsBoard.TransBoard].SetActive(true);
                 break;
 
         }
@@ -566,6 +578,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newGrowthDoors[(int)GrowthContentsDoor.GodTest].SetActive(e == 1);
             oldGrowthDoors[(int)GrowthContentsDoor.GodTest].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showTransUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.TransBoard].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.TransBoard].SetActive(e == 1);
         }).AddTo(this);
         
         ////////////보스도전

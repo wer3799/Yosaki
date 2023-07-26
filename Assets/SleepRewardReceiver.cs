@@ -178,11 +178,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float jade = 0;
 
         float GrowthStone = killedEnemyPerMin *
-                            (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)) *
+                            (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)+PlayerStats.GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)) *
                             GameBalance.sleepRewardRatio * elapsedMinutes;
 
         float marble = killedEnemyPerMin * (stageTableData.Marbleamount) *
-                       (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MarbleAddPer)) *
+                       (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MarbleAddPer)+PlayerStats.GetSAHotTimeEventBuffEffect(StatusType.MarbleAddPer)) *
                        GameBalance.sleepRewardRatio * elapsedMinutes;
 
         float yoguimarble = killedEnemyPerMin * stageTableData.Marbleamount * GameBalance.sleepRewardRatio * elapsedMinutes;
@@ -233,10 +233,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             hotTimeItem = (int)(GameBalance.sleepRewardRatio * elapsedMinutes / 10);
             
-            if (Utils.HasHotTimeEventPass())
-            {
-                hotTimeItem *= 2;
-            }
+            // if (Utils.HasHotTimeEventPass())
+            // {
+            // }
+            hotTimeItem *= 2;
         }
 
 
@@ -335,13 +335,13 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             }
         }
 
-
+//2주년은 2개씩줌
         ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += sleepRewardInfo.hotTimeItem;
 
-        if (Utils.HasHotTimeEventPass() == false)
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
-        }
+        // if (Utils.HasHotTimeEventPass() == false)
+        // {
+        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
+        // }
 
 
         ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += sleepRewardInfo.sulItem;
@@ -403,10 +403,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
         goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
 
-        if (Utils.HasHotTimeEventPass() == false)
-        {
-            goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
-        }
+        // if (Utils.HasHotTimeEventPass() == false)
+        // {
+        //     goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+        // }
 
 
         //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);

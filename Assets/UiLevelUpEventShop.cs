@@ -697,10 +697,22 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     param.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
                 }
                 break;
+            case Item_Type.TransClearTicket:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
+                    param.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
+                }
+                break;
             case Item_Type.EventDice:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
                     param.Add(GoodsTable.EventDice, ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value);
+                }
+                break;
+            case Item_Type.Event_SA:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value += amount;
+                    param.Add(GoodsTable.Event_SA, ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value);
                 }
                 break;
 

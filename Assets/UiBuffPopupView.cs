@@ -394,7 +394,15 @@ public class UiBuffPopupView : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("봄 훈련 패스권이 필요 합니다.");
                 return;
             }
-
+        }
+        //스노클링 패스 유료버프
+        if (buffTableData.Stringid.Equals("winter1"))
+        {
+            if (ServerData.iapServerTable.TableDatas[UiWinterPassBuyButton.productKey].buyCount.Value == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("스노클링 훈련 패스권이 필요 합니다.");
+                return;
+            }
         }
         ServerData.userInfoTable.GetTableData(buffTableData.Stringid).Value++;
         ServerData.buffServerTable.TableDatas[buffTableData.Stringid].remainSec.Value += buffTableData.Buffseconds;

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GodTrialSort : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _gameObjects;
+    [SerializeField] private List<GameObject> _graduateText;
 
     [SerializeField] private SeletableTab _seletableTab;
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class GodTrialSort : MonoBehaviour
                     for (int i = 0; i < e; i++)
                     {
                         _gameObjects[(int)i].transform.SetAsLastSibling();
+                        _graduateText[i].SetActive(true);
                     }
                 }
 

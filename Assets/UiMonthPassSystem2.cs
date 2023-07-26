@@ -1,4 +1,5 @@
-﻿using BackEnd;
+﻿using System;
+using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,12 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
     private List<UiMonthlyPassCell2> uiPassCellContainer = new List<UiMonthlyPassCell2>();
 
     private ObscuredString passShopId;
+    
+    [SerializeField]
+    private List<TextMeshProUGUI> textList = new List<TextMeshProUGUI>();
+    
+    [SerializeField] private UiRewardResultView _uiRewardResultView;
+    private List<UiLevelPassBoard.Reward> rewardList = new List<UiLevelPassBoard.Reward>();
 
 #if UNITY_EDITOR
     private void Update()
@@ -37,7 +44,23 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
         }
     }
 #endif
+    
+    private void AddOrUpdateReward(Item_Type itemType, float itemValue)
+    {
+        int existingRewardIndex = rewardList.FindIndex(r => r.ItemType == itemType);
 
+        if (existingRewardIndex >= 0)
+        {
+            UiLevelPassBoard.Reward existingReward = rewardList[existingRewardIndex];
+            existingReward.ItemValue += itemValue;
+            rewardList[existingRewardIndex] = existingReward;
+        }
+        else
+        {
+            rewardList.Add(new UiLevelPassBoard.Reward(itemType, itemValue));
+        }
+    }
+    
     private void Initialize()
     {
         var tableData = TableManager.Instance.MonthlyPass2.dataArray;
@@ -78,7 +101,22 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
 
         // cellParent.transform.localPosition = new Vector3(0f, cellParent.transform.localPosition.y, cellParent.transform.localPosition.z);
     }
-
+    private void SetMonthText()
+    {
+        textList[0].SetText($"월간 훈련({ServerData.userInfoTable.currentServerTime.Month}월)");
+        textList[1].SetText($"월간 출석({ServerData.userInfoTable.currentServerTime.Month}월)");
+        textList[2].SetText($"월간 미션({ServerData.userInfoTable.currentServerTime.Month}월)");
+        if (ServerData.userInfoTable.currentServerTime.Day < 23)
+        {
+            textList[3].SetText($"{ServerData.userInfoTable.currentServerTime.Month}월 23일부터 구매 가능");
+        }
+        else
+        {
+            textList[3].SetText($"요괴 처치수만 증가합니다.");
+        }
+        textList[4].SetText($"{ServerData.userInfoTable.currentServerTime.Month}월 훈련권 필요");
+        textList[5].SetText($"종료 : {ServerData.userInfoTable.currentServerTime.Month}월 {DateTime.DaysInMonth(ServerData.userInfoTable.currentServerTime.Year,ServerData.userInfoTable.currentServerTime.Month)}일\n(100단위로 갱신됩니다!)");
+    }
     public void OnClickAllReceiveButton()
     {
         string freeKey = MonthlyPassServerTable2.MonthlypassFreeReward;
@@ -250,6 +288,180 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
         }
     }
 
+    public void OnClickAllReceiveButtonV2()
+    {
+        string freeKey = MonthlyPassServerTable2.MonthlypassFreeReward;
+        string adKey = MonthlyPassServerTable2.MonthlypassAdReward;
+
+        List<int> splitData_Free = GetSplitData(MonthlyPassServerTable2.MonthlypassFreeReward);
+        List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable2.MonthlypassAdReward);
+
+        List<int> rewardTypeList = new List<int>();
+
+        var tableData = TableManager.Instance.MonthlyPass2.dataArray;
+
+        int rewardedNum = 0;
+
+        string free = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value;
+        string ad = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value;
+
+        bool hasCostumeItem = false;
+        bool hasPassItem = false;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+
+            if (canGetReward == false) break;
+
+            //무료보상
+            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+            }
+
+            //유료보상
+            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+            }
+        }
+
+        if (hasCostumeItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
+            return;
+        }
+        if (hasPassItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
+            return;
+        }
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+
+            if (canGetReward == false) break;
+
+            //무료보상
+            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+                free += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                AddOrUpdateReward((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1);
+                }
+
+                rewardedNum++;
+            }
+
+            //유료보상
+            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+                ad += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                AddOrUpdateReward((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward2);
+                }
+
+                rewardedNum++;
+            }
+        }
+
+   
+
+        if (rewardedNum > 0)
+        {
+            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value = free;
+            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value = ad;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            var e = rewardTypeList.GetEnumerator();
+
+            Param goodsParam = new Param();
+
+            while (e.MoveNext())
+            {
+                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
+            }
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            Param passParam = new Param();
+
+            passParam.Add(MonthlyPassServerTable2.MonthlypassFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value);
+            passParam.Add(MonthlyPassServerTable2.MonthlypassAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value);
+
+            transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                //PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
+              //  LogManager.Instance.SendLogType("MonthPass", "A", "A");
+              List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+              var e = rewardList.GetEnumerator();
+              for (int i = 0 ;  i < rewardList.Count;i++)
+              {
+                  if (e.MoveNext())
+                  {
+                      rewardData.Add(new UiRewardView.RewardData(e.Current.ItemType,e.Current.ItemValue));
+                  }                    
+              }
+              if (rewardData.Count > 0)
+              {
+                  _uiRewardResultView.gameObject.SetActive(true);
+                  _uiRewardResultView.Initialize(rewardData);
+              }
+            });
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("수령할 보상이 없습니다.");
+        }
+    }
+
 
     private bool CanGetReward(int require)
     {
@@ -303,6 +515,8 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
     protected override GameObject CellPrefab => cellPrefab;
     private void Start()
     {
+        SetMonthText();
+        
         scroller.Initialize(TypeScroll.MonthPass2);
         
         scroller.OnValueChanged(UpdatePosition);

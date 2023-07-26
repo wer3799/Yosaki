@@ -18,6 +18,7 @@ public class UserInfoTable_2
     public const string chunGodScore = "chunGodScore";
     public const string doGodScore = "dokebiGodScore";
     public const string sumiGodScore = "sumiGodScore";
+    public const string thiefGodScore = "thiefGodScore";
     public const string relicTestScore = "relicTestScore";
     public const string GangChulReset = "GangChulReset";
     public const string stagePassFree = "stagePassFree";
@@ -34,6 +35,8 @@ public class UserInfoTable_2
 
     public const string commonAttendCount = "cac0";
     public const string yorinAttendRewarded = "yar";
+    public const string secondAttendRewarded = "sar";
+    public const string secondAttendCount = "sac";
     
     public const string killCountTotalSeason0 = "ks0"; //혹서기 훈련
     
@@ -47,7 +50,9 @@ public class UserInfoTable_2
     public const string sinsunScore = "ss";
     public const string graduateGold = "gg";
     public const string gyungRockTower3 = "grt3";
+    public const string gyungRockTower4 = "grt4";
     public const string graduateSeolEvent = "gse";
+    public const string hyunsangTowerScore = "hts";
     
     public const string towerFloorAdjust = "ta";
     public const string dosulScore = "dss";
@@ -63,6 +68,10 @@ public class UserInfoTable_2
     
     public const string usedGuimoonRelicTicket = "ugrt";
 
+    public const string transTowerIdx = "tti";
+    public const string transTowerStart = "tts";
+    public const string eventMiniGameScore_TopRate = "emgstr";
+    public const string eventMiniGameScore_Total = "emgst";
     
     
     public bool isInitialize = false;
@@ -74,6 +83,8 @@ public class UserInfoTable_2
         { killCountTotalSeason0, 0f },
         { commonAttendCount, 0f },
         { yorinAttendRewarded, 0f },
+        { secondAttendRewarded, 0f },
+        { secondAttendCount, 0f },
         
         { monkeyGodScore, 0f },
         { swordGodScore, 0f },
@@ -81,6 +92,7 @@ public class UserInfoTable_2
         { chunGodScore, 0f },
         { doGodScore, 0f },
         { sumiGodScore, 0f },
+        { thiefGodScore, 0f },
         { relicTestScore, 0f },
         { foxFirePassKill, 0f },
         { dosulPassKill, 0f },
@@ -96,6 +108,8 @@ public class UserInfoTable_2
         { sinsunScore, 0f },
         { graduateGold, 0f },
         { gyungRockTower3, 0f },
+        { gyungRockTower4, 0f },
+        { hyunsangTowerScore, 0f },
         { graduateSeolEvent, 0f },
         { towerFloorAdjust, 0f },
         { dosulScore, 0f },
@@ -106,6 +120,11 @@ public class UserInfoTable_2
         { getDragonBracelet, 0f },
         { guimoonRelicStart, 0f },
         { usedGuimoonRelicTicket, 0f },
+        
+        { transTowerIdx, 0f },
+        { transTowerStart, 0f },
+        { eventMiniGameScore_TopRate, 0f },
+        { eventMiniGameScore_Total, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

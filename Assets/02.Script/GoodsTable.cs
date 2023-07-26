@@ -210,6 +210,7 @@ public class GoodsTable
     public static string DokebiFireKey = "DokebiFireKey"; //도깨비 불 입장권
 
     public static string Mileage = "Mileage"; //마일리지
+    public static string ClearTicket = "ClearTicket"; //마일리지
 
     public static string HellPowerUp = "HellPowerUp";
     public static string DokebiTreasure = "DT";
@@ -229,8 +230,10 @@ public class GoodsTable
     public static string ChunguRelic = "ChunguRelic";
     public static string FoxRelic = "FR";
     public static string FoxRelicClearTicket = "FRCT";
+    public static string TransClearTicket = "TCT";
 
     public static string EventDice = "EventDice";
+    public static string Event_SA = "EventSA";
     public static string Tresure = "Tresure";
     public static string SuhoPetFeed = "SuhoPetFeed";
     public static string SuhoPetFeedClear = "SPFC";
@@ -240,6 +243,7 @@ public class GoodsTable
     public static string GuildTowerHorn = "GuildTowerHorn";
     public static string SealWeaponClear = "SealWeaponClear";
     public static string DosulGoods = "DosulGoods";
+    public static string TransGoods = "TransGoods";
     public static string DosulClear = "DosulClear";
 
 
@@ -431,6 +435,7 @@ public class GoodsTable
         { DokebiFireEnhance, 0f },
 
         { Mileage, 0f },
+        { ClearTicket, 0f },
         { HellPowerUp, 0f },
         { DokebiTreasure, 0f },
         { SahyungTreasure, 0f },
@@ -449,8 +454,10 @@ public class GoodsTable
         { ChunguRelic, 0f },
         { FoxRelic, 0f },
         { FoxRelicClearTicket, 0f },
+        { TransClearTicket, 0f },
 
         { EventDice, 0f },
+        { Event_SA, 0f },
         { Tresure, 0f },
         { SuhoPetFeed, 0f },
         { SuhoPetFeedClear, 0f },
@@ -460,6 +467,7 @@ public class GoodsTable
         { GuildTowerHorn, 0f },
         { SealWeaponClear, 0f },
         { DosulGoods, 0f },
+        { TransGoods, 0f },
         { DosulClear, 0f },
     };
 
@@ -1612,10 +1620,19 @@ public class GoodsTable
             {
                 return GoodsTable.FoxRelicClearTicket;
             }
+            case Item_Type.TransClearTicket:
+            {
+                return GoodsTable.TransClearTicket;
+            }
 
             case Item_Type.EventDice:
             {
                 return GoodsTable.EventDice;
+            }
+
+            case Item_Type.Event_SA:
+            {
+                return GoodsTable.Event_SA;
             }
 
             case Item_Type.NewGachaEnergy:
@@ -2227,6 +2244,10 @@ public class GoodsTable
         {
             return Item_Type.DosulGoods;
         }
+        else if (GoodsTable.TransGoods == type)
+        {
+            return Item_Type.TransGoods;
+        }
         else if (GoodsTable.DosulClear == type)
         {
             return Item_Type.DosulClear;
@@ -2248,13 +2269,25 @@ public class GoodsTable
         {
             return Item_Type.FoxRelic;
         }
+        else if (GoodsTable.TransGoods == type)
+        {
+            return Item_Type.TransGoods;
+        }
         else if (GoodsTable.FoxRelicClearTicket == type)
         {
             return Item_Type.FoxRelicClearTicket;
         }
+        else if (GoodsTable.TransClearTicket == type)
+        {
+            return Item_Type.TransClearTicket;
+        }
         else if (GoodsTable.EventDice == type)
         {
             return Item_Type.EventDice;
+        }
+        else if (GoodsTable.Event_SA == type)
+        {
+            return Item_Type.Event_SA;
         }
 
         else if (GoodsTable.NewGachaEnergy == type)

@@ -32,7 +32,6 @@ public class UiSealWeaponGacha : MonoBehaviour
     //         freeButtonDesc.SetText(e == 0 ? "무료 뽑기!" : "내일 다시!");
     //     }).AddTo(this);
     // }
-
     private void Start()
     {
         Initialize();

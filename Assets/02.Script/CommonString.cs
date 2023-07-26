@@ -296,6 +296,11 @@ public static class CommonString
             case Item_Type.costume137: return TableManager.Instance.Costume.dataArray[137].Name;
             case Item_Type.costume138: return TableManager.Instance.Costume.dataArray[138].Name;
             case Item_Type.costume139: return TableManager.Instance.Costume.dataArray[139].Name;
+            case Item_Type.costume140: return TableManager.Instance.Costume.dataArray[140].Name;
+            case Item_Type.costume141: return TableManager.Instance.Costume.dataArray[141].Name;
+            case Item_Type.costume142: return TableManager.Instance.Costume.dataArray[142].Name;
+            case Item_Type.costume143: return TableManager.Instance.Costume.dataArray[143].Name;
+            case Item_Type.costume144: return TableManager.Instance.Costume.dataArray[144].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -480,10 +485,12 @@ public static class CommonString
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
             case Item_Type.Event_Mission: return "서핑 보드";
             case Item_Type.Event_Mission_All: return "꽃송이 총 획득량";
+            case Item_Type.pet52: return "요랑";
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
             case Item_Type.Mileage: return "마일리지";
+            case Item_Type.ClearTicket: return "만능 소탕권";
             case Item_Type.HellPower: return "지옥강화석";
             case Item_Type.MonthNorigae0: return "12월 월간 노리개";
             case Item_Type.MonthNorigae1: return "1월 월간 노리개";
@@ -493,13 +500,14 @@ public static class CommonString
             case Item_Type.MonthNorigae5: return "5월 월간 노리개";
             case Item_Type.MonthNorigae6: return "6월 월간 노리개";
             case Item_Type.MonthNorigae7: return "7월 월간 노리개";
+            case Item_Type.MonthNorigae8: return "8월 월간 노리개";
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
             case Item_Type.SahyungTreasure: return "사흉구슬";
             case Item_Type.VisionTreasure: return "비전서";
             case Item_Type.DarkTreasure: return "심연의 정수";
             case Item_Type.SinsunTreasure: return "신선의 보옥";
-            case Item_Type.GwisalTreasure: return "귀인의 정수";
+            case Item_Type.GwisalTreasure: return "현상수배 증표";
             case Item_Type.ChunguTreasure: return "천구구슬";
             case Item_Type.SleepRewardItem: return "휴식보상(24시간)";
             case Item_Type.GoldBar: return "백금화";
@@ -510,6 +518,7 @@ public static class CommonString
             case Item_Type.NewGachaEnergy: return "영혼석";
             case Item_Type.weapon81: return "설날 외형 무기";
             case Item_Type.weapon90: return "바람개비 외형 무기";
+            case Item_Type.weapon131: return "2주년 외형 무기";
             case Item_Type.DokebiBundle: return "도깨비 보물상자";
 
             case Item_Type.SinsuRelic: return "황룡의 여의주";
@@ -517,6 +526,8 @@ public static class CommonString
             case Item_Type.ChunguRelic: return "천신의 보주";
             case Item_Type.FoxRelic: return "여우불씨";
             case Item_Type.FoxRelicClearTicket: return "여우불씨 소탕권";
+            case Item_Type.TransClearTicket: return "초월석 소탕권";
+            case Item_Type.Event_SA: return "2주년 도토리";
             case Item_Type.EventDice: return "이벤트 주사위";
             case Item_Type.SuhoPetFeed: return "수호환";
             case Item_Type.SuhoPetFeedClear: return "수호환 소탕권";
@@ -524,9 +535,10 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "불꽃 조각";
+            case Item_Type.Event_HotTime: return "촛불";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
+            case Item_Type.TransGoods: return "초월석";
             case Item_Type.DosulClear: return "도술꽃 소탕권";
 
         }
@@ -682,6 +694,8 @@ public static class CommonString
                 return "심연의 정수 레벨당 심연베기 피해량 증가(%)";
             case StatusType.SinsunHasValueUpgrade:
                 return "신선의 보옥 레벨당 신선베기 피해량 증가(%)";
+            case StatusType.HyunsangHasValueUpgrade:
+                return "현상수배 증표 갯수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:
@@ -713,6 +727,8 @@ public static class CommonString
                 return "귀살베기 피해(%)";
             case StatusType.SuperCritical20DamPer:
                 return "천구베기 피해(%)";
+            case StatusType.SuperCritical21DamPer:
+                return "초월 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:

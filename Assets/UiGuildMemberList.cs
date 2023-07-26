@@ -153,7 +153,6 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
         RefreshMemberList();
 
 
-        
         initialized = true;
     }
 
@@ -169,6 +168,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
                 }
             }
         }
+
         for (int i = 0; i < memberCells.Count; i++)
         {
             if (memberCells[i].guildMemberInfo != null)
@@ -180,7 +180,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             }
         }
     }
-    
+
     private void RefreshGuildMemberCountText()
     {
         memberNumText.SetText($"문파 인원 : {guildMemberCount}/{GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value)}");
@@ -195,7 +195,7 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             if (memberCells[i].guildMemberInfo != null)
                 memberCells[i].guildMemberInfo.guildTowerFloor = 0;
         }
-        
+
         GetGuildGoods6AmountByIndateV3();
 
         if (goodsDictionary.Count == 0)
@@ -204,14 +204,14 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "조회 실패\n잠시후 다시 시도해 주세요", null);
             return;
         }
-        
-        
+
+
         UiGuildLoadingMask.Instance.Show(true);
 
         SendQueue.Enqueue(Backend.Social.Guild.GetGuildMemberListV3, GuildManager.Instance.myGuildIndate, GuildManager.Instance.GetGuildMemberMaxNum(GuildManager.Instance.guildLevelExp.Value) + 5, (bro) =>
         {
             UiGuildLoadingMask.Instance.Show(false);
-            
+
             if (bro.IsSuccess())
             {
                 var returnValue = bro.GetReturnValuetoJSON();
@@ -495,6 +495,11 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
         var myData = goodsDictionary["goods6"].userList.Find(e => e.nickname.Equals(nickName));
 
         if (myData == null) return 0;
+
+        if (myData.totalAmount > TableManager.Instance.guildTowerTable.dataArray.Length + 20)
+        {
+            myData.totalAmount = (int)(myData.totalAmount / 2);
+        }
 
         return myData.totalAmount;
     }

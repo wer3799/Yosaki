@@ -25,16 +25,5 @@ public class UiWinterPassPopup : MonoBehaviour
         uiBuffPopupView_WinterPass_1.Initalize(tableDatas[22]); ;
     }
 
-    private void OnEnable()
-    {
-       var serverTime = ServerData.userInfoTable.currentServerTime;
-        
-        if (serverTime.Month >= 2)
-        {
-            this.gameObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다.");
-            return;
-        }
-    }
 
 }

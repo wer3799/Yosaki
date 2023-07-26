@@ -1196,7 +1196,7 @@ public class UiInventoryWeaponView : MonoBehaviour
     {
         if (weaponData != null)
         {
-            if (weaponData.WEAPONTYPE == WeaponType.View || weaponData.WEAPONTYPE == WeaponType.HasEffectOnly)
+            if (weaponData.WEAPONTYPE == WeaponType.View || weaponData.WEAPONTYPE == WeaponType.HasEffectOnly|| weaponData.WEAPONTYPE == WeaponType.HasEffectOnly)
             {
                 PopupManager.Instance.ShowAlarmMessage("외형 아이템은 레벨업 하실수 없습니다.");
                 return;

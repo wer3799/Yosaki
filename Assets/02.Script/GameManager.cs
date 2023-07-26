@@ -79,8 +79,12 @@ public class GameManager : SingletonMono<GameManager>
         TestSumi,
         VisionTower,
         Sinsun,
+        TestThief,
+        HyunSangTower,
+        TransTower,
+        GyungRockTower4,
     }
-
+    
     public bool SpawnMagicStone => IsNormalField;
     public bool IsNormalField => contentsType == ContentsType.NormalField;
     public bool IsJumpBoss = false;

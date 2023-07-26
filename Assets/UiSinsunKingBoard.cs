@@ -47,7 +47,7 @@ public class UiSinsunKingBoard : MonoBehaviour
             gradeText.SetText("없음");
         }
 
-        transAfterText.SetText($"각성효과로 강화됩니다.\n심연왕 능력치 {GameBalance.sinsunGraduateValue}배 증가");
+        transAfterText.SetText($"각성효과로 강화됩니다.\n신선왕 능력치 {GameBalance.sinsunGraduateValue}배 증가");
     }
 
     public void OnClickEnterButton()

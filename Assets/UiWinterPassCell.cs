@@ -172,7 +172,7 @@ public class UiWinterPassCell : MonoBehaviour
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"겨울 훈련권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"훈련권이 필요합니다.");
         }
     }
 

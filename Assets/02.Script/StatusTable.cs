@@ -61,9 +61,12 @@ public class StatusTable
     public const string Special0_GoldBar = "Special0_GoldBar";
     public const string Special1_GoldBar = "Special1_GoldBar";
     public const string Special2_GoldBar = "Special2_GoldBar";
+    public const string Special3_GoldBar = "Special3_GoldBar";
+    public const string Special4_GoldBar = "Special4_GoldBar";
     
     public const string Sin_StatPoint = "Sin_StatPoint";
     public const string Hyung_StatPoint = "Hyung_StatPoint";
+    public const string Chungu_StatPoint = "Chungu_StatPoint";
 
 
     public const string Skill0_AddValue = "Sk0_Add";
@@ -120,9 +123,12 @@ public class StatusTable
         { Special0_GoldBar, 0 },
         { Special1_GoldBar, 0 },
         { Special2_GoldBar, 0 },
+        { Special3_GoldBar, 0 },
+        { Special4_GoldBar, 0 },
         
         { Sin_StatPoint, 0 },
         { Hyung_StatPoint, 0 },
+        { Chungu_StatPoint, 0 },
         
         { Skill0_AddValue, 0 },
         { Skill1_AddValue, 0 },
@@ -282,6 +288,12 @@ public class StatusTable
                     }
                     break;
 
+                case Chungu_StatPoint:
+                    {
+                        return level * GameBalance.Stat_Chungu_Slash;
+                    }
+                    break;
+
                 #endregion
 
                 #region Memory
@@ -401,6 +413,18 @@ public class StatusTable
                     float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
                     return level * GameBalance.Special2_GoldBar * specialAbilityRatio * goldAbilRatio;
                 }
+                case Special3_GoldBar:
+                {
+                    float specialAbilityRatio = Mathf.Max(1, PlayerStats.GetNorigaeSoulGradeValue() / 100);
+                    float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
+                    return level * GameBalance.Special3_GoldBar * specialAbilityRatio * goldAbilRatio;
+                }
+                case Special4_GoldBar:
+                {
+                    float specialAbilityRatio = Mathf.Max(1, PlayerStats.GetNorigaeSoulGradeValue() / 100);
+                    float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
+                    return level * GameBalance.Special4_GoldBar * specialAbilityRatio * goldAbilRatio;
+                }
 
                 #endregion
                 default:
@@ -424,7 +448,9 @@ public class StatusTable
         var soul0 = tableDatas[Special0_GoldBar].Value;
         var soul1 = tableDatas[Special1_GoldBar].Value;
         var soul2 = tableDatas[Special2_GoldBar].Value;
-        var sum = soul0 + soul1 + soul2;
+        var soul3 = tableDatas[Special3_GoldBar].Value;
+        var soul4 = tableDatas[Special4_GoldBar].Value;
+        var sum = soul0 + soul1 + soul2+ soul3+ soul4;
         
         return sum;
     }

@@ -5,6 +5,7 @@ public enum EventMissionType
 {
     FIRST,
     SECOND,
+    THIRD,
 }
 public enum EventMissionKey
 {
@@ -28,6 +29,18 @@ public enum EventMissionKey
     S_ClearDokebiFire,//도깨비나라 보상 ★
     S_ClearSumiFire,//수미산 보상 ★
     S_ClearSoulStone,//영혼석 보상
+    
+    TMISSION1,//반딧
+    TMISSION2,//깨비전
+    TMISSION3,//빠른전투
+    TMISSION4,//검의산
+    TMISSION5,//불멸석
+    TMISSION6,//천계꽃
+    TMISSION7,//도깨비
+    TMISSION8,//수미산
+    TMISSION9,//영혼석(반지)
+    TMISSION10,//문파점수등록
+    TMISSION11,//견공
 }
 public enum MonthMissionKey
 {

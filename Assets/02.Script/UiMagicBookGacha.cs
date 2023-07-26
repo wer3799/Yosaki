@@ -40,7 +40,7 @@ public class UiMagicBookGacha : MonoBehaviour
     {
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeNorigae).Subscribe(e =>
         {
-            freeButtonDesc.SetText(e == 0 ? "무료 뽑기!" : "내일 다시!");
+            freeButtonDesc.SetText(e == 0 ? "600번\n무료 뽑기!" : "내일 다시!");
         }).AddTo(this);
     }
 

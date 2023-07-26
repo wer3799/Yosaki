@@ -620,6 +620,9 @@ public static class ServerData
             case Item_Type.DosulGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value += rewardValue;
                 break;  
+            case Item_Type.TransGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += rewardValue;
+                break;  
             case Item_Type.GuildTowerClearTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildTowerClearTicket).Value += rewardValue;
                 break;  
@@ -683,9 +686,15 @@ public static class ServerData
             case Item_Type.FoxRelicClearTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value += rewardValue;
                 break;
+            case Item_Type.TransClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += rewardValue;
+                break;
 
             case Item_Type.EventDice:
                 ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += rewardValue;
+                break;
+            case Item_Type.Event_SA:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value += rewardValue;
                 break;
 
             case Item_Type.DokebiFireKey:
@@ -706,6 +715,10 @@ public static class ServerData
 
             case Item_Type.Mileage:
                 ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += rewardValue;
+                break;
+
+            case Item_Type.ClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += rewardValue;
                 break;
 
             case Item_Type.Event_Collection:
@@ -884,6 +897,11 @@ public static class ServerData
             case Item_Type.costume137:
             case Item_Type.costume138:
             case Item_Type.costume139:
+            case Item_Type.costume140:
+            case Item_Type.costume141:
+            case Item_Type.costume142:
+            case Item_Type.costume143:
+            case Item_Type.costume144:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -891,6 +909,12 @@ public static class ServerData
                 break;
             case Item_Type.weapon90:
                 ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.weapon131:
+                ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.pet52:
+                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.RelicTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += rewardValue;
@@ -1088,6 +1112,11 @@ public static class ServerData
             case Item_Type.costume137:
             case Item_Type.costume138:
             case Item_Type.costume139:
+            case Item_Type.costume140:
+            case Item_Type.costume141:
+            case Item_Type.costume142:
+            case Item_Type.costume143:
+            case Item_Type.costume144:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1188,9 +1217,16 @@ public static class ServerData
             case Item_Type.FoxRelicClearTicket:
                 passParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.TransClearTicket:
+                passParam.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.EventDice:
                 passParam.Add(GoodsTable.EventDice, ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Event_SA:
+                passParam.Add(GoodsTable.Event_SA, ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.Tresure:
@@ -1233,6 +1269,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.Mileage:
                 passParam.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.ClearTicket:
+                passParam.Add(GoodsTable.ClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
           
 
@@ -1611,6 +1650,12 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            
+            case Item_Type.TransGoods:
+                passParam.Add(GoodsTable.TransGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -1915,10 +1960,20 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
+            case Item_Type.TransGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;
+                param.Add(GoodsTable.TransGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
 
             case Item_Type.Mileage:
                 ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
                 param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.ClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += amount;
+                param.Add(GoodsTable.ClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.SinsuRelic:
@@ -1944,10 +1999,18 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value += amount;
                 param.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.TransClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
+                param.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.EventDice:
                 ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
                 param.Add(GoodsTable.EventDice, ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Event_SA:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value += amount;
+                param.Add(GoodsTable.Event_SA, ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             
      case Item_Type.SealWeaponClear:
@@ -3631,8 +3694,14 @@ public static class ServerData
                 case Item_Type.FoxRelicClearTicket:
                     ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value += amount;
                     break;
+                case Item_Type.TransClearTicket:
+                    ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
+                    break;
                 case Item_Type.EventDice:
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
+                    break;
+                case Item_Type.Event_SA:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value += amount;
                     break;
                 case Item_Type.Event_Collection_All:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value += amount;
@@ -3695,6 +3764,10 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += amount;
                     break;
 
+                case Item_Type.ClearTicket:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += amount;
+                    break;
+
                 case Item_Type.Cw:
                     ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value += amount;
                     break; 
@@ -3737,6 +3810,9 @@ public static class ServerData
                     break;
                 case Item_Type.DosulGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value += amount;
+                    break;
+                case Item_Type.TransGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;
                     break;
                 case Item_Type.DokebiFireEnhance:
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireEnhance).Value += amount;

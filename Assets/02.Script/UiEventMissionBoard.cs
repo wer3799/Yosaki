@@ -92,18 +92,18 @@ public class UiEventMissionBoard : MonoBehaviour
 
     private void Initialize()
     {
-        ServerData.userInfoTable.UpdateDdukGukCollectionComplete();
-
-        var tableData = TableManager.Instance.EventMission.dataArray;
-
-        for (int i = 0; i < tableData.Length; i++)
-        {
-            if (tableData[i].EVENTMISSIONTYPE != EventMissionType.FIRST) continue;
-            var cell = Instantiate<UiEventMissionCell>(missionCell, cellParent);
-
-            cell.Initialize(tableData[i]);
-
-            cellContainer.Add(tableData[i].Id, cell);
-        }
-    }
+    //     ServerData.userInfoTable.UpdateDdukGukCollectionComplete();
+    //
+    //     var tableData = TableManager.Instance.EventMission.dataArray;
+    //
+    //     for (int i = 0; i < tableData.Length; i++)
+    //     {
+    //         if (tableData[i].EVENTMISSIONTYPE != EventMissionType.FIRST) continue;
+    //         var cell = Instantiate<UiEventMissionCell>(missionCell, cellParent);
+    //
+    //         cell.Initialize(tableData[i]);
+    //
+    //         cellContainer.Add(tableData[i].Id, cell);
+    //     }
+     }
 }

@@ -54,7 +54,7 @@ public class UiGuimoonCell : MonoBehaviour
     public void OnClickUnlockButton()
     {
         //해금
-        if (guimoonLocalData.Unlockstageid > ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)
+        if (guimoonLocalData.Unlockstageid-1 > ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value)
         {
             PopupManager.Instance.ShowAlarmMessage("스테이지가 부족합니다!");
             return;

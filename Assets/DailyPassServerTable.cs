@@ -831,6 +831,9 @@ public class ColdSeasonPassServerTable
     public static string guimoonFree = "f13";
     public static string guimoonAd = "a13";
 
+    public static string secondAccumul = "f14";
+    public static string secondTop = "a14";
+
     public static string coldseasonFree_Atten = "fa2";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
@@ -856,6 +859,8 @@ public class ColdSeasonPassServerTable
         { dosulAd,string.Empty},
         { guimoonFree,string.Empty},
         { guimoonAd,string.Empty},
+        { secondAccumul,string.Empty},
+        { secondTop,string.Empty},
 
     };
 

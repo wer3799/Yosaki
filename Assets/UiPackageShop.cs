@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UiPackageShop : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class UiPackageShop : MonoBehaviour
     [SerializeField]
     private Transform petCostumeParent;
 
-    [SerializeField]
-    private Transform relicParent;
+    [FormerlySerializedAs("relicParent")] [SerializeField]
+    private List<Transform> costumePetWeapon;
 
     [SerializeField]
     private Transform eventParent;
@@ -110,14 +111,19 @@ public class UiPackageShop : MonoBehaviour
                 var cell = Instantiate<UiIapItemCell>(iapCellPrefab, package2Parent);
                 cell.Initialize(e.Current.Value);
             }
-            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Pet || e.Current.Value.SHOPCATEGORY == ShopCategory.Costume)
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Costume)
             {
-                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, petCostumeParent);
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, costumePetWeapon[0]);
+                cell.Initialize(e.Current.Value);
+            }
+            else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Pet)
+            {
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, costumePetWeapon[1]);
                 cell.Initialize(e.Current.Value);
             }
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Limit3)
             {
-                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, relicParent);
+                var cell = Instantiate<UiIapItemCell>(iapCellPrefab, costumePetWeapon[2]);
                 cell.Initialize(e.Current.Value);
             }
             else if (e.Current.Value.SHOPCATEGORY == ShopCategory.Event2)

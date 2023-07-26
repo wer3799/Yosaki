@@ -9,7 +9,7 @@ using BackEnd;
 
 public enum PetGetType
 {
-    Ad, Gem, Shop, Evolution, Sasinsu,Sahyungsu,Vision
+    Ad, Gem, Shop, Evolution, Sasinsu,Sahyungsu,Vision,Event
 }
 
 public class UiPetView : MonoBehaviour
@@ -517,6 +517,18 @@ public class UiPetView : MonoBehaviour
                 buttonDescription.SetText($"{petData.Getspecialdescription}");
             }
         }
+        else if (petData.PETGETTYPE == PetGetType.Event)
+        {
+            //보유
+            if (petServerData.hasItem.Value == 1)
+            {
+                buttonDescription.SetText("장착하기");
+            }
+            else
+            {
+                buttonDescription.SetText($"{petData.Getspecialdescription}");
+            }
+        }
 
     }
 
@@ -728,7 +740,18 @@ public class UiPetView : MonoBehaviour
                PopupManager.Instance.ShowAlarmMessage($"사룡전 컨텐츠 {petData.Name}에서 획득 가능!");
             }
         }
-
+        else if (petData.PETGETTYPE == PetGetType.Event)
+        {
+            if (petServerData.hasItem.Value == 1)
+            {
+                ServerData.equipmentTable.ChangeEquip(EquipmentTable.Pet, petData.Id);
+            }
+            //미보유
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{petData.Onclickbuttondescription}");
+            }
+        }
         UpdateUi();
     }
 

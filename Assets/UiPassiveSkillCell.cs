@@ -86,7 +86,7 @@ public class UiPassiveSkillCell : MonoBehaviour
             //단전베기
             else if(statusType == StatusType.SuperCritical8DamPer||statusType == StatusType.SuperCritical13DamPer||statusType == StatusType.SuperCritical18DamPer)
             {
-                skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {Utils.ConvertNum(PlayerStats.GetPassiveSkillValue(statusType) * 100f, 2)}");
+                skillDesc.SetText($"{CommonString.GetStatusName(statusType)} : {Utils.ConvertNum(PlayerStats.GetPassiveSkillValue(statusType,passiveSkillData.Avoidduplicationidx) * 100f, 2)}");
  
             }
             else

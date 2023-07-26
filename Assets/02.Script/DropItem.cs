@@ -506,7 +506,13 @@ public enum Item_Type
     costume136 = 1436, // 수박이벤트외형     
     costume137 = 1437, // 이벤트외형     
     costume138 = 1438, // 현상수배     
-    costume139 = 1439, // 현상수배     
+    costume139 = 1439, // 현상수배
+    
+    costume140 = 1440, // 현상수배     
+    costume141 = 1441, // 현상수배     
+    costume142 = 1442, // 현상수배     
+    costume143 = 1443, // 이벤트     
+    costume144 = 1444, //      월간
 
 
     gumiho0 = 5000,
@@ -626,6 +632,7 @@ public enum Item_Type
     
     
     
+    
     DokebiHorn0 = 7100,
     DokebiHorn1 = 7101,
     DokebiHorn2 = 7102,
@@ -738,16 +745,22 @@ public enum Item_Type
     HyunSangWeapon1 = 7241,
     HyunSangWeapon2 = 7242,
     HyunSangWeapon3 = 7243,
+    HyunSangWeapon4 = 7244,
+    HyunSangWeapon5 = 7245,
     
     HyunSangNorigae0 = 7250,
     HyunSangNorigae1 = 7251,
     HyunSangNorigae2 = 7252,
     HyunSangNorigae3 = 7253,
+    HyunSangNorigae4 = 7254,
+    HyunSangNorigae5 = 7255,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
     ChunGuPet2 = 7602,
     ChunGuPet3 = 7603,
+    
+    pet52 = 7700, //이벤트펫
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -789,6 +802,8 @@ public enum Item_Type
     MonthNorigae5 = 8607, // 월간노리개
     MonthNorigae6 = 8608, // 월간노리개
     MonthNorigae7 = 8609, // 월간노리개
+    MonthNorigae8 = 8610, // 월간노리개
+    weapon131 = 8611,//2주년무기
 
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
@@ -883,6 +898,10 @@ public enum Item_Type
     ChunguRelic = 9036,
     GuimoonRelic = 9037,
     GuimoonRelicClearTicket = 9038,
+    ClearTicket = 9039,
+    TransGoods = 9040,
+    TransClearTicket = 9041,
+    Event_SA = 9042,
 }
 //
 public class DropItem : PoolItem

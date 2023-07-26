@@ -118,8 +118,17 @@ public class UiEventMission : MonoBehaviour
         List<string> stringIdList = new List<string>();
         for (int i = 0; i < tableData.Length; i++)
         {
-            //Second가 아니라면
-            // if (tableData[i].EVENTMISSIONTYPE != EventMissionType.SECOND) continue;
+            
+            if (tableData[i].EVENTMISSIONTYPE == EventMissionType.FIRST ||
+                tableData[i].EVENTMISSIONTYPE == EventMissionType.SECOND)
+            {
+                
+            }
+            else
+            {
+                //FIRST나SECOND가 아니라면
+                continue;
+            }
             //Enable을 껐다면
             if (tableData[i].Enable == false) continue;
             //보상을 받았다면

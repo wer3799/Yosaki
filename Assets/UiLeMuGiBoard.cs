@@ -52,9 +52,13 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
     private List<UiPetView> uiPetViewPrefeab_Tiger;
     [SerializeField]
     private List<UiPetView> uiPetViewPrefeab_ChunGu;
+    [SerializeField]
+    private List<UiPetView> uiPetViewPrefab_Event;
 
     [SerializeField]
     private Transform petViewParent;
+    [SerializeField]
+    private Transform petViewEventParent;
     void Start()
     {
         Initialize();
@@ -358,6 +362,15 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
                     petView47.transform.localPosition = Vector3.zero;
 
                     petView47.Initialize(e.Current.Value);
+                    break;
+                case 52:
+                    var petView52 = Instantiate<UiPetView>(uiPetViewPrefab_Event[0], petViewEventParent);
+
+                    petView52.gameObject.SetActive(true);
+
+                    petView52.transform.localPosition = Vector3.zero;
+
+                    petView52.Initialize(e.Current.Value);
                     break;
             }
         }

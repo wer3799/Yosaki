@@ -97,6 +97,12 @@ public class UiHellTowerResult : MonoBehaviour
                     case GameManager.ContentsType.SinsunTower:
                         stageChangeButton.SetActive(false);
                         break;
+                    case GameManager.ContentsType.TransTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.transTowerIdx).Value < (TableManager.Instance.TransTowerTable.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.TransTower:
+                        stageChangeButton.SetActive(false);
+                        break;
                 }
                 
                 return "클리어!!";

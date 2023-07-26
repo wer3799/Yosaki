@@ -85,6 +85,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.SinsunTower:
                         return false;
+                    case GameManager.ContentsType.TransTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.transTowerIdx).Value <
+                                                                      (TableManager.Instance.TransTowerTable.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.TransTower:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)
@@ -103,12 +108,14 @@ public class UiContentsExitButton : MonoBehaviour
             case GameManager.ContentsType.GyungRockTower:
             case GameManager.ContentsType.GyungRockTower2:
             case GameManager.ContentsType.GyungRockTower3:
+            case GameManager.ContentsType.GyungRockTower4:
             case GameManager.ContentsType.TestSword:
             case GameManager.ContentsType.TestMonkey:
             case GameManager.ContentsType.TestHell:
             case GameManager.ContentsType.TestChun:
             case GameManager.ContentsType.TestDo:
             case GameManager.ContentsType.TestSumi:
+            case GameManager.ContentsType.TestThief:
             case GameManager.ContentsType.RelicTest:
                 return true;
             case GameManager.ContentsType.TwelveDungeon:

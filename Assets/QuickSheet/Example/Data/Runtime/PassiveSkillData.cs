@@ -64,4 +64,8 @@ public class PassiveSkillData
   string lockmaskdescription;
   public string Lockmaskdescription { get {return lockmaskdescription; } set { this.lockmaskdescription = value;} }
   
+  [SerializeField]
+  int avoidduplicationidx;
+  public int Avoidduplicationidx { get {return avoidduplicationidx; } set { this.avoidduplicationidx = value;} }
+  
 }

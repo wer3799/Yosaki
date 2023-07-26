@@ -355,6 +355,7 @@ public static class GameBalance
     public static ObscuredFloat FoxTowerTicketDailyGetAmount = 2; // 
     public static ObscuredFloat SealSwordTicketDailyGetAmount = 4; // 
     public static ObscuredFloat GuimoonTicketDailyGetAmount = 4; // 
+    public static ObscuredInt TransTicketWeeklyGetAmount = 3; // 
     
     public static ObscuredFloat GuildTowerChimAbilUpValue = 0.01f; // 
     
@@ -373,7 +374,7 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTimeEvent_Ad_GrowthStone = 15;
     public readonly static ObscuredFloat HotTimeEvent_Ad_Marble = 5;
     //
-    public readonly static ObscuredBool isOddMonthlyPass = true; // 월간훈련 홀수월, 짝수월
+    public readonly static ObscuredBool isOddMonthlyPass = false; // 월간훈련 홀수월, 짝수월
     
     public readonly static ObscuredInt fireFlyRequire = 160;
     public readonly static ObscuredInt fireFlyFixedScore = 173;
@@ -384,6 +385,7 @@ public static class GameBalance
     public readonly static ObscuredFloat HpPer_StatPoint = 0.005f;
     public readonly static ObscuredFloat Stat_Sin_Slash = 0.00001f;
     public readonly static ObscuredFloat Stat_Hyung_Slash =  0.000001f;
+    public readonly static ObscuredFloat Stat_Chungu_Slash =  0.0000003f;
     //
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
     
@@ -424,13 +426,14 @@ public static class GameBalance
     public static ObscuredFloat swordGodGraduateValue = 1.5f;
     public static ObscuredFloat monkeyGodGraduateValue = 1.3f;
     public static ObscuredFloat hellGodGraduateValue = 1.15f;
+    public static ObscuredFloat chunGodGraduateValue = 1.2f;
     public static ObscuredFloat doGodGraduateValue = 2f;
     public static ObscuredFloat sumiGodGraduateValue = 2f;
         
     public static ObscuredDouble swordGodGraduateScore = 2E+122;
     public static ObscuredDouble monkeyGodGraduateScore = 5E+122;
     public static ObscuredDouble hellGodGraduateScore = 1E+124;
-    public static ObscuredDouble chunGodGraduateScore = 1E+119;
+    public static ObscuredDouble chunGodGraduateScore = 1E+127;
     public static ObscuredDouble doGodGraduateScore = 1E+119;
     public static ObscuredDouble sumiGodGraduateScore = 1E+119;
     //
@@ -446,6 +449,8 @@ public static class GameBalance
     public static ObscuredFloat Special0_GoldBar = 0.0000000004f;
     public static ObscuredFloat Special1_GoldBar = 0.0000000015f;
     public static ObscuredFloat Special2_GoldBar = 0.0000000038f;
+    public static ObscuredFloat Special3_GoldBar = 0.0000000075f;
+    public static ObscuredFloat Special4_GoldBar = 0.000000013f;
     
     public static ObscuredInt JumpStageStartValue = 1;//시작 가능 스테이지
     public static ObscuredInt JumpStageAdjustValue = 10;//강철이 데미지 스테이지 계산(스테이지보스체력x2<강철이체력)의 인덱스 -50짜리 보스
@@ -481,6 +486,9 @@ public static class GameBalance
     public static ObscuredInt goldBarWhite = 500000;
     public static ObscuredInt goldBarRed = 700000;
     public static ObscuredInt goldBarBlue = 1000000;
+    
+    //신규 하단전 각성시 하단전베기 피해량 추가상승분
+    public static ObscuredFloat newLowGyungRockAwakeValue = 0.5f;
 
     public static ObscuredDouble GoldLimit = 1E+38;// 해당금화 이상 소지시 휴식보상 받을수없음.
     public static int GetSonIdx()

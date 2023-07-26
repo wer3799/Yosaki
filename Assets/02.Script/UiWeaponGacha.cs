@@ -34,7 +34,7 @@ public class UiWeaponGacha : MonoBehaviour
     {
         ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Subscribe(e =>
         {
-            freeButtonDesc.SetText(e == 0 ? "무료 뽑기!" : "내일 다시!");
+            freeButtonDesc.SetText(e == 0 ? "600번\n무료 뽑기!" : "내일 다시!");
         }).AddTo(this);
     }
 

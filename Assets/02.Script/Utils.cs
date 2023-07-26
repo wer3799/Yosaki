@@ -170,7 +170,12 @@ public static class Utils
                type == Item_Type.costume136||
                type == Item_Type.costume137||
                type == Item_Type.costume138||
-               type == Item_Type.costume139
+               type == Item_Type.costume139||
+               type == Item_Type.costume140||
+               type == Item_Type.costume141||
+               type == Item_Type.costume142||
+               type == Item_Type.costume143||
+               type == Item_Type.costume144
             ;
     }
 
@@ -191,15 +196,21 @@ public static class Utils
                type == Item_Type.MonthNorigae4 ||
                type == Item_Type.MonthNorigae5 ||
                type == Item_Type.MonthNorigae6||
-               type == Item_Type.MonthNorigae7
+               type == Item_Type.MonthNorigae7||
+               type == Item_Type.MonthNorigae8
             ;
     }
 
     public static bool IsPassWeaponItem(this Item_Type type)
     {
         return type == Item_Type.weapon81 ||
-               type == Item_Type.weapon90
+               type == Item_Type.weapon90||
+               type == Item_Type.weapon131
             ;
+    }
+    public static bool IsPassPetItem(this Item_Type type)
+    {
+        return type == Item_Type.pet52;
     }
 
 
@@ -211,7 +222,7 @@ public static class Utils
     public static bool IsDailyEventMissionKey(this EventMissionKey type)
     {
         int type_int = (int)type;
-        return type_int >= (int)EventMissionKey.S_ClearBandit && type <= EventMissionKey.S_ClearSoulStone;
+        return type_int >= (int)EventMissionKey.S_ClearBandit && type <= EventMissionKey.TMISSION11;
     }
 
     public static bool IsRegainableItem(this Item_Type type)
@@ -335,6 +346,7 @@ public static class Utils
                type == Item_Type.ChunGuPet1 ||
                type == Item_Type.ChunGuPet2 ||
                type == Item_Type.ChunGuPet3 ||
+               type == Item_Type.pet52 ||
                type == Item_Type.SpecialSuhoPet0 ||
                type == Item_Type.SpecialSuhoPet1 ||
                type == Item_Type.SpecialSuhoPet2 ||
@@ -373,6 +385,7 @@ public static class Utils
                type == Item_Type.MonthNorigae5 ||
                type == Item_Type.MonthNorigae6 ||
                type == Item_Type.MonthNorigae7 ||
+               type == Item_Type.MonthNorigae8 ||
                type == Item_Type.DokebiHorn0 ||
                type == Item_Type.DokebiHorn1 ||
                type == Item_Type.DokebiHorn2 ||
@@ -412,6 +425,7 @@ public static class Utils
                type == Item_Type.GuildTowerClearTicket ||
                type == Item_Type.SinsuMarble ||
                type == Item_Type.Mileage ||
+               type == Item_Type.ClearTicket ||
                type == Item_Type.Event_Collection ||
                type == Item_Type.Event_HotTime ||
                type == Item_Type.Event_Collection_All ||
@@ -427,16 +441,20 @@ public static class Utils
                type == Item_Type.ChunguRelic ||
                type == Item_Type.FoxRelic ||
                type == Item_Type.FoxRelicClearTicket ||
+               type == Item_Type.TransClearTicket ||
                type == Item_Type.NewGachaEnergy ||
                type == Item_Type.EventDice ||
+               type == Item_Type.Event_SA ||
                type == Item_Type.SuhoPetFeed ||
                type == Item_Type.SuhoPetFeedClear ||
                type == Item_Type.SoulRingClear ||
                type == Item_Type.Tresure ||
-               type == Item_Type.GuildTowerClearTicket ||
                type == Item_Type.DosulGoods ||
+               type == Item_Type.TransGoods ||
                type == Item_Type.DosulClear ||
-               type == Item_Type.GuildTowerHorn
+               type == Item_Type.GuildTowerHorn||
+               type == Item_Type.GuimoonRelic||
+               type == Item_Type.GuimoonRelicClearTicket
             ;
     }
 

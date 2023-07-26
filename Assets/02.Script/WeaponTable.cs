@@ -16,10 +16,11 @@ public class WeaponServerData
     public ReactiveProperty<int> amount;
     public ReactiveProperty<int> getReward0;
     public ReactiveProperty<int> getReward1;
+    public ReactiveProperty<int> trans;
 
     public string ConvertToString()
     {
-        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{getReward0.Value},{getReward1.Value}";
+        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{getReward0.Value},{getReward1.Value},{trans.Value}";
     }
 }
 
@@ -130,6 +131,7 @@ public class WeaponTable
                         weaponData.amount = new ReactiveProperty<int>(1);
                         weaponData.getReward0 = new ReactiveProperty<int>(0);
                         weaponData.getReward1 = new ReactiveProperty<int>(0);
+                        weaponData.trans = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, weaponData);
                     }
@@ -142,6 +144,7 @@ public class WeaponTable
                         weaponData.amount = new ReactiveProperty<int>(0);
                         weaponData.getReward0 = new ReactiveProperty<int>(0);
                         weaponData.getReward1 = new ReactiveProperty<int>(0);
+                        weaponData.trans = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, weaponData);
                         defultValues.Add(table[i].Stringid, weaponData.ConvertToString());
@@ -210,6 +213,16 @@ public class WeaponTable
                             weapondata.getReward0 = new ReactiveProperty<int>(int.Parse(splitData[4]));
                             weapondata.getReward1 = new ReactiveProperty<int>(int.Parse(splitData[5]));
                         }
+                        if (splitData.Length < 7)
+                        {
+                            weapondata.trans = new ReactiveProperty<int>(0);
+                            paramCount++;
+                            defultValues.Add(table[i].Stringid, weapondata.ConvertToString());
+                        }
+                        else 
+                        { 
+                            weapondata.trans = new ReactiveProperty<int>(int.Parse(splitData[6]));;
+                        }
 
                         tableDatas.Add(table[i].Stringid, weapondata);
                     }
@@ -222,6 +235,7 @@ public class WeaponTable
                         weaponData.amount = new ReactiveProperty<int>(0);
                         weaponData.getReward0 = new ReactiveProperty<int>(0);
                         weaponData.getReward1 = new ReactiveProperty<int>(0);
+                        weaponData.trans = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, weaponData);
                         defultValues.Add(table[i].Stringid, weaponData.ConvertToString());

@@ -152,6 +152,8 @@ public Sprite HyunSangWeapon0;
 public Sprite HyunSangWeapon1;
 public Sprite HyunSangWeapon2;
 public Sprite HyunSangWeapon3;
+public Sprite HyunSangWeapon4;
+public Sprite HyunSangWeapon5;
     
 [Header ("Weapon_View")]
 
@@ -187,6 +189,7 @@ public Sprite RecommendWeapon19;
 public Sprite RecommendWeapon20;
 
 public Sprite weapon90;
+public Sprite weapon131;
 
 public Sprite RecommendWeapon21;
 public Sprite RecommendWeapon22;
@@ -268,6 +271,8 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae1;
     public Sprite HyunSangNorigae2;
     public Sprite HyunSangNorigae3;
+    public Sprite HyunSangNorigae4;
+    public Sprite HyunSangNorigae5;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -278,6 +283,7 @@ public Sprite RecommendWeapon22;
     public Sprite MonthNorigae5;
     public Sprite MonthNorigae6;
     public Sprite MonthNorigae7;
+    public Sprite MonthNorigae8;
     
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -332,6 +338,7 @@ public Sprite RecommendWeapon22;
     public Sprite ChunGuPet1;
     public Sprite ChunGuPet2;
     public Sprite ChunGuPet3;
+    [FormerlySerializedAs("EventPet0")] public Sprite pet52;
     public Sprite SpecialSuhoPet0;
     public Sprite SpecialSuhoPet1;
     public Sprite SpecialSuhoPet2;
@@ -443,6 +450,7 @@ public Sprite RecommendWeapon22;
     public Sprite SoulRingClear;
     public Sprite SealWeaponClear;
     public Sprite Mileage;
+    public Sprite ClearTicket;
     public Sprite HellPower;
     public Sprite DokebiFireKey;
     public Sprite DokebiTreasure;
@@ -467,6 +475,7 @@ public Sprite RecommendWeapon22;
     public Sprite ChunguRelic;
     public Sprite FoxRelic;
     public Sprite FoxRelicClearTicket;
+    public Sprite TransClearTicket;
     [Header ("Goods_Event")]
     public Sprite Songpyeon;
     public Sprite EventCollection;
@@ -477,6 +486,7 @@ public Sprite RecommendWeapon22;
     public Sprite Event_XMas;
     public Sprite Event_Mission;
     public Sprite EventDice;
+    [FormerlySerializedAs("SAEventGoods")] public Sprite Event_SA;
     public List<SkeletonDataAsset> enemySpineAssets;
 
     public Sprite GuildReward;
@@ -524,6 +534,7 @@ public Sprite RecommendWeapon22;
     public Sprite HellMark6;
     public Sprite HellMark7;
     public Sprite DosulGoods;
+    public Sprite TransGoods;
     public Sprite DosulClear;
     public Sprite SleepRewardItem;
 
@@ -907,6 +918,16 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[138];
             case Item_Type.costume139:
                 return costumeThumbnail[139];
+            case Item_Type.costume140:
+                return costumeThumbnail[140];
+            case Item_Type.costume141:
+                return costumeThumbnail[141];
+            case Item_Type.costume142:
+                return costumeThumbnail[142];
+            case Item_Type.costume143:
+                return costumeThumbnail[143];
+            case Item_Type.costume144:
+                return costumeThumbnail[144];
 
 
             case Item_Type.RankFrame1:
@@ -1306,6 +1327,10 @@ public Sprite RecommendWeapon22;
                 return FoxRelic;
             case Item_Type.FoxRelicClearTicket:
                 return FoxRelicClearTicket;
+            case Item_Type.TransClearTicket:
+                return TransClearTicket;
+            case Item_Type.Event_SA:
+                return Event_SA;
 
 
             case Item_Type.EventDice:
@@ -1352,6 +1377,8 @@ public Sprite RecommendWeapon22;
                 return ChunguTreasure;   
             case Item_Type.DosulGoods:
                 return DosulGoods;   
+            case Item_Type.TransGoods:
+                return TransGoods;   
             case Item_Type.DosulClear:
                 return DosulClear;   
             case Item_Type.GuildTowerClearTicket:
@@ -1375,6 +1402,8 @@ public Sprite RecommendWeapon22;
 
             case Item_Type.Mileage:
                 return Mileage;
+            case Item_Type.ClearTicket:
+                return ClearTicket;
 
 
             case Item_Type.Event_Collection:
@@ -1626,6 +1655,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae2;
             case Item_Type.HyunSangNorigae3:
                 return HyunSangNorigae3;
+            case Item_Type.HyunSangNorigae4:
+                return HyunSangNorigae4;
+            case Item_Type.HyunSangNorigae5:
+                return HyunSangNorigae5;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -1647,6 +1680,8 @@ public Sprite RecommendWeapon22;
                 return MonthNorigae6;
             case Item_Type.MonthNorigae7:
                 return MonthNorigae7;
+            case Item_Type.MonthNorigae8:
+                return MonthNorigae8;
             //
             //
             case Item_Type.DokebiHorn0:
@@ -1823,6 +1858,8 @@ public Sprite RecommendWeapon22;
             case Item_Type.ChunGuPet3:
                 return ChunGuPet3;
             
+            case Item_Type.pet52:
+                return pet52;
             case Item_Type.SpecialSuhoPet0:
                 return SpecialSuhoPet0;
             case Item_Type.SpecialSuhoPet1:
@@ -2253,6 +2290,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangWeapon2;
             case Item_Type.HyunSangWeapon3:
                 return HyunSangWeapon3;
+            case Item_Type.HyunSangWeapon4:
+                return HyunSangWeapon4;
+            case Item_Type.HyunSangWeapon5:
+                return HyunSangWeapon5;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
@@ -2387,6 +2428,8 @@ public Sprite RecommendWeapon22;
                 
             case Item_Type.weapon90:
                 return weapon90;
+            case Item_Type.weapon131:
+                return weapon131;
 
 
 

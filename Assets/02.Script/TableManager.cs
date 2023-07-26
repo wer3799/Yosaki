@@ -724,6 +724,9 @@ public class TableManager : SingletonMono<TableManager>
     
     [SerializeField] private YorinAttend yorinAttend;
     public YorinAttend YorinAttend => yorinAttend;
+    
+    [SerializeField] private SecondAttend secondAttend;
+    public SecondAttend SecondAttend => secondAttend;
 
     [SerializeField] private SonReward sonReward;
 
@@ -803,11 +806,13 @@ public class TableManager : SingletonMono<TableManager>
     public FallCollection fallCollection;
     public XMasCollection xMasCollection;
     public MileageReward mileageReward;
+    public ClearTicket ClearTicket;
     public PetHome petHome;
     public TowerTable3 towerTable3;
     public TowerTable4 towerTableMulti;
     public TowerTable5 sumisanTowerTable;
     public GradeTestTable gradeTestTable;
+    public HyunSangTowerTable HyunSangTowerTable;
     public RelicTest RelicTest;
     public CommonCollectionEvent commoncollectionEvent;
     public CommonEventAttend CommonEventAttend;
@@ -849,6 +854,7 @@ public class TableManager : SingletonMono<TableManager>
     public TestSword TestSword;
     public TestDo TestDo;
     public TestSumi TestSumi;
+    public TestThief TestThief;
     public SealSword sealSwordTable;
     public SealSwordPass SealSwordPass;
     public FoxFirePass FoxFirePass;
@@ -858,6 +864,8 @@ public class TableManager : SingletonMono<TableManager>
     public SwordPass SwordPass;
     public GuimoonTable GuimoonTable;
     public GuimoonPass GuimoonPass;
+    public TransTowerTable TransTowerTable;
+    public SecondMiniGame SecondMiniGame;
     
     
     private Dictionary<int, SealSwordData> sealSwordData = null;
@@ -887,6 +895,7 @@ public class TableManager : SingletonMono<TableManager>
     public SealSwordAwakeTable SealSwordAwakeTable;
     public TaegeukTitle taegeukTitle;
     public TowerTable10 gyungRockTowerTable3;
+    public TowerTable11 gyungRockTowerTable4;
     public GCPass GCPass;
 
     public DosulTower dosulTowerTable;
@@ -903,5 +912,6 @@ public enum CommonTableEventType
     Flower,
     DdukGuk,
     HotTime,
-    Normal
+    Normal,
+    SecondAnniversary,
 }

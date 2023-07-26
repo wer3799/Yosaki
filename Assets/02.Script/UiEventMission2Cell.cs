@@ -44,7 +44,7 @@ public class UiEventMission2Cell : MonoBehaviour
         {
             exchangeNum.SetText($"매일 교환 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
         }
-        else
+        else if(tableData.EVENTMISSIONTYPE == EventMissionType.FIRST)
         {
             exchangeNum.SetText($"이벤트 기간 내 1회 획득 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
         }
@@ -63,7 +63,7 @@ public class UiEventMission2Cell : MonoBehaviour
             {
                 exchangeNum.SetText($"매일 교환 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
             }
-            else
+            else if(tableData.EVENTMISSIONTYPE == EventMissionType.FIRST)
             {
                 exchangeNum.SetText($"이벤트 기간 내 1회 획득 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
             }

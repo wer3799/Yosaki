@@ -796,6 +796,7 @@ public static class SettingKey
     public static string showSuhoTowerUi = "showSuhoTowerUi";
     public static string showFoxTowerUi = "showFoxTowerUi";
     public static string showGodTrialUi = "showGodTrialUi";
+    public static string showTransUi = "showTransUi";
 
     public static string showCatUi = "showCatUi";
     public static string showTwelveUi = "showTwelveUi";
@@ -891,6 +892,7 @@ public static class SettingData
     public static ReactiveProperty<int> showSuhoTowerUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showFoxTowerUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showGodTrialUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showTransUi = new ReactiveProperty<int>();
 
     //보스도전
     public static ReactiveProperty<int> showCatUi    = new ReactiveProperty<int>();
@@ -1103,6 +1105,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.showGodTrialUi) == false)
             PlayerPrefs.SetInt(SettingKey.showGodTrialUi, 1);
         
+        if (PlayerPrefs.HasKey(SettingKey.showTransUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showTransUi, 1);
+        
         //
 
     }
@@ -1195,6 +1200,8 @@ public static class SettingData
         showFoxTowerUi.Value = PlayerPrefs.GetInt(SettingKey.showFoxTowerUi, 1);
         
         showGodTrialUi.Value = PlayerPrefs.GetInt(SettingKey.showGodTrialUi, 1);
+        
+        showTransUi.Value = PlayerPrefs.GetInt(SettingKey.showTransUi, 1);
         
         
         //보스도전
@@ -1486,6 +1493,10 @@ public static class SettingData
         showGodTrialUi.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showGodTrialUi, e);
+        });
+        showTransUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showTransUi, e);
         });
 //
         showCatUi.AsObservable().Subscribe(e =>

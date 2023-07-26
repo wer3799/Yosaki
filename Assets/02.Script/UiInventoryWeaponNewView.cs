@@ -39,6 +39,10 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
 
     [SerializeField]
     private Button levelUpButton;
+    [SerializeField]
+    private TextMeshProUGUI levelUpButtonText;
+    [SerializeField]
+    private Image upgradeGoodsImage;
 
     [SerializeField]
     private TextMeshProUGUI levelUpPrice;
@@ -344,8 +348,35 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
     {
         SetCurrentWeapon();
         UpdateLevelUpUi();
+        SetTextLevelUpButton(level);
     }
 
+    private void SetTextLevelUpButton(int level)
+    {
+        if (level < weaponData.Maxlevel)
+        {
+            levelUpButtonText.SetText("레벨업");
+        }
+        else
+        {
+            if (weaponData.WEAPONTYPE == WeaponType.Normal)
+            {
+                if (ServerData.weaponTable.TableDatas[weaponData.Stringid].trans.Value > 0)
+                {
+                    levelUpButtonText.SetText("초월 완료");
+                }
+                else
+                {
+                    levelUpButtonText.SetText("초월");
+                }   
+            }
+            else
+            {
+                levelUpButtonText.SetText("레벨업");
+            }
+        }
+    }
+    
     private void UpdateLevelUpUi()
     {
         if (weaponData == null && magicBookData == null && newGachaData == null && sealSwordData == null) return;
@@ -357,7 +388,25 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
            )
         {
             levelUpButton.interactable = false;
-            levelUpPrice.SetText("최대레벨");
+            if (weaponData.WEAPONTYPE== WeaponType.Normal)
+            {
+                if (ServerData.weaponTable.TableDatas[weaponData.Stringid].trans.Value > 0)
+                {
+                    levelUpPrice.SetText("초월완료");
+                    upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.TransGoods);
+                }
+                else
+                {
+                    levelUpPrice.SetText($"{weaponData.Transrequirevalue}");
+                    upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.TransGoods);
+                }   
+            }
+            else
+            {
+                levelUpPrice.SetText("최대레벨");
+                upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.GrowthStone);
+            }
+            
             return;
         }
 
@@ -398,6 +447,7 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
         {
             //요물일때 X
             upgradeButton.SetActive(amount >= weaponData.Requireupgrade && weaponData.Id < 19);
+            
         }
         else if (magicBookData != null)
         {
@@ -1104,9 +1154,10 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
         // ShowSubDetailView();
     }
 
-    
 
 
+
+    private bool showingPopup = false;
 
 
     public void OnClickLevelUpButton()
@@ -1124,10 +1175,42 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
             float currentMagicStoneAmount = ServerData.goodsTable.GetCurrentGoods(GoodsTable.GrowthStone);
             float levelUpPrice = ServerData.weaponTable.GetWeaponLevelUpPrice(weaponData.Stringid);
 
-            if (ServerData.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel)
-            {
-                PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
-                return;
+           
+             
+                if (ServerData.weaponTable.TableDatas[weaponData.Stringid].level.Value >= weaponData.Maxlevel)
+                { 
+                    if (weaponData.WEAPONTYPE == WeaponType.Normal)
+                    {
+                        if (ServerData.weaponTable.TableDatas[weaponData.Stringid].trans.Value > 0)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage("이미 초월하였습니다.");
+                            return;
+                        }
+                        else
+                        {
+                            if (ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value < weaponData.Transrequirevalue)
+                            {
+                                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.TransGoods)}이 부족합니다!(초월동굴에서 획득)");
+                                return;
+                            }
+                            //초월하겠습니까?
+                            if(showingPopup==false)
+                            {
+                                showingPopup = true;
+                                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"초월하시겠습니까?",
+                                    () => { TransEquipment(); }, () =>
+                                    {
+                                        showingPopup = false;
+                                    });
+                            }
+                            return;
+                        } 
+                    }
+                    else
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("최대 레벨입니다.");
+                        return;
+                    }
             }
 #if UNITY_EDITOR
             levelUpPrice = 0;
@@ -1193,6 +1276,58 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
         }
     }
 
+    private void TransEquipment()
+    {
+        showingPopup= false;
+
+        var require = weaponData.Transrequirevalue;
+
+        if (weaponData.WEAPONTYPE != WeaponType.Normal)
+        {
+            PopupManager.Instance.ShowAlarmMessage("초월할 수 없는 장비입니다!");
+            return;
+        }
+        
+        //개수 체크
+        if (ServerData.weaponTable.TableDatas[weaponData.Stringid].trans.Value > 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 초월하였습니다!");
+            return;
+        }
+            
+        if (ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value < require)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.TransGoods)}이 부족합니다!(초월동굴에서 획득)");
+            return;
+        }
+
+        
+        ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value -= require;
+        ServerData.weaponTable.TableDatas[weaponData.Stringid].trans.Value = 1;
+        //데이터 싱크
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param goodsParam = new Param();
+        Param equipmentParam = new Param();
+
+        //재화 차감
+        goodsParam.Add(GoodsTable.TransGoods, ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        //레벨 상승
+        string updateValue = ServerData.weaponTable.TableDatas[weaponData.Stringid].ConvertToString();
+        equipmentParam.Add(weaponData.Stringid, updateValue);
+
+        transactionList.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, equipmentParam));
+
+
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
+        {
+            WhenItemLevelChanged(weaponData.Maxlevel);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "초월 완료!!", null);
+        });
+    }
+    
     private Dictionary<int, Coroutine> SyncRoutine_weapon = new Dictionary<int, Coroutine>();
     private WaitForSeconds syncWaitTime_weapon = new WaitForSeconds(2.0f);
 

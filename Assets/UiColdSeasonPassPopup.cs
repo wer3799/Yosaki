@@ -22,7 +22,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     void Start()
     {
         Initialize();
-        Subscribe();
+        //Subscribe();
     }
 
     private void Subscribe()
@@ -50,7 +50,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
                           + $"금화 획득 + {GameBalance.HotTimeEvent_Ad_Gold * 100}% 증가\n"
                           + $"수련의돌 획득 + {GameBalance.HotTimeEvent_Ad_GrowthStone * 100}% 증가\n"
                           + $"여우구슬 획득 + {GameBalance.HotTimeEvent_Ad_Marble * 100}% 증가\n");
-
+        descText2.SetText("적용중");
     }
 
     private void OnEnable()

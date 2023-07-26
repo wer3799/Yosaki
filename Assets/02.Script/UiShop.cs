@@ -60,6 +60,14 @@ public class UiShop : SingletonMono<UiShop>
         IAPManager.Instance.BuyProduct(id);
     }
 
+    public bool HasSecondCostume()
+    {
+        if (ServerData.costumeServerTable.TableDatas["costume41"].hasCostume.Value ==true)
+        {
+            return true;
+        }
+        return false;
+    }
     public void GetPackageItem(string productId)
     {
         if (productId.Equals("removeadios"))
@@ -80,6 +88,8 @@ public class UiShop : SingletonMono<UiShop>
         if (tableData.SELLWHERE != SellWhere.Shop) return;
         if (tableData.BUYTYPE == BuyType.Pension) return;
 
+
+        
         //아이템 수령처리
         Param goodsParam = null;
         Param costumeParam = null;
@@ -90,8 +100,16 @@ public class UiShop : SingletonMono<UiShop>
         Param weaponParam = null;
         Param norigaeParam = null;
         Param skillParam = null;
-
+        
         List<TransactionValue> transactionList = new List<TransactionValue>();
+        if (productId.Equals("secondcostume0"))
+        {
+            if (HasSecondCostume())
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += 5;
+                ServerData.goodsTable.UpDataV2(GoodsTable.Mileage,false);
+            }
+        }
 
         string logString = string.Empty;
 
@@ -189,7 +207,7 @@ public class UiShop : SingletonMono<UiShop>
 
         transactionList.Add(TransactionValue.SetUpdate(IAPServerTableTotal.tableName, IAPServerTableTotal.Indate, iapTotalParam));
 
-        ServerData.SendTransaction(transactionList, successCallBack: WhenRewardSuccess);
+        ServerData.SendTransactionV2(transactionList, successCallBack: WhenRewardSuccess);
 
         currentItemIdx = productId;
     }
@@ -426,6 +444,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
                 }
                 break;  
+            case Item_Type.ClearTicket:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += amount;
+                    param.Add(GoodsTable.ClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value);
+                }
+                break;  
             case Item_Type.SumiFire:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += amount;
@@ -476,10 +500,22 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
                 }
                 break;  
+            case Item_Type.TransClearTicket:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
+                    param.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
+                }
+                break;  
             case Item_Type.EventDice:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
                     param.Add(GoodsTable.EventDice, ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value);
+                }
+                break;  
+            case Item_Type.Event_SA:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value += amount;
+                    param.Add(GoodsTable.Event_SA, ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value);
                 }
                 break;  
             
@@ -556,6 +592,12 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value += amount;
                 param.Add(GoodsTable.DosulGoods, ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
+            }
+                break;  
+            case Item_Type.TransGoods:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;
+                param.Add(GoodsTable.TransGoods, ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
             }
                 break;  
             case Item_Type.GuildTowerClearTicket:

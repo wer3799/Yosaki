@@ -10,6 +10,20 @@ using UnityEngine.UI.Extensions;
 public class UiLevelPassBoard : MonoBehaviour
 {
     
+    public struct Reward
+    {
+        public Item_Type ItemType;
+        public float ItemValue;
+
+        public Reward(Item_Type itemType, float itemValue)
+        {
+            this.ItemType = itemType;
+            this.ItemValue = itemValue;
+        }
+    }
+    
+    
+    
     private string rewardFreeKey;
     private string iapKey;
     private List<int> splitData_Free;
@@ -18,12 +32,32 @@ public class UiLevelPassBoard : MonoBehaviour
     [SerializeField] private Transform cellParent;
     [SerializeField] private Transform scrollCellParent;
     [SerializeField] private SelectableLevelPassButton _selectableLevelPassButton;
+    
+    [SerializeField] private UiRewardResultView _uiRewardResultView;
+    
+    private List<Reward> rewardList = new List<Reward>();
     private void Start()
     {
         // RefundFox();
         Initialize();
     }
+    
+    private void AddOrUpdateReward(Item_Type itemType, float itemValue)
+    {
+        int existingRewardIndex = rewardList.FindIndex(r => r.ItemType == itemType);
 
+        if (existingRewardIndex >= 0)
+        {
+            Reward existingReward = rewardList[existingRewardIndex];
+            existingReward.ItemValue += itemValue;
+            rewardList[existingRewardIndex] = existingReward;
+        }
+        else
+        {
+            rewardList.Add(new Reward(itemType, itemValue));
+        }
+    }
+    
     private void Initialize()
     {
         var inAppPurchaseData = TableManager.Instance.InAppPurchase.dataArray;
@@ -124,6 +158,8 @@ public class UiLevelPassBoard : MonoBehaviour
 
         List<int> rewardTypeList = new List<int>();
 
+        List<Reward> rewards = new List<Reward>();
+        
         for (int i = 0; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward(tableData[i].Unlocklevel);
@@ -188,6 +224,106 @@ public class UiLevelPassBoard : MonoBehaviour
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
                 LogManager.Instance.SendLogType("LevelPass", "A", "A");
+            });
+
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("수령할 보상이 없습니다.");
+        }
+    }
+    public void OnClickAllReceiveButtonV2()
+    {
+        splitData_Free = GetSplitData(NewLevelPass.freeReward);
+        splitData_Ad = GetSplitData(NewLevelPass.premiumReward);
+
+        var tableData = TableManager.Instance.LevelPass.dataArray;
+
+        int rewardedNum = 0;
+
+        string free = ServerData.newLevelPass.TableDatas[NewLevelPass.freeReward].Value;
+        string ad = ServerData.newLevelPass.TableDatas[NewLevelPass.premiumReward].Value;
+
+        List<int> rewardTypeList = new List<int>();
+
+        rewardList.Clear();
+        
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            bool canGetReward = CanGetReward(tableData[i].Unlocklevel);
+
+            if (canGetReward == false) break;
+
+            //무료보상
+            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            {
+                free += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1_Free, tableData[i].Reward1_Value);
+                AddOrUpdateReward((Item_Type)(int)tableData[i].Reward1_Free, tableData[i].Reward1_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward1_Free) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1_Free);
+                }
+                rewardedNum++;
+            }
+
+            //유로보상
+            if (HasLevelPassProduct(tableData[i].Shopid) && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                ad += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2_Pass, tableData[i].Reward2_Value);
+                AddOrUpdateReward((Item_Type)(int)tableData[i].Reward2_Pass, tableData[i].Reward2_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward2_Pass) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward2_Pass);
+                }
+
+                rewardedNum++;
+            }
+        }
+
+        if (rewardedNum > 0)
+        {
+            ServerData.newLevelPass.TableDatas[NewLevelPass.freeReward].Value = free;
+            ServerData.newLevelPass.TableDatas[NewLevelPass.premiumReward].Value = ad;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            var e = rewardTypeList.GetEnumerator();
+
+            Param goodsParam = new Param();
+            while (e.MoveNext())
+            {
+                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
+            }
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            Param passParam = new Param();
+
+            passParam.Add(NewLevelPass.freeReward, ServerData.newLevelPass.TableDatas[NewLevelPass.freeReward].Value);
+            passParam.Add(NewLevelPass.premiumReward, ServerData.newLevelPass.TableDatas[NewLevelPass.premiumReward].Value);
+
+            transactions.Add(TransactionValue.SetUpdate(NewLevelPass.tableName, NewLevelPass.Indate, passParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                //PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
+                LogManager.Instance.SendLogType("LevelPass", "A", "A");
+
+                List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+                var e = rewardList.GetEnumerator();
+                for (int i = 0 ;  i < rewardList.Count;i++)
+                {
+                    if (e.MoveNext())
+                    {
+                        rewardData.Add(new UiRewardView.RewardData(e.Current.ItemType,e.Current.ItemValue));
+                    }                    
+                }
+                if (rewardData.Count > 0)
+                {
+                    _uiRewardResultView.gameObject.SetActive(true);
+                    _uiRewardResultView.Initialize(rewardData);
+                }
             });
 
         }

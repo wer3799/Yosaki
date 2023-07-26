@@ -111,6 +111,7 @@ public class SealSwordServerTable
                     weaponData.amount = new ReactiveProperty<int>(0);
                     weaponData.getReward0 = new ReactiveProperty<int>(0);
                     weaponData.getReward1 = new ReactiveProperty<int>(0);
+                    weaponData.trans = new ReactiveProperty<int>(0);
 
                     tableDatas.Add(table[i].Stringid, weaponData);
                     defultValues.Add(table[i].Stringid, weaponData.ConvertToString());
@@ -178,7 +179,16 @@ public class SealSwordServerTable
                             weapondata.getReward0 = new ReactiveProperty<int>(int.Parse(splitData[4]));
                             weapondata.getReward1 = new ReactiveProperty<int>(int.Parse(splitData[5]));
                         }
-
+                        if (splitData.Length < 7)
+                        {
+                            weapondata.trans = new ReactiveProperty<int>(0);
+                            paramCount++;
+                            defultValues.Add(table[i].Stringid, weapondata.ConvertToString());
+                        }
+                        else 
+                        { 
+                            weapondata.trans = new ReactiveProperty<int>(int.Parse(splitData[6]));;
+                        }
                         tableDatas.Add(table[i].Stringid, weapondata);
                     }
                     else
@@ -190,6 +200,7 @@ public class SealSwordServerTable
                         weaponData.amount = new ReactiveProperty<int>(0);
                         weaponData.getReward0 = new ReactiveProperty<int>(0);
                         weaponData.getReward1 = new ReactiveProperty<int>(0);
+                        weaponData.trans = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, weaponData);
                         defultValues.Add(table[i].Stringid, weaponData.ConvertToString());

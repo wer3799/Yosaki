@@ -67,6 +67,10 @@ public class SetRandomPosition : MonoBehaviour
     {
         moveDir = playerTr.position - transform.position;
     }
+    public void SetDirFromRb()
+    {
+        moveDir = playerTr.position - rb.transform.position;
+    }
     
     private void SetCoroutine()
     {
@@ -76,7 +80,7 @@ public class SetRandomPosition : MonoBehaviour
     private void Update()
     {
         //조조
-        if (_bossId == 111||_bossId == 112||_bossId == 123||_bossId == 133||_bossId == 134||_bossId == 135||_bossId==154||_bossId==155||_bossId==156)
+        if (_bossId == 111||_bossId == 112||_bossId == 123||_bossId == 133||_bossId == 134||_bossId == 135||_bossId==154||_bossId==155||_bossId==156||_bossId==169||_bossId==170||_bossId==171)
         {
             if (isMove)
             {
@@ -113,6 +117,13 @@ public class SetRandomPosition : MonoBehaviour
             if (_bossId == 119||_bossId==120||_bossId==121||_bossId==122||_bossId == 136||_bossId==137||_bossId==138||_bossId==139)
             {
                 SetDir();
+                float angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
+                projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            }
+            //방향전환
+            if (_bossId==169||_bossId==170||_bossId==171)
+            {
+                SetDirFromRb();
                 float angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
                 projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             }

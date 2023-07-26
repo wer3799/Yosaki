@@ -116,6 +116,7 @@ public class UiPetHomeBoard : MonoBehaviour
 
         for (int i = 8; i < tableData.Length; i++)
         {
+            if(tableData[i].PETGETTYPE == PetGetType.Event) continue;
             var cell = Instantiate<UiPetHomeView>(petHomeViewPrefab, cellParent);
 
             cell.Initialize(tableData[i]);
@@ -245,6 +246,7 @@ public class UiPetHomeBoard : MonoBehaviour
         {
             //꼬맹이들이면 거른다.
             if (tableData[i].Id <= 7) continue;
+            if (tableData[i].PETGETTYPE == PetGetType.Event) continue;
             var serverData = ServerData.petTable.TableDatas[tableData[i].Stringid];
             //가지고있지 않으면 continue
             if (serverData.hasItem.Value < 1) continue;

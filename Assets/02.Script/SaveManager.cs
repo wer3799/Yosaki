@@ -51,15 +51,16 @@ public class SaveManager : SingletonMono<SaveManager>
 
     private void GetHotTimeGoods()
     {
-        if (Utils.HasHotTimeEventPass() == false)
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 1;
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += 1;
-        }
-        else
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 2;
-        }
+        // if (Utils.HasHotTimeEventPass() == false)
+        // {
+        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 1;
+        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += 1;
+        // }
+        // else
+        // {
+        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 2;
+        // }
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 2;
     }
 
     private void CheckClientVersion()
@@ -264,6 +265,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.Event_NewYear,
         GoodsTable.Event_NewYear_All,
         GoodsTable.Mileage,
+        GoodsTable.ClearTicket,
 
         GoodsTable.HellPowerUp,
         //GoodsTable.DokebiFire,
@@ -284,6 +286,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.ChunguRelic,
         GoodsTable.FoxRelic,
         GoodsTable.FoxRelicClearTicket,
+        GoodsTable.TransClearTicket,
         GoodsTable.EventDice,
         GoodsTable.Tresure,
         GoodsTable.SinsuMarble,
@@ -294,6 +297,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.GuildTowerHorn,
         GoodsTable.DosulClear,
         GoodsTable.DosulGoods,
+        GoodsTable.TransGoods,
     };
 
 
