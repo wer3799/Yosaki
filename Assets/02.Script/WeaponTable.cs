@@ -122,7 +122,7 @@ public class WeaponTable
                     //기본무기
                     if (i == 0)
                     {
-                        defultValues.Add(table[i].Stringid, "0,1,0,1");
+                        defultValues.Add(table[i].Stringid, "0,1,0,1,0,0,0");
 
                         var weaponData = new WeaponServerData();
                         weaponData.idx = table[i].Id;
@@ -206,7 +206,6 @@ public class WeaponTable
                             weapondata.getReward0 = new ReactiveProperty<int>(0);
                             weapondata.getReward1 = new ReactiveProperty<int>(0);
                             paramCount++;
-                            defultValues.Add(table[i].Stringid, weapondata.ConvertToString());
                         }
                         else 
                         { 

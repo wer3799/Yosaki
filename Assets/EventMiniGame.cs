@@ -23,7 +23,7 @@ public class EventMiniGame : SingletonMono<EventMiniGame>
 
     [SerializeField]
     private GameObject jumpButton;
-    
+
     [SerializeField]
     private GameObject hideObject;
 
@@ -179,9 +179,9 @@ public class EventMiniGame : SingletonMono<EventMiniGame>
     private float GetMoveSpeed()
     {
         float addTime = Mathf.Min(elapsedTime.Value, 100);
-        
+
         float ret = 9f + addTime * 0.075f;
-        
+
         return ret;
     }
 
@@ -211,7 +211,7 @@ public class EventMiniGame : SingletonMono<EventMiniGame>
     public void OnClickGameStartButton()
     {
         ResetGame();
-        
+
         if (gameState.Value != MiniGameState.Playing)
         {
             gameState.Value = MiniGameState.Playing;
@@ -274,12 +274,18 @@ public class EventMiniGame : SingletonMono<EventMiniGame>
         gameState.Value = MiniGameState.Wait;
     }
 
+    private bool currentFrameChack = false;
+
     public void OnClickJumpButton()
     {
         if (gameState.Value != MiniGameState.Playing) return;
 
         //2번까지 점프
-        if (currentJumpCount >= 2) return;
+        if (currentJumpCount >= 2 || currentFrameChack == true) return;
+
+        CoroutineExecuter.Instance.StartCoroutine(FrameCheck());
+
+        currentFrameChack = true;
 
         currentJumpCount++;
 
@@ -287,6 +293,23 @@ public class EventMiniGame : SingletonMono<EventMiniGame>
 
         rb.AddForce(Vector2.up * jumpPower);
     }
+
+    private IEnumerator FrameCheck()
+    {
+        yield return null;
+        currentFrameChack = false;
+    }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            OnClickJumpButton();
+            OnClickJumpButton();
+        }
+    }
+#endif
 
     public void ResetJumpCount()
     {

@@ -287,7 +287,8 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
             weaponView.Initialize(null, magicBookData);
         }
 
-
+        UpdateLevelUpUi();
+        
         SubscribeWeapon();
 
         SetParent();
@@ -356,6 +357,7 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
         if (level < weaponData.Maxlevel)
         {
             levelUpButtonText.SetText("레벨업");
+            upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.GrowthStone);
         }
         else
         {
