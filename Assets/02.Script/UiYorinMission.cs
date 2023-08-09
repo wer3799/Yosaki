@@ -115,7 +115,7 @@ public class UiYorinMission : MonoBehaviour
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).AsObservable().Subscribe(e =>
         {
-            if (e >= 9)
+            if (e >= 5)
             {
                 string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission1_2].Stringid;
                 ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
@@ -148,7 +148,7 @@ public class UiYorinMission : MonoBehaviour
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(e =>
         {
-            if (e > 50-2)
+            if (e > 10-2)
             {
                 string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission1_6].Stringid;
                 ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
@@ -168,6 +168,14 @@ public class UiYorinMission : MonoBehaviour
             if (e > 0)
             {
                 string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission1_8].Stringid;
+                ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
+            }
+        }).AddTo(this);
+        ServerData.userInfoTable.GetTableData(UserInfoTable.gachaNum_Skill).AsObservable().Subscribe(e =>
+        {
+            if (e >= 10000)
+            {
+                string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission1_9].Stringid;
                 ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
             }
         }).AddTo(this);
@@ -211,6 +219,15 @@ public class UiYorinMission : MonoBehaviour
             if (e > 0)
             {
                 string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission2_5].Stringid;
+                ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
+            }
+        }).AddTo(this);
+        //전방베기4형
+        ServerData.skillServerTable.TableDatas[SkillServerTable.SkillCollectionLevel][3].AsObservable().Subscribe(e =>
+        {
+            if (e > 0)
+            {
+                string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission2_7].Stringid;
                 ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
             }
         }).AddTo(this);

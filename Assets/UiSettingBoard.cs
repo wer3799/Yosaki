@@ -810,6 +810,7 @@ public static class SettingKey
     public static string showFoxUi = "showFoxUi";
     public static string showSangoonUi= "showSangoonUi";
     public static string showChunguUi= "showChunguUi";
+    public static string showNewBossUi= "showNewBossUi";
 
     public static string showHellUi = "showHellUi";
     public static string showChunUi = "showChunUi";
@@ -907,6 +908,7 @@ public static class SettingData
     public static ReactiveProperty<int> showFoxUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showSangoonUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showChunguUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showNewBossUi = new ReactiveProperty<int>();
 
     //삼천세계
     public static ReactiveProperty<int> showHellUi  = new ReactiveProperty<int>();
@@ -1229,6 +1231,8 @@ public static class SettingData
 
         showChunguUi.Value = PlayerPrefs.GetInt(SettingKey.showChunguUi, 1);
 
+        showNewBossUi.Value = PlayerPrefs.GetInt(SettingKey.showNewBossUi, 1);
+
         showHellUi.Value = PlayerPrefs.GetInt(SettingKey.showHellUi, 1);
 
         showChunUi.Value = PlayerPrefs.GetInt(SettingKey.showChunUi, 1);
@@ -1546,6 +1550,10 @@ public static class SettingData
         showChunguUi.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showChunguUi, e);
+        });
+        showNewBossUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showNewBossUi, e);
         });
         
         showHellUi.AsObservable().Subscribe(e =>

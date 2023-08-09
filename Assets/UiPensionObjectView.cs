@@ -229,6 +229,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.GuimoonRelicClearTicket;
         }
+        else if (pensionKey == "meditationpension")
+        {
+            itemType = Item_Type.MeditationClearTicket;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -238,7 +242,7 @@ public class UiPensionObjectView : MonoBehaviour
         transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(itemType, instantReceiveValue));
         transactions.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
 
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!\n{CommonString.GetItemName(itemType)} {Utils.ConvertBigNum(instantReceiveValue)}개 획득!", null);
         });

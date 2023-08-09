@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Spine.Unity;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using static UiRewardView;
@@ -40,11 +41,27 @@ public class UiTwelveBossContentsView : MonoBehaviour
 
     [SerializeField]
     private SkeletonGraphic petGraphic;
+
+    [SerializeField] private GameObject allClearMark; 
+    
     private void Start()
     {
         InitByInspector();
+        if (initByInspector)
+        {
+            Subscribe();
+        }
     }
 
+    private void Subscribe()
+    {
+        ServerData.bossServerTable.TableDatas[bossTableData.Stringid].rewardedId.AsObservable().Subscribe(e =>
+        {
+            OnOffAllClearMark();
+        }).AddTo(this);
+        
+    }
+    
     private void InitByInspector()
     {
         if (initByInspector)
@@ -106,8 +123,23 @@ public class UiTwelveBossContentsView : MonoBehaviour
             petGraphic.Initialize(true);
             petGraphic.SetMaterialDirty();
         }
+
+        OnOffAllClearMark();
     }
 
+    private void OnOffAllClearMark()
+    {
+        if (allClearMark != null)
+        {
+            var rewardTotalCount = TableManager.Instance.TwelveBossTable.dataArray[bossId].Rewardtype.Length;
+
+            var rewardedListTotalCount = ServerData.bossServerTable.GetBossRewardedIdxList(bossTableData.Stringid).Count;
+
+            allClearMark.SetActive(rewardedListTotalCount >= rewardTotalCount);
+
+        }
+    }
+    
     public void OnClickRewardButton()
     {
         UiTwelveRewardPopup.Instance.Initialize(bossTableData.Id);

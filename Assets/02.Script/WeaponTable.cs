@@ -206,6 +206,7 @@ public class WeaponTable
                             weapondata.getReward0 = new ReactiveProperty<int>(0);
                             weapondata.getReward1 = new ReactiveProperty<int>(0);
                             paramCount++;
+                            defultValues.Add(table[i].Stringid, weapondata.ConvertToString());
                         }
                         else 
                         { 

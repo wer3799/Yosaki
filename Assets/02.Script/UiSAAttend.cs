@@ -29,7 +29,7 @@ public class UiSAAttend : MonoBehaviour
     {
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendCount).AsObservable().Subscribe(e =>
         {
-            day.SetText($"출석일 : {Mathf.Min((int)e, 7)}일");
+            day.SetText($"출석일 : {(int)e}일");
         });
     }
     private void Initialize()

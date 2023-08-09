@@ -13,9 +13,13 @@ public class UiChunmaRewardBoard : MonoBehaviour
 
     [SerializeField]
     private UiTwelveBossContentsView bossContentsView_Recommend;
+    [SerializeField]
+    private UiTwelveBossContentsView bossContentsView_Recommend2;
 
     [SerializeField]
     private TextMeshProUGUI RecommendCount;
+    [SerializeField]
+    private TextMeshProUGUI RecommendCount2;
 
     private void Start()
     {
@@ -34,10 +38,27 @@ public class UiChunmaRewardBoard : MonoBehaviour
                 if (string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas["b68"].score.Value))
                 {
                     RecommendCount.SetText($"받은 추천 : 0");
+                    ServerData.bossServerTable.TableDatas["b176"].score.Value = e;
                 }
                 else
                 {
                     RecommendCount.SetText($"받은 추천 : {ServerData.bossServerTable.TableDatas["b68"].score.Value}");
+                    ServerData.bossServerTable.TableDatas["b176"].score.Value = e;
+
+                }
+            }
+        }).AddTo(this);
+        ServerData.bossServerTable.TableDatas["b176"].score.AsObservable().Subscribe(e=>
+        {
+            if (RecommendCount2 != null)
+            {
+                if (string.IsNullOrEmpty(ServerData.bossServerTable.TableDatas["b176"].score.Value))
+                {
+                    RecommendCount2.SetText($"받은 추천 : 0");
+                }
+                else
+                {
+                    RecommendCount2.SetText($"받은 추천 : {ServerData.bossServerTable.TableDatas["b176"].score.Value}");
                 }
             }
         }).AddTo(this);
@@ -48,6 +69,8 @@ public class UiChunmaRewardBoard : MonoBehaviour
         bossContentsView_Normal.Initialize(TableManager.Instance.TwelveBossTable.dataArray[55]);
 
         bossContentsView_Recommend.Initialize(TableManager.Instance.TwelveBossTable.dataArray[68]);
+
+        bossContentsView_Recommend2.Initialize(TableManager.Instance.TwelveBossTable.dataArray[176]);
     }
     
     public void OnClickAllReceiveButton()

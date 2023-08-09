@@ -175,13 +175,8 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
    public void OnClickLocal()
    {
       #if UNITY_EDITOR
-      if (int.TryParse(adjustNum.text, out var inputNum))
+      if (double.TryParse(adjustNum.text, out double inputNum))
       {
-         if (inputNum == 0)
-         {
-            PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
-            return;
-         }
       }
       else
       {
@@ -198,7 +193,7 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
             ServerData.userInfoTable_2.GetTableData(selectedData.DataName).Value = inputNum;
             break;
          case TableName.GoodsTable:
-            ServerData.goodsTable.GetTableData(selectedData.DataName).Value = inputNum;
+            ServerData.goodsTable.GetTableData(selectedData.DataName).Value = (float)inputNum;
             break;
          default:
             throw new ArgumentOutOfRangeException();

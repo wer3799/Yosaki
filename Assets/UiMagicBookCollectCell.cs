@@ -196,6 +196,8 @@ public class UiMagicBookCollectCell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
 
         ServerData.SendTransaction(transactionList);
+        
+        YorinMissionManager.UpdateYorinMissionClear(YorinMissionKey.YMission2_7, 1);
 
         syncRoutine = null;
     }

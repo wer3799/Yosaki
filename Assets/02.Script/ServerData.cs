@@ -528,6 +528,18 @@ public static class ServerData
             case Item_Type.VisionSkill7:
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill7).Value += rewardValue;
                 break;
+            case Item_Type.VisionSkill8:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill8).Value += rewardValue;
+                break;
+            case Item_Type.VisionSkill9:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill9).Value += rewardValue;
+                break;
+            case Item_Type.VisionSkill10:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).Value += rewardValue;
+                break;
+            case Item_Type.VisionSkill11:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value += rewardValue;
+                break;
 
             //
             //            
@@ -688,6 +700,12 @@ public static class ServerData
                 break;
             case Item_Type.TransClearTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += rewardValue;
+                break;
+            case Item_Type.MeditationGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value += rewardValue;
+                break;
+            case Item_Type.MeditationClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += rewardValue;
                 break;
 
             case Item_Type.EventDice:
@@ -902,6 +920,11 @@ public static class ServerData
             case Item_Type.costume142:
             case Item_Type.costume143:
             case Item_Type.costume144:
+            case Item_Type.costume145:
+            case Item_Type.costume146:
+            case Item_Type.costume147:
+            case Item_Type.costume148:
+            case Item_Type.costume149:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1117,6 +1140,11 @@ public static class ServerData
             case Item_Type.costume142:
             case Item_Type.costume143:
             case Item_Type.costume144:
+            case Item_Type.costume145:
+            case Item_Type.costume146:
+            case Item_Type.costume147:
+            case Item_Type.costume148:
+            case Item_Type.costume149:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1219,6 +1247,12 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.TransClearTicket:
                 passParam.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.MeditationGoods:
+                passParam.Add(GoodsTable.MeditationGoods, ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.MeditationClearTicket:
+                passParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.EventDice:
@@ -1554,6 +1588,18 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.VisionSkill7:
                 passParam.Add(GoodsTable.VisionSkill7, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill7).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.VisionSkill8:
+                passParam.Add(GoodsTable.VisionSkill8, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill8).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.VisionSkill9:
+                passParam.Add(GoodsTable.VisionSkill9, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill9).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.VisionSkill10:
+                passParam.Add(GoodsTable.VisionSkill10, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.VisionSkill11:
+                passParam.Add(GoodsTable.VisionSkill11, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             // //
             case Item_Type.ThiefSkill0:
@@ -2003,6 +2049,14 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
                 param.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.MeditationGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value += amount;
+                param.Add(GoodsTable.MeditationGoods, ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.MeditationClearTicket:
+                ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += amount;
+                param.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.EventDice:
                 ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
@@ -2314,6 +2368,22 @@ public static class ServerData
             case Item_Type.VisionSkill7:
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill7).Value += amount;
                 param.Add(GoodsTable.VisionSkill7, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill7).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.VisionSkill8:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill8).Value += amount;
+                param.Add(GoodsTable.VisionSkill8, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill8).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.VisionSkill9:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill9).Value += amount;
+                param.Add(GoodsTable.VisionSkill9, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill9).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.VisionSkill10:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).Value += amount;
+                param.Add(GoodsTable.VisionSkill10, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.VisionSkill11:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value += amount;
+                param.Add(GoodsTable.VisionSkill11, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //   //            //            //
             case Item_Type.ThiefSkill0:
@@ -3696,6 +3766,12 @@ public static class ServerData
                     break;
                 case Item_Type.TransClearTicket:
                     ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
+                    break;
+                case Item_Type.MeditationGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value += amount;
+                    break;
+                case Item_Type.MeditationClearTicket:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += amount;
                     break;
                 case Item_Type.EventDice:
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;

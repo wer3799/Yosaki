@@ -113,14 +113,39 @@ public class UiNewGacha : MonoBehaviour
 
     public void OnClickFreeGacha()
     {
-        bool canFreeGacha = ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value == 0;
 
+        
+        bool canFreeGacha = ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value == 0;
+        
         if (canFreeGacha == false)
         {
             PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 받을 수 없습니다.");
             return;
         }
+        
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.getRelicUpgrade).Value > 0)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value = 1;
+            
+            ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += GameBalance.GetSoulRingAdReward;
 
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.freeNewGacha, ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowAlarmMessage($"영혼석 {GameBalance.GetSoulRingAdReward}개 획득!");
+            });
+            return;
+        }
+        
         AdManager.Instance.ShowRewardedReward(() =>
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.freeNewGacha).Value = 1;
@@ -152,6 +177,12 @@ public class UiNewGacha : MonoBehaviour
         this.lastGachaIdx = idx;
         int amount = gachaAmount[idx];
         int price = gachaPrice[idx];
+
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.getRelicUpgrade).Value > 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"영혼 반지 뽑기를 모두 마치셨습니다.\n영혼석을 통해 영혼 반지 강화를 진행해 주세요.");
+            return;
+        }
 
         //재화 체크
         if (CanGacha(price) == false)

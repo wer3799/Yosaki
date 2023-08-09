@@ -129,6 +129,7 @@ public class UserInfoTable
     public const string sealswordpension = "sealswordpension";
     public const string dosulpension = "dosulpension";
     public const string guimoonpension = "guimoonpension";
+    public const string meditationpension = "meditationpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -457,6 +458,7 @@ public class UserInfoTable
         { sealswordpension, 0f },
         { dosulpension, 0f },
         { guimoonpension, 0f },
+        { meditationpension, 0f },
 
         { marblePackChange, 0f },
         { yoguiSogulLastClear, 0f },
@@ -730,18 +732,22 @@ public class UserInfoTable
                             e.Current.Key == basicPackRefund ||
                             e.Current.Key == refundFox ||
                             e.Current.Key == titleRefund||
-                            e.Current.Key == eventMissionInitialize||
-                            e.Current.Key == collectionEventInitialize||
                             e.Current.Key == trainingEventInitialize0
                            )
                         {
                             defultValues.Add(e.Current.Key, 1);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(1));
                         }
+                        else if (e.Current.Key == collectionEventInitialize||
+                        e.Current.Key == eventMissionInitialize)
+                        {
+                            defultValues.Add(e.Current.Key, 2);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(2));
+                        }
                         else if (e.Current.Key == RefundIdx)
                         {
-                            defultValues.Add(e.Current.Key, 5);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(5));
+                            defultValues.Add(e.Current.Key, 6);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(6));
                         }
                         else
                         {
@@ -1281,6 +1287,10 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.guimoonpension).Value++;
             }
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.meditationpension].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.meditationpension).Value++;
+            }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
@@ -1349,6 +1359,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.sealswordpension, ServerData.userInfoTable.GetTableData(UserInfoTable.sealswordpension).Value);
         userInfoParam.Add(UserInfoTable.dosulpension, ServerData.userInfoTable.GetTableData(UserInfoTable.dosulpension).Value);
         userInfoParam.Add(UserInfoTable.guimoonpension, ServerData.userInfoTable.GetTableData(UserInfoTable.guimoonpension).Value);
+        userInfoParam.Add(UserInfoTable.meditationpension, ServerData.userInfoTable.GetTableData(UserInfoTable.meditationpension).Value);
 
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
@@ -1533,6 +1544,12 @@ public class UserInfoTable
         {
             ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += GameBalance.GuimoonTicketDailyGetAmount;
             goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
+        }  
+        //귀문
+        if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationStart].Value != 0)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += GameBalance.MeditationTicketDailyGetAmount;
+            goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
         }  
         
         //봉인검

@@ -68,6 +68,8 @@ public class UiEditiorBoard : MonoBehaviour
     [SerializeField]
     private Toggle showChunguToggle;
     [SerializeField]
+    private Toggle showNewBossToggle;
+    [SerializeField]
     private Toggle showHellToggle;
     [SerializeField]
     private Toggle showChunToggle;
@@ -152,6 +154,8 @@ public class UiEditiorBoard : MonoBehaviour
         showSangoonToggle.isOn = PlayerPrefs.GetInt(SettingKey.showSangoonUi) == 1;
 
         showChunguToggle.isOn = PlayerPrefs.GetInt(SettingKey.showChunguUi) == 1;
+        
+        showNewBossToggle.isOn = PlayerPrefs.GetInt(SettingKey.showNewBossUi) == 1;
         
         showHellToggle.isOn = PlayerPrefs.GetInt(SettingKey.showHellUi) == 1;
 
@@ -492,6 +496,17 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showChunguUi.Value = on ? 1 : 0;
+    }
+    public void NewBossUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showNewBossUi.Value = on ? 1 : 0;
     }
     public void HellUiOnOff(bool on)
     {

@@ -28,4 +28,8 @@ public class GuildLevelData
   float value;
   public float Value { get {return value; } set { this.value = value;} }
   
+  [SerializeField]
+  string guildname;
+  public string Guildname { get {return guildname; } set { this.guildname = value;} }
+  
 }

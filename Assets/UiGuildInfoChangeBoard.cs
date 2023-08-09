@@ -10,6 +10,10 @@ public class UiGuildInfoChangeBoard : MonoBehaviour
     [SerializeField]
     private Transform cellParent;
 
+    [SerializeField]
+    private Transform cellParent_Special;
+
+        
     private void Start()
     {
         Initialize();
@@ -21,7 +25,18 @@ public class UiGuildInfoChangeBoard : MonoBehaviour
 
         for (int i = 0; i < guildIconList.Count; i++)
         {
-            var cell = Instantiate<UiGuildIconCell>(uiGuildIconCell, cellParent);
+            Transform parent;
+
+            if (i < 30)
+            {
+                parent = cellParent;
+            }
+            else
+            {
+                parent = cellParent_Special;
+            }
+            
+            var cell = Instantiate<UiGuildIconCell>(uiGuildIconCell, parent);
             cell.Initialize(i);
         }
     }

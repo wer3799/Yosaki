@@ -301,6 +301,11 @@ public static class CommonString
             case Item_Type.costume142: return TableManager.Instance.Costume.dataArray[142].Name;
             case Item_Type.costume143: return TableManager.Instance.Costume.dataArray[143].Name;
             case Item_Type.costume144: return TableManager.Instance.Costume.dataArray[144].Name;
+            case Item_Type.costume145: return TableManager.Instance.Costume.dataArray[145].Name;
+            case Item_Type.costume146: return TableManager.Instance.Costume.dataArray[146].Name;
+            case Item_Type.costume147: return TableManager.Instance.Costume.dataArray[147].Name;
+            case Item_Type.costume148: return TableManager.Instance.Costume.dataArray[148].Name;
+            case Item_Type.costume149: return TableManager.Instance.Costume.dataArray[149].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -421,6 +426,10 @@ public static class CommonString
             case Item_Type.VisionSkill5: return "궁극 기술6";
             case Item_Type.VisionSkill6: return "궁극 기술7";
             case Item_Type.VisionSkill7: return "궁극 기술8";
+            case Item_Type.VisionSkill8: return "궁극 기술9";
+            case Item_Type.VisionSkill9: return "궁극 기술10";
+            case Item_Type.VisionSkill10: return "궁극 기술11";
+            case Item_Type.VisionSkill11: return "궁극 기술12";
             case Item_Type.ThiefSkill0: return "도적 기술1";
             case Item_Type.ThiefSkill1: return "도적 기술2";
             case Item_Type.ThiefSkill2: return "도적 기술3";
@@ -540,6 +549,8 @@ public static class CommonString
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";
             case Item_Type.DosulClear: return "도술꽃 소탕권";
+            case Item_Type.MeditationGoods: return "심득 조각";
+            case Item_Type.MeditationClearTicket: return "내면세계 입장권";
 
         }
         return "미등록";

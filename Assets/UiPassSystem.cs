@@ -43,6 +43,24 @@ public class DamagePassInfo
 
     public int passGrade;
 }
+public class EquipmentPassInfo
+{
+    public string require;
+
+    public ObscuredInt id;
+
+    public ObscuredInt rewardType_Free;
+    public ObscuredFloat rewardTypeValue_Free;
+    public ObscuredString rewardType_Free_Key;
+
+    public ObscuredInt rewardType_IAP;
+    public ObscuredFloat rewardTypeValue_IAP;
+    public ObscuredString rewardType_IAP_Key;
+
+    public ObscuredString shopId;
+
+    public int passGrade;
+}
 
 public enum PassType
 {

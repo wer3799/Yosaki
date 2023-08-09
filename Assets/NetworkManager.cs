@@ -1152,6 +1152,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
 
     private char splitComma = ',';
+
+    private void SendRecommendById(string bossId)
+    {
+        var rewardData = ServerData.bossServerTable.TableDatas[bossId];
+
+        if (string.IsNullOrEmpty(rewardData.score.Value))
+        {
+            rewardData.score.Value = "1";
+        }
+        else
+        {
+            int prefScore = int.Parse(rewardData.score.Value);
+
+            prefScore++;
+
+            rewardData.score.Value = prefScore.ToString();
+        }
+
+        ServerData.bossServerTable.UpdateData(bossId);
+    }
     public void OnEvent(EventData photonEvent)
     {
         if (photonEvent.Code == SendScore_Event)
@@ -1345,22 +1365,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 PopupManager.Instance.ShowAlarmMessage($"{recommendedNickName}님에게 추천 받았습니다!");
 
-                var rewardData = ServerData.bossServerTable.TableDatas["b68"];
-
-                if (string.IsNullOrEmpty(rewardData.score.Value))
-                {
-                    rewardData.score.Value = "1";
-                }
-                else
-                {
-                    int prefScore = int.Parse(rewardData.score.Value);
-
-                    prefScore++;
-
-                    rewardData.score.Value = prefScore.ToString();
-                }
-
-                ServerData.bossServerTable.UpdateData("b68");
+                SendRecommendById("b68");
+                //SendRecommendById("b176");
             }
         }
         else if (photonEvent.Code == SendPartyTowerRecommend_Event)
@@ -1376,23 +1382,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 Debug.LogError("추천 받음");
 
                 PopupManager.Instance.ShowAlarmMessage($"{recommendedNickName}님에게 추천 받았습니다!");
-
-                var rewardData = ServerData.bossServerTable.TableDatas["b68"];
-
-                if (string.IsNullOrEmpty(rewardData.score.Value))
-                {
-                    rewardData.score.Value = "1";
-                }
-                else
-                {
-                    int prefScore = int.Parse(rewardData.score.Value);
-
-                    prefScore++;
-
-                    rewardData.score.Value = prefScore.ToString();
-                }
-
-                ServerData.bossServerTable.UpdateData("b68");
+                
+                SendRecommendById("b68");
+                //SendRecommendById("b176");
+                
+                // var rewardData = ServerData.bossServerTable.TableDatas["b68"];
+                //
+                // if (string.IsNullOrEmpty(rewardData.score.Value))
+                // {
+                //     rewardData.score.Value = "1";
+                // }
+                // else
+                // {
+                //     int prefScore = int.Parse(rewardData.score.Value);
+                //
+                //     prefScore++;
+                //
+                //     rewardData.score.Value = prefScore.ToString();
+                // }
+                //
+                // ServerData.bossServerTable.UpdateData("b68");
             }
         }
     }

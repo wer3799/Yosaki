@@ -116,7 +116,9 @@ public class UiContentsExitButton : MonoBehaviour
             case GameManager.ContentsType.TestDo:
             case GameManager.ContentsType.TestSumi:
             case GameManager.ContentsType.TestThief:
+            case GameManager.ContentsType.TestDark:
             case GameManager.ContentsType.RelicTest:
+            case GameManager.ContentsType.MeditationTower:
                 return true;
             case GameManager.ContentsType.TwelveDungeon:
             {

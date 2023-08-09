@@ -137,9 +137,9 @@ public class UiFoxFirePassSystem : FancyScrollView<FoxFirePassData_Fancy>
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
 
-                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
                 {
-                    rewardTypeList.Add(tableData[i].Reward1);
+                    rewardTypeList.Add(tableData[i].Reward2);
                 }
 
                 rewardedNum++;

@@ -19,6 +19,7 @@ public class UserInfoTable_2
     public const string doGodScore = "dokebiGodScore";
     public const string sumiGodScore = "sumiGodScore";
     public const string thiefGodScore = "thiefGodScore";
+    public const string darkGodScore = "darkGodScore";
     public const string relicTestScore = "relicTestScore";
     public const string GangChulReset = "GangChulReset";
     public const string stagePassFree = "stagePassFree";
@@ -65,6 +66,11 @@ public class UserInfoTable_2
     public const string getDragonBracelet = "gdb";
     
     public const string guimoonRelicStart = "grs";
+    public const string meditationStart = "ms";
+    public const string meditationStartTime = "mst";
+    public const string meditationIndex = "msi";
+    public const string meditationTowerRewardIndex = "msti";
+    public const string meditationTowerScore = "msts";
     
     public const string usedGuimoonRelicTicket = "ugrt";
 
@@ -72,6 +78,8 @@ public class UserInfoTable_2
     public const string transTowerStart = "tts";
     public const string eventMiniGameScore_TopRate = "emgstr";
     public const string eventMiniGameScore_Total = "emgst";
+    
+    public const string getRelicUpgrade = "gru";
     
     
     public bool isInitialize = false;
@@ -93,6 +101,7 @@ public class UserInfoTable_2
         { doGodScore, 0f },
         { sumiGodScore, 0f },
         { thiefGodScore, 0f },
+        { darkGodScore, 0f },
         { relicTestScore, 0f },
         { foxFirePassKill, 0f },
         { dosulPassKill, 0f },
@@ -119,8 +128,14 @@ public class UserInfoTable_2
         { visionTowerScore, 0f },
         { getDragonBracelet, 0f },
         { guimoonRelicStart, 0f },
+        { meditationStart, 0f },
+        { meditationStartTime, -1f },
+        { meditationIndex, -1f },
+        { meditationTowerRewardIndex, 0f },
+        { meditationTowerScore, 0f },
         { usedGuimoonRelicTicket, 0f },
-        
+        { getRelicUpgrade, 0f },
+
         { transTowerIdx, 0f },
         { transTowerStart, 0f },
         { eventMiniGameScore_TopRate, 0f },

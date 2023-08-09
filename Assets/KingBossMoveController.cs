@@ -47,6 +47,7 @@ public class KingBossMoveController : MonoBehaviour
 
     private void OnDisable()
     {
+        StopMove();
         if (moveCoroutine != null)
         {
             StopCoroutine(moveCoroutine);
@@ -116,12 +117,24 @@ public class KingBossMoveController : MonoBehaviour
                 initialized = true;
             }
         }
+        //펫기반보스
         else if (_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165)
         {
             isMoving = true;
 
             SetMoveDir(playerTr.position - transform.position);
             _skeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+            if (initialized == false)
+            {
+                initialized = true;
+            }
+        }
+        //인간형기반보스
+        else if (_bossId == 174||_bossId == 175)
+        {
+            isMoving = true;
+
+            SetMoveDir(playerTr.position - transform.position);
             if (initialized == false)
             {
                 initialized = true;
@@ -156,7 +169,7 @@ public class KingBossMoveController : MonoBehaviour
             }
         }
 
-         else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165)
+         else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175)
          {
              if (isMoving)
              {
@@ -181,6 +194,10 @@ public class KingBossMoveController : MonoBehaviour
             {
                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 3 : -3, 3, 1);   
             }
+            else if(_bossId == 174||_bossId == 175)
+            {
+                viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 1 : -1, 1, 1);   
+            }
             else
             {
                 viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
@@ -199,6 +216,8 @@ public class KingBossMoveController : MonoBehaviour
     {
         moveCoroutine = StartCoroutine(MoveAttackToPlayerVer2());
     }
+
+
 
     private IEnumerator MoveAttackToPlayer()
     {

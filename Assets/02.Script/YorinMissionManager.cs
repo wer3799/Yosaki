@@ -49,6 +49,9 @@ public enum YorinMissionKey
     YMission7_3, //FeedGyungong,
     YMission7_4, //PlayTower1_30,
     YMission7_5, //PlayCave
+    
+    YMission1_9, //뽑기레벨
+    YMission2_7 //기술흡수
 
 
 }

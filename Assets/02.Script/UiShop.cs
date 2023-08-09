@@ -506,6 +506,18 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
                 }
                 break;  
+            case Item_Type.MeditationGoods:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value += amount;
+                    param.Add(GoodsTable.MeditationGoods, ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value);
+                }
+                break;  
+            case Item_Type.MeditationClearTicket:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += amount;
+                    param.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
+                }
+                break;  
             case Item_Type.EventDice:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
@@ -938,6 +950,30 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill7).Value += amount;
                 param.Add(GoodsTable.VisionSkill7, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill7).Value);
+            }
+                break;
+            case Item_Type.VisionSkill8:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill8).Value += amount;
+                param.Add(GoodsTable.VisionSkill8, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill8).Value);
+            }
+                break;
+            case Item_Type.VisionSkill9:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill9).Value += amount;
+                param.Add(GoodsTable.VisionSkill9, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill9).Value);
+            }
+                break;
+            case Item_Type.VisionSkill10:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).Value += amount;
+                param.Add(GoodsTable.VisionSkill10, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).Value);
+            }
+                break;
+            case Item_Type.VisionSkill11:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value += amount;
+                param.Add(GoodsTable.VisionSkill11, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value);
             }
                 break;
  

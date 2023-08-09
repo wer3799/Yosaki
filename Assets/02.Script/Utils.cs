@@ -175,7 +175,12 @@ public static class Utils
                type == Item_Type.costume141||
                type == Item_Type.costume142||
                type == Item_Type.costume143||
-               type == Item_Type.costume144
+               type == Item_Type.costume144||
+               type == Item_Type.costume145||
+               type == Item_Type.costume146||
+               type == Item_Type.costume147||
+               type == Item_Type.costume148||
+               type == Item_Type.costume149
             ;
     }
 
@@ -355,6 +360,10 @@ public static class Utils
                type == Item_Type.SpecialSuhoPet5 ||
                type == Item_Type.SpecialSuhoPet6 ||
                type == Item_Type.SpecialSuhoPet7 ||
+               type == Item_Type.SpecialSuhoPet8 ||
+               type == Item_Type.SpecialSuhoPet9 ||
+               // type == Item_Type.SpecialSuhoPet10 ||
+               // type == Item_Type.SpecialSuhoPet11||
                type == Item_Type.RabitPet ||
                type == Item_Type.RabitNorigae ||
                type == Item_Type.YeaRaeNorigae ||
@@ -442,6 +451,8 @@ public static class Utils
                type == Item_Type.FoxRelic ||
                type == Item_Type.FoxRelicClearTicket ||
                type == Item_Type.TransClearTicket ||
+               type == Item_Type.MeditationGoods ||
+               type == Item_Type.MeditationClearTicket ||
                type == Item_Type.NewGachaEnergy ||
                type == Item_Type.EventDice ||
                type == Item_Type.Event_SA ||
@@ -714,7 +725,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","미정2","미정3","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","미정3","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16",
         
     };
 

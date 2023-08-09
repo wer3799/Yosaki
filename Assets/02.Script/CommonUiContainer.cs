@@ -154,6 +154,8 @@ public Sprite HyunSangWeapon2;
 public Sprite HyunSangWeapon3;
 public Sprite HyunSangWeapon4;
 public Sprite HyunSangWeapon5;
+public Sprite HyunSangWeapon6;
+public Sprite HyunSangWeapon7;
     
 [Header ("Weapon_View")]
 
@@ -273,6 +275,8 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae3;
     public Sprite HyunSangNorigae4;
     public Sprite HyunSangNorigae5;
+    public Sprite HyunSangNorigae6;
+    public Sprite HyunSangNorigae7;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -284,6 +288,7 @@ public Sprite RecommendWeapon22;
     public Sprite MonthNorigae6;
     public Sprite MonthNorigae7;
     public Sprite MonthNorigae8;
+    public Sprite RecommendNorigae0;
     
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -347,6 +352,10 @@ public Sprite RecommendWeapon22;
     public Sprite SpecialSuhoPet5;
     public Sprite SpecialSuhoPet6;
     public Sprite SpecialSuhoPet7;
+    public Sprite SpecialSuhoPet8;
+    public Sprite SpecialSuhoPet9;
+    public Sprite SpecialSuhoPet10;
+    public Sprite SpecialSuhoPet11;
 
 
     [Header ("Skill")]
@@ -390,6 +399,10 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill5;
     public Sprite VisionSkill6;
     public Sprite VisionSkill7;
+    public Sprite VisionSkill8;
+    public Sprite VisionSkill9;
+    public Sprite VisionSkill10;
+    public Sprite VisionSkill11;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -476,6 +489,8 @@ public Sprite RecommendWeapon22;
     public Sprite FoxRelic;
     public Sprite FoxRelicClearTicket;
     public Sprite TransClearTicket;
+    public Sprite MeditationGoods;
+    public Sprite MeditationClearTicket;
     [Header ("Goods_Event")]
     public Sprite Songpyeon;
     public Sprite EventCollection;
@@ -928,6 +943,16 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[143];
             case Item_Type.costume144:
                 return costumeThumbnail[144];
+            case Item_Type.costume145:
+                return costumeThumbnail[145];
+            case Item_Type.costume146:
+                return costumeThumbnail[146];
+            case Item_Type.costume147:
+                return costumeThumbnail[147];
+            case Item_Type.costume148:
+                return costumeThumbnail[148];
+            case Item_Type.costume149:
+                return costumeThumbnail[149];
 
 
             case Item_Type.RankFrame1:
@@ -1331,6 +1356,10 @@ public Sprite RecommendWeapon22;
                 return TransClearTicket;
             case Item_Type.Event_SA:
                 return Event_SA;
+            case Item_Type.MeditationGoods:
+                return MeditationGoods;
+            case Item_Type.MeditationClearTicket:
+                return MeditationClearTicket;
 
 
             case Item_Type.EventDice:
@@ -1659,6 +1688,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae4;
             case Item_Type.HyunSangNorigae5:
                 return HyunSangNorigae5;
+            case Item_Type.HyunSangNorigae6:
+                return HyunSangNorigae6;
+            case Item_Type.HyunSangNorigae7:
+                return HyunSangNorigae7;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -1682,6 +1715,8 @@ public Sprite RecommendWeapon22;
                 return MonthNorigae7;
             case Item_Type.MonthNorigae8:
                 return MonthNorigae8;
+            case Item_Type.RecommendNorigae0:
+                return RecommendNorigae0;
             //
             //
             case Item_Type.DokebiHorn0:
@@ -1876,6 +1911,14 @@ public Sprite RecommendWeapon22;
                 return SpecialSuhoPet6;
             case Item_Type.SpecialSuhoPet7:
                 return SpecialSuhoPet7;
+            case Item_Type.SpecialSuhoPet8:
+                return SpecialSuhoPet8;
+            case Item_Type.SpecialSuhoPet9:
+                return SpecialSuhoPet9;
+            // case Item_Type.SpecialSuhoPet10:
+            //     return SpecialSuhoPet10;
+            // case Item_Type.SpecialSuhoPet11:
+            //     return SpecialSuhoPet11;
 
 
 
@@ -2083,6 +2126,14 @@ public Sprite RecommendWeapon22;
                 return VisionSkill6;
             case Item_Type.VisionSkill7:
                 return VisionSkill7;
+            case Item_Type.VisionSkill8:
+                return VisionSkill8;
+            case Item_Type.VisionSkill9:
+                return VisionSkill9;
+            case Item_Type.VisionSkill10:
+                return VisionSkill10;
+            case Item_Type.VisionSkill11:
+                return VisionSkill11;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2294,6 +2345,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangWeapon4;
             case Item_Type.HyunSangWeapon5:
                 return HyunSangWeapon5;
+            case Item_Type.HyunSangWeapon6:
+                return HyunSangWeapon6;
+            case Item_Type.HyunSangWeapon7:
+                return HyunSangWeapon7;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

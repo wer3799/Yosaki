@@ -460,6 +460,57 @@ public class UiMileageRefund : MonoBehaviour
             }
 
         }
+        //귀문소탕권
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.RefundIdx).Value < 6)
+        {
+           
+            ServerData.userInfoTable.GetTableData(UserInfoTable.RefundIdx).Value++;
+
+            int package1Count = 0;
+            int package2Count = 0;
+
+            package1Count = ServerData.iAPServerTableTotal.TableDatas["weeklyringpackage"].buyCount.Value;
+            package2Count = ServerData.iAPServerTableTotal.TableDatas["ringpackage2"].buyCount.Value;
+
+            if (package1Count == 0 && package2Count == 0)
+            {
+                ServerData.userInfoTable.UpData(UserInfoTable.RefundIdx, false);
+            }
+            else
+            {
+                
+                int amount1 = 5 * package1Count;
+            
+                if (package1Count > 0)
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SoulRingClear).Value += amount1;
+                }
+            
+                int amount2 = 10 * package2Count;
+            
+                if (package2Count > 0)
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.SoulRingClear).Value += amount2;
+                }
+
+                List<TransactionValue> transactions = new List<TransactionValue>();
+
+                Param goodsParam = new Param();
+                goodsParam.Add(GoodsTable.SoulRingClear, ServerData.goodsTable.GetTableData(GoodsTable.SoulRingClear).Value);
+
+                Param userInfoParam = new Param();
+                userInfoParam.Add(UserInfoTable.RefundIdx, ServerData.userInfoTable.GetTableData(UserInfoTable.RefundIdx).Value);
+
+                transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+                transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+                ServerData.SendTransactionV2(transactions, successCallBack: () =>
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"영혼석 소탕권 세트 {CommonString.GetItemName(Item_Type.SoulRingClear)} {amount1+amount2}개 소급 완료!\n", null);
+                });
+            }
+
+        }
         else
         {
             return;

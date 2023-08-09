@@ -833,6 +833,12 @@ public class ColdSeasonPassServerTable
 
     public static string secondAccumul = "f14";
     public static string secondTop = "a14";
+    
+    public static string soulFree = "f15";
+    public static string soulAd = "a15";
+    
+    public static string peachFree = "f16";
+    public static string peachAd = "a16";
 
     public static string coldseasonFree_Atten = "fa2";
 
@@ -861,6 +867,10 @@ public class ColdSeasonPassServerTable
         { guimoonAd,string.Empty},
         { secondAccumul,string.Empty},
         { secondTop,string.Empty},
+        { soulFree,string.Empty},
+        { soulAd,string.Empty},
+        { peachFree,string.Empty},
+        { peachAd,string.Empty},
 
     };
 

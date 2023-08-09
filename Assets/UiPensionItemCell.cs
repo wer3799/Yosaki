@@ -291,6 +291,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             return Item_Type.GuimoonRelicClearTicket;
         }
+        else if (key == "meditationpension")
+        {
+            return Item_Type.MeditationClearTicket;
+        }
         else
         {
             return Item_Type.SmithFire;

@@ -355,6 +355,7 @@ public static class GameBalance
     public static ObscuredFloat FoxTowerTicketDailyGetAmount = 2; // 
     public static ObscuredFloat SealSwordTicketDailyGetAmount = 4; // 
     public static ObscuredFloat GuimoonTicketDailyGetAmount = 4; // 
+    public static ObscuredFloat MeditationTicketDailyGetAmount = 2; // 심득 
     public static ObscuredInt TransTicketWeeklyGetAmount = 3; // 
     
     public static ObscuredFloat GuildTowerChimAbilUpValue = 0.01f; // 
@@ -422,20 +423,23 @@ public static class GameBalance
     public static ObscuredInt chunGodGraduate = 4;
     public static ObscuredInt doGodGraduate = 5;
     public static ObscuredInt sumiGodGraduate = 6;
+    public static ObscuredInt darkGodGraduate = 7;
     
     public static ObscuredFloat swordGodGraduateValue = 1.5f;
     public static ObscuredFloat monkeyGodGraduateValue = 1.3f;
     public static ObscuredFloat hellGodGraduateValue = 1.15f;
     public static ObscuredFloat chunGodGraduateValue = 1.2f;
-    public static ObscuredFloat doGodGraduateValue = 2f;
+    public static ObscuredFloat doGodGraduateValue = 1.25f;
     public static ObscuredFloat sumiGodGraduateValue = 2f;
+    public static ObscuredFloat darkGodGraduateValue = 2f;
         
     public static ObscuredDouble swordGodGraduateScore = 2E+122;
     public static ObscuredDouble monkeyGodGraduateScore = 5E+122;
     public static ObscuredDouble hellGodGraduateScore = 1E+124;
     public static ObscuredDouble chunGodGraduateScore = 1E+127;
-    public static ObscuredDouble doGodGraduateScore = 1E+119;
-    public static ObscuredDouble sumiGodGraduateScore = 1E+119;
+    public static ObscuredDouble doGodGraduateScore = 1E+129;
+    public static ObscuredDouble sumiGodGraduateScore = 5E+131;
+    public static ObscuredDouble darkGodGraduateScore = 5E+133;
     //
     
     public static ObscuredDouble refundGoldBarRatio = 1E+34; //보유금화환불단위
@@ -472,7 +476,7 @@ public static class GameBalance
     public static ObscuredFloat batterySafeCount = 100f; // 절전모드
 
     //사흉구슬
-    public static ObscuredFloat sahyungUpgradeValue = 0.03f;
+    public static ObscuredFloat sahyungUpgradeValue = 0.05f;
     //사신수구슬
     public static ObscuredFloat sinsuUpgradeValue = 0.15f;
     //천구재화
@@ -491,6 +495,11 @@ public static class GameBalance
     public static ObscuredFloat newLowGyungRockAwakeValue = 0.5f;
 
     public static ObscuredDouble GoldLimit = 1E+38;// 해당금화 이상 소지시 휴식보상 받을수없음.
+    
+    public static ObscuredFloat GetSoulRingUpgradePrice = 10000f;// 강화비용
+    public static ObscuredFloat GetSoulRingAdReward = 4000f;// 광고보상
+
+    public static ObscuredInt MeditationHour = 24;// 명상시간
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

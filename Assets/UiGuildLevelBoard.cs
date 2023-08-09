@@ -4,6 +4,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public enum guildLevelType
 {
@@ -55,6 +56,7 @@ public class UiGuildLevelBoard : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
+            if(tableData[i].Guildname.IsNullOrEmpty()==false) continue;
             description += $"명성 : {tableData[i].Needamount}\n<color=yellow>{tableData[i].Description}</color>\n\n";
         }
 

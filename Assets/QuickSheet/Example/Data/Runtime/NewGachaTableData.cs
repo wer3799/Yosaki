@@ -120,4 +120,8 @@ public class NewGachaTableData
   int displayorder;
   public int Displayorder { get {return displayorder; } set { this.displayorder = value;} }
   
+  [SerializeField]
+  float exchage;
+  public float Exchage { get {return exchage; } set { this.exchage = value;} }
+  
 }

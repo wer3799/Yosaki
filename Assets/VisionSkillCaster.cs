@@ -71,5 +71,26 @@ public class  VisionSkillCaster : SingletonMono<VisionSkillCaster>
         }
 
     }
+    
+    
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlayerSkillCaster.Instance.UseSkill(142);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlayerSkillCaster.Instance.UseSkill(157);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            PlayerSkillCaster.Instance.UseSkill(158);
+        }
+    }
+#endif
 
 }

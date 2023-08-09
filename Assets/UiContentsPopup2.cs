@@ -44,6 +44,7 @@ public class UiContentsPopup2 : MonoBehaviour
         VisionTowerBoard,
         SinSkillBoard,
         TransBoard,
+        NewBossBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -87,6 +88,7 @@ public class UiContentsPopup2 : MonoBehaviour
         FoxStory,
         Sangun,
         Chungu,
+        NewBoss,
         
     }
     //삼천세계 
@@ -363,6 +365,8 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 169:
                     case 170:
                     case 171:
+                    case 172:
+                    case 173:
                         lastBoards[(int)ContentsBoard.HyunSangBoard].SetActive(true);
                         break;
                     
@@ -372,6 +376,12 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 165:
                     case 166:
                         lastBoards[(int)ContentsBoard.ChunGuBoard].SetActive(true);
+                        break;
+                    case 174:
+                    case 175:
+                    case 176:
+                    case 177:
+                        lastBoards[(int)ContentsBoard.NewBossBoard].SetActive(true);
                         break;
                         
                 }
@@ -416,6 +426,7 @@ public class UiContentsPopup2 : MonoBehaviour
             case GameManager.ContentsType.TestDo:
             case GameManager.ContentsType.TestSumi:
             case GameManager.ContentsType.TestThief:
+            case GameManager.ContentsType.TestDark:
                 lastBoards[(int)ContentsBoard.GodTrialBoard].SetActive(true);
                 break;
             case GameManager.ContentsType.GradeTest:
@@ -646,6 +657,12 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newBossDoors[(int)BossChallengeDoor.Chungu].SetActive(e == 1);
             oldBossDoors[(int)BossChallengeDoor.Chungu].SetActive(e == 1);
+        }).AddTo(this);;
+        
+        SettingData.showNewBossUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.NewBoss].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.NewBoss].SetActive(e == 1);
         }).AddTo(this);;
         
         ///////삼천세계

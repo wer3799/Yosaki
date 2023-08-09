@@ -513,6 +513,13 @@ public enum Item_Type
     costume142 = 1442, // 현상수배     
     costume143 = 1443, // 이벤트     
     costume144 = 1444, //      월간
+    costume145 = 1445, // 현상수배     
+    costume146 = 1446, // 현상수배     
+
+    costume147 = 1447, // 수인     
+    costume148 = 1448, // 수인     
+    
+    costume149 = 1449, // 투명     
 
 
     gumiho0 = 5000,
@@ -747,6 +754,8 @@ public enum Item_Type
     HyunSangWeapon3 = 7243,
     HyunSangWeapon4 = 7244,
     HyunSangWeapon5 = 7245,
+    HyunSangWeapon6 = 7246,
+    HyunSangWeapon7 = 7247,
     
     HyunSangNorigae0 = 7250,
     HyunSangNorigae1 = 7251,
@@ -754,11 +763,19 @@ public enum Item_Type
     HyunSangNorigae3 = 7253,
     HyunSangNorigae4 = 7254,
     HyunSangNorigae5 = 7255,
+    HyunSangNorigae6 = 7256,
+    HyunSangNorigae7 = 7257,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
     ChunGuPet2 = 7602,
     ChunGuPet3 = 7603,
+    
+    SpecialSuhoPet8 = 7604,
+    SpecialSuhoPet9 = 7605,
+    // SpecialSuhoPet10 = 7606,
+    // SpecialSuhoPet11 = 7607,
+    
     
     pet52 = 7700, //이벤트펫
 
@@ -804,6 +821,7 @@ public enum Item_Type
     MonthNorigae7 = 8609, // 월간노리개
     MonthNorigae8 = 8610, // 월간노리개
     weapon131 = 8611,//2주년무기
+    RecommendNorigae0 = 8612, // 투명노리개
 
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
@@ -850,6 +868,11 @@ public enum Item_Type
     DarkSkill3 = 8748,
     DarkSkill4 = 8749,
     
+    VisionSkill8 = 8750,//비전
+    VisionSkill9 = 8751,//비전
+    VisionSkill10 = 8752,//비전
+    VisionSkill11 = 8753,//비전
+
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량
     
@@ -902,6 +925,8 @@ public enum Item_Type
     TransGoods = 9040,
     TransClearTicket = 9041,
     Event_SA = 9042,
+    MeditationGoods = 9043,
+    MeditationClearTicket = 9044,
 }
 //
 public class DropItem : PoolItem

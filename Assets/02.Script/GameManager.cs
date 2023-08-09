@@ -83,6 +83,8 @@ public class GameManager : SingletonMono<GameManager>
         HyunSangTower,
         TransTower,
         GyungRockTower4,
+        MeditationTower,
+        TestDark,
     }
     
     public bool SpawnMagicStone => IsNormalField;

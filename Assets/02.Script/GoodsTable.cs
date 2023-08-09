@@ -167,6 +167,10 @@ public class GoodsTable
     public static string VisionSkill5 = "VisionSkill5";
     public static string VisionSkill6 = "VisionSkill6";
     public static string VisionSkill7 = "VisionSkill7";
+    public static string VisionSkill8 = "VisionSkill8";
+    public static string VisionSkill9 = "VisionSkill9";
+    public static string VisionSkill10 = "VisionSkill10";
+    public static string VisionSkill11 = "VisionSkill11";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -231,6 +235,8 @@ public class GoodsTable
     public static string FoxRelic = "FR";
     public static string FoxRelicClearTicket = "FRCT";
     public static string TransClearTicket = "TCT";
+    public static string MeditationGoods = "MG";
+    public static string MeditationClearTicket = "MCT";
 
     public static string EventDice = "EventDice";
     public static string Event_SA = "EventSA";
@@ -393,6 +399,11 @@ public class GoodsTable
         { VisionSkill5, 0f },
         { VisionSkill6, 0f },
         { VisionSkill7, 0f },
+        
+        { VisionSkill8, 0f },
+        { VisionSkill9, 0f },
+        { VisionSkill10, 0f },
+        { VisionSkill11, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -455,6 +466,8 @@ public class GoodsTable
         { FoxRelic, 0f },
         { FoxRelicClearTicket, 0f },
         { TransClearTicket, 0f },
+        { MeditationGoods, 0f },
+        { MeditationClearTicket, 0f },
 
         { EventDice, 0f },
         { Event_SA, 0f },
@@ -1456,6 +1469,22 @@ public class GoodsTable
             {
                 return GoodsTable.VisionSkill7;
             }
+            case Item_Type.VisionSkill8:
+            {
+                return GoodsTable.VisionSkill8;
+            }
+            case Item_Type.VisionSkill9:
+            {
+                return GoodsTable.VisionSkill9;
+            }
+            case Item_Type.VisionSkill10:
+            {
+                return GoodsTable.VisionSkill10;
+            }
+            case Item_Type.VisionSkill11:
+            {
+                return GoodsTable.VisionSkill11;
+            }
 
             //
             //            //
@@ -1623,6 +1652,14 @@ public class GoodsTable
             case Item_Type.TransClearTicket:
             {
                 return GoodsTable.TransClearTicket;
+            }
+            case Item_Type.MeditationGoods:
+            {
+                return GoodsTable.MeditationGoods;
+            }
+            case Item_Type.MeditationClearTicket:
+            {
+                return GoodsTable.MeditationClearTicket;
             }
 
             case Item_Type.EventDice:
@@ -2095,6 +2132,22 @@ public class GoodsTable
         {
             return Item_Type.VisionSkill7;
         }
+        else if (GoodsTable.VisionSkill8 == type)
+        {
+            return Item_Type.VisionSkill8;
+        }
+        else if (GoodsTable.VisionSkill9 == type)
+        {
+            return Item_Type.VisionSkill9;
+        }
+        else if (GoodsTable.VisionSkill10 == type)
+        {
+            return Item_Type.VisionSkill10;
+        }
+        else if (GoodsTable.VisionSkill11 == type)
+        {
+            return Item_Type.VisionSkill11;
+        }
 
         // //
         else if (GoodsTable.ThiefSkill0 == type)
@@ -2280,6 +2333,14 @@ public class GoodsTable
         else if (GoodsTable.TransClearTicket == type)
         {
             return Item_Type.TransClearTicket;
+        }
+        else if (GoodsTable.MeditationGoods == type)
+        {
+            return Item_Type.MeditationGoods;
+        }
+        else if (GoodsTable.MeditationClearTicket == type)
+        {
+            return Item_Type.MeditationClearTicket;
         }
         else if (GoodsTable.EventDice == type)
         {

@@ -49,6 +49,10 @@ public class UiGodTrialBoard : MonoBehaviour
             {
                 selectableTab.OnSelect(6);
             }
+            else if (GameManager.Instance.lastContentsType == GameManager.ContentsType.TestDark)
+            {
+                selectableTab.OnSelect(7);
+            }
         }
 
     }

@@ -866,6 +866,12 @@ public class TableManager : SingletonMono<TableManager>
     public GuimoonPass GuimoonPass;
     public TransTowerTable TransTowerTable;
     public SecondMiniGame SecondMiniGame;
+    public RelicUpgrade RelicUpgrade;
+    public Meditation Meditation;
+    public MeditationTower MeditationTower;
+    public TestDark TestDark;
+    public SoulPass SoulPass;
+    public PeachPass PeachPass;
     
     
     private Dictionary<int, SealSwordData> sealSwordData = null;

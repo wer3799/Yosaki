@@ -94,7 +94,7 @@ public class SeletableTab : MonoBehaviour
             {
                 tabs[i].color = i == select ? enableColor : disableColor;
             }
-
+            
             objects[i].gameObject.SetActive(i == select);
         }
     }

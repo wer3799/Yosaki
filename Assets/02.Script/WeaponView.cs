@@ -51,6 +51,10 @@ public class WeaponView : MonoBehaviour
     [SerializeField]
     private UIShiny uishiny;
 
+    [SerializeField]
+    private bool IsGachaCell = false;
+
+
     public void Initialize(WeaponData weaponData, MagicBookData magicBookData, SkillTableData skillData = null, NewGachaTableData newGachaData = null, SealSwordData sealSwordData = null)
     {
         weaponMagicBookObject.SetActive(skillData == null);
@@ -145,6 +149,7 @@ public class WeaponView : MonoBehaviour
                         gradeNumText.SetText($"<color=blue>청룡</color>");
                     }
                 }
+
                 if (gradeNumObject != null)
                 {
                     gradeNumObject.SetActive(true);
@@ -167,6 +172,7 @@ public class WeaponView : MonoBehaviour
                 {
                     gradeNumObject.SetActive(true);
                 }
+
                 gradeNumText.SetText($"{gradeText}등급");
             }
             else
@@ -204,25 +210,28 @@ public class WeaponView : MonoBehaviour
 
         bg.sprite = CommonUiContainer.Instance.itemGradeFrame[grade];
 
-        if (weaponData != null)
+        if (IsGachaCell == false)
         {
-            SubscribeWeapon();
-        }
-        else if (magicBookData != null)
-        {
-            SubscribeMagicBook();
-        }
-        else if (skillData != null)
-        {
-            SubscribeSkill();
-        }
-        else if (newGachaData != null)
-        {
-            SubscribeNewGacha();
-        }
-        else
-        {
-            SubscribeSealSword();
+            if (weaponData != null)
+            {
+                SubscribeWeapon();
+            }
+            else if (magicBookData != null)
+            {
+                SubscribeMagicBook();
+            }
+            else if (skillData != null)
+            {
+                SubscribeSkill();
+            }
+            else if (newGachaData != null)
+            {
+                SubscribeNewGacha();
+            }
+            else
+            {
+                SubscribeSealSword();
+            }
         }
 
         //uishiny.width = ((float)grade / 3f) * 0.6f;
@@ -286,7 +295,7 @@ public class WeaponView : MonoBehaviour
 
     private void WhenCountChanged(int amount)
     {
-        UpdateAmountText();
+            UpdateAmountText();
     }
 
     private void UpdateAmountText()
