@@ -168,6 +168,12 @@ public class UiMeditationBoard : MonoBehaviour
                     $"{CommonString.GetItemName(Item_Type.MeditationGoods)} {lastMinute * multiplyCost}개를 사용하여 즉시 완료하시겠습니까? ",
                     () =>
                     {
+                        if (ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value < lastMinute * multiplyCost)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.MeditationGoods)}이 부족합니다.");
+                            return;
+                        }
+                        
                         //두번 타는거 방지용
                         if (timeRemaining.TotalSeconds < 0)
                         {
