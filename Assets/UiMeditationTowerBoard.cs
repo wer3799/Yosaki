@@ -10,7 +10,6 @@ using static UiRewardView;
 
 public class UiMeditationTowerBoard : MonoBehaviour
 {
-    
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [SerializeField]
@@ -20,7 +19,7 @@ public class UiMeditationTowerBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI currentStageText_Real;
 
-    
+
     // [SerializeField]
     // private GameObject normalRoot;
     //
@@ -32,7 +31,8 @@ public class UiMeditationTowerBoard : MonoBehaviour
 
     private void Start()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value * GameBalance.BossScoreConvertToOrigin)}");    }
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+    }
 
     void OnEnable()
     {
@@ -52,7 +52,15 @@ public class UiMeditationTowerBoard : MonoBehaviour
         if (IsAllClear() == false)
         {
             int currentFloor = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationTowerRewardIndex).Value;
-            currentStageText_Real.SetText($"현재 {currentFloor}층");
+
+            if (currentFloor != -1)
+            {
+                currentStageText_Real.SetText($"현재 {currentFloor + 1}층");
+            }
+            else
+            {
+                currentStageText_Real.SetText($"기록 없음");
+            }
         }
     }
 
@@ -73,6 +81,11 @@ public class UiMeditationTowerBoard : MonoBehaviour
                 return;
             }
 
+            if (currentFloor == -1)
+            {
+                currentFloor = 0;
+            }
+
             var towerTableData = TableManager.Instance.MeditationTower.dataArray[currentFloor];
 
             uiTowerRewardView.UpdateRewardView(towerTableData.Id);
@@ -86,7 +99,7 @@ public class UiMeditationTowerBoard : MonoBehaviour
 
     public void OnClickInstantClearButton()
     {
-        int currentClearStageId = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationTowerRewardIndex).Value - 1;
+        int currentClearStageId = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationTowerRewardIndex).Value;
 
         if (currentClearStageId < 0)
         {
@@ -123,69 +136,69 @@ public class UiMeditationTowerBoard : MonoBehaviour
 
 
         int instantClearGetNum = (int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue * inputNum;
-    
+
         string desc = "";
         desc +=
             $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum}개를 획득 하시겠습니까?\n" +
             $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.MeditationGoods)} {(int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue}개 획득)</color>";
-    
-    
+
+
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-        desc,
-        () =>
-        {
-            int remainItemNum = (int)ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value;
-    
-            if (remainItemNum <= 0)
+            desc,
+            () =>
             {
-                PopupManager.Instance.ShowAlarmMessage(
-                    $"{CommonString.GetItemName(Item_Type.MeditationClearTicket)}이 없습니다.");
-    
-                return;
-            }
-    
-            if (int.TryParse(instantClearNum.text, out var inputNum))
-            {
-                if (inputNum == 0)
+                int remainItemNum = (int)ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value;
+
+                if (remainItemNum <= 0)
+                {
+                    PopupManager.Instance.ShowAlarmMessage(
+                        $"{CommonString.GetItemName(Item_Type.MeditationClearTicket)}이 없습니다.");
+
+                    return;
+                }
+
+                if (int.TryParse(instantClearNum.text, out var inputNum))
+                {
+                    if (inputNum == 0)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
+                        return;
+                    }
+                    else if (remainItemNum < inputNum)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage(
+                            $"{CommonString.GetItemName(Item_Type.MeditationClearTicket)}이 부족합니다!");
+                        return;
+                    }
+                }
+                else
                 {
                     PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
                     return;
                 }
-                else if (remainItemNum < inputNum)
-                {
-                    PopupManager.Instance.ShowAlarmMessage(
-                        $"{CommonString.GetItemName(Item_Type.MeditationClearTicket)}이 부족합니다!");
-                    return;
-                }
-            }
-            else
-            {
-                PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
-                return;
-            }
-    
-            //실제소탕
-            ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value -= inputNum;
-            ServerData.goodsTable.TableDatas[GoodsTable.MeditationGoods].Value += instantClearGetNum;
-    
-            List<TransactionValue> transactions = new List<TransactionValue>();
-    
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value);
-            goodsParam.Add(GoodsTable.MeditationGoods, ServerData.goodsTable.TableDatas[GoodsTable.MeditationGoods].Value);
-    
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-    
-            ServerData.SendTransactionV2(transactions,
-                successCallBack: () =>
-                {
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum}개 획득!", null);
-                });
-        }, null);
-     }
-    
-    #if UNITY_EDITOR
+
+                //실제소탕
+                ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value -= inputNum;
+                ServerData.goodsTable.TableDatas[GoodsTable.MeditationGoods].Value += instantClearGetNum;
+
+                List<TransactionValue> transactions = new List<TransactionValue>();
+
+                Param goodsParam = new Param();
+                goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value);
+                goodsParam.Add(GoodsTable.MeditationGoods, ServerData.goodsTable.TableDatas[GoodsTable.MeditationGoods].Value);
+
+                transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+                ServerData.SendTransactionV2(transactions,
+                    successCallBack: () =>
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum}개 획득!", null);
+                    });
+            }, null);
+    }
+
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

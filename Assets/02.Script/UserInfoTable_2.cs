@@ -80,6 +80,7 @@ public class UserInfoTable_2
     public const string eventMiniGameScore_Total = "emgst";
     
     public const string getRelicUpgrade = "gru";
+    public const string meditationRefund = "mr0";
     
     
     public bool isInitialize = false;
@@ -131,7 +132,7 @@ public class UserInfoTable_2
         { meditationStart, 0f },
         { meditationStartTime, -1f },
         { meditationIndex, -1f },
-        { meditationTowerRewardIndex, 0f },
+        { meditationTowerRewardIndex, -1f },
         { meditationTowerScore, 0f },
         { usedGuimoonRelicTicket, 0f },
         { getRelicUpgrade, 0f },
@@ -140,6 +141,7 @@ public class UserInfoTable_2
         { transTowerStart, 0f },
         { eventMiniGameScore_TopRate, 0f },
         { eventMiniGameScore_Total, 0f },
+        { meditationRefund, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
