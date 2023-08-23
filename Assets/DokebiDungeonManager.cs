@@ -63,7 +63,7 @@ public class DokebiDungeonManager : ContentsManagerBase
         GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearOni);
 
         //580미만은 600으로 고정 ->기기별 데미지 차이
-        if (enemyDeadCount.Value >= 570)
+        if (enemyDeadCount.Value >= 500)
         {
             enemyDeadCount.Value = 600;
         }
@@ -77,9 +77,12 @@ public class DokebiDungeonManager : ContentsManagerBase
 
     private IEnumerator EnemySpawnRoutine()
     {
-        WaitForSeconds interval = new WaitForSeconds(0.5f);
+        // WaitForSeconds interval = new WaitForSeconds(0.5f);
+        //
+        // yield return new WaitForSeconds(1.5f);
+        WaitForSeconds interval = new WaitForSeconds(0.08f);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.3f);
 
         while (true)
         {

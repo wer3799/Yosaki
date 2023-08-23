@@ -45,6 +45,7 @@ public class UiContentsPopup2 : MonoBehaviour
         SinSkillBoard,
         TransBoard,
         NewBossBoard,
+        DanjeonBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -69,6 +70,7 @@ public class UiContentsPopup2 : MonoBehaviour
         Fox,
         GodTest,
         TransBoard,
+        DanjeonBoard,
 
         
         
@@ -367,6 +369,7 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 171:
                     case 172:
                     case 173:
+                    case 177:
                         lastBoards[(int)ContentsBoard.HyunSangBoard].SetActive(true);
                         break;
                     
@@ -379,8 +382,8 @@ public class UiContentsPopup2 : MonoBehaviour
                         break;
                     case 174:
                     case 175:
-                    case 176:
-                    case 177:
+                    case 178:
+                    case 179:
                         lastBoards[(int)ContentsBoard.NewBossBoard].SetActive(true);
                         break;
                         
@@ -427,6 +430,7 @@ public class UiContentsPopup2 : MonoBehaviour
             case GameManager.ContentsType.TestSumi:
             case GameManager.ContentsType.TestThief:
             case GameManager.ContentsType.TestDark:
+            case GameManager.ContentsType.TestSin:
                 lastBoards[(int)ContentsBoard.GodTrialBoard].SetActive(true);
                 break;
             case GameManager.ContentsType.GradeTest:
@@ -475,6 +479,10 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.TransTower :
                 lastBoards[(int)ContentsBoard.TransBoard].SetActive(true);
+                break;
+
+            case GameManager.ContentsType.Danjeon :
+                lastBoards[(int)ContentsBoard.DanjeonBoard].SetActive(true);
                 break;
 
         }
@@ -594,6 +602,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newGrowthDoors[(int)GrowthContentsDoor.TransBoard].SetActive(e == 1);
             oldGrowthDoors[(int)GrowthContentsDoor.TransBoard].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDanjeon.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.DanjeonBoard].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.DanjeonBoard].SetActive(e == 1);
         }).AddTo(this);
         
         ////////////보스도전

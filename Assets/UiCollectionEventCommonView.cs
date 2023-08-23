@@ -50,7 +50,7 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        //Initialize();
         Subscribe();
     }
 
@@ -105,6 +105,42 @@ public class UiCollectionEventCommonView : MonoBehaviour
     private void Initialize()
     {
         tableData = TableManager.Instance.commoncollectionEvent.dataArray[tableId];
+
+        itemIcon.gameObject.SetActive(IsCostumeItem() == false);
+        skeletonGraphic.gameObject.SetActive(IsCostumeItem());
+
+        if (IsCostumeItem() == false)
+        {
+            price.SetText(Utils.ConvertBigNum(tableData.Price));
+        }
+
+        //스파인
+        if (IsCostumeItem())
+        {
+            string itemKey = ((Item_Type)tableData.Itemtype).ToString();
+            var idx = ServerData.costumeServerTable.TableDatas[itemKey].idx;
+            skeletonGraphic.Clear();
+            skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+            skeletonGraphic.Initialize(true);
+            skeletonGraphic.SetMaterialDirty();
+
+            var costumeTable = TableManager.Instance.Costume.dataArray[idx];
+
+            if (itemAmount_Costume != null)
+            {
+                itemAmount_Costume.SetText($"(능력치 슬롯{costumeTable.Slotnum}개)");
+            }
+        }
+
+        itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Itemtype);
+
+        itemAmount.SetText(Utils.ConvertBigNum(tableData.Itemvalue) + "개");
+
+        itemName.SetText(CommonString.GetItemName((Item_Type)tableData.Itemtype));
+    }
+    public void Initialize(int index)
+    {
+        tableData = TableManager.Instance.commoncollectionEvent.dataArray[index];
 
         itemIcon.gameObject.SetActive(IsCostumeItem() == false);
         skeletonGraphic.gameObject.SetActive(IsCostumeItem());

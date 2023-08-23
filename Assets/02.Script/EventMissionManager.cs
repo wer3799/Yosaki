@@ -6,6 +6,8 @@ public enum EventMissionType
     FIRST,
     SECOND,
     THIRD,
+    AFIRST,
+    BSECOND,
 }
 public enum EventMissionKey
 {
@@ -41,6 +43,20 @@ public enum EventMissionKey
     TMISSION9,//영혼석(반지)
     TMISSION10,//문파점수등록
     TMISSION11,//견공
+    
+    
+    AMISSION1,//문파점수
+    AMISSION2,//견공
+    AMISSION3,//십만대산
+
+    BMISSION1,//반딧
+    BMISSION2,//깨비전
+    BMISSION3,//빠른전투
+    BMISSION4,//검의산
+    BMISSION5,//천계꽃
+    BMISSION6,//도깨비
+    BMISSION7,//수미산
+    BMISSION8,//영혼석(반지)
 }
 public enum MonthMissionKey
 {

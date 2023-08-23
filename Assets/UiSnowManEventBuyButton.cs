@@ -9,9 +9,11 @@ public class UiSnowManEventBuyButton : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI descText;
 
+    [SerializeField]
+    private GameObject plusGoodsObject;
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string fallPassKey = "childpass";
+    public static readonly string fallPassKey = "songpyeonpass";
 
     private Button buyButton;
 
@@ -35,6 +37,7 @@ public class UiSnowManEventBuyButton : MonoBehaviour
         {
             descText.SetText(e >= 1 ? "구매완료" : "패스권 구매");
             this.gameObject.SetActive(e <= 0);
+            plusGoodsObject.SetActive(e <= 0);
         }).AddTo(disposable);
 
         IAPManager.Instance.WhenBuyComplete.AsObservable().Subscribe(e =>
@@ -89,6 +92,9 @@ public class UiSnowManEventBuyButton : MonoBehaviour
 
         if (tableData.Productid != fallPassKey) return;
 
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan_All).Value;
+        ServerData.goodsTable.UpData(GoodsTable.Event_Item_SnowMan, false);
+        
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;

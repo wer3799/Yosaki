@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,6 +69,13 @@ public class UiDokebiTowerBoard : MonoBehaviour
             uiTower3RewardView.UpdateRewardView(towerTableData.Id);
         }
 
+        else
+        {     
+ 
+            var towerTableData = TableManager.Instance.towerTable3.dataArray.Last();
+
+            uiTower3RewardView.UpdateRewardView(towerTableData.Id);
+        }
 
     }
 

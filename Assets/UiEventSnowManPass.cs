@@ -28,6 +28,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
     private List<UiSnowManPassCell> uiPassCellContainer = new List<UiSnowManPassCell>();
 
     private ObscuredString passShopId;
+    [SerializeField] private UiRewardResultView _uiRewardResultView;
 
 #if UNITY_EDITOR
     private void Update()
@@ -94,7 +95,8 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
         List<int> splitData_Ad = GetSplitData(OneYearPassServerTable.childAd_Snow);
         
         List<int> rewardTypeList = new List<int>();
-        
+        List<RewardItem> rewards = new List<RewardItem>();
+
         var tableData = TableManager.Instance.snowManAtten.dataArray;
 
         int rewardedNum = 0;
@@ -121,6 +123,8 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                Utils.AddOrUpdateReward(ref rewards,(Item_Type)tableData[i].Reward1,tableData[i].Reward1_Value);
+
                 if (rewardTypeList.Contains(tableData[i].Reward1) == false)
                 {
                     rewardTypeList.Add(tableData[i].Reward1);
@@ -138,6 +142,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
                 }
 
                 ad += $",{tableData[i].Id}";
+                Utils.AddOrUpdateReward(ref rewards,(Item_Type)tableData[i].Reward2,tableData[i].Reward2_Value);
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
                 if (rewardTypeList.Contains(tableData[i].Reward2) == false)
                 {
@@ -178,8 +183,20 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
-                //LogManager.Instance.SendLogType("ChildPass", "A", "A");
+                List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+                var e2 = rewards.GetEnumerator();
+                for (int i = 0 ;  i < rewards.Count;i++)
+                {
+                    if (e2.MoveNext())
+                    {
+                        rewardData.Add(new UiRewardView.RewardData(e2.Current.ItemType,e2.Current.ItemValue));
+                    }                    
+                }
+                if (rewardData.Count > 0)
+                {
+                    _uiRewardResultView.gameObject.SetActive(true);
+                    _uiRewardResultView.Initialize(rewardData);
+                }
             });
         }
         else

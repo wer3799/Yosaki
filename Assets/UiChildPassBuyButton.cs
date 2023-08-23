@@ -14,7 +14,7 @@ public class UiChildPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string PassKey = "childpass";
+    public static readonly string PassKey = "songpyeonpass";
 
     private Button buyButton;
 

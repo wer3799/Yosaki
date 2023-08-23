@@ -80,7 +80,7 @@ public class SetRandomPosition : MonoBehaviour
     private void Update()
     {
         //조조
-        if (_bossId == 111||_bossId == 112||_bossId == 123||_bossId == 133||_bossId == 134||_bossId == 135||_bossId==154||_bossId==155||_bossId==156||_bossId==169||_bossId==170||_bossId==171||_bossId==172||_bossId==173)
+        if (_bossId == 111||_bossId == 112||_bossId == 123||_bossId == 133||_bossId == 134||_bossId == 135||_bossId==154||_bossId==155||_bossId==156||_bossId==169||_bossId==170||_bossId==171||_bossId==172||_bossId==173||_bossId==177)
         {
             if (isMove)
             {
@@ -92,6 +92,15 @@ public class SetRandomPosition : MonoBehaviour
             }
         }
 
+    }
+    private float GenerateValueExcludingRange(float minValue, float maxValue, float excludedMin, float excludedMax)
+    {
+        float randomValue;
+        do {
+            randomValue = Random.Range(minValue, maxValue);
+        } while (randomValue >= excludedMin && randomValue <= excludedMax);
+        
+        return randomValue;
     }
     private IEnumerator SetRandPositionRoutine()
     {
@@ -123,6 +132,15 @@ public class SetRandomPosition : MonoBehaviour
             //방향전환
             if (_bossId==169||_bossId==170||_bossId==171||_bossId==172||_bossId==173)
             {
+                SetDirFromRb();
+                float angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
+                projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            }
+            //플레이어 중심기준
+            if (_bossId==177)
+            {
+                float distance = GenerateValueExcludingRange(_minX, _maxX, -1f, 1f);
+                transform.localPosition = new Vector3(playerTr.position.x+distance, playerTr.position.y+distance, 0);
                 SetDirFromRb();
                 float angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
                 projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);

@@ -32,7 +32,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
     private List<TextMeshProUGUI> textList = new List<TextMeshProUGUI>();
     
     [SerializeField] private UiRewardResultView _uiRewardResultView;
-    private List<UiLevelPassBoard.Reward> rewardList = new List<UiLevelPassBoard.Reward>();
+    private List<RewardItem> rewardList = new List<RewardItem>();
     
 #if UNITY_EDITOR
     private void Update()
@@ -50,13 +50,13 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
         if (existingRewardIndex >= 0)
         {
-            UiLevelPassBoard.Reward existingReward = rewardList[existingRewardIndex];
+            RewardItem existingReward = rewardList[existingRewardIndex];
             existingReward.ItemValue += itemValue;
             rewardList[existingRewardIndex] = existingReward;
         }
         else
         {
-            rewardList.Add(new UiLevelPassBoard.Reward(itemType, itemValue));
+            rewardList.Add(new RewardItem(itemType, itemValue));
         }
     }
     

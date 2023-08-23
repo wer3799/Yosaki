@@ -256,7 +256,8 @@ public static class GameBalance
 
     public readonly static ObscuredFloat BossScoreSmallizeValue = 0.00000000000000000000000000000001f;
     public readonly static ObscuredFloat BossScoreConvertToOrigin = 100000000000000000000000000000000f;
-
+    public readonly static ObscuredDouble BossScoreAdjustValue = 1.0E+92;
+    
     public readonly static ObscuredInt SonEvolutionDivdeNum = 3000;
 
     public readonly static ObscuredInt MaxDamTextNum = 120;
@@ -424,14 +425,16 @@ public static class GameBalance
     public static ObscuredInt doGodGraduate = 5;
     public static ObscuredInt sumiGodGraduate = 6;
     public static ObscuredInt darkGodGraduate = 7;
+    public static ObscuredInt sinsunGodGraduate = 8;
     
     public static ObscuredFloat swordGodGraduateValue = 1.5f;
     public static ObscuredFloat monkeyGodGraduateValue = 1.3f;
     public static ObscuredFloat hellGodGraduateValue = 1.15f;
     public static ObscuredFloat chunGodGraduateValue = 1.2f;
     public static ObscuredFloat doGodGraduateValue = 1.25f;
-    public static ObscuredFloat sumiGodGraduateValue = 2f;
-    public static ObscuredFloat darkGodGraduateValue = 2f;
+    public static ObscuredFloat sumiGodGraduateValue = 1.25f;
+    public static ObscuredFloat darkGodGraduateValue = 1.25f;
+    public static ObscuredFloat sinsunGodGraduateValue = 1.25f;
         
     public static ObscuredDouble swordGodGraduateScore = 2E+122;
     public static ObscuredDouble monkeyGodGraduateScore = 5E+122;
@@ -440,6 +443,7 @@ public static class GameBalance
     public static ObscuredDouble doGodGraduateScore = 1E+129;
     public static ObscuredDouble sumiGodGraduateScore = 5E+131;
     public static ObscuredDouble darkGodGraduateScore = 5E+133;
+    public static ObscuredDouble sinsunGodGraduateScore = 5E+133;
     //
     
     public static ObscuredDouble refundGoldBarRatio = 1E+34; //보유금화환불단위
@@ -500,6 +504,8 @@ public static class GameBalance
     public static ObscuredFloat GetSoulRingAdReward = 4000f;// 광고보상
 
     public static ObscuredInt MeditationHour = 24;// 명상시간
+    
+    public static ObscuredInt DosulAwakeRequireLevel = 99;// 필요 도술 ID
     public static int GetSonIdx()
     {
         int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

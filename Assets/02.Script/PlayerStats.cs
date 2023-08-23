@@ -90,6 +90,10 @@ public enum StatusType
     SinsunHasValueUpgrade, //신선보옥당 신선베기
     HyunsangHasValueUpgrade, //귀멸증표당 귀멸베기
     SuperCritical21DamPer, //초월베기
+    
+    SuperCritical8AddDam,
+    SuperCritical13AddDam,
+    SuperCritical18AddDam,
 }
 
 
@@ -1685,15 +1689,29 @@ public static class PlayerStats
 
         ret += GetGyungRockEffect(StatusType.SuperCritical8DamPer) * GetGuildTowerChimUpgradeValue();
         
+        ret += GetGyungRockEffect(StatusType.SuperCritical8DamPer) * SuperCritical8AddDam();
+        
         ret += GetGyungRockEffect4(StatusType.SuperCritical8DamPer);
 
         ret += GetGyungRockEffect4(StatusType.SuperCritical8DamPer) * GetGuildTowerChimUpgradeValue();
+        
+        ret += GetGyungRockEffect4(StatusType.SuperCritical8DamPer) * SuperCritical8AddDam();
 
         ret += GetPassiveSkillValue(StatusType.SuperCritical8DamPer);
+        
         
         ret += GetNewLowGyungRockAwakeAbilValue();
         
 
+        return ret;
+    }
+    public static float SuperCritical8AddDam()
+    {
+        float ret = 0f;
+
+        
+        ret += GetDanjeonAbilValue(StatusType.SuperCritical8AddDam);
+        
         return ret;
     }
 
@@ -1717,9 +1735,21 @@ public static class PlayerStats
         ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer);
 
         ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * GetGuildTowerChimUpgradeValue();
+        
+        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * SuperCritical13AddDam();
 
         ret += GetPassiveSkillValue(StatusType.SuperCritical13DamPer);
 
+        return ret;
+    }
+    
+    public static float SuperCritical13AddDam()
+    {
+        float ret = 0f;
+
+        
+        ret += GetDanjeonAbilValue(StatusType.SuperCritical13AddDam);
+        
         return ret;
     }
     //흉수베기
@@ -2928,7 +2958,7 @@ public static class PlayerStats
             ret += GetSinsunTreasureHasAddValue() * currentLevel;
         }
         
-        return ret;
+        return ret * GetSinsunGodAbil0();
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -3564,6 +3594,25 @@ public static class PlayerStats
 
         return grade;
     }
+    public static int GetDosulAwakeGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.DosulAwakeTable.dataArray;
+
+        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
 
     public static int GetDosulGrade()
     {
@@ -3653,6 +3702,25 @@ public static class PlayerStats
         var tableData = TableManager.Instance.gradeTestTable.dataArray;
 
         var score = ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+    public static int GetDanjeonGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.DanjeonTable.dataArray;
+
+        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.danjeonScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4032,6 +4100,25 @@ public static class PlayerStats
 
         return grade;
     }
+    public static int GetSinsunGodGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.TestSin.dataArray;
+
+        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.sinsunGodScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
 
     public static int GetBlackGrade()
     {
@@ -4373,7 +4460,11 @@ public static class PlayerStats
         if (grade == -1) return 1f;
 
         var tableData = TableManager.Instance.TestSumi.dataArray[grade];
-
+        
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.GodTrialGraduateIdx).Value >= GameBalance.sumiGodGraduate)
+        {
+            return tableData.Abilvalue0 * GameBalance.sumiGodGraduateValue;
+        }
         return tableData.Abilvalue0;
     }
     public static float GetThiefGodAbil0()
@@ -4394,6 +4485,16 @@ public static class PlayerStats
         if (grade == -1) return 1f;
 
         var tableData = TableManager.Instance.TestDark.dataArray[grade];
+
+        return tableData.Abilvalue0;
+    }
+    public static float GetSinsunGodAbil0()
+    {
+        int grade = GetSinsunGodGrade();
+
+        if (grade == -1) return 1f;
+
+        var tableData = TableManager.Instance.TestSin.dataArray[grade];
 
         return tableData.Abilvalue0;
     }
@@ -4979,6 +5080,28 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetDanjeonAbilValue(StatusType statusType)
+    {
+        int currentGrade = GetDanjeonGrade();
+
+        if (currentGrade == -1) return 0f;
+
+        var tableData = TableManager.Instance.DanjeonTable.dataArray[currentGrade];
+
+        if (tableData.Abiltype.Length != tableData.Abilvalue.Length) return 0f;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Abiltype.Length; i++)
+        {
+            if (tableData.Abiltype[i] == (int)statusType)
+            {
+                ret += tableData.Abilvalue[i];
+            }
+        }
+
+        return ret;
+    }
     private static Dictionary<StatusType, float> meditationDictionary = new Dictionary<StatusType, float>();
     private static bool meditationInitialize = false;
 
@@ -5328,7 +5451,6 @@ public static class PlayerStats
 
         return ret;
     }
-
     public static float GetGuildTowerChimUpgradeValue()
     {
         return ServerData.goodsTable.TableDatas[GoodsTable.GuildTowerHorn].Value * GameBalance.GuildTowerChimAbilUpValue;
@@ -5343,11 +5465,23 @@ public static class PlayerStats
 
         ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer) * GetGuildTowerChimUpgradeValue();
 
+        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer) * SuperCritical18AddDam();
+
         ret += GetPassiveSkillValue(StatusType.SuperCritical18DamPer);
 
         return ret;
     }
 
+    
+    public static float SuperCritical18AddDam()
+    {
+        float ret = 0f;
+
+        
+        ret += GetDanjeonAbilValue(StatusType.SuperCritical18AddDam);
+        
+        return ret;
+    }
     public static float GetGyungRockEffect3(StatusType statusType, int addLevel = 0)
     {
         float ret = 0f;

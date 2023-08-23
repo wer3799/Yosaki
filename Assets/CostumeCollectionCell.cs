@@ -109,7 +109,7 @@ public class CostumeCollectionCell : MonoBehaviour
        
         if (costumeAmount < tableData.Require)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{tableData.Require}개 만큼 획득해야 합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"외형이 {tableData.Require}개 필요 합니다.");
             return;
         }
 

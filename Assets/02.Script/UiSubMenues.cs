@@ -64,6 +64,12 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                     _DosulButton.OnClickButton();
                     return;
                 }
+                case GameManager.ContentsType.DosulAwake:
+                {
+                    GameManager.Instance.ResetLastContents2();
+                    _DosulButton.OnClickButton();
+                    return;
+                }
             }
 
             _mainTabButtons.OnClickButton();

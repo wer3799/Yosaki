@@ -29,7 +29,7 @@ public class GodTrialSort : MonoBehaviour
                     }
                 }
 
-                if (e >= GameBalance.darkGodGraduate)
+                if (e >= GameBalance.sinsunGodGraduate)
                 {
                     _seletableTab.OnSelect(0);
                 }

@@ -135,7 +135,7 @@ public class UiChunmaRewardBoard : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            ServerData.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
                 SoundManager.Instance.PlaySound("Reward");

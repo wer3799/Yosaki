@@ -9,7 +9,7 @@ using GoogleMobileAds.Common;
 using UnityEngine.UI;
 using System;
 
-public class AdManager : SingletonMono<AdManager>
+public class AdManager : SingletonMono<AdManager>,IUnityAdsInitializationListener,IUnityAdsLoadListener,IUnityAdsShowListener
 {
     private static string AndroidGameId = "4235399";
     private static string IOSGameId = "4235398";
@@ -44,20 +44,16 @@ public class AdManager : SingletonMono<AdManager>
 
     private void Initialize()
     {
-        options = new ShowOptions();
-        options.resultCallback = HandleShowResult;
-
-
-        //ADMob
+       
     }
 
     private void ShowNormalVideo()
     {
-        Advertisement.Show(videoPlacementId, options);
+        Advertisement.Show(videoPlacementId);
     }
     private void ShowRewardedUnityVideo()
     {
-        Advertisement.Show(rewardedPlacementId, options);
+        Advertisement.Show(rewardedPlacementId);
     }
 
     public void ShowRewardedReward(System.Action callBack)
@@ -201,4 +197,50 @@ public class AdManager : SingletonMono<AdManager>
     }
 
 
+    public void OnInitializationComplete()
+    {
+    
+    }
+
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+    
+    }
+
+    public void OnUnityAdsAdLoaded(string placementId)
+    {
+      
+    }
+
+    public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
+    {
+    
+    }
+
+    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
+    {
+      
+    }
+
+    public void OnUnityAdsShowStart(string placementId)
+    {
+  
+    }
+
+    public void OnUnityAdsShowClick(string placementId)
+    {
+       
+    }
+
+    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+    {
+        if (showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+        {
+            GetReward();
+        }
+        else 
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "광고 재생에 실패했습니다.\n잠시후 다시 시도해주세요", null);
+        }
+    }
 }

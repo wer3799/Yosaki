@@ -25,28 +25,5 @@ public class UiCollectionEventFall : MonoBehaviour
         eventDescription.SetText(description);
     }
 
-#if UNITY_EDITOR
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value += 1000000;
-        }
-        if (Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value += 10;
-        }
-    }
-#endif
-
-    private void OnEnable()
-    {
-        if (ServerData.userInfoTable.CanSpawnSpringEventItem() == false)
-        {
-            this.gameObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage("이벤트가 종료됐습니다!");
-        }
-    }
 
 }

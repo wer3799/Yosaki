@@ -44,6 +44,8 @@ public class UiEditiorBoard : MonoBehaviour
     [SerializeField]
     private Toggle showTransUiToggle;
     [SerializeField]
+    private Toggle showDanjeonUiToggle;
+    [SerializeField]
     private Toggle showCatToggle;
     [SerializeField]
     private Toggle showTwelveToggle;
@@ -130,6 +132,8 @@ public class UiEditiorBoard : MonoBehaviour
         showGodTrialToggle.isOn = PlayerPrefs.GetInt(SettingKey.showGodTrialUi) == 1;
         
         showTransUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showTransUi) == 1;
+        
+        showDanjeonUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showDanjeon) == 1;
         
         showCatToggle.isOn = PlayerPrefs.GetInt(SettingKey.showCatUi) == 1;
         
@@ -363,6 +367,18 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showTransUi.Value = on ? 1 : 0;
+    }
+    
+    public void DanjeonUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showDanjeon.Value = on ? 1 : 0;
     }
     
     public void CatUiOnOff(bool on)

@@ -306,6 +306,11 @@ public static class CommonString
             case Item_Type.costume147: return TableManager.Instance.Costume.dataArray[147].Name;
             case Item_Type.costume148: return TableManager.Instance.Costume.dataArray[148].Name;
             case Item_Type.costume149: return TableManager.Instance.Costume.dataArray[149].Name;
+            case Item_Type.costume150: return TableManager.Instance.Costume.dataArray[150].Name;
+            case Item_Type.costume151: return TableManager.Instance.Costume.dataArray[151].Name;
+            case Item_Type.costume152: return TableManager.Instance.Costume.dataArray[152].Name;
+            case Item_Type.costume153: return TableManager.Instance.Costume.dataArray[153].Name;
+            case Item_Type.costume154: return TableManager.Instance.Costume.dataArray[154].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -381,7 +386,7 @@ public static class CommonString
             case Item_Type.SP: return "검조각";
             case Item_Type.Hae_Norigae: return "해태 노리개 조각";
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
-            case Item_Type.Event_Item_SnowMan: return "팽이";
+            case Item_Type.Event_Item_SnowMan: return "송편";//(구)팽이
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
@@ -493,7 +498,9 @@ public static class CommonString
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
             case Item_Type.Event_Mission: return "서핑 보드";
-            case Item_Type.Event_Mission_All: return "꽃송이 총 획득량";
+            case Item_Type.Event_Mission_All: return "서핑보드 총 획득량";
+            case Item_Type.Event_Mission2: return "보름달";
+            case Item_Type.Event_Mission2_All: return "보름달 총 획득량";
             case Item_Type.pet52: return "요랑";
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
@@ -510,6 +517,7 @@ public static class CommonString
             case Item_Type.MonthNorigae6: return "6월 월간 노리개";
             case Item_Type.MonthNorigae7: return "7월 월간 노리개";
             case Item_Type.MonthNorigae8: return "8월 월간 노리개";
+            case Item_Type.MonthNorigae9: return "9월 월간 노리개";
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
             case Item_Type.SahyungTreasure: return "사흉구슬";
@@ -551,6 +559,7 @@ public static class CommonString
             case Item_Type.DosulClear: return "도술꽃 소탕권";
             case Item_Type.MeditationGoods: return "심득 조각";
             case Item_Type.MeditationClearTicket: return "내면세계 입장권";
+            case Item_Type.DaesanGoods: return "대산의 정수";
 
         }
         return "미등록";
@@ -764,6 +773,12 @@ public static class CommonString
                 return "도술꽃 소탕량 증가 (%)";
             case StatusType.AddSummonYogui:
                 return "요괴 추가 소환";
+            case StatusType.SuperCritical8AddDam:
+                return "하단전 베기 증폭 (%)";
+            case StatusType.SuperCritical13AddDam:
+                return "중단전 베기 증폭 (%)";
+            case StatusType.SuperCritical18AddDam:
+                return "상단전 베기 증폭 (%)";
         }
 
         return "등록필요";

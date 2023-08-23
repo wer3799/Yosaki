@@ -87,6 +87,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"점수를 등록하고 나갈가요?\n<color=red>(주의)현재 결과화면에 기록된 점수의 합으로 등록 됩니다.\n총 : {Utils.ConvertBigNum(PartyRaidManager.Instance.NetworkManager.GetTotalScore())}점", () =>
             {
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.MISSION3, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.AMISSION3, 1);
                 RecordPartyRaidScore();
                 LeaveRoom();
 
@@ -126,7 +127,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
         {
             ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value = totalScore.ToString();
             //랭킹등록
-            RankManager.Instance.UpdateChunmaTop(totalScore);
+            //RankManager.Instance.UpdateChunmaTop(totalScore);
         }
         else
         {

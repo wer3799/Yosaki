@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UniRx;
 using TMPro;
-
+//십만대산 명예의전당(미사용)
 public class UiChunMaTopRankerBoard : MonoBehaviour
 {
     [SerializeField]
@@ -69,8 +69,8 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaTop_Uuid, 4, WhenAllRankerLoadCompleteTest);
-        RankManager.Instance.RequestChunMaTopRank();
+        //RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaTop_Uuid, 4, WhenAllRankerLoadCompleteTest);
+        //RankManager.Instance.RequestChunMaTopRank();
     }
 
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
@@ -107,7 +107,7 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
                         string nickName = data["nickname"][ServerData.format_string].ToString();
                         int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                         double score = double.Parse(data["score"][ServerData.format_Number].ToString());
-                        score *= GameBalance.BossScoreConvertToOrigin;
+                        score *= GameBalance.BossScoreConvertToOrigin*GameBalance.BossScoreAdjustValue;
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);
                         int weaponId = int.Parse(splitData[2]);
@@ -209,7 +209,7 @@ public class UiChunMaTopRankerBoard : MonoBehaviour
                         string nickName = json_data["rows"][i]["nickname"][ServerData.format_string].ToString();
                         int rank = int.Parse(json_data["rows"][i]["rank"][ServerData.format_Number].ToString());
                         double score = double.Parse(json_data["rows"][i]["score"][ServerData.format_Number].ToString());
-                        score *= GameBalance.BossScoreConvertToOrigin;
+                        score *= GameBalance.BossScoreConvertToOrigin*GameBalance.BossScoreAdjustValue;
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);
                         int weaponId = int.Parse(splitData[2]);

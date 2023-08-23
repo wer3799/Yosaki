@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class PlayerGumgiSoulEffect : MonoBehaviour
@@ -20,5 +21,15 @@ public class PlayerGumgiSoulEffect : MonoBehaviour
 
         gumgiSoulEffect.ForEach(e => e.SetActive(false));
         gumgiSoulEffect[grade].SetActive(true);
+        
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        SettingData.showGumgiSoul.AsObservable().Subscribe(e =>
+        {
+            rootObject.SetActive(e==1);
+        }).AddTo(this);
     }
 }

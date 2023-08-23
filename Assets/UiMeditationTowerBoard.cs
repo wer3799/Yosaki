@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BackEnd;
 using TMPro;
 using UnityEngine;
@@ -87,6 +88,13 @@ public class UiMeditationTowerBoard : MonoBehaviour
             }
 
             var towerTableData = TableManager.Instance.MeditationTower.dataArray[currentFloor];
+
+            uiTowerRewardView.UpdateRewardView(towerTableData.Id);
+        }
+        else
+        {
+            
+            var towerTableData = TableManager.Instance.MeditationTower.dataArray.Last();
 
             uiTowerRewardView.UpdateRewardView(towerTableData.Id);
         }

@@ -175,7 +175,7 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"어린이날 패스권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"패스권이 필요합니다.");
             return;
         }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");

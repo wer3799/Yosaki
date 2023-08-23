@@ -129,8 +129,8 @@ public class KingBossMoveController : MonoBehaviour
                 initialized = true;
             }
         }
-        //인간형기반보스
-        else if (_bossId == 174||_bossId == 175)
+        //인간형기반보스(수인전)
+        else if (_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179)
         {
             isMoving = true;
 
@@ -169,13 +169,13 @@ public class KingBossMoveController : MonoBehaviour
             }
         }
 
-         else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175)
-         {
+        else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179)
+        {
              if (isMoving)
              {
                  rb.velocity = (playerTr.position - transform.position).normalized * moveSpeed;
              }
-         }
+        }
 
         // float playerDist = Vector3.Distance(playerTr.position, this.transform.position);
             //
@@ -194,7 +194,7 @@ public class KingBossMoveController : MonoBehaviour
             {
                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 3 : -3, 3, 1);   
             }
-            else if(_bossId == 174||_bossId == 175)
+            else if(_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179)
             {
                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 1 : -1, 1, 1);   
             }

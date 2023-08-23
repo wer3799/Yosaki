@@ -28,6 +28,8 @@ public static class ServerData
     public static RankTable_Boss rankTables_Boss { get; private set; } = new RankTable_Boss();
     public static RankTable_Real_Boss rankTables_Real_Boss { get; private set; } = new RankTable_Real_Boss();
 
+    public static RankTable_ChunmaV2 rankTables_ChunmaV2 { get; private set; } = new RankTable_ChunmaV2();
+
     public static RankTable_Real_Boss_GangChul rankTables_Real_Boss_gangChul { get; private set; } =
         new RankTable_Real_Boss_GangChul();
 
@@ -120,7 +122,8 @@ public static class ServerData
         rankTables_level.Initialize();
         rankTables_Stage.Initialize();
         rankTables_Boss.Initialize();
-        rankTables_Real_Boss.Initialize();
+        //rankTables_Real_Boss.Initialize();
+        rankTables_ChunmaV2.Initialize();
         rankTables_Real_Boss_gangChul.Initialize();
         
         costumeServerTable.Initialize();
@@ -708,6 +711,10 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += rewardValue;
                 break;
 
+            case Item_Type.DaesanGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += rewardValue;
+                break;
+
             case Item_Type.EventDice:
                 ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += rewardValue;
                 break;
@@ -762,6 +769,12 @@ public static class ServerData
                 break;
             case Item_Type.Event_Mission_All:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value += rewardValue;
+                break;
+            case Item_Type.Event_Mission2:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value += rewardValue;
+                break;
+            case Item_Type.Event_Mission2_All:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value += rewardValue;
                 break;
 
             case Item_Type.du:
@@ -925,6 +938,11 @@ public static class ServerData
             case Item_Type.costume147:
             case Item_Type.costume148:
             case Item_Type.costume149:
+            case Item_Type.costume150:
+            case Item_Type.costume151:
+            case Item_Type.costume152:
+            case Item_Type.costume153:
+            case Item_Type.costume154:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1145,6 +1163,11 @@ public static class ServerData
             case Item_Type.costume147:
             case Item_Type.costume148:
             case Item_Type.costume149:
+            case Item_Type.costume150:
+            case Item_Type.costume151:
+            case Item_Type.costume152:
+            case Item_Type.costume153:
+            case Item_Type.costume154:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1254,6 +1277,9 @@ public static class ServerData
             case Item_Type.MeditationClearTicket:
                 passParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.DaesanGoods:
+                passParam.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.EventDice:
                 passParam.Add(GoodsTable.EventDice, ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value);
@@ -1349,6 +1375,15 @@ public static class ServerData
             case Item_Type.Event_Mission_All:
                 passParam.Add(GoodsTable.Event_Mission_All,
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.Event_Mission2:
+                passParam.Add(GoodsTable.Event_Mission2,
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.Event_Mission2_All:
+                passParam.Add(GoodsTable.Event_Mission2_All,
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.Fw:
@@ -1922,6 +1957,15 @@ public static class ServerData
                 param.Add(GoodsTable.Event_Mission_All,
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Event_Mission2:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value += amount;
+                param.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.Event_Mission2_All:
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value += amount;
+                param.Add(GoodsTable.Event_Mission2_All,
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.Hel:
                 ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value += amount;
@@ -2056,6 +2100,10 @@ public static class ServerData
             case Item_Type.MeditationClearTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += amount;
                 param.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DaesanGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += amount;
+                param.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.EventDice:
@@ -3773,6 +3821,9 @@ public static class ServerData
                 case Item_Type.MeditationClearTicket:
                     ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += amount;
                     break;
+                case Item_Type.DaesanGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += amount;
+                    break;
                 case Item_Type.EventDice:
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
                     break;
@@ -3975,6 +4026,14 @@ public static class ServerData
 
                 case Item_Type.Event_Mission_All:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value += amount;
+                    break;
+
+                case Item_Type.Event_Mission2:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value += amount;
+                    break;
+
+                case Item_Type.Event_Mission2_All:
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value += amount;
                     break;
 
                 case Item_Type.GuildReward:

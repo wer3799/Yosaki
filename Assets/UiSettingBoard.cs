@@ -115,6 +115,8 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle norigaeSize;
     
     [SerializeField]
+    private Toggle showGumgiSoul;
+    [SerializeField]
     private Toggle showVisionSkill;
     [SerializeField]
     private Toggle showDosulSkill;
@@ -190,6 +192,7 @@ public class UiSettingBoard : MonoBehaviour
         showRingEffect.isOn = PlayerPrefs.GetInt(SettingKey.showRingEffect) == 1;
         newUi.isOn = PlayerPrefs.GetInt(SettingKey.newUi) == 1;
         norigaeSize.isOn = PlayerPrefs.GetInt(SettingKey.norigaeSize) == 1;
+        showGumgiSoul.isOn = PlayerPrefs.GetInt(SettingKey.showGumgiSoul) == 1;
         showVisionSkill.isOn = PlayerPrefs.GetInt(SettingKey.showVisionSkill) == 1;
         showDosulSkill.isOn = PlayerPrefs.GetInt(SettingKey.showDosulSkill) == 1;
 
@@ -633,6 +636,17 @@ public class UiSettingBoard : MonoBehaviour
         SettingData.showRingEffect.Value = on ? 1 : 0;
     } 
     
+    public void ShowGumgiSoulOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showGumgiSoul.Value = on ? 1 : 0;
+    }
     public void ShowVisionSkillOnOff(bool on)
     {
         if (initialized == false) return;
@@ -777,6 +791,7 @@ public static class SettingKey
     public static string norigaeSize = "norigaeSize";//수호동물임
 
     public static string autoVisionSkill = "autoVisionSkill";
+    public static string showGumgiSoul = "showGumgiSoul";
     public static string showVisionSkill = "showVisionSkill";
     public static string showDosulSkill = "showDosulSkill";
 
@@ -797,6 +812,7 @@ public static class SettingKey
     public static string showFoxTowerUi = "showFoxTowerUi";
     public static string showGodTrialUi = "showGodTrialUi";
     public static string showTransUi = "showTransUi";
+    public static string showDanjeon = "showDanjeon";
 
     public static string showCatUi = "showCatUi";
     public static string showTwelveUi = "showTwelveUi";
@@ -873,6 +889,7 @@ public static class SettingData
     public static ReactiveProperty<int> norigaeSize = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     
     public static ReactiveProperty<int> autoVisionSkill = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> showGumgiSoul = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showVisionSkill = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showDosulSkill = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
 
@@ -894,6 +911,7 @@ public static class SettingData
     public static ReactiveProperty<int> showFoxTowerUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showGodTrialUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showTransUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showDanjeon = new ReactiveProperty<int>();
 
     //보스도전
     public static ReactiveProperty<int> showCatUi    = new ReactiveProperty<int>();
@@ -1041,6 +1059,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.showRingEffect) == false)
             PlayerPrefs.SetInt(SettingKey.showRingEffect, 1); 
         
+        if (PlayerPrefs.HasKey(SettingKey.showGumgiSoul) == false)
+            PlayerPrefs.SetInt(SettingKey.showGumgiSoul, 1);   
+        
         if (PlayerPrefs.HasKey(SettingKey.showVisionSkill) == false)
             PlayerPrefs.SetInt(SettingKey.showVisionSkill, 1);   
         
@@ -1110,6 +1131,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.showTransUi) == false)
             PlayerPrefs.SetInt(SettingKey.showTransUi, 1);
         
+        if (PlayerPrefs.HasKey(SettingKey.showDanjeon) == false)
+            PlayerPrefs.SetInt(SettingKey.showDanjeon, 1);
+        
         //
 
     }
@@ -1167,6 +1191,8 @@ public static class SettingData
         
         autoVisionSkill.Value = PlayerPrefs.GetInt(SettingKey.autoVisionSkill, 1);
         
+        showGumgiSoul.Value = PlayerPrefs.GetInt(SettingKey.showGumgiSoul, 1);
+        
         showVisionSkill.Value = PlayerPrefs.GetInt(SettingKey.showVisionSkill, 1);
         
         showDosulSkill.Value = PlayerPrefs.GetInt(SettingKey.showDosulSkill, 1);
@@ -1204,6 +1230,8 @@ public static class SettingData
         showGodTrialUi.Value = PlayerPrefs.GetInt(SettingKey.showGodTrialUi, 1);
         
         showTransUi.Value = PlayerPrefs.GetInt(SettingKey.showTransUi, 1);
+        
+        showDanjeon.Value = PlayerPrefs.GetInt(SettingKey.showDanjeon, 1);
         
         
         //보스도전
@@ -1388,6 +1416,11 @@ public static class SettingData
             PlayerPrefs.SetInt(SettingKey.showOtherPlayer, e);
         }); 
         
+        showGumgiSoul.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showGumgiSoul, e);
+        });
+        
         showVisionSkill.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showVisionSkill, e);
@@ -1501,6 +1534,10 @@ public static class SettingData
         showTransUi.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showTransUi, e);
+        });
+        showDanjeon.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showDanjeon, e);
         });
 //
         showCatUi.AsObservable().Subscribe(e =>

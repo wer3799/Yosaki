@@ -180,7 +180,12 @@ public static class Utils
                type == Item_Type.costume146||
                type == Item_Type.costume147||
                type == Item_Type.costume148||
-               type == Item_Type.costume149
+               type == Item_Type.costume149||
+               type == Item_Type.costume150||
+               type == Item_Type.costume151||
+               type == Item_Type.costume152||
+               type == Item_Type.costume153||
+               type == Item_Type.costume154
             ;
     }
 
@@ -202,7 +207,8 @@ public static class Utils
                type == Item_Type.MonthNorigae5 ||
                type == Item_Type.MonthNorigae6||
                type == Item_Type.MonthNorigae7||
-               type == Item_Type.MonthNorigae8
+               type == Item_Type.MonthNorigae8||
+               type == Item_Type.MonthNorigae9
             ;
     }
 
@@ -362,8 +368,8 @@ public static class Utils
                type == Item_Type.SpecialSuhoPet7 ||
                type == Item_Type.SpecialSuhoPet8 ||
                type == Item_Type.SpecialSuhoPet9 ||
-               // type == Item_Type.SpecialSuhoPet10 ||
-               // type == Item_Type.SpecialSuhoPet11||
+               type == Item_Type.SpecialSuhoPet10||
+               type == Item_Type.SpecialSuhoPet11||
                type == Item_Type.RabitPet ||
                type == Item_Type.RabitNorigae ||
                type == Item_Type.YeaRaeNorigae ||
@@ -395,6 +401,7 @@ public static class Utils
                type == Item_Type.MonthNorigae6 ||
                type == Item_Type.MonthNorigae7 ||
                type == Item_Type.MonthNorigae8 ||
+               type == Item_Type.MonthNorigae9 ||
                type == Item_Type.DokebiHorn0 ||
                type == Item_Type.DokebiHorn1 ||
                type == Item_Type.DokebiHorn2 ||
@@ -441,6 +448,7 @@ public static class Utils
                type == Item_Type.Event_Fall_Gold ||
                type == Item_Type.Event_NewYear ||
                type == Item_Type.Event_Mission ||
+               type == Item_Type.Event_Mission2 ||
                type == Item_Type.SumiFire ||
                type == Item_Type.SealWeaponClear ||
                type == Item_Type.SumiFireKey ||
@@ -453,6 +461,7 @@ public static class Utils
                type == Item_Type.TransClearTicket ||
                type == Item_Type.MeditationGoods ||
                type == Item_Type.MeditationClearTicket ||
+               type == Item_Type.DaesanGoods ||
                type == Item_Type.NewGachaEnergy ||
                type == Item_Type.EventDice ||
                type == Item_Type.Event_SA ||
@@ -683,6 +692,21 @@ public static class Utils
         stage += firststring + "-" + secondstring;
         return stage;
 
+    }    
+    public static void AddOrUpdateReward(ref List<RewardItem> rewardList, Item_Type itemType, float itemValue)
+    {
+        int existingRewardIndex = rewardList.FindIndex(r => r.ItemType == itemType);
+
+        if (existingRewardIndex >= 0)
+        {
+            RewardItem existingReward = rewardList[existingRewardIndex];
+            existingReward.ItemValue += itemValue;
+            rewardList[existingRewardIndex] = existingReward;
+        }
+        else
+        {
+            rewardList.Add(new RewardItem(itemType, itemValue));
+        }
     }
 
     public static double ConvertToUnixTimestamp(DateTime date)
@@ -725,7 +749,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","미정3","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16","미정16",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
         
     };
 

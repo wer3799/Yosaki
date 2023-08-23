@@ -518,6 +518,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
                 }
                 break;  
+            case Item_Type.DaesanGoods:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += amount;
+                    param.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
+                }
+                break;  
             case Item_Type.EventDice:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
@@ -684,6 +690,18 @@ public class UiShop : SingletonMono<UiShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value += amount;
                     param.Add(GoodsTable.Event_Mission_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value);
+                }
+                break;
+            case Item_Type.Event_Mission2:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value += amount;
+                    param.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+                }
+                break;
+            case Item_Type.Event_Mission2_All:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value += amount;
+                    param.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
                 }
                 break;
 

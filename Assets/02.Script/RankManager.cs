@@ -83,6 +83,11 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_GangChul_Guild_Boss_Uuid = "a16b1790-559d-11ed-9936-adc34f7d653d";
     public const string Rank_Party_Guild_Uuid = "a16b1790-559d-11ed-9936-adc34f7d653d";
     public const string Rank_ChunmaTop_Uuid = "8f5ebfc0-4341-11ed-844a-55337d4fa4d7";
+    
+    
+    public const string Rank_ChunmaV2_Uuid = "fb16c4d0-4195-11ee-b1bd-f5f3eef03a18";
+    
+    
 
     //
     public const string Rank_Level_TableName = "Rank_Level"; //레벨
@@ -93,6 +98,9 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_MiniGame = "Rank_MiniGame2"; //미니게임
     public const string Rank_GangChul = "Guild_Boss_And"; // 대산군
     public const string Rank_ChunmaTop = "Party_Top_AND"; // 십만대산 파티
+    
+    public const string Rank_ChunmaV2 = "PartyRaid_AND"; // 십만대산V2
+    
 #endif
 
 #if UNITY_IOS
@@ -111,6 +119,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Party_Guild_Uuid = "b7238c20-559d-11ed-9936-adc34f7d653d";
     public const string Rank_ChunmaTop_Uuid = "aa2dfff0-4341-11ed-844a-55337d4fa4d7";
 
+    public const string Rank_ChunmaV2_Uuid = "0a4296a0-4196-11ee-b1bd-f5f3eef03a18";
+
 
     public const string Rank_Level_TableName = "Level_Rank_IOS";
     public const string Rank_Stage = "Rank_Stage_IOS";
@@ -120,6 +130,8 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_MiniGame = "Rank_MiniGame2_IOS";
     public const string Rank_GangChul = "Guild_Boss_IOS";
     public const string Rank_ChunmaTop = "Party_Top_IOS";
+
+    public const string Rank_ChunmaV2 = "PartyRaid_IOS"; // 십만대산V2
 
 #endif
 
@@ -366,7 +378,7 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 double score = double.Parse(data["score"][ServerData.format_Number].ToString());
-                score *= GameBalance.BossScoreConvertToOrigin;
+                score *= GameBalance.BossScoreConvertToOrigin *GameBalance.BossScoreAdjustValue;
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -454,7 +466,8 @@ public class RankManager : SingletonMono<RankManager>
     {
         this.whenLoadSuccess_Real_Boss = whenLoadSuccess;
 
-        Backend.URank.User.GetMyRank(RankManager.Rank_Real_Boss_Uuid, MyRealBossRankLoadComplete);
+        //Backend.URank.User.GetMyRank(RankManager.Rank_Real_Boss_Uuid, MyRealBossRankLoadComplete);
+        Backend.URank.User.GetMyRank(RankManager.Rank_ChunmaV2_Uuid, MyRealBossRankLoadComplete);
     }
     private void MyRealBossRankLoadComplete(BackendReturnObject bro)
     {
@@ -473,7 +486,8 @@ public class RankManager : SingletonMono<RankManager>
                 string nickName = data["nickname"][ServerData.format_string].ToString();
                 int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                 double score = double.Parse(data["score"][ServerData.format_Number].ToString());
-                score *= GameBalance.BossScoreConvertToOrigin;
+                score *= GameBalance.BossScoreConvertToOrigin *GameBalance.BossScoreAdjustValue;
+
                 int costumeId = int.Parse(splitData[0]);
                 int petId = int.Parse(splitData[1]);
                 int weaponId = int.Parse(splitData[2]);
@@ -519,8 +533,9 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-        score *= GameBalance.BossScoreSmallizeValue;
-
+        score *= GameBalance.BossScoreSmallizeValue / GameBalance.BossScoreAdjustValue;
+//122
+        
         Param param = new Param();
         param.Add("Score", score);
 
@@ -535,7 +550,19 @@ public class RankManager : SingletonMono<RankManager>
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}{CommonString.ChatSplitChar}{suhoAnimal}");
 
-        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Real_Boss_Uuid, Rank_Real_Boss, RankTable_Real_Boss.Indate, param, bro =>
+        // SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Real_Boss_Uuid, Rank_Real_Boss, RankTable_Real_Boss.Indate, param, bro =>
+        // {
+        //     // 이후처리
+        //     if (bro.IsSuccess())
+        //     {
+        //         Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
+        //     }
+        // });
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_ChunmaV2_Uuid, Rank_ChunmaV2, RankTable_ChunmaV2.Indate, param, bro =>
         {
             // 이후처리
             if (bro.IsSuccess())
@@ -713,7 +740,7 @@ public class RankManager : SingletonMono<RankManager>
             this.myRankInfo[RankType.ChunmaTop] = myRankInfo;
         }
     }
-    //십만대산 개인
+    //십만대산 명예의전당
     public void UpdateChunmaTop(double score)
     {
         if (UpdateRank() == false) return;
@@ -723,9 +750,9 @@ public class RankManager : SingletonMono<RankManager>
             return;
         }
 
-         score *= GameBalance.BossScoreSmallizeValue;
+        score *= GameBalance.BossScoreSmallizeValue / GameBalance.BossScoreAdjustValue;
 
-
+    
         Param param = new Param();
         param.Add("Score", score);
 

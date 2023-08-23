@@ -20,6 +20,7 @@ public class UserInfoTable_2
     public const string sumiGodScore = "sumiGodScore";
     public const string thiefGodScore = "thiefGodScore";
     public const string darkGodScore = "darkGodScore";
+    public const string sinsunGodScore = "sinsunGodScore";
     public const string relicTestScore = "relicTestScore";
     public const string GangChulReset = "GangChulReset";
     public const string stagePassFree = "stagePassFree";
@@ -35,6 +36,7 @@ public class UserInfoTable_2
     public const string oddMonthKillCount = "odd0";
 
     public const string commonAttendCount = "cac0";
+    public const string commonAttend2Count = "cac1";
     public const string yorinAttendRewarded = "yar";
     public const string secondAttendRewarded = "sar";
     public const string secondAttendCount = "sac";
@@ -42,6 +44,7 @@ public class UserInfoTable_2
     public const string killCountTotalSeason0 = "ks0"; //혹서기 훈련
     
     public const string SealSwordAwakeScore = "SSASS";
+    public const string DosulAwakeScore = "DASS";
     public const string taeguekTower = "tgtw";
     public const string taeguekLock = "tgll";
     public const string SansinTowerIdx = "sst";
@@ -82,6 +85,14 @@ public class UserInfoTable_2
     public const string getRelicUpgrade = "gru";
     public const string meditationRefund = "mr0";
     
+    public const string danjeonScore = "djs";
+    
+    public const string exchage_Daesan1 = "exchage_Daesan1";
+    public const string exchage_Daesan2 = "exchage_Daesan2";
+    public const string exchage_Daesan3 = "exchage_Daesan3";
+    public const string exchage_Daesan4 = "exchage_Daesan4";
+    public const string exchage_Daesan5 = "exchage_Daesan5";
+    
     
     public bool isInitialize = false;
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
@@ -91,6 +102,7 @@ public class UserInfoTable_2
         { stagePassAd, -1f },
         { killCountTotalSeason0, 0f },
         { commonAttendCount, 0f },
+        { commonAttend2Count, 0f },
         { yorinAttendRewarded, 0f },
         { secondAttendRewarded, 0f },
         { secondAttendCount, 0f },
@@ -103,12 +115,14 @@ public class UserInfoTable_2
         { sumiGodScore, 0f },
         { thiefGodScore, 0f },
         { darkGodScore, 0f },
+        { sinsunGodScore, 0f },
         { relicTestScore, 0f },
         { foxFirePassKill, 0f },
         { dosulPassKill, 0f },
         { evenMonthKillCount, 0f },
         { oddMonthKillCount, 0f },
         { SealSwordAwakeScore, 0f },
+        { DosulAwakeScore, 0f },
         { taeguekTower, 0f },
         { taeguekLock, 0f },
         { SansinTowerIdx, 0f },
@@ -142,6 +156,14 @@ public class UserInfoTable_2
         { eventMiniGameScore_TopRate, 0f },
         { eventMiniGameScore_Total, 0f },
         { meditationRefund, 0f },
+        
+        { danjeonScore, 0f },
+        
+        { exchage_Daesan1, 0f },
+        { exchage_Daesan2, 0f },
+        { exchage_Daesan3, 0f },
+        { exchage_Daesan4, 0f },
+        { exchage_Daesan5, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

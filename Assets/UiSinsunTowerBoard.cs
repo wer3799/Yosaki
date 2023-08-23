@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -65,6 +66,13 @@ public class UiSinsunTowerBoard : MonoBehaviour
             }
 
             var towerTableData = TableManager.Instance.sinsunTowerTable.dataArray[currentFloor];
+
+            uiRewardView.UpdateRewardView(towerTableData.Id);
+        }
+        else
+        {
+
+            var towerTableData = TableManager.Instance.sinsunTowerTable.dataArray.Last();
 
             uiRewardView.UpdateRewardView(towerTableData.Id);
         }

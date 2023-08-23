@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -97,7 +98,13 @@ public class UiSumisanTowerBoard : MonoBehaviour
 
             uiSumisanTowerRewardView.UpdateRewardView(towerTableData.Id);
         }
+        else
+        {
+            
+            var towerTableData = TableManager.Instance.sumisanTowerTable.dataArray.Last();
 
+            uiSumisanTowerRewardView.UpdateRewardView(towerTableData.Id);
+        }
 
     }
 

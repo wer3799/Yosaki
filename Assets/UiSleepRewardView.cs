@@ -143,6 +143,8 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
 
         //요괴구슬
         rewards[5].SetText(Utils.ConvertBigNum(reward.yoguiMarble));
+        
+        //2023 송편
         if (ServerData.userInfoTable.CanSpawnSnowManItem())
         {
             

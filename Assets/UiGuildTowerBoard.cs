@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BackEnd;
 using TMPro;
 using UnityEngine;
@@ -72,6 +73,13 @@ public class UiGuildTowerBoard : MonoBehaviour
             }
 
             var towerTableData = TableManager.Instance.guildTowerTable.dataArray[currentFloor];
+
+            uiGuildTowerRewardView.UpdateRewardView(towerTableData.Id);
+        }
+        else
+        {
+            
+            var towerTableData = TableManager.Instance.guildTowerTable.dataArray.Last();
 
             uiGuildTowerRewardView.UpdateRewardView(towerTableData.Id);
         }

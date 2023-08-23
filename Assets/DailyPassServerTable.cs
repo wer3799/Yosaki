@@ -1139,13 +1139,17 @@ public class OneYearPassServerTable
     public static string childFree = "f5";
     public static string childAd = "a5";
 
-    //2023 어린이날 //2022눈사람 사용중
+    //2023 송편패스
     public static string childFree_Snow = "fs1";
     public static string childAd_Snow = "as1";
     
-    //2023 어린이날 //2022눈사람 사용중
+    //2023 바캉스패스
     public static string commonEventFree = "cef0";
     public static string commonEventAd = "cea0";
+    
+    //2023 보름달패스
+    public static string commonEvent2Free = "cef1";
+    public static string commonEvent2Ad = "cea1";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
@@ -1155,6 +1159,8 @@ public class OneYearPassServerTable
         { childAd_Snow,string.Empty},
         { commonEventFree,string.Empty},
         { commonEventAd,string.Empty},
+        { commonEvent2Free,string.Empty},
+        { commonEvent2Ad,string.Empty},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

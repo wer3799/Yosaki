@@ -6,21 +6,21 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI.Extensions;
 
+public struct RewardItem
+{
+    public Item_Type ItemType;
+    public float ItemValue;
 
+    public RewardItem(Item_Type itemType, float itemValue)
+    {
+        this.ItemType = itemType;
+        this.ItemValue = itemValue;
+    }
+}
 public class UiLevelPassBoard : MonoBehaviour
 {
     
-    public struct Reward
-    {
-        public Item_Type ItemType;
-        public float ItemValue;
 
-        public Reward(Item_Type itemType, float itemValue)
-        {
-            this.ItemType = itemType;
-            this.ItemValue = itemValue;
-        }
-    }
     
     
     
@@ -35,7 +35,7 @@ public class UiLevelPassBoard : MonoBehaviour
     
     [SerializeField] private UiRewardResultView _uiRewardResultView;
     
-    private List<Reward> rewardList = new List<Reward>();
+    private List<RewardItem> rewardList = new List<RewardItem>();
     private void Start()
     {
         // RefundFox();
@@ -48,13 +48,13 @@ public class UiLevelPassBoard : MonoBehaviour
 
         if (existingRewardIndex >= 0)
         {
-            Reward existingReward = rewardList[existingRewardIndex];
+            RewardItem existingReward = rewardList[existingRewardIndex];
             existingReward.ItemValue += itemValue;
             rewardList[existingRewardIndex] = existingReward;
         }
         else
         {
-            rewardList.Add(new Reward(itemType, itemValue));
+            rewardList.Add(new RewardItem(itemType, itemValue));
         }
     }
     
@@ -158,7 +158,7 @@ public class UiLevelPassBoard : MonoBehaviour
 
         List<int> rewardTypeList = new List<int>();
 
-        List<Reward> rewards = new List<Reward>();
+        List<RewardItem> rewards = new List<RewardItem>();
         
         for (int i = 0; i < tableData.Length; i++)
         {

@@ -816,6 +816,7 @@ public class TableManager : SingletonMono<TableManager>
     public RelicTest RelicTest;
     public CommonCollectionEvent commoncollectionEvent;
     public CommonEventAttend CommonEventAttend;
+    public CommonEventAttend2 CommonEventAttend2;
     public SnowManAtten snowManAtten;
     public SumiAbilBase sumiAbilBase;
     public FoxCup foxCup;
@@ -855,6 +856,7 @@ public class TableManager : SingletonMono<TableManager>
     public TestDo TestDo;
     public TestSumi TestSumi;
     public TestThief TestThief;
+    public TestSin TestSin;
     public SealSword sealSwordTable;
     public SealSwordPass SealSwordPass;
     public FoxFirePass FoxFirePass;
@@ -872,6 +874,7 @@ public class TableManager : SingletonMono<TableManager>
     public TestDark TestDark;
     public SoulPass SoulPass;
     public PeachPass PeachPass;
+    public DanjeonTable DanjeonTable;
     
     
     private Dictionary<int, SealSwordData> sealSwordData = null;
@@ -899,6 +902,7 @@ public class TableManager : SingletonMono<TableManager>
     
     public TowerTable9 SealTowerTable;
     public SealSwordAwakeTable SealSwordAwakeTable;
+    public DosulAwakeTable DosulAwakeTable;
     public TaegeukTitle taegeukTitle;
     public TowerTable10 gyungRockTowerTable3;
     public TowerTable11 gyungRockTowerTable4;
@@ -907,7 +911,7 @@ public class TableManager : SingletonMono<TableManager>
     public DosulTower dosulTowerTable;
     public Dosul dosulTable;
     public VisionTowerTable visionTowerTable;
-
+    public DaesanExchange DaesanExchange;
 }
 
 
@@ -920,4 +924,5 @@ public enum CommonTableEventType
     HotTime,
     Normal,
     SecondAnniversary,
+    FullMoon,
 }

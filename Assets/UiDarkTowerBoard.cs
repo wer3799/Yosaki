@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -66,6 +67,14 @@ public class UiDarkTowerBoard : MonoBehaviour
             var towerTableData = TableManager.Instance.DarkTowerTable.dataArray[currentFloor];
 
             uiTowerRewardView.UpdateRewardView(towerTableData.Id);
+        }
+        else
+        {     
+ 
+            var towerTableData = TableManager.Instance.DarkTowerTable.dataArray.Last();
+
+            uiTowerRewardView.UpdateRewardView(towerTableData.Id);
+            
         }
 
 

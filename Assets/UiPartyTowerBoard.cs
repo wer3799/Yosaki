@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UniRx;
 using BackEnd;
@@ -125,6 +126,13 @@ public class UiPartyTowerBoard : MonoBehaviour
             }
 
             var towerTableData = TableManager.Instance.towerTableMulti.dataArray[currentFloor];
+
+            uiTower4RewardView.UpdateRewardView(towerTableData.Id);
+        }
+        else
+        {
+            
+            var towerTableData = TableManager.Instance.towerTableMulti.dataArray.Last();
 
             uiTower4RewardView.UpdateRewardView(towerTableData.Id);
         }

@@ -202,9 +202,11 @@ public class GoodsTable
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string Event_NewYear = "Event_NewYear"; //떡국
     public static string Event_NewYear_All = "Event_NewYear_All"; //신년재화 총생산량
-    public static string Event_Mission = "Event_Mission2";//발리볼 //꽃송이 //바람개비.
     public static string Event_Mission_Refund = "Event_Mission1";//발리볼 //꽃송이 //바람개비.
+    public static string Event_Mission = "Event_Mission2";//발리볼 //꽃송이 //바람개비.
     public static string Event_Mission_All = "Event_Mission_All2"; //꽃송이 //바람개비 총생산량(소급 위한)
+    public static string Event_Mission2 = "Event_Mission3";//보름달
+    public static string Event_Mission2_All = "Event_Mission_All3"; //보름달생산량
 
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
     public static string SusanoTreasure = "ST"; // 악귀퇴치 재화
@@ -237,6 +239,7 @@ public class GoodsTable
     public static string TransClearTicket = "TCT";
     public static string MeditationGoods = "MG";
     public static string MeditationClearTicket = "MCT";
+    public static string DaesanGoods = "DG";
 
     public static string EventDice = "EventDice";
     public static string Event_SA = "EventSA";
@@ -438,6 +441,8 @@ public class GoodsTable
         { Event_NewYear_All, 0f },
         { Event_Mission, 0f },
         { Event_Mission_All, 0f },
+        { Event_Mission2, 0f },
+        { Event_Mission2_All, 0f },
         { Event_Mission_Refund, 0f },
         { FoxMaskPartial, 0f },
 
@@ -468,6 +473,7 @@ public class GoodsTable
         { TransClearTicket, 0f },
         { MeditationGoods, 0f },
         { MeditationClearTicket, 0f },
+        { DaesanGoods, 0f },
 
         { EventDice, 0f },
         { Event_SA, 0f },
@@ -1661,6 +1667,10 @@ public class GoodsTable
             {
                 return GoodsTable.MeditationClearTicket;
             }
+            case Item_Type.DaesanGoods:
+            {
+                return GoodsTable.DaesanGoods;
+            }
 
             case Item_Type.EventDice:
             {
@@ -1684,6 +1694,10 @@ public class GoodsTable
             case Item_Type.Event_Mission:
             {
                 return GoodsTable.Event_Mission;
+            }
+            case Item_Type.Event_Mission2:
+            {
+                return GoodsTable.Event_Mission2;
             }
 
             case Item_Type.DokebiFireKey:
@@ -2342,6 +2356,10 @@ public class GoodsTable
         {
             return Item_Type.MeditationClearTicket;
         }
+        else if (GoodsTable.DaesanGoods == type)
+        {
+            return Item_Type.DaesanGoods;
+        }
         else if (GoodsTable.EventDice == type)
         {
             return Item_Type.EventDice;
@@ -2363,6 +2381,11 @@ public class GoodsTable
         else if (GoodsTable.Event_Mission == type)
         {
             return Item_Type.Event_Mission;
+        }
+
+        else if (GoodsTable.Event_Mission2 == type)
+        {
+            return Item_Type.Event_Mission2;
         }
 
         else if (GoodsTable.DokebiFireKey == type)

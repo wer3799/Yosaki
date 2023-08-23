@@ -416,6 +416,14 @@ public class SkillServerTable
 
         if (tableData.SKILLCASTTYPE == SkillCastType.Dosul)
         {
+            int getDosulAwakeGrade = PlayerStats.GetDosulAwakeGrade();
+
+            if (getDosulAwakeGrade != -1)
+            {
+                var sealTableData = TableManager.Instance.DosulAwakeTable.dataArray[getDosulAwakeGrade];
+                //ret->originDamage       
+                return (ret + sealTableData.Awakevalue* addDamageValue) * (1 + PlayerStats.GetDosulDamPer());
+            }
             return ret * (1 + PlayerStats.GetDosulDamPer());
         }
 

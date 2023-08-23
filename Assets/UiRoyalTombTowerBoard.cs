@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,7 +68,13 @@ public class UiRoyalTombTowerBoard : MonoBehaviour
 
             uiRoyalTombTowerRewardView.UpdateRewardView(towerTableData.Id);
         }
+        else
+        {
+            var towerTableData = TableManager.Instance.royalTombTowerTable.dataArray.Last();
 
+            uiRoyalTombTowerRewardView.UpdateRewardView(towerTableData.Id);
+            
+        }
 
     }
 

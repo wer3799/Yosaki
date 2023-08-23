@@ -174,7 +174,8 @@ public class SonCloneManager : SingletonMono<SonCloneManager>
     [SerializeField]
     private TextMeshProUGUI currentWaveText;
 
-    private WaitForSeconds spawnDelay = new WaitForSeconds(0.4f);
+    //private WaitForSeconds spawnDelay = new WaitForSeconds(0.4f);
+    private WaitForSeconds spawnDelay = new WaitForSeconds(0.13f);
 
     private IEnumerator MainGameRoutine()
     {

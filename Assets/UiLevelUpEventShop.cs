@@ -738,6 +738,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                     ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += amount;
                     param.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
                 }
+                break;;
+            case Item_Type.DaesanGoods:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += amount;
+                    param.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
+                }
                 break;
             case Item_Type.EventDice:
                 {

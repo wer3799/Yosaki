@@ -512,14 +512,21 @@ public enum Item_Type
     costume141 = 1441, // 현상수배     
     costume142 = 1442, // 현상수배     
     costume143 = 1443, // 이벤트     
-    costume144 = 1444, //      월간
+    costume144 = 1444, // 8월 월간
     costume145 = 1445, // 현상수배     
     costume146 = 1446, // 현상수배     
 
     costume147 = 1447, // 수인     
     costume148 = 1448, // 수인     
     
-    costume149 = 1449, // 투명     
+    costume149 = 1449, // 투명
+    
+    costume150 = 1450, // 현상     
+    costume151 = 1451, // 수인     
+    costume152 = 1452, // 수인     
+    
+    costume153 = 1453, // 9월 월간     
+    costume154 = 1454, // 송편 보름달 외형 이벤트     
 
 
     gumiho0 = 5000,
@@ -756,6 +763,7 @@ public enum Item_Type
     HyunSangWeapon5 = 7245,
     HyunSangWeapon6 = 7246,
     HyunSangWeapon7 = 7247,
+    HyunSangWeapon8 = 7248,
     
     HyunSangNorigae0 = 7250,
     HyunSangNorigae1 = 7251,
@@ -765,6 +773,7 @@ public enum Item_Type
     HyunSangNorigae5 = 7255,
     HyunSangNorigae6 = 7256,
     HyunSangNorigae7 = 7257,
+    HyunSangNorigae8 = 7258,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -773,8 +782,8 @@ public enum Item_Type
     
     SpecialSuhoPet8 = 7604,
     SpecialSuhoPet9 = 7605,
-    // SpecialSuhoPet10 = 7606,
-    // SpecialSuhoPet11 = 7607,
+    SpecialSuhoPet10 = 7606,
+    SpecialSuhoPet11 = 7607,
     
     
     pet52 = 7700, //이벤트펫
@@ -822,6 +831,7 @@ public enum Item_Type
     MonthNorigae8 = 8610, // 월간노리개
     weapon131 = 8611,//2주년무기
     RecommendNorigae0 = 8612, // 투명노리개
+    MonthNorigae9 = 8613, // 월간노리개
 
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
@@ -876,11 +886,14 @@ public enum Item_Type
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량
     
-    Event_Mission = 8802,//꽃송이
+    Event_Mission = 8802,//서핑보드
     Event_Mission_All = 8803, // 총 습득량
     Event_Collection_All =8804,//봄나물 총습득량
     Event_Item_SnowMan_All=8805,
 
+    Event_Mission2 = 8806,//보름달
+    Event_Mission2_All = 8807, // 총 습득량
+    
     Mileage = 9000,
     DokebiFire = 9001,
     DokebiFireKey = 9002,
@@ -927,6 +940,7 @@ public enum Item_Type
     Event_SA = 9042,
     MeditationGoods = 9043,
     MeditationClearTicket = 9044,
+    DaesanGoods = 9045,
 }
 //
 public class DropItem : PoolItem

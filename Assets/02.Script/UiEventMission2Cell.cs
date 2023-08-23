@@ -187,7 +187,7 @@ public class UiEventMission2Cell : MonoBehaviour
         }
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransactionV2(transactionList);
 
         SyncRoutine = null;
     }

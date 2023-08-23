@@ -6,6 +6,7 @@ using UnityEngine;
 using UniRx;
 using TMPro;
 
+//십만대산
 public class UiRealBossRankBoard : MonoBehaviour
 {
     [SerializeField]
@@ -67,7 +68,8 @@ public class UiRealBossRankBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        RankManager.Instance.GetRankerList(RankManager.Rank_Real_Boss_Uuid, 100, WhenAllRankerLoadComplete);
+        //RankManager.Instance.GetRankerList(RankManager.Rank_Real_Boss_Uuid, 100, WhenAllRankerLoadComplete);
+        RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaV2_Uuid, 100, WhenAllRankerLoadComplete);
         RankManager.Instance.RequestMyRealBossRank();
     }
 
@@ -104,7 +106,7 @@ public class UiRealBossRankBoard : MonoBehaviour
                         string nickName = data["nickname"][ServerData.format_string].ToString();
                         int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
                         double score = double.Parse(data["score"][ServerData.format_Number].ToString());
-                        score *= GameBalance.BossScoreConvertToOrigin;
+                        score *= GameBalance.BossScoreConvertToOrigin * GameBalance.BossScoreAdjustValue;
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);
                         int weaponId = int.Parse(splitData[2]);
