@@ -1075,6 +1075,7 @@ public class UserInfoTable
         {
             //주간미션은 초기화안함.
             if(table[i].EVENTMISSIONTYPE == EventMissionType.FIRST) continue;
+            if(table[i].EVENTMISSIONTYPE == EventMissionType.AFIRST) continue;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].clearCount.Value = 0;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].rewardCount.Value = 0;
 

@@ -83,7 +83,7 @@ public class UserInfoTable_2
     public const string eventMiniGameScore_Total = "emgst";
     
     public const string getRelicUpgrade = "gru";
-    public const string meditationRefund = "mr0";
+    public const string fullMoonRefund = "fmr0";
     
     public const string danjeonScore = "djs";
     
@@ -155,7 +155,7 @@ public class UserInfoTable_2
         { transTowerStart, 0f },
         { eventMiniGameScore_TopRate, 0f },
         { eventMiniGameScore_Total, 0f },
-        { meditationRefund, 0f },
+        { fullMoonRefund, 0f },
         
         { danjeonScore, 0f },
         
