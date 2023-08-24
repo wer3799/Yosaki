@@ -61,9 +61,9 @@ public class UiFullMoonMissionRefund : MonoBehaviour
             }
         }
 
-        //미션깬거 초기화 되어서 있어서 1개씩 클리어 된걸로 처리
-        ServerData.eventMissionTable.TableDatas["AMission1"].clearCount.Value++;
-        ServerData.eventMissionTable.TableDatas["AMission2"].clearCount.Value++;
+        //미션깬거 초기화 있어서 1개씩 클리어 된걸로 처리 (어제꺼 1 + 오늘꺼 1 = 2)
+        ServerData.eventMissionTable.TableDatas["AMission1"].clearCount.Value=2;
+        ServerData.eventMissionTable.TableDatas["AMission2"].clearCount.Value=2;
 
 
         if (minusUser)
