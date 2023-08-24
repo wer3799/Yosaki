@@ -9,10 +9,10 @@ public class UiFullMoonMissionRefund : MonoBehaviour
 
     void Start()
     {
-        #if UNITY_IOS
+#if UNITY_IOS
         return;
-        #endif
-        
+#endif
+
         CheckRefund();
     }
 
@@ -42,6 +42,7 @@ public class UiFullMoonMissionRefund : MonoBehaviour
 
 
         bool minusUser = false;
+        bool showMessage = false;
 
         int moonCount = totalExchangeCount + remainMoonHasCount;
 
@@ -59,7 +60,7 @@ public class UiFullMoonMissionRefund : MonoBehaviour
                 minusUser = true;
             }
         }
-        
+
         //미션깬거 초기화 되어서 있어서 1개씩 클리어 된걸로 처리
         ServerData.eventMissionTable.TableDatas["AMission1"].clearCount.Value++;
         ServerData.eventMissionTable.TableDatas["AMission2"].clearCount.Value++;
@@ -73,6 +74,8 @@ public class UiFullMoonMissionRefund : MonoBehaviour
             //미션 클리어처리
             ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
             ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
+            
+            showMessage = true;
         }
         //이전에 보상 받은적이 있고,두번 클리어는 했는데 받지는 않은유저
         else
@@ -87,8 +90,6 @@ public class UiFullMoonMissionRefund : MonoBehaviour
                         ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
                         minusUser = true;
                     }
-                    
-       
                 }
             }
             else
@@ -101,7 +102,6 @@ public class UiFullMoonMissionRefund : MonoBehaviour
                         ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
                         minusUser = true;
                     }
-             
                 }
             }
         }
@@ -116,7 +116,7 @@ public class UiFullMoonMissionRefund : MonoBehaviour
         eventMissionParam.Add("AMission3", ServerData.eventMissionTable.TableDatas["AMission3"].ConvertToString());
         eventMissionParam.Add("AMission1", ServerData.eventMissionTable.TableDatas["AMission1"].ConvertToString());
         eventMissionParam.Add("AMission2", ServerData.eventMissionTable.TableDatas["AMission2"].ConvertToString());
-        
+
         goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
         userInfo2Param.Add(UserInfoTable_2.fullMoonRefund, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.fullMoonRefund].Value);
 
@@ -130,7 +130,10 @@ public class UiFullMoonMissionRefund : MonoBehaviour
 
         if (minusUser)
         {
-            PopupManager.Instance.ShowConfirmPopup("중복 보상회수", $"십만대산미션 중복보상 보름달 {retakeCount}개가 회수 되었습니다.", null);
+            if (showMessage)
+            {
+                PopupManager.Instance.ShowConfirmPopup("중복 보상회수", $"십만대산미션 중복보상 보름달 {retakeCount}개가 회수 되었습니다.", null);
+            }
         }
     }
 }
