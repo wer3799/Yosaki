@@ -760,11 +760,15 @@ public class UserInfoTable
                             defultValues.Add(e.Current.Key, 1);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(1));
                         }
-                        else if (e.Current.Key == collectionEventInitialize||
-                        e.Current.Key == eventMissionInitialize)
+                        else if (e.Current.Key == collectionEventInitialize)
                         {
                             defultValues.Add(e.Current.Key, 5);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(5));
+                        }
+                        else if(e.Current.Key == eventMissionInitialize)
+                        {
+                            defultValues.Add(e.Current.Key, 6);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(6));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {

@@ -218,7 +218,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 #endif
             for (int i = 0; i < controller.products.all.Length; i++)
             {
-                Debug.Log(controller.products.all[i].definition.id);
+               //Debug.Log(controller.products.all[i].definition.id);
                 if (controller.products.all[i].hasReceipt)
                 {
                     products.Add(controller.products.all[i]);
@@ -235,7 +235,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 
         for (int i = 0; i < PurchasedProducts.Length; i++)
         {
-            Debug.Log($"{PurchasedProducts[i].definition.id} has hasReceipt");
+            //Debug.Log($"{PurchasedProducts[i].definition.id} has hasReceipt");
         }
 
         //딕셔너리에 저장

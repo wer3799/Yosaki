@@ -291,6 +291,34 @@ public class UiMileageRefund : MonoBehaviour
             });
 
         }
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 6)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 6;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_5).Value = 0;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_0, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_0).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_1, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_1).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_2, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_2).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_3, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_3).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_4, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_4).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_5, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_5).Value);
+    
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("송편 교환 횟수 초기화!!");
+            });
+        }
         
     }
     
