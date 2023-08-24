@@ -9,6 +9,10 @@ public class UiFullMoonMissionRefund : MonoBehaviour
 
     void Start()
     {
+        #if UNITY_IOS
+        return;
+        #endif
+        
         CheckRefund();
     }
 
@@ -55,6 +59,10 @@ public class UiFullMoonMissionRefund : MonoBehaviour
                 minusUser = true;
             }
         }
+        
+        //미션깬거 초기화 되어서 있어서 1개씩 클리어 된걸로 처리
+        ServerData.eventMissionTable.TableDatas["AMission1"].clearCount.Value++;
+        ServerData.eventMissionTable.TableDatas["AMission2"].clearCount.Value++;
 
 
         if (minusUser)
@@ -65,10 +73,37 @@ public class UiFullMoonMissionRefund : MonoBehaviour
             //미션 클리어처리
             ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
             ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
-            
-            //미션깬거 초기화 됐을수 있어서 1개씩 클리어 된걸로 처리
-            ServerData.eventMissionTable.TableDatas["AMission1"].clearCount.Value++;
-            ServerData.eventMissionTable.TableDatas["AMission2"].clearCount.Value++;
+        }
+        //이전에 보상 받은적이 있고,두번 클리어는 했는데 받지는 않은유저
+        else
+        {
+            if (hasFullMoonPass)
+            {
+                if (moonCount >= 1000)
+                {
+                    if (ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value >= 5)
+                    {
+                        ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
+                        ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
+                        minusUser = true;
+                    }
+                    
+       
+                }
+            }
+            else
+            {
+                if (moonCount >= 500)
+                {
+                    if (ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value >= 5)
+                    {
+                        ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
+                        ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
+                        minusUser = true;
+                    }
+             
+                }
+            }
         }
 
 
