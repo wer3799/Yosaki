@@ -84,24 +84,19 @@ public class UiFullMoonMissionRefund : MonoBehaviour
             {
                 if (moonCount >= 1000)
                 {
-                    if (ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value >= 5)
-                    {
-                        ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
-                        ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
-                        minusUser = true;
-                    }
+                    ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
+                    ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
+                    minusUser = true;
+               
                 }
             }
             else
             {
                 if (moonCount >= 500)
                 {
-                    if (ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value >= 5)
-                    {
-                        ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
-                        ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
-                        minusUser = true;
-                    }
+                    ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
+                    ServerData.eventMissionTable.TableDatas["AMission3"].rewardCount.Value = 1;
+                    minusUser = true;
                 }
             }
         }
