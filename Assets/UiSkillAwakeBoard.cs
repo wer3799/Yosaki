@@ -68,11 +68,11 @@ public class UiSkillAwakeBoard : MonoBehaviour
 
     public void OnClickResetButton()
     {
-        int currentMaxPoint = GetMaxSkillAwakePoint();
+        var currentMaxPoint = GetMaxSkillAwakePoint();
 
-        currentMaxPoint -= ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
-        currentMaxPoint -= ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
-        currentMaxPoint -= ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
+        currentMaxPoint -= (int)ServerData.statusTable.GetTableData(StatusTable.Skill0_AddValue).Value;
+        currentMaxPoint -= (int)ServerData.statusTable.GetTableData(StatusTable.Skill1_AddValue).Value;
+        currentMaxPoint -= (int)ServerData.statusTable.GetTableData(StatusTable.Skill2_AddValue).Value;
 
         ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value = currentMaxPoint;
 

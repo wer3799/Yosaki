@@ -449,13 +449,18 @@ public class SeolPassServerTable
     public static string MonthlypassAdReward = "ad";  
     public static string MonthlypassFreeReward_dol = "free_d";
     public static string MonthlypassAdReward_dol = "ad_d";
+    
+    public static string PetPassFree = "p_free0";
+    public static string PetPassAd = "p_ad0";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         { MonthlypassFreeReward,string.Empty},
         { MonthlypassAdReward,string.Empty},
         { MonthlypassFreeReward_dol,string.Empty},
-        { MonthlypassAdReward_dol,string.Empty}
+        { MonthlypassAdReward_dol,string.Empty},
+        { PetPassFree,"-1"},
+        { PetPassAd,"-1"}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -839,6 +844,9 @@ public class ColdSeasonPassServerTable
     
     public static string peachFree = "f16";
     public static string peachAd = "a16";
+    
+    public static string meditationFree = "f17";
+    public static string meditationAd = "a17";
 
     public static string coldseasonFree_Atten = "fa2";
 
@@ -871,6 +879,8 @@ public class ColdSeasonPassServerTable
         { soulAd,string.Empty},
         { peachFree,string.Empty},
         { peachAd,string.Empty},
+        { meditationFree,string.Empty},
+        { meditationAd,string.Empty},
 
     };
 

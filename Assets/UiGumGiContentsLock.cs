@@ -8,7 +8,7 @@ public class UiGumGiContentsLock : MonoBehaviour
     private int lockLevel = 100000;
     private void OnEnable()
     {
-        int curLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        var curLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         if (curLevel < lockLevel)
         {

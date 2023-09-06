@@ -875,8 +875,11 @@ public class TableManager : SingletonMono<TableManager>
     public SoulPass SoulPass;
     public PeachPass PeachPass;
     public DanjeonTable DanjeonTable;
-    
-    
+    public MeditationPass MeditationPass;
+    public RelicSpecial RelicSpecial;
+    public RelicEnhance RelicEnhance;
+    public PetPass PetPass;
+    public GuildExchange GuildExchange;
     private Dictionary<int, SealSwordData> sealSwordData = null;
 
     public Dictionary<int, SealSwordData> SealSwordData

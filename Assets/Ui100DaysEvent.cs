@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +12,14 @@ public class Ui100DaysEvent : MonoBehaviour
     void Start()
     {
         Initialize();
+        
     }
+
 
     private void Initialize()
     {
+        this.gameObject.SetActive(ServerData.attendanceServerTable.Attendance100AllReceived() == false);
+        
         var tableDatas = TableManager.Instance.AttendanceReward_100.dataArray;
 
         int currentAttendance = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.attendanceCount_100Day).Value;

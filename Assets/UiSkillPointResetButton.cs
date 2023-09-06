@@ -126,7 +126,7 @@ public class UiSkillPointResetButton : MonoBehaviour
             ServerData.skillServerTable.UpdateSelectedSkillIdx(ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(i)].Select(e => e.Value).ToList(), i);
         }
 
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        var currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         //리셋한 데이터 적용
         ServerData.statusTable.GetTableData(StatusTable.SkillPoint).Value = currentLevel * GameBalance.SkillPointGet;

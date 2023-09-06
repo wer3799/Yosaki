@@ -82,7 +82,7 @@ public class UiMeditationBoard : MonoBehaviour
         {
             string formattedTime = string.Format("남은시간\n<color=white>{0:D2}시:{1:D2}분</color>", timeRemaining.Hours, timeRemaining.Minutes);
             timeText.text = formattedTime;
-            meditationButtonText.SetText($"시간 단축\n{(int)(timeRemaining.TotalSeconds/60) * GetNextGradeCost()}개 사용");
+            meditationButtonText.SetText($"시간 단축\n{Utils.ConvertNum((int)(timeRemaining.TotalSeconds/60) * GetNextGradeCost())}개 사용");
             if (meditationGoods != null)
             {
                 meditationGoods.SetActive(true);
@@ -92,7 +92,7 @@ public class UiMeditationBoard : MonoBehaviour
         {
             string formattedTime = string.Format("남은시간\n<color=white>{0:D2}분:{1:D2}초</color>", timeRemaining.Minutes, timeRemaining.Seconds);
             timeText.SetText(formattedTime);
-            meditationButtonText.SetText($"시간 단축\n{Mathf.Max(1,(int)(timeRemaining.TotalSeconds/60)) * GetNextGradeCost()}개 사용");
+            meditationButtonText.SetText($"시간 단축\n{Utils.ConvertNum(Mathf.Max(1,(int)(timeRemaining.TotalSeconds/60)) * GetNextGradeCost())}개 사용");
             if (meditationGoods != null)
             {
                 meditationGoods.SetActive(true);

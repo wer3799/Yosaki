@@ -137,6 +137,19 @@ public static class GameBalance
     public readonly static ObscuredInt murgePartyRaidRankRewardTicket_0_501_1000 = 10;
     public readonly static ObscuredInt murgePartyRaidRankRewardTicket_0_1001_5000 = 8;
 
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_1 = 15;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_2 = 13;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_3 = 11;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_4 = 10;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_5 = 9;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_6_10 = 8;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_11_20 = 7;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_21_50 = 6;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_51_100 = 5;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_101_500 = 4;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_501_1000 = 3;
+    public readonly static ObscuredInt murgePartyRaidRankRewardTicket_1_1001_5000 = 2;
+
     public readonly static ObscuredInt rankRewardTicket_1_relic = 120;
     public readonly static ObscuredInt rankRewardTicket_2_relic = 110;
     public readonly static ObscuredInt rankRewardTicket_3_relic = 100;
@@ -177,8 +190,8 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_new_21_100_MiniGame = 14;
     public readonly static ObscuredInt rankReward_new_101_1000_MiniGame = 13;
     public readonly static ObscuredInt rankReward_new_1001_10000_MiniGame = 12;
-
-    //구미호
+    
+    //붉은구미호(구)
     public readonly static ObscuredInt rankReward_1_guild = 40000;
     public readonly static ObscuredInt rankReward_2_guild = 38000;
     public readonly static ObscuredInt rankReward_3_guild = 36000;
@@ -187,6 +200,15 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_6_20_guild = 30000;
     public readonly static ObscuredInt rankReward_21_50_guild = 28000;
     public readonly static ObscuredInt rankReward_51_100_guild = 26000;
+    
+    //붉은구미호(신)
+    public readonly static ObscuredInt redFoxReward_1_guild = 50000;
+    public readonly static ObscuredInt redFoxReward_2_guild = 45000;
+    public readonly static ObscuredInt redFoxReward_3_guild = 40000;
+    public readonly static ObscuredInt redFoxReward_4_guild = 35000;
+    public readonly static ObscuredInt redFoxReward_5_guild = 30000;
+    public readonly static ObscuredInt redFoxReward_6_20_guild = 20000;
+    public readonly static ObscuredInt redFoxReward_21_100_guild = 10000;
 
     public readonly static ObscuredInt rankReward_1_guild_new = 400;
     public readonly static ObscuredInt rankReward_2_guild_new = 350;
@@ -197,7 +219,7 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_21_50_guild_new = 100;
     public readonly static ObscuredInt rankReward_51_100_guild_new = 50;
 
-    //대산군
+    //대산군(구)
     public readonly static ObscuredInt rankRewardParty_1_guild_new = 40000;
     public readonly static ObscuredInt rankRewardParty_2_guild_new = 38000;
     public readonly static ObscuredInt rankRewardParty_3_guild_new = 36000;
@@ -207,6 +229,15 @@ public static class GameBalance
     public readonly static ObscuredInt rankRewardParty_21_50_guild_new = 28000;
     public readonly static ObscuredInt rankRewardParty_51_100_guild_new = 26000;
 
+    //대산군(신)
+    public readonly static ObscuredInt sangunReward_1_guild = 50000;
+    public readonly static ObscuredInt sangunReward_2_guild = 45000;
+    public readonly static ObscuredInt sangunReward_3_guild = 40000;
+    public readonly static ObscuredInt sangunReward_4_guild = 35000;
+    public readonly static ObscuredInt sangunReward_5_guild = 30000;
+    public readonly static ObscuredInt sangunReward_6_20_guild = 20000;
+    public readonly static ObscuredInt sangunReward_21_100_guild = 10000;
+    
     public readonly static ObscuredInt rankReward_1_new_boss = 3000;
     public readonly static ObscuredInt rankReward_2_new_boss = 2800;
     public readonly static ObscuredInt rankReward_3_new_boss = 2600;
@@ -424,8 +455,9 @@ public static class GameBalance
     public static ObscuredInt chunGodGraduate = 4;
     public static ObscuredInt doGodGraduate = 5;
     public static ObscuredInt sumiGodGraduate = 6;
-    public static ObscuredInt darkGodGraduate = 7;
-    public static ObscuredInt sinsunGodGraduate = 8;
+    public static ObscuredInt thiefGodGraduate = 7;
+    public static ObscuredInt darkGodGraduate = 8;
+    public static ObscuredInt sinsunGodGraduate = 9;
     
     public static ObscuredFloat swordGodGraduateValue = 1.5f;
     public static ObscuredFloat monkeyGodGraduateValue = 1.3f;
@@ -433,6 +465,7 @@ public static class GameBalance
     public static ObscuredFloat chunGodGraduateValue = 1.2f;
     public static ObscuredFloat doGodGraduateValue = 1.25f;
     public static ObscuredFloat sumiGodGraduateValue = 1.25f;
+    public static ObscuredFloat thiefGodGraduateValue = 2f;
     public static ObscuredFloat darkGodGraduateValue = 1.25f;
     public static ObscuredFloat sinsunGodGraduateValue = 1.25f;
         
@@ -442,8 +475,9 @@ public static class GameBalance
     public static ObscuredDouble chunGodGraduateScore = 1E+127;
     public static ObscuredDouble doGodGraduateScore = 1E+129;
     public static ObscuredDouble sumiGodGraduateScore = 5E+131;
-    public static ObscuredDouble darkGodGraduateScore = 5E+133;
-    public static ObscuredDouble sinsunGodGraduateScore = 5E+133;
+    public static ObscuredDouble thiefGodGraduateScore = 5E+134;
+    public static ObscuredDouble darkGodGraduateScore = 1E+136;
+    public static ObscuredDouble sinsunGodGraduateScore = 1E+139;
     //
     
     public static ObscuredDouble refundGoldBarRatio = 1E+34; //보유금화환불단위
@@ -454,6 +488,10 @@ public static class GameBalance
     public static ObscuredInt goldGraduateScore = 65950;// 금화능력치총합레벨조건
     
     public static ObscuredFloat Gum_memory = 0.0000010f;
+    public static ObscuredFloat Sum_memory = 0.0000008f;
+    public static ObscuredFloat Sim_memory = 0.0000004f;
+
+    
     public static ObscuredFloat Special0_GoldBar = 0.0000000004f;
     public static ObscuredFloat Special1_GoldBar = 0.0000000015f;
     public static ObscuredFloat Special2_GoldBar = 0.0000000038f;
@@ -508,7 +546,7 @@ public static class GameBalance
     public static ObscuredInt DosulAwakeRequireLevel = 99;// 필요 도술 ID
     public static int GetSonIdx()
     {
-        int level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
+        var level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
 
         if (level >= 12000 && level < 50000)
         {
@@ -525,7 +563,7 @@ public static class GameBalance
             return 5;
         }
 
-        int ret = 0;
+        var ret = 0f;
 
 
 
@@ -536,7 +574,7 @@ public static class GameBalance
 
         ret = level / SonEvolutionDivdeNum;
         ret = Mathf.Min(ret, CommonUiContainer.Instance.sonThumbNail.Count - 1);
-        return ret;
+        return (int)ret;
     }
 }
 

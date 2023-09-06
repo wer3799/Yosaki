@@ -235,6 +235,60 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if(type.IsMergePartyRaidRankFrameItem_1())
+        {
+            switch (type)
+            {
+                case Item_Type.MergePartyRaidRankFrame_1_1:
+                    title.SetText("십만대산 개인 랭킹보상(1위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_1}개\n채팅 아이콘(1등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_2:
+                    title.SetText("십만대산 개인 랭킹보상(2위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_2}개\n채팅 아이콘(2등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_3:
+                    title.SetText("십만대산 개인 랭킹보상(3위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_3}개\n채팅 아이콘(3등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_4:
+                    title.SetText("십만대산 개인 랭킹보상(4위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_4}개\n채팅 아이콘(4등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_5:
+                    title.SetText("십만대산 개인 랭킹보상(5위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_5}개\n채팅 아이콘(5등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_6_10:
+                    title.SetText("십만대산 개인 랭킹보상(6~10위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_6_10}개\n채팅 아이콘(6등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_11_20:
+                    title.SetText("십만대산 개인 랭킹보상(11~20위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_11_20}개\n채팅 아이콘(6등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_21_50:
+                    title.SetText("십만대산 개인 랭킹보상(21~50위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_21_50}개\n채팅 아이콘(7등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_51_100:
+                    title.SetText("십만대산 개인 랭킹보상(51~100위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_51_100}개\n채팅 아이콘(7등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_101_500:
+                    title.SetText("십만대산 개인 랭킹보상(101~500위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_101_500}개\n채팅 아이콘(8등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_501_1000:
+                    title.SetText("십만대산 개인 랭킹보상(501~1000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_501_1000}개\n채팅 아이콘(8등급)");
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_1001_5000:
+                    title.SetText("십만대산 개인 랭킹보상(1001~5000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_1001_5000}개\n채팅 아이콘(9등급)");
+                    break;
+            }
+        }
         else if (type.IsRelicRewardItem())
         {
             switch (type)
@@ -518,6 +572,71 @@ public class UiPostView : MonoBehaviour
                 case Item_Type.RankFrameParty51_100_guild_new:
                     title.SetText("대산군 보상(50~100위)(문파)");
                     description.SetText($"{CommonString.GetItemName(Item_Type.GuildReward)} {GameBalance.rankRewardParty_51_100_guild_new}개");
+                    break;
+            }
+        }        
+        else if (type.IsGuildReward2Item())
+        {
+            switch (type)
+            {
+                case Item_Type.RedFoxFrame1_guild:
+                    title.SetText("랭킹보상(1위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_1_guild}개");
+                    break;
+                case Item_Type.RedFoxFrame2_guild:
+                    title.SetText("랭킹보상(2위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_2_guild}개");
+                    break;
+                case Item_Type.RedFoxFrame3_guild:
+                    title.SetText("랭킹보상(3위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_3_guild}개");
+                    break;
+                case Item_Type.RedFoxFrame4_guild:
+                    title.SetText("랭킹보상(4위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_4_guild}개");
+                    break;
+                case Item_Type.RedFoxFrame5_guild:
+                    title.SetText("랭킹보상(5위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_5_guild}개");
+                    break;
+                case Item_Type.RedFoxFrame6_20_guild:
+                    title.SetText("랭킹보상(6~20위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_6_20_guild}개");
+                    break;
+                case Item_Type.RedFoxFrame21_100_guild:
+                    title.SetText("랭킹보상(21~100위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.redFoxReward_21_100_guild}개");
+                    break;
+
+                //
+
+                case Item_Type.Sangun_1guild_new:
+                    title.SetText("대산군 보상(1위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_1_guild}개");
+                    break;
+                case Item_Type.Sangun_2guild_new:
+                    title.SetText("대산군 보상(2위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_2_guild}개");
+                    break;
+                case Item_Type.Sangun_3guild_new:
+                    title.SetText("대산군 보상(3위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_3_guild}개");
+                    break;
+                case Item_Type.Sangun_4guild_new:
+                    title.SetText("대산군 보상(4위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_4_guild}개");
+                    break;
+                case Item_Type.Sangun_5guild_new:
+                    title.SetText("대산군 보상(5위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_5_guild}개");
+                    break;
+                case Item_Type.Sangun_6_20_guild_new:
+                    title.SetText("대산군 보상(6~20위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_6_20_guild}개");
+                    break;
+                case Item_Type.Sangun_21_100_guild_new:
+                    title.SetText("대산군 보상(21~100위)(문파)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.HonorGoods)} {GameBalance.sangunReward_21_100_guild}개");
                     break;
             }
         }

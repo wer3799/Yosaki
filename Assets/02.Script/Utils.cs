@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using System.Globalization;
 using Firebase.Analytics;
+using Random = UnityEngine.Random;
 
 public static class Utils
 {
@@ -26,8 +27,12 @@ public static class Utils
     public static bool IsAbsoluteStatus(this StatusType type)
     {
         return type == StatusType.ExpGainPer||
-               type == StatusType.GoldGainPer|
-               type == StatusType.GoldBarGainPer;
+               type == StatusType.GoldGainPer||
+               type == StatusType.GoldBarGainPer||
+               type == StatusType.SuhoGainPer||
+               type == StatusType.FoxRelicGainPer||
+               type == StatusType.DosulGainPer||
+               type == StatusType.MeditationGainPer;
     }
     public static bool IsCostumeItem(this Item_Type type)
     {
@@ -185,7 +190,10 @@ public static class Utils
                type == Item_Type.costume151||
                type == Item_Type.costume152||
                type == Item_Type.costume153||
-               type == Item_Type.costume154
+               type == Item_Type.costume154||
+               type == Item_Type.costume155||
+               type == Item_Type.costume156||
+               type == Item_Type.costume157
             ;
     }
 
@@ -221,7 +229,9 @@ public static class Utils
     }
     public static bool IsPassPetItem(this Item_Type type)
     {
-        return type == Item_Type.pet52;
+        return type == Item_Type.pet52 ||
+               type == Item_Type.pet53 ||
+               type == Item_Type.pet54;
     }
 
 
@@ -358,6 +368,8 @@ public static class Utils
                type == Item_Type.ChunGuPet2 ||
                type == Item_Type.ChunGuPet3 ||
                type == Item_Type.pet52 ||
+               type == Item_Type.pet53 ||
+               type == Item_Type.pet54 ||
                type == Item_Type.SpecialSuhoPet0 ||
                type == Item_Type.SpecialSuhoPet1 ||
                type == Item_Type.SpecialSuhoPet2 ||
@@ -370,6 +382,7 @@ public static class Utils
                type == Item_Type.SpecialSuhoPet9 ||
                type == Item_Type.SpecialSuhoPet10||
                type == Item_Type.SpecialSuhoPet11||
+               type == Item_Type.SpecialSuhoPet12||
                type == Item_Type.RabitPet ||
                type == Item_Type.RabitNorigae ||
                type == Item_Type.YeaRaeNorigae ||
@@ -462,6 +475,7 @@ public static class Utils
                type == Item_Type.MeditationGoods ||
                type == Item_Type.MeditationClearTicket ||
                type == Item_Type.DaesanGoods ||
+               type == Item_Type.HonorGoods ||
                type == Item_Type.NewGachaEnergy ||
                type == Item_Type.EventDice ||
                type == Item_Type.Event_SA ||
@@ -553,6 +567,10 @@ public static class Utils
     {
         return type >= Item_Type.MergePartyRaidRankFrame_0_1 && type <= Item_Type.MergePartyRaidRankFrame_0_1001_5000;
     }
+    public static bool IsMergePartyRaidRankFrameItem_1(this Item_Type type)
+    {
+        return type >= Item_Type.MergePartyRaidRankFrame_1_1 && type <= Item_Type.MergePartyRaidRankFrame_1_1001_5000;
+    }
 
     public static bool IsRelicRewardItem(this Item_Type type)
     {
@@ -584,6 +602,12 @@ public static class Utils
         return (type >= Item_Type.RankFrame1_guild && type <= Item_Type.RankFrame101_1000_guild) ||
                (type >= Item_Type.RankFrame1guild_new && type <= Item_Type.RankFrame51_100_guild_new) ||
                (type >= Item_Type.RankFrameParty1guild_new && type <= Item_Type.RankFrameParty51_100_guild_new)
+            ;
+    }
+    public static bool IsGuildReward2Item(this Item_Type type)
+    {
+        return (type >= Item_Type.RedFoxFrame1_guild && type <= Item_Type.RedFoxFrame21_100_guild) ||
+               (type >= Item_Type.Sangun_1guild_new && type <= Item_Type.Sangun_21_100_guild_new) 
             ;
     }
 
@@ -749,7 +773,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","미정4","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
         
     };
 
@@ -1034,5 +1058,15 @@ public static class Utils
     {
         return ServerData.iapServerTable.TableDatas[UiSnowManEventBuyButton.fallPassKey].buyCount.Value > 0;
     }
+    public static float GetRandomExcluding(float min, float max, float excludeMin, float excludeMax)
+    {
+        float randomValue;
+        do
+        {
+            randomValue = Random.Range(min, max);
+        }
+        while (randomValue >= excludeMin && randomValue <= excludeMax);
 
+        return randomValue;
+    }
 }

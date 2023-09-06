@@ -7,7 +7,7 @@ public class SeolAttenButton : MonoBehaviour
 {
     private static bool active = true;
 
-    void Start()
+    void OnEnable()
     {
         if (active == true)
         {

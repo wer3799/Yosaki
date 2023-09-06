@@ -46,9 +46,16 @@ public class UiMeditationTowerRewardView : MonoBehaviour
        rewardDescription.SetText($"클리어 보상 : {Utils.ConvertBigNum(towerTableData.Rewardvalue)}개");
        
        requireDamage.SetText($"{Utils.ConvertNum(towerTableData.Rewrardcut)}");
-       
 
-        sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}개");
+       if (PlayerStats.GetMeditationGainValue() > 0f)
+       {
+           sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}(+{Utils.ConvertNum(towerTableData.Sweepvalue*PlayerStats.GetMeditationGainValue())})개");
+       }
+       else
+       {
+            sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}개");
+       }
+
        
        rewardName.SetText(CommonString.GetItemName((Item_Type)towerTableData.Rewardtype));
         

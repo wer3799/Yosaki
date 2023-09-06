@@ -129,6 +129,11 @@ public class UiMeditationTowerBoard : MonoBehaviour
             {
                 PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
                 return;
+            }            
+            if (inputNum > 200)
+            {
+                PopupManager.Instance.ShowAlarmMessage("소탕권은 200개 미만으로 사용가능합니다!");
+                return;
             }
             else if (remainItemNum < inputNum)
             {
@@ -146,10 +151,24 @@ public class UiMeditationTowerBoard : MonoBehaviour
         int instantClearGetNum = (int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue * inputNum;
 
         string desc = "";
-        desc +=
-            $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum}개를 획득 하시겠습니까?\n" +
-            $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.MeditationGoods)} {(int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue}개 획득)</color>";
 
+        if (PlayerStats.GetMeditationGainValue() > 0f)
+        {
+
+            desc +=
+                $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {Utils.ConvertNum(instantClearGetNum)}(+{Utils.ConvertNum(instantClearGetNum * PlayerStats.GetMeditationGainValue())})개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.MeditationGoods)} {(int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue}(+{Utils.ConvertNum((int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue * PlayerStats.GetMeditationGainValue())})개 획득)</color>";
+
+        }
+        else
+        {
+                
+            desc +=
+                $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum}개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.MeditationGoods)} {(int)TableManager.Instance.MeditationTower.dataArray[currentClearStageId].Sweepvalue}개 획득)</color>";
+
+        }
+    
 
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
             desc,
@@ -187,7 +206,7 @@ public class UiMeditationTowerBoard : MonoBehaviour
 
                 //실제소탕
                 ServerData.goodsTable.TableDatas[GoodsTable.MeditationClearTicket].Value -= inputNum;
-                ServerData.goodsTable.TableDatas[GoodsTable.MeditationGoods].Value += instantClearGetNum;
+                ServerData.goodsTable.TableDatas[GoodsTable.MeditationGoods].Value += Mathf.Round(instantClearGetNum+(PlayerStats.GetMeditationGainValue()*instantClearGetNum));;
 
                 List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -201,7 +220,7 @@ public class UiMeditationTowerBoard : MonoBehaviour
                     successCallBack: () =>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum}개 획득!", null);
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum+(PlayerStats.GetMeditationGainValue()*instantClearGetNum)}개 획득!", null);
                     });
             }, null);
     }

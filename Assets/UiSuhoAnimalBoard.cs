@@ -108,8 +108,8 @@ public class UiSuhoAnimalBoard : SingletonMono<UiSuhoAnimalBoard>
         if (PlayerStats.GetSuhoGainValue() > 0f)
         {
             desc +=
-                $"{lastPetId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.SuhoPetFeed)} {instanClearGetNum}(+{instanClearGetNum*PlayerStats.GetSuhoGainValue()})개를 획득 하시겠습니까?\n" +
-                $"<color=yellow>({lastPetId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {(int)TableManager.Instance.suhoPetTable.dataArray[lastPetId].Sweepvalue}(+{(int)TableManager.Instance.suhoPetTable.dataArray[lastPetId].Sweepvalue*PlayerStats.GetSuhoGainValue()})개 획득)</color>";
+                $"{lastPetId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.SuhoPetFeed)} {instanClearGetNum}(+{Utils.ConvertNum(instanClearGetNum*PlayerStats.GetSuhoGainValue())})개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({lastPetId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {(int)TableManager.Instance.suhoPetTable.dataArray[lastPetId].Sweepvalue}(+{Utils.ConvertNum((int)TableManager.Instance.suhoPetTable.dataArray[lastPetId].Sweepvalue*PlayerStats.GetSuhoGainValue())})개 획득)</color>";
         }
         else
         {
@@ -151,8 +151,7 @@ public class UiSuhoAnimalBoard : SingletonMono<UiSuhoAnimalBoard>
 
                 //실제소탕
                 ServerData.goodsTable.TableDatas[GoodsTable.SuhoPetFeedClear].Value -= inputNum;
-                ServerData.goodsTable.TableDatas[GoodsTable.SuhoPetFeed].Value +=
-                    instanClearGetNum + (instanClearGetNum * PlayerStats.GetSuhoGainValue());
+                ServerData.goodsTable.TableDatas[GoodsTable.SuhoPetFeed].Value +=Mathf.Round(instanClearGetNum + (instanClearGetNum * PlayerStats.GetSuhoGainValue()));
 
                 List<TransactionValue> transactions = new List<TransactionValue>();
 

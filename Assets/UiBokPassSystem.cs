@@ -79,6 +79,8 @@ public class UiBokPassSystem : MonoBehaviour
     {
         string freeKey = BokPassServerTable.childFree;
         string adKey = BokPassServerTable.childAd;
+        
+        List<int> typeList = new List<int>();
 
         List<int> splitData_Free = GetSplitData(BokPassServerTable.childFree);
         List<int> splitData_Ad = GetSplitData(BokPassServerTable.childAd);
@@ -110,6 +112,10 @@ public class UiBokPassSystem : MonoBehaviour
                 free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
                 rewardedNum++;
+                if(!typeList.Contains(tableData[i].Reward1))
+                {
+                    typeList.Add(tableData[i].Reward1);
+                }
             }
 
             //유료보상
@@ -124,14 +130,14 @@ public class UiBokPassSystem : MonoBehaviour
                 ad += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
                 rewardedNum++;
+                if(!typeList.Contains(tableData[i].Reward2))
+                {
+                    typeList.Add(tableData[i].Reward2);
+                }
             }
         }
 
-        if (hasCostumeItem)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
-            return;
-        }
+
 
         if (rewardedNum > 0)
         {
@@ -141,13 +147,13 @@ public class UiBokPassSystem : MonoBehaviour
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-            goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
-            goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
-
+            var e = typeList.GetEnumerator();
+            
+            while (e.MoveNext())
+            {
+                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
+            }
+            
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param passParam = new Param();
@@ -157,9 +163,16 @@ public class UiBokPassSystem : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(BokPassServerTable.tableName, BokPassServerTable.Indate, passParam));
 
-            ServerData.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
+                if (hasCostumeItem)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
+                }
+                else
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
+                }
                 //LogManager.Instance.SendLogType("ChildPass", "A", "A");
             });
         }

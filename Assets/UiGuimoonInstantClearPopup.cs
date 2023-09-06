@@ -54,6 +54,11 @@ public class UiGuimoonInstantClearPopup : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
                 return;
             }
+            if (inputNum > 200)
+            {
+                PopupManager.Instance.ShowAlarmMessage("소탕권은 200개 미만으로 사용가능합니다!");
+                return;
+            }
             else if (remainItemNum < inputNum)
             {
                 PopupManager.Instance.ShowAlarmMessage(

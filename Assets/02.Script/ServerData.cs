@@ -543,6 +543,9 @@ public static class ServerData
             case Item_Type.VisionSkill11:
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value += rewardValue;
                 break;
+            case Item_Type.VisionSkill12:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value += rewardValue;
+                break;
 
             //
             //            
@@ -713,6 +716,9 @@ public static class ServerData
 
             case Item_Type.DaesanGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += rewardValue;
+                break;
+            case Item_Type.HonorGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += rewardValue;
                 break;
 
             case Item_Type.EventDice:
@@ -943,6 +949,9 @@ public static class ServerData
             case Item_Type.costume152:
             case Item_Type.costume153:
             case Item_Type.costume154:
+            case Item_Type.costume155:
+            case Item_Type.costume156:
+            case Item_Type.costume157:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -955,6 +964,12 @@ public static class ServerData
                 ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet52:
+                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.pet53:
+                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.pet54:
                 ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.RelicTicket:
@@ -1168,6 +1183,9 @@ public static class ServerData
             case Item_Type.costume152:
             case Item_Type.costume153:
             case Item_Type.costume154:
+            case Item_Type.costume155:
+            case Item_Type.costume156:
+            case Item_Type.costume157:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1279,6 +1297,10 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.DaesanGoods:
                 passParam.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.HonorGoods:
+                passParam.Add(GoodsTable.HonorGoods, ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             case Item_Type.EventDice:
@@ -1636,6 +1658,9 @@ public static class ServerData
             case Item_Type.VisionSkill11:
                 passParam.Add(GoodsTable.VisionSkill11, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.VisionSkill12:
+                passParam.Add(GoodsTable.VisionSkill12, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             // //
             case Item_Type.ThiefSkill0:
                 passParam.Add(GoodsTable.ThiefSkill0, ServerData.goodsTable.GetTableData(GoodsTable.ThiefSkill0).Value);
@@ -1737,6 +1762,12 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
+            case Item_Type.pet53:
+                passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
+                return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
+            case Item_Type.pet54:
+                passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
+                return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -2105,6 +2136,10 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += amount;
                 param.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.HonorGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += amount;
+                param.Add(GoodsTable.HonorGoods, ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.EventDice:
                 ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;
@@ -2432,6 +2467,10 @@ public static class ServerData
             case Item_Type.VisionSkill11:
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value += amount;
                 param.Add(GoodsTable.VisionSkill11, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.VisionSkill12:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value += amount;
+                param.Add(GoodsTable.VisionSkill12, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //   //            //            //
             case Item_Type.ThiefSkill0:
@@ -3261,6 +3300,105 @@ public static class ServerData
                 //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
             });
         }
+        else if (type.IsMergePartyRaidRankFrameItem_1())
+        {
+            switch (type)
+            {
+                case Item_Type.MergePartyRaidRankFrame_1_1:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_1;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 8;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_2:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_2;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 7;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_3:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_3;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 6;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_4:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 5;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_5:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_5;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_6_10:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_6_10;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 6;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 3;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_11_20:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_11_20;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 5;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 3;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_21_50:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_21_50;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 2;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_51_100:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_51_100;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 3;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 2;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_101_500:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_101_500;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 2;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_501_1000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_501_1000;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 1;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
+                    break;
+                case Item_Type.MergePartyRaidRankFrame_1_1001_5000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_1001_5000;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 0;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 9;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.hellMark,
+                ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value);
+            userInfoParam.Add(UserInfoTable.chatFrame,
+                ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.ClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value);
+
+
+            transactionList.Add(
+                TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
+            });
+        }
         else if (type.IsRelicRewardItem())
         {
             switch (type)
@@ -3632,6 +3770,79 @@ public static class ServerData
                 //LogManager.Instance.SendLogType("GuildReward", type.ToString(), "");
             });
         }
+        else if (type.IsGuildReward2Item())
+        {
+            switch (type)
+            {
+                case Item_Type.RedFoxFrame1_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += GameBalance.redFoxReward_1_guild;
+                    break;
+                case Item_Type.RedFoxFrame2_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += GameBalance.redFoxReward_2_guild;
+                    break;
+                case Item_Type.RedFoxFrame3_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += GameBalance.redFoxReward_3_guild;
+                    break;
+                case Item_Type.RedFoxFrame4_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += GameBalance.redFoxReward_4_guild;
+                    break;
+                case Item_Type.RedFoxFrame5_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += GameBalance.redFoxReward_5_guild;
+                    break;
+                case Item_Type.RedFoxFrame6_20_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.redFoxReward_6_20_guild;
+                    break;
+                case Item_Type.RedFoxFrame21_100_guild:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.redFoxReward_21_100_guild;
+                    break;
+
+                //
+                case Item_Type.Sangun_1guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_1_guild;
+                    break;
+                case Item_Type.Sangun_2guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_2_guild;
+                    break;
+                case Item_Type.Sangun_3guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_3_guild;
+                    break;
+                case Item_Type.Sangun_4guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_4_guild;
+                    break;
+                case Item_Type.Sangun_5guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_5_guild;
+                    break;
+                case Item_Type.Sangun_6_20_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_6_20_guild;
+                    break;
+                case Item_Type.Sangun_21_100_guild_new:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value +=
+                        GameBalance.sangunReward_21_100_guild;
+                    break;
+            }
+
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.HonorGoods, ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransactionV2(transactionList, successCallBack: () =>
+            {
+                //LogManager.Instance.SendLogType("GuildReward", type.ToString(), "");
+            });
+        }
+        
         else if (type.IsGangChulItem())
         {
             switch (type)
@@ -3823,6 +4034,9 @@ public static class ServerData
                     break;
                 case Item_Type.DaesanGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value += amount;
+                    break;
+                case Item_Type.HonorGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.HonorGoods).Value += amount;
                     break;
                 case Item_Type.EventDice:
                     ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += amount;

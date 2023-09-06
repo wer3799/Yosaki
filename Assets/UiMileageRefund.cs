@@ -319,6 +319,80 @@ public class UiMileageRefund : MonoBehaviour
                 Debug.LogError("송편 교환 횟수 초기화!!");
             });
         }
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 7)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 7;
+            
+            ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childFree].Value = string.Empty;
+            ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childAd].Value = string.Empty;
+            
+            ServerData.seolPassServerTable.TableDatas[SeolPassServerTable.MonthlypassFreeReward].Value = string.Empty;
+            ServerData.seolPassServerTable.TableDatas[SeolPassServerTable.MonthlypassAdReward].Value = string.Empty;
+            
+            ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey_100].Value = string.Empty;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            Param passParam = new Param();
+            passParam.Add(BokPassServerTable.childFree, ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childFree].Value);
+            passParam.Add(BokPassServerTable.childAd, ServerData.bokPassServerTable.TableDatas[BokPassServerTable.childAd].Value);
+            transactions.Add(TransactionValue.SetUpdate(BokPassServerTable.tableName, BokPassServerTable.Indate, passParam));
+            
+            Param passParam2 = new Param();
+            passParam2.Add(SeolPassServerTable.MonthlypassFreeReward, ServerData.seolPassServerTable.TableDatas[SeolPassServerTable.MonthlypassFreeReward].Value);
+            passParam2.Add(SeolPassServerTable.MonthlypassAdReward, ServerData.seolPassServerTable.TableDatas[SeolPassServerTable.MonthlypassAdReward].Value);
+            transactions.Add(TransactionValue.SetUpdate(SeolPassServerTable.tableName, SeolPassServerTable.Indate, passParam2));
+            
+            Param passParam3 = new Param();
+            passParam3.Add(AttendanceServerTable.rewardKey_100, ServerData.attendanceServerTable.TableDatas[AttendanceServerTable.rewardKey_100].Value);
+            transactions.Add(TransactionValue.SetUpdate(AttendanceServerTable.tableName, AttendanceServerTable.Indate, passParam3));
+    
+            
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("복날 / 신년 /7일  출석 초기화");
+            });
+        }
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 8)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 8;
+            
+            //0부터
+            int currentFloor = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value;
+
+            var tableData = TableManager.Instance.towerTableMulti.dataArray;
+
+            float rewardSum = 0f;
+            
+            for (int i = 0; i < currentFloor; i++)
+            {
+                rewardSum += tableData[i].Rewardvalue;
+            }
+            
+            ServerData.goodsTable.AddLocalData(GoodsTable.DaesanGoods,rewardSum);
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+    
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.DaesanGoods, ServerData.goodsTable.GetTableData(GoodsTable.DaesanGoods).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                if (rewardSum > 0)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"십만동굴 대산의 정수 {rewardSum}개 환급!",null);
+                }
+            });
+        }
         
     }
     

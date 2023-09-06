@@ -119,7 +119,7 @@ public class UiSkillCell : MonoBehaviour
 
     private void RefreshSkillLvText()
     {
-        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillData.Id);
+        var skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillData.Id);
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillData.Id);
 
         // levelDescription.SetText(string.Format(lvTextFormat, skillLevel, maxLevel));

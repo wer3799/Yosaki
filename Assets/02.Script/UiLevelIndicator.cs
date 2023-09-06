@@ -18,7 +18,7 @@ public class UiLevelIndicator : MonoBehaviour
         ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Subscribe(WhenLevelChanged).AddTo(this);
     }
 
-    private void WhenLevelChanged(int level)
+    private void WhenLevelChanged(float level)
     {
         levelText.SetText($"{level}");
     }

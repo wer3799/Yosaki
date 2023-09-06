@@ -47,7 +47,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
     {
         ServerData.growthTable.GetTableData(GrowthTable.Exp).Value += exp;
 
-        int maxLevelUpCount = 100000;
+        var maxLevelUpCount = 100000;
 
         this.useEffect = false;
 
@@ -212,7 +212,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
     private void ShowContentsUnlockAlarm(int accumLevel)
     {
 
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value + accumLevel;
+        var currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value + accumLevel;
 
         if (currentLevel == GameBalance.bonusDungeonUnlockLevel)
         {

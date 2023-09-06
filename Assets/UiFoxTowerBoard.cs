@@ -123,6 +123,11 @@ public class UiFoxTowerBoard : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
                 return;
             }
+            if (inputNum > 200)
+            {
+                PopupManager.Instance.ShowAlarmMessage("소탕권은 200개 미만으로 사용가능합니다!");
+                return;
+            }
             else if (remainItemNum < inputNum)
             {
                 PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.FoxRelicClearTicket)}이 부족합니다!");
@@ -142,8 +147,8 @@ public class UiFoxTowerBoard : MonoBehaviour
     if (PlayerStats.GetFoxRelicGainValue() > 0f)
     {
         desc +=
-            $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}(+{instanClearGetNum*PlayerStats.GetFoxRelicGainValue()})개를 획득 하시겠습니까?\n" +
-            $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}(+{(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue*PlayerStats.GetFoxRelicGainValue()})개 획득)</color>";
+            $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}(+{Utils.ConvertNum(instanClearGetNum*PlayerStats.GetFoxRelicGainValue())})개를 획득 하시겠습니까?\n" +
+            $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}(+{Utils.ConvertNum((int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue*PlayerStats.GetFoxRelicGainValue())})개 획득)</color>";
     }
     else
     {
@@ -188,7 +193,7 @@ public class UiFoxTowerBoard : MonoBehaviour
     
             //실제소탕
             ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value -= inputNum;
-            ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value += instanClearGetNum + (instanClearGetNum * PlayerStats.GetFoxRelicGainValue());
+            ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value += Mathf.Round(instanClearGetNum + (instanClearGetNum * PlayerStats.GetFoxRelicGainValue()));
     
             List<TransactionValue> transactions = new List<TransactionValue>();
     

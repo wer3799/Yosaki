@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 using UniRx;
 using Random = UnityEngine.Random;
@@ -33,6 +34,8 @@ public class BossMoveController : MonoBehaviour
     public float stoppingDistance = 0.1f;
     public ReactiveProperty<bool> isMoving;
     private Vector3 dummyPosition;
+    [SerializeField]
+    protected SkeletonAnimation skeletonAnimation;
     private void Start()
     {
         _bossId = GameManager.Instance.bossId;
@@ -105,11 +108,62 @@ public class BossMoveController : MonoBehaviour
                 initialized = true;
             }
         }
+        else if (_bossId == 180||_bossId == 182)
+        {
+            StartCoroutine(EnemyMovementRoutine());
+            if (initialized == false)
+            {
+                initialized = true;
+            }
+        }
 
     }
 
+    private int SpecialPatternCount = 1;
+    //유사 벽력일섬
+    private IEnumerator EnemyMovementRoutine()
+    {
+        while (true)
+        {
+            float blinkSecond=1f;    
+            if (_bossId == 180)
+            {
+                SpecialPatternCount = (int)Random.Range(1,3);
+                blinkSecond = 1f;
+            }
+            if (_bossId == 182)
+            {
+                SpecialPatternCount = (int)Random.Range(3,6);
+                blinkSecond = Random.Range(1,2);
+            }
+            float max = 6;
+            float exclude = 4;
 
+            for (int i = 0; i < SpecialPatternCount; i++)
+            {
+                // 플레이어와 닿지 않는 랜덤한 위치로 이동
+                Vector3 random = new Vector3(Utils.GetRandomExcluding(-max,max,-exclude,exclude),Utils.GetRandomExcluding(-max,max,-exclude,exclude), 0f);
+                var position = playerTr.position;
+                var randomPosition = position + random;
+                viewTr.position = randomPosition;
+                viewTr.transform.localScale = new Vector3(viewTr.position.x-position.x> 0 ? -1 : 1, 1, 1);
 
+                yield return new WaitForSeconds(blinkSecond/SpecialPatternCount);   
+            }
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack1", true);
+            SetMoveDir(playerTr.position - viewTr.position);
+            yield return new WaitForSeconds(0.4f);
+            // 플레이어 쪽으로 이동
+            isMoving.Value = true;
+            skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
+            // 3초 동안 이동
+            yield return new WaitForSeconds(2f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+
+            isMoving.Value = false;
+
+        }
+    }
     private void Update()
     {
         //측천무후
@@ -172,6 +226,19 @@ public class BossMoveController : MonoBehaviour
          if (_bossId == 109 || _bossId == 110)
          {
              viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
+         }
+         if (_bossId == 180 || _bossId == 182)
+         {
+             if (isMoving.Value)
+             {
+                 rb.velocity = moveDir.normalized * moveSpeed;
+                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
+             }
+             else
+             {
+                 rb.velocity = Vector2.zero;
+             }
+
          }
     }
 

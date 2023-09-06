@@ -42,7 +42,7 @@ public class AlarmHitObject : MonoBehaviour
     public void MoveToPlayer()
     {
         int bossId = GameManager.Instance.bossId;
-        if (bossId == 146||bossId == 147||bossId == 148||bossId == 149||bossId == 162||bossId == 163||bossId == 164||bossId == 165||bossId == 174||bossId == 175||bossId == 178||bossId == 179)
+        if (bossId == 146||bossId == 147||bossId == 148||bossId == 149||bossId == 162||bossId == 163||bossId == 164||bossId == 165||bossId == 174||bossId == 175||bossId == 178||bossId == 179||bossId == 181)
         {
             transform.Rotate(0, 0, 90);
             transform.position = PlayerMoveController.Instance.transform.position;

@@ -39,6 +39,7 @@ public enum PassProductType
     None,
     LevelPass,
     MonthPass,
+    PetPass,
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 {
@@ -283,7 +284,7 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
         test_product = args.purchasedProduct;
 
         bool isSuccess = true;
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_ANDROID
 		CrossPlatformValidator validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
 		try
 		{

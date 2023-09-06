@@ -66,6 +66,11 @@ public enum PassType
 {
     Level, Daily
 }
+public enum RewardItemType
+{
+    GoodsItem,
+    PassItem,
+}
 
 public class UiPassSystem : MonoBehaviour
 {

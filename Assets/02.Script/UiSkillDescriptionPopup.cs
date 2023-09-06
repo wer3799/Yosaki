@@ -475,9 +475,9 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     private void RefreshSkillLvText()
     {
-        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        var skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
-        int addValue = 0;
+        var addValue = 0f;
 
         if (skillTableData.SKILLCASTTYPE == SkillCastType.Player)
         {
@@ -491,7 +491,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
     private void RefreshUpgradeButton()
     {
-        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        var skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
         int awakeNum = ServerData.skillServerTable.GetSkillAwakeNum(skillTableData.Id);
@@ -531,7 +531,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     public void OnClickSkillUpgradeButton()
     {
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
-        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        int skillLevel = (int)ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
 
         if (skillLevel >= maxLevel)
         {
@@ -541,7 +541,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
 
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
 
-        int currentSkillPoint = skillPoint.Value;
+        int currentSkillPoint = (int)skillPoint.Value;
         if (currentSkillPoint <= 0)
         {
             PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
@@ -554,7 +554,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
     public void OnClickSkillAllUpgradeButton()
     {
         int maxLevel = ServerData.skillServerTable.GetSkillMaxLevel(skillTableData.Id);
-        int skillLevel = ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
+        int skillLevel = (int)ServerData.skillServerTable.GetSkillCurrentLevel(skillTableData.Id);
 
         if (skillLevel >= maxLevel)
         {
@@ -565,14 +565,14 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.SkillPoint);
 
 
-        int currentSkillPoint = skillPoint.Value;
+        var currentSkillPoint = skillPoint.Value;
         if (currentSkillPoint <= 0)
         {
             PopupManager.Instance.ShowAlarmMessage("기술포인트가 부족합니다.");
             return;
         }
 
-        int upgradableNum = maxLevel - skillLevel;
+        float upgradableNum = maxLevel - skillLevel;
 
         upgradableNum = Mathf.Min(currentSkillPoint, upgradableNum);
 
@@ -582,7 +582,7 @@ public class UiSkillDescriptionPopup : MonoBehaviour
         }
     }
 
-    private void SkillLevelUp(ReactiveProperty<int> skillPoint, bool updateUi = true)
+    private void SkillLevelUp(ReactiveProperty<float> skillPoint, bool updateUi = true)
     {
         //스킬포인트 감소
         skillPoint.Value--;

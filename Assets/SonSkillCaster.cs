@@ -52,7 +52,7 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
 
         while (true)
         {
-            int sonLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
+            var sonLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;
 
             for(int i=0;i< sonSkills.Count; i++) 
             {

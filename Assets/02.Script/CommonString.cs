@@ -311,6 +311,9 @@ public static class CommonString
             case Item_Type.costume152: return TableManager.Instance.Costume.dataArray[152].Name;
             case Item_Type.costume153: return TableManager.Instance.Costume.dataArray[153].Name;
             case Item_Type.costume154: return TableManager.Instance.Costume.dataArray[154].Name;
+            case Item_Type.costume155: return TableManager.Instance.Costume.dataArray[155].Name;
+            case Item_Type.costume156: return TableManager.Instance.Costume.dataArray[156].Name;
+            case Item_Type.costume157: return TableManager.Instance.Costume.dataArray[157].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -435,6 +438,7 @@ public static class CommonString
             case Item_Type.VisionSkill9: return "궁극 기술10";
             case Item_Type.VisionSkill10: return "궁극 기술11";
             case Item_Type.VisionSkill11: return "궁극 기술12";
+            case Item_Type.VisionSkill12: return "궁극 기술13";
             case Item_Type.ThiefSkill0: return "도적 기술1";
             case Item_Type.ThiefSkill1: return "도적 기술2";
             case Item_Type.ThiefSkill2: return "도적 기술3";
@@ -501,7 +505,9 @@ public static class CommonString
             case Item_Type.Event_Mission_All: return "서핑보드 총 획득량";
             case Item_Type.Event_Mission2: return "보름달";
             case Item_Type.Event_Mission2_All: return "보름달 총 획득량";
-            case Item_Type.pet52: return "요랑";
+            case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;
+            case Item_Type.pet53: return TableManager.Instance.PetTable.dataArray[53].Name;
+            case Item_Type.pet54: return TableManager.Instance.PetTable.dataArray[54].Name;
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
@@ -560,6 +566,7 @@ public static class CommonString
             case Item_Type.MeditationGoods: return "심득 조각";
             case Item_Type.MeditationClearTicket: return "내면세계 입장권";
             case Item_Type.DaesanGoods: return "대산의 정수";
+            case Item_Type.HonorGoods: return "명예의 증표";
 
         }
         return "미등록";
@@ -749,6 +756,8 @@ public static class CommonString
                 return "천구베기 피해(%)";
             case StatusType.SuperCritical21DamPer:
                 return "초월 피해(%)";
+            case StatusType.SuperCritical22DamPer:
+                return "[진]귀살베기 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:
@@ -761,6 +770,8 @@ public static class CommonString
                 return "각성 시 천계꽃 방치 획득량 증가 (%)";
             case StatusType.DokebiFireGainPer:
                 return "각성 시 도깨비불 방치 획득량 증가(%)";
+            case StatusType.MeditationGainPer:
+                return "심득 조각 소탕량 증가 (%)";
             case StatusType.SealAttackSpeed:
                 return "요도 시전 속도 증가 (%)";
             case StatusType.SuhoGainPer:
@@ -779,6 +790,8 @@ public static class CommonString
                 return "중단전 베기 증폭 (%)";
             case StatusType.SuperCritical18AddDam:
                 return "상단전 베기 증폭 (%)";
+            case StatusType.StageRelicUpgrade:
+                return "유물 복원 강화";
         }
 
         return "등록필요";

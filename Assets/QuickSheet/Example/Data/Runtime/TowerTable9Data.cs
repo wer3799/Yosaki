@@ -49,6 +49,10 @@ public class TowerTable9Data
   public float Gachalv5 { get {return gachalv5; } set { this.gachalv5 = value;} }
   
   [SerializeField]
+  float gachalv6;
+  public float Gachalv6 { get {return gachalv6; } set { this.gachalv6 = value;} }
+  
+  [SerializeField]
   int gachacount;
   public int Gachacount { get {return gachacount; } set { this.gachacount = value;} }
   

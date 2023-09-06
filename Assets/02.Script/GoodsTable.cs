@@ -171,6 +171,7 @@ public class GoodsTable
     public static string VisionSkill9 = "VisionSkill9";
     public static string VisionSkill10 = "VisionSkill10";
     public static string VisionSkill11 = "VisionSkill11";
+    public static string VisionSkill12 = "VisionSkill12";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -240,6 +241,7 @@ public class GoodsTable
     public static string MeditationGoods = "MG";
     public static string MeditationClearTicket = "MCT";
     public static string DaesanGoods = "DG";
+    public static string HonorGoods = "HG";
 
     public static string EventDice = "EventDice";
     public static string Event_SA = "EventSA";
@@ -407,6 +409,7 @@ public class GoodsTable
         { VisionSkill9, 0f },
         { VisionSkill10, 0f },
         { VisionSkill11, 0f },
+        { VisionSkill12, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -474,6 +477,7 @@ public class GoodsTable
         { MeditationGoods, 0f },
         { MeditationClearTicket, 0f },
         { DaesanGoods, 0f },
+        { HonorGoods, 0f },
 
         { EventDice, 0f },
         { Event_SA, 0f },
@@ -1491,6 +1495,10 @@ public class GoodsTable
             {
                 return GoodsTable.VisionSkill11;
             }
+            case Item_Type.VisionSkill12:
+            {
+                return GoodsTable.VisionSkill12;
+            }
 
             //
             //            //
@@ -1670,6 +1678,10 @@ public class GoodsTable
             case Item_Type.DaesanGoods:
             {
                 return GoodsTable.DaesanGoods;
+            }
+            case Item_Type.HonorGoods:
+            {
+                return GoodsTable.HonorGoods;
             }
 
             case Item_Type.EventDice:
@@ -2162,6 +2174,10 @@ public class GoodsTable
         {
             return Item_Type.VisionSkill11;
         }
+        else if (GoodsTable.VisionSkill12 == type)
+        {
+            return Item_Type.VisionSkill12;
+        }
 
         // //
         else if (GoodsTable.ThiefSkill0 == type)
@@ -2359,6 +2375,10 @@ public class GoodsTable
         else if (GoodsTable.DaesanGoods == type)
         {
             return Item_Type.DaesanGoods;
+        }
+        else if (GoodsTable.HonorGoods == type)
+        {
+            return Item_Type.HonorGoods;
         }
         else if (GoodsTable.EventDice == type)
         {

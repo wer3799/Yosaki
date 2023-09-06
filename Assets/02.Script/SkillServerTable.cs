@@ -336,7 +336,7 @@ public class SkillServerTable
         return (tableDatas[SkillAwakeNum][idx].Value) * GameBalance.SkillAwakePlusNum;
     }
 
-    public int GetSkillCurrentLevel(int idx)
+    public float GetSkillCurrentLevel(int idx)
     {
         var tableData = TableManager.Instance.SkillData[idx];
 
@@ -363,12 +363,12 @@ public class SkillServerTable
     //UI팝업에서도 쓰는부분이라 함부로 건들면 안됨
     public float GetSkillDamagePer(int idx, int addLevel = 0, bool applySkillDamAbility = true)
     {
-        int currentLevel = GetSkillCurrentLevel(idx);
+        var currentLevel = GetSkillCurrentLevel(idx);
 
         //
         var tableData = TableManager.Instance.SkillData[idx];
 
-        int plusAddValue = 0;
+        var plusAddValue = 0f;
 
         if (tableData.SKILLCASTTYPE == SkillCastType.Player)
         {

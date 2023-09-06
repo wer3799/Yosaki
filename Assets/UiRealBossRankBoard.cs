@@ -28,6 +28,8 @@ public class UiRealBossRankBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI title;
+    [SerializeField]
+    private List<TextMeshProUGUI> rewardTexts;
 
 
     private void OnEnable()
@@ -45,6 +47,19 @@ public class UiRealBossRankBoard : MonoBehaviour
     private void Start()
     {
         Subscribe();
+        
+        rewardTexts[0].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_1}개");
+        rewardTexts[1].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_2}개");
+        rewardTexts[2].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_3}개");
+        rewardTexts[3].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_4}개");
+        rewardTexts[4].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_5}개");
+        rewardTexts[5].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_6_10}개");
+        rewardTexts[6].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_11_20}개");
+        rewardTexts[7].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_21_50}개");
+        rewardTexts[8].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_51_100 }개");
+        rewardTexts[9].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_101_500}개");
+        rewardTexts[10].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_501_1000}개");
+        rewardTexts[11].SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_1001_5000}개");
     }
 
     private void Subscribe()

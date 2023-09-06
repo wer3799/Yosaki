@@ -208,7 +208,7 @@ public class UiPassCell : MonoBehaviour
 
     private bool CanGetReward()
     {
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        var currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
         return currentLevel >= passInfo.require;
     }
 }

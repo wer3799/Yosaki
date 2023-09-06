@@ -53,13 +53,13 @@ public class UiSkillAwakeCell : MonoBehaviour
             return;
         }
 
-        int remainPoint = ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value;
+        var remainPoint = ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value;
 
-        int addNum = Mathf.Min(remainPoint, 100);
+        var addNum = Mathf.Min(remainPoint, 100);
 
-        ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value -= addNum;
+        ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value -= (int)addNum;
 
-        ServerData.statusTable.GetTableData(key).Value += addNum;
+        ServerData.statusTable.GetTableData(key).Value += (int)addNum;
 
         if (syncRoutine != null)
         {
@@ -77,13 +77,13 @@ public class UiSkillAwakeCell : MonoBehaviour
             return;
         }
 
-        int remainPoint = ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value;
+        var remainPoint = ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value;
 
-        int addNum = remainPoint;
+        var addNum = remainPoint;
 
-        ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value -= addNum;
+        ServerData.statusTable.GetTableData(StatusTable.SkillAdPoint).Value -= (int)addNum;
 
-        ServerData.statusTable.GetTableData(key).Value += addNum;
+        ServerData.statusTable.GetTableData(key).Value += (int)addNum;
 
         if (syncRoutine != null)
         {

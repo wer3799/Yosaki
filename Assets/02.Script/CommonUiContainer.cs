@@ -157,6 +157,8 @@ public Sprite HyunSangWeapon5;
 public Sprite HyunSangWeapon6;
 public Sprite HyunSangWeapon7;
 public Sprite HyunSangWeapon8;
+public Sprite HyunSangWeapon9;
+public Sprite HyunSangWeapon10;
     
 [Header ("Weapon_View")]
 
@@ -279,6 +281,8 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae6;
     public Sprite HyunSangNorigae7;
     public Sprite HyunSangNorigae8;
+    public Sprite HyunSangNorigae9;
+    public Sprite HyunSangNorigae10;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -347,6 +351,8 @@ public Sprite RecommendWeapon22;
     public Sprite ChunGuPet2;
     public Sprite ChunGuPet3;
     [FormerlySerializedAs("EventPet0")] public Sprite pet52;
+    public Sprite pet53;
+    public Sprite pet54;
     public Sprite SpecialSuhoPet0;
     public Sprite SpecialSuhoPet1;
     public Sprite SpecialSuhoPet2;
@@ -359,6 +365,7 @@ public Sprite RecommendWeapon22;
     public Sprite SpecialSuhoPet9;
     public Sprite SpecialSuhoPet10;
     public Sprite SpecialSuhoPet11;
+    public Sprite SpecialSuhoPet12;
 
 
     [Header ("Skill")]
@@ -406,6 +413,7 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill9;
     public Sprite VisionSkill10;
     public Sprite VisionSkill11;
+    public Sprite VisionSkill12;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -493,6 +501,7 @@ public Sprite RecommendWeapon22;
     public Sprite FoxRelicClearTicket;
     public Sprite TransClearTicket;
     public Sprite DaesanGoods;
+    public Sprite HonorGoods;
     public Sprite MeditationGoods;
     public Sprite MeditationClearTicket;
     [Header ("Goods_Event")]
@@ -968,6 +977,12 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[153];
             case Item_Type.costume154:
                 return costumeThumbnail[154];
+            case Item_Type.costume155:
+                return costumeThumbnail[155];
+            case Item_Type.costume156:
+                return costumeThumbnail[156];
+            case Item_Type.costume157:
+                return costumeThumbnail[157];
 
 
             case Item_Type.RankFrame1:
@@ -1092,6 +1107,31 @@ public Sprite RecommendWeapon22;
                 return HellMark0;
             case Item_Type.MergePartyRaidRankFrame_0_1001_5000:
                 return rankFrame[9];
+            
+            case Item_Type.MergePartyRaidRankFrame_1_1:
+                return HellMark7;
+            case Item_Type.MergePartyRaidRankFrame_1_2:
+                return HellMark7;
+            case Item_Type.MergePartyRaidRankFrame_1_3:
+                return HellMark7;
+            case Item_Type.MergePartyRaidRankFrame_1_4:
+                return HellMark7;
+            case Item_Type.MergePartyRaidRankFrame_1_5:
+                return HellMark7;
+            case Item_Type.MergePartyRaidRankFrame_1_6_10:
+                return HellMark6;
+            case Item_Type.MergePartyRaidRankFrame_1_11_20:
+                return HellMark4;
+            case Item_Type.MergePartyRaidRankFrame_1_21_50:
+                return HellMark3;
+            case Item_Type.MergePartyRaidRankFrame_1_51_100:
+                return HellMark1;
+            case Item_Type.MergePartyRaidRankFrame_1_101_500:
+                return HellMark5;
+            case Item_Type.MergePartyRaidRankFrame_1_501_1000:
+                return HellMark0;
+            case Item_Type.MergePartyRaidRankFrame_1_1001_5000:
+                return rankFrame[9];
 
             case Item_Type.RankFrame1_relic:
             case Item_Type.RankFrame2_relic:
@@ -1164,6 +1204,16 @@ public Sprite RecommendWeapon22;
                 return GuildReward;
 
 
+            case Item_Type.RedFoxFrame1_guild:     
+            case Item_Type.RedFoxFrame2_guild:    
+            case Item_Type.RedFoxFrame3_guild:     
+            case Item_Type.RedFoxFrame4_guild:     
+            case Item_Type.RedFoxFrame5_guild:     
+            case Item_Type.RedFoxFrame6_20_guild:  
+            case Item_Type.RedFoxFrame21_100_guild:
+                return HonorGoods;
+
+
 
             case Item_Type.RankFrame1guild_new:
             case Item_Type.RankFrame2guild_new:
@@ -1186,6 +1236,15 @@ public Sprite RecommendWeapon22;
             case Item_Type.RankFrameParty21_50_guild_new:
             case Item_Type.RankFrameParty51_100_guild_new:
                 return GuildReward;
+
+            case Item_Type.Sangun_1guild_new:
+            case Item_Type.Sangun_2guild_new:
+            case Item_Type.Sangun_3guild_new:
+            case Item_Type.Sangun_4guild_new:
+            case Item_Type.Sangun_5guild_new:
+            case Item_Type.Sangun_6_20_guild_new:
+            case Item_Type.Sangun_21_100_guild_new:
+                return HonorGoods;
 
 
 
@@ -1377,6 +1436,8 @@ public Sprite RecommendWeapon22;
                 return MeditationClearTicket;
             case Item_Type.DaesanGoods:
                 return DaesanGoods;
+            case Item_Type.HonorGoods:
+                return HonorGoods;
 
 
             case Item_Type.EventDice:
@@ -1714,6 +1775,10 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae7;
             case Item_Type.HyunSangNorigae8:
                 return HyunSangNorigae8;
+            case Item_Type.HyunSangNorigae9:
+                return HyunSangNorigae9;
+            case Item_Type.HyunSangNorigae10:
+                return HyunSangNorigae10;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -1919,6 +1984,10 @@ public Sprite RecommendWeapon22;
             
             case Item_Type.pet52:
                 return pet52;
+            case Item_Type.pet53:
+                return pet53;
+            case Item_Type.pet54:
+                return pet54;
             case Item_Type.SpecialSuhoPet0:
                 return SpecialSuhoPet0;
             case Item_Type.SpecialSuhoPet1:
@@ -1943,6 +2012,8 @@ public Sprite RecommendWeapon22;
                 return SpecialSuhoPet10;
             case Item_Type.SpecialSuhoPet11:
                 return SpecialSuhoPet11;
+            case Item_Type.SpecialSuhoPet12:
+                return SpecialSuhoPet12;
 
 
 
@@ -2158,6 +2229,8 @@ public Sprite RecommendWeapon22;
                 return VisionSkill10;
             case Item_Type.VisionSkill11:
                 return VisionSkill11;
+            case Item_Type.VisionSkill12:
+                return VisionSkill12;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2375,6 +2448,11 @@ public Sprite RecommendWeapon22;
                 return HyunSangWeapon7;
             case Item_Type.HyunSangWeapon8:
                 return HyunSangWeapon8;
+            case Item_Type.HyunSangWeapon9:
+                return HyunSangWeapon9;
+            
+            case Item_Type.HyunSangWeapon10:
+                return HyunSangWeapon10;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

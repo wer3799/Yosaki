@@ -286,7 +286,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         int horn = ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
         int suhoAnimal = ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value;
         string guildName = GuildManager.Instance.myGuildName;
-        int level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        var level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         //닉네임,코스튬,무기,마법책,펫,검기,길드명
         string platform = string.Empty;

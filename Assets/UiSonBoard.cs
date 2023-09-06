@@ -49,7 +49,7 @@ public class UiSonBoard : MonoBehaviour
     {
         ServerData.statusTable.GetTableData(StatusTable.Son_Level).AsObservable().Subscribe(level =>
         {
-            sonLevelText.SetText($"LV : {level}");
+            sonLevelText.SetText($"LV : {Utils.ConvertNum(level)}");
             UpdateAbilText1(level);
 
             sonCharacterIcon.sprite = CommonUiContainer.Instance.sonThumbNail[GameBalance.GetSonIdx()];
@@ -73,7 +73,7 @@ public class UiSonBoard : MonoBehaviour
         }).AddTo(this);
     }
 
-    private void UpdateAbilText1(int currentLevel)
+    private void UpdateAbilText1(float currentLevel)
     {
         var tableData = TableManager.Instance.SonAbil.dataArray;
 

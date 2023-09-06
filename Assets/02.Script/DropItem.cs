@@ -156,7 +156,7 @@ public enum Item_Type
     RankFrame21_100_new_miniGame = 315,
     RankFrame101_1000_new_miniGame = 316,
     RankFrame1001_10000_new_miniGame = 317,
-
+    //구미호(구)
     RankFrame1_guild = 400,
     RankFrame2_guild = 401,
     RankFrame3_guild = 402,
@@ -165,6 +165,14 @@ public enum Item_Type
     RankFrame6_20_guild = 405,
     RankFrame21_100_guild = 406,
     RankFrame101_1000_guild = 407,
+    //붉은구미호(신)
+    RedFoxFrame1_guild      = 410,
+    RedFoxFrame2_guild      = 411,
+    RedFoxFrame3_guild      = 412,
+    RedFoxFrame4_guild      = 413,
+    RedFoxFrame5_guild      = 414,
+    RedFoxFrame6_20_guild   = 415,
+    RedFoxFrame21_100_guild = 416,
 
     MagicStoneBuff = 500,
     //신규
@@ -226,6 +234,16 @@ public enum Item_Type
     RankFrame101_1000_war_hell = 814,
     RankFrame1001_10000_war_hell = 815,
 
+    //대산군(신)
+    Sangun_1guild_new = 840,
+    Sangun_2guild_new = 841,
+    Sangun_3guild_new = 842,
+    Sangun_4guild_new = 843,
+    Sangun_5guild_new = 844,
+    Sangun_6_20_guild_new = 845,
+    Sangun_21_100_guild_new = 846,
+    
+    //대산군(구)
     RankFrameParty1guild_new = 850,
     RankFrameParty2guild_new = 851,
     RankFrameParty3guild_new = 852,
@@ -271,6 +289,19 @@ public enum Item_Type
     MergePartyRaidRankFrame_0_101_500 = 899,
     MergePartyRaidRankFrame_0_501_1000 = 900,
     MergePartyRaidRankFrame_0_1001_5000 = 901,
+    
+    MergePartyRaidRankFrame_1_1 = 910,
+    MergePartyRaidRankFrame_1_2 = 911,
+    MergePartyRaidRankFrame_1_3 = 912,
+    MergePartyRaidRankFrame_1_4 = 913,
+    MergePartyRaidRankFrame_1_5 = 914,
+    MergePartyRaidRankFrame_1_6_10 = 915,
+    MergePartyRaidRankFrame_1_11_20 = 916,
+    MergePartyRaidRankFrame_1_21_50 = 917,
+    MergePartyRaidRankFrame_1_51_100 = 918,
+    MergePartyRaidRankFrame_1_101_500 = 919,
+    MergePartyRaidRankFrame_1_501_1000 = 920,
+    MergePartyRaidRankFrame_1_1001_5000 = 921,
 
     //1000~1100 무기
     weapon0 = 1000,
@@ -527,6 +558,10 @@ public enum Item_Type
     
     costume153 = 1453, // 9월 월간     
     costume154 = 1454, // 송편 보름달 외형 이벤트     
+    
+    costume155 = 1455, // 현상     
+    costume156 = 1456, // 수인     
+    costume157 = 1457, // 수인     
 
 
     gumiho0 = 5000,
@@ -764,6 +799,7 @@ public enum Item_Type
     HyunSangWeapon6 = 7246,
     HyunSangWeapon7 = 7247,
     HyunSangWeapon8 = 7248,
+    HyunSangWeapon9 = 7249,
     
     HyunSangNorigae0 = 7250,
     HyunSangNorigae1 = 7251,
@@ -774,6 +810,13 @@ public enum Item_Type
     HyunSangNorigae6 = 7256,
     HyunSangNorigae7 = 7257,
     HyunSangNorigae8 = 7258,
+    HyunSangNorigae9 = 7259,
+    
+    
+    HyunSangWeapon10 = 7260,
+    
+    HyunSangNorigae10 = 7280,
+
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -784,9 +827,12 @@ public enum Item_Type
     SpecialSuhoPet9 = 7605,
     SpecialSuhoPet10 = 7606,
     SpecialSuhoPet11 = 7607,
+    SpecialSuhoPet12 = 7608,
     
     
     pet52 = 7700, //이벤트펫
+    pet53 = 7701, //패스펫
+    pet54 = 7702, //패스펫
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -882,6 +928,7 @@ public enum Item_Type
     VisionSkill9 = 8751,//비전
     VisionSkill10 = 8752,//비전
     VisionSkill11 = 8753,//비전
+    VisionSkill12 = 8754,//비전
 
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량
@@ -941,6 +988,7 @@ public enum Item_Type
     MeditationGoods = 9043,
     MeditationClearTicket = 9044,
     DaesanGoods = 9045,
+    HonorGoods = 9046,
 }
 //
 public class DropItem : PoolItem

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class LevelPassCellCreater : FancyScrollView<PassData_Fancy>
 
     [SerializeField] private TextMeshProUGUI _title;
     [SerializeField] private TextMeshProUGUI _buyText;
+    [SerializeField] private TextMeshProUGUI productDescription;
     [SerializeField] private List<Sprite> _sprites;
     [SerializeField] private List<Color> _colors;
     [SerializeField] private Image _image;
@@ -88,7 +90,34 @@ public class LevelPassCellCreater : FancyScrollView<PassData_Fancy>
         }
 
     }
-    
+
+    private void SetPassDescription(int idx)
+    {
+        var passInfos = passInfosList[idx];
+        
+        List<RewardItem> rewards = new List<RewardItem>();
+        
+
+        for (int i = 0; i < passInfos.Count; i++)
+        {
+            Utils.AddOrUpdateReward(ref rewards,(Item_Type)(int)passInfos[i].passInfo.rewardType_IAP,passInfos[i].passInfo.rewardTypeValue_IAP);
+        }
+
+        if (rewards.Count > 0)
+        {
+            var e =rewards.GetEnumerator();
+            string desc = "";
+            while (e.MoveNext())
+            {
+                desc+=$"{CommonString.GetItemName(e.Current.ItemType)} : {Utils.ConvertNum(e.Current.ItemValue)}개\n";
+            }
+            productDescription.SetText(desc);
+        }
+        else
+        {
+            productDescription.SetText("수령할 보상이 없습니다!");
+        }
+    }
     private void AllPassUpdate()
     {
         scroller.Initialize(TypeScroll.LevelPass);
@@ -137,6 +166,7 @@ public class LevelPassCellCreater : FancyScrollView<PassData_Fancy>
         this.UpdateContents(passInfosList[_idx].ToArray());
         scroller.SetTotalCount(passInfosList[_idx].Count);
         scroller.JumpTo(0);
+        SetPassDescription(_idx);
     }
     
     [SerializeField]
@@ -152,6 +182,6 @@ public class LevelPassCellCreater : FancyScrollView<PassData_Fancy>
         SetPassIdx();
         AllPassUpdate();
         Initialize(0);
-
+        SetPassDescription(0);
     }
 }

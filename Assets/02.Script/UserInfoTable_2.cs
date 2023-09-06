@@ -27,8 +27,9 @@ public class UserInfoTable_2
     public const string stagePassAd = "stagePassAd";
     public const string foxFirePassKill = "pass0"; //요도 여우불 같은거씀
     public const string dosulPassKill = "pass1"; // 도술꽃
-    
-    
+    public const string petPassKill = "pass2"; // 펫
+
+
 
     //짝수 월간훈련(Monthlypass)
     public const string evenMonthKillCount = "even0";
@@ -71,9 +72,9 @@ public class UserInfoTable_2
     public const string guimoonRelicStart = "grs";
     public const string meditationStart = "ms";
     public const string meditationStartTime = "mst";
-    public const string meditationIndex = "msi";
-    public const string meditationTowerRewardIndex = "msti";
-    public const string meditationTowerScore = "msts";
+    public const string meditationIndex = "msi"; // 명상 단계
+    public const string meditationTowerRewardIndex = "msti"; //명상 타워 보상 단계
+    public const string meditationTowerScore = "msts"; // 명상 타워 점수
     
     public const string usedGuimoonRelicTicket = "ugrt";
 
@@ -92,6 +93,15 @@ public class UserInfoTable_2
     public const string exchage_Daesan3 = "exchage_Daesan3";
     public const string exchage_Daesan4 = "exchage_Daesan4";
     public const string exchage_Daesan5 = "exchage_Daesan5";
+    
+    public const string exchage_Guild1 = "exchage_Guild1";
+    public const string exchage_Guild2 = "exchage_Guild2";
+    public const string exchage_Guild3 = "exchage_Guild3";
+    public const string exchage_Guild4 = "exchage_Guild4";
+    
+    
+    public const string enhanceRelicIdx = "eri";
+    
     
     
     public bool isInitialize = false;
@@ -119,6 +129,7 @@ public class UserInfoTable_2
         { relicTestScore, 0f },
         { foxFirePassKill, 0f },
         { dosulPassKill, 0f },
+        { petPassKill, 0f },
         { evenMonthKillCount, 0f },
         { oddMonthKillCount, 0f },
         { SealSwordAwakeScore, 0f },
@@ -164,6 +175,13 @@ public class UserInfoTable_2
         { exchage_Daesan3, 0f },
         { exchage_Daesan4, 0f },
         { exchage_Daesan5, 0f },
+        
+        { exchage_Guild1, 0f },
+        { exchage_Guild2, 0f },
+        { exchage_Guild3, 0f },
+        { exchage_Guild4, 0f },
+        
+        { enhanceRelicIdx, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -301,6 +319,7 @@ public class UserInfoTable_2
         }
         userInfo_2Param.Add(foxFirePassKill, tableDatas[foxFirePassKill].Value);
         userInfo_2Param.Add(dosulPassKill, tableDatas[dosulPassKill].Value);
+        userInfo_2Param.Add(petPassKill, tableDatas[petPassKill].Value);
         
         if (ServerData.userInfoTable.IsEventPassPeriod())
         {
@@ -340,6 +359,7 @@ public class UserInfoTable_2
 
             tableDatas[foxFirePassKill].Value += updateRequireNum;
             tableDatas[dosulPassKill].Value += updateRequireNum;
+            tableDatas[petPassKill].Value += updateRequireNum;
         }
     }
     public void UpData(string key, bool LocalOnly)

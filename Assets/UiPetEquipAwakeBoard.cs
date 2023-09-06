@@ -150,7 +150,7 @@ public class UiPetEquipAwakeBoard : MonoBehaviour
 
     private float GetAwakeProb()
     {
-        int prob = 130 - ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        var prob = 130 - ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
 
         return Mathf.Clamp(prob, 50, 100) + PlayerStats.GetSmithValue(StatusType.PetEquipProbUp);
     }

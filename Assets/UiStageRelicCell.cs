@@ -85,7 +85,7 @@ public class UiStageRelicCell : MonoBehaviour
                     {
                         float superCritical6Value = relicLocalData.Abilvalue * totalLevel * 100f;
 
-                        superCritical6Value *= PlayerStats.GetStageAddValue();
+                        superCritical6Value *= PlayerStats.GetStageRelicUpgradeValue();
 
                         relicDescription.SetText($"{CommonString.GetStatusName(abilType)} {superCritical6Value}%");
                     }

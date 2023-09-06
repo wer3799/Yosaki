@@ -298,15 +298,15 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         int maxLevel = passiveSkillData.Maxlevel;
 
-        int skillPointRemain = skillPoint.Value;
+        var skillPointRemain = skillPoint.Value;
 
-        int upgradableAmount = Mathf.Min(skillPointRemain, passiveSkillData.Maxlevel - currentLevel);
+        var upgradableAmount = Mathf.Min(skillPointRemain, passiveSkillData.Maxlevel - currentLevel);
 
         upgradableAmount = Mathf.Min(upgradableAmount, 100);
 
         //로컬
-        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += upgradableAmount;
-        skillPoint.Value -= upgradableAmount;
+        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += (int)upgradableAmount;
+        skillPoint.Value -= (int)upgradableAmount;
         
         if (syncRoutine != null)
         {
@@ -341,13 +341,13 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         int maxLevel = passiveSkillData.Maxlevel;
 
-        int skillPointRemain = skillPoint.Value;
+        var skillPointRemain = skillPoint.Value;
 
-        int upgradableAmount = Mathf.Min(skillPointRemain, passiveSkillData.Maxlevel - currentLevel);
+        var upgradableAmount = Mathf.Min(skillPointRemain, passiveSkillData.Maxlevel - currentLevel);
 
         //로컬
-        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += upgradableAmount;
-        skillPoint.Value -= upgradableAmount;
+        ServerData.passiveServerTable.TableDatas[passiveSkillData.Stringid].level.Value += (int)upgradableAmount;
+        skillPoint.Value -= (int)upgradableAmount;
         
         if (syncRoutine != null)
         {
@@ -373,6 +373,6 @@ public class UiPassiveSkillCell : MonoBehaviour
         skillPointParam.Add(StatusTable.SkillPoint, skillPoint.Value);
         transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, skillPointParam));
 
-        ServerData.SendTransaction(transactions);
+        ServerData.SendTransactionV2(transactions);
     }
 }

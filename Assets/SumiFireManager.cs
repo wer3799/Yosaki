@@ -31,7 +31,7 @@ public class SumiFireManager : SingletonMono<SumiFireManager>
     [SerializeField]
     private Animator remainTextAnim;
 
-    private ObscuredInt enemyMaxCount = 100;
+    private ObscuredInt enemyMaxCount = 200;
 
     [SerializeField]
     private TextMeshProUGUI endText;
@@ -174,7 +174,8 @@ public class SumiFireManager : SingletonMono<SumiFireManager>
     [SerializeField]
     private TextMeshProUGUI currentWaveText;
 
-    private WaitForSeconds spawnDelay = new WaitForSeconds(0.4f);
+   // private WaitForSeconds spawnDelay = new WaitForSeconds(0.4f);
+    private WaitForSeconds spawnDelay = new WaitForSeconds(0.2f);
 
     private IEnumerator MainGameRoutine()
     {

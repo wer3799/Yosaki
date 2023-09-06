@@ -101,6 +101,11 @@ public class UiDosulSweepBoard : MonoBehaviour
                 PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
                 return;
             }
+            if (inputNum > 200)
+            {
+                PopupManager.Instance.ShowAlarmMessage("소탕권은 200개 미만으로 사용가능합니다!");
+                return;
+            }
             else if (remainItemNum < inputNum)
             {
                 PopupManager.Instance.ShowAlarmMessage(
@@ -120,7 +125,7 @@ public class UiDosulSweepBoard : MonoBehaviour
         {
             desc +=
                 $"{currentGradeId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.DosulGoods)} {Utils.ConvertNum(instanClearGetNum)}(+{Utils.ConvertNum(instanClearGetNum * PlayerStats.GetDosulGainValue())})개를 획득 하시겠습니까?\n" +
-                $"<color=yellow>({currentGradeId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.DosulGoods)} {(int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue}(+{(int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue * PlayerStats.GetDosulGainValue()})개 획득)</color>";
+                $"<color=yellow>({currentGradeId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.DosulGoods)} {(int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue}(+{Utils.ConvertNum((int)TableManager.Instance.dosulTowerTable.dataArray[currentGradeId].Sweepvalue * PlayerStats.GetDosulGainValue())})개 획득)</color>";
         }
         else
         {
@@ -164,7 +169,7 @@ public class UiDosulSweepBoard : MonoBehaviour
 
                 //실제소탕
                 ServerData.goodsTable.TableDatas[GoodsTable.DosulClear].Value -= inputNum;
-                ServerData.goodsTable.TableDatas[GoodsTable.DosulGoods].Value += instanClearGetNum+(PlayerStats.GetDosulGainValue()*instanClearGetNum);
+                ServerData.goodsTable.TableDatas[GoodsTable.DosulGoods].Value += Mathf.Round(instanClearGetNum+(PlayerStats.GetDosulGainValue()*instanClearGetNum));
 
                 List<TransactionValue> transactions = new List<TransactionValue>();
 

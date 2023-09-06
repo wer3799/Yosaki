@@ -7,7 +7,7 @@ public class UiGuildBoard : MonoBehaviour
 {
     public void OnEnable()
     {
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        var currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         if (currentLevel < GameBalance.GuildEnterMinLevel)
         {

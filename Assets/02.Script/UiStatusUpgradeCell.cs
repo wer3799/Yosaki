@@ -45,7 +45,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI priceText;
 
-    private ObscuredInt currentLevel = -1;
+    private ObscuredFloat currentLevel = -1;
 
     private ObscuredFloat upgradePrice_gold;
 
@@ -206,7 +206,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
             }
         }
 
-        levelText.SetText($"Lv : {currentLevel}");
+        levelText.SetText($"Lv : {Utils.ConvertNum(currentLevel)}");
         if (IsMaxLevel())
         {
             upgradeText.SetText("최고레벨");
@@ -518,7 +518,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
     {
         if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            int currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
+            var currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
 
             if (currentStatPoint <= 0)
             {
@@ -532,20 +532,20 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
-            int upgradableAmount = maxLevel - currentLevel;
+            var upgradableAmount = maxLevel - currentLevel;
 
             //맥스렙 가능
             if (currentStatPoint >= upgradableAmount)
             {
-                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
-                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= (int)upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value +=(int)upgradableAmount;
             }
             else
             {
-                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
-                ServerData.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= (int)currentStatPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += (int)currentStatPoint;
             }
         }
         
@@ -574,11 +574,11 @@ public class UiStatusUpgradeCell : MonoBehaviour
             }
 
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
             //업그레이드가능한 레벨 * 코스트
             //int upgradableAmount = (maxLevel - currentLevel) * statusData.Upgradeprice;
-            int upgradableAmount = (maxLevel - currentLevel);
+            var upgradableAmount = (maxLevel - currentLevel);
 
             //2개당 1개로 전환
             var upgradableGoldBar = (int)(currentGoldBar / statusData.Upgradeprice);
@@ -597,7 +597,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            int currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
+            var currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
 
             if (currentMemoryPoint <= 0)
             {
@@ -611,19 +611,19 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
-            int upgradableAmount = maxLevel - currentLevel;
+            var upgradableAmount = maxLevel - currentLevel;
 
             //맥스렙 가능
             if (currentMemoryPoint >= upgradableAmount)
             {
-                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= upgradableAmount;
-                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= (int)upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += (int)upgradableAmount;
             }
             else
             {
-                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= currentMemoryPoint;
+                ServerData.statusTable.GetTableData(StatusTable.Memory).Value -= (int)currentMemoryPoint;
                 ServerData.statusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
             }
         }
@@ -638,7 +638,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
     {
         if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            int currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
+            var currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
 
             if (currentStatPoint <= 0)
             {
@@ -652,9 +652,9 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
-            int upgradableAmount = maxLevel - currentLevel;
+            var upgradableAmount = maxLevel - currentLevel;
 
             upgradableAmount = Mathf.Min(upgradableAmount, 100);
 
@@ -686,10 +686,10 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
             //업그레이드가능한 레벨 * 코스트
-            int upgradableAmount = (maxLevel - currentLevel) * statusData.Upgradeprice;
+            var upgradableAmount = (maxLevel - currentLevel) * statusData.Upgradeprice;
 
             //2개당 1개로 전환
             var upgradableGoldBar = currentGoldBar / statusData.Upgradeprice;
@@ -710,7 +710,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            int currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
+            var currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
 
             if (currentMemoryPoint <= 0)
             {
@@ -724,9 +724,9 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
-            int upgradableAmount = maxLevel - currentLevel;
+            var upgradableAmount = maxLevel - currentLevel;
 
             upgradableAmount = Mathf.Min(upgradableAmount, 100);
 
@@ -752,7 +752,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
     {
         if (statusData.STATUSWHERE == StatusWhere.statpoint)
         {
-            int currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
+            var currentStatPoint = ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value;
 
             if (currentStatPoint <= 0)
             {
@@ -766,22 +766,22 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
-            int upgradableAmount = maxLevel - currentLevel;
+            var upgradableAmount = maxLevel - currentLevel;
 
             upgradableAmount = Mathf.Min(upgradableAmount, 10000);
 
             //맥스렙 가능
             if (currentStatPoint >= upgradableAmount)
             {
-                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= upgradableAmount;
-                ServerData.statusTable.GetTableData(statusData.Key).Value += upgradableAmount;
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= (int)upgradableAmount;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += (int)upgradableAmount;
             }
             else
             {
-                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= currentStatPoint;
-                ServerData.statusTable.GetTableData(statusData.Key).Value += currentStatPoint;
+                ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value -= (int)currentStatPoint;
+                ServerData.statusTable.GetTableData(statusData.Key).Value += (int)currentStatPoint;
             }
         }
         else if (statusData.STATUSWHERE == StatusWhere.goldbar)
@@ -801,10 +801,10 @@ public class UiStatusUpgradeCell : MonoBehaviour
             }
 
  
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
             //업그레이드가능한 레벨 * 코스트
-            int upgradableAmount = (maxLevel - currentLevel) * statusData.Upgradeprice;
+            var upgradableAmount = (maxLevel - currentLevel) * statusData.Upgradeprice;
 
             //2개당 1개로 전환
             var upgradableGoldBar = currentGoldBar / statusData.Upgradeprice;
@@ -824,7 +824,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {
-            int currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
+            var currentMemoryPoint = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
 
             if (currentMemoryPoint <= 0)
             {
@@ -838,9 +838,9 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 return;
             }
 
-            int currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
-            int upgradableAmount = maxLevel - currentLevel;
+            var upgradableAmount = maxLevel - currentLevel;
 
             upgradableAmount = Mathf.Min(upgradableAmount, 10000);
 

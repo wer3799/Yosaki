@@ -376,6 +376,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         
         ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.foxFirePassKill].Value += sleepRewardInfo.killCount;
         ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulPassKill].Value += sleepRewardInfo.killCount;
+        ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.petPassKill].Value += sleepRewardInfo.killCount;
         
         if (ServerData.userInfoTable.IsEventPassPeriod())
         {
@@ -484,6 +485,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         userInfo_2Param.Add(UserInfoTable_2.foxFirePassKill, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.foxFirePassKill].Value);
         userInfo_2Param.Add(UserInfoTable_2.dosulPassKill, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulPassKill].Value);
+        userInfo_2Param.Add(UserInfoTable_2.petPassKill, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.petPassKill].Value);
         if (ServerData.userInfoTable.IsEventPassPeriod())
         {
             userInfo_2Param.Add(UserInfoTable_2.killCountTotalSeason0,

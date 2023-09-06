@@ -184,15 +184,15 @@ public class UiPassiveSkill2Cell : MonoBehaviour
 
 
 
-        int skillPointRemain = skillPoint.Value;
+        var skillPointRemain = skillPoint.Value;
 
-        int upgradableAmount = Mathf.Min(skillPointRemain, maxLevel - currentLevel);
+        var upgradableAmount = Mathf.Min(skillPointRemain, maxLevel - currentLevel);
 
         upgradableAmount = Mathf.Min(upgradableAmount, 100);
 
         //로컬
-        ServerData.passive2ServerTable.TableDatas[passiveSkill2Data.Stringid].level.Value += upgradableAmount;
-        skillPoint.Value -= upgradableAmount;
+        ServerData.passive2ServerTable.TableDatas[passiveSkill2Data.Stringid].level.Value += (int)upgradableAmount;
+        skillPoint.Value -= (int)upgradableAmount;
         
         if (syncRoutine != null)
         {
@@ -224,13 +224,13 @@ public class UiPassiveSkill2Cell : MonoBehaviour
 
 
 
-        int skillPointRemain = skillPoint.Value;
+        var skillPointRemain = skillPoint.Value;
 
-        int upgradableAmount = Mathf.Min(skillPointRemain, maxLevel - currentLevel);
+        var upgradableAmount = Mathf.Min(skillPointRemain, maxLevel - currentLevel);
 
         //로컬
-        ServerData.passive2ServerTable.TableDatas[passiveSkill2Data.Stringid].level.Value += upgradableAmount;
-        skillPoint.Value -= upgradableAmount;
+        ServerData.passive2ServerTable.TableDatas[passiveSkill2Data.Stringid].level.Value += (int)upgradableAmount;
+        skillPoint.Value -= (int)upgradableAmount;
         
         if (syncRoutine != null)
         {

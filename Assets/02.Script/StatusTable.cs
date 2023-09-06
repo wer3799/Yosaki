@@ -57,6 +57,9 @@ public class StatusTable
     public const string GiSlash_memory = "GiSlash_memory";
     public const string Gum_memory = "Gum_memory";
     
+    public const string Sum_memory = "Sum_memory";
+    public const string Sim_memory = "Sim_memory";
+    
     //public const string IgnoreDefense_GoldBar = "IgnoreDefense_GoldBar";
     //public const string GoldBarGain_GoldBar = "GoldBarGain_GoldBar";
     public const string Special0_GoldBar = "Special0_GoldBar";
@@ -78,7 +81,7 @@ public class StatusTable
     public const string LeeMuGi = "LeeMuGi";
 
 
-    private Dictionary<string, int> tableSchema = new Dictionary<string, int>()
+    private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         { Level, 1 },
         { SkillPoint, GameBalance.SkillPointGet },
@@ -120,7 +123,9 @@ public class StatusTable
         { Cslash_memory, 0 },
         { GiSlash_memory, 0 },
         { Gum_memory, 0 },
-        //{ IgnoreDefense_GoldBar, 0 },
+        { Sum_memory, 0 },
+        { Sim_memory, 0 },
+        //{ IgnoreDefense_GoldBar, 0 }, 
         //{ GoldBarGain_GoldBar, 0 },
         { Special0_GoldBar, 0 },
         { Special1_GoldBar, 0 },
@@ -140,7 +145,7 @@ public class StatusTable
         { LeeMuGi, 0 },
     };
 
-    private Dictionary<string, ReactiveProperty<int>> tableDatas = new Dictionary<string, ReactiveProperty<int>>();
+    private Dictionary<string, ReactiveProperty<float>> tableDatas = new Dictionary<string, ReactiveProperty<float>>();
 
     public void SyncAllData()
     {
@@ -162,7 +167,7 @@ public class StatusTable
         });
     }
 
-    public ReactiveProperty<int> GetTableData(string key)
+    public ReactiveProperty<float> GetTableData(string key)
     {
         return tableDatas[key];
     }
@@ -376,6 +381,18 @@ public class StatusTable
 
                         return level * GameBalance.Gum_memory * spcialAbilRatio;
                     }
+                case Sum_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * GameBalance.Sum_memory * spcialAbilRatio;
+                    }
+                case Sim_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * GameBalance.Sim_memory * spcialAbilRatio;
+                    }
 
                 #endregion
 
@@ -444,7 +461,7 @@ public class StatusTable
         return 0f;
     }
 
-    public int GoldBarUpgradeSum()
+    public float GoldBarUpgradeSum()
     {
 
         var soul0 = tableDatas[Special0_GoldBar].Value;
@@ -458,6 +475,47 @@ public class StatusTable
     }
     
     public float GetStatusUpgradePrice(string key, int level)
+    {
+        if (TableManager.Instance.StatusDatas.TryGetValue(key, out var data))
+        {
+            switch (key)
+            {
+                case AttackLevel_Gold:
+                    {
+                        //7월 12일버전
+                        //return (Mathf.Pow(level, 2.9f + (level / 1000) * 0.1f));
+
+                        return (Mathf.Pow(level, 2.7f + (level / 1000) * 0.1f));
+                    }
+                    break;
+                case CriticalDamLevel_Gold:
+                case CriticalLevel_Gold:
+                case HpLevel_Gold:
+                case MpLevel_Gold:
+                case HpRecover_Gold:
+                case MpRecover_Gold:
+                    {
+                        //7월 12일버전
+                        //return Mathf.Pow(level, 3.0f + (level / 100) * 0.1f);
+                        if (data.Maxlv <= level)
+                        {
+                            return 0f;
+                        }
+                        return Mathf.Pow(level, 2.9f + (level / 100) * 0.1f);
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogError($"key {key} is not exist in GetStatusUpgradePrice");
+            return -1f;
+        }
+
+        return -1f;
+    }
+    
+    public float GetStatusUpgradePrice(string key, float level)
     {
         if (TableManager.Instance.StatusDatas.TryGetValue(key, out var data))
         {
@@ -525,7 +583,7 @@ public class StatusTable
                 while (e.MoveNext())
                 {
                     defultValues.Add(e.Current.Key, e.Current.Value);
-                    tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+                    tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(e.Current.Value));
                 }
 
                 var bro = Backend.GameData.Insert(tableName, defultValues);
@@ -573,12 +631,12 @@ public class StatusTable
                         {
                             //값로드
                             var value = data[e.Current.Key][ServerData.format_Number].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(Int32.Parse(value)));
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(Int32.Parse(value)));
                         }
                         else
                         {
                             defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<int>(e.Current.Value));
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(e.Current.Value));
                             paramCount++;
                         }
                     }
@@ -609,7 +667,7 @@ public class StatusTable
         UpData(key, tableDatas[key].Value, localOnly);
     }
 
-    public void UpData(string key, int data, bool localOnly)
+    public void UpData(string key, float data, bool localOnly)
     {
         if (tableDatas.ContainsKey(key) == false)
         {

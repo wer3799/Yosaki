@@ -94,6 +94,10 @@ public enum StatusType
     SuperCritical8AddDam,
     SuperCritical13AddDam,
     SuperCritical18AddDam,
+    
+    SuperCritical22DamPer, //진 귀살베기
+    StageRelicUpgrade, //유물 복원 강화
+    MeditationGainPer, //내면세계 소탕량 증가
 }
 
 
@@ -141,6 +145,7 @@ public static class PlayerStats
         double gwisal = GetSuperCritical19DamPer();
         double chungu = GetSuperCritical20DamPer();
         double trans = GetSuperCritical21DamPer();
+        double jingwisal = GetSuperCritical22DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -177,6 +182,7 @@ public static class PlayerStats
         totalPower += (totalPower * gwisal);
         totalPower += (totalPower * chungu);
         totalPower += (totalPower * trans);
+        totalPower += (totalPower * jingwisal);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -1795,6 +1801,9 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical10DamPer);
 
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Sum_memory);
+
+        
         return ret;
     }
 
@@ -1821,6 +1830,9 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical12DamPer);
 
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Sim_memory);
+
+        
         return ret;
     }
 
@@ -1934,6 +1946,17 @@ public static class PlayerStats
 
         ret += GetWeaponTransHasValue(StatusType.SuperCritical21DamPer);
 
+        return ret;
+    }
+    //진 귀살 베기
+    public static float GetSuperCritical22DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetWeaponEquipPercentValue(StatusType.SuperCritical22DamPer);
+
+        ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical22DamPer);
+        
         return ret;
     }
 
@@ -2532,7 +2555,7 @@ public static class PlayerStats
         {
             var tableDatas = TableManager.Instance.PetEquipment.dataArray;
 
-            int petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+            var petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
 
             for (int i = 0; i < tableDatas.Length; i++)
             {
@@ -2659,7 +2682,7 @@ public static class PlayerStats
             stageRelicValue.Add(statusType, ret);
         }
 
-        ret *= GetStageAddValue();
+        ret *= GetStageRelicUpgradeValue();
 
         return ret;
     }
@@ -2728,13 +2751,13 @@ public static class PlayerStats
         return (1 + divide * divideAbilValue);
     }
 
-    public static float GetSonAbilHasEffect(StatusType statusType, int addLevel = 0)
+    public static float GetSonAbilHasEffect(StatusType statusType, float addLevel = 0f)
     {
         float ret = 0f;
 
         var tableDatas = TableManager.Instance.SonAbil.dataArray;
 
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value + addLevel;
+        var currentLevel = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value + addLevel;
 
         currentLevel += (int)ServerData.userInfoTable.TableDatas[UserInfoTable.sonCloneClear].Value *
                         GameBalance.sonCloneAddValue;
@@ -2744,7 +2767,7 @@ public static class PlayerStats
             if (currentLevel < tableDatas[i].Unlocklevel) continue;
             if (statusType != (StatusType)tableDatas[i].Abiltype) continue;
 
-            int calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
+            var calculatedLevel = currentLevel - tableDatas[i].Unlocklevel;
 
             ret += tableDatas[i].Abilvalue + calculatedLevel * tableDatas[i].Abiladdvalue;
         }
@@ -4119,24 +4142,192 @@ public static class PlayerStats
 
         return grade;
     }
-
-    public static int GetBlackGrade()
+    public static int GetSpecialSuhoRelicGrade()
     {
+        var relicTable = TableManager.Instance.RelicSpecial.dataArray;
+        
+        var localData = TableManager.Instance.suhoPetTable.dataArray;
+        var serverData = ServerData.suhoAnimalServerTable.TableDatas;
+
+        int suhoIdx = -1;
+
         int grade = -1;
-
-        var tableData = TableManager.Instance.sasinsuTable.dataArray;
-
-        var score = ServerData.sasinsuServerTable.TableDatas["b0"].score.Value * GameBalance.BossScoreConvertToOrigin;
-
-        for (int i = 0; i < tableData[0].Score.Length; i++)
+        
+        for (int i = 0; i < localData.Length; i++)
         {
-            if (score >= tableData[0].Score[i])
+            if (localData[i].SUHOPETTYPE != SuhoPetType.Basic) continue;
+            if (serverData[localData[i].Stringid].hasItem.Value < 1) break;
+            else
             {
-                grade = i;
+                suhoIdx = i;
             }
         }
 
+        for (int i = 0; i < relicTable.Length; i++)
+        {
+            if (relicTable[i].Suhorequire < 0) break;
+            if (suhoIdx >= relicTable[i].Suhorequire)
+            {
+                grade = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+
         return grade;
+    }
+    public static int GetFoxFireGrade()
+    {
+        var value = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.foxFireIdx).Value;
+
+        if (value < 0)
+        {
+            return 0;
+        }
+        else
+        {
+            var tableData = TableManager.Instance.FoxFire.dataArray;
+
+            return tableData[value].Level;
+        }
+    }
+    
+    public static int GetSpecialFoxRelicGrade()
+    {
+        var relicTable = TableManager.Instance.RelicSpecial.dataArray;
+        
+        int foxGrade = GetFoxFireGrade();
+
+        int grade = -1;
+
+        for (int i = 0; i < relicTable.Length; i++)
+        {
+            if (relicTable[i].Foxrequire < 0) break;
+
+            if (foxGrade >= relicTable[i].Foxrequire)
+            {
+                grade = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+
+        return grade;
+    }
+    public static int GetSpecialDosulRelicGrade()
+    {
+        var relicTable = TableManager.Instance.RelicSpecial.dataArray;
+        
+        int dosulGrade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dosulLevel).Value;
+
+        int grade = -1;
+
+        for (int i = 0; i < relicTable.Length; i++)
+        {
+            if (relicTable[i].Dosulrequire < 0) break;
+
+            
+            if (dosulGrade >= relicTable[i].Dosulrequire)
+            {
+                grade = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+
+        return grade;
+    }
+    public static int GetSpecialMeditationRelicGrade()
+    {
+        var relicTable = TableManager.Instance.RelicSpecial.dataArray;
+        
+        int meditationGrade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationIndex).Value;
+
+        int grade = -1;
+
+        for (int i = 0; i < relicTable.Length; i++)
+        {
+            if (relicTable[i].Meditationrequire < 0) break;
+
+            if (meditationGrade >= relicTable[i].Meditationrequire)
+            {
+                grade = i;
+            }
+            else
+            {
+                break;
+            }
+        }
+        
+
+        return grade;
+    }
+    public static float GetSpecialSuhoRelicAbil(StatusType type)
+    {
+        var grade = GetSpecialSuhoRelicGrade();
+
+        if (grade == -1)
+        {
+            return 0f;
+        }
+        var tableData =  TableManager.Instance.RelicSpecial.dataArray;
+
+        return (StatusType)tableData[grade].Suhoabiltype != type ? 0f : tableData[grade].Suhoabilvalue;
+    }
+
+    public static float GetSpecialFoxRelicAbil(StatusType type)
+    {
+        var grade = GetSpecialFoxRelicGrade();
+        if (grade == -1)
+        {
+            return 0f;
+        }
+        var tableData =  TableManager.Instance.RelicSpecial.dataArray;
+
+        return (StatusType)tableData[grade].Foxabiltype != type ? 0f : tableData[grade].Foxabilvalue;
+    }
+    public static float GetSpecialDosulRelicAbil(StatusType type)
+    {
+        var grade = GetSpecialDosulRelicGrade();
+        if (grade == -1)
+        {
+            return 0f;
+        }
+        var tableData =  TableManager.Instance.RelicSpecial.dataArray;
+
+        return (StatusType)tableData[grade].Dosulabiltype != type ? 0f : tableData[grade].Dosulabilvalue;
+    }
+    public static float GetSpecialMeditationRelicAbil(StatusType type)
+    {
+        var grade = GetSpecialMeditationRelicGrade();
+        if (grade == -1)
+        {
+            return 0f;
+        }
+        var tableData =  TableManager.Instance.RelicSpecial.dataArray;
+
+        return (StatusType)tableData[grade].Meditationabiltype != type ? 0f : tableData[grade].Meditationabilvalue;
+    }
+    public static float GetEnhanceRelicAbil(StatusType type)
+    {
+        int grade = -1;
+        
+        grade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.enhanceRelicIdx).Value;
+
+        if (grade < 0) return 0f;
+        
+        var tableData =  TableManager.Instance.RelicEnhance.dataArray;
+
+        return (StatusType)tableData[grade].Abiltype != type ? 0f : tableData[grade].Abilvalue;
     }
 
     public static float GetSusanoAbil(StatusType type)
@@ -4475,6 +4666,10 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.TestThief.dataArray[grade];
 
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.GodTrialGraduateIdx).Value >= GameBalance.thiefGodGraduate)
+        {
+            return tableData.Abilvalue0 * GameBalance.thiefGodGraduateValue;
+        }
         return tableData.Abilvalue0;
     }
 
@@ -4670,7 +4865,7 @@ public static class PlayerStats
     public static int GetCurrentFoxCupIdx()
     {
         var tableData = TableManager.Instance.foxCup.dataArray;
-        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        var currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
         int idx = -1;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4687,7 +4882,7 @@ public static class PlayerStats
     public static int GetCurrentWolfRingIdx()
     {
         var tableData = TableManager.Instance.BlackWolfRing.dataArray;
-        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        var currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
         int idx = -1;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4703,7 +4898,7 @@ public static class PlayerStats
     public static int GetCurrentRelicUpgradeIdx()
     {
         var tableData = TableManager.Instance.RelicUpgrade.dataArray;
-        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.RingEnhance_Level).Value;
+        var currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.RingEnhance_Level).Value;
         int idx = -1;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4719,7 +4914,7 @@ public static class PlayerStats
     public static int GetCurrentDragonBraceletIdx()
     {
         var tableData = TableManager.Instance.DragonBracelet.dataArray;
-        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        var currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
         int idx = -1;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4736,7 +4931,7 @@ public static class PlayerStats
     public static int GetCurrentDragonIdx()
     {
         var tableData = TableManager.Instance.dragonBall.dataArray;
-        int currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        var currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
         int idx = -1;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -5388,6 +5583,9 @@ public static class PlayerStats
 
         ret += GetGuimoonHasEffect2(StatusType.SuhoGainPer);
 
+        ret += GetSpecialSuhoRelicAbil(StatusType.SuhoGainPer);
+        
+        ret += ServerData.petTable.GetStatusValue(StatusType.SuhoGainPer);
 
         return ret;
     }
@@ -5397,6 +5595,9 @@ public static class PlayerStats
 
         ret += GetGuimoonHasEffect2(StatusType.FoxRelicGainPer);
 
+        ret += GetSpecialFoxRelicAbil(StatusType.FoxRelicGainPer);
+
+        ret += ServerData.petTable.GetStatusValue(StatusType.FoxRelicGainPer);
 
         return ret;
     }
@@ -5405,7 +5606,31 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetGuimoonHasEffect2(StatusType.DosulGainPer);
+        
+        ret += GetSpecialDosulRelicAbil(StatusType.DosulGainPer);
+        
+        ret += ServerData.petTable.GetStatusValue(StatusType.DosulGainPer);
 
+        return ret;
+    }
+    public static float GetMeditationGainValue()
+    {
+        float ret = 0f;
+
+        ret += GetSpecialMeditationRelicAbil(StatusType.MeditationGainPer);
+        
+        ret += ServerData.petTable.GetStatusValue(StatusType.MeditationGainPer);
+
+        return ret;
+    }
+    public static float GetStageRelicUpgradeValue()
+    {
+        float ret = 0f;
+
+        ret += GetStageAddValue();
+
+        ret += GetEnhanceRelicAbil(StatusType.StageRelicUpgrade);
+        
 
         return ret;
     }
@@ -5537,4 +5762,5 @@ public static class PlayerStats
 
         return ServerData.guimoonServerTable.TableDatas[tableData[idx].Stringid].level2.Value > 0f;
     }
+    
 }

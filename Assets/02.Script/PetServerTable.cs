@@ -46,7 +46,7 @@ public class PetServerTable
         else
         {
             int status = (int)statusType;
-            int petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
+            var petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
             var e = tableDatas.GetEnumerator();
             while (e.MoveNext())

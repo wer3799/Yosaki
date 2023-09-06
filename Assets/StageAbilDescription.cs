@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 
 public class StageAbilDescription : MonoBehaviour
@@ -10,11 +11,15 @@ public class StageAbilDescription : MonoBehaviour
 
     void Start()
     {
-        int currentStage = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.topClearStageId].Value;
+        Subscribe();
+    }
 
-        float divide = (int)(currentStage / PlayerStats.divideNum);
-
-        description.SetText($"x{PlayerStats.GetStageAddValue()}배");
+    private void Subscribe()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.enhanceRelicIdx).AsObservable().Subscribe(e =>
+        {
+            description.SetText($"x{PlayerStats.GetStageRelicUpgradeValue()}배");
+        }).AddTo(this);
     }
 
 }

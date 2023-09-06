@@ -59,7 +59,7 @@ public class UiStatus : SingletonMono<UiStatus>
 
     }
 
-    private void WhenLevelChanged(int level)
+    private void WhenLevelChanged(float level)
     {
         if (loadedMyRank == -1)
         {

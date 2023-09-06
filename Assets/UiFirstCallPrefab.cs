@@ -4,25 +4,21 @@ using UnityEngine;
 
 public class UiFirstCallPrefab : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private List<GameObject> prefab;
 
     private static bool isFirst = true;
-    private GameObject popupObject;
+    private List<GameObject> popupObject = new List<GameObject>();
     void Start()
     {
         if (isFirst) 
         {
             isFirst = false;
 
-            if (popupObject == null)
+            for (int i = 0; i < prefab.Count; i++)
             {
-                popupObject = Instantiate<GameObject>(prefab,InGameCanvas.Instance.transform);
+                popupObject.Add(Instantiate<GameObject>(prefab[i],InGameCanvas.Instance.transform));
             }
-            else
-            {
-                popupObject.transform.SetAsLastSibling();
-                popupObject.SetActive(true);
-            }
+            
         }
     }
 

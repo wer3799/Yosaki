@@ -190,6 +190,8 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description2 += $"{CommonString.GetStatusName(StatusType.FoxRelicGainPer)}: {Utils.ConvertNum(PlayerStats.GetFoxRelicGainValue()*100)}\n";
         //도술꽃획득
         description2 += $"{CommonString.GetStatusName(StatusType.DosulGainPer)}: {Utils.ConvertNum(PlayerStats.GetDosulGainValue()*100)}\n";
+        //명상획득량
+        description2 += $"{CommonString.GetStatusName(StatusType.MeditationGainPer)}: {Utils.ConvertNum(PlayerStats.GetMeditationGainValue()*100)}\n";
         
         //천상베기
         description3 +=
@@ -240,6 +242,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         description3 +=
             $"크리티컬 21단계 {CommonString.GetStatusName(StatusType.SuperCritical21DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical21DamPer() * 100f,1)}\n";
+
+        description3 +=
+            $"크리티컬 22단계 {CommonString.GetStatusName(StatusType.SuperCritical22DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical22DamPer() * 100f,1)}\n";
 
             //도술
             description1 +=

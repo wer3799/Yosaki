@@ -116,7 +116,7 @@ public class UiPetEquipmentView : MonoBehaviour
 
     private void WhenLevelChanged(int level)
     {
-        int petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
+        var petEquipLevel = ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).Value;
 
         levelText.SetText($"(LV:{level})");
 

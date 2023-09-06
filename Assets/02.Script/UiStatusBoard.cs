@@ -115,13 +115,13 @@ public class UiStatusBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "비급 능력치를 초기화 합니까?", () =>
         {
-            int pref = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
+            var pref = ServerData.statusTable.GetTableData(StatusTable.Memory).Value;
 
             string log = $"보유 {pref}";
 
             var tableData = TableManager.Instance.StatusTable.dataArray;
 
-            int usedPoint = 0;
+            var usedPoint = 0f;
 
             for (int i = 0; i < tableData.Length; i++)
             {
@@ -146,17 +146,17 @@ public class UiStatusBoard : MonoBehaviour
     
     public void OnClickTransButton()
     {
-        int att = ServerData.statusTable.GetTableData(StatusTable.AttackLevel_Gold).Value;
-        int cri = ServerData.statusTable.GetTableData(StatusTable.CriticalLevel_Gold).Value;
-        int criDam = ServerData.statusTable.GetTableData(StatusTable.CriticalDamLevel_Gold).Value;
-        int hp = ServerData.statusTable.GetTableData(StatusTable.HpLevel_Gold).Value;
-        int hpRec = ServerData.statusTable.GetTableData(StatusTable.HpRecover_Gold).Value;
+        var att = ServerData.statusTable.GetTableData(StatusTable.AttackLevel_Gold).Value;
+        var cri = ServerData.statusTable.GetTableData(StatusTable.CriticalLevel_Gold).Value;
+        var criDam = ServerData.statusTable.GetTableData(StatusTable.CriticalDamLevel_Gold).Value;
+        var hp = ServerData.statusTable.GetTableData(StatusTable.HpLevel_Gold).Value;
+        var hpRec = ServerData.statusTable.GetTableData(StatusTable.HpRecover_Gold).Value;
 
         var gold = (int)(ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value / GameBalance.refundGoldBarRatio);
         
-        int refund = criDam - GameBalance.criticalGraduateRefundStandard;
+        var refund = criDam - GameBalance.criticalGraduateRefundStandard;
         
-        int sum = att + cri + criDam +  hp + hpRec;
+        var sum = att + cri + criDam +  hp + hpRec;
         int reqLv = GameBalance.goldGraduateScore;
         if (sum < reqLv)
         {

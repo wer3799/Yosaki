@@ -72,7 +72,7 @@ public class UiContentsPopup : MonoBehaviour
 
     private void RefreshBandit()
     {
-        int level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        var level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
         int requireLv = GameBalance.banditUpgradeLevel;
    
             bandit1.ForEach(e => e.SetActive(level < requireLv));

@@ -45,7 +45,7 @@ public class UiFoxTowerRewardView : MonoBehaviour
 
        if (PlayerStats.GetFoxRelicGainValue() > 0f)
        {
-           sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}(+{towerTableData.Sweepvalue * PlayerStats.GetFoxRelicGainValue()})개");
+           sweepAmount.SetText($"소탕 보상 : {Utils.ConvertBigNum(towerTableData.Sweepvalue)}(+{Utils.ConvertNum(towerTableData.Sweepvalue * PlayerStats.GetFoxRelicGainValue())})개");
        }
        else
        {

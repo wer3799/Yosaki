@@ -192,7 +192,7 @@ public class UiPetView : MonoBehaviour
 
         int currentLevel = ServerData.petTable.TableDatas[petData.Stringid].level.Value;
         int maxLevel = petData.Maxlevel;
-        int petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
+        var petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
         if (petData.Hasvalue1 != 0f)
         {
@@ -981,7 +981,7 @@ public class UiPetView : MonoBehaviour
 
     public void GetLeeMuGiButton()
     {
-        int yachaZiBaeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
+        var yachaZiBaeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
         if (yachaZiBaeLevel < GameBalance.LeeMuGiGetLevel)
         {
@@ -1008,7 +1008,7 @@ public class UiPetView : MonoBehaviour
 
     public void GetGoldDragonButton()
     {
-        int LeeMugiLevel = ServerData.statusTable.GetTableData(StatusTable.LeeMuGi).Value;
+        var LeeMugiLevel = ServerData.statusTable.GetTableData(StatusTable.LeeMuGi).Value;
 
         if (LeeMugiLevel < GameBalance.GoldGetLevel)
         {

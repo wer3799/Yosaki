@@ -767,8 +767,8 @@ public class UserInfoTable
                         }
                         else if(e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 6);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(6));
+                            defultValues.Add(e.Current.Key, 8);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(8));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1679,11 +1679,19 @@ public class UserInfoTable
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan3].Value = 0;  
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan4].Value = 0;  
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan5].Value = 0;  
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild1].Value = 0;  
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild2].Value = 0;  
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild3].Value = 0;  
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild4].Value = 0;  
             userInfo2Param.Add(UserInfoTable_2.exchage_Daesan1,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan1].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Daesan2,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan2].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Daesan3,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan3].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Daesan4,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan4].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Daesan5,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan5].Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Guild1,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild1].Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Guild2,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild2].Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Guild3,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild3].Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Guild4,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild4].Value);
 
             //그림자보스
             //ServerData.bossServerTable.TableDatas["b91"].rewardedId.Value = string.Empty;
