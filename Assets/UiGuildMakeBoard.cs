@@ -46,7 +46,7 @@ public class UiGuildMakeBoard : MonoBehaviour
         }
 
 #if !UNITY_EDITOR
-        int currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
+        float currentLevel = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
         if (currentLevel < GameBalance.GuildCreateMinLevel)
         {
