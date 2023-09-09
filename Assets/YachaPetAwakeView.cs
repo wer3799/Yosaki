@@ -39,7 +39,7 @@ public class YachaPetAwakeView : MonoBehaviour
 
         ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).AsObservable().Subscribe(level =>
         {
-            levelText.SetText($"LV : {level}");
+            levelText.SetText($"LV : {Utils.ConvertNum(level)}");
             levelDescription.SetText($"환수 {1f + level * GameBalance.PetAwakeValuePerLevel}배 강해짐");
         }).AddTo(this);
     }
