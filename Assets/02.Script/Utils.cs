@@ -193,7 +193,11 @@ public static class Utils
                type == Item_Type.costume154||
                type == Item_Type.costume155||
                type == Item_Type.costume156||
-               type == Item_Type.costume157
+               type == Item_Type.costume157||
+               type == Item_Type.costume158||
+               type == Item_Type.costume159||
+               type == Item_Type.costume160||
+               type == Item_Type.costume161
             ;
     }
 
@@ -216,7 +220,8 @@ public static class Utils
                type == Item_Type.MonthNorigae6||
                type == Item_Type.MonthNorigae7||
                type == Item_Type.MonthNorigae8||
-               type == Item_Type.MonthNorigae9
+               type == Item_Type.MonthNorigae9||
+               type == Item_Type.MonthNorigae10
             ;
     }
 
@@ -231,7 +236,9 @@ public static class Utils
     {
         return type == Item_Type.pet52 ||
                type == Item_Type.pet53 ||
-               type == Item_Type.pet54;
+               type == Item_Type.pet54 ||
+               type == Item_Type.pet55 ||
+               type == Item_Type.pet56;
     }
 
 
@@ -243,7 +250,7 @@ public static class Utils
     public static bool IsDailyEventMissionKey(this EventMissionKey type)
     {
         int type_int = (int)type;
-        return type_int >= (int)EventMissionKey.S_ClearBandit && type <= EventMissionKey.TMISSION11;
+        return type_int >= (int)EventMissionKey.SMISSION1 && type <= EventMissionKey.TMISSION11;
     }
 
     public static bool IsRegainableItem(this Item_Type type)
@@ -370,6 +377,8 @@ public static class Utils
                type == Item_Type.pet52 ||
                type == Item_Type.pet53 ||
                type == Item_Type.pet54 ||
+               type == Item_Type.pet55 ||
+               type == Item_Type.pet56 ||
                type == Item_Type.SpecialSuhoPet0 ||
                type == Item_Type.SpecialSuhoPet1 ||
                type == Item_Type.SpecialSuhoPet2 ||
@@ -383,6 +392,7 @@ public static class Utils
                type == Item_Type.SpecialSuhoPet10||
                type == Item_Type.SpecialSuhoPet11||
                type == Item_Type.SpecialSuhoPet12||
+               type == Item_Type.SpecialSuhoPet13||
                type == Item_Type.RabitPet ||
                type == Item_Type.RabitNorigae ||
                type == Item_Type.YeaRaeNorigae ||
@@ -415,6 +425,7 @@ public static class Utils
                type == Item_Type.MonthNorigae7 ||
                type == Item_Type.MonthNorigae8 ||
                type == Item_Type.MonthNorigae9 ||
+               type == Item_Type.MonthNorigae10 ||
                type == Item_Type.DokebiHorn0 ||
                type == Item_Type.DokebiHorn1 ||
                type == Item_Type.DokebiHorn2 ||
@@ -524,7 +535,10 @@ public static class Utils
             type != StatusType.DashCount &&
             type != StatusType.SkillAttackCount &&
             type != StatusType.SealSwordDam &&
-            type != StatusType.AddSummonYogui;
+            type != StatusType.AddSummonYogui&&
+            type != StatusType.AddVisionSkillUseCount&&
+            type != StatusType.AddSealSwordSkillHitCount&&
+            type != StatusType.ReduceDosulSkillCoolTime;
     }
 
     public static bool IsBossContents(this GameManager.ContentsType type)
@@ -773,7 +787,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","미정5","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
         
     };
 
@@ -1052,7 +1066,7 @@ public static class Utils
 
     public static bool HasHotTimeEventPass()
     {
-        return ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0;
     }
     public static bool HasSnowManEventPass()
     {

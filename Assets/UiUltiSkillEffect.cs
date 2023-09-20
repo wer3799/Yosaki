@@ -7,6 +7,8 @@ public class UiUltiSkillEffect : SingletonMono<UiUltiSkillEffect>
 {
     [SerializeField]
     private List<GameObject> ultSkillEffect;
+
+    [SerializeField] private List<Animator> _animators;
     
     public void ShowUltSkillEffect(int idx)
     {
@@ -24,69 +26,104 @@ public class UiUltiSkillEffect : SingletonMono<UiUltiSkillEffect>
         
         if (idx == 46)
         {
-            ultSkillEffect[0].SetActive(true);
+            var index = 0;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
         }
 
         if (idx == 47)
         {
-            ultSkillEffect[1].SetActive(true);
+            var index = 1;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+            
         }
 
         if (idx == 48)
         {
-            ultSkillEffect[2].SetActive(true);
+            var index = 2;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+            
         }
 
         if (idx == 49)
         {
-            ultSkillEffect[3].SetActive(true);
+            var index = 3;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+            
         }
         
         if (idx == 55)
         {
-            ultSkillEffect[4].SetActive(true);
+            var index = 4;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+            
         }  
         
         if (idx == 95)
         {
-            ultSkillEffect[5].SetActive(true);
+            var index = 5;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+            
         }
         
         if (idx == 141)
         {
-            ultSkillEffect[6].SetActive(true);
+            var index = 6;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
         }
         
                 
         if (idx == 142)
         {
-            ultSkillEffect[7].SetActive(true);
+            var index = 7;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
         }
         
         if (idx == 157)
         {
-            ultSkillEffect[8].SetActive(true);
+            var index = 8;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
         }
         
         if (idx == 158)
         {
-            ultSkillEffect[9].SetActive(true);
+            var index = 9;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);        
         }
         
         if (idx == 159)
         {
-            ultSkillEffect[10].SetActive(true);
+            var index = 10;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
         }
         
         if (idx == 160)
         {
-            ultSkillEffect[11].SetActive(true);
-        }
+            var index = 11;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);        }
         
         if (idx == 172)
         {
-            ultSkillEffect[12].SetActive(true);
-        }
+            var index = 12;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);        }
+        
+        if (idx == 173)
+        {
+            var index = 13;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);        }
     }
 
     public void OffAllUltSkillEffect()

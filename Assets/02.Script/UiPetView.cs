@@ -130,6 +130,14 @@ public class UiPetView : MonoBehaviour
         {
             skeletonGraphic.transform.localPosition = new Vector3(54f, -188f, 0f);
         }
+        else if (idx == 55)
+        {
+            skeletonGraphic.transform.localPosition = new Vector3(-8f, -1.42f, 0f);
+        }
+        else if (idx == 56)
+        {
+            skeletonGraphic.transform.localPosition = new Vector3(-8f, -1.42f, 0f);
+        }
 
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();

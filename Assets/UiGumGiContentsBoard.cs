@@ -124,7 +124,7 @@ public class UiGumGiContentsBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSwordPartial, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION4, 1);
 
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {

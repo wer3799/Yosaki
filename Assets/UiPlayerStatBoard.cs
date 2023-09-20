@@ -246,9 +246,24 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description3 +=
             $"크리티컬 22단계 {CommonString.GetStatusName(StatusType.SuperCritical22DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical22DamPer() * 100f,1)}\n";
 
+        description3 +=
+            $"크리티컬 23단계 {CommonString.GetStatusName(StatusType.SuperCritical23DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical23DamPer() * 100f,1)}\n";
+
             //도술
             description1 +=
                 $"{CommonString.GetStatusName(StatusType.DosulDamPer)} : {Utils.ConvertNum(PlayerStats.GetDosulDamPer() * 100f)}\n";
+            //궁극기술타수
+            description1 +=
+                $"{CommonString.GetStatusName(StatusType.AddVisionSkillUseCount)} : {Utils.ConvertNum(PlayerStats.GetAddVisionSkillUseCount())}\n";
+            //요도강화 타수
+            description1 +=
+                $"{CommonString.GetStatusName(StatusType.AddSealSwordSkillHitCount)} : {Utils.ConvertNum(PlayerStats.GetAddSealSwordSkillHitCount())}\n";
+            //도술쿨감
+            description1 +=
+                $"{CommonString.GetStatusName(StatusType.ReduceDosulSkillCoolTime)} : {Utils.ConvertNum(PlayerStats.GetReduceDosulSkillCoolTime())}\n";
+            //궁극기술
+            description1 +=
+                $"{CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} : {Utils.ConvertNum(PlayerStats.GetEnhanceVisionSkill() * 100f)}\n";
 
     
         descriptionBoard1.SetText(description1);

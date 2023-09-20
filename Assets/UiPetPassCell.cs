@@ -53,6 +53,9 @@ public class UiPetPassCell : FancyCell<PassData_Fancy>
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
+    [SerializeField] private Image passIcon;
+
+    [SerializeField] private List<Sprite> petIcons;
     private void OnDestroy()
     {
         disposables.Dispose();
@@ -78,7 +81,7 @@ public class UiPetPassCell : FancyCell<PassData_Fancy>
         }).AddTo(disposables);
         
         //킬카운트 변경될때
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petPassKill).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable_2.GetTableData(passInfo.key0).AsObservable().Subscribe(e =>
         {
             lockIcon_Free.SetActive(!CanGetReward());
             lockIcon_Ad.SetActive(!CanGetReward());
@@ -100,8 +103,16 @@ public class UiPetPassCell : FancyCell<PassData_Fancy>
 
         itemName_free.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_Free));
         itemName_ad.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_IAP));
+
+        passIcon.sprite = GetPassIconSprite();
     }
 
+    private Sprite GetPassIconSprite()
+    {
+        var passNum = int.Parse(passInfo.shopId.ToString().Replace("petpass", ""));
+        return petIcons[passNum];
+    }
+    
     private void SetDescriptionText()
     {
         descriptionText.SetText($"{Utils.ConvertNum(passInfo.require)}");
@@ -219,25 +230,25 @@ public class UiPetPassCell : FancyCell<PassData_Fancy>
     private bool IsBeforeRewardedFree()
     {
         var idx = int.Parse(ServerData.seolPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
-        return idx+1 == passInfo.id;
+        return idx+1 == passInfo.passGrade;
     }
     private bool IsBeforeRewardedAd()
     {
         var idx = int.Parse(ServerData.seolPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value);
-        return idx+1 == passInfo.id;
+        return idx+1 == passInfo.passGrade;
     }
     private bool CanGetReward()
     {
-        var killCount = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petPassKill).Value;
+        var killCount = (int)ServerData.userInfoTable_2.GetTableData(passInfo.key0).Value;
         return killCount >= passInfo.require;
     }
     private bool IsAdRewarded()
     {
-        return int.Parse(ServerData.seolPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value) >= passInfo.id;
+        return int.Parse(ServerData.seolPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value) >= passInfo.passGrade;
     }
     private bool IsFreeRewarded()
     {
-        return int.Parse(ServerData.seolPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value) >= passInfo.id;
+        return int.Parse(ServerData.seolPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value) >= passInfo.passGrade;
     }
     public void UpdateUi(PassInfo passInfo)
     {

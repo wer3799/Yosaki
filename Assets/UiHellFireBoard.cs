@@ -165,7 +165,7 @@ public class UiHellFireBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
 
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearHell, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION5, 1);
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearHell, 1);

@@ -233,10 +233,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             hotTimeItem = (int)(GameBalance.sleepRewardRatio * elapsedMinutes / 10);
             
-            // if (Utils.HasHotTimeEventPass())
-            // {
-            // }
-            hotTimeItem *= 2;
+            if (Utils.HasHotTimeEventPass())
+            {
+                hotTimeItem *= 2;
+            }
         }
 
 
@@ -335,13 +335,14 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             }
         }
 
-//2주년은 2개씩줌
+        //추석 핫타임
         ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += sleepRewardInfo.hotTimeItem;
+        //패스 미구매시 저장 재화 추가획득
+        if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value < 1)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
+        }
 
-        // if (Utils.HasHotTimeEventPass() == false)
-        // {
-        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
-        // }
 
 
         ServerData.goodsTable.GetTableData(GoodsTable.SulItem).Value += sleepRewardInfo.sulItem;
@@ -404,10 +405,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
         goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
 
-        // if (Utils.HasHotTimeEventPass() == false)
-        // {
-        //     goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
-        // }
+        if (Utils.HasHotTimeEventPass() == false)
+        {
+            goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+        }
 
 
         //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);

@@ -172,6 +172,7 @@ public class GoodsTable
     public static string VisionSkill10 = "VisionSkill10";
     public static string VisionSkill11 = "VisionSkill11";
     public static string VisionSkill12 = "VisionSkill12";
+    public static string VisionSkill13 = "VisionSkill13";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -198,14 +199,14 @@ public class GoodsTable
 
     public static string Event_Collection = "EC0"; //곶감 - > 봄나물로 대체 -> 수박 
     public static string Event_Collection_All = "ECA0"; //봄나물 총 획득량
-    public static string Event_HotTime = "Event_HotTime0"; //핫타임 불꽃
-    public static string Event_HotTime_Saved = "EHS0"; //핫타임 불꽃
+    public static string Event_HotTime = "Event_HotTime0"; //청사초롱
+    public static string Event_HotTime_Saved = "EHS0"; //청사초롱 총획득량
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string Event_NewYear = "Event_NewYear"; //떡국
     public static string Event_NewYear_All = "Event_NewYear_All"; //신년재화 총생산량
     public static string Event_Mission_Refund = "Event_Mission1";//발리볼 //꽃송이 //바람개비.
-    public static string Event_Mission = "Event_Mission2";//발리볼 //꽃송이 //바람개비.
-    public static string Event_Mission_All = "Event_Mission_All2"; //꽃송이 //바람개비 총생산량(소급 위한)
+    public static string Event_Mission = "Event_Mission2";//추석
+    public static string Event_Mission_All = "Event_Mission_All2"; //추석
     public static string Event_Mission2 = "Event_Mission3";//보름달
     public static string Event_Mission2_All = "Event_Mission_All3"; //보름달생산량
 
@@ -410,6 +411,7 @@ public class GoodsTable
         { VisionSkill10, 0f },
         { VisionSkill11, 0f },
         { VisionSkill12, 0f },
+        { VisionSkill13, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -1500,6 +1502,11 @@ public class GoodsTable
                 return GoodsTable.VisionSkill12;
             }
 
+            case Item_Type.VisionSkill13:
+            {
+                return GoodsTable.VisionSkill13;
+            }
+
             //
             //            //
             case Item_Type.ThiefSkill0:
@@ -1706,6 +1713,10 @@ public class GoodsTable
             case Item_Type.Event_Mission:
             {
                 return GoodsTable.Event_Mission;
+            }
+            case Item_Type.Event_Mission_All:
+            {
+                return GoodsTable.Event_Mission_All;
             }
             case Item_Type.Event_Mission2:
             {
@@ -2177,6 +2188,10 @@ public class GoodsTable
         else if (GoodsTable.VisionSkill12 == type)
         {
             return Item_Type.VisionSkill12;
+        }
+        else if (GoodsTable.VisionSkill13 == type)
+        {
+            return Item_Type.VisionSkill13;
         }
 
         // //

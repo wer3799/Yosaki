@@ -400,7 +400,7 @@ public class UiBuffPopupView : MonoBehaviour
         {
             if (ServerData.iapServerTable.TableDatas[UiWinterPassBuyButton.productKey].buyCount.Value == 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("스노클링 훈련 패스권이 필요 합니다.");
+                PopupManager.Instance.ShowAlarmMessage("가을 훈련 패스권이 필요 합니다.");
                 return;
             }
         }

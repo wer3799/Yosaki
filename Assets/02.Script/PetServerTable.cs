@@ -259,4 +259,19 @@ public class PetServerTable
             }
         });
     }
+
+    public int GetPetDispatchScore()
+    {
+        int scoreSum = 0;
+        var e = tableDatas.GetEnumerator();
+        while (e.MoveNext())
+        {
+            if (e.Current.Value.hasItem.Value == 0) continue;
+
+            var petTableData = TableManager.Instance.PetDatas[e.Current.Value.idx];
+            scoreSum += petTableData.Dispatchscore;
+        }
+
+        return scoreSum;
+    }
 }

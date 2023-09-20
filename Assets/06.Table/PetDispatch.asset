@@ -1,0 +1,857 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a4ca9cb3cbe5c40af5a7fb6215020f, type: 3}
+  m_Name: PetDispatch
+  m_EditorClassIdentifier: 
+  SheetName: Assets/06.Table/PetDispatch.xlsx
+  WorksheetName: PetDispatch
+  dataArray:
+  - id: 0
+    minscore: 0
+    maxscore: 10
+    rewardtype: 010000000200000005000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 10000000
+    - 1e+9
+    - 100000000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 1
+    minscore: 11
+    maxscore: 20
+    rewardtype: 010000000200000005000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 20000000
+    - 1.5e+9
+    - 120000000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 2
+    minscore: 21
+    maxscore: 30
+    rewardtype: 010000000200000005000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 30000000
+    - 2e+9
+    - 140000000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 3
+    minscore: 31
+    maxscore: 40
+    rewardtype: 01000000020000000500000014000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 40000000
+    - 2.5e+9
+    - 160000000
+    - 100000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 4
+    minscore: 41
+    maxscore: 50
+    rewardtype: 01000000020000000500000014000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 50000000
+    - 3e+9
+    - 180000000
+    - 300000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 5
+    minscore: 51
+    maxscore: 60
+    rewardtype: 01000000020000000500000014000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 60000000
+    - 3.5e+9
+    - 200000000
+    - 500000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 6
+    minscore: 61
+    maxscore: 70
+    rewardtype: 0100000002000000050000001400000038230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 70000000
+    - 4e+9
+    - 220000000
+    - 700000
+    - 100
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 7
+    minscore: 71
+    maxscore: 80
+    rewardtype: 01000000020000000500000014000000382300002e000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 80000000
+    - 4.5e+9
+    - 240000000
+    - 900000
+    - 110
+    - 1000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 8
+    minscore: 81
+    maxscore: 90
+    rewardtype: 01000000020000000500000014000000382300002e000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 90000000
+    - 5e+9
+    - 260000000
+    - 1100000
+    - 120
+    - 1500
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 9
+    minscore: 91
+    maxscore: 100
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 100000000
+    - 5.5e+9
+    - 280000000
+    - 1300000
+    - 130
+    - 2000
+    - 25000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 10
+    minscore: 101
+    maxscore: 110
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 110000000
+    - 6e+9
+    - 300000000
+    - 1500000
+    - 140
+    - 2500
+    - 27000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 11
+    minscore: 111
+    maxscore: 120
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 120000000
+    - 6.5e+9
+    - 320000000
+    - 1700000
+    - 150
+    - 3000
+    - 29000
+    - 1000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 12
+    minscore: 121
+    maxscore: 130
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 130000000
+    - 7e+9
+    - 340000000
+    - 1900000
+    - 160
+    - 3500
+    - 31000
+    - 1100
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 13
+    minscore: 131
+    maxscore: 140
+    rewardtype: 01000000020000000500000014000000382300002e000000322300004223000044230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 140000000
+    - 7.5e+9
+    - 360000000
+    - 2100000
+    - 170
+    - 4000
+    - 33000
+    - 1200
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 14
+    minscore: 141
+    maxscore: 150
+    rewardtype: 01000000020000000500000014000000382300002e000000322300004223000044230000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 150000000
+    - 8e+9
+    - 380000000
+    - 2300000
+    - 180
+    - 4500
+    - 35000
+    - 1300
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 15
+    minscore: 151
+    maxscore: 160
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000ffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 160000000
+    - 8.5e+9
+    - 400000000
+    - 2500000
+    - 190
+    - 5000
+    - 37000
+    - 1400
+    - 1
+    - 10000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 16
+    minscore: 161
+    maxscore: 170
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000ffffffffffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 170000000
+    - 9e+9
+    - 420000000
+    - 2700000
+    - 200
+    - 5500
+    - 39000
+    - 1500
+    - 1
+    - 30000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 17
+    minscore: 171
+    maxscore: 180
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 180000000
+    - 9.5e+9
+    - 440000000
+    - 2900000
+    - 210
+    - 6000
+    - 41000
+    - 1600
+    - 1
+    - 50000
+    - 1000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 18
+    minscore: 181
+    maxscore: 190
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 190000000
+    - 1e+10
+    - 460000000
+    - 3100000
+    - 220
+    - 6500
+    - 43000
+    - 1700
+    - 1
+    - 70000
+    - 4000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 19
+    minscore: 191
+    maxscore: 200
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 200000000
+    - 1.05e+10
+    - 480000000
+    - 3300000
+    - 230
+    - 7000
+    - 45000
+    - 1800
+    - 1
+    - 90000
+    - 7000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 20
+    minscore: 201
+    maxscore: 210
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 210000000
+    - 1.1e+10
+    - 500000000
+    - 3500000
+    - 240
+    - 7500
+    - 47000
+    - 1900
+    - 1
+    - 110000
+    - 10000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 21
+    minscore: 211
+    maxscore: 220
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 220000000
+    - 1.15e+10
+    - 520000000
+    - 3700000
+    - 250
+    - 8000
+    - 49000
+    - 2000
+    - 1
+    - 130000
+    - 13000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 22
+    minscore: 221
+    maxscore: 230
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 230000000
+    - 1.2e+10
+    - 540000000
+    - 3900000
+    - 260
+    - 8500
+    - 51000
+    - 2100
+    - 1
+    - 150000
+    - 16000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 23
+    minscore: 231
+    maxscore: 240
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 240000000
+    - 1.25e+10
+    - 560000000
+    - 4100000
+    - 270
+    - 9000
+    - 53000
+    - 2200
+    - 1
+    - 170000
+    - 19000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 24
+    minscore: 241
+    maxscore: 250
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 250000000
+    - 1.3e+10
+    - 580000000
+    - 4300000
+    - 280
+    - 9500
+    - 55000
+    - 2300
+    - 1
+    - 190000
+    - 22000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 25
+    minscore: 251
+    maxscore: 260
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 260000000
+    - 1.35e+10
+    - 600000000
+    - 4500000
+    - 290
+    - 10000
+    - 57000
+    - 2400
+    - 1
+    - 210000
+    - 25000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 26
+    minscore: 261
+    maxscore: 270
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 270000000
+    - 1.4e+10
+    - 620000000
+    - 4700000
+    - 300
+    - 10500
+    - 59000
+    - 2500
+    - 1
+    - 230000
+    - 28000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 27
+    minscore: 271
+    maxscore: 280
+    rewardtype: 01000000020000000500000014000000382300002e0000003223000042230000442300004823000053230000ffffffffffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 280000000
+    - 1.45e+10
+    - 640000000
+    - 4900000
+    - 310
+    - 11000
+    - 61000
+    - 2600
+    - 1
+    - 250000
+    - 31000
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 28
+    minscore: 281
+    maxscore: 290
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f230000ffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 290000000
+    - 1.5e+10
+    - 660000000
+    - 5100000
+    - 320
+    - 11500
+    - 63000
+    - 2700
+    - 2
+    - 270000
+    - 34000
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 29
+    minscore: 291
+    maxscore: 300
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f230000ffffffffffffffffffffffffffffffff
+    rewardvalue:
+    - 300000000
+    - 1.55e+10
+    - 680000000
+    - 5300000
+    - 330
+    - 12000
+    - 65000
+    - 2800
+    - 2
+    - 290000
+    - 37000
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - id: 30
+    minscore: 301
+    maxscore: 310
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000ffffffffffffffffffffffff
+    rewardvalue:
+    - 310000000
+    - 1.6e+10
+    - 700000000
+    - 5500000
+    - 340
+    - 12500
+    - 67000
+    - 2900
+    - 2
+    - 310000
+    - 40000
+    - 1
+    - 1
+    - 0
+    - 0
+    - 0
+  - id: 31
+    minscore: 311
+    maxscore: 320
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000ffffffffffffffffffffffff
+    rewardvalue:
+    - 320000000
+    - 1.65e+10
+    - 720000000
+    - 5700000
+    - 350
+    - 13000
+    - 69000
+    - 3000
+    - 2
+    - 330000
+    - 43000
+    - 1
+    - 1
+    - 0
+    - 0
+    - 0
+  - id: 32
+    minscore: 321
+    maxscore: 330
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f2300003923000043230000ffffffffffffffff
+    rewardvalue:
+    - 330000000
+    - 1.7e+10
+    - 740000000
+    - 5900000
+    - 360
+    - 13500
+    - 71000
+    - 3100
+    - 2
+    - 350000
+    - 46000
+    - 1
+    - 1
+    - 1
+    - 0
+    - 0
+  - id: 33
+    minscore: 331
+    maxscore: 340
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f230000392300004323000049230000ffffffff
+    rewardvalue:
+    - 340000000
+    - 1.75e+10
+    - 760000000
+    - 6100000
+    - 370
+    - 14000
+    - 73000
+    - 3200
+    - 2
+    - 370000
+    - 49000
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+  - id: 34
+    minscore: 341
+    maxscore: 350
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f230000392300004323000049230000ffffffff
+    rewardvalue:
+    - 350000000
+    - 1.8e+10
+    - 780000000
+    - 6300000
+    - 380
+    - 14500
+    - 75000
+    - 3300
+    - 2
+    - 390000
+    - 52000
+    - 1
+    - 1
+    - 1
+    - 1
+    - 0
+  - id: 35
+    minscore: 351
+    maxscore: 360
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000432300004923000054230000
+    rewardvalue:
+    - 360000000
+    - 1.85e+10
+    - 800000000
+    - 6500000
+    - 390
+    - 15000
+    - 77000
+    - 3400
+    - 2
+    - 410000
+    - 55000
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  - id: 36
+    minscore: 361
+    maxscore: 370
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000432300004923000054230000
+    rewardvalue:
+    - 370000000
+    - 1.9e+10
+    - 820000000
+    - 6700000
+    - 400
+    - 15500
+    - 79000
+    - 3500
+    - 2
+    - 430000
+    - 58000
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+  - id: 37
+    minscore: 371
+    maxscore: 380
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000432300004923000054230000
+    rewardvalue:
+    - 380000000
+    - 1.95e+10
+    - 840000000
+    - 6900000
+    - 410
+    - 16000
+    - 81000
+    - 3600
+    - 2
+    - 450000
+    - 61000
+    - 2
+    - 1
+    - 1
+    - 1
+    - 1
+  - id: 38
+    minscore: 381
+    maxscore: 390
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000432300004923000054230000
+    rewardvalue:
+    - 390000000
+    - 2e+10
+    - 860000000
+    - 7100000
+    - 420
+    - 16500
+    - 83000
+    - 3700
+    - 2
+    - 470000
+    - 64000
+    - 2
+    - 1
+    - 1
+    - 1
+    - 1
+  - id: 39
+    minscore: 391
+    maxscore: 400
+    rewardtype: 01000000020000000500000014000000382300002e00000032230000422300004423000048230000532300003f23000039230000432300004923000054230000
+    rewardvalue:
+    - 400000000
+    - 2.05e+10
+    - 880000000
+    - 7300000
+    - 430
+    - 17000
+    - 85000
+    - 3800
+    - 2
+    - 490000
+    - 67000
+    - 2
+    - 2
+    - 1
+    - 1
+    - 1

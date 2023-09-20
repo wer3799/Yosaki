@@ -48,4 +48,12 @@ public class PetPassData
   RewardItemType rewarditemtype;
   public RewardItemType REWARDITEMTYPE { get {return rewarditemtype; } set { this.rewarditemtype = value;} }
   
+  [SerializeField]
+  int reward_id;
+  public int Reward_Id { get {return reward_id; } set { this.reward_id = value;} }
+  
+  [SerializeField]
+  string unlock_key;
+  public string Unlock_Key { get {return unlock_key; } set { this.unlock_key = value;} }
+  
 }

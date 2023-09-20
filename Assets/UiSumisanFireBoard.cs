@@ -158,7 +158,7 @@ public class UiSumisanFireBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
             
             
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSumiFire, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION8, 1);
 
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {

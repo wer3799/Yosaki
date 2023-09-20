@@ -452,6 +452,8 @@ public class SeolPassServerTable
     
     public static string PetPassFree = "p_free0";
     public static string PetPassAd = "p_ad0";
+    public static string PetPassFree_1 = "p_free1";
+    public static string PetPassAd_1 = "p_ad1";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
@@ -460,7 +462,9 @@ public class SeolPassServerTable
         { MonthlypassFreeReward_dol,string.Empty},
         { MonthlypassAdReward_dol,string.Empty},
         { PetPassFree,"-1"},
-        { PetPassAd,"-1"}
+        { PetPassAd,"-1"},
+        { PetPassFree_1,"-1"},
+        { PetPassAd_1,"-1"}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

@@ -8,6 +8,9 @@ public enum EventMissionType
     THIRD,
     AFIRST,
     BSECOND,
+    NORMALMARBLE,
+    FINISHMARBLE,
+
 }
 public enum EventMissionKey
 {
@@ -22,15 +25,15 @@ public enum EventMissionKey
 
     /////
 
-    S_ClearBandit=8,//반딧불전
-    S_ClearOni,//도깨비전
-    S_ClearFast,//빠른전투
-    S_ClearSwordPartial,//검조각 보상 ★
-    S_ClearHell,//불멸석 보상 ★
-    S_ClearChunFlower,//천계꽃 보상 ★
-    S_ClearDokebiFire,//도깨비나라 보상 ★
-    S_ClearSumiFire,//수미산 보상 ★
-    S_ClearSoulStone,//영혼석 보상
+   SMISSION1,
+   SMISSION2,
+   SMISSION3,
+   SMISSION4,
+   SMISSION5,
+   SMISSION6,
+   SMISSION7,
+   SMISSION8,
+   SMISSION9,
     
     TMISSION1,//반딧
     TMISSION2,//깨비전
@@ -57,6 +60,28 @@ public enum EventMissionKey
     BMISSION6,//도깨비
     BMISSION7,//수미산
     BMISSION8,//영혼석(반지)
+    
+    NMARBLEMISSION1,
+    NMARBLEMISSION2,
+    NMARBLEMISSION3,
+    NMARBLEMISSION4,
+    NMARBLEMISSION5,
+    NMARBLEMISSION6,
+    NMARBLEMISSION7,
+    NMARBLEMISSION8,
+    FMARBLEMISSION1,
+    FMARBLEMISSION2,
+    FMARBLEMISSION3,
+    FMARBLEMISSION4,
+    FMARBLEMISSION5,
+    FMARBLEMISSION6,
+    FMARBLEMISSION7,
+    FMARBLEMISSION8,
+    FMARBLEMISSION9,
+    FMARBLEMISSION10,
+    FMARBLEMISSION11,
+    FMARBLEMISSION12
+
 }
 public enum MonthMissionKey
 {

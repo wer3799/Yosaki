@@ -813,6 +813,7 @@ public static class SettingKey
     public static string showGodTrialUi = "showGodTrialUi";
     public static string showTransUi = "showTransUi";
     public static string showDanjeon = "showDanjeon";
+    public static string showClosed = "showClosed";
 
     public static string showCatUi = "showCatUi";
     public static string showTwelveUi = "showTwelveUi";
@@ -912,6 +913,7 @@ public static class SettingData
     public static ReactiveProperty<int> showGodTrialUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showTransUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showDanjeon = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showClosed = new ReactiveProperty<int>();
 
     //보스도전
     public static ReactiveProperty<int> showCatUi    = new ReactiveProperty<int>();
@@ -1134,6 +1136,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.showDanjeon) == false)
             PlayerPrefs.SetInt(SettingKey.showDanjeon, 1);
         
+        if (PlayerPrefs.HasKey(SettingKey.showClosed) == false)
+            PlayerPrefs.SetInt(SettingKey.showClosed, 1);
+        
         //
 
     }
@@ -1232,6 +1237,8 @@ public static class SettingData
         showTransUi.Value = PlayerPrefs.GetInt(SettingKey.showTransUi, 1);
         
         showDanjeon.Value = PlayerPrefs.GetInt(SettingKey.showDanjeon, 1);
+        
+        showClosed.Value = PlayerPrefs.GetInt(SettingKey.showClosed, 1);
         
         
         //보스도전
@@ -1538,6 +1545,10 @@ public static class SettingData
         showDanjeon.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showDanjeon, e);
+        });
+        showClosed.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showClosed, e);
         });
 //
         showCatUi.AsObservable().Subscribe(e =>

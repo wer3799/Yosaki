@@ -108,7 +108,7 @@ public class BossMoveController : MonoBehaviour
                 initialized = true;
             }
         }
-        else if (_bossId == 180||_bossId == 182)
+        else if (_bossId == 180||_bossId == 182||_bossId == 184)
         {
             StartCoroutine(EnemyMovementRoutine());
             if (initialized == false)
@@ -135,6 +135,11 @@ public class BossMoveController : MonoBehaviour
             {
                 SpecialPatternCount = (int)Random.Range(3,6);
                 blinkSecond = Random.Range(1,2);
+            }
+            if (_bossId == 184)
+            {
+                SpecialPatternCount = (int)Random.Range(6,9);
+                blinkSecond = Random.Range(0.8f,1.5f);
             }
             float max = 6;
             float exclude = 4;
@@ -227,7 +232,7 @@ public class BossMoveController : MonoBehaviour
          {
              viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
          }
-         if (_bossId == 180 || _bossId == 182)
+         if (_bossId == 180 || _bossId == 182|| _bossId == 184)
          {
              if (isMoving.Value)
              {

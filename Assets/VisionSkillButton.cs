@@ -15,6 +15,8 @@ public class VisionSkillButton : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI count;
+    [SerializeField]
+    private TextMeshProUGUI visionSkillCount;
 
     [SerializeField]
     private Image gauge;
@@ -63,7 +65,7 @@ public class VisionSkillButton : MonoBehaviour
             }
             else
             {
-                if (!PlayerSkillCaster.Instance.useVisionSkill.Value)
+                if (PlayerSkillCaster.Instance.visionSkillUseCount.Value>0)
                 {
                     count.SetText($"{count_Max - count_Showing}");
                 
@@ -100,19 +102,26 @@ public class VisionSkillButton : MonoBehaviour
         ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill10).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
         ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
         ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
-        PlayerSkillCaster.Instance.useVisionSkill.AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
+        PlayerSkillCaster.Instance.visionSkillUseCount.AsObservable().Subscribe(e =>
         {
-            if (e)
+            //사용시 카운트 초기화
+            if (count_Showing > 0)
+            {
+                count_Showing = 0;
+            }
+            if (e==0)
             {
                 count.SetText("사용함");
             }
 
-            mask.SetActive(e);
+            visionSkillCount.SetText($"{e}");
+            mask.SetActive(e==0);
         }).AddTo(this);
         PlayerSkillCaster.Instance.visionChargeCount.AsObservable().Subscribe(e =>
         {
 
-            if (e > 0 && !PlayerSkillCaster.Instance.useVisionSkill.Value)
+            if (e > 0 && PlayerSkillCaster.Instance.visionSkillUseCount.Value>0)
             {
                 count_Real = e;
                 if (count_Max == -1)
@@ -161,7 +170,7 @@ public class VisionSkillButton : MonoBehaviour
         }
 
         //이미 사용한 경우
-        if (PlayerSkillCaster.Instance.useVisionSkill.Value)
+        if (PlayerSkillCaster.Instance.visionSkillUseCount.Value==0)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 사용하였습니다.");
             return;
@@ -170,6 +179,6 @@ public class VisionSkillButton : MonoBehaviour
         //사용
         PlayerSkillCaster.Instance.UseSkill(_skillTableData.Id);
 
-        PlayerSkillCaster.Instance.SetUseVisionSkill(true);
+        PlayerSkillCaster.Instance.UseVisionSkill();
     }
 }

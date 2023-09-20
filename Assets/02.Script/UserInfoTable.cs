@@ -275,6 +275,10 @@ public class UserInfoTable
     public const string exchangeCount_19_Mileage = "m19";
     public const string exchangeCount_20_Mileage = "m20";
     public const string exchangeCount_21_Mileage = "m21";
+    public const string exchangeCount_22_Mileage = "m22";
+    public const string exchangeCount_23_Mileage = "m23";
+    public const string exchangeCount_24_Mileage = "m24";
+    public const string exchangeCount_25_Mileage = "m25";
 
     
 
@@ -299,17 +303,17 @@ public class UserInfoTable
     public const string eventMission0_9 = "em_2_9";
     
     
-    public const string eventMission1_0 =  "em_3_0";
-    public const string eventMission1_1 =  "em_3_1";
-    public const string eventMission1_2 =  "em_3_2";
-    public const string eventMission1_3 =  "em_3_3";
-    public const string eventMission1_4 =  "em_3_4";
-    public const string eventMission1_5 =  "em_3_5";
+    public const string eventMission1_0  =  "em_3_0";
+    public const string eventMission1_1  =  "em_3_1";
+    public const string eventMission1_2  =  "em_3_2";
+    public const string eventMission1_3  =  "em_3_3";
+    public const string eventMission1_4  =  "em_3_4";
+    public const string eventMission1_5  =  "em_3_5";
                                                
-    public const string eventMission1_6 =  "em_3_6";
-    public const string eventMission1_7 =  "em_3_7";
-    public const string eventMission1_8 =  "em_3_8";
-    public const string eventMission1_9 =  "em_3_9";
+    public const string eventMission1_6  =  "em_3_6";
+    public const string eventMission1_7  =  "em_3_7";
+    public const string eventMission1_8  =  "em_3_8";
+    public const string eventMission1_9  =  "em_3_9";
     public const string eventMission1_10 = "em_3_10";
     public const string eventMission1_11 = "em_3_11";
     
@@ -615,6 +619,10 @@ public class UserInfoTable
         { exchangeCount_19_Mileage, 0 },
         { exchangeCount_20_Mileage, 0 },
         { exchangeCount_21_Mileage, 0 },
+        { exchangeCount_22_Mileage, 0 },
+        { exchangeCount_23_Mileage, 0 },
+        { exchangeCount_24_Mileage, 0 },
+        { exchangeCount_25_Mileage, 0 },
 
         { ny_ex_0, 0 },
         { ny_ex_1, 0 },
@@ -767,8 +775,8 @@ public class UserInfoTable
                         }
                         else if(e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 8);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(8));
+                            defultValues.Add(e.Current.Key, 17);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(17));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1076,6 +1084,7 @@ public class UserInfoTable
             //주간미션은 초기화안함.
             if(table[i].EVENTMISSIONTYPE == EventMissionType.FIRST) continue;
             if(table[i].EVENTMISSIONTYPE == EventMissionType.AFIRST) continue;
+            if(table[i].EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE) continue;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].clearCount.Value = 0;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].rewardCount.Value = 0;
 
@@ -1352,9 +1361,9 @@ public class UserInfoTable
             }
             
             //바캉스 이벤트 출석
-            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendCount).Value != 0)
+            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value != 0)
             {
-                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendCount).Value++;
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value++;
             }            
                 
 
@@ -1446,7 +1455,7 @@ public class UserInfoTable
         
         userInfo2Param.Add(UserInfoTable_2.commonAttendCount,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.commonAttendCount].Value);
         userInfo2Param.Add(UserInfoTable_2.commonAttend2Count,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.commonAttend2Count].Value);
-        userInfo2Param.Add(UserInfoTable_2.secondAttendCount,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.secondAttendCount].Value);
+        userInfo2Param.Add(UserInfoTable_2.eventAttendCount,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventAttendCount].Value);
         
         if (monthChanged)
         {
@@ -1498,6 +1507,10 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_19_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_20_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_21_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_22_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_23_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_24_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_25_Mileage).Value = 0;
 
             userInfoParam.Add(UserInfoTable.exchangeCount_0_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_1_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value);
@@ -1522,6 +1535,10 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.exchangeCount_19_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_19_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_20_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_20_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_21_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_21_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_22_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_22_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_23_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_23_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_24_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_24_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_25_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_25_Mileage).Value);
             
         }
 
@@ -1806,8 +1823,8 @@ public class UserInfoTable
 //         return true;
 // #endif
 
-        return currentServerTime.Year <= 2023 && currentServerTime.Month <= 8 ||
-               (currentServerTime.Month <= 9 && currentServerTime.Day <= 10);
+        return currentServerTime.Year <= 2023 && currentServerTime.Month <= 10 ||
+               (currentServerTime.Month <= 11 && currentServerTime.Day <= 1);
     }
     public bool IsMileageEvent(MileageRewardData rewardData)
     {

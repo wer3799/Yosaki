@@ -39,7 +39,7 @@ public class UiVisionTowerDescription : MonoBehaviour
 
         gradeText.SetText($"비전 {idx + 1}급");
         
-        abilDescription.SetText($"궁극기술 효과 {Utils.ConvertNum(tableData.Abilvalue0 * 100f)}% 강화");
+        abilDescription.SetText($"{CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} {Utils.ConvertNum(tableData.Abilvalue0 * 100f)}");
 
     }
 

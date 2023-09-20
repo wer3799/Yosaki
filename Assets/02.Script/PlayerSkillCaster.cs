@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
+using UnityEngine.Serialization;
 
 public enum SkillCastType
 {
@@ -42,7 +43,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     public ReactiveProperty<float> sealChargeCount;//상단전속도증가
     public ReactiveProperty<float> sealChargeCount2;//요도해방으로 인한 속도증가
     public ReactiveProperty<float> sealChargeCount3;//능력치로 증가
-    public ReactiveProperty<bool> useVisionSkill;
+    [FormerlySerializedAs("useVisionSkillCount")] [FormerlySerializedAs("useVisionSkill")] public ReactiveProperty<int> visionSkillUseCount;
     
     
     private static readonly List<int> _visionSkillIdxList = new List<int>();
@@ -99,7 +100,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             UserSkills[skillIdx].UseSkill();
 
             // visionSkill
-            if (useVisionSkill.Value == false &&
+            if (visionSkillUseCount.Value > 0 &&
                 (TableManager.Instance.SkillTable.dataArray[skillIdx].Requirehit < 0) &&
                 (visionChargeCount.Value > 0)
                )
@@ -135,14 +136,21 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         visionChargeCount.Value = TableManager.Instance.SkillTable.dataArray[visionIdx].Requirehit;
 
 
-        useVisionSkill.Value = false;
+        visionSkillUseCount.Value = 1 + PlayerStats.GetAddVisionSkillUseCount();
 
         VisionSkillCaster.Instance.StartSkillRoutine();
     }
 
-    public void SetUseVisionSkill(bool isUsed)
+    public void UseVisionSkill()
     {
-        useVisionSkill.Value = isUsed;
+        visionSkillUseCount.Value--;
+        
+        int visionIdx = ServerData.goodsTable.GetVisionSkillIdx();
+
+        visionChargeCount.Value = TableManager.Instance.SkillTable.dataArray[visionIdx].Requirehit;
+        
+        VisionSkillCaster.Instance.StartSkillRoutine();
+        
     }
 
     protected virtual void Awake()
@@ -154,7 +162,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     private void Start()
     {
         visionChargeCount.Value = 0;
-        useVisionSkill.Value = false;
+        visionSkillUseCount.Value = 1 + PlayerStats.GetAddVisionSkillUseCount();
 
         InitSkill();
         ignoreDamDecrease = ServerData.userInfoTable.TableDatas[UserInfoTable.IgnoreDamDec].Value == 1;
@@ -352,11 +360,17 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         {
             hitCount = skillInfo.Hitcount + PlayerStats.GetSkillHitAddValue();
         }
-        //인드라는 추가타X + 도술 추가
         else
         {
             hitCount = skillInfo.Hitcount;
         }
+        
+        if(skillInfo.SKILLCASTTYPE==SkillCastType.SealSword)
+        {
+            hitCount *= (1+PlayerStats.GetAddSealSwordSkillHitCount());
+        }
+        //인드라는 추가타X + 도술 추가
+     
 
         double defense = agentHpController.Defense + 1;
 

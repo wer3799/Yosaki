@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using BackEnd;
 using GoogleMobileAds.Api;
+using Spine.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
 public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
@@ -19,7 +22,20 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
 
 
     [FormerlySerializedAs("_goodsIndicator")] [SerializeField] private List<UiAutoGoodsIndicator> goodsIndicator = new List<UiAutoGoodsIndicator>();
+
+    [SerializeField] private SeasonKillCountIndicator2 _seasonKillCountIndicator2;
+
+    [SerializeField] private SkeletonGraphic pet0;
     
+    [SerializeField] private SkeletonGraphic pet1;
+
+    [SerializeField] private TextMeshProUGUI petDesc0;
+    [SerializeField] private TextMeshProUGUI petDesc1;
+
+    [SerializeField] private TextMeshProUGUI petName0;
+    [SerializeField] private TextMeshProUGUI petName1;
+
+    [SerializeField] private Image passImage;
     
     private int _selectedIdx = 0;
     private void Initialize()
@@ -42,15 +58,139 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
     public void OnSelectPetPassButton(int idx)
     {
         _selectedIdx = idx;
+        SetPetDescription();
         this.UpdateContents(_passInfosList[idx].ToArray());
         scroller.SetTotalCount(_passInfosList[idx].Count);
         scroller.JumpTo(0);
         petPassBuyButton.SetPassKey(_passInfosList[idx][0].passInfo.shopId);
         petPassBuyButton.Subscribe();
         GetGoodsIndicator(idx);
-
+        _seasonKillCountIndicator2.ChangeKey(_passInfosList[idx][0].passInfo.key0);
     }
 
+    private void SetPetDescription()
+    {
+        var tableData = TableManager.Instance.PetPass.dataArray;
+
+        var addCount = _selectedIdx*40;
+        for (int i = 0 + addCount; i < tableData.Length; i++)
+        {
+            if (tableData[i].REWARDITEMTYPE == RewardItemType.PassItem)
+            {
+                var pet0Type = (Item_Type)(tableData[i].Reward1);
+                var pet1Type = (Item_Type)(tableData[i].Reward2);
+                var petString = (pet0Type).ToString().Replace("pet","");
+                var petString2 = (pet1Type).ToString().Replace("pet","");
+
+                var petIdx =  int.Parse(petString);
+                var petIdx2 =  int.Parse(petString2);
+                pet0.Clear();
+                pet0.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[petIdx];
+                pet0.Initialize(true);
+                pet0.SetMaterialDirty();
+                if (pet0Type == Item_Type.pet53)
+                {
+                    var scale = 1f;
+                    pet0.gameObject.transform.localScale = new Vector3(scale,scale,1f);
+                    pet0.gameObject.transform.localPosition = new Vector3(0f,-98f,1f);
+
+                }
+                else if (pet0Type == Item_Type.pet55)
+                {
+                    var scale = 1f;
+                    pet0.gameObject.transform.localScale = new Vector3(scale,scale,1f);
+                    pet0.gameObject.transform.localPosition = new Vector3(2.5f,-13,1f);
+                }
+                pet1.Clear();
+                pet1.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[petIdx2];
+                pet1.Initialize(true);
+                pet1.SetMaterialDirty();
+                if (pet1Type == Item_Type.pet54)
+                {
+                    var scale = 1f;
+                    pet1.gameObject.transform.localScale = new Vector3(scale,scale,1f);
+                    pet1.gameObject.transform.localPosition = new Vector3(0f,-234,1f);
+                }
+                else if (pet1Type == Item_Type.pet56)
+                {
+                    var scale = 1f;
+                    pet1.gameObject.transform.localScale = new Vector3(scale,scale,1f);
+                    pet1.gameObject.transform.localPosition = new Vector3(0f,-180.4f,1f);
+                }
+
+
+                var petTableData = TableManager.Instance.PetTable.dataArray;
+
+                var pet0Data = petTableData[petIdx];
+                
+                string desc0 = "";
+                if (pet0Data.Hasvalue1 > 0)
+                {
+                    desc0 +=
+                        $"{CommonString.GetStatusName((StatusType)pet0Data.Hastype1)} ({Utils.ConvertNum(pet0Data.Hasvalue1 * 100)})";
+                }
+
+                if (pet0Data.Hasvalue2 > 0)
+                {
+                    desc0 +=
+                        $"\n{CommonString.GetStatusName((StatusType)pet0Data.Hastype2)} ({Utils.ConvertNum(pet0Data.Hasvalue2 * 100)})";
+                }
+
+                if (pet0Data.Hasvalue3 > 0)
+                {
+                    desc0 +=
+                        $"\n{CommonString.GetStatusName((StatusType)pet0Data.Hastype3)} ({Utils.ConvertNum(pet0Data.Hasvalue3 * 100)})";
+                }
+
+                if (pet0Data.Hasvalue4 > 0)
+                {
+                    desc0 +=
+                        $"\n{CommonString.GetStatusName((StatusType)pet0Data.Hastype4)} ({Utils.ConvertNum(pet0Data.Hasvalue4 * 100)})";
+                }
+
+                petDesc0.SetText(desc0);
+                petName0.SetText(pet0Data.Name);
+                var pet1Data = petTableData[petIdx2];
+                
+                string desc1 = "";
+                if (pet1Data.Hasvalue1 > 0)
+                {
+                    desc1 +=
+                        $"{CommonString.GetStatusName((StatusType)pet1Data.Hastype1)} ({Utils.ConvertNum(pet1Data.Hasvalue1 * 100)})";
+                }
+
+                if (pet1Data.Hasvalue2 > 0)
+                {
+                    desc1 +=
+                        $"\n{CommonString.GetStatusName((StatusType)pet1Data.Hastype2)} ({Utils.ConvertNum(pet1Data.Hasvalue2 * 100)})";
+                }
+
+                if (pet1Data.Hasvalue3 > 0)
+                {
+                    desc1 +=
+                        $"\n{CommonString.GetStatusName((StatusType)pet1Data.Hastype3)} ({Utils.ConvertNum(pet1Data.Hasvalue3 * 100)})";
+                }
+
+                if (pet1Data.Hasvalue4 > 0)
+                {
+                    desc1 +=
+                        $"\n{CommonString.GetStatusName((StatusType)pet1Data.Hastype4)} ({Utils.ConvertNum(pet1Data.Hasvalue4 * 100)})";
+                }
+
+                petDesc1.SetText(desc1);
+                petName1.SetText(pet1Data.Name);
+
+                passImage.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData[i].Reward2);
+                
+                
+                
+                
+                
+                break;
+            }
+        }
+    }
+    
     private void GetGoodsIndicator(int idx)
     {
         var tableData = TableManager.Instance.PetPass.dataArray;
@@ -86,9 +226,9 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
             }
         }
     }
-    private bool CanGetReward(double require)
+    private bool CanGetReward(double require,string killKey)
     {
-        var killCount = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petPassKill).Value;
+        var killCount = (int)ServerData.userInfoTable_2.GetTableData(killKey).Value;
         return killCount >= require;
     }
     private bool IsAdRewarded(string key,int id)
@@ -121,10 +261,10 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
         int adIdx = int.Parse(ad);
 
         bool isPassItem = false;
-        
-        for (int i = freeIdx+1; i < tableData.Length; i++)
+        var addCount = _selectedIdx*40;
+        for (int i = freeIdx+1+addCount; i < tableData.Length; i++)
         {
-            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+            if (CanGetReward(tableData[i].Unlockamount,tableData[i].Unlock_Key) == false) break;
 
             if (tableData[i].REWARDITEMTYPE != RewardItemType.GoodsItem)
             {
@@ -144,11 +284,11 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
                 }
             }
         }
-        for (int i = adIdx+1; i < tableData.Length; i++)
+        for (int i = adIdx+1+addCount; i < tableData.Length; i++)
         {
             if (HasPassItem() == false) break;
 
-            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+            if (CanGetReward(tableData[i].Unlockamount,tableData[i].Unlock_Key) == false) break;
             
             if (tableData[i].REWARDITEMTYPE != RewardItemType.GoodsItem)
             {
@@ -203,7 +343,7 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
         {
             if (isPassItem)
             {
-                PopupManager.Instance.ShowAlarmMessage("패스 아이템을 수령해주세요!");
+                PopupManager.Instance.ShowAlarmMessage("환수를 직접 수령해주세요!");
             }
             else
             {
@@ -249,6 +389,10 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
             passInfo.rewardType_IAP_Key = tableData[i].Reward2_Key;
 
             passInfo.shopId = tableData[i].Shopid;
+
+            passInfo.passGrade = tableData[i].Reward_Id;
+
+            passInfo.key0 = tableData[i].Unlock_Key;
             
             passInfos.Add(new PassData_Fancy(passInfo));
             

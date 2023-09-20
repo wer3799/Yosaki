@@ -162,7 +162,7 @@ public class UiDayOfWeekDungeonBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearBandit, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
 
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {

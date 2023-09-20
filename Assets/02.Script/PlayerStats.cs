@@ -1,7 +1,9 @@
+using System;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 //삭제하거나순서절대바꾸면안됨
 public enum StatusType
@@ -98,6 +100,12 @@ public enum StatusType
     SuperCritical22DamPer, //진 귀살베기
     StageRelicUpgrade, //유물 복원 강화
     MeditationGainPer, //내면세계 소탕량 증가
+    SuperCritical23DamPer, //심상베기
+    AddVisionSkillUseCount, //비전스킬횟수증가
+    AddSealSwordSkillHitCount, //요도 타수강화
+    ReduceDosulSkillCoolTime, //도술재사용시간
+    
+    EnhanceVisionSkill, //비전스킬효과 강화
 }
 
 
@@ -146,6 +154,7 @@ public static class PlayerStats
         double chungu = GetSuperCritical20DamPer();
         double trans = GetSuperCritical21DamPer();
         double jingwisal = GetSuperCritical22DamPer();
+        double simsang = GetSuperCritical23DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -183,6 +192,7 @@ public static class PlayerStats
         totalPower += (totalPower * chungu);
         totalPower += (totalPower * trans);
         totalPower += (totalPower * jingwisal);
+        totalPower += (totalPower * simsang);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -1896,6 +1906,8 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special2_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special3_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special4_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special5_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special6_GoldBar);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical17DamPer);
 
@@ -1959,6 +1971,15 @@ public static class PlayerStats
         
         return ret;
     }
+    //심상베기
+    public static float GetSuperCritical23DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetClosedTrainingValue();
+        
+        return ret;
+    }
 
     //요도 추가피해량
     public static float GetSealSwordDam()
@@ -1968,6 +1989,9 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SealSwordDam);
         
         ret += GetSealSwordCollectionHasValue(StatusType.SealSwordDam);
+        
+        ret += GetAwakeAbilityValue(AbilAwakeType.SealSword, StatusType.SealSwordDam);
+
         
         return ret;
     }
@@ -1990,6 +2014,8 @@ public static class PlayerStats
         
         ret += GetCurrentDosulAddValue();
         
+        ret += GetAwakeAbilityValue(AbilAwakeType.Dosul, StatusType.DosulDamPer);
+
         return ret;
     }
 
@@ -2036,6 +2062,7 @@ public static class PlayerStats
                 superCritical11Value += tableData[i].Abilvalue[currentLevel];
             }
             superCritical11Value += GetGuimoonHasEffect1(StatusType.SuperCritical11DamPer);
+            superCritical11Value += GetSuhoUpgradeAbilValue(GetCurrentSuhoUpgradeIdx());
         }
 
         //막아둠일단
@@ -2474,7 +2501,7 @@ public static class PlayerStats
         if (statusType == StatusType.GoldGainPer)
         {
             ret = GameBalance.HotTimeEvent_Gold;
-            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 ret += GameBalance.HotTimeEvent_Ad_Gold;
             }
@@ -2482,7 +2509,7 @@ public static class PlayerStats
         else if (statusType == StatusType.ExpGainPer)
         {
             ret = GameBalance.HotTimeEvent_Exp;
-            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 ret += GameBalance.HotTimeEvent_Ad_Exp;
             }
@@ -2490,7 +2517,7 @@ public static class PlayerStats
         else if (statusType == StatusType.MagicStoneAddPer)
         {
             ret = GameBalance.HotTimeEvent_GrowthStone;
-            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 ret += GameBalance.HotTimeEvent_Ad_GrowthStone;
             }
@@ -2498,7 +2525,7 @@ public static class PlayerStats
         else if (statusType == StatusType.MarbleAddPer)
         {
             ret = GameBalance.HotTimeEvent_Marble;
-            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 ret += GameBalance.HotTimeEvent_Ad_Marble;
             }
@@ -3573,6 +3600,58 @@ public static class PlayerStats
         return grade;
     }
 
+    public static int GetAddVisionSkillUseCount()
+    {
+        int ret = 0;
+
+        ret += (int)GetAwakeAbilityValue(AbilAwakeType.Vision, StatusType.AddVisionSkillUseCount);
+        
+        return ret;
+    }
+    public static float GetEnhanceVisionSkill()
+    {
+        float ret = 0f;
+
+        ret += GetVisionTowerAbil();
+
+        ret += GameBalance.VisionTreasurePerDamage * ServerData.goodsTable.GetTableData(GoodsTable.VisionTreasure).Value;
+
+        ret += GetAwakeAbilityValue(AbilAwakeType.Vision, StatusType.EnhanceVisionSkill);
+        
+        return ret;
+    }
+    public static float GetReduceDosulSkillCoolTime()
+    {
+        float ret = 0f;
+        
+        ret += GetAwakeAbilityValue(AbilAwakeType.Dosul, StatusType.ReduceDosulSkillCoolTime);
+        
+        return ret;
+    }
+    
+    public static int GetAddSealSwordSkillHitCount()
+    {
+        var ret = 0;
+        
+        ret += (int)GetAwakeAbilityValue(AbilAwakeType.SealSword, StatusType.AddSealSwordSkillHitCount);
+        
+        return ret;
+    }
+    
+
+    public static float GetVisionTowerAbil()
+    {
+        var grade = PlayerStats.GetVisionTowerGrade();
+        if (grade > -1)
+        {
+            var data = TableManager.Instance.visionTowerTable.dataArray[grade];
+            return data.Abilvalue0;
+        } 
+        else
+        {
+            return 0f;
+        }
+    }
     public static int GetVisionTowerGrade()
     {
         int grade = -1;
@@ -3755,6 +3834,138 @@ public static class PlayerStats
         }
 
         return grade;
+    }
+    public static int GetClosedTrainingGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.ClosedTrainingTable.dataArray;
+
+        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+    //type별 그레이드의 테이블 내 실제 id
+    private static int GetAbilAwakeTableIdx(AbilAwakeType type, int idx)
+    {
+        var tableData = TableManager.Instance.AbilAwakeTable.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].ABILAWAKETYPE != type) continue;
+
+            if (tableData[i].Grade == idx)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+    //type별 진행가능한 grade 단계
+    public static int CanAbilAwakeGrade(AbilAwakeType type)
+    {
+        int grade0 = GetClosedTrainingGrade();
+        int grade1 = -1;
+        int abilGrade = -1;
+
+        switch (type)
+        {
+            case AbilAwakeType.Vision:
+                grade1 = GetVisionTowerGrade();
+                break;
+            case AbilAwakeType.SealSword:
+                grade1 = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx9).Value;;
+                break;
+            case AbilAwakeType.Dosul:
+                grade1 = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dosulLevel).Value;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+        var tableData = TableManager.Instance.AbilAwakeTable.dataArray;
+
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if(tableData[i].ABILAWAKETYPE!=type) continue;
+
+            if (tableData[i].Unlockclosedtraining <= grade0 && tableData[i].Unlockcontents <= grade1)
+            {
+                abilGrade = tableData[i].Grade;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return abilGrade;
+    }
+    
+    public static float GetAwakeAbilityValue(AbilAwakeType type,StatusType statusType)
+    {
+        int currentGrade = -1;
+
+        switch (type)
+        {
+            case AbilAwakeType.Vision:
+                currentGrade= GetAbilAwakeTableIdx(type,(int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.awakeVisionSkill).Value);
+                break;
+            case AbilAwakeType.SealSword:
+                currentGrade= GetAbilAwakeTableIdx(type,(int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.awakeSealSword).Value);
+                break;
+            case AbilAwakeType.Dosul:
+                currentGrade= GetAbilAwakeTableIdx(type,(int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.awakeDosulSkill).Value);
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
+
+
+        if (currentGrade == -1) return 0f;
+
+        var tableData = TableManager.Instance.AbilAwakeTable.dataArray[currentGrade];
+
+        if (tableData.Abiltype.Length != tableData.Abilvalue.Length) return 0f;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Abiltype.Length; i++)
+        {
+            if (tableData.Abiltype[i] == (int)statusType)
+            {
+                ret += tableData.Abilvalue[i];
+            }
+        }
+
+        return ret;
+    }
+
+    public static float GetClosedTrainingValue()
+    {
+        int grade = -1;
+
+        grade = GetClosedTrainingGrade();
+
+        if (grade < 0)
+        {
+            return 0f;
+        }
+
+        var tableData = TableManager.Instance.ClosedTrainingTable.dataArray[grade];
+
+        return tableData.Abilvalue;
     }
     public static int GetHyunsangTowerGrade()
     {
@@ -4680,7 +4891,10 @@ public static class PlayerStats
         if (grade == -1) return 1f;
 
         var tableData = TableManager.Instance.TestDark.dataArray[grade];
-
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.GodTrialGraduateIdx).Value >= GameBalance.darkGodGraduate)
+        {
+            return tableData.Abilvalue0 * GameBalance.darkGodGraduateValue;
+        }
         return tableData.Abilvalue0;
     }
     public static float GetSinsunGodAbil0()
@@ -4911,6 +5125,22 @@ public static class PlayerStats
 
         return idx;
     }
+    public static int GetCurrentSuhoUpgradeIdx()
+    {
+        var tableData = TableManager.Instance.SuhoUpgrade.dataArray;
+        var currentPetEquipGrade = ServerData.statusTable.GetTableData(StatusTable.SuhoEnhance_Level).Value;
+        int idx = -1;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (currentPetEquipGrade >= tableData[i].Require)
+            {
+                idx = i;
+            }
+        }
+
+        return idx;
+    }
     public static int GetCurrentDragonBraceletIdx()
     {
         var tableData = TableManager.Instance.DragonBracelet.dataArray;
@@ -5060,6 +5290,13 @@ public static class PlayerStats
         if (idx == -1) return 0f;
 
         return TableManager.Instance.RelicUpgrade.dataArray[idx].Abilvalue;
+    }
+    public static float GetSuhoUpgradeAbilValue(int idx)
+    {
+        //if (ServerData.userInfoTable.GetTableData(UserInfoTable.getRelicUpgrade).Value == 0) return 0f;
+        if (idx == -1) return 0f;
+
+        return TableManager.Instance.SuhoUpgrade.dataArray[idx].Abilvalue;
     }
     public static float GetDragonBraceletAbilValue(int idx, int abilIdx)
     {
@@ -5329,6 +5566,17 @@ public static class PlayerStats
 
     }
     public static void AddOrUpdateValue(Dictionary<StatusType, float> dictionary, StatusType key, float value)
+    {
+        if (dictionary.ContainsKey(key))
+        {
+            dictionary[key] += value;
+        }
+        else
+        {
+            dictionary.Add(key, value);
+        }
+    }
+    public static void AddOrUpdateValue(ref Dictionary<Item_Type, float> dictionary, Item_Type key, float value)
     {
         if (dictionary.ContainsKey(key))
         {
@@ -5761,6 +6009,22 @@ public static class PlayerStats
         var tableData = TableManager.Instance.GuimoonTable.dataArray;
 
         return ServerData.guimoonServerTable.TableDatas[tableData[idx].Stringid].level2.Value > 0f;
+    }
+    public static int GetPetDispatchGrade()
+    {
+        var grade = -1;
+        
+        var score =  ServerData.petTable.GetPetDispatchScore();
+
+        var tableData = TableManager.Instance.PetDispatch.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            //최소치보다 작으면 끝
+            if (tableData[i].Minscore > score) break;
+            grade = i;
+        }
+        return grade;
     }
     
 }

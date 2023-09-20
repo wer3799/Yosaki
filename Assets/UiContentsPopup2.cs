@@ -46,6 +46,7 @@ public class UiContentsPopup2 : MonoBehaviour
         TransBoard,
         NewBossBoard,
         DanjeonBoard,
+        ClosedTrainingBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -71,6 +72,7 @@ public class UiContentsPopup2 : MonoBehaviour
         GodTest,
         TransBoard,
         DanjeonBoard,
+        ClosedTrainingBoard,
 
         
         
@@ -370,6 +372,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 172:
                     case 173:
                     case 177:
+                    case 180:
+                    case 182:
+                    case 184:
                         lastBoards[(int)ContentsBoard.HyunSangBoard].SetActive(true);
                         break;
                     
@@ -384,6 +389,8 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 175:
                     case 178:
                     case 179:
+                    case 181:
+                    case 183:
                         lastBoards[(int)ContentsBoard.NewBossBoard].SetActive(true);
                         break;
                         
@@ -483,6 +490,10 @@ public class UiContentsPopup2 : MonoBehaviour
 
             case GameManager.ContentsType.Danjeon :
                 lastBoards[(int)ContentsBoard.DanjeonBoard].SetActive(true);
+                break;
+
+            case GameManager.ContentsType.ClosedTraining :
+                lastBoards[(int)ContentsBoard.ClosedTrainingBoard].SetActive(true);
                 break;
 
         }
@@ -607,6 +618,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newGrowthDoors[(int)GrowthContentsDoor.DanjeonBoard].SetActive(e == 1);
             oldGrowthDoors[(int)GrowthContentsDoor.DanjeonBoard].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showClosed.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.ClosedTrainingBoard].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.ClosedTrainingBoard].SetActive(e == 1);
         }).AddTo(this);
         
         ////////////보스도전

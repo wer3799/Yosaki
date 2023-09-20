@@ -128,4 +128,8 @@ public class PetTableData
   string onclickbuttondescription;
   public string Onclickbuttondescription { get {return onclickbuttondescription; } set { this.onclickbuttondescription = value;} }
   
+  [SerializeField]
+  int dispatchscore;
+  public int Dispatchscore { get {return dispatchscore; } set { this.dispatchscore = value;} }
+  
 }

@@ -869,6 +869,7 @@ public class TableManager : SingletonMono<TableManager>
     public TransTowerTable TransTowerTable;
     public SecondMiniGame SecondMiniGame;
     public RelicUpgrade RelicUpgrade;
+    public SuhoUpgrade SuhoUpgrade;
     public Meditation Meditation;
     public MeditationTower MeditationTower;
     public TestDark TestDark;
@@ -880,6 +881,10 @@ public class TableManager : SingletonMono<TableManager>
     public RelicEnhance RelicEnhance;
     public PetPass PetPass;
     public GuildExchange GuildExchange;
+    public PetDispatch PetDispatch;
+    public MarbleEvent MarbleEvent;
+    public AbilAwakeTable AbilAwakeTable;
+    public ClosedTrainingTable ClosedTrainingTable;
     private Dictionary<int, SealSwordData> sealSwordData = null;
 
     public Dictionary<int, SealSwordData> SealSwordData

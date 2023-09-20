@@ -253,7 +253,7 @@ public class UiMileageRewardCell : MonoBehaviour
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
 
-        ServerData.SendTransaction(transactions, successCallBack: () =>
+        ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
             if (IsCostumeItem())
             {

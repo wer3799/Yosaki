@@ -196,7 +196,7 @@ public class UiRewardCollection : MonoBehaviour
                             // enterButton.interactable = true;
                         });
 
-                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearBandit, clearCount);
+                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, clearCount);
 
                     if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                     {
@@ -265,7 +265,7 @@ public class UiRewardCollection : MonoBehaviour
                             // enterButton.interactable = true;
                         });
 
-                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearBandit, clearCount);
+                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, clearCount);
 
                     if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                     {
@@ -368,7 +368,7 @@ public class UiRewardCollection : MonoBehaviour
 
                 DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearBandit, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
 
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
@@ -418,7 +418,7 @@ public class UiRewardCollection : MonoBehaviour
 
                 DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearBandit, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
 
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
@@ -490,7 +490,7 @@ public class UiRewardCollection : MonoBehaviour
                  userInfoParam.Add(UserInfoTable.dokebiNewEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiNewEnterCount).Value);
 
                  transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearOni, 1);
+                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION2, 1);
                  if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                  {
                      EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearOni, 1);
@@ -552,7 +552,7 @@ public class UiRewardCollection : MonoBehaviour
             userInfoParam.Add(UserInfoTable.dokebiNewEnterCount, ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiNewEnterCount).Value);
 
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearOni, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION2, 1);
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearOni, 1);
@@ -618,7 +618,7 @@ public class UiRewardCollection : MonoBehaviour
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSwordPartial, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION4, 1);
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearSwordPartial, 1);
@@ -656,7 +656,7 @@ public class UiRewardCollection : MonoBehaviour
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSwordPartial, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION4, 1);
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearSwordPartial, 1);
@@ -728,7 +728,7 @@ public class UiRewardCollection : MonoBehaviour
 
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearChunFlower, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION6, 1);
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearChunFlower, 1);
                 EventMissionManager.UpdateEventMissionClear(MonthMission2Key.ClearChunFlower, 1);
 
@@ -759,7 +759,7 @@ public class UiRewardCollection : MonoBehaviour
 
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearChunFlower, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION6, 1);
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearChunFlower, 1);
                 EventMissionManager.UpdateEventMissionClear(MonthMission2Key.ClearChunFlower, 1);
                 ServerData.SendTransaction(transactions, successCallBack: () =>
@@ -937,7 +937,7 @@ public class UiRewardCollection : MonoBehaviour
                     transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
 
-                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearDokebiFire, 1);
+                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION7, 1);
                     if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                     {
                         EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearDokebiFire, 1);
@@ -982,7 +982,7 @@ public class UiRewardCollection : MonoBehaviour
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
                 //EventMissionManager.UpdateEventMissionClear(EventMissionKey.ClearDokebiFire, 1);
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearDokebiFire, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION7, 1);
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearDokebiFire, 1);
@@ -1047,7 +1047,7 @@ public class UiRewardCollection : MonoBehaviour
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSumiFire, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION8, 1);
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearSumiFire, 1);
@@ -1084,7 +1084,7 @@ public class UiRewardCollection : MonoBehaviour
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSumiFire, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION8, 1);
 
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
@@ -1161,7 +1161,7 @@ public class UiRewardCollection : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSoulStone, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION9, 1);
             
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
@@ -1198,7 +1198,7 @@ public class UiRewardCollection : MonoBehaviour
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-                EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearSoulStone, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION9, 1);
                 
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
@@ -1628,7 +1628,6 @@ public class UiRewardCollection : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearHell, 1);
 
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {

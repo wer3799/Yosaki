@@ -141,7 +141,7 @@ public class KingBossMoveController : MonoBehaviour
             }
         }
         //인간형기반보스(수인전)
-        else if (_bossId == 181)
+        else if (_bossId == 181||_bossId == 183)
         {
             SetMoveDir(playerTr.position - transform.position);
             if (initialized == false)
@@ -178,7 +178,7 @@ public class KingBossMoveController : MonoBehaviour
             }
         }
 
-        else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181)
+        else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
         {
              if (isMoving)
              {
@@ -203,7 +203,7 @@ public class KingBossMoveController : MonoBehaviour
             {
                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 3 : -3, 3, 1);   
             }
-            else if(_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181)
+            else if(_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
             {
                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 1 : -1, 1, 1);   
             }

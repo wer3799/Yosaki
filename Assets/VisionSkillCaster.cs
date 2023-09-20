@@ -57,14 +57,17 @@ public class  VisionSkillCaster : SingletonMono<VisionSkillCaster>
         while (true)
         {
             if (PlayerSkillCaster.Instance.visionChargeCount.Value < 1 &&
-                !PlayerSkillCaster.Instance.useVisionSkill.Value &&
+                PlayerSkillCaster.Instance.visionSkillUseCount.Value>0 &&
                 _visionSkillIdx > 0 &&
                 SettingData.autoVisionSkill.Value > 0)
             {
                 if (AutoManager.Instance.canAttack == false && GameManager.Instance.IsNormalField == true) continue;
                 PlayerSkillCaster.Instance.UseSkill(_skillTableData.Id);
-                PlayerSkillCaster.Instance.SetUseVisionSkill(true);
-                StopCoroutine(skillRoutine);
+                PlayerSkillCaster.Instance.UseVisionSkill();
+                if(PlayerSkillCaster.Instance.visionSkillUseCount.Value==0)
+                {
+                    StopCoroutine(skillRoutine);
+                }
             }
 
             yield return null;

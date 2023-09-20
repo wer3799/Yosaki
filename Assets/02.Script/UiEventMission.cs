@@ -25,12 +25,12 @@ public class UiEventMission : MonoBehaviour
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
         {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.S_ClearChunFlower].Stringid;
+            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.SMISSION6].Stringid;
             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
         }    
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
         {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.S_ClearDokebiFire].Stringid;
+            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.SMISSION7].Stringid;
             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
         }    
         

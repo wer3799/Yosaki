@@ -466,7 +466,7 @@ public static class GameBalance
     public static ObscuredFloat doGodGraduateValue = 1.25f;
     public static ObscuredFloat sumiGodGraduateValue = 1.25f;
     public static ObscuredFloat thiefGodGraduateValue = 2f;
-    public static ObscuredFloat darkGodGraduateValue = 1.25f;
+    public static ObscuredFloat darkGodGraduateValue = 2.5f;
     public static ObscuredFloat sinsunGodGraduateValue = 1.25f;
         
     public static ObscuredDouble swordGodGraduateScore = 2E+122;
@@ -486,6 +486,8 @@ public static class GameBalance
     public static ObscuredInt attackGraduateValue = 50000;//각성시 공격력
     public static ObscuredInt criticalGraduateRefundStandard = 6950;//각성시 크리티컬 환불기준레벨
     public static ObscuredInt goldGraduateScore = 65950;// 금화능력치총합레벨조건
+    public static ObscuredInt hellRelicGraduateScore = 4000;// 지옥영숲각성컷
+    public static ObscuredInt hellRelicGraduateValue = 100000;// 지옥영숲각성시레벨
     
     public static ObscuredFloat Gum_memory = 0.0000010f;
     public static ObscuredFloat Sum_memory = 0.0000008f;
@@ -497,6 +499,8 @@ public static class GameBalance
     public static ObscuredFloat Special2_GoldBar = 0.0000000038f;
     public static ObscuredFloat Special3_GoldBar = 0.0000000075f;
     public static ObscuredFloat Special4_GoldBar = 0.000000013f;
+    public static ObscuredFloat Special5_GoldBar = 0.000000018f;
+    public static ObscuredFloat Special6_GoldBar = 0.00000003f;
     
     public static ObscuredInt JumpStageStartValue = 1;//시작 가능 스테이지
     public static ObscuredInt JumpStageAdjustValue = 10;//강철이 데미지 스테이지 계산(스테이지보스체력x2<강철이체력)의 인덱스 -50짜리 보스
@@ -538,12 +542,19 @@ public static class GameBalance
 
     public static ObscuredDouble GoldLimit = 1E+38;// 해당금화 이상 소지시 휴식보상 받을수없음.
     
+    public static ObscuredFloat GetSuhoPetUpgradePrice = 100f;// 수호보주 강화비용
+    
     public static ObscuredFloat GetSoulRingUpgradePrice = 10000f;// 강화비용
     public static ObscuredFloat GetSoulRingAdReward = 4000f;// 광고보상
 
     public static ObscuredInt MeditationHour = 24;// 명상시간
+    public static ObscuredInt PetDispatchHour = 20;// 펫파견시간
     
     public static ObscuredInt DosulAwakeRequireLevel = 99;// 필요 도술 ID
+    
+    public static ObscuredInt SuhoPetUpgradeIdx = 29;// 필요 수호펫 Idx
+    
+    
     public static int GetSonIdx()
     {
         var level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

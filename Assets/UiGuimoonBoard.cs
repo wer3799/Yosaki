@@ -86,15 +86,17 @@ public class UiGuimoonBoard : SingletonMono<UiGuimoonBoard>
 
 
             ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value += refundCount;
+            
 
             Param goodsParam = new Param();
             goodsParam.Add(GoodsTable.GuimoonRelic, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value);
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            
+            PlayerStats.ResetSuperCritical11CalculatedValue();
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                PlayerStats.ResetSuperCritical11CalculatedValue();
                 PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
             });
 

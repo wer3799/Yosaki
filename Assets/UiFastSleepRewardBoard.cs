@@ -140,7 +140,7 @@ public class UiFastSleepRewardBoard : MonoBehaviour
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
 
-        EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearFast, 1);
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION3, 1);
         if (ServerData.userInfoTable.IsMonthlyPass2() == false)
         {
             EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearFast, 1);
@@ -196,7 +196,7 @@ public class UiFastSleepRewardBoard : MonoBehaviour
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
 
-        EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearFast, count);
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION3, count);
         if (ServerData.userInfoTable.IsMonthlyPass2() == false)
         {
             EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearFast, count);

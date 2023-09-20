@@ -43,7 +43,7 @@ public class SAAttendCell : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendRewarded).AsObservable().Subscribe(e => { UpdateUi(); }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).AsObservable().Subscribe(e => { UpdateUi(); }).AddTo(this);
     }
 
     public void Initialize(SecondAttendData data, UiRewardResultView result)
@@ -99,18 +99,18 @@ public class SAAttendCell : MonoBehaviour
 
     private bool CanGetReward()
     {
-        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendCount).Value >= tableData.Unlockday;
+        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value >= tableData.Unlockday;
     }
 
     private bool IsBeforeRewarded()
     {
         //0일때 1
-        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendRewarded).Value + 1 == tableData.Unlockday;
+        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value + 1 == tableData.Unlockday;
     }
 
     private bool IsRewarded()
     {
-        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendRewarded).Value >= tableData.Unlockday;
+        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value >= tableData.Unlockday;
     }
 
     public void OnClickButton()
@@ -148,8 +148,8 @@ public class SAAttendCell : MonoBehaviour
 
         Param userInfo2Param = new Param();
 
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.secondAttendRewarded).Value++;
-        userInfo2Param.Add(UserInfoTable_2.secondAttendRewarded, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.secondAttendRewarded].Value);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value++;
+        userInfo2Param.Add(UserInfoTable_2.eventAttendRewarded, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventAttendRewarded].Value);
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
 

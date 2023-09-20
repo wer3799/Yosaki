@@ -24,13 +24,13 @@ public class VisionDescription : MonoBehaviour
         {
             if (useSpace)
             {
-            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.VisionTreasure)} 1개당\n 궁극기술 효과 {GameBalance.VisionTreasurePerDamage * 100f}% 강화");
+            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.VisionTreasure)} 1개당\n {CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} {GameBalance.VisionTreasurePerDamage * 100f}");
                 
             }
             else
             {
                 
-            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.VisionTreasure)} 1개당 궁극기술 효과 {GameBalance.VisionTreasurePerDamage * 100f}% 강화");
+            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.VisionTreasure)} 1개당 {CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} {GameBalance.VisionTreasurePerDamage * 100f}");
             }
         }).AddTo(this);
 

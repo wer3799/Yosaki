@@ -1006,6 +1006,12 @@ public class UiShop : SingletonMono<UiShop>
                 param.Add(GoodsTable.VisionSkill12, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value);
             }
                 break;
+            case Item_Type.VisionSkill13:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value += amount;
+                param.Add(GoodsTable.VisionSkill13, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value);
+            }
+                break;
  
             //
             case Item_Type.ThiefSkill0:

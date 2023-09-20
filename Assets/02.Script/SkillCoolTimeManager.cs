@@ -78,14 +78,16 @@ public static class SkillCoolTimeManager
         float skillCoolTimeDecValue = PlayerStats.GetSkillCoolTimeDecreaseValue();
 
         var skillTableData = TableManager.Instance.SkillData[idx];
-        
+
+        float reduceFixedCoolTime = 0f;
         //도술은 쿨감적용 X
         if (skillTableData.SKILLCASTTYPE == SkillCastType.Dosul)
         {
             skillCoolTimeDecValue = 0;
+            reduceFixedCoolTime = Mathf.Min(PlayerStats.GetReduceDosulSkillCoolTime(),4);
         }
         
-        float calculatedCoolTime = coolTime - (coolTime * skillCoolTimeDecValue);
+        float calculatedCoolTime = coolTime - (coolTime * skillCoolTimeDecValue) - reduceFixedCoolTime;
         
         calculatedCoolTime = Mathf.Max(minimumCoolValue, calculatedCoolTime);
 

@@ -154,7 +154,7 @@ public class UiChunFlowerBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
             
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearChunFlower, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION6, 1);
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearChunFlower, 1);

@@ -390,6 +390,24 @@ public class UiLeMuGiBoard : SingletonMono<UiLeMuGiBoard>
 
                     petView54.Initialize(e.Current.Value);
                     break;
+                case 55:
+                    var petView55 = Instantiate<UiPetView>(uiPetViewPrefab_Event[3], petViewEventParent);
+
+                    petView55.gameObject.SetActive(true);
+
+                    petView55.transform.localPosition = Vector3.zero;
+
+                    petView55.Initialize(e.Current.Value);
+                    break;
+                case 56:
+                    var petView56 = Instantiate<UiPetView>(uiPetViewPrefab_Event[4], petViewEventParent);
+
+                    petView56.gameObject.SetActive(true);
+
+                    petView56.transform.localPosition = Vector3.zero;
+
+                    petView56.Initialize(e.Current.Value);
+                    break;
             }
         }
     }

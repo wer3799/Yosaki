@@ -39,8 +39,8 @@ public class UserInfoTable_2
     public const string commonAttendCount = "cac0";
     public const string commonAttend2Count = "cac1";
     public const string yorinAttendRewarded = "yar";
-    public const string secondAttendRewarded = "sar";
-    public const string secondAttendCount = "sac";
+    public const string eventAttendRewarded = "sar";
+    public const string eventAttendCount = "sac";
     
     public const string killCountTotalSeason0 = "ks0"; //혹서기 훈련
     
@@ -76,6 +76,9 @@ public class UserInfoTable_2
     public const string meditationTowerRewardIndex = "msti"; //명상 타워 보상 단계
     public const string meditationTowerScore = "msts"; // 명상 타워 점수
     
+    public const string petDispatchStartTime = "pdst";
+
+    
     public const string usedGuimoonRelicTicket = "ugrt";
 
     public const string transTowerIdx = "tti";
@@ -87,6 +90,7 @@ public class UserInfoTable_2
     public const string fullMoonRefund = "fmr0";
     
     public const string danjeonScore = "djs";
+    public const string closedScore = "cs";
     
     public const string exchage_Daesan1 = "exchage_Daesan1";
     public const string exchage_Daesan2 = "exchage_Daesan2";
@@ -102,6 +106,12 @@ public class UserInfoTable_2
     
     public const string enhanceRelicIdx = "eri";
     
+    public const string awakeVisionSkill = "avs";
+    public const string awakeSealSword   = "ass";
+    public const string awakeDosulSkill = "ads";
+    
+    public const string yosakiMarbleScore = "yms";
+    
     
     
     public bool isInitialize = false;
@@ -114,8 +124,8 @@ public class UserInfoTable_2
         { commonAttendCount, 0f },
         { commonAttend2Count, 0f },
         { yorinAttendRewarded, 0f },
-        { secondAttendRewarded, 0f },
-        { secondAttendCount, 0f },
+        { eventAttendRewarded, 0f },
+        { eventAttendCount, 0f },
         
         { monkeyGodScore, 0f },
         { swordGodScore, 0f },
@@ -161,6 +171,7 @@ public class UserInfoTable_2
         { meditationTowerScore, 0f },
         { usedGuimoonRelicTicket, 0f },
         { getRelicUpgrade, 0f },
+        { petDispatchStartTime, -1f },
 
         { transTowerIdx, 0f },
         { transTowerStart, 0f },
@@ -169,6 +180,7 @@ public class UserInfoTable_2
         { fullMoonRefund, 0f },
         
         { danjeonScore, 0f },
+        { closedScore, 0f },
         
         { exchage_Daesan1, 0f },
         { exchage_Daesan2, 0f },
@@ -182,6 +194,10 @@ public class UserInfoTable_2
         { exchage_Guild4, 0f },
         
         { enhanceRelicIdx, -1f },
+        { awakeVisionSkill, -1f },
+        { awakeSealSword, -1f },
+        { awakeDosulSkill, -1f },
+        { yosakiMarbleScore, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

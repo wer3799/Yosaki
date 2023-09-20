@@ -137,7 +137,7 @@ public class UiSAMinigameHighScoreRewardCell : MonoBehaviour
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
         transactionList.Add(rewardTransactionValue);
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransactionV2(transactionList);
     }
     private bool CanGetReward()
     {

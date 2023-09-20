@@ -88,6 +88,7 @@ public class GameManager : SingletonMono<GameManager>
         TestSin,
         DosulAwake,
         Danjeon,
+        ClosedTraining,
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -347,7 +348,7 @@ public class GameManager : SingletonMono<GameManager>
 
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
 
-            EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearBandit, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearBandit, 1);

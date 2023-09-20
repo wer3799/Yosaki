@@ -108,7 +108,7 @@ public class UiHellRewardCell : MonoBehaviour
 
         transactions.Add(ServerData.GetItemTypeTransactionValueForAttendance(type, (int)amount));
 
-        EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearHell, 1);
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION5, 1);
         
         if (ServerData.userInfoTable.IsMonthlyPass2() == false)
         {

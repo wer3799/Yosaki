@@ -168,7 +168,7 @@ public class DokebiEnterView : MonoBehaviour
 
              transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
              
-             EventMissionManager.UpdateEventMissionClear(EventMissionKey.S_ClearOni, 1);
+             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION7, 1);
              if (ServerData.userInfoTable.IsMonthlyPass2() == false)
              {
                  EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearOni, 1);

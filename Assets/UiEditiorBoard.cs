@@ -46,6 +46,8 @@ public class UiEditiorBoard : MonoBehaviour
     [SerializeField]
     private Toggle showDanjeonUiToggle;
     [SerializeField]
+    private Toggle showClosedUiToggle;
+    [SerializeField]
     private Toggle showCatToggle;
     [SerializeField]
     private Toggle showTwelveToggle;
@@ -134,6 +136,8 @@ public class UiEditiorBoard : MonoBehaviour
         showTransUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showTransUi) == 1;
         
         showDanjeonUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showDanjeon) == 1;
+        
+        showClosedUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showClosed) == 1;
         
         showCatToggle.isOn = PlayerPrefs.GetInt(SettingKey.showCatUi) == 1;
         
@@ -379,6 +383,18 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showDanjeon.Value = on ? 1 : 0;
+    }
+    
+    public void ClosedUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showClosed.Value = on ? 1 : 0;
     }
     
     public void CatUiOnOff(bool on)

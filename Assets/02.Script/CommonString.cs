@@ -314,6 +314,10 @@ public static class CommonString
             case Item_Type.costume155: return TableManager.Instance.Costume.dataArray[155].Name;
             case Item_Type.costume156: return TableManager.Instance.Costume.dataArray[156].Name;
             case Item_Type.costume157: return TableManager.Instance.Costume.dataArray[157].Name;
+            case Item_Type.costume158: return TableManager.Instance.Costume.dataArray[158].Name;
+            case Item_Type.costume159: return TableManager.Instance.Costume.dataArray[159].Name;
+            case Item_Type.costume160: return TableManager.Instance.Costume.dataArray[160].Name;
+            case Item_Type.costume161: return TableManager.Instance.Costume.dataArray[161].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -345,7 +349,7 @@ public static class CommonString
             case Item_Type.Relic: return "영혼 조각";
             case Item_Type.RelicTicket: return "영혼 열쇠";
             case Item_Type.RabitBossStone: return "영혼의 증표";
-            case Item_Type.Event_Item_0: return "눈송이";
+            case Item_Type.Event_Item_0: return "주사위";
             case Item_Type.Event_Item_1: return "벚꽃";
             case Item_Type.StageRelic: return "유물 파편";
             case Item_Type.GuimoonRelic: return "귀문석";
@@ -439,6 +443,7 @@ public static class CommonString
             case Item_Type.VisionSkill10: return "궁극 기술11";
             case Item_Type.VisionSkill11: return "궁극 기술12";
             case Item_Type.VisionSkill12: return "궁극 기술13";
+            case Item_Type.VisionSkill13: return "궁극 기술14";
             case Item_Type.ThiefSkill0: return "도적 기술1";
             case Item_Type.ThiefSkill1: return "도적 기술2";
             case Item_Type.ThiefSkill2: return "도적 기술3";
@@ -501,13 +506,15 @@ public static class CommonString
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
-            case Item_Type.Event_Mission: return "서핑 보드";
-            case Item_Type.Event_Mission_All: return "서핑보드 총 획득량";
+            case Item_Type.Event_Mission: return "밤송이";
+            case Item_Type.Event_Mission_All: return "밤송이 총 획득량";
             case Item_Type.Event_Mission2: return "보름달";
             case Item_Type.Event_Mission2_All: return "보름달 총 획득량";
             case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;
             case Item_Type.pet53: return TableManager.Instance.PetTable.dataArray[53].Name;
             case Item_Type.pet54: return TableManager.Instance.PetTable.dataArray[54].Name;
+            case Item_Type.pet55: return TableManager.Instance.PetTable.dataArray[55].Name;
+            case Item_Type.pet56: return TableManager.Instance.PetTable.dataArray[56].Name;
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
@@ -524,6 +531,7 @@ public static class CommonString
             case Item_Type.MonthNorigae7: return "7월 월간 노리개";
             case Item_Type.MonthNorigae8: return "8월 월간 노리개";
             case Item_Type.MonthNorigae9: return "9월 월간 노리개";
+            case Item_Type.MonthNorigae10: return "10월 월간 노리개";
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
             case Item_Type.SahyungTreasure: return "사흉구슬";
@@ -758,6 +766,8 @@ public static class CommonString
                 return "초월 피해(%)";
             case StatusType.SuperCritical22DamPer:
                 return "[진]귀살베기 피해(%)";
+            case StatusType.SuperCritical23DamPer:
+                return "심상베기 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:
@@ -792,6 +802,14 @@ public static class CommonString
                 return "상단전 베기 증폭 (%)";
             case StatusType.StageRelicUpgrade:
                 return "유물 복원 강화";
+            case StatusType.AddVisionSkillUseCount:
+                return "궁극 기술 사용 횟수 증가";
+            case StatusType.AddSealSwordSkillHitCount:
+                return "요도 타격 횟수 증가";
+            case StatusType.ReduceDosulSkillCoolTime:
+                return "도술 시간 감소(초)";
+            case StatusType.EnhanceVisionSkill:
+                return "궁극 기술 강화(%)";
         }
 
         return "등록필요";

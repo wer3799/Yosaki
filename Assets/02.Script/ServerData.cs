@@ -546,6 +546,9 @@ public static class ServerData
             case Item_Type.VisionSkill12:
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value += rewardValue;
                 break;
+            case Item_Type.VisionSkill13:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value += rewardValue;
+                break;
 
             //
             //            
@@ -952,6 +955,10 @@ public static class ServerData
             case Item_Type.costume155:
             case Item_Type.costume156:
             case Item_Type.costume157:
+            case Item_Type.costume158:
+            case Item_Type.costume159:
+            case Item_Type.costume160:
+            case Item_Type.costume161:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -970,6 +977,12 @@ public static class ServerData
                 ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet54:
+                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.pet55:
+                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.pet56:
                 ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.RelicTicket:
@@ -1186,6 +1199,10 @@ public static class ServerData
             case Item_Type.costume155:
             case Item_Type.costume156:
             case Item_Type.costume157:
+            case Item_Type.costume158:
+            case Item_Type.costume159:
+            case Item_Type.costume160:
+            case Item_Type.costume161:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1661,6 +1678,9 @@ public static class ServerData
             case Item_Type.VisionSkill12:
                 passParam.Add(GoodsTable.VisionSkill12, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.VisionSkill13:
+                passParam.Add(GoodsTable.VisionSkill13, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             // //
             case Item_Type.ThiefSkill0:
                 passParam.Add(GoodsTable.ThiefSkill0, ServerData.goodsTable.GetTableData(GoodsTable.ThiefSkill0).Value);
@@ -1766,6 +1786,12 @@ public static class ServerData
                 passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
                 return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
             case Item_Type.pet54:
+                passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
+                return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
+            case Item_Type.pet55:
+                passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
+                return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
+            case Item_Type.pet56:
                 passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
                 return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
         }
@@ -2471,6 +2497,10 @@ public static class ServerData
             case Item_Type.VisionSkill12:
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value += amount;
                 param.Add(GoodsTable.VisionSkill12, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.VisionSkill13:
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value += amount;
+                param.Add(GoodsTable.VisionSkill13, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //   //            //            //
             case Item_Type.ThiefSkill0:

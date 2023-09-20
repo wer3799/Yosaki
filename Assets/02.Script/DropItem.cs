@@ -561,7 +561,12 @@ public enum Item_Type
     
     costume155 = 1455, // 현상     
     costume156 = 1456, // 수인     
-    costume157 = 1457, // 수인     
+    costume157 = 1457, // 수인
+    
+    costume158 = 1458, // 수인     
+    costume159 = 1459, // 현상     
+    costume160 = 1460, // 10월 월간     
+    costume161 = 1461, // 마블     
 
 
     gumiho0 = 5000,
@@ -814,8 +819,10 @@ public enum Item_Type
     
     
     HyunSangWeapon10 = 7260,
+    HyunSangWeapon11 = 7261,
     
     HyunSangNorigae10 = 7280,
+    HyunSangNorigae11 = 7281,
 
     
     ChunGuPet0 = 7600,
@@ -828,11 +835,14 @@ public enum Item_Type
     SpecialSuhoPet10 = 7606,
     SpecialSuhoPet11 = 7607,
     SpecialSuhoPet12 = 7608,
+    SpecialSuhoPet13 = 7609,
     
     
     pet52 = 7700, //이벤트펫
     pet53 = 7701, //패스펫
     pet54 = 7702, //패스펫
+    pet55 = 7703, //패스펫
+    pet56 = 7704, //패스펫
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -878,6 +888,7 @@ public enum Item_Type
     weapon131 = 8611,//2주년무기
     RecommendNorigae0 = 8612, // 투명노리개
     MonthNorigae9 = 8613, // 월간노리개
+    MonthNorigae10 = 8614, // 월간노리개
 
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
@@ -929,6 +940,7 @@ public enum Item_Type
     VisionSkill10 = 8752,//비전
     VisionSkill11 = 8753,//비전
     VisionSkill12 = 8754,//비전
+    VisionSkill13 = 8755,//비전
 
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량

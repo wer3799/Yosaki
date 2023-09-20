@@ -159,6 +159,7 @@ public Sprite HyunSangWeapon7;
 public Sprite HyunSangWeapon8;
 public Sprite HyunSangWeapon9;
 public Sprite HyunSangWeapon10;
+public Sprite HyunSangWeapon11;
     
 [Header ("Weapon_View")]
 
@@ -283,6 +284,7 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae8;
     public Sprite HyunSangNorigae9;
     public Sprite HyunSangNorigae10;
+    public Sprite HyunSangNorigae11;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -295,6 +297,7 @@ public Sprite RecommendWeapon22;
     public Sprite MonthNorigae7;
     public Sprite MonthNorigae8;
     public Sprite MonthNorigae9;
+    public Sprite MonthNorigae10;
     public Sprite RecommendNorigae0;
     
     [Header ("DokebiHorn")]
@@ -353,6 +356,8 @@ public Sprite RecommendWeapon22;
     [FormerlySerializedAs("EventPet0")] public Sprite pet52;
     public Sprite pet53;
     public Sprite pet54;
+    public Sprite pet55;
+    public Sprite pet56;
     public Sprite SpecialSuhoPet0;
     public Sprite SpecialSuhoPet1;
     public Sprite SpecialSuhoPet2;
@@ -366,6 +371,7 @@ public Sprite RecommendWeapon22;
     public Sprite SpecialSuhoPet10;
     public Sprite SpecialSuhoPet11;
     public Sprite SpecialSuhoPet12;
+    public Sprite SpecialSuhoPet13;
 
 
     [Header ("Skill")]
@@ -414,6 +420,7 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill10;
     public Sprite VisionSkill11;
     public Sprite VisionSkill12;
+    public Sprite VisionSkill13;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -983,6 +990,14 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[156];
             case Item_Type.costume157:
                 return costumeThumbnail[157];
+            case Item_Type.costume158:
+                return costumeThumbnail[158];
+            case Item_Type.costume159:
+                return costumeThumbnail[159];
+            case Item_Type.costume160:
+                return costumeThumbnail[160];
+            case Item_Type.costume161:
+                return costumeThumbnail[161];
 
 
             case Item_Type.RankFrame1:
@@ -1779,6 +1794,8 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae9;
             case Item_Type.HyunSangNorigae10:
                 return HyunSangNorigae10;
+            case Item_Type.HyunSangNorigae11:
+                return HyunSangNorigae11;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -1804,6 +1821,8 @@ public Sprite RecommendWeapon22;
                 return MonthNorigae8;
             case Item_Type.MonthNorigae9:
                 return MonthNorigae9;
+            case Item_Type.MonthNorigae10:
+                return MonthNorigae10;
             case Item_Type.RecommendNorigae0:
                 return RecommendNorigae0;
             //
@@ -1988,6 +2007,10 @@ public Sprite RecommendWeapon22;
                 return pet53;
             case Item_Type.pet54:
                 return pet54;
+            case Item_Type.pet55:
+                return pet55;
+            case Item_Type.pet56:
+                return pet56;
             case Item_Type.SpecialSuhoPet0:
                 return SpecialSuhoPet0;
             case Item_Type.SpecialSuhoPet1:
@@ -2014,6 +2037,8 @@ public Sprite RecommendWeapon22;
                 return SpecialSuhoPet11;
             case Item_Type.SpecialSuhoPet12:
                 return SpecialSuhoPet12;
+            case Item_Type.SpecialSuhoPet13:
+                return SpecialSuhoPet13;
 
 
 
@@ -2231,6 +2256,8 @@ public Sprite RecommendWeapon22;
                 return VisionSkill11;
             case Item_Type.VisionSkill12:
                 return VisionSkill12;
+            case Item_Type.VisionSkill13:
+                return VisionSkill13;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2453,6 +2480,8 @@ public Sprite RecommendWeapon22;
             
             case Item_Type.HyunSangWeapon10:
                 return HyunSangWeapon10;
+            case Item_Type.HyunSangWeapon11:
+                return HyunSangWeapon11;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

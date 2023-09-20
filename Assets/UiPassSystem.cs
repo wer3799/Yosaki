@@ -23,6 +23,8 @@ public class PassInfo
 
     public ObscuredString shopId;
 
+    public ObscuredString key0;
+    
     public int passGrade;
 }
 public class DamagePassInfo
