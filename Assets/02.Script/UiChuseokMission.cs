@@ -161,6 +161,13 @@ public class UiChuseokMission : MonoBehaviour
             else
             {
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Rewardtype, tableData[i].Rewardvalue);
+                
+                ServerData.goodsTable.AddLocalData(ServerData.goodsTable.ItemTypeToServerString(Item_Type.Event_Mission_All), tableData[i].Rewardvalue);
+
+                if (rewardTypeList.Contains((int)Item_Type.Event_Mission_All) == false)
+                {
+                    rewardTypeList.Add((int)Item_Type.Event_Mission_All);
+                }
             }
 
             if (rewardTypeList.Contains(tableData[i].Rewardtype) == false)
@@ -195,7 +202,16 @@ public class UiChuseokMission : MonoBehaviour
             else
             {
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Rewardtype, tableData[i].Rewardvalue);
+                
+                ServerData.goodsTable.AddLocalData(ServerData.goodsTable.ItemTypeToServerString(Item_Type.Event_Mission_All), tableData[i].Rewardvalue);
+
+                if (rewardTypeList.Contains((int)Item_Type.Event_Mission_All) == false)
+                {
+                    rewardTypeList.Add((int)Item_Type.Event_Mission_All);
+                }
+                
             }
+            
             if (rewardTypeList.Contains(tableData[i].Rewardtype) == false)
             {
                 rewardTypeList.Add(tableData[i].Rewardtype);
