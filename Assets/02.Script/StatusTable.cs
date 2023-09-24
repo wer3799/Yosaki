@@ -653,7 +653,7 @@ public class StatusTable
                         {
                             //값로드
                             var value = data[e.Current.Key][ServerData.format_Number].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(Int32.Parse(value)));
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<float>(float.Parse(value)));
                         }
                         else
                         {
