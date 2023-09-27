@@ -106,6 +106,8 @@ public enum StatusType
     ReduceDosulSkillCoolTime, //도술재사용시간
     
     EnhanceVisionSkill, //비전스킬효과 강화
+    SuperCritical24DamPer, //용인베기
+
 }
 
 
@@ -597,6 +599,30 @@ public static class PlayerStats
         for (int i = 0; i < tableData.Length; i++)
         {
             if (tableData[i].WEAPONTYPE != WeaponType.Normal) continue;
+            if (serverData[tableData[i].Stringid].hasItem.Value == 0) continue;
+
+            
+            
+            if ((StatusType)tableData[i].Transeffecttype == type&&serverData[tableData[i].Stringid].trans.Value > 0)
+            {
+                ret += tableData[i].Transeffectvalue;
+            }
+        }
+
+        return ret;
+    }
+
+    public static float GetMagicBookTransHasValue(StatusType type)
+    {
+        var tableData = TableManager.Instance.MagicBookTable.dataArray;
+
+        var serverData = ServerData.magicBookTable.TableDatas;
+
+        float ret = 0f;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].MAGICBOOKTYPE != MagicBookType.Normal) continue;
             if (serverData[tableData[i].Stringid].hasItem.Value == 0) continue;
 
             
@@ -1958,6 +1984,8 @@ public static class PlayerStats
 
         ret += GetWeaponTransHasValue(StatusType.SuperCritical21DamPer);
 
+        ret += GetMagicBookTransHasValue(StatusType.SuperCritical21DamPer);
+
         return ret;
     }
     //진 귀살 베기
@@ -1976,7 +2004,21 @@ public static class PlayerStats
     {
         float ret = 0f;
 
+        
         ret += GetClosedTrainingValue();
+        
+        return ret;
+    }
+    //용살베기
+    public static float GetSuperCritical24DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetDragonScaleAbilHasEffect();
+        
+        ret += GetWeaponEquipPercentValue(StatusType.SuperCritical24DamPer);
+
+        ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical24DamPer);
         
         return ret;
     }
@@ -3009,6 +3051,12 @@ public static class PlayerStats
         }
         
         return ret * GetSinsunGodAbil0();
+    }
+    public static float GetDragonScaleAbilHasEffect()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 17900-2) return 0f;
+
+        return (int)ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value * GameBalance.dragonScaleAbilValue;
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -4904,7 +4952,10 @@ public static class PlayerStats
         if (grade == -1) return 1f;
 
         var tableData = TableManager.Instance.TestSin.dataArray[grade];
-
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.GodTrialGraduateIdx).Value >= GameBalance.sinsunGodGraduate)
+        {
+            return tableData.Abilvalue0 * GameBalance.sinsunGodGraduateValue;
+        }
         return tableData.Abilvalue0;
     }
 

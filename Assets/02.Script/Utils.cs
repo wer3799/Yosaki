@@ -197,7 +197,10 @@ public static class Utils
                type == Item_Type.costume158||
                type == Item_Type.costume159||
                type == Item_Type.costume160||
-               type == Item_Type.costume161
+               type == Item_Type.costume161||
+               type == Item_Type.costume162||
+               type == Item_Type.costume163||
+               type == Item_Type.costume164
             ;
     }
 
@@ -460,6 +463,7 @@ public static class Utils
                type == Item_Type.VisionTreasure ||
                type == Item_Type.DarkTreasure ||
                type == Item_Type.SinsunTreasure ||
+               type == Item_Type.DragonScale ||
                type == Item_Type.GwisalTreasure ||
                type == Item_Type.ChunguTreasure ||
                type == Item_Type.GuildTowerClearTicket ||
@@ -633,6 +637,10 @@ public static class Utils
     public static bool IsRealGangChulItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1_boss_GangChul && type <= Item_Type.RankFrame1000_3000_boss_GangChul;
+    }
+    public static bool IsUpdateRewardItem(this Item_Type type)
+    {
+        return type == Item_Type.UpdateRewardMail;
     }
 
     public static int GetRandomIdx(List<float> inputDatas)

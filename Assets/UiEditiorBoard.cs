@@ -87,6 +87,8 @@ public class UiEditiorBoard : MonoBehaviour
     private Toggle showDarkToggle;
     [SerializeField]
     private Toggle showSinsunToggle;
+    [SerializeField]
+    private Toggle showDragonToggle;
 
 
     private void Awake()
@@ -178,6 +180,8 @@ public class UiEditiorBoard : MonoBehaviour
         showDarkToggle.isOn = PlayerPrefs.GetInt(SettingKey.showDarkUi) == 1;
 
         showSinsunToggle.isOn = PlayerPrefs.GetInt(SettingKey.showSinsunUi) == 1;
+        
+        showDragonToggle.isOn = PlayerPrefs.GetInt(SettingKey.showDragonUi) == 1;
 
 
         initialized = true;
@@ -616,6 +620,17 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showSinsunUi.Value = on ? 1 : 0;
+    }
+    public void DragonUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showDragonUi.Value = on ? 1 : 0;
     }
 
 }

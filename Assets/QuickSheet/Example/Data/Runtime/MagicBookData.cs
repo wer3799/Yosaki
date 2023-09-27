@@ -140,4 +140,16 @@ public class MagicBookData
   int displayorder;
   public int Displayorder { get {return displayorder; } set { this.displayorder = value;} }
   
+  [SerializeField]
+  int transrequirevalue;
+  public int Transrequirevalue { get {return transrequirevalue; } set { this.transrequirevalue = value;} }
+  
+  [SerializeField]
+  int transeffecttype;
+  public int Transeffecttype { get {return transeffecttype; } set { this.transeffecttype = value;} }
+  
+  [SerializeField]
+  float transeffectvalue;
+  public float Transeffectvalue { get {return transeffectvalue; } set { this.transeffectvalue = value;} }
+  
 }

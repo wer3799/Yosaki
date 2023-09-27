@@ -227,6 +227,7 @@ public class GoodsTable
     public static string VisionTreasure = "VisionTreasure";
     public static string DarkTreasure = "DarkTreasure";
     public static string SinsunTreasure = "SinsunTreasure";
+    public static string DragonScale = "DragonScale";
     public static string GwisalTreasure = "GwisalTreasure";
     public static string ChunguTreasure = "CT";
     public static string SumiFire = "SumiFire";
@@ -463,6 +464,7 @@ public class GoodsTable
         { VisionTreasure, 0f },
         { DarkTreasure, 0f },
         { SinsunTreasure, 0f },
+        { DragonScale, 0f },
         { GwisalTreasure, 0f },
         { ChunguTreasure, 0f },
         { SusanoTreasure, 0f },

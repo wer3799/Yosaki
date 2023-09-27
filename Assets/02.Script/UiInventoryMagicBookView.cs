@@ -63,6 +63,11 @@ public class UiInventoryMagicBookView : FancyCell<MagicBook_Fancy>
 
 
     [SerializeField]
+    private TextMeshProUGUI levelUpButtonText;
+    [SerializeField]
+    private Image upgradeGoodsImage;
+
+    [SerializeField]
     private Sprite weaponViewEquipDisable;
 
     [SerializeField]
@@ -95,7 +100,32 @@ public class UiInventoryMagicBookView : FancyCell<MagicBook_Fancy>
             equipButton.gameObject.SetActive(false);
         }
     }
-
+    private void SetTextLevelUpButton(int level)
+    {
+        if (level < magicBookData.Maxlevel)
+        {
+            levelUpButtonText.SetText("레벨업");
+            upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.GrowthStone);
+        }
+        else
+        {
+            if (magicBookData.MAGICBOOKTYPE == MagicBookType.Normal)
+            {
+                if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].trans.Value > 0)
+                {
+                    levelUpButtonText.SetText("초월 완료");
+                }
+                else
+                {
+                    levelUpButtonText.SetText("초월");
+                }   
+            }
+            else
+            {
+                levelUpButtonText.SetText("레벨업");
+            }
+        }
+    }
     public void OnClickMagicBookViewButton()
     {
         if (magicBookData != null)
@@ -175,6 +205,7 @@ public class UiInventoryMagicBookView : FancyCell<MagicBook_Fancy>
     {
         SetCurrentWeapon();
         UpdateLevelUpUi();
+        SetTextLevelUpButton(level);
     }
 
     private void UpdateLevelUpUi()
@@ -184,7 +215,24 @@ public class UiInventoryMagicBookView : FancyCell<MagicBook_Fancy>
         if ((magicBookData != null && ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel))
         {
             levelUpButton.interactable = false;
-            levelUpPrice.SetText("최대레벨");
+            if (magicBookData.MAGICBOOKTYPE== MagicBookType.Normal)
+            {
+                if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].trans.Value > 0)
+                {
+                    levelUpPrice.SetText("초월완료");
+                    upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.TransGoods);
+                }
+                else
+                {
+                    levelUpPrice.SetText($"{magicBookData.Transrequirevalue}");
+                    upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.TransGoods);
+                }   
+            }
+            else
+            {
+                levelUpPrice.SetText("최대레벨");
+                upgradeGoodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(Item_Type.GrowthStone);
+            }
             return;
         }
 
@@ -600,6 +648,8 @@ if (magicBookData != null)
         }
         // ShowSubDetailView();
     }
+    private bool showingPopup = false;
+
     public void OnClickLevelUpButton()
     {
        
@@ -621,8 +671,38 @@ if (magicBookData != null)
             
             if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].level.Value >= magicBookData.Maxlevel)
             {
-                PopupManager.Instance.ShowAlarmMessage("최대레벨 입니다.");
-                return;
+                if (magicBookData.MAGICBOOKTYPE == MagicBookType.Normal)
+                {
+                    if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].trans.Value > 0)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("이미 초월하였습니다.");
+                        return;
+                    }
+                    else
+                    {
+                        if (ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value < magicBookData.Transrequirevalue)
+                        {
+                            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.TransGoods)}이 부족합니다!(초월동굴에서 획득)");
+                            return;
+                        }
+                        //초월하겠습니까?
+                        if(showingPopup==false)
+                        {
+                            showingPopup = true;
+                            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"초월하시겠습니까?",
+                                () => { TransEquipment(); }, () =>
+                                {
+                                    showingPopup = false;
+                                });
+                        }
+                        return;
+                    } 
+                }
+                else
+                {
+                    PopupManager.Instance.ShowAlarmMessage("최대 레벨입니다.");
+                    return;
+                }
             }
 
             if (currentMagicStoneAmount < levelUpPrice)
@@ -737,7 +817,57 @@ if (magicBookData != null)
         }
     }
 
+    private void TransEquipment()
+    {
+        showingPopup= false;
 
+        var require = magicBookData.Transrequirevalue;
+
+        if (magicBookData.MAGICBOOKTYPE != MagicBookType.Normal)
+        {
+            PopupManager.Instance.ShowAlarmMessage("초월할 수 없는 장비입니다!");
+            return;
+        }
+        
+        //개수 체크
+        if (ServerData.magicBookTable.TableDatas[magicBookData.Stringid].trans.Value > 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 초월하였습니다!");
+            return;
+        }
+            
+        if (ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value < require)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.TransGoods)}이 부족합니다!(초월동굴에서 획득)");
+            return;
+        }
+
+        
+        ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value -= require;
+        ServerData.magicBookTable.TableDatas[magicBookData.Stringid].trans.Value = 1;
+        //데이터 싱크
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param goodsParam = new Param();
+        Param equipmentParam = new Param();
+
+        //재화 차감
+        goodsParam.Add(GoodsTable.TransGoods, ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        //레벨 상승
+        string updateValue = ServerData.magicBookTable.TableDatas[magicBookData.Stringid].ConvertToString();
+        equipmentParam.Add(magicBookData.Stringid, updateValue);
+
+        transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, equipmentParam));
+
+
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
+        {
+            WhenItemLevelChanged(magicBookData.Maxlevel);
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "초월 완료!!", null);
+        });
+    }
     public void OnClickGetGumihoNorigaeButton()
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.gumiho7).Value == 0)

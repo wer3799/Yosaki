@@ -594,6 +594,12 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.SinsunTreasure, ServerData.goodsTable.GetTableData(GoodsTable.SinsunTreasure).Value);
                 }
                 break;  
+            case Item_Type.DragonScale:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value += amount;
+                    param.Add(GoodsTable.DragonScale, ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value);
+                }
+                break;  
             case Item_Type.GwisalTreasure:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.GwisalTreasure).Value += amount;

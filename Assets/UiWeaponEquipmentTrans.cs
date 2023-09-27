@@ -117,7 +117,7 @@ public class UiWeaponEquipmentTrans : MonoBehaviour
 
         if (rewards.Count == 0)
         {
-            abilDescription.SetText("무기가 없습니다.");
+            abilDescription.SetText("초월된 무기가 없습니다.");
         }
         else
         {

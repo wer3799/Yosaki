@@ -764,6 +764,20 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if (type.IsUpdateRewardItem())
+        {
+            switch (type)
+            {
+                case Item_Type.UpdateRewardMail:
+                    title.SetText("업데이트 보상");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.SP)} {GameBalance.updateRewardSP}개" +
+                                        $"\n{CommonString.GetItemName(Item_Type.SmithFire)} {GameBalance.updateRewardSmithFire}개" +
+                                        $"\n{CommonString.GetItemName(Item_Type.PeachReal)} {GameBalance.updateRewardPeach}개" +
+                                        $"\n{CommonString.GetItemName(Item_Type.SuhoPetFeed)} {GameBalance.updateRewardSuhoPet}개" +
+                                        $"\n{CommonString.GetItemName(Item_Type.NewGachaEnergy)} {GameBalance.updateRewardNGE}개" );
+                    break;
+            }
+        }
         else
         {
             title.SetText(postInfo.titleText);

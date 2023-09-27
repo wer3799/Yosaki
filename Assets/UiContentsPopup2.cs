@@ -47,6 +47,7 @@ public class UiContentsPopup2 : MonoBehaviour
         NewBossBoard,
         DanjeonBoard,
         ClosedTrainingBoard,
+        DragonBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -105,6 +106,8 @@ public class UiContentsPopup2 : MonoBehaviour
         Thief,
         Dark,
         Sinsun,
+        Dragon,
+
     }
     
     [SerializeField]
@@ -729,6 +732,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newAdventureDoors[(int)AdventureDoor.Sinsun].SetActive(e == 1);
             oldAdventureDoors[(int)AdventureDoor.Sinsun].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDragonUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Dragon].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Dragon].SetActive(e == 1);
         }).AddTo(this);
     }
     void Start()

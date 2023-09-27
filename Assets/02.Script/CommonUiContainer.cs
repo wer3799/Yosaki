@@ -16,7 +16,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, 
         CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 ,
         CommonString.ItemGrade_21 , CommonString.ItemGrade_22 , CommonString.ItemGrade_23 , CommonString.ItemGrade_24, CommonString.ItemGrade_25,
-        CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29 };
+        CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29, CommonString.ItemGrade_30 };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
@@ -25,7 +25,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,  //11~15
         CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae, string.Empty, string.Empty,//16~20
         string.Empty, CommonString.ItemGrade_22_Norigae, string.Empty,CommonString.ItemGrade_24_Norigae ,string.Empty, //21~25,
-        CommonString.ItemGrade_26_Norigae, CommonString.ItemGrade_27_Norigae,CommonString.ItemGrade_28_Norigae,CommonString.ItemGrade_29_Norigae,
+        CommonString.ItemGrade_26_Norigae, CommonString.ItemGrade_27_Norigae,CommonString.ItemGrade_28_Norigae,CommonString.ItemGrade_29_Norigae,CommonString.ItemGrade_30_Norigae,
     }; 
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
@@ -160,6 +160,8 @@ public Sprite HyunSangWeapon8;
 public Sprite HyunSangWeapon9;
 public Sprite HyunSangWeapon10;
 public Sprite HyunSangWeapon11;
+
+public Sprite DragonWeapon0;
     
 [Header ("Weapon_View")]
 
@@ -285,6 +287,7 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae9;
     public Sprite HyunSangNorigae10;
     public Sprite HyunSangNorigae11;
+    public Sprite DragonNorigae0;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -491,6 +494,7 @@ public Sprite RecommendWeapon22;
     public Sprite VisionTreasure;
     public Sprite DarkTreasure;
     public Sprite SinsunTreasure;
+    public Sprite DragonScale;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -998,6 +1002,12 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[160];
             case Item_Type.costume161:
                 return costumeThumbnail[161];
+            case Item_Type.costume162:
+                return costumeThumbnail[162];
+            case Item_Type.costume163:
+                return costumeThumbnail[163];
+            case Item_Type.costume164:
+                return costumeThumbnail[164];
 
 
             case Item_Type.RankFrame1:
@@ -1205,6 +1215,8 @@ public Sprite RecommendWeapon22;
             case Item_Type.RankFrame101_1000_new_miniGame:
             case Item_Type.RankFrame1001_10000_new_miniGame:
                 return MiniGameTicket2;
+            case Item_Type.UpdateRewardMail:
+                return SwordPartial;
 
 
 
@@ -1493,6 +1505,8 @@ public Sprite RecommendWeapon22;
                 return DarkTreasure;   
             case Item_Type.SinsunTreasure:
                 return SinsunTreasure;   
+            case Item_Type.DragonScale:
+                return DragonScale;   
             case Item_Type.GwisalTreasure:
                 return GwiSalTreasure;   
             case Item_Type.ChunguTreasure:
@@ -1796,6 +1810,8 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae10;
             case Item_Type.HyunSangNorigae11:
                 return HyunSangNorigae11;
+            case Item_Type.DragonNorigae0:
+                return DragonNorigae0;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2482,6 +2498,8 @@ public Sprite RecommendWeapon22;
                 return HyunSangWeapon10;
             case Item_Type.HyunSangWeapon11:
                 return HyunSangWeapon11;
+            case Item_Type.DragonWeapon0:
+                return DragonWeapon0;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

@@ -283,6 +283,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.VisionTreasure,
         GoodsTable.DarkTreasure,
         GoodsTable.SinsunTreasure,
+        GoodsTable.DragonScale,
         GoodsTable.SumiFire,
         GoodsTable.SumiFireKey,
         GoodsTable.NewGachaEnergy,

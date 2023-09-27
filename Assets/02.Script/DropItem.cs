@@ -173,6 +173,8 @@ public enum Item_Type
     RedFoxFrame5_guild      = 414,
     RedFoxFrame6_20_guild   = 415,
     RedFoxFrame21_100_guild = 416,
+    
+    UpdateRewardMail = 420,
 
     MagicStoneBuff = 500,
     //신규
@@ -567,6 +569,9 @@ public enum Item_Type
     costume159 = 1459, // 현상     
     costume160 = 1460, // 10월 월간     
     costume161 = 1461, // 마블     
+    costume162 = 1462, // 용인보스     
+    costume163 = 1463, // 용인보스     
+    costume164 = 1464, // 용인보스     
 
 
     gumiho0 = 5000,
@@ -820,10 +825,11 @@ public enum Item_Type
     
     HyunSangWeapon10 = 7260,
     HyunSangWeapon11 = 7261,
+    DragonWeapon0 = 7262,
     
     HyunSangNorigae10 = 7280,
     HyunSangNorigae11 = 7281,
-
+    DragonNorigae0 = 7282,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -1001,6 +1007,7 @@ public enum Item_Type
     MeditationClearTicket = 9044,
     DaesanGoods = 9045,
     HonorGoods = 9046,
+    DragonScale = 9047,
 }
 //
 public class DropItem : PoolItem

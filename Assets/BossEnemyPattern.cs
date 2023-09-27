@@ -37,7 +37,10 @@ public class BossEnemyPattern : BossEnemyBase
     [SerializeField] private Transform _targetTransform;
     private void Start()
     {
-        Initialize();
+        if (GameManager.Instance.bossId != 185)
+        {
+            Initialize();
+        }
     }
     [SerializeField]
     private float percentDamageValue = 0f;
@@ -52,10 +55,65 @@ public class BossEnemyPattern : BossEnemyBase
     {
         CustomHitList[index].AttackStart();
     }
+    public void StartRandomAttackRoutine()
+    {
+        StartCoroutine(RandomAttackRoutine());
+    }
+    private IEnumerator RandomAttackRoutine()
+    {
+        UpdateBossDamage();
+        while (true)
+        {
+            RandomPattern();
+            skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+            yield return new WaitForSeconds(0.70f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack1", false);   
+            yield return new WaitForSeconds(0.13f);
+            yield return new WaitForSeconds(0.25f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+            //후딜
+            yield return new WaitForSeconds(1f);
 
+
+        }
+    }
+    public void RandomPattern()
+    {
+        int patternCount = Random.Range(0,2);
+
+        switch (patternCount)
+        {
+            case 0:
+                foreach (var t in RandomHit)
+                {
+                    t.AttackStart();
+                }
+                break;
+            case 1:
+                foreach (var t in RandomHit2)
+                {
+                    t.AttackStart();
+                }
+                break;
+        }
+    }
+    
     public void EnableRandomGameObject()
     {
         gameObjects[UnityEngine.Random.Range(0, gameObjects.Count)].SetActive(true);
+    }
+    
+    public void EnableRandomGameObjectFromActiveFalse()
+    {
+        var randIdx = UnityEngine.Random.Range(0, gameObjects.Count);
+        if (gameObjects[randIdx].activeSelf == true)
+        {
+            EnableRandomGameObjectFromActiveFalse();
+        }
+        else
+        {
+            gameObjects[randIdx].SetActive(true);
+        }
     }
     
     public void EnableGameObject(int _index)
@@ -87,9 +145,8 @@ public class BossEnemyPattern : BossEnemyBase
 
         agentHpController.SetDefense(0);
 
-        //enemyHitObjects.ForEach(e => e.SetDamage(1f));
-
         StartAttackRoutine();
+        
     }
 
     public void StartAttackRoutine()

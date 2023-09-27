@@ -629,6 +629,9 @@ public static class ServerData
             case Item_Type.SinsunTreasure:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinsunTreasure).Value += rewardValue;
                 break;  
+            case Item_Type.DragonScale:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value += rewardValue;
+                break;  
             case Item_Type.GwisalTreasure:
                 ServerData.goodsTable.GetTableData(GoodsTable.GwisalTreasure).Value += rewardValue;
                 break;  
@@ -959,6 +962,9 @@ public static class ServerData
             case Item_Type.costume159:
             case Item_Type.costume160:
             case Item_Type.costume161:
+            case Item_Type.costume162:
+            case Item_Type.costume163:
+            case Item_Type.costume164:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1203,6 +1209,9 @@ public static class ServerData
             case Item_Type.costume159:
             case Item_Type.costume160:
             case Item_Type.costume161:
+            case Item_Type.costume162:
+            case Item_Type.costume163:
+            case Item_Type.costume164:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1747,6 +1756,11 @@ public static class ServerData
                 passParam.Add(GoodsTable.SinsunTreasure,
                     ServerData.goodsTable.GetTableData(GoodsTable.SinsunTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);    
+
+            case Item_Type.DragonScale:
+                passParam.Add(GoodsTable.DragonScale,
+                    ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);    
             case Item_Type.GwisalTreasure:
                 passParam.Add(GoodsTable.GwisalTreasure,
                     ServerData.goodsTable.GetTableData(GoodsTable.GwisalTreasure).Value);
@@ -2080,6 +2094,11 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.SinsunTreasure).Value += amount;
                 param.Add(GoodsTable.SinsunTreasure,
                     ServerData.goodsTable.GetTableData(GoodsTable.SinsunTreasure).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DragonScale:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value += amount;
+                param.Add(GoodsTable.DragonScale,
+                    ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.GwisalTreasure:
@@ -3999,6 +4018,37 @@ public static class ServerData
                 //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
             });
         }
+        else if (type.IsUpdateRewardItem())
+        {
+            switch (type)
+            {
+               
+                case Item_Type.UpdateRewardMail:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value += GameBalance.updateRewardSP;
+                    ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += GameBalance.updateRewardSmithFire;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.updateRewardPeach;
+                    ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeed).Value += GameBalance.updateRewardSuhoPet;
+                    ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += GameBalance.updateRewardNGE;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
+            goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+            goodsParam.Add(GoodsTable.SuhoPetFeed, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeed).Value);
+            goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransactionV2(transactionList, successCallBack: () =>
+            {
+                //  LogManager.Instance.SendLogType("RelicReward", type.ToString(), "");
+            });
+        }
+        
         else
         {
             switch (type)
@@ -4169,6 +4219,9 @@ public static class ServerData
                     break;
                 case Item_Type.SinsunTreasure:
                     ServerData.goodsTable.GetTableData(GoodsTable.SinsunTreasure).Value += amount;
+                    break;
+                case Item_Type.DragonScale:
+                    ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value += amount;
                     break;
                 case Item_Type.GwisalTreasure:
                     ServerData.goodsTable.GetTableData(GoodsTable.GwisalTreasure).Value += amount;

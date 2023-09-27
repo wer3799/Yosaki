@@ -254,6 +254,12 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_1000_3000_new_boss = 400;
 
 
+    //붉은구미호(신)
+    public readonly static ObscuredInt updateRewardSP = 100000;
+    public readonly static ObscuredInt updateRewardSmithFire = 100000;
+    public readonly static ObscuredInt updateRewardPeach = 100000;
+    public readonly static ObscuredInt updateRewardSuhoPet = 3000;
+    public readonly static ObscuredInt updateRewardNGE = 100000;
 
     public readonly static ObscuredInt EventDropEndDay = 28;
     public readonly static ObscuredInt EventMakeEndDay = 28;
@@ -467,7 +473,7 @@ public static class GameBalance
     public static ObscuredFloat sumiGodGraduateValue = 1.25f;
     public static ObscuredFloat thiefGodGraduateValue = 2f;
     public static ObscuredFloat darkGodGraduateValue = 2.5f;
-    public static ObscuredFloat sinsunGodGraduateValue = 1.25f;
+    public static ObscuredFloat sinsunGodGraduateValue = 1.7f;
         
     public static ObscuredDouble swordGodGraduateScore = 2E+122;
     public static ObscuredDouble monkeyGodGraduateScore = 5E+122;
@@ -553,6 +559,8 @@ public static class GameBalance
     public static ObscuredInt DosulAwakeRequireLevel = 99;// 필요 도술 ID
     
     public static ObscuredInt SuhoPetUpgradeIdx = 29;// 필요 수호펫 Idx
+    
+    public static ObscuredFloat dragonScaleAbilValue = 0.04f;//용인비늘베기 
     
     
     public static int GetSonIdx()

@@ -18,10 +18,11 @@ public class MagicBookServerData
 
     public ReactiveProperty<int> getReward0;
     public ReactiveProperty<int> getReward1;
+    public ReactiveProperty<int> trans;
 
     public string ConvertToString()
     {
-        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{collectLevel.Value},{getReward0.Value},{getReward1.Value}";
+        return $"{idx},{hasItem.Value},{level.Value},{amount.Value},{collectLevel.Value},{getReward0.Value},{getReward1.Value},{trans.Value}";
     }
 }
 
@@ -127,6 +128,7 @@ public class MagicBookTable
 
                     magicBookData.getReward0 = new ReactiveProperty<int>(0);
                     magicBookData.getReward1 = new ReactiveProperty<int>(0);
+                    magicBookData.trans = new ReactiveProperty<int>(0);
 
                     tableDatas.Add(table[i].Stringid, magicBookData);
                     defultValues.Add(table[i].Stringid, magicBookData.ConvertToString());
@@ -202,6 +204,16 @@ public class MagicBookTable
                             paramCount++;
                             defultValues.Add(table[i].Stringid, magicBook.ConvertToString());
                         }
+                        if (splitData.Length >= 8)
+                        {
+                            magicBook.trans = new ReactiveProperty<int>(int.Parse(splitData[7]));
+                        }
+                        else
+                        {
+                            magicBook.trans = new ReactiveProperty<int>(0);
+                            paramCount++;
+                            defultValues.Add(table[i].Stringid, magicBook.ConvertToString());
+                        }
                         tableDatas.Add(table[i].Stringid, magicBook);
                     }
                     else
@@ -215,6 +227,7 @@ public class MagicBookTable
                         magicBookData.collectLevel = new ReactiveProperty<int>(0);
                         magicBookData.getReward0 = new ReactiveProperty<int>(0);
                         magicBookData.getReward1 = new ReactiveProperty<int>(0);
+                        magicBookData.trans = new ReactiveProperty<int>(0);
 
                         tableDatas.Add(table[i].Stringid, magicBookData);
                         defultValues.Add(table[i].Stringid, magicBookData.ConvertToString());

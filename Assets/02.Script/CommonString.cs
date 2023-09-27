@@ -51,6 +51,7 @@ public static class CommonString
     public static string ItemGrade_27 = "암흑";
     public static string ItemGrade_28 = "신선";
     public static string ItemGrade_29 = "현상";
+    public static string ItemGrade_30 = "용인";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -66,6 +67,7 @@ public static class CommonString
     public static string ItemGrade_27_Norigae = "암흑";
     public static string ItemGrade_28_Norigae = "신선";
     public static string ItemGrade_29_Norigae = "현상";
+    public static string ItemGrade_30_Norigae = "용인";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -318,6 +320,9 @@ public static class CommonString
             case Item_Type.costume159: return TableManager.Instance.Costume.dataArray[159].Name;
             case Item_Type.costume160: return TableManager.Instance.Costume.dataArray[160].Name;
             case Item_Type.costume161: return TableManager.Instance.Costume.dataArray[161].Name;
+            case Item_Type.costume162: return TableManager.Instance.Costume.dataArray[162].Name;
+            case Item_Type.costume163: return TableManager.Instance.Costume.dataArray[163].Name;
+            case Item_Type.costume164: return TableManager.Instance.Costume.dataArray[164].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -538,6 +543,7 @@ public static class CommonString
             case Item_Type.VisionTreasure: return "비전서";
             case Item_Type.DarkTreasure: return "심연의 정수";
             case Item_Type.SinsunTreasure: return "신선의 보옥";
+            case Item_Type.DragonScale: return "용인의 비늘";
             case Item_Type.GwisalTreasure: return "현상수배 증표";
             case Item_Type.ChunguTreasure: return "천구구슬";
             case Item_Type.SleepRewardItem: return "휴식보상(24시간)";
@@ -768,6 +774,8 @@ public static class CommonString
                 return "[진]귀살베기 피해(%)";
             case StatusType.SuperCritical23DamPer:
                 return "심상베기 피해(%)";
+            case StatusType.SuperCritical24DamPer:
+                return "용베기 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:
