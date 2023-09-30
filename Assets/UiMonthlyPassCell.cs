@@ -12,6 +12,7 @@ using UnityEngine.UI.Extensions;
 public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
 {
     private MonthlyPassData_Fancy itemData;
+    
     [SerializeField]
     private Image itemIcon_free;
 
@@ -25,17 +26,32 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     private TextMeshProUGUI itemName_ad;
 
     [SerializeField]
+    private Image itemIcon_new;
+
+    [SerializeField]
+    private TextMeshProUGUI itemName_new;
+
+    
+    [SerializeField]
     private TextMeshProUGUI itemAmount_free;
 
     [SerializeField]
     private TextMeshProUGUI itemAmount_ad;
 
     [SerializeField]
+    private TextMeshProUGUI itemAmount_new;
+
+    
+    [SerializeField]
     private GameObject lockIcon_Free;
 
     [SerializeField]
     private GameObject lockIcon_Ad;
 
+    [SerializeField]
+    private GameObject lockIcon_New;
+
+    
     private PassInfo passInfo;
 
     [SerializeField]
@@ -44,6 +60,10 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     [SerializeField]
     private GameObject rewardedObject_Ad;
 
+    [SerializeField]
+    private GameObject rewardedObject_New;
+
+    
     [SerializeField]
     private GameObject gaugeImage;
 
@@ -88,6 +108,15 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
             rewardedObject_Ad.SetActive(rewarded);
 
         }).AddTo(disposables);
+        
+        //신규보상 데이터 변경시
+        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_New_Key].Subscribe(e =>
+        {
+            bool rewarded = HasReward(passInfo.rewardType_New_Key, passInfo.id);
+            rewardedObject_New.SetActive(rewarded);
+
+        }).AddTo(disposables);
+        
 
         //킬카운트 변경될때
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).AsObservable().Subscribe(e =>
@@ -96,6 +125,7 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
             {
                 lockIcon_Free.SetActive(!CanGetReward());
                 lockIcon_Ad.SetActive(!CanGetReward());
+                lockIcon_New.SetActive(!CanGetReward());
                 gaugeImage.SetActive(CanGetReward());
             }
         }).AddTo(disposables);
@@ -122,15 +152,18 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     {
         itemAmount_free.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_Free));
         itemAmount_ad.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_IAP));
+        itemAmount_new.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_New));
     }
 
     private void SetItemIcon()
     {
         itemIcon_free.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_Free);
         itemIcon_ad.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_IAP);
+        itemIcon_new.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_New);
 
         itemName_free.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_Free));
         itemName_ad.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_IAP));
+        itemName_new.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_New));
     }
 
     private void SetDescriptionText()
@@ -193,10 +226,42 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
             PopupManager.Instance.ShowAlarmMessage($"월간 훈련권이 필요합니다.");
         }
     }
+    
+    public void OnClickNewRewardButton()
+    {
+        if (CanGetReward() == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("몹 처치가 부족합니다.");
+            return;
+        }
+
+        if (HasReward(passInfo.rewardType_New_Key, passInfo.id))
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            return;
+        }
+
+        if (HasPassItem_New())
+        {
+            GetNewReward();
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage($"월간 훈련권이 필요합니다.");
+        }
+    }
+    
 
     private bool HasPassItem()
     {
         bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value > 0;
+
+        return hasIapProduct;
+    }
+    
+    private bool HasPassItem_New()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey_New].buyCount.Value > 0;
 
         return hasIapProduct;
     }
@@ -458,6 +523,37 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
         
     }
+    
+    private void GetNewReward()
+    {
+
+        //로컬
+        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_New_Key].Value += $",{passInfo.id}";
+        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_New, passInfo.rewardTypeValue_New);
+
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        //패스 보상
+        Param passParam = new Param();
+        passParam.Add(passInfo.rewardType_New_Key, ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_New_Key].Value);
+        transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
+
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_New);
+        transactionList.Add(rewardTransactionValue);
+
+        //킬카운트
+        Param userInfoParam = new Param();
+        userInfoParam.Add(UserInfoTable_2.evenMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
+
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        {
+            //   LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
+        });
+
+        PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
+        
+    }
 
     private bool CanGetReward()
     {
@@ -474,7 +570,7 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     {
         if (passInfo == null) return;
 
-        if (HasPassItem() == false)
+        if (HasPassItem_New() == false)
         {
             if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false)
             {
@@ -484,7 +580,8 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
         else
         {
             if (CanGetReward() == true &&
-                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id) == false))
+                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id) == false)
+                || HasReward(passInfo.rewardType_New_Key, passInfo.id) == false)
             {
                 this.transform.SetAsFirstSibling();
             }

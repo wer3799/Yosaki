@@ -202,8 +202,10 @@ public class MagicBookTable
                             magicBook.getReward0 = new ReactiveProperty<int>(0);
                             magicBook.getReward1 = new ReactiveProperty<int>(0);
                             paramCount++;
-                            defultValues.Add(table[i].Stringid, magicBook.ConvertToString());
+                          //  defultValues.Add(table[i].Stringid, magicBook.ConvertToString());
                         }
+                        
+                        
                         if (splitData.Length >= 8)
                         {
                             magicBook.trans = new ReactiveProperty<int>(int.Parse(splitData[7]));
@@ -214,6 +216,7 @@ public class MagicBookTable
                             paramCount++;
                             defultValues.Add(table[i].Stringid, magicBook.ConvertToString());
                         }
+                        
                         tableDatas.Add(table[i].Stringid, magicBook);
                     }
                     else

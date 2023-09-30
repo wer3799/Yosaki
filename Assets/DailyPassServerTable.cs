@@ -142,6 +142,7 @@ public class MonthlyPassServerTable
 
     public static string MonthlypassFreeReward = "f10";
     public static string MonthlypassAdReward = "a10";
+    public static string MonthlypassNewReward = "n10";
 
     public static string MonthlypassAttendFreeReward = "af11";
     public static string MonthlypassAttendAdReward = "aa11";
@@ -150,6 +151,7 @@ public class MonthlyPassServerTable
     {
         { MonthlypassFreeReward,string.Empty},
         { MonthlypassAdReward,string.Empty},
+        { MonthlypassNewReward,string.Empty},
         { MonthlypassAttendFreeReward,string.Empty},
         { MonthlypassAttendAdReward,string.Empty}
     };

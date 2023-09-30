@@ -13,6 +13,7 @@ public class UiMonthPassBuyButton : MonoBehaviour
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public static readonly string monthPassKey = "monthpass23";
+    public static readonly string monthPassKey_New = "monthpass25";
 
     private Button buyButton;
 
@@ -32,7 +33,7 @@ public class UiMonthPassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
-        ServerData.iapServerTable.TableDatas[monthPassKey].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[monthPassKey_New].buyCount.AsObservable().Subscribe(e =>
         {
             descText.SetText(e >= 1 ? "구매완료" : "훈련권 구매");
             this.gameObject.SetActive(e <= 0);
@@ -57,18 +58,18 @@ public class UiMonthPassBuyButton : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        if (ServerData.iapServerTable.TableDatas[monthPassKey].buyCount.Value >= 1)
+        if (ServerData.iapServerTable.TableDatas[monthPassKey_New].buyCount.Value >= 1)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 구매 했습니다.");
             return;
         }
 
 #if UNITY_EDITOR|| TEST
-        GetPackageItem(monthPassKey);
+        GetPackageItem(monthPassKey_New);
         return;
 #endif
 
-        IAPManager.Instance.BuyProduct(monthPassKey);
+        IAPManager.Instance.BuyProduct(monthPassKey_New);
     }
 
     public void GetPackageItem(string productId)
@@ -88,7 +89,7 @@ public class UiMonthPassBuyButton : MonoBehaviour
             // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
         }
 
-        if (tableData.Productid != monthPassKey) return;
+        if (tableData.Productid != monthPassKey_New) return;
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 

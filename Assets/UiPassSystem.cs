@@ -20,6 +20,10 @@ public class PassInfo
     public ObscuredInt rewardType_IAP;
     public ObscuredFloat rewardTypeValue_IAP;
     public ObscuredString rewardType_IAP_Key;
+    
+    public ObscuredInt rewardType_New;
+    public ObscuredFloat rewardTypeValue_New;
+    public ObscuredString rewardType_New_Key;
 
     public ObscuredString shopId;
 

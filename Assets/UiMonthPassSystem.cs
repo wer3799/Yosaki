@@ -88,6 +88,10 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
                 passInfo.rewardType_IAP = tableData[i].Reward2;
                 passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
                 passInfo.rewardType_IAP_Key = MonthlyPassServerTable.MonthlypassAdReward;
+                
+                passInfo.rewardType_New = tableData[i].Reward3;
+                passInfo.rewardTypeValue_New = tableData[i].Reward3_Value;
+                passInfo.rewardType_New_Key = MonthlyPassServerTable.MonthlypassNewReward;
         
                 uiPassCellContainer[i].gameObject.SetActive(true);
                 uiPassCellContainer[i].Initialize(passInfo);
@@ -122,9 +126,11 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
     {
         string freeKey = MonthlyPassServerTable.MonthlypassFreeReward;
         string adKey = MonthlyPassServerTable.MonthlypassAdReward;
+        string newKey = MonthlyPassServerTable.MonthlypassNewReward;
 
         List<int> splitData_Free = GetSplitData(MonthlyPassServerTable.MonthlypassFreeReward);
         List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable.MonthlypassAdReward);
+        List<int> splitData_New = GetSplitData(MonthlyPassServerTable.MonthlypassNewReward);
 
         List<int> rewardTypeList = new List<int>();
 
@@ -134,6 +140,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
         string free = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value;
         string ad = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value;
+        string new_ = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassNewReward].Value;
 
         bool hasCostumeItem = false;
         bool hasPassItem = false;
@@ -168,6 +175,21 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
                     break;
                 }
                 if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+            }
+            
+            //유료보상
+            if (HasPassItem_New() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward3)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward3)).IsPassNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -240,6 +262,30 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
                 rewardedNum++;
             }
+            
+            //유료보상
+            if (HasPassItem_New() && HasReward(splitData_New, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward3)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward3)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+
+                new_ += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward3, tableData[i].Reward3_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward3) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward3);
+                }
+
+                rewardedNum++;
+            }
         }
 
         
@@ -248,6 +294,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
         {
             ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value = free;
             ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value = ad;
+            ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassNewReward].Value = new_;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -277,6 +324,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
             passParam.Add(MonthlyPassServerTable.MonthlypassFreeReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value);
             passParam.Add(MonthlyPassServerTable.MonthlypassAdReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value);
+            passParam.Add(MonthlyPassServerTable.MonthlypassNewReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassNewReward].Value);
 
             transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
 
@@ -295,9 +343,11 @@ public void OnClickAllReceiveButtonV2()
     {
         string freeKey = MonthlyPassServerTable.MonthlypassFreeReward;
         string adKey = MonthlyPassServerTable.MonthlypassAdReward;
+        string newKey = MonthlyPassServerTable.MonthlypassNewReward;
 
         List<int> splitData_Free = GetSplitData(MonthlyPassServerTable.MonthlypassFreeReward);
         List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable.MonthlypassAdReward);
+        List<int> splitData_New = GetSplitData(MonthlyPassServerTable.MonthlypassNewReward);
 
         List<int> rewardTypeList = new List<int>();
 
@@ -307,6 +357,8 @@ public void OnClickAllReceiveButtonV2()
 
         string free = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value;
         string ad = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value;
+        string new_ = ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassNewReward].Value;
+
 
         bool hasCostumeItem = false;
         bool hasPassItem = false;
@@ -341,6 +393,21 @@ public void OnClickAllReceiveButtonV2()
                     break;
                 }
                 if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+            }
+            
+            //유료보상
+            if (HasPassItem_New() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward3)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward3)).IsPassNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -416,6 +483,32 @@ public void OnClickAllReceiveButtonV2()
 
                 rewardedNum++;
             }
+            
+            //유료보상
+            if (HasPassItem_New() && HasReward(splitData_New, tableData[i].Id) == false)
+            {
+                if (((Item_Type)(tableData[i].Reward3)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+                if (((Item_Type)(tableData[i].Reward3)).IsPassNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+
+                new_ += $",{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward3, tableData[i].Reward3_Value);
+                AddOrUpdateReward((Item_Type)(int)tableData[i].Reward3, tableData[i].Reward3_Value);
+
+                if (rewardTypeList.Contains(tableData[i].Reward3) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward3);
+                }
+
+                rewardedNum++;
+            }
         }
 
         
@@ -424,6 +517,7 @@ public void OnClickAllReceiveButtonV2()
         {
             ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value = free;
             ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value = ad;
+            ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassNewReward].Value = new_;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -442,6 +536,7 @@ public void OnClickAllReceiveButtonV2()
 
             passParam.Add(MonthlyPassServerTable.MonthlypassFreeReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value);
             passParam.Add(MonthlyPassServerTable.MonthlypassAdReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value);
+            passParam.Add(MonthlyPassServerTable.MonthlypassNewReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassNewReward].Value);
 
             transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
 
@@ -485,6 +580,13 @@ public void OnClickAllReceiveButtonV2()
     private bool HasPassItem()
     {
         bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value > 0;
+
+        return hasIapProduct;
+    }
+    
+    private bool HasPassItem_New()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey_New].buyCount.Value > 0;
 
         return hasIapProduct;
     }
@@ -549,6 +651,12 @@ public void OnClickAllReceiveButtonV2()
             passInfo.rewardType_IAP = tableData[i].Reward2;
             passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
             passInfo.rewardType_IAP_Key = MonthlyPassServerTable.MonthlypassAdReward;
+            
+            passInfo.rewardType_New = tableData[i].Reward3;
+            passInfo.rewardTypeValue_New = tableData[i].Reward3_Value;
+            passInfo.rewardType_New_Key = MonthlyPassServerTable.MonthlypassNewReward;
+            
+            
             passInfos.Add(new MonthlyPassData_Fancy(passInfo));
     
         }

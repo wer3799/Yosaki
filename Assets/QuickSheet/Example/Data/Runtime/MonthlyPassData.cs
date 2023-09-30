@@ -32,4 +32,12 @@ public class MonthlyPassData
   float reward2_value;
   public float Reward2_Value { get {return reward2_value; } set { this.reward2_value = value;} }
   
+  [SerializeField]
+  int reward3;
+  public int Reward3 { get {return reward3; } set { this.reward3 = value;} }
+  
+  [SerializeField]
+  float reward3_value;
+  public float Reward3_Value { get {return reward3_value; } set { this.reward3_value = value;} }
+  
 }
