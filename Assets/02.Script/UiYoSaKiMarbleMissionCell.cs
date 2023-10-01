@@ -31,6 +31,7 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
     [SerializeField] private Image ItemIcon;
 
     private int getAmountFactor;
+
     public void Initialize(EventMissionData tableData)
     {
         if (tableData.Enable == false)
@@ -45,7 +46,7 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
         {
             exchangeNum.SetText($"매일 교환 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
         }
-        else if(tableData.EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE)
+        else if (tableData.EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE)
         {
             exchangeNum.SetText($"이벤트 기간 내 1회 획득 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
         }
@@ -53,26 +54,26 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
         title.SetText(tableData.Title);
 
         ItemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Rewardtype);
-        
+
         Subscribe();
     }
 
-    
+
     private void Subscribe()
     {
         ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.AsObservable().Subscribe(WhenMissionCountChanged).AddTo(this);
-        ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount.AsObservable().Subscribe(e=>
+        ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount.AsObservable().Subscribe(e =>
         {
             if (tableData.EVENTMISSIONTYPE == EventMissionType.NORMALMARBLE)
             {
                 exchangeNum.SetText($"매일 교환 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
             }
-            else if(tableData.EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE)
+            else if (tableData.EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE)
             {
                 exchangeNum.SetText($"이벤트 기간 내 1회 획득 : {ServerData.eventMissionTable.TableDatas[tableData.Stringid].rewardCount}/{TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear}");
             }
-             
-            if(e>=TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear)
+
+            if (e >= TableManager.Instance.EventMission.dataArray[tableData.Id].Dailymaxclear)
             {
                 lockMask.SetActive(true);
             }
@@ -89,7 +90,6 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
         {
             WhenMissionCountChanged(ServerData.eventMissionTable.TableDatas[tableData.Stringid].clearCount.Value);
         }
-
     }
 
     private void WhenMissionCountChanged(int count)
@@ -112,7 +112,7 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
         }
 
 
-        rewardNum.SetText($"{Mathf.Max(getAmountFactor,1) * tableData.Rewardvalue  }개");
+        rewardNum.SetText($"{Mathf.Max(getAmountFactor, 1) * tableData.Rewardvalue}개");
     }
 
     private Coroutine SyncRoutine;
@@ -120,11 +120,10 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
 
     public void OnClickGetButton()
     {
-        
         //로컬 갱신
         //EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire );
         EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), 1);
-        if(Utils.IsCostumeItem((Item_Type)tableData.Rewardtype))
+        if (Utils.IsCostumeItem((Item_Type)tableData.Rewardtype))
         {
             if ((Item_Type)tableData.Rewardtype == Item_Type.costume161)
             {
@@ -137,7 +136,7 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
                 Param costumeParam = new Param();
                 costumeParam.Add("costume161", costumeServerData.ConvertToString());
                 transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
-                
+
                 Param eventMissionParam = new Param();
                 eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
                 transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
@@ -148,13 +147,14 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.costume161)} 획득!!", null);
                     // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
                 });
-            }        }
+            }
+        }
         else
         {
             ServerData.goodsTable.AddLocalData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Rewardtype), tableData.Rewardvalue);
 
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)} {tableData.Rewardvalue}개 획득!!");
-            
+
             SoundManager.Instance.PlaySound("GoldUse");
 
             if (SyncRoutine != null)
@@ -164,8 +164,6 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
 
             SyncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncDataRoutine());
         }
-
-
     }
 
     private IEnumerator SyncDataRoutine()
@@ -182,8 +180,8 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
-        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)tableData.Rewardtype);
+        transactionList.Add(rewardTransactionValue);
 
         ServerData.SendTransactionV2(transactionList);
 
