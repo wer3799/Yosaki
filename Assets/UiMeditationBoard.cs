@@ -72,9 +72,12 @@ public class UiMeditationBoard : MonoBehaviour
         }
         
         //명상누름
-        var seconds = ElapsedTimeManager.Instance.GetElapsedTimeReal();
-        TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime.AddSeconds(seconds);
         
+        TimeSpan timeRemaining = targetTime - DateTime.Now;
+        
+        // var seconds = ElapsedTimeManager.Instance.GetElapsedTimeReal();
+        // TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime.AddSeconds(seconds);
+        //
         // #if UNITY_EDITOR
         // Debug.LogError("앱이 실행된 시간 :" + timeRemaining.TotalSeconds + "초");
         // #endif

@@ -2157,50 +2157,6 @@ Transform:
   m_Father: {fileID: 785766492}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1893129307
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1893129309}
-  - component: {fileID: 1893129308}
-  m_Layer: 0
-  m_Name: ElapsedTimeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1893129308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893129307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0423c7817b372841ba1bb817b239a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DontDestroy: 1
---- !u!4 &1893129309
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1893129307}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.7898939, y: -0.18099746, z: -36.697548}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 30
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1918971819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3527,7 +3483,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 54c43b88d1533ba4ba0abb809591bef9, type: 3}
   - {fileID: 21300000, guid: d2463554ed75dff42947fa01387a5389, type: 3}
   - {fileID: 21300000, guid: 258f6d4c4db3bcf4da93a12749561777, type: 3}
-  guildIconGrade: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000001000000010000000100000002000000020000000200000002000000020000000300000003000000030000000300000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  - {fileID: 21300000, guid: 26fd00a13e19bc348a2ed5eadf8cb203, type: 3}
+  guildIconGrade: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000010000000100000001000000010000000200000002000000020000000200000002000000030000000300000003000000030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   weaponEnhnaceMats:
   - {fileID: 2100000, guid: cc460e5b1c6c0bd498b44195a0c3da99, type: 2}
   - {fileID: 2100000, guid: ca0c874d3c59cf84f9454d629f66af08, type: 2}
@@ -4385,7 +4342,7 @@ PrefabInstance:
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}
       propertyPath: editorLoginId
-      value: clone8
+      value: a_8846847867697156085
       objectReference: {fileID: 0}
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}

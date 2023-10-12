@@ -1021,7 +1021,6 @@ public class UserInfoTable
                         
                     }
                 }
-                ElapsedTimeManager.Instance.Reset();
 
                 //week check
                 int currentWeek = Utils.GetWeekNumber(currentServerTime);
