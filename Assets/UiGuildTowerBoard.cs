@@ -186,7 +186,7 @@ public class UiGuildTowerBoard : MonoBehaviour
                     successCallBack: () =>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.GuildReward)} {instanClearGetNum}개 획득!", null);
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.GuildReward)} {Utils.ConvertNum(instanClearGetNum)}개 획득!", null);
                     });
             }, null);
     }

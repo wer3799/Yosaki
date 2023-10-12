@@ -90,7 +90,7 @@ public enum StatusType
     AddSummonYogui, //요괴 추가소환
     PeachAbilUpgradePer, //복숭아 효과 강화
     SinsunHasValueUpgrade, //신선보옥당 신선베기
-    HyunsangHasValueUpgrade, //귀멸증표당 귀멸베기
+    HyunsangHasValueUpgrade=75, //귀멸증표당 귀멸베기
     SuperCritical21DamPer, //초월베기
     
     SuperCritical8AddDam,
@@ -107,6 +107,7 @@ public enum StatusType
     
     EnhanceVisionSkill, //비전스킬효과 강화
     SuperCritical24DamPer, //용인베기
+    SuperCritical25DamPer, //요력개방
 
 }
 
@@ -2022,6 +2023,17 @@ public static class PlayerStats
         
         return ret;
     }
+    
+    //요력베기
+    public static float GetSuperCritical25DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetYoPowerEffect(StatusType.SuperCritical25DamPer);
+
+        
+        return ret;
+    }
 
     //요도 추가피해량
     public static float GetSealSwordDam()
@@ -3179,6 +3191,29 @@ public static class PlayerStats
         var tableDatas = TableManager.Instance.FoxFire.dataArray;
 
         int currentLevel = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.foxFireIdx).Value;
+
+        if (currentLevel == -1)
+        {
+            return 0f;
+        }
+
+        for (int i = 0; i < currentLevel + 1; i++)
+        {
+            if ((StatusType)tableDatas[i].Abil_Type == statusType)
+            {
+                ret += tableDatas[i].Abil_Value;
+            }
+        }
+
+        return ret;
+    }
+    public static float GetYoPowerEffect(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.YokaiPowerOpen.dataArray;
+
+        int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.yoPowerIdx).Value;
 
         if (currentLevel == -1)
         {
@@ -5807,7 +5842,7 @@ public static class PlayerStats
     {
         float ret = 0f;
 
-        //ret += GetSkillHasValue(StatusType.SinsunHasValueUpgrade);
+        ret += GetSkillHasValue(StatusType.SinsunHasValueUpgrade);
 
         ret += GetGradeTestAbilValue(StatusType.SinsunHasValueUpgrade);
 
@@ -5822,6 +5857,8 @@ public static class PlayerStats
         //ret += GetSkillHasValue(StatusType.SinsunHasValueUpgrade);
 
         ret += GetHyunSangTowerAbilValue(StatusType.HyunsangHasValueUpgrade);
+        
+        ret += GetPassiveSkill2Value(StatusType.HyunsangHasValueUpgrade);
 
         return ret;
     }

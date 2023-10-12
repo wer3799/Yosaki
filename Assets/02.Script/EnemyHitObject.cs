@@ -43,7 +43,7 @@ public class EnemyHitObject : MonoBehaviour
     {
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon && (GameManager.Instance.bossId == 57 ||
             GameManager.Instance.bossId == 72 || GameManager.Instance.bossId == 82 || GameManager.Instance.bossId == 83 || GameManager.Instance.bossId == 92 ||
-            GameManager.Instance.bossId == 96|| GameManager.Instance.bossId == 118|| GameManager.Instance.bossId == 150
+            GameManager.Instance.bossId == 96|| GameManager.Instance.bossId == 118|| GameManager.Instance.bossId == 150|| GameManager.Instance.bossId == 187
             ))
         {
             this.percentDamage = 1f;

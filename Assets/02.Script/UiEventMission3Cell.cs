@@ -138,15 +138,15 @@ public class UiEventMission3Cell : MonoBehaviour
         }
         else
         {
-            ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission2_All, rewardGemNum);
+            ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission3_All, rewardGemNum);
         }
         //로컬 갱신
         EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire );
         EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), 1);
         
-        ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission2, rewardGemNum);
+        ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission3, rewardGemNum);
 
-        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission2)} {rewardGemNum}개 획득!!");
+        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission3)} {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
 
         if (SyncRoutine != null)
@@ -171,10 +171,10 @@ public class UiEventMission3Cell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+        goodsParam.Add(GoodsTable.Event_Mission3, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value);
         if (ServerData.iapServerTable.TableDatas[UiEvent2PassBuyButton.productKey].buyCount.Value == 0)
         {
-            goodsParam.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
+            goodsParam.Add(GoodsTable.Event_Mission3_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value);
         }
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

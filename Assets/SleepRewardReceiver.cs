@@ -40,8 +40,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         public readonly float dailybootyItem;
         public readonly float dokebiItem;
         public readonly float hotTimeItem;
+        public readonly float yoPowerItem;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic, float sulItem, float springItem, float peachItem, float helItem, float chunItem, float dailybootyItem, float dokebiItem, float hotTimeItem)
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic, float sulItem, float springItem, float peachItem, float helItem, float chunItem, float dailybootyItem, float dokebiItem, float hotTimeItem, float yoPowerItem)
         {
             this.gold = gold;
 
@@ -78,6 +79,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             this.dokebiItem = dokebiItem;
 
             this.hotTimeItem = hotTimeItem;
+            
+            this.yoPowerItem = yoPowerItem;
         }
     }
 
@@ -110,6 +113,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float elapsedMinutes = (float)elapsedSeconds / 60f;
 
         int currentStageIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        currentStageIdx = currentStageIdx + 1;
 
         if (currentStageIdx == TableManager.Instance.GetLastStageIdx())
         {
@@ -228,6 +233,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
                 (1 + PlayerStats.GetDokebiFireGainValue());
         }
 
+        float yoPowerItem = (killedEnemyPerMin * stageTableData.Yokaiessence * GameBalance.sleepRewardRatio *
+                             elapsedMinutes);
+        
+
         int hotTimeItem = 0;
         if (ServerData.userInfoTable.IsHotTimeEvent())
         {
@@ -253,7 +262,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             killCount: (int)(elapsedMinutes * killedEnemyPerMin * stageTableData.Marbleamount *
                              GameBalance.sleepRewardRatio), stageRelic: stageRelic, sulItem: sulItem,
             springItem: springItem, peachItem: peachItem, helItem: helItem, chunItem: chunItem,
-            dailybootyItem: dailybootyItem, dokebiItem: dokebiItem, hotTimeItem: hotTimeItem);
+            dailybootyItem: dailybootyItem, dokebiItem: dokebiItem, hotTimeItem: hotTimeItem, yoPowerItem: yoPowerItem);
 
         UiSleepRewardView.Instance.CheckReward();
     }
@@ -305,18 +314,19 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += (int)sleepRewardInfo.dokebiItem;
         }
+        ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value += (int)sleepRewardInfo.yoPowerItem;
 
         //봄나물
         if (ServerData.userInfoTable.CanSpawnSpringEventItem())
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value += sleepRewardInfo.springItem;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += sleepRewardInfo.springItem;
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
             {
-                ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value += sleepRewardInfo.springItem;
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value += sleepRewardInfo.springItem;
             }
             else
             {
-                ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value += sleepRewardInfo.springItem;
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += sleepRewardInfo.springItem;
             }
         }
 
@@ -336,11 +346,15 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         //추석 핫타임
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += sleepRewardInfo.hotTimeItem;
-        //패스 미구매시 저장 재화 추가획득
-        if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value < 1)
+        if (ServerData.userInfoTable.IsHotTimeEvent())
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += sleepRewardInfo.hotTimeItem;
+            
+            //패스 미구매시 저장 재화 추가획득
+            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value < 1)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
+            }
         }
 
 
@@ -370,8 +384,14 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.oddMonthKillCount].Value += sleepRewardInfo.killCount;
         }
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value += sleepRewardInfo.killCount;
-        ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value += sleepRewardInfo.killCount;
-        ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value += sleepRewardInfo.killCount;
+        //가을훈련
+        if (ServerData.userInfoTable.IsEventPass2Period())
+        {
+            ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value +=
+                sleepRewardInfo.killCount;
+        }
+
+        //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value += sleepRewardInfo.killCount;
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason2].Value += sleepRewardInfo.killCount;
         ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason3].Value += sleepRewardInfo.killCount;
         
@@ -403,22 +423,27 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
         goodsParam.Add(GoodsTable.GrowthStone, ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value);
         goodsParam.Add(GoodsTable.PetUpgradeSoul, ServerData.goodsTable.GetTableData(GoodsTable.PetUpgradeSoul).Value);
-        goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
-
-        if (Utils.HasHotTimeEventPass() == false)
+        
+        if (ServerData.userInfoTable.IsHotTimeEvent())
         {
-            goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+            goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
+            if (Utils.HasHotTimeEventPass() == false)
+            {
+                goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+            }
         }
+
+
 
 
         //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
         //goodsParam.Add(GoodsTable.Event_Mission, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value);
         if (ServerData.userInfoTable.CanSpawnSpringEventItem())
         {
-            goodsParam.Add(GoodsTable.Event_Collection, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value);
+            goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
             {
-                goodsParam.Add(GoodsTable.Event_Collection_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value);
+                goodsParam.Add(GoodsTable.Event_Kill1_Item_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value);
             }
         }
 
@@ -445,12 +470,13 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         {
             goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
         }
-
+        //도꺠비불
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
         {
             goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
         }
-
+        //요괴정수
+        goodsParam.Add(GoodsTable.YoPowerGoods, ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
 
 
@@ -468,8 +494,12 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         // }
 
         //userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
-        userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value);
-        userInfoParam.Add(UserInfoTable.killCountTotalSeason, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value);
+        //가을훈련
+        if (ServerData.userInfoTable.IsEventPass2Period())
+        {
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value);
+        }
+        //userInfoParam.Add(UserInfoTable.killCountTotalSeason, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value);
         //userInfoParam.Add(UserInfoTable.killCountTotalSeason2, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason2].Value);
         userInfoParam.Add(UserInfoTable.killCountTotalSeason3, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason3].Value);
         
@@ -525,7 +555,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         
         YorinMissionManager.UpdateYorinMissionClear(YorinMissionKey.YMission2_6, 1);
         
-        ServerData.SendTransaction(transantions, successCallBack: () =>
+        ServerData.SendTransactionV2(transantions, successCallBack: () =>
         {
             successCallBack?.Invoke();
             UiSleepRewardMask.Instance.ShowMaskObject(false);

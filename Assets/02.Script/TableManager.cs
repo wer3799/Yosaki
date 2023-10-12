@@ -885,6 +885,7 @@ public class TableManager : SingletonMono<TableManager>
     public MarbleEvent MarbleEvent;
     public AbilAwakeTable AbilAwakeTable;
     public ClosedTrainingTable ClosedTrainingTable;
+    public DragonTowerTable DragonTowerTable;
     private Dictionary<int, SealSwordData> sealSwordData = null;
 
     public Dictionary<int, SealSwordData> SealSwordData
@@ -920,6 +921,7 @@ public class TableManager : SingletonMono<TableManager>
     public Dosul dosulTable;
     public VisionTowerTable visionTowerTable;
     public DaesanExchange DaesanExchange;
+    public YokaiPowerOpen YokaiPowerOpen;
 }
 
 

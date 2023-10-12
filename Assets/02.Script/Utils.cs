@@ -200,7 +200,10 @@ public static class Utils
                type == Item_Type.costume161||
                type == Item_Type.costume162||
                type == Item_Type.costume163||
-               type == Item_Type.costume164
+               type == Item_Type.costume164||
+               type == Item_Type.costume165||
+               type == Item_Type.costume166||
+               type == Item_Type.costume167
             ;
     }
 
@@ -241,7 +244,9 @@ public static class Utils
                type == Item_Type.pet53 ||
                type == Item_Type.pet54 ||
                type == Item_Type.pet55 ||
-               type == Item_Type.pet56;
+               type == Item_Type.pet56 ||
+               type == Item_Type.pet57 ||
+               type == Item_Type.pet58;
     }
 
 
@@ -252,8 +257,11 @@ public static class Utils
     }
     public static bool IsDailyEventMissionKey(this EventMissionKey type)
     {
-        int type_int = (int)type;
-        return type_int >= (int)EventMissionKey.SMISSION1 && type <= EventMissionKey.TMISSION11;
+        bool isDaily = (type >= EventMissionKey.SMISSION1 && type <= EventMissionKey.SMISSION9)||
+                       (type >= EventMissionKey.BMISSION1 && type <= EventMissionKey.BMISSION8)||
+                       (type >= EventMissionKey.NMARBLEMISSION1 && type <= EventMissionKey.NMARBLEMISSION8)||
+                       (type >= EventMissionKey.FMISSION1 && type <= EventMissionKey.FMISSION8);
+        return isDaily;
     }
 
     public static bool IsRegainableItem(this Item_Type type)
@@ -382,6 +390,8 @@ public static class Utils
                type == Item_Type.pet54 ||
                type == Item_Type.pet55 ||
                type == Item_Type.pet56 ||
+               type == Item_Type.pet57 ||
+               type == Item_Type.pet58 ||
                type == Item_Type.SpecialSuhoPet0 ||
                type == Item_Type.SpecialSuhoPet1 ||
                type == Item_Type.SpecialSuhoPet2 ||
@@ -475,8 +485,8 @@ public static class Utils
                type == Item_Type.Event_Collection_All ||
                type == Item_Type.Event_Fall_Gold ||
                type == Item_Type.Event_NewYear ||
-               type == Item_Type.Event_Mission ||
                type == Item_Type.Event_Mission2 ||
+               type == Item_Type.Event_Mission3 ||
                type == Item_Type.SumiFire ||
                type == Item_Type.SealWeaponClear ||
                type == Item_Type.SumiFireKey ||
@@ -795,7 +805,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","미정6","미정7","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
         
     };
 

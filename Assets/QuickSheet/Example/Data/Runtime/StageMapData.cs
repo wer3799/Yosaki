@@ -112,4 +112,8 @@ public class StageMapData
   int chapteridx;
   public int Chapteridx { get {return chapteridx; } set { this.chapteridx = value;} }
   
+  [SerializeField]
+  float yokaiessence;
+  public float Yokaiessence { get {return yokaiessence; } set { this.yokaiessence = value;} }
+  
 }

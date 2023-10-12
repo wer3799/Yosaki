@@ -656,8 +656,8 @@ public class UiShop : SingletonMono<UiShop>
                 break; 
             case Item_Type.Event_Collection:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value += amount;
-                    param.Add(GoodsTable.Event_Collection, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += amount;
+                    param.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
                 }
                 break;
             case Item_Type.Event_HotTime:
@@ -669,8 +669,8 @@ public class UiShop : SingletonMono<UiShop>
                 
             case Item_Type.Event_Collection_All:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value += amount;
-                    param.Add(GoodsTable.Event_Collection_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value += amount;
+                    param.Add(GoodsTable.Event_Kill1_Item_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value);
                 }
                 break;
 
@@ -692,16 +692,16 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.Event_NewYear_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_NewYear_All).Value);
                 }
                 break;
-            case Item_Type.Event_Mission:
+            case Item_Type.Event_Mission1:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value += amount;
-                    param.Add(GoodsTable.Event_Mission, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1).Value += amount;
+                    param.Add(GoodsTable.Event_Mission1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1).Value);
                 }
                 break;
-            case Item_Type.Event_Mission_All:
+            case Item_Type.Event_Mission1_All:
                 {
-                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value += amount;
-                    param.Add(GoodsTable.Event_Mission_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value);
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).Value += amount;
+                    param.Add(GoodsTable.Event_Mission1_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).Value);
                 }
                 break;
             case Item_Type.Event_Mission2:
@@ -714,6 +714,18 @@ public class UiShop : SingletonMono<UiShop>
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value += amount;
                     param.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
+                }
+                break;
+            case Item_Type.Event_Mission3:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value += amount;
+                    param.Add(GoodsTable.Event_Mission3, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value);
+                }
+                break;
+            case Item_Type.Event_Mission3_All:
+                {
+                    ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value += amount;
+                    param.Add(GoodsTable.Event_Mission3_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value);
                 }
                 break;
 
@@ -1083,6 +1095,40 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.DarkSkill4).Value += amount;
                 param.Add(GoodsTable.DarkSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DarkSkill4).Value);
+            }
+                break;
+ 
+            //
+            //
+            case Item_Type.SinsunSkill0:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill0).Value += amount;
+                param.Add(GoodsTable.SinsunSkill0, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill0).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill1:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill1).Value += amount;
+                param.Add(GoodsTable.SinsunSkill1, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill1).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill2:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill2).Value += amount;
+                param.Add(GoodsTable.SinsunSkill2, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill2).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill3:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill3).Value += amount;
+                param.Add(GoodsTable.SinsunSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill3).Value);
+            }
+                break;
+ 
+            case Item_Type.SinsunSkill4:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value += amount;
+                param.Add(GoodsTable.SinsunSkill4, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value);
             }
                 break;
  

@@ -7,9 +7,12 @@ using System.Linq;
 using BackEnd;
 using TMPro;
 using System;
+using UnityEngine.UI.Extensions;
 
-public class UiOneYearPassCell : MonoBehaviour
+public class UiOneYearPassCell : FancyCell<PassData_Fancy>
 {
+    PassData_Fancy itemData;
+
     [SerializeField]
     private Image itemIcon_free;
 
@@ -135,7 +138,7 @@ public class UiOneYearPassCell : MonoBehaviour
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("서핑 보드 교환 수가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("황금 보리 교환 수가 부족합니다.");
             return;
         }
 
@@ -156,7 +159,7 @@ public class UiOneYearPassCell : MonoBehaviour
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("서핑 보드 교환 수가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage("황금 보리 교환 수가 부족합니다.");
             return;
         }
 
@@ -173,7 +176,7 @@ public class UiOneYearPassCell : MonoBehaviour
         }
        else
         {
-            PopupManager.Instance.ShowAlarmMessage($"수박 패스권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"패스권이 필요합니다.");
             return;
         }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
@@ -245,12 +248,6 @@ public class UiOneYearPassCell : MonoBehaviour
         int killCountTotalBok = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value;
         return killCountTotalBok >= passInfo.require;
     }
-    private void OnEnable()
-    {
-        RefreshParent();
-        RefreshData();
-
-    }
 
     private void RefreshData()
     {
@@ -270,4 +267,53 @@ public class UiOneYearPassCell : MonoBehaviour
         }
     }
 
+    public void UpdateUi(PassInfo passInfo)
+    {
+        this.passInfo = passInfo;
+
+        SetAmount();
+
+        SetItemIcon();
+
+        SetDescriptionText();
+
+        Subscribe();
+        
+        RefreshData();
+    }
+
+    public override void UpdateContent(PassData_Fancy itemData)
+    {
+        if (this.itemData != null && this.itemData.passInfo.id == itemData.passInfo.id)
+        {
+            return;
+        }
+
+        this.itemData = itemData;
+
+        
+        UpdateUi(this.itemData.passInfo);
+    }
+
+    float currentPosition = 0;
+    [SerializeField] Animator animator = default;
+
+    static class AnimatorHash
+    {
+        public static readonly int Scroll = Animator.StringToHash("scroll");
+    }
+
+    public override void UpdatePosition(float position)
+    {
+        currentPosition = position;
+
+        if (animator.isActiveAndEnabled)
+        {
+            animator.Play(AnimatorHash.Scroll, -1, position);
+        }
+
+        animator.speed = 0;
+    }
+
+    void OnEnable() => UpdatePosition(currentPosition);
 }

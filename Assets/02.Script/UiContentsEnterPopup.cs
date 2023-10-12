@@ -300,7 +300,7 @@ public class UiContentsEnterPopup : SingletonMono<UiContentsEnterPopup>
                       enterButton.interactable = true;
                   });
 
-              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
+              PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {Utils.ConvertNum(rewardNumJade)}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!", null);
               SoundManager.Instance.PlaySound("GoldUse");
 
 

@@ -81,6 +81,7 @@ public static class CommonString
     public static string ItemGrade_13_Skill = "비전검";
     public static string ItemGrade_14_Skill = "섬광검";
     public static string ItemGrade_15_Skill = "심연검";
+    public static string ItemGrade_16_Skill = "신선검";
 
     public static string GoldItemName = "금화";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -323,6 +324,9 @@ public static class CommonString
             case Item_Type.costume162: return TableManager.Instance.Costume.dataArray[162].Name;
             case Item_Type.costume163: return TableManager.Instance.Costume.dataArray[163].Name;
             case Item_Type.costume164: return TableManager.Instance.Costume.dataArray[164].Name;
+            case Item_Type.costume165: return TableManager.Instance.Costume.dataArray[165].Name;
+            case Item_Type.costume166: return TableManager.Instance.Costume.dataArray[166].Name;
+            case Item_Type.costume167: return TableManager.Instance.Costume.dataArray[167].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -459,6 +463,11 @@ public static class CommonString
             case Item_Type.DarkSkill2: return "심연 기술3";
             case Item_Type.DarkSkill3: return "심연 기술4";
             case Item_Type.DarkSkill4: return "심연 기술5";
+            case Item_Type.SinsunSkill0: return "신선 기술1";
+            case Item_Type.SinsunSkill1: return "신선 기술2";
+            case Item_Type.SinsunSkill2: return "신선 기술3";
+            case Item_Type.SinsunSkill3: return "신선 기술4";
+            case Item_Type.SinsunSkill4: return "신선 기술5";
             //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
@@ -506,20 +515,24 @@ public static class CommonString
             case Item_Type.du: return "저승 명부";
             case Item_Type.Fw: return "분홍 꽃";
             case Item_Type.Cw: return "천계 꽃";
-            case Item_Type.Event_Collection: return "수박";//봄나물
-            case Item_Type.Event_Collection_All: return "수박 총 획득량";
+            case Item_Type.Event_Collection: return "황금 보리";//봄나물
+            case Item_Type.Event_Collection_All: return "황금 보리 총 획득량";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
-            case Item_Type.Event_Mission: return "밤송이";
-            case Item_Type.Event_Mission_All: return "밤송이 총 획득량";
-            case Item_Type.Event_Mission2: return "보름달";
-            case Item_Type.Event_Mission2_All: return "보름달 총 획득량";
+            case Item_Type.Event_Mission1: return "요괴 호박";
+            case Item_Type.Event_Mission1_All: return "요괴 호박 총 획득량";
+            case Item_Type.Event_Mission2: return "밤송이";
+            case Item_Type.Event_Mission2_All: return "밤송이 총 획득량";
+            case Item_Type.Event_Mission3: return "보름달";
+            case Item_Type.Event_Mission3_All: return "보름달 총 획득량";
             case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;
             case Item_Type.pet53: return TableManager.Instance.PetTable.dataArray[53].Name;
             case Item_Type.pet54: return TableManager.Instance.PetTable.dataArray[54].Name;
             case Item_Type.pet55: return TableManager.Instance.PetTable.dataArray[55].Name;
             case Item_Type.pet56: return TableManager.Instance.PetTable.dataArray[56].Name;
+            case Item_Type.pet57: return TableManager.Instance.PetTable.dataArray[57].Name;
+            case Item_Type.pet58: return TableManager.Instance.PetTable.dataArray[58].Name;
             case Item_Type.FoxMaskPartial: return "나무조각";
             case Item_Type.DokebiFire: return "도깨비불";
             case Item_Type.DokebiFireKey: return "도깨비불 소탕권";
@@ -563,6 +576,7 @@ public static class CommonString
             case Item_Type.ChunguRelic: return "천신의 보주";
             case Item_Type.FoxRelic: return "여우불씨";
             case Item_Type.FoxRelicClearTicket: return "여우불씨 소탕권";
+            case Item_Type.YoPowerGoods: return "요석";
             case Item_Type.TransClearTicket: return "초월석 소탕권";
             case Item_Type.Event_SA: return "2주년 도토리";
             case Item_Type.EventDice: return "이벤트 주사위";
@@ -776,6 +790,8 @@ public static class CommonString
                 return "심상베기 피해(%)";
             case StatusType.SuperCritical24DamPer:
                 return "용베기 피해(%)";
+            case StatusType.SuperCritical25DamPer:
+                return "요력 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:

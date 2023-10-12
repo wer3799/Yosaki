@@ -186,6 +186,12 @@ public class GoodsTable
     public static string DarkSkill3 = "DarkSkill3";
     public static string DarkSkill4 = "DarkSkill4";
 
+    public static string SinsunSkill0 = "SinsunSkill0";
+    public static string SinsunSkill1 = "SinsunSkill1";
+    public static string SinsunSkill2 = "SinsunSkill2";
+    public static string SinsunSkill3 = "SinsunSkill3";
+    public static string SinsunSkill4 = "SinsunSkill4";
+
     public static string Fw = "Fw";
     public const string Cw = "Cw"; //천계꽃
 
@@ -197,18 +203,20 @@ public class GoodsTable
     public static string c5 = "c5"; //천계꽃
     public static string c6 = "c6"; //천계꽃
 
-    public static string Event_Collection = "EC0"; //곶감 - > 봄나물로 대체 -> 수박 
-    public static string Event_Collection_All = "ECA0"; //봄나물 총 획득량
+    public static string Event_Kill1_Item = "EC0"; //곶감 - > 봄나물로 대체 -> 수박 ->보리ㅣ
+    public static string Event_Kill1_Item_All = "ECA0"; //봄나물 총 획득량
     public static string Event_HotTime = "Event_HotTime0"; //청사초롱
     public static string Event_HotTime_Saved = "EHS0"; //청사초롱 총획득량
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string Event_NewYear = "Event_NewYear"; //떡국
     public static string Event_NewYear_All = "Event_NewYear_All"; //신년재화 총생산량
     public static string Event_Mission_Refund = "Event_Mission1";//발리볼 //꽃송이 //바람개비.
-    public static string Event_Mission = "Event_Mission2";//추석
-    public static string Event_Mission_All = "Event_Mission_All2"; //추석
-    public static string Event_Mission2 = "Event_Mission3";//보름달
-    public static string Event_Mission2_All = "Event_Mission_All3"; //보름달생산량
+    public static string Event_Mission1 = "E1";//할로윈
+    public static string Event_Mission1_All = "E1_All"; //할로윈
+    public static string Event_Mission2 = "Event_Mission2";//추석
+    public static string Event_Mission2_All = "Event_Mission_All2"; //추석
+    public static string Event_Mission3 = "Event_Mission3";//보름달
+    public static string Event_Mission3_All = "Event_Mission_All3"; //보름달생산량
 
     public static string FoxMaskPartial = "FoxMaskPartial"; //여우 탈 재화
     public static string SusanoTreasure = "ST"; // 악귀퇴치 재화
@@ -238,6 +246,7 @@ public class GoodsTable
     public static string HyungsuRelic = "HyungsuRelic";
     public static string ChunguRelic = "ChunguRelic";
     public static string FoxRelic = "FR";
+    public static string YoPowerGoods = "YPG";
     public static string FoxRelicClearTicket = "FRCT";
     public static string TransClearTicket = "TCT";
     public static string MeditationGoods = "MG";
@@ -426,6 +435,12 @@ public class GoodsTable
         { DarkSkill3, 0f },
         { DarkSkill4, 0f },
 
+        { SinsunSkill0, 0f },
+        { SinsunSkill1, 0f },
+        { SinsunSkill2, 0f },
+        { SinsunSkill3, 0f },
+        { SinsunSkill4, 0f },
+
         { Fw, 0f },
         { Cw, 0f },
         //
@@ -438,17 +453,19 @@ public class GoodsTable
         { c5, 0f },
         { c6, 0f },
 
-        { Event_Collection, 0f },
+        { Event_Kill1_Item, 0f },
         { Event_HotTime, 0f },
         { Event_HotTime_Saved, 0f },
-        { Event_Collection_All, 0f },
+        { Event_Kill1_Item_All, 0f },
         { Event_Fall_Gold, 0f },
         { Event_NewYear, 0f },
         { Event_NewYear_All, 0f },
-        { Event_Mission, 0f },
-        { Event_Mission_All, 0f },
+        { Event_Mission1, 0f },
+        { Event_Mission1_All, 0f },
         { Event_Mission2, 0f },
         { Event_Mission2_All, 0f },
+        { Event_Mission3, 0f },
+        { Event_Mission3_All, 0f },
         { Event_Mission_Refund, 0f },
         { FoxMaskPartial, 0f },
 
@@ -476,6 +493,7 @@ public class GoodsTable
         { HyungsuRelic, 0f },
         { ChunguRelic, 0f },
         { FoxRelic, 0f },
+        { YoPowerGoods, 0f },
         { FoxRelicClearTicket, 0f },
         { TransClearTicket, 0f },
         { MeditationGoods, 0f },
@@ -725,6 +743,21 @@ public class GoodsTable
             dokebiItemAddNum -= (int)dokebiItemAddNum;
         }
     }
+    static float yoPowerItemAddNum = 0;
+    public void GetYoPowerItem(float amount)
+    {
+        yoPowerItemAddNum += amount;
+
+        //1개 획득할때마다 얻게하기 위해서
+        if (yoPowerItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Yokaiessence, 1))
+        {
+        }
+        else
+        {
+            tableDatas[YoPowerGoods].Value += (int)yoPowerItemAddNum;
+            yoPowerItemAddNum -= (int)yoPowerItemAddNum;
+        }
+    }
     //
 
     public int GetFourSkillHasCount()
@@ -790,15 +823,15 @@ public class GoodsTable
         else
         {
             //tableDatas[Event_Item_1].Value += eventItemAddNum_Spring;
-            tableDatas[Event_Collection].Value += eventItemAddNum_Spring;
+            tableDatas[Event_Kill1_Item].Value += eventItemAddNum_Spring;
             //총획득량
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
             {
-                tableDatas[Event_Collection_All].Value += eventItemAddNum_Spring;
+                tableDatas[Event_Kill1_Item_All].Value += eventItemAddNum_Spring;
             }
             else
             {
-                tableDatas[Event_Collection].Value += eventItemAddNum_Spring;
+                tableDatas[Event_Kill1_Item].Value += eventItemAddNum_Spring;
             }
 
             eventItemAddNum_Spring = 0;
@@ -1119,10 +1152,10 @@ public class GoodsTable
 
         if (ServerData.userInfoTable.CanSpawnSpringEventItem())
         {
-            goodsParam.Add(GoodsTable.Event_Collection, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value);
+            goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
             {
-                goodsParam.Add(GoodsTable.Event_Collection_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value);
+                goodsParam.Add(GoodsTable.Event_Kill1_Item_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value);
             }
         }
 
@@ -1564,6 +1597,33 @@ public class GoodsTable
             }
 
             //
+            //            //
+            case Item_Type.SinsunSkill0:
+            {
+                return GoodsTable.SinsunSkill0;
+            }
+
+            case Item_Type.SinsunSkill1:
+            {
+                return GoodsTable.SinsunSkill1;
+            }
+
+            case Item_Type.SinsunSkill2:
+            {
+                return GoodsTable.SinsunSkill2;
+            }
+
+            case Item_Type.SinsunSkill3:
+            {
+                return GoodsTable.SinsunSkill3;
+            }
+
+            case Item_Type.SinsunSkill4:
+            {
+                return GoodsTable.SinsunSkill4;
+            }
+
+            //
             case Item_Type.GangrimSkill:
             {
                 return GoodsTable.GangrimSkill;
@@ -1668,6 +1728,11 @@ public class GoodsTable
                 return GoodsTable.FoxRelic;
             }
 
+            case Item_Type.YoPowerGoods:
+            {
+                return GoodsTable.YoPowerGoods;
+            }
+
             case Item_Type.FoxRelicClearTicket:
             {
                 return GoodsTable.FoxRelicClearTicket;
@@ -1712,17 +1777,25 @@ public class GoodsTable
             {
                 return GoodsTable.DokebiBundle;
             }
-            case Item_Type.Event_Mission:
+            case Item_Type.Event_Mission1:
             {
-                return GoodsTable.Event_Mission;
+                return GoodsTable.Event_Mission1;
             }
-            case Item_Type.Event_Mission_All:
+            case Item_Type.Event_Mission1_All:
             {
-                return GoodsTable.Event_Mission_All;
+                return GoodsTable.Event_Mission1_All;
             }
             case Item_Type.Event_Mission2:
             {
                 return GoodsTable.Event_Mission2;
+            }
+            case Item_Type.Event_Mission2_All:
+            {
+                return GoodsTable.Event_Mission2_All;
+            }
+            case Item_Type.Event_Mission3:
+            {
+                return GoodsTable.Event_Mission3;
             }
 
             case Item_Type.DokebiFireKey:
@@ -1736,7 +1809,7 @@ public class GoodsTable
             }
             case Item_Type.Event_Collection:
             {
-                return GoodsTable.Event_Collection;
+                return GoodsTable.Event_Kill1_Item;
             }
             case Item_Type.Event_HotTime:
             {
@@ -1744,7 +1817,7 @@ public class GoodsTable
             }
             case Item_Type.Event_Collection_All:
             {
-                return GoodsTable.Event_Collection_All;
+                return GoodsTable.Event_Kill1_Item_All;
             }
             case Item_Type.Event_Fall_Gold:
             {
@@ -2249,6 +2322,32 @@ public class GoodsTable
         }
 
         //
+        // //
+        else if (GoodsTable.SinsunSkill0 == type)
+        {
+            return Item_Type.SinsunSkill0;
+        }
+
+        else if (GoodsTable.SinsunSkill1 == type)
+        {
+            return Item_Type.SinsunSkill1;
+        }
+
+        else if (GoodsTable.SinsunSkill2 == type)
+        {
+            return Item_Type.SinsunSkill2;
+        }
+
+        else if (GoodsTable.SinsunSkill3 == type)
+        {
+            return Item_Type.SinsunSkill3;
+        }
+        else if (GoodsTable.SinsunSkill4 == type)
+        {
+            return Item_Type.SinsunSkill4;
+        }
+
+        //
         else if (GoodsTable.GangrimSkill == type)
         {
             return Item_Type.GangrimSkill;
@@ -2369,6 +2468,10 @@ public class GoodsTable
         {
             return Item_Type.FoxRelic;
         }
+        else if (GoodsTable.YoPowerGoods == type)
+        {
+            return Item_Type.YoPowerGoods;
+        }
         else if (GoodsTable.TransGoods == type)
         {
             return Item_Type.TransGoods;
@@ -2415,14 +2518,19 @@ public class GoodsTable
         {
             return Item_Type.DokebiBundle;
         }
-        else if (GoodsTable.Event_Mission == type)
+        else if (GoodsTable.Event_Mission1 == type)
         {
-            return Item_Type.Event_Mission;
+            return Item_Type.Event_Mission1;
         }
 
         else if (GoodsTable.Event_Mission2 == type)
         {
             return Item_Type.Event_Mission2;
+        }
+
+        else if (GoodsTable.Event_Mission3 == type)
+        {
+            return Item_Type.Event_Mission3;
         }
 
         else if (GoodsTable.DokebiFireKey == type)
@@ -2434,7 +2542,7 @@ public class GoodsTable
         {
             return Item_Type.SumiFireKey;
         }
-        else if (GoodsTable.Event_Collection == type)
+        else if (GoodsTable.Event_Kill1_Item == type)
         {
             return Item_Type.Event_Collection;
         }
@@ -2442,7 +2550,7 @@ public class GoodsTable
         {
             return Item_Type.Event_HotTime;
         }
-        else if (GoodsTable.Event_Collection_All == type)
+        else if (GoodsTable.Event_Kill1_Item_All == type)
         {
             return Item_Type.Event_Collection_All;
         }

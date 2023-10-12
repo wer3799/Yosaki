@@ -198,7 +198,7 @@ public class UiTransTowerBoard : MonoBehaviour
                 successCallBack: () =>
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.TransGoods)} {instanClearGetNum}개 획득!", null);
+                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.TransGoods)} {Utils.ConvertNum(instanClearGetNum)}개 획득!", null);
                 });
         }, null);
      }

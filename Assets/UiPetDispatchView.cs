@@ -249,6 +249,12 @@ public class UiPetDispatchView : MonoBehaviour
             skeletonGraphic.transform.localScale = new Vector3(scale, scale, 1f);
             skeletonGraphic.transform.localPosition = new Vector3(-8f, -147.6f, 1f);
         }
+        else if (idx >= 57 && idx <= 58)
+        {
+            var scale = 2f;
+            skeletonGraphic.transform.localScale = new Vector3(scale, scale, 1f);
+            skeletonGraphic.transform.localPosition = new Vector3(-8f, -214.19f, 1f);
+        }
     }
 
 }

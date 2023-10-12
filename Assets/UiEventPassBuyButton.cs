@@ -13,7 +13,7 @@ public class UiEventPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string productKey = "vacationpass";
+    public static readonly string productKey = "halloweenpass";
 
     private Button buyButton;
 
@@ -36,14 +36,14 @@ public class UiEventPassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).AsObservable().Subscribe(e =>
         {
-            GetEventItemCount.SetText($"구매시 즉시 추가획득 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value} 개");
+            GetEventItemCount.SetText($"구매시 즉시 추가획득 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).Value} 개");
         }).AddTo(disposable);
 
         ServerData.iapServerTable.TableDatas[productKey].buyCount.AsObservable().Subscribe(e =>
         {
-            descText.SetText(e >= 1 ? "구매완료" : $"{CommonString.GetItemName(Item_Type.Event_Mission)} 패스 구매");
+            descText.SetText(e >= 1 ? "구매완료" : $"{CommonString.GetItemName(Item_Type.Event_Mission1)} 패스 구매");
             if (e >= 1)
             {
                 GetEventItemCount.SetText(""); 
@@ -103,15 +103,16 @@ public class UiEventPassBuyButton : MonoBehaviour
 
         if (tableData.Productid != productKey) return;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!\n {CommonString.GetItemName(Item_Type.Event_Mission)} {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value}개 획득!", null);
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!\n {CommonString.GetItemName(Item_Type.Event_Mission1)} {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).Value}개 획득!", null);
 
         //소급적용
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).Value;
 
-        ServerData.goodsTable.UpData(GoodsTable.Event_Mission, false);
+        ServerData.goodsTable.UpDataV2(GoodsTable.Event_Mission1, false);
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 
         ServerData.iapServerTable.UpData(tableData.Productid);
+        
     }
 }

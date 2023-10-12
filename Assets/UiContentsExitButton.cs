@@ -90,6 +90,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.TransTower:
                         return false;
+                    case GameManager.ContentsType.DragonTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.DragonTowerIdx).Value <
+                                                                      (TableManager.Instance.DragonTowerTable.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.DragonTower:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)

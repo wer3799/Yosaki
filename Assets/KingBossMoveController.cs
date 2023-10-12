@@ -149,7 +149,7 @@ public class KingBossMoveController : MonoBehaviour
                 initialized = true;
             }
         }
-        else if (_bossId == 158||_bossId == 159||_bossId == 160||_bossId == 161)
+        else if (_bossId == 158||_bossId == 159||_bossId == 160||_bossId == 161||_bossId == 186)
         {
             MoveToPlayerVer2();
         }

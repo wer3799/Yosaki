@@ -77,7 +77,7 @@ public class UiEventMission2Cell : MonoBehaviour
                 lockMask.SetActive(false);
             }
         }).AddTo(this);
-        ServerData.iapServerTable.TableDatas[UiEventPassBuyButton.productKey].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.AsObservable().Subscribe(e =>
         {
             if (tableData != null)
             {
@@ -116,19 +116,12 @@ public class UiEventMission2Cell : MonoBehaviour
         }
 
         int passBonus = 0;
-        if (ServerData.iapServerTable.TableDatas[UiEventPassBuyButton.productKey].buyCount.Value > 0)
+        if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
         {
             passBonus = tableData.Rewardvalue;
         }
 
         rewardNum.SetText($"{Mathf.Max(getAmountFactor,1) * tableData.Rewardvalue +passBonus  }개");
-        //if (getButton.interactable)
-        //{
-        //    if (!lockMask.activeSelf)
-        //    {
-        //        this.transform.SetAsFirstSibling();
-        //    }
-        //}
     }
 
     private Coroutine SyncRoutine;
@@ -141,21 +134,21 @@ public class UiEventMission2Cell : MonoBehaviour
         int amountFactor = getAmountFactor;
         int rewardGemNum = tableData.Rewardvalue * amountFactor;
 
-        if(ServerData.iapServerTable.TableDatas[UiEventPassBuyButton.productKey].buyCount.Value>0)
+        if(ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value>0)
         {
             rewardGemNum *= 2;
         }
         else
         {
-            ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission_All, rewardGemNum);
+            ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission2_All, rewardGemNum);
         }
         //로컬 갱신
         EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
         EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), amountFactor);
         
-        ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission, rewardGemNum);
+        ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission2, rewardGemNum);
 
-        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission)} {rewardGemNum}개 획득!!");
+        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission2)} {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
 
         if (SyncRoutine != null)
@@ -180,10 +173,10 @@ public class UiEventMission2Cell : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Event_Mission, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value);
-        if (ServerData.iapServerTable.TableDatas[UiEventPassBuyButton.productKey].buyCount.Value == 0)
+        goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+        if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value == 0)
         {
-            goodsParam.Add(GoodsTable.Event_Mission_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value);
+            goodsParam.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
         }
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

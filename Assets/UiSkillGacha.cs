@@ -226,9 +226,12 @@ public class UiSkillGacha : MonoBehaviour
             ServerData.skillServerTable.UpdateSkillAmountLocal(this.skillTableDatas[randomIdx], cellInfo.amount);
         }
 
-        SyncServer();
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
 
-        DailyMissionManager.UpdateDailyMission(DailyMissionKey.GachaSkillBook, amount);
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
 
         UiGachaResultView.Instance.Initialize(gachaResultCellInfos, () =>
         {
@@ -238,6 +241,14 @@ public class UiSkillGacha : MonoBehaviour
         SoundManager.Instance.PlaySound("Reward");
     }
 
+    private Coroutine syncRoutine;
+
+    private WaitForSeconds syncDelay = new WaitForSeconds(0.4f);
+    public IEnumerator SyncRoutine()
+    {
+        yield return syncDelay;
+        SyncServer();
+    }
     private void SyncServer()
     {
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -271,6 +282,6 @@ public class UiSkillGacha : MonoBehaviour
         //스킬
         transactionList.Add(TransactionValue.SetUpdate(SkillServerTable.tableName, SkillServerTable.Indate, skillParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransactionV2(transactionList);
     }
 }

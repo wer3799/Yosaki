@@ -213,7 +213,7 @@ public class UserInfoTable
     public const string collectionEventInitialize = "cei0";
     public const string trainingEventInitialize0 = "tei0";
     
-    public const string exchangeCount = "ec_0";
+    public const string exchangeCount_0 = "ec_0";
     public const string exchangeCount_1 = "ec_1";
     public const string exchangeCount_2 = "ec_2";
     public const string exchangeCount_3 = "ec_3";
@@ -564,7 +564,7 @@ public class UserInfoTable
         { sendPetExp, 0 },
         { collectionEventInitialize, 0 },
         { trainingEventInitialize0, 0 },
-        { exchangeCount, 0 },
+        { exchangeCount_0, 0 },
         { exchangeCount_1, 0 },
         { exchangeCount_2, 0 },
         { exchangeCount_3, 0 },
@@ -775,8 +775,8 @@ public class UserInfoTable
                         }
                         else if(e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 17);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(17));
+                            defultValues.Add(e.Current.Key, 21);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(21));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1018,8 +1018,10 @@ public class UserInfoTable
 
                             return;
                         }
+                        
                     }
                 }
+                ElapsedTimeManager.Instance.Reset();
 
                 //week check
                 int currentWeek = Utils.GetWeekNumber(currentServerTime);
@@ -1085,6 +1087,7 @@ public class UserInfoTable
             if(table[i].EVENTMISSIONTYPE == EventMissionType.FIRST) continue;
             if(table[i].EVENTMISSIONTYPE == EventMissionType.AFIRST) continue;
             if(table[i].EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE) continue;
+            if(table[i].EVENTMISSIONTYPE == EventMissionType.THIRD) continue;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].clearCount.Value = 0;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].rewardCount.Value = 0;
 
@@ -1350,9 +1353,9 @@ public class UserInfoTable
             }
             
             //바캉스 이벤트 출석
-            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttendCount).Value != 0)
+            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value != 0)
             {
-                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttendCount).Value++;
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value++;
             }
             //보름달 이벤트 출석
             if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttend2Count).Value != 0)
@@ -1453,7 +1456,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.yomul6_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul6_buff).Value);
         userInfoParam.Add(UserInfoTable.yomul7_buff, ServerData.userInfoTable.GetTableData(UserInfoTable.yomul7_buff).Value);
         
-        userInfo2Param.Add(UserInfoTable_2.commonAttendCount,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.commonAttendCount].Value);
+        userInfo2Param.Add(UserInfoTable_2.eventMission1AttendCount,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventMission1AttendCount].Value);
         userInfo2Param.Add(UserInfoTable_2.commonAttend2Count,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.commonAttend2Count].Value);
         userInfo2Param.Add(UserInfoTable_2.eventAttendCount,ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventAttendCount].Value);
         
@@ -1750,11 +1753,11 @@ public class UserInfoTable
 
         return currentServerTime <= targetDate.AddDays(1);
     }
-
-    //8월31일까지
+    
+    //보리 이벤트 12월5일까지
     public bool CanSpawnSpringEventItem()
     {
-        DateTime targetDate = new DateTime(2023, 8, 31);
+        DateTime targetDate = new DateTime(2023, 12, 5);
 
         return currentServerTime <= targetDate.AddDays(1);
     }
@@ -1958,6 +1961,11 @@ public class UserInfoTable
     public bool IsEventPassPeriod()
     {
         return (currentServerTime.Month <= 7 && currentServerTime.Day <= 30);
+    }
+    // 가을훈련
+    public bool IsEventPass2Period()
+    {
+        return (currentServerTime.Year <= 2023 && currentServerTime.Month <= 11 && currentServerTime.Day <= 15);
     }
 
     public ReactiveProperty<bool> SnowCollectionComplete = new ReactiveProperty<bool>(false);

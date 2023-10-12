@@ -17,7 +17,7 @@ public class UiEventMission2Board : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value += 100;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value += 100;
         }
 
     }

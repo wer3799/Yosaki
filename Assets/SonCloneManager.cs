@@ -31,7 +31,7 @@ public class SonCloneManager : SingletonMono<SonCloneManager>
     [SerializeField]
     private Animator remainTextAnim;
 
-    private ObscuredInt enemyMaxCount = 100;
+    private ObscuredInt enemyMaxCount = 200;
 
     [SerializeField]
     private TextMeshProUGUI endText;

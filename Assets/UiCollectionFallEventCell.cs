@@ -205,7 +205,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
         }
 
 
-        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value;
+        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value;
 
         if (currentEventItemNum < tableData.Price)
         {
@@ -216,7 +216,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
         PopupManager.Instance.ShowAlarmMessage("교환 완료");
 
         //로컬
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value -= tableData.Price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value -= tableData.Price;
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value += tableData.Price;
 
 
@@ -322,7 +322,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Event_Collection, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value);
+            goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
 
             goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
 
@@ -337,7 +337,7 @@ public class UiCollectionFallEventCell : MonoBehaviour
             Param goodsParam = new Param();
 
 
-            goodsParam.Add(GoodsTable.Event_Collection, ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value);
+            goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
 
             goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
 

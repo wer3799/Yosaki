@@ -138,7 +138,7 @@ public class UiGuimoonInstantClearPopup : MonoBehaviour
                     successCallBack: () =>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.GuimoonRelic)} {instanClearGetNum}개 획득!", null);
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.GuimoonRelic)} {Utils.ConvertNum(instanClearGetNum)}개 획득!", null);
 
                         //남은재화(소탕권) / 사용한재화(소탕권) / 획득한 재화갯수
                         LogManager.Instance.SendLogType("Guimoon", "Clear", $"{ServerData.goodsTable.TableDatas[GoodsTable.GuimoonRelicClearTicket].Value}#{inputNum}#{instanClearGetNum}");

@@ -9,12 +9,12 @@ using UnityEngine.Serialization;
 
 public class UiEventMission3 : MonoBehaviour
 {
-    [SerializeField]
-    private UiEventMission3Cell missionCell;
+    [FormerlySerializedAs("missionCell")] [SerializeField]
+    private UiEventMission3Cell mission3Cell;
     [SerializeField]
     private Transform cellParent;
-    [SerializeField]
-    private UiEventMission3Cell missionCell2;
+    [FormerlySerializedAs("missionCell2")] [SerializeField]
+    private UiEventMission3Cell mission3Cell2;
     [SerializeField]
     private Transform cellParent2;
 
@@ -22,61 +22,65 @@ public class UiEventMission3 : MonoBehaviour
 
     private void OnEnable()
     {
+
+        
+        
+        
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION5].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }    
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION6].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        } 
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION1].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION1].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiNewEnterCount).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION2].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.dailySleepRewardReceiveCount).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION3].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION4].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION5].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION6].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION7].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION8].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION5].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }    
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION6].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         } 
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION1].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION1].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiNewEnterCount).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION2].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.dailySleepRewardReceiveCount).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION3].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION4].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION5].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION6].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION7].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value > 0)
+         {
+             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.BMISSION8].Stringid;
+             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+         }
     }
 
 
@@ -86,12 +90,13 @@ public class UiEventMission3 : MonoBehaviour
     }
     private void Initialize()
     {
+        
         var tableData = TableManager.Instance.EventMission.dataArray;
 
         for (int i = 0; i < tableData.Length; i++)
         {
             if (tableData[i].EVENTMISSIONTYPE != EventMissionType.AFIRST) continue;
-            var cell = Instantiate<UiEventMission3Cell>(missionCell, cellParent2);
+            var cell = Instantiate<UiEventMission3Cell>(mission3Cell, cellParent2);
 
             cell.Initialize(tableData[i]);
 
@@ -100,7 +105,7 @@ public class UiEventMission3 : MonoBehaviour
         for (int i = 0; i < tableData.Length; i++)
         {
             if (tableData[i].EVENTMISSIONTYPE != EventMissionType.BSECOND) continue;
-            var cell = Instantiate<UiEventMission3Cell>(missionCell2, cellParent);
+            var cell = Instantiate<UiEventMission3Cell>(mission3Cell2, cellParent);
 
             cell.Initialize(tableData[i]);
 
@@ -147,7 +152,7 @@ public class UiEventMission3 : MonoBehaviour
             {
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Rewardtype, tableData[i].Rewardvalue);
                 //삿을떄 보너스 추가
-                ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission2_All, tableData[i].Rewardvalue);
+                ServerData.goodsTable.AddLocalData(GoodsTable.Event_Mission3_All, tableData[i].Rewardvalue);
             }
 
             if (rewardTypeList.Contains(tableData[i].Rewardtype) == false)
@@ -172,7 +177,7 @@ public class UiEventMission3 : MonoBehaviour
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
             }
-            goodsParam.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);;
+            goodsParam.Add(GoodsTable.Event_Mission3_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value);;
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         

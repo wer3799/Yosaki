@@ -101,6 +101,12 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
                     pet0.gameObject.transform.localScale = new Vector3(scale,scale,1f);
                     pet0.gameObject.transform.localPosition = new Vector3(2.5f,-13,1f);
                 }
+                else if (pet0Type == Item_Type.pet57)
+                {
+                    var scale = 1f;
+                    pet0.gameObject.transform.localScale = new Vector3(scale,scale,1f);
+                    pet0.gameObject.transform.localPosition = new Vector3(2.5f,-72f,1f);
+                }
                 pet1.Clear();
                 pet1.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[petIdx2];
                 pet1.Initialize(true);
@@ -116,6 +122,12 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
                     var scale = 1f;
                     pet1.gameObject.transform.localScale = new Vector3(scale,scale,1f);
                     pet1.gameObject.transform.localPosition = new Vector3(0f,-180.4f,1f);
+                }
+                else if (pet1Type == Item_Type.pet58)
+                {
+                    var scale = 1f;
+                    pet1.gameObject.transform.localScale = new Vector3(scale,scale,1f);
+                    pet1.gameObject.transform.localPosition = new Vector3(0f,-211.4f,1f);
                 }
 
 

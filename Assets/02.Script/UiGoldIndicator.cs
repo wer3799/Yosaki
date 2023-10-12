@@ -18,7 +18,7 @@ public class UiGoldIndicator : MonoBehaviour
     {
         ServerData.goodsTable.GetTableData(GoodsTable.Gold).AsObservable().Subscribe(gold =>
         {
-            goldText.SetText($"{Utils.ConvertBigNum(gold)}");
+            goldText.SetText($"{Utils.ConvertBigNum((double)gold)}");
         }).AddTo(this);
     }
 

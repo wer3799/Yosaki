@@ -27,7 +27,7 @@ public class UiFullMoonMissionRefund : MonoBehaviour
 
 
         int totalExchangeCount = 0;
-        int remainMoonHasCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value;
+        int remainMoonHasCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value;
 
         var rewardTableData = TableManager.Instance.xMasCollection.dataArray;
 
@@ -69,7 +69,7 @@ public class UiFullMoonMissionRefund : MonoBehaviour
         if (minusUser)
         {
             //재화차감
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value -= retakeCount;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value -= retakeCount;
 
             //미션 클리어처리
             ServerData.eventMissionTable.TableDatas["AMission3"].clearCount.Value = 0;
@@ -112,7 +112,7 @@ public class UiFullMoonMissionRefund : MonoBehaviour
         eventMissionParam.Add("AMission1", ServerData.eventMissionTable.TableDatas["AMission1"].ConvertToString());
         eventMissionParam.Add("AMission2", ServerData.eventMissionTable.TableDatas["AMission2"].ConvertToString());
 
-        goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+        goodsParam.Add(GoodsTable.Event_Mission3, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value);
         userInfo2Param.Add(UserInfoTable_2.fullMoonRefund, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.fullMoonRefund].Value);
 
 

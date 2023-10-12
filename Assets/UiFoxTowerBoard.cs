@@ -207,7 +207,7 @@ public class UiFoxTowerBoard : MonoBehaviour
                 successCallBack: () =>
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum+ (instanClearGetNum * PlayerStats.GetFoxRelicGainValue())}개 획득!", null);
+                        $"소탕 완료!\n{CommonString.GetItemName(Item_Type.FoxRelic)} {Utils.ConvertNum(instanClearGetNum+ (instanClearGetNum * PlayerStats.GetFoxRelicGainValue()))}개 획득!", null);
                 });
         }, null);
      }

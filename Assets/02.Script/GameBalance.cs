@@ -288,6 +288,7 @@ public static class GameBalance
     public readonly static ObscuredInt DokebiKeyUseCount = 5;
     public readonly static ObscuredInt StageRelicUnlockLevel = 3000;
     public readonly static ObscuredInt GuimoonUnlockLevel = 1000;
+    public readonly static ObscuredInt YoPowerUnlockStage = 17998;
     public readonly static ObscuredFloat StageRelicUpgradePrice = 1000;
     public readonly static ObscuredFloat GuimoonRelicUpgradePrice = 1000;
 
@@ -490,8 +491,8 @@ public static class GameBalance
     public static ObscuredInt refundCriDamGoldBarRatio = 4000;//크리티컬데미지환불 
     public static ObscuredInt criticalGraduateValue = 7500;//각성시 크리티컬레벨
     public static ObscuredInt attackGraduateValue = 50000;//각성시 공격력
-    public static ObscuredInt criticalGraduateRefundStandard = 6950;//각성시 크리티컬 환불기준레벨
-    public static ObscuredInt goldGraduateScore = 65950;// 금화능력치총합레벨조건
+    public static ObscuredInt criticalGraduateRefundStandard = 6850;//각성시 크리티컬 환불기준레벨
+    public static ObscuredInt goldGraduateScore = 65850;// 금화능력치총합레벨조건
     public static ObscuredInt hellRelicGraduateScore = 4000;// 지옥영숲각성컷
     public static ObscuredInt hellRelicGraduateValue = 100000;// 지옥영숲각성시레벨
     

@@ -572,6 +572,10 @@ public enum Item_Type
     costume162 = 1462, // 용인보스     
     costume163 = 1463, // 용인보스     
     costume164 = 1464, // 용인보스     
+    
+    costume165 = 1465, // 용인보스     
+    costume166 = 1466, // 용인보스     
+    costume167 = 1467, // 이벤트
 
 
     gumiho0 = 5000,
@@ -826,10 +830,12 @@ public enum Item_Type
     HyunSangWeapon10 = 7260,
     HyunSangWeapon11 = 7261,
     DragonWeapon0 = 7262,
+    DragonWeapon1 = 7263,
     
     HyunSangNorigae10 = 7280,
     HyunSangNorigae11 = 7281,
     DragonNorigae0 = 7282,
+    DragonNorigae1 = 7283,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -849,6 +855,8 @@ public enum Item_Type
     pet54 = 7702, //패스펫
     pet55 = 7703, //패스펫
     pet56 = 7704, //패스펫
+    pet57 = 7705, //패스펫
+    pet58 = 7706, //패스펫
 
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
@@ -948,16 +956,25 @@ public enum Item_Type
     VisionSkill12 = 8754,//비전
     VisionSkill13 = 8755,//비전
 
+    SinsunSkill0 = 8756, //신선스킬
+    SinsunSkill1 = 8757, 
+    SinsunSkill2 = 8758, 
+    SinsunSkill3 = 8759,
+    SinsunSkill4 = 8760,
+    
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량
     
-    Event_Mission = 8802,//서핑보드
-    Event_Mission_All = 8803, // 총 습득량
+    Event_Mission2 = 8802,//미션2 - 추석
+    Event_Mission2_All = 8803, 
     Event_Collection_All =8804,//봄나물 총습득량
     Event_Item_SnowMan_All=8805,
 
-    Event_Mission2 = 8806,//보름달
-    Event_Mission2_All = 8807, // 총 습득량
+    Event_Mission3 = 8806,//미션 3- 보름달
+    Event_Mission3_All = 8807, // 총 습득량
+    
+    Event_Mission1 = 8808,//미션 1 - 할로윈
+    Event_Mission1_All = 8809, 
     
     Mileage = 9000,
     DokebiFire = 9001,
@@ -1008,6 +1025,7 @@ public enum Item_Type
     DaesanGoods = 9045,
     HonorGoods = 9046,
     DragonScale = 9047,
+    YoPowerGoods = 9048,
 }
 //
 public class DropItem : PoolItem

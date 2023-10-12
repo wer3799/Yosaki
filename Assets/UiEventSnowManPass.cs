@@ -19,13 +19,6 @@ public class SnowPassData_Fancy
 }
 public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 {
-    [SerializeField]
-    private UiSnowManPassCell uiPassCellPrefab;
-
-    [SerializeField]
-    private Transform cellParent;
-
-    private List<UiSnowManPassCell> uiPassCellContainer = new List<UiSnowManPassCell>();
 
     private ObscuredString passShopId;
     [SerializeField] private UiRewardResultView _uiRewardResultView;
@@ -40,50 +33,6 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
     }
 #endif
 
-    // private void Start()
-    // {
-    //     Initialize();
-    // }
-    private void Initialize()
-    {
-        var tableData = TableManager.Instance.snowManAtten.dataArray;
-
-        int interval = tableData.Length - uiPassCellContainer.Count;
-
-        for (int i = 0; i < interval; i++)
-        {
-            var prefab = Instantiate<UiSnowManPassCell>(uiPassCellPrefab, cellParent);
-            uiPassCellContainer.Add(prefab);
-        }
-
-        for (int i = 0; i < uiPassCellContainer.Count; i++)
-        {
-            if (i < tableData.Length)
-            {
-                var passInfo = new PassInfo();
-
-                passInfo.require = tableData[i].Unlockamount;
-                passInfo.id = tableData[i].Id;
-
-                passInfo.rewardType_Free = tableData[i].Reward1;
-                passInfo.rewardTypeValue_Free = tableData[i].Reward1_Value;
-                passInfo.rewardType_Free_Key = OneYearPassServerTable.childFree_Snow;
-
-                passInfo.rewardType_IAP = tableData[i].Reward2;
-                passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
-                passInfo.rewardType_IAP_Key = OneYearPassServerTable.childAd_Snow;
-
-                uiPassCellContainer[i].gameObject.SetActive(true);
-                uiPassCellContainer[i].Initialize(passInfo);
-            }
-            else
-            {
-                uiPassCellContainer[i].gameObject.SetActive(false);
-            }
-        }
-
-        // cellParent.transform.localPosition = new Vector3(0f, cellParent.transform.localPosition.y, cellParent.transform.localPosition.z);
-    }
 
 
     public void OnClickAllReceiveButton()

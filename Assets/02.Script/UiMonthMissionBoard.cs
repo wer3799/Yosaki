@@ -38,16 +38,6 @@ public class UiMonthMissionBoard : MonoBehaviour
         Initialize();
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value += 100;
-        }
-
-    }
-#endif
 
     private void Initialize()
     {
@@ -106,7 +96,6 @@ public class UiMonthMissionBoard : MonoBehaviour
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
             }
-            goodsParam.Add(GoodsTable.Event_Mission_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission_All).Value);;
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         

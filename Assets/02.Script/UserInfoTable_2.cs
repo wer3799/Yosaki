@@ -36,7 +36,7 @@ public class UserInfoTable_2
     //홓수 월간훈련(Monthlypass2)
     public const string oddMonthKillCount = "odd0";
 
-    public const string commonAttendCount = "cac0";
+    public const string eventMission1AttendCount = "cac0";
     public const string commonAttend2Count = "cac1";
     public const string yorinAttendRewarded = "yar";
     public const string eventAttendRewarded = "sar";
@@ -49,6 +49,7 @@ public class UserInfoTable_2
     public const string taeguekTower = "tgtw";
     public const string taeguekLock = "tgll";
     public const string SansinTowerIdx = "sst";
+    public const string DragonTowerIdx = "dti";
     public const string KingTrialGraduateIdx = "ktgi";
     public const string GodTrialGraduateIdx = "gtgi";
     public const string darkScore = "ds";
@@ -75,6 +76,7 @@ public class UserInfoTable_2
     public const string meditationIndex = "msi"; // 명상 단계
     public const string meditationTowerRewardIndex = "msti"; //명상 타워 보상 단계
     public const string meditationTowerScore = "msts"; // 명상 타워 점수
+    public const string yoPowerIdx = "ypi"; // 요력개방
     
     public const string petDispatchStartTime = "pdst";
 
@@ -121,7 +123,7 @@ public class UserInfoTable_2
         { stagePassFree, -1f },
         { stagePassAd, -1f },
         { killCountTotalSeason0, 0f },
-        { commonAttendCount, 0f },
+        { eventMission1AttendCount, 0f },
         { commonAttend2Count, 0f },
         { yorinAttendRewarded, 0f },
         { eventAttendRewarded, 0f },
@@ -147,6 +149,7 @@ public class UserInfoTable_2
         { taeguekTower, 0f },
         { taeguekLock, 0f },
         { SansinTowerIdx, 0f },
+        { DragonTowerIdx, 0f },
         { KingTrialGraduateIdx, 0f },
         { GodTrialGraduateIdx, 0f },
         { darkScore, 0f },
@@ -172,6 +175,7 @@ public class UserInfoTable_2
         { usedGuimoonRelicTicket, 0f },
         { getRelicUpgrade, 0f },
         { petDispatchStartTime, -1f },
+        { yoPowerIdx, -1f },
 
         { transTowerIdx, 0f },
         { transTowerStart, 0f },

@@ -220,7 +220,7 @@ public class UiMeditationTowerBoard : MonoBehaviour
                     successCallBack: () =>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {instantClearGetNum+(PlayerStats.GetMeditationGainValue()*instantClearGetNum)}개 획득!", null);
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {Utils.ConvertNum(instantClearGetNum+(PlayerStats.GetMeditationGainValue()*instantClearGetNum))}개 획득!", null);
                     });
             }, null);
     }

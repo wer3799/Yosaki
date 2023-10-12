@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public class UiHotTimeBoard : SingletonMono<UiMileageBoard>
 {
     [SerializeField]
-    private UiEventMissionShopCell cell;
+    private UiHotTimeShopCell cell;
 
     [SerializeField]
     private Transform parents;
@@ -29,7 +29,7 @@ public class UiHotTimeBoard : SingletonMono<UiMileageBoard>
             if (tableDatas[i].Active == false) continue;
             if (tableDatas[i].COMMONTABLEEVENTTYPE != CommonTableEventType.HotTime) continue;
             //프리미엄
-            var button = Instantiate<UiEventMissionShopCell>(cell, parents);
+            var button = Instantiate<UiHotTimeShopCell>(cell, parents);
             button.Initialize(i);
         }
     }

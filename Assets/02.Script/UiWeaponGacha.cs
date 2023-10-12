@@ -228,10 +228,14 @@ public class UiWeaponGacha : MonoBehaviour
             serverUpdateList.Add(weaponDatas[randomIdx].Id);
         }
 
-        SyncServer(serverUpdateList, price, serverUpdateList.Count);
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
 
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine(serverUpdateList, price, serverUpdateList.Count));
+        
         DailyMissionManager.UpdateDailyMission(DailyMissionKey.GachaWeapon, amount);
-
 
         UiGachaResultView.Instance.Initialize(gachaResultCellInfos, () =>
         {
@@ -245,6 +249,14 @@ public class UiWeaponGacha : MonoBehaviour
         //  UiTutorialManager.Instance.SetClear(TutorialStep._10_GetWeaponInShop);
     }
 
+    private Coroutine syncRoutine;
+
+    private WaitForSeconds syncDelay = new WaitForSeconds(0.4f);
+    public IEnumerator SyncRoutine(List<int> serverUpdateList, int price, int gachaCount)
+    {
+        yield return syncDelay;
+        SyncServer(serverUpdateList, price, gachaCount);
+    }
     //서버 갱신만
     private void SyncServer(List<int> serverUpdateList, int price, int gachaCount)
     {
@@ -279,6 +291,6 @@ public class UiWeaponGacha : MonoBehaviour
         //무기
         transactionList.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransactionV2(transactionList);
     }
 }

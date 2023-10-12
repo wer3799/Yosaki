@@ -14,7 +14,7 @@ public class UiCollectionPass0BuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string PassKey = "watermelonpass0";
+    public static readonly string PassKey = "boripass0";
 
     private Button buyButton;
 
@@ -94,8 +94,8 @@ public class UiCollectionPass0BuyButton : MonoBehaviour
 
         if (tableData.Productid != PassKey) return;
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Collection_All).Value;
-        ServerData.goodsTable.UpData(GoodsTable.Event_Collection, false);
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value;
+        ServerData.goodsTable.UpData(GoodsTable.Event_Kill1_Item, false);
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
 

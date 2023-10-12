@@ -225,8 +225,12 @@ public class UiMagicBookGacha : MonoBehaviour
             serverUpdateList.Add(magicBookDatas[randomIdx].Id);
         }
 
-        SyncServer(serverUpdateList, price, serverUpdateList.Count);
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
 
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine(serverUpdateList, price, serverUpdateList.Count));
         //gachaResultCellInfos.Sort((a, b) =>
         //{
         //    if (a.magicBookData.Grade < b.magicBookData.Grade)
@@ -245,7 +249,14 @@ public class UiMagicBookGacha : MonoBehaviour
 
         SoundManager.Instance.PlaySound("Reward");
     }
+    private Coroutine syncRoutine;
 
+    private WaitForSeconds syncDelay = new WaitForSeconds(0.4f);
+    public IEnumerator SyncRoutine(List<int> serverUpdateList, int price, int gachaCount)
+    {
+        yield return syncDelay;
+        SyncServer(serverUpdateList, price, gachaCount);
+    }
     private void SyncServer(List<int> serverUpdateList, int price, int gachaCount)
     {
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -279,6 +290,6 @@ public class UiMagicBookGacha : MonoBehaviour
         //마법책
         transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
 
-        ServerData.SendTransaction(transactionList);
+        ServerData.SendTransactionV2(transactionList);
     }
 }

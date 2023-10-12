@@ -351,6 +351,7 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 151:
                     case 152:
                     case 153:
+                    case 187:
                         lastBoards[(int)ContentsBoard.SinsunBoard].SetActive(true);
                         break;
                     case 146:
@@ -395,6 +396,10 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 181:
                     case 183:
                         lastBoards[(int)ContentsBoard.NewBossBoard].SetActive(true);
+                        break;
+                    case 185:
+                    case 186:
+                        lastBoards[(int)ContentsBoard.DragonBoard].SetActive(true);
                         break;
                         
                 }
@@ -497,6 +502,9 @@ public class UiContentsPopup2 : MonoBehaviour
 
             case GameManager.ContentsType.ClosedTraining :
                 lastBoards[(int)ContentsBoard.ClosedTrainingBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.DragonTower :
+                lastBoards[(int)ContentsBoard.DragonBoard].SetActive(true);
                 break;
 
         }

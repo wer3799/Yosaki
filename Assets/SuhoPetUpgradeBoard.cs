@@ -312,7 +312,7 @@ public class SuhoPetUpgradeBoard : MonoBehaviour
                     successCallBack: () =>
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.SuhoPetFeed)} {instanClearGetNum+(instanClearGetNum * PlayerStats.GetSuhoGainValue())}개 획득!", null);
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.SuhoPetFeed)} {Utils.ConvertNum(instanClearGetNum+(instanClearGetNum * PlayerStats.GetSuhoGainValue()))}개 획득!", null);
                     });
             }, null);
     }

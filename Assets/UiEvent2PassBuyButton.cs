@@ -39,14 +39,14 @@ public class UiEvent2PassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).AsObservable().Subscribe(e =>
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).AsObservable().Subscribe(e =>
         {
-            GetEventItemCount.SetText($"구매시 즉시 추가획득 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value} 개");
+            GetEventItemCount.SetText($"구매시 즉시 추가획득 : {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value} 개");
         }).AddTo(disposable);
 
         ServerData.iapServerTable.TableDatas[productKey].buyCount.AsObservable().Subscribe(e =>
         {
-            descText.SetText(e >= 1 ? "구매완료" : $"{CommonString.GetItemName(Item_Type.Event_Mission2)} 패스 구매");
+            descText.SetText(e >= 1 ? "구매완료" : $"{CommonString.GetItemName(Item_Type.Event_Mission3)} 패스 구매");
             if (e >= 1)
             {
                 GetEventItemCount.SetText(""); 
@@ -107,12 +107,12 @@ public class UiEvent2PassBuyButton : MonoBehaviour
 
         if (tableData.Productid != productKey) return;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!\n {CommonString.GetItemName(Item_Type.Event_Mission2)} {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value}개 획득!", null);
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!\n {CommonString.GetItemName(Item_Type.Event_Mission3)} {ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value}개 획득!", null);
 
         //소급적용
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value += ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3_All).Value;
 
-        ServerData.goodsTable.UpData(GoodsTable.Event_Mission2, false);
+        ServerData.goodsTable.UpData(GoodsTable.Event_Mission3, false);
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 

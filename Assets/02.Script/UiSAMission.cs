@@ -98,16 +98,6 @@ public class UiSAMission : MonoBehaviour
         Initialize();
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value += 100;
-        }
-
-    }
-#endif
 
     private void Initialize()
     {

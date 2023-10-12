@@ -31,7 +31,7 @@ public class SmithTreeManager : SingletonMono<SmithTreeManager>
     [SerializeField]
     private Animator remainTextAnim;
 
-    private ObscuredInt enemyMaxCount = 100;
+    private ObscuredInt enemyMaxCount = 200;
 
     [SerializeField]
     private TextMeshProUGUI endText;

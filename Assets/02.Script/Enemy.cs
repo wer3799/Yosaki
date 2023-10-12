@@ -192,6 +192,7 @@ public class Enemy : PoolItem
         GetHelItem();
         GetChunItem();
         GetDokebiItem();
+        GetYoPowerItem();
         
 
         //곶감 -> 봄나물
@@ -244,6 +245,11 @@ public class Enemy : PoolItem
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value == 0) return;
 
         ServerData.goodsTable.GetDokebiItem(GameManager.Instance.CurrentStageData.Dokebifireamount);
+    }
+
+    private void GetYoPowerItem()
+    {
+        ServerData.goodsTable.GetYoPowerItem(GameManager.Instance.CurrentStageData.Yokaiessence);
     }
 
     private void GetSpringEventItem() 

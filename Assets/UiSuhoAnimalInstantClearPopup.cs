@@ -93,12 +93,12 @@ public class UiSuhoAnimalInstantClearPopup : MonoBehaviour
         if (PlayerStats.GetSuhoGainValue() > 0f)
         {
             rewardDescription.SetText(
-                $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {petTableData.Sweepvalue}(+{petTableData.Sweepvalue*PlayerStats.GetSuhoGainValue()})개 획득!");
+                $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {Utils.ConvertNum(petTableData.Sweepvalue)}(+{Utils.ConvertNum(petTableData.Sweepvalue*PlayerStats.GetSuhoGainValue())})개 획득!");
         }
         else
         {
             rewardDescription.SetText(
-                $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {petTableData.Sweepvalue}개 획득!");
+                $"현재 {petTableData.Gradedescription} 1회 소탕시 {CommonString.GetItemName(Item_Type.SuhoPetFeed)} {Utils.ConvertNum(petTableData.Sweepvalue)}개 획득!");
         }
     }
     

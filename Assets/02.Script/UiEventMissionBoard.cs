@@ -6,12 +6,12 @@ using TMPro;
 public class UiEventMissionBoard : MonoBehaviour
 {
     [SerializeField]
-    private UiEventMissionCell missionCell;
+    private UiNewYearEventMissionCell missionCell;
 
     [SerializeField]
     private Transform cellParent;
 
-    private Dictionary<int, UiEventMissionCell> cellContainer = new Dictionary<int, UiEventMissionCell>();
+    private Dictionary<int, UiNewYearEventMissionCell> cellContainer = new Dictionary<int, UiNewYearEventMissionCell>();
 
 
     private void OnEnable()

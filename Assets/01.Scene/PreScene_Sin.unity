@@ -2054,6 +2054,7 @@ MonoBehaviour:
   AbilAwakeTable: {fileID: 11400000, guid: 029983690473a4449939ed79e1790bed, type: 2}
   ClosedTrainingTable: {fileID: 11400000, guid: 2698b3dfa6f11c745965d9b397631d00,
     type: 2}
+  DragonTowerTable: {fileID: 11400000, guid: fee3ac8b3d3b09b4ba6047462e8155c4, type: 2}
   SealTowerTable: {fileID: 11400000, guid: 639631a794d349c49947e093ccd5a5fa, type: 2}
   SealSwordAwakeTable: {fileID: 11400000, guid: 5c9b48933332ff74d8a77423e727c4e3,
     type: 2}
@@ -2068,6 +2069,7 @@ MonoBehaviour:
   dosulTable: {fileID: 11400000, guid: f902cdc1804a9c44fb62bd4872c1964a, type: 2}
   visionTowerTable: {fileID: 11400000, guid: d0dd747074fcb8f439fbfde218ef7c83, type: 2}
   DaesanExchange: {fileID: 11400000, guid: 6137635cc1bb83a4c8b54588384f776b, type: 2}
+  YokaiPowerOpen: {fileID: 11400000, guid: 7cd423c30592810489e57c7e387b3503, type: 2}
 --- !u!224 &1672999882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3778453797765526293, guid: 341961fb75a51fb4c844909972cb6b1a,
@@ -2155,6 +2157,50 @@ Transform:
   m_Father: {fileID: 785766492}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1893129307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1893129309}
+  - component: {fileID: 1893129308}
+  m_Layer: 0
+  m_Name: ElapsedTimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1893129308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893129307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0423c7817b372841ba1bb817b239a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DontDestroy: 1
+--- !u!4 &1893129309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893129307}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.7898939, y: -0.18099746, z: -36.697548}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1918971819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,6 +2269,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e2b5c2e9b9e472b4db8bbfa1d7cdc97a, type: 3}
   - {fileID: 21300000, guid: d6ec835aa31131449bc34ecf6ac9fded, type: 3}
   - {fileID: 21300000, guid: e684bb6245b6fb64e966cae2664edd01, type: 3}
+  - {fileID: 21300000, guid: b57ac018c278b1e40aa5081ca859d2a1, type: 3}
   itemGradeColor:
   - {r: 0.42352945, g: 0.34117648, b: 0.24705884, a: 1}
   - {r: 0.36862746, g: 0.8000001, b: 0.23529413, a: 1}
@@ -2255,6 +2302,7 @@ MonoBehaviour:
   - {r: 0.84498245, g: 0.8773585, b: 0.13656996, a: 1}
   - {r: 0.10196079, g: 0.14117648, b: 0.29411766, a: 1}
   - {r: 0.058823533, g: 0.1764706, b: 0.14509805, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
   costumeThumbnail:
   - {fileID: 21300000, guid: e1fdee06b1ace764e99a14c848a213ad, type: 3}
   - {fileID: 21300000, guid: be316b91f67a3bc458b47904aec3c83a, type: 3}
@@ -2421,6 +2469,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 466ad2f21ed504447ac3b35be702f58a, type: 3}
   - {fileID: 21300000, guid: ddaab655499c484439036eff9adce7a2, type: 3}
   - {fileID: 21300000, guid: 7b0ef3a79bab1c54493ab51ee899a3ef, type: 3}
+  - {fileID: 21300000, guid: 9e6853a4b04abb74c9168e515dc8a357, type: 3}
+  - {fileID: 21300000, guid: dfad82f8c297a5046a4cd2c11a36108f, type: 3}
+  - {fileID: 21300000, guid: 34a70262308738b40a2e20d958075ef0, type: 3}
   rankFrame:
   - {fileID: 21300000, guid: 180b014bbd854ff4c8d26a3bc3108a29, type: 3}
   - {fileID: 21300000, guid: 045aff0737bd68d449d44a4a9bb5b849, type: 3}
@@ -2553,6 +2604,7 @@ MonoBehaviour:
   HyunSangWeapon10: {fileID: 21300000, guid: ea5821d4cc29dd2458ff61cb9fba6888, type: 3}
   HyunSangWeapon11: {fileID: 21300000, guid: a0ce714927296df489574fdf04eec0ad, type: 3}
   DragonWeapon0: {fileID: 21300000, guid: 70540aac07f4fdd43bab119e7896d3fd, type: 3}
+  DragonWeapon1: {fileID: 21300000, guid: 42af3857ce6270d499f39083ebb64ef6, type: 3}
   ChunSun0: {fileID: 21300000, guid: 4f63300c771529e49801fd1615d788fa, type: 3}
   ChunSun1: {fileID: 21300000, guid: e785d28ef5135714bbc245dafaa158e3, type: 3}
   ChunSun2: {fileID: 21300000, guid: 52ad30337e6bb1f4fb00a32d5bb21019, type: 3}
@@ -2656,6 +2708,7 @@ MonoBehaviour:
   HyunSangNorigae10: {fileID: 21300000, guid: 5ac29fced6df47c43bd3ad053addf56f, type: 3}
   HyunSangNorigae11: {fileID: 21300000, guid: 27d1b5e8ba1b9124795d7994e7c05189, type: 3}
   DragonNorigae0: {fileID: 21300000, guid: b3a502b42d63b7949a0c16a7b7439f70, type: 3}
+  DragonNorigae1: {fileID: 21300000, guid: 9cd20267cf5044a4081b0c2db712ad31, type: 3}
   MonthNorigae0: {fileID: 21300000, guid: b8e4966468cd428418fa5447c72fabe7, type: 3}
   MonthNorigae1: {fileID: 21300000, guid: 534227b3d8d3ed346912306890c7d5ee, type: 3}
   MonthNorigae2: {fileID: 21300000, guid: e5a11b2c900be0a478a8bef1cd907e2d, type: 3}
@@ -2721,6 +2774,8 @@ MonoBehaviour:
   pet54: {fileID: 21300000, guid: 6f28ff3e644f2c74e9a5503fd704b668, type: 3}
   pet55: {fileID: 21300000, guid: d7e3750c06d92af40aaa37cbb3ae6631, type: 3}
   pet56: {fileID: 21300000, guid: 0c31cd70d9791904aaee88b1b45c5b65, type: 3}
+  pet57: {fileID: 21300000, guid: 0e897ca055dce8547934a426b514bb44, type: 3}
+  pet58: {fileID: 21300000, guid: e9659aaa873227d41893cd92b8b0ddf8, type: 3}
   SpecialSuhoPet0: {fileID: 21300000, guid: 20789486ca0754d40a06f5217ca5ee42, type: 3}
   SpecialSuhoPet1: {fileID: 21300000, guid: 12bf2ffd7be1c70438d9f852e6b08c9e, type: 3}
   SpecialSuhoPet2: {fileID: 21300000, guid: aab190d4384e1e04abe30b5a22410420, type: 3}
@@ -2783,6 +2838,11 @@ MonoBehaviour:
   DarkSkill2: {fileID: 21300000, guid: cdeb35c9e15584e459875184ff9e017b, type: 3}
   DarkSkill3: {fileID: 21300000, guid: 190a77a47aa60db43be1b9cd3f6c0fcb, type: 3}
   DarkSkill4: {fileID: 21300000, guid: f4e861f65812a4a459a4485abeb8a1ee, type: 3}
+  SinsunSkill0: {fileID: 21300000, guid: b89891d02b2694249b3ca240f1ee14ba, type: 3}
+  SinsunSkill1: {fileID: 21300000, guid: 708cf5a969bab4740882997da2608c1d, type: 3}
+  SinsunSkill2: {fileID: 21300000, guid: 79d9accf85d0d0d47b9e75a774eb8ee9, type: 3}
+  SinsunSkill3: {fileID: 21300000, guid: c1b11bfb5d0f06743b01f4316df275a9, type: 3}
+  SinsunSkill4: {fileID: 21300000, guid: c7008e0f3a3255842b8e0390fce78245, type: 3}
   magicStone: {fileID: 21300000, guid: a04b455a2016d0d4db39dd66b1d507ab, type: 3}
   blueStone: {fileID: 21300000, guid: 99f2d7ae766e00d4b88b7f2b3f1b81a0, type: 3}
   gold: {fileID: 21300000, guid: 3746ae3bc982cb34395dac845129215b, type: 3}
@@ -2836,6 +2896,7 @@ MonoBehaviour:
   DarkTreasure: {fileID: 21300000, guid: 5c7854cdd22e4c349bbac00d79442943, type: 3}
   SinsunTreasure: {fileID: 21300000, guid: 32893a95ea5172f408f18a4f6f189a08, type: 3}
   DragonScale: {fileID: 21300000, guid: cb662962e180fb74aa41edeb67d3b7a2, type: 3}
+  YoPowerGoods: {fileID: 21300000, guid: 42a3dc861884abb48ae0f1ccb6097b1f, type: 3}
   GwiSalTreasure: {fileID: 21300000, guid: 0f1766d863fbb1f4fa8aee760cb32a79, type: 3}
   ChunguTreasure: {fileID: 21300000, guid: 716d02ea71ca09d43bba795123f5d38e, type: 3}
   GuildTowerClearTicket: {fileID: 21300000, guid: e1c2800e99ce64542832990a20ea6670,
@@ -2866,8 +2927,9 @@ MonoBehaviour:
   Event_HotTime: {fileID: 21300000, guid: 192a531134be8e5428224d3bc5f9f0aa, type: 3}
   Event_Fall_Gold: {fileID: 21300000, guid: 1d092eb7a781a5b48b0afc61e1055f11, type: 3}
   Event_XMas: {fileID: 21300000, guid: 88013ee1676187b4db84e6314715c079, type: 3}
-  Event_Mission: {fileID: 21300000, guid: 1f8c887606a5d274ba859c15a44a7262, type: 3}
-  Event_Mission2: {fileID: 0}
+  Event_Mission1: {fileID: 21300000, guid: 7e5a33a8ae8ed7144b45bdcf1d874651, type: 3}
+  Event_Mission2: {fileID: 21300000, guid: 1f8c887606a5d274ba859c15a44a7262, type: 3}
+  Event_Mission3: {fileID: 21300000, guid: 72c1a39a00d8fca438aa746e6690189d, type: 3}
   EventDice: {fileID: 21300000, guid: 7d7ecd5bea1b6dd4093b17216da70a44, type: 3}
   Event_SA: {fileID: 21300000, guid: 618281762da6d8c4eaf12af19be6ad30, type: 3}
   enemySpineAssets:
@@ -3225,6 +3287,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1f0cf82c55b6324097896daceb4ffcc, type: 2}
   - {fileID: 11400000, guid: 9219e3298ab329044a6e0693b836e9da, type: 2}
   - {fileID: 11400000, guid: a98a1422cc15c2641abba3fe444f7f75, type: 2}
+  - {fileID: 11400000, guid: 34bc6fcd1bdc98346b5ad42b4424835e, type: 2}
+  - {fileID: 11400000, guid: 78d13e030dfd4c94a9a6f86ac4ef413d, type: 2}
+  - {fileID: 11400000, guid: 6903d07608bd3c54ead44d5ee9df0a68, type: 2}
   petCostumeList:
   - {fileID: 11400000, guid: 3d9145f3f8361c944acb6cd70679d6e2, type: 2}
   - {fileID: 11400000, guid: 206e7bbe5e49e2f4bb8859c83698d1d7, type: 2}
@@ -3283,6 +3348,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 462a2306512f8664bbe9c6d918f881e7, type: 2}
   - {fileID: 11400000, guid: 483e35a4d2220f04fbefdab64aab3bec, type: 2}
   - {fileID: 11400000, guid: 2dbcee17cfc858a41a40202ecd295bbc, type: 2}
+  - {fileID: 11400000, guid: 50d1dddab182a834b8b37b7fea8265fd, type: 2}
+  - {fileID: 11400000, guid: 3d29091d294945a4dbdbb1bd62d0bac4, type: 2}
   wingList:
   - {fileID: 1824337048444021639, guid: fa4281d5278f08f4bb6cfbef4bcd93fa, type: 3}
   - {fileID: 8084249260456971432, guid: 40b10dbb47e87d746a73b03ca26b9cfd, type: 3}

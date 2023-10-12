@@ -35,7 +35,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_6_Skill, CommonString.ItemGrade_7_Skill, CommonString.ItemGrade_8_Skill, CommonString.ItemGrade_9_Skill, CommonString.ItemGrade_10_Skill,
         CommonString.ItemGrade_11_Skill,string.Empty,string.Empty,string.Empty,string.Empty,
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
-        string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill};
+        string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill,
+        string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
+        CommonString.ItemGrade_16_Skill};
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
 
     private List<string> itemGradeName_NewGacha= new List<string>() { 
@@ -45,7 +47,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     
     private List<string> itemGradeName_SealSword= new List<string>() { 
         CommonString.ItemGrade_0,
-        CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5,CommonString.ItemGrade_6_Ring};
+        CommonString.ItemGrade_1, CommonString.ItemGrade_2, CommonString.ItemGrade_3, CommonString.ItemGrade_4, CommonString.ItemGrade_5,
+        CommonString.ItemGrade_6_Ring,CommonString.ItemGrade_6_Norigae,CommonString.ItemGrade_8,CommonString.ItemGrade_9,CommonString.ItemGrade_10,};
     public List<string> ItemGradeName_SealSword => itemGradeName_SealSword;
 
     public List<Color> itemGradeColor;
@@ -162,6 +165,7 @@ public Sprite HyunSangWeapon10;
 public Sprite HyunSangWeapon11;
 
 public Sprite DragonWeapon0;
+public Sprite DragonWeapon1;
     
 [Header ("Weapon_View")]
 
@@ -288,6 +292,7 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae10;
     public Sprite HyunSangNorigae11;
     public Sprite DragonNorigae0;
+    public Sprite DragonNorigae1;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -361,6 +366,8 @@ public Sprite RecommendWeapon22;
     public Sprite pet54;
     public Sprite pet55;
     public Sprite pet56;
+    public Sprite pet57;
+    public Sprite pet58;
     public Sprite SpecialSuhoPet0;
     public Sprite SpecialSuhoPet1;
     public Sprite SpecialSuhoPet2;
@@ -437,6 +444,12 @@ public Sprite RecommendWeapon22;
     public Sprite DarkSkill2;
     public Sprite DarkSkill3;
     public Sprite DarkSkill4;
+    
+    public Sprite SinsunSkill0;
+    public Sprite SinsunSkill1;
+    public Sprite SinsunSkill2;
+    public Sprite SinsunSkill3;
+    public Sprite SinsunSkill4;
 
     
     [Header ("Goods")]
@@ -495,6 +508,7 @@ public Sprite RecommendWeapon22;
     public Sprite DarkTreasure;
     public Sprite SinsunTreasure;
     public Sprite DragonScale;
+    public Sprite YoPowerGoods;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -523,8 +537,9 @@ public Sprite RecommendWeapon22;
     public Sprite Event_HotTime;
     public Sprite Event_Fall_Gold;
     public Sprite Event_XMas;
-    public Sprite Event_Mission;
+    public Sprite Event_Mission1;
     public Sprite Event_Mission2;
+    public Sprite Event_Mission3;
     public Sprite EventDice;
     [FormerlySerializedAs("SAEventGoods")] public Sprite Event_SA;
     public List<SkeletonDataAsset> enemySpineAssets;
@@ -1008,6 +1023,12 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[163];
             case Item_Type.costume164:
                 return costumeThumbnail[164];
+            case Item_Type.costume165:
+                return costumeThumbnail[165];
+            case Item_Type.costume166:
+                return costumeThumbnail[166];
+            case Item_Type.costume167:
+                return costumeThumbnail[167];
 
 
             case Item_Type.RankFrame1:
@@ -1506,7 +1527,9 @@ public Sprite RecommendWeapon22;
             case Item_Type.SinsunTreasure:
                 return SinsunTreasure;   
             case Item_Type.DragonScale:
-                return DragonScale;   
+                return DragonScale;      
+            case Item_Type.YoPowerGoods:
+                return YoPowerGoods;   
             case Item_Type.GwisalTreasure:
                 return GwiSalTreasure;   
             case Item_Type.ChunguTreasure:
@@ -1556,11 +1579,13 @@ public Sprite RecommendWeapon22;
                 return Event_XMas;
 
 
-            case Item_Type.Event_Mission:
-                return Event_Mission;
-
+            case Item_Type.Event_Mission1:
+                return Event_Mission1;
             case Item_Type.Event_Mission2:
                 return Event_Mission2;
+
+            case Item_Type.Event_Mission3:
+                return Event_Mission3;
 
 
 
@@ -1812,6 +1837,8 @@ public Sprite RecommendWeapon22;
                 return HyunSangNorigae11;
             case Item_Type.DragonNorigae0:
                 return DragonNorigae0;
+            case Item_Type.DragonNorigae1:
+                return DragonNorigae1;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2027,6 +2054,10 @@ public Sprite RecommendWeapon22;
                 return pet55;
             case Item_Type.pet56:
                 return pet56;
+            case Item_Type.pet57:
+                return pet57;
+            case Item_Type.pet58:
+                return pet58;
             case Item_Type.SpecialSuhoPet0:
                 return SpecialSuhoPet0;
             case Item_Type.SpecialSuhoPet1:
@@ -2298,6 +2329,18 @@ public Sprite RecommendWeapon22;
             case Item_Type.DarkSkill4:
                 return DarkSkill4;
             //
+            //
+            case Item_Type.SinsunSkill0:
+                return SinsunSkill0;
+            case Item_Type.SinsunSkill1:
+                return SinsunSkill1;
+            case Item_Type.SinsunSkill2:
+                return SinsunSkill2;
+            case Item_Type.SinsunSkill3:
+                return SinsunSkill3;
+            case Item_Type.SinsunSkill4:
+                return SinsunSkill4;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
 
@@ -2500,6 +2543,8 @@ public Sprite RecommendWeapon22;
                 return HyunSangWeapon11;
             case Item_Type.DragonWeapon0:
                 return DragonWeapon0;
+            case Item_Type.DragonWeapon1:
+                return DragonWeapon1;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

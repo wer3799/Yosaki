@@ -212,18 +212,18 @@ public class UiEventMission3ShopCell : MonoBehaviour
         }
 
 
-        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value;
+        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value;
 
         if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission2)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission3)}가 부족합니다.");
             return;
         }
 
         PopupManager.Instance.ShowAlarmMessage("교환 완료");
 
         //로컬
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value -= tableData.Price;
+        ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value -= tableData.Price;
 
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
@@ -271,7 +271,7 @@ public class UiEventMission3ShopCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+            goodsParam.Add(GoodsTable.Event_Mission3, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value);
 
             
 
@@ -289,7 +289,7 @@ public class UiEventMission3ShopCell : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+            goodsParam.Add(GoodsTable.Event_Mission3, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value);
 
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
@@ -303,7 +303,7 @@ public class UiEventMission3ShopCell : MonoBehaviour
             Param goodsParam = new Param();
 
 
-            goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+            goodsParam.Add(GoodsTable.Event_Mission3, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission3).Value);
 
 
             goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Itemtype), ServerData.goodsTable.GetTableData((Item_Type)tableData.Itemtype).Value);

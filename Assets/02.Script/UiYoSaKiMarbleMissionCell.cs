@@ -121,8 +121,9 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
     public void OnClickGetButton()
     {
         //로컬 갱신
-        //EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire );
-        EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), 1);
+        string key = TableManager.Instance.EventMissionDatas[(int)(EventMissionKey)(tableData.Id)].Stringid;
+        ServerData.eventMissionTable.UpdateMissionRewardCount(key, 1);
+        
         if (Utils.IsCostumeItem((Item_Type)tableData.Rewardtype))
         {
             if ((Item_Type)tableData.Rewardtype == Item_Type.costume161)

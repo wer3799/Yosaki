@@ -594,6 +594,37 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                 param.Add(GoodsTable.DarkSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DarkSkill4).Value);
             }
                 break;
+            //    //            //
+            case Item_Type.SinsunSkill0:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill0).Value += amount;
+                param.Add(GoodsTable.SinsunSkill0, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill0).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill1:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill1).Value += amount;
+                param.Add(GoodsTable.SinsunSkill1, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill1).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill2:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill2).Value += amount;
+                param.Add(GoodsTable.SinsunSkill2, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill2).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill3:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill3).Value += amount;
+                param.Add(GoodsTable.SinsunSkill3, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill3).Value);
+            }
+                break;
+            case Item_Type.SinsunSkill4:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value += amount;
+                param.Add(GoodsTable.SinsunSkill4, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value);
+            }
+                break;
             //
             case Item_Type.GangrimSkill:
                 {

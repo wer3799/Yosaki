@@ -10,6 +10,7 @@ public enum EventMissionType
     BSECOND,
     NORMALMARBLE,
     FINISHMARBLE,
+    FOURTH,
 
 }
 public enum EventMissionKey
@@ -35,17 +36,17 @@ public enum EventMissionKey
    SMISSION8,
    SMISSION9,
     
-    TMISSION1,//반딧
-    TMISSION2,//깨비전
-    TMISSION3,//빠른전투
-    TMISSION4,//검의산
-    TMISSION5,//불멸석
-    TMISSION6,//천계꽃
-    TMISSION7,//도깨비
-    TMISSION8,//수미산
-    TMISSION9,//영혼석(반지)
-    TMISSION10,//문파점수등록
-    TMISSION11,//견공
+    TMISSION1,//주간미션
+    TMISSION2,//주간미션
+    TMISSION3,//주간미션
+    TMISSION4,
+    TMISSION5,
+    TMISSION6,
+    TMISSION7,
+    TMISSION8,
+    TMISSION9,
+    TMISSION10,
+    TMISSION11,
     
     
     AMISSION1,//문파점수
@@ -80,8 +81,21 @@ public enum EventMissionKey
     FMARBLEMISSION9,
     FMARBLEMISSION10,
     FMARBLEMISSION11,
-    FMARBLEMISSION12
+    FMARBLEMISSION12,
 
+    
+    FMISSION1,//반딧
+    FMISSION2,//깨비전
+    FMISSION3,//빠른전투
+    FMISSION4,//검의산
+    FMISSION5,//불멸석
+    FMISSION6,//천계꽃
+    FMISSION7,//도깨비
+    FMISSION8,//수미산
+    FMISSION9,//영혼석(반지)
+    FMISSION10,//문파점수등록
+    FMISSION11,//견공
+    FMISSION12,//견공
 }
 public enum MonthMissionKey
 {
