@@ -293,7 +293,6 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.ChunguRelic,
         GoodsTable.FoxRelic,
         GoodsTable.FoxRelicClearTicket,
-        GoodsTable.YoPowerGoods,
         GoodsTable.TransClearTicket,
         GoodsTable.EventDice,
         GoodsTable.Tresure,
