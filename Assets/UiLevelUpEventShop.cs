@@ -531,6 +531,12 @@ public class UiLevelUpEventShop : SingletonMono<UiLevelUpEventShop>
                 param.Add(GoodsTable.VisionSkill13, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).Value);
             }
                 break;
+            case Item_Type.VisionSkill14:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill14).Value += amount;
+                param.Add(GoodsTable.VisionSkill14, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill14).Value);
+            }
+                break;
             //    //            //
             case Item_Type.ThiefSkill0:
             {

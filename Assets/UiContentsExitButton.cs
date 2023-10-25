@@ -114,6 +114,7 @@ public class UiContentsExitButton : MonoBehaviour
             case GameManager.ContentsType.GyungRockTower2:
             case GameManager.ContentsType.GyungRockTower3:
             case GameManager.ContentsType.GyungRockTower4:
+            case GameManager.ContentsType.GyungRockTower5:
             case GameManager.ContentsType.TestSword:
             case GameManager.ContentsType.TestMonkey:
             case GameManager.ContentsType.TestHell:

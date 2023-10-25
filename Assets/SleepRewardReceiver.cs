@@ -41,8 +41,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         public readonly float dokebiItem;
         public readonly float hotTimeItem;
         public readonly float yoPowerItem;
+        public readonly float taegeukItem;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic, float sulItem, float springItem, float peachItem, float helItem, float chunItem, float dailybootyItem, float dokebiItem, float hotTimeItem, float yoPowerItem)
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic, float sulItem, float springItem, float peachItem, float helItem, float chunItem, float dailybootyItem, float dokebiItem, float hotTimeItem, float yoPowerItem, float taegeukItem)
         {
             this.gold = gold;
 
@@ -81,6 +82,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             this.hotTimeItem = hotTimeItem;
             
             this.yoPowerItem = yoPowerItem;
+            
+            this.taegeukItem = taegeukItem;
         }
     }
 
@@ -183,7 +186,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         float jade = 0;
 
         float GrowthStone = killedEnemyPerMin *
-                            (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)+PlayerStats.GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)) *
+                            (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)+
+                                PlayerStats.GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)+PlayerStats.GetMonthBuffEffect(StatusType.MagicStoneAddPer)) *
                             GameBalance.sleepRewardRatio * elapsedMinutes;
 
         float marble = killedEnemyPerMin * (stageTableData.Marbleamount) *
@@ -235,6 +239,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         float yoPowerItem = (killedEnemyPerMin * stageTableData.Yokaiessence * GameBalance.sleepRewardRatio *
                              elapsedMinutes);
+        float taegeukItem = (killedEnemyPerMin * stageTableData.Taegeuk * GameBalance.sleepRewardRatio *
+                             elapsedMinutes);
         
 
         int hotTimeItem = 0;
@@ -262,7 +268,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             killCount: (int)(elapsedMinutes * killedEnemyPerMin * stageTableData.Marbleamount *
                              GameBalance.sleepRewardRatio), stageRelic: stageRelic, sulItem: sulItem,
             springItem: springItem, peachItem: peachItem, helItem: helItem, chunItem: chunItem,
-            dailybootyItem: dailybootyItem, dokebiItem: dokebiItem, hotTimeItem: hotTimeItem, yoPowerItem: yoPowerItem);
+            dailybootyItem: dailybootyItem, dokebiItem: dokebiItem, hotTimeItem: hotTimeItem, yoPowerItem: yoPowerItem, taegeukItem: taegeukItem);
 
         UiSleepRewardView.Instance.CheckReward();
     }
@@ -315,6 +321,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += (int)sleepRewardInfo.dokebiItem;
         }
         ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value += (int)sleepRewardInfo.yoPowerItem;
+        ServerData.goodsTable.GetTableData(GoodsTable.TaeguekGoods).Value += (int)sleepRewardInfo.taegeukItem;
 
         //봄나물
         if (ServerData.userInfoTable.CanSpawnSpringEventItem())
@@ -477,6 +484,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
         //요괴정수
         goodsParam.Add(GoodsTable.YoPowerGoods, ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value);
+        goodsParam.Add(GoodsTable.TaeguekGoods, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekGoods).Value);
         goodsParam.Add(GoodsTable.StageRelic, ServerData.goodsTable.GetTableData(GoodsTable.StageRelic).Value);
 
 
@@ -625,5 +633,42 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
     public void GetRewardSuccess()
     {
         sleepRewardInfo = null;
+    }
+
+    public float GetUseTaegeukGoodsPerElixir()
+    {
+        var sum = 0f;
+        int currentStageIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value;
+
+        currentStageIdx = currentStageIdx + 1;
+        
+        var stageTableData = TableManager.Instance.StageMapData[currentStageIdx];
+        
+        int platformNum = MapInfo.Instance.spawnPlatforms.Count;
+
+        
+
+        int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+
+        //지옥 추가소환
+        plusSpawnNum += (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+        
+        //요괴소환능력치
+        plusSpawnNum += PlayerStats.GetAddSummonYogui();
+
+        //천계 추가소환
+        if (PlayerStats.IsChunMonsterSpawnAdd())
+        {
+            plusSpawnNum += 5;
+        }
+        var spawnInterval = stageTableData.Spawndelay + ((float)GameBalance.spawnIntervalTime * (float)GameBalance.spawnDivideNum);
+
+        float spawnEnemyNumPerSec = (float)((platformNum * stageTableData.Spawnamountperplatform) + plusSpawnNum) / spawnInterval;
+
+        float killedEnemyPerMin = spawnEnemyNumPerSec * 60f;
+        
+        sum = (killedEnemyPerMin * stageTableData.Taegeuk *  GameBalance.taegeukElixirValue);
+        
+        return sum;
     }
 }

@@ -79,29 +79,13 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
         //킬카운트 변경될때
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).AsObservable().Subscribe(e =>
         {
-            if (this.gameObject.activeInHierarchy) 
-            {
+          
                 lockIcon_Free.SetActive(!CanGetReward());
                 lockIcon_Ad.SetActive(!CanGetReward());
                 gaugeImage.SetActive(CanGetReward());
-            }
+            
       
         }).AddTo(disposables);
-    }
-
-    public void Initialize(PassInfo passInfo)
-    {
-        this.passInfo = passInfo;
-
-        SetAmount();
-
-        SetItemIcon();
-
-        SetDescriptionText();
-
-        Subscribe();
-
-        RefreshParent();
     }
 
     private void SetAmount()
@@ -129,12 +113,27 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
         return ServerData.monthlyPassServerTable2.TableDatas[key].Value.Split(',').ToList();
     }
 
+   
     public bool HasReward(string key, int data)
     {
-        var splitData = GetSplitData(key);
-        return splitData.Contains(data.ToString());
+        return int.Parse(ServerData.monthlyPassServerTable2.TableDatas[key].Value) >= data;
     }
+    private bool HasPassItem()
+    {
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0;
 
+        return hasIapProduct;
+    }
+    private bool CanGetReward()
+    {
+        int killCountTotal2 = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value;
+        return killCountTotal2 >= passInfo.require;
+    }
+    private bool GetBeforeRewarded(string key,int data)
+    {
+        return int.Parse(ServerData.monthlyPassServerTable2.TableDatas[key].Value) == data - 1;
+    }
+    
     public void OnClickFreeRewardButton()
     {
         if (CanGetReward() == false)
@@ -149,6 +148,11 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
             return;
         }
 
+        if (GetBeforeRewarded(passInfo.rewardType_Free_Key,passInfo.id) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            return;
+        }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
 
         GetFreeReward();
@@ -170,6 +174,11 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
             return;
         }
 
+        if (GetBeforeRewarded(passInfo.rewardType_IAP_Key,passInfo.id) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            return;
+        }
         if (HasPassItem())
         {
             GetAdReward();
@@ -180,177 +189,13 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
         }
     }
 
-    private bool HasPassItem()
-    {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0;
-
-        return hasIapProduct;
-    }
-
+   
     private void GetFreeReward()
     {
-        if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae1)
+        ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";
+       
+        if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae9)
         {
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-
-
-            if (ServerData.magicBookTable.TableDatas["magicBook50"].hasItem.Value == 1)
-            {
-                PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
-                return;
-            }
-
-            List<TransactionValue> transactionList = new List<TransactionValue>();
-
-            ServerData.magicBookTable.TableDatas["magicBook50"].amount.Value += 1;
-            ServerData.magicBookTable.TableDatas["magicBook50"].hasItem.Value = 1;
-
-            Param magicBookParam = new Param();
-
-            magicBookParam.Add("magicBook50", ServerData.magicBookTable.TableDatas["magicBook50"].ConvertToString());
-
-            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
-
-            //패스 보상
-            Param passParam = new Param();
-            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
-            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
-
-
-            //킬카운트
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
-            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
-            {
-                SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "1월 노리개 획득!!", null);
-                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
-            });
-        }
-        else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae3)
-        {
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-
-            if (ServerData.magicBookTable.TableDatas["magicBook62"].hasItem.Value == 1)
-            {
-                PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
-                return;
-            }
-
-            List<TransactionValue> transactionList = new List<TransactionValue>();
-
-            ServerData.magicBookTable.TableDatas["magicBook62"].amount.Value += 1;
-            ServerData.magicBookTable.TableDatas["magicBook62"].hasItem.Value = 1;
-
-            Param magicBookParam = new Param();
-
-            magicBookParam.Add("magicBook62", ServerData.magicBookTable.TableDatas["magicBook62"].ConvertToString());
-
-            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
-
-            //패스 보상
-            Param passParam = new Param();
-            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
-            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
-
-
-            //킬카운트
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
-            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
-            {
-                SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "3월 노리개 획득!!", null);
-                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
-            });
-        }
-        else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae5)
-        {
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-
-            if (ServerData.magicBookTable.TableDatas["magicBook80"].hasItem.Value == 1)
-            {
-                PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
-                return;
-            }
-
-            List<TransactionValue> transactionList = new List<TransactionValue>();
-
-            ServerData.magicBookTable.TableDatas["magicBook80"].amount.Value += 1;
-            ServerData.magicBookTable.TableDatas["magicBook80"].hasItem.Value = 1;
-
-            Param magicBookParam = new Param();
-
-            magicBookParam.Add("magicBook80", ServerData.magicBookTable.TableDatas["magicBook80"].ConvertToString());
-
-            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
-
-            //패스 보상
-            Param passParam = new Param();
-            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
-            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
-
-
-            //킬카운트
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
-            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
-            {
-                SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "5월 노리개 획득!!", null);
-                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
-            });
-        }
-        else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae7)
-        {
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-
-            if (ServerData.magicBookTable.TableDatas["magicBook94"].hasItem.Value == 1)
-            {
-                PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
-                return;
-            }
-
-            List<TransactionValue> transactionList = new List<TransactionValue>();
-
-            ServerData.magicBookTable.TableDatas["magicBook94"].amount.Value += 1;
-            ServerData.magicBookTable.TableDatas["magicBook94"].hasItem.Value = 1;
-
-            Param magicBookParam = new Param();
-
-            magicBookParam.Add("magicBook94", ServerData.magicBookTable.TableDatas["magicBook94"].ConvertToString());
-
-            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
-
-            //패스 보상
-            Param passParam = new Param();
-            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
-            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
-
-
-            //킬카운트
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
-            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
-            {
-                SoundManager.Instance.PlaySound("Reward");
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "7월 노리개 획득!!", null);
-                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
-            });
-        }
-        else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae9)
-        {
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-
             if (ServerData.magicBookTable.TableDatas["magicBook106"].hasItem.Value == 1)
             {
                 PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
@@ -378,19 +223,54 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
             Param userInfoParam = new Param();
             userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
             transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
+            ServerData.SendTransactionV2(transactionList, successCallBack: () =>
             {
                 SoundManager.Instance.PlaySound("Reward");
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.MonthNorigae9)} 획득!!", null);
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
+        
+        else if ((Item_Type)(int)passInfo.rewardType_Free == Item_Type.MonthNorigae11)
+        {
+            //로컬
+
+            if (ServerData.magicBookTable.TableDatas["magicBook114"].hasItem.Value == 1)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"이미 보유하고 있습니다.");
+                return;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            ServerData.magicBookTable.TableDatas["magicBook114"].amount.Value += 1;
+            ServerData.magicBookTable.TableDatas["magicBook114"].hasItem.Value = 1;
+
+            Param magicBookParam = new Param();
+
+            magicBookParam.Add("magicBook114", ServerData.magicBookTable.TableDatas["magicBook114"].ConvertToString());
+
+            transactionList.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+
+            //패스 보상
+            Param passParam = new Param();
+            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
+            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
+
+
+            //킬카운트
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
+            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
+            ServerData.SendTransaction(transactionList, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.MonthNorigae11)} 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+        }
         else
         {
-
-
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
             ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -408,16 +288,15 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
             userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
             transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
 
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
+            ServerData.SendTransactionV2(transactionList, successCallBack: () =>
             {
-            // LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
         });
         }
     }
     private void GetAdReward()
     {
             //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
             ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -435,7 +314,7 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
             userInfoParam.Add(UserInfoTable_2.oddMonthKillCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value);
             transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfoParam));
 
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
+            ServerData.SendTransactionV2(transactionList, successCallBack: () =>
             {
             // LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
              });
@@ -444,12 +323,7 @@ public class UiMonthlyPassCell2 : FancyCell<MonthlyPass2Data_Fancy>
         
     }
 
-    private bool CanGetReward()
-    {
-        int killCountTotal2 = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value;
-        return killCountTotal2 >= passInfo.require;
-    }
-
+  
 
 
     public void RefreshParent()

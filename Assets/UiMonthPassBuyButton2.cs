@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using TMPro;
 using UnityEngine;
 using UniRx;
@@ -12,7 +13,7 @@ public class UiMonthPassBuyButton2 : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string monthPassKey = "monthpass24";
+    public static readonly string monthPassKey = "monthpass26";
 
     private Button buyButton;
 
@@ -89,11 +90,44 @@ public class UiMonthPassBuyButton2 : MonoBehaviour
         }
 
         if (tableData.Productid != monthPassKey) return;
+        
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
+        
+        
+        //홀수월+패스구매시
+        var rewardData = TableManager.Instance.MonthReward.dataArray;
+        List<TransactionValue> transactionList = new List<TransactionValue>();
 
+        string str = "";
+        int ticketCount = 0;
+        Param goodsParam = new Param();
+        for (int i = 0; i < rewardData.Length; i++)
+        {
+            if(rewardData[i].Monthsort!=true) continue;
+            ServerData.goodsTable.GetTableData((Item_Type)rewardData[i].Itemtype).Value += rewardData[i].Itemvalue;
+            str += rewardData[i].Description+",";
+            if (ticketCount <1)
+            {
+                ticketCount = (int)rewardData[i].Itemvalue;
+            }
+            goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype)).Value);
+        }
+
+        str += $"#소탕권 {ticketCount}개 획득!";
+        str = str.Replace(",#", "");
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+
+        Param iapParam = new Param();
+        
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
+        
+        iapParam.Add(tableData.Productid, ServerData.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
+        transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
 
-        ServerData.iapServerTable.UpData(tableData.Productid);
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, str, null);
+        });
     }
 }

@@ -41,6 +41,8 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
     private GameObject seolObject;
     [SerializeField]
     private GameObject yoPowerObject;
+    [SerializeField]
+    private GameObject taegeukObject;
 
     [SerializeField] private Image GoldIcon;
     //[SerializeField]
@@ -211,9 +213,11 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
             rewards[16].SetText("0");
         }
         rewards[17].SetText(Utils.ConvertBigNum(reward.yoPowerItem));
+        rewards[18].SetText(Utils.ConvertBigNum(reward.taegeukItem));
         
 
         yoPowerObject.SetActive(reward.yoPowerItem > 0);
+        taegeukObject.SetActive(reward.taegeukItem > 0);
         
         
         SleepRewardReceiver.Instance.GetRewardSuccess();

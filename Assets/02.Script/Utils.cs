@@ -203,7 +203,11 @@ public static class Utils
                type == Item_Type.costume164||
                type == Item_Type.costume165||
                type == Item_Type.costume166||
-               type == Item_Type.costume167
+               type == Item_Type.costume167||
+               type == Item_Type.costume168||
+               type == Item_Type.costume169||
+               type == Item_Type.costume170||
+               type == Item_Type.costume171
             ;
     }
 
@@ -227,7 +231,8 @@ public static class Utils
                type == Item_Type.MonthNorigae7||
                type == Item_Type.MonthNorigae8||
                type == Item_Type.MonthNorigae9||
-               type == Item_Type.MonthNorigae10
+               type == Item_Type.MonthNorigae10||
+               type == Item_Type.MonthNorigae11
             ;
     }
 
@@ -439,6 +444,7 @@ public static class Utils
                type == Item_Type.MonthNorigae8 ||
                type == Item_Type.MonthNorigae9 ||
                type == Item_Type.MonthNorigae10 ||
+               type == Item_Type.MonthNorigae11 ||
                type == Item_Type.DokebiHorn0 ||
                type == Item_Type.DokebiHorn1 ||
                type == Item_Type.DokebiHorn2 ||
@@ -552,7 +558,8 @@ public static class Utils
             type != StatusType.AddSummonYogui&&
             type != StatusType.AddVisionSkillUseCount&&
             type != StatusType.AddSealSwordSkillHitCount&&
-            type != StatusType.ReduceDosulSkillCoolTime;
+            type != StatusType.ReduceDosulSkillCoolTime&&
+            type != StatusType.ReduceSealSwordSkillRequireCount;
     }
 
     public static bool IsBossContents(this GameManager.ContentsType type)
@@ -805,7 +812,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","미정8","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","미정9","미정10","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
         
     };
 

@@ -273,10 +273,10 @@ public class MonthlyPassServerTable2
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { MonthlypassFreeReward,string.Empty},
-        { MonthlypassAdReward,string.Empty},
-        { MonthlypassAttendFreeReward,string.Empty},
-        { MonthlypassAttendAdReward,string.Empty}
+        { MonthlypassFreeReward,"-1"},
+        { MonthlypassAdReward,"-1"},
+        { MonthlypassAttendFreeReward,"-1"},
+        { MonthlypassAttendAdReward,"-1"}
     };
     
 
@@ -284,65 +284,65 @@ public class MonthlyPassServerTable2
     public ReactiveDictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
     private void LoadTable(bool isOddMonthlypass = false)
     {
-        var datas= TableManager.Instance.InAppPurchase.dataArray;
-        if (isOddMonthlypass)
-        {
-            List<int> evenList = new List<int>();
-            foreach (var purchaseData in datas)
-            {
-                if (purchaseData.PASSPRODUCTTYPE == PassProductType.MonthPass)
-                {
-                    int num = int.Parse(purchaseData.Productid.Replace("monthpass", ""));
-                    if (num % 2 == 1)
-                    {
-                        //홀수는 짝수월(monthpass2,4,6...)
-                        //oddList.Add(num);
-                    }
-                    else
-                    {
-                        //짝수는 홀수월(1,3,5...)
-                        evenList.Add(num);
-                    }
-                }
-            }
-            MonthlypassFreeReward += "_"+evenList.Last();
-            MonthlypassAdReward += "_"+evenList.Last();
-            MonthlypassAttendFreeReward +="_"+evenList.Last(); 
-            MonthlypassAttendAdReward +="_"+evenList.Last();
-        }
-        else
-        {
-            List<int> oddList = new List<int>();
-            foreach (var purchaseData in datas)
-            {
-                if (purchaseData.PASSPRODUCTTYPE == PassProductType.MonthPass)
-                {
-                    int num = int.Parse(purchaseData.Productid.Replace("monthpass", ""));
-                    if (num % 2 == 1)
-                    {
-                        //홀수는 짝수월(monthpass2,4,6...)
-                        oddList.Add(num);
-                    }
-                    else
-                    {
-                        //짝수는 홀수월(1,3,5...)
-                        //evenList.Add(num);
-                    }
-                }
-            }
-            MonthlypassFreeReward += "_"+oddList.Last();
-            MonthlypassAdReward += "_"+oddList.Last();
-            MonthlypassAttendFreeReward +="_"+oddList.Last(); 
-            MonthlypassAttendAdReward +="_"+oddList.Last();
-        }
-        tableSchema.Add(MonthlypassFreeReward,string.Empty);
-        tableSchema.Add(MonthlypassAdReward,string.Empty);
-        tableSchema.Add(MonthlypassAttendFreeReward,string.Empty);
-        tableSchema.Add(MonthlypassAttendAdReward,string.Empty);
+        // var datas= TableManager.Instance.InAppPurchase.dataArray;
+        // if (isOddMonthlypass)
+        // {
+        //     List<int> evenList = new List<int>();
+        //     foreach (var purchaseData in datas)
+        //     {
+        //         if (purchaseData.PASSPRODUCTTYPE == PassProductType.MonthPass)
+        //         {
+        //             int num = int.Parse(purchaseData.Productid.Replace("monthpass", ""));
+        //             if (num % 2 == 1)
+        //             {
+        //                 //홀수는 짝수월(monthpass2,4,6...)
+        //                 //oddList.Add(num);
+        //             }
+        //             else
+        //             {
+        //                 //짝수는 홀수월(1,3,5...)
+        //                 evenList.Add(num);
+        //             }
+        //         }
+        //     }
+        //     MonthlypassFreeReward += "_"+evenList.Last();
+        //     MonthlypassAdReward += "_"+evenList.Last();
+        //     MonthlypassAttendFreeReward +="_"+evenList.Last(); 
+        //     MonthlypassAttendAdReward +="_"+evenList.Last();
+        // }
+        // else
+        // {
+        //     List<int> oddList = new List<int>();
+        //     foreach (var purchaseData in datas)
+        //     {
+        //         if (purchaseData.PASSPRODUCTTYPE == PassProductType.MonthPass)
+        //         {
+        //             int num = int.Parse(purchaseData.Productid.Replace("monthpass", ""));
+        //             if (num % 2 == 1)
+        //             {
+        //                 //홀수는 짝수월(monthpass2,4,6...)
+        //                 oddList.Add(num);
+        //             }
+        //             else
+        //             {
+        //                 //짝수는 홀수월(1,3,5...)
+        //                 //evenList.Add(num);
+        //             }
+        //         }
+        //     }
+        //     MonthlypassFreeReward += "_"+oddList.Last();
+        //     MonthlypassAdReward += "_"+oddList.Last();
+        //     MonthlypassAttendFreeReward +="_"+oddList.Last(); 
+        //     MonthlypassAttendAdReward +="_"+oddList.Last();
+        // }
+        // tableSchema.Add(MonthlypassFreeReward,string.Empty);
+        // tableSchema.Add(MonthlypassAdReward,string.Empty);
+        // tableSchema.Add(MonthlypassAttendFreeReward,string.Empty);
+        // tableSchema.Add(MonthlypassAttendAdReward,string.Empty);
     }
     public void Initialize()
     {
-        LoadTable(true);
+        //LoadTable(ServerData.userInfoTable.IsMonthlyPass2());
         tableDatas.Clear();
 
         SendQueue.Enqueue(Backend.GameData.GetMyData, tableName, new Where(), callback =>
@@ -858,6 +858,9 @@ public class ColdSeasonPassServerTable
     public static string meditationFree = "f17";
     public static string meditationAd = "a17";
 
+    public static string sealswordEvolutionFree = "f18";
+    public static string sealswordEvolutionAd = "a18";
+
     public static string coldseasonFree_Atten = "fa2";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
@@ -891,6 +894,8 @@ public class ColdSeasonPassServerTable
         { peachAd,string.Empty},
         { meditationFree,string.Empty},
         { meditationAd,string.Empty},
+        { sealswordEvolutionFree,string.Empty},
+        { sealswordEvolutionAd,string.Empty},
 
     };
 

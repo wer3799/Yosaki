@@ -258,6 +258,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.VisionSkill11,
         GoodsTable.VisionSkill12,
         GoodsTable.VisionSkill13,
+        GoodsTable.VisionSkill14,
 
         GoodsTable.c0,
         GoodsTable.c1,

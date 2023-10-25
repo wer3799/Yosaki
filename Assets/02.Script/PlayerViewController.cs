@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using UnityEngine;
 using Spine.Unity;
+using UniRx;
 
 public class PlayerViewController : SingletonMono<PlayerViewController>
 {
@@ -29,6 +32,63 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
     [SerializeField]
     private GameObject idleWeapon;
 
+
+    private void Start()
+    {
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        GuildManager.Instance.hasGuild.AsObservable().Subscribe(e =>
+        {
+            //길드있음
+            if (e == true)
+            {
+                
+            }
+            //길드없음
+            else
+            {
+                var costumeServerData = ServerData.costumeServerTable.TableDatas["costume171"];
+
+                if (costumeServerData.hasCostume.Value == true)
+                {
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+                
+                    costumeServerData.hasCostume.Value = false;
+                
+                    Param costumeParam = new Param();
+                    costumeParam.Add("costume171", costumeServerData.ConvertToString());
+
+                    transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+                    ServerData.SendTransactionV2(transactions, successCallBack: () =>
+                    {
+                    
+                    });
+                }
+         
+                
+                //끼고 있으면
+                if (ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value == 171)
+                {
+                    //기본코스튬으로 변경
+                    SetCostumeSpine(0);
+                
+                    //서버 저장
+                    ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value = 0;
+                    ServerData.equipmentTable.SyncData(EquipmentTable.CostumeLook);
+                }
+            }
+        }).AddTo(this);
+    }
+    private void SetCostumeSpine(int idx)
+    {
+        skeletonGraphic.Clear();
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        skeletonGraphic.Initialize(true);
+        skeletonGraphic.SetMaterialDirty();
+    }
     private IEnumerator AttackAnimEndRoutine()
     {
         yield return attackAnimDelay;

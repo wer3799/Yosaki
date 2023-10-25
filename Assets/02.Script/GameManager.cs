@@ -90,6 +90,7 @@ public class GameManager : SingletonMono<GameManager>
         Danjeon,
         ClosedTraining,
         DragonTower,
+        GyungRockTower5,
     }
     
     public bool SpawnMagicStone => IsNormalField;

@@ -57,6 +57,7 @@ public class UserInfoTable_2
     public const string graduateGold = "gg";
     public const string gyungRockTower3 = "grt3";
     public const string gyungRockTower4 = "grt4";
+    public const string gyungRockTower5 = "grt5";
     public const string graduateSeolEvent = "gse";
     public const string hyunsangTowerScore = "hts";
     
@@ -113,7 +114,12 @@ public class UserInfoTable_2
     public const string awakeDosulSkill = "ads";
     
     public const string yosakiMarbleScore = "yms";
+    public const string taegeukSimbeopIdx = "tsi";
+    public const string dailyPetDispatchReceiveCount = "dpdrc";
     
+    public const string sealSwordEvolutionIdx = "ssei";
+    public const string sealSwordEvolutionExp = "ssee";
+
     
     
     public bool isInitialize = false;
@@ -157,6 +163,7 @@ public class UserInfoTable_2
         { graduateGold, 0f },
         { gyungRockTower3, 0f },
         { gyungRockTower4, 0f },
+        { gyungRockTower5, 0f },
         { hyunsangTowerScore, 0f },
         { graduateSeolEvent, 0f },
         { towerFloorAdjust, 0f },
@@ -202,6 +209,10 @@ public class UserInfoTable_2
         { awakeSealSword, -1f },
         { awakeDosulSkill, -1f },
         { yosakiMarbleScore, -1f },
+        { taegeukSimbeopIdx, -1f },
+        { dailyPetDispatchReceiveCount, 0f },
+        { sealSwordEvolutionIdx, -1f },
+        { sealSwordEvolutionExp, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

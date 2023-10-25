@@ -116,4 +116,8 @@ public class StageMapData
   float yokaiessence;
   public float Yokaiessence { get {return yokaiessence; } set { this.yokaiessence = value;} }
   
+  [SerializeField]
+  float taegeuk;
+  public float Taegeuk { get {return taegeuk; } set { this.taegeuk = value;} }
+  
 }

@@ -354,7 +354,14 @@ namespace UnityEngine.UI.Extensions
             //int totalCount = TableManager.Instance.dolPass.dataArray.Length;
             if (scrollbar != null)
             {
-                scrollbar.value = Mathf.Clamp01(Mathf.Max(freeMax,3) / Mathf.Max(totalCount - 1f, 1e-4f));
+                if (this.type == TypeScroll.MonthPass2)
+                {
+                    scrollbar.value = Mathf.Clamp01(Mathf.Max(freeMax,0.7f) / Mathf.Max(totalCount - 1f, 1e-4f));
+                }
+                else
+                {
+                    scrollbar.value = Mathf.Clamp01(Mathf.Max(freeMax,3) / Mathf.Max(totalCount - 1f, 1e-4f));
+                }
             }
         }
         public void OnValueChanged(Action<float> callback) => onValueChanged = callback;

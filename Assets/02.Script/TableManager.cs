@@ -922,6 +922,13 @@ public class TableManager : SingletonMono<TableManager>
     public VisionTowerTable visionTowerTable;
     public DaesanExchange DaesanExchange;
     public YokaiPowerOpen YokaiPowerOpen;
+    public TaegeukSimbeop TaegeukSimbeop;
+    public TowerTable12 gyungRockTowerTable5;
+    public MonthBuff MonthBuff;
+    public MonthReward MonthReward;
+    public SealSwordEvolutionPass SealSwordEvolutionPass;
+    public SealSwordEvolution SealSwordEvolution;
+
 }
 
 

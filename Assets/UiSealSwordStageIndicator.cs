@@ -66,6 +66,7 @@ public class UiSealSwordStageIndicator : MonoBehaviour
         string prob3 = $"<color=purple>특급 :  {(Math.Round(currentData.Gachalv4,5) * 100f)}% ";
         string prob4 = $"<color=red>전설 :  {(Math.Round(currentData.Gachalv5,5) * 100f)}% ";
         string prob5 = $"<color=#87ceebff>요물 :  {(Math.Round(currentData.Gachalv6,5) * 100f)}%";
+        string prob6 = $"<color=#e3d600ff>신물 :  {(Math.Round(currentData.Gachalv7,5) * 100f)}%";
 
         string result = string.Empty;
 
@@ -145,6 +146,19 @@ public class UiSealSwordStageIndicator : MonoBehaviour
             if (minGrade == 5)
             {
                 minGrade = 6;
+            }
+        }
+        
+        if (currentData.Gachalv7 != 0f)
+        {
+            result += prob6;
+            maxGrade = 7;
+        }
+        else
+        {
+            if (minGrade == 6)
+            {
+                minGrade = 7;
             }
         }
         probDescription.SetText(result);

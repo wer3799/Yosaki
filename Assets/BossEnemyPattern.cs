@@ -59,6 +59,10 @@ public class BossEnemyPattern : BossEnemyBase
     {
         StartCoroutine(RandomAttackRoutine());
     }
+    public void StartRandomAttackRoutineV2()
+    {
+        StartCoroutine(RandomAttackRoutineV2());
+    }
     private IEnumerator RandomAttackRoutine()
     {
         UpdateBossDamage();
@@ -72,7 +76,25 @@ public class BossEnemyPattern : BossEnemyBase
             yield return new WaitForSeconds(0.25f);
             skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
             //후딜
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(attackInterval);
+
+
+        }
+    }
+    private IEnumerator RandomAttackRoutineV2()
+    {
+        UpdateBossDamage();
+        while (true)
+        {
+            RandomPatternAttack(2);
+            skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+            yield return new WaitForSeconds(0.70f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack1", false);   
+            yield return new WaitForSeconds(0.13f);
+            yield return new WaitForSeconds(0.25f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+            //후딜
+            yield return new WaitForSeconds(attackInterval);
 
 
         }
@@ -145,12 +167,16 @@ public class BossEnemyPattern : BossEnemyBase
 
         agentHpController.SetDefense(0);
 
-        StartAttackRoutine();
+        if (GameManager.Instance.bossId < 188)
+        {
+            StartAttackRoutine();
+        }
         
     }
 
     public void StartAttackRoutine()
     {
+        
         StartCoroutine(AttackRoutine());
     }
 
@@ -219,4 +245,82 @@ public class BossEnemyPattern : BossEnemyBase
         }
 
     }
+    
+    private Queue<int> skillQueue = new Queue<int>();
+    private int lastUsedSkill = -1; // 마지막으로 사용한 스킬
+    private void ShuffleSkills(int patternCount)
+        {
+            
+            List<int> shuffledSkills = new List<int>();
+            for (int i = 0; i < patternCount; i++)
+            {
+                shuffledSkills.Add(i);
+            }
+            
+            if (lastUsedSkill != -1)
+            {
+                shuffledSkills.Remove(lastUsedSkill); // 마지막으로 사용한 스킬을 제외합니다.
+                shuffledSkills.Add(lastUsedSkill); // 마지막으로 사용한 스킬을 큐의 마지막에 추가합니다.
+            }
+            
+            int n = shuffledSkills.Count;
+     
+            while (n > 1)
+            {
+                n--;
+                int k = Random.Range(0, n + 1);
+                (shuffledSkills[k], shuffledSkills[n]) = (shuffledSkills[n], shuffledSkills[k]);
+            }
+    
+            // 섞인 스킬 목록을 큐에 추가합니다.
+            foreach (int skill in shuffledSkills)
+            {
+                skillQueue.Enqueue(skill);
+            }
+        }
+    
+        public void RandomPatternAttack(int patternCount)
+        {
+            while (true)
+            {
+                var index = 0;
+    
+                if (skillQueue.Count > 0)
+                {
+                    index = skillQueue.Dequeue();
+                    lastUsedSkill = index;
+                }
+                else
+                {
+                    ShuffleSkills(patternCount);
+                    continue;
+                }
+    
+                switch (index)
+                {
+                    case 0:
+                        foreach (var t in RandomHit)
+                        {
+                            t.AttackStart();
+                        }
+    
+                        break;
+                    case 1:
+                        foreach (var t in RandomHit2)
+                        {
+                            t.AttackStart();
+                        }
+    
+                        break;
+                    case 2:
+                        foreach (var t in RandomHit3)
+                        {
+                            t.AttackStart();
+                        }
+                        break;
+                }
+    
+                break;
+            }
+        }
 }

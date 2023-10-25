@@ -6,6 +6,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PetDispatchBoard : MonoBehaviour
 {
@@ -28,9 +29,12 @@ public class PetDispatchBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI petScoreDescription;
 
+    [SerializeField] private TextMeshProUGUI adReduceTimeButtonText;
     [SerializeField] private TextMeshProUGUI timeText;
 
     [SerializeField] private GameObject petDispatchButton;
+    [SerializeField] private GameObject adReduceTimeButtonObject;
+    [SerializeField] private Button adReduceTimeButton;
     
     private int currentIdx = 0;
     
@@ -45,8 +49,8 @@ public class PetDispatchBoard : MonoBehaviour
 
 
         currentIdx = Mathf.Max(0, PlayerStats.GetPetDispatchGrade());
-        
-        
+
+        Subscribe2();
         Initialize(currentIdx);
     }
     private void OnEnable()
@@ -73,6 +77,16 @@ public class PetDispatchBoard : MonoBehaviour
         Observable.Interval(TimeSpan.FromSeconds(1))
             .Subscribe(_ => UpdateTimeText())
             .AddTo(disposable);
+
+    }
+    private void Subscribe2()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dailyPetDispatchReceiveCount).AsObservable().Subscribe(
+            e =>
+            {
+                adReduceTimeButtonText.SetText($"남은시간\n2시간 감소({e}/2)");
+                adReduceTimeButton.interactable = e < 2;
+            }).AddTo(this);
     }
     private void CreateLeftCells()
     {
@@ -94,7 +108,11 @@ public class PetDispatchBoard : MonoBehaviour
         UpdateUi();
     }
 
+    private bool HasRemoveAd()
+    {
+        return ServerData.iapServerTable.TableDatas["removead"].buyCount.Value > 0;
 
+    }
     public void UpdateUi()
     {
         string desc = "";
@@ -216,12 +234,14 @@ public class PetDispatchBoard : MonoBehaviour
             string formattedTime = string.Format("남은시간\n<color=white>{0:D2}시:{1:D2}분</color>", timeRemaining.Hours, timeRemaining.Minutes);
             timeText.text = formattedTime;
             petDispatchButton.SetActive(false);
+            adReduceTimeButtonObject.SetActive(true);
         }
         else if(timeRemaining.TotalSeconds > 0)
         {
             string formattedTime = string.Format("남은시간\n<color=white>{0:D2}분:{1:D2}초</color>", timeRemaining.Minutes, timeRemaining.Seconds);
             timeText.SetText(formattedTime);
             petDispatchButton.SetActive(false);
+            adReduceTimeButtonObject.SetActive(true);
         }
         else
         {
@@ -229,6 +249,7 @@ public class PetDispatchBoard : MonoBehaviour
 
             petDispatchButtonText.SetText("보상 획득");
             petDispatchButton.SetActive(true);
+            adReduceTimeButtonObject.SetActive(false);
         }
     }
     
@@ -238,6 +259,58 @@ public class PetDispatchBoard : MonoBehaviour
         string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
         return DateTime.Parse(time).ToUniversalTime().AddHours(9);
     }
+
+    public void OnClickReducePetDispatchTimeButton()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dailyPetDispatchReceiveCount).Value >= 2)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이번 파견에서는 더 이상 시간을 감소하실 수 없습니다.");
+            return;
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value < 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("환수 파견을 시작해주세요!");
+            return;
+        }
+        AdManager.Instance.ShowRewardedReward(RewardRoutine);
+        
+    }
+
+    private void RewardRoutine()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dailyPetDispatchReceiveCount).Value >= 2)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이번 파견에서는 더 이상 시간을 감소하실 수 없습니다.");
+            return;
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value < 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("환수 파견을 시작해주세요!");
+            return;
+            
+        }
+
+        adReduceTimeButton.interactable = false;
+        
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dailyPetDispatchReceiveCount).Value++;
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value-=3600*2;
+        
+        List<TransactionValue> transactions = new List<TransactionValue>();
+                
+        Param userinfo2Param = new Param();
+
+        userinfo2Param.Add(UserInfoTable_2.dailyPetDispatchReceiveCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dailyPetDispatchReceiveCount].Value);
+        userinfo2Param.Add(UserInfoTable_2.petDispatchStartTime, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.petDispatchStartTime].Value);
+
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userinfo2Param));
+
+        ServerData.SendTransactionV2(transactions, successCallBack: () =>
+        {
+            UpdateTimeText();
+            adReduceTimeButton.interactable = ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dailyPetDispatchReceiveCount).Value<2;
+        });
+    }
+
     public void OnClickPetDispatchButton()
     {
         var grade = PlayerStats.GetPetDispatchGrade();
@@ -292,6 +365,7 @@ public class PetDispatchBoard : MonoBehaviour
                 
          
                 ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value = -1;
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dailyPetDispatchReceiveCount).Value = 0;
 
                 List<TransactionValue> transactions = new List<TransactionValue>();
                 
@@ -309,6 +383,7 @@ public class PetDispatchBoard : MonoBehaviour
                 Param userinfo2Param = new Param();
 
                 userinfo2Param.Add(UserInfoTable_2.petDispatchStartTime, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.petDispatchStartTime].Value);
+                userinfo2Param.Add(UserInfoTable_2.dailyPetDispatchReceiveCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dailyPetDispatchReceiveCount].Value);
 
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
                 transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userinfo2Param));

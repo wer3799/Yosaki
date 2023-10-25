@@ -295,6 +295,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             return Item_Type.MeditationClearTicket;
         }
+        else if (key == "taeguekpension")
+        {
+            return Item_Type.TaeguekElixir;
+        }
         else
         {
             return Item_Type.SmithFire;

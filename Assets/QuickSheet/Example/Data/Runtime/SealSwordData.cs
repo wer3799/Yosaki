@@ -60,4 +60,8 @@ public class SealSwordData
   float collectioneffectvalue;
   public float Collectioneffectvalue { get {return collectioneffectvalue; } set { this.collectioneffectvalue = value;} }
   
+  [SerializeField]
+  float sealswordexp;
+  public float Sealswordexp { get {return sealswordexp; } set { this.sealswordexp = value;} }
+  
 }

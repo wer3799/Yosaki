@@ -166,6 +166,7 @@ public Sprite HyunSangWeapon11;
 
 public Sprite DragonWeapon0;
 public Sprite DragonWeapon1;
+public Sprite DragonWeapon2;
     
 [Header ("Weapon_View")]
 
@@ -293,6 +294,7 @@ public Sprite RecommendWeapon22;
     public Sprite HyunSangNorigae11;
     public Sprite DragonNorigae0;
     public Sprite DragonNorigae1;
+    public Sprite DragonNorigae2;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -306,6 +308,7 @@ public Sprite RecommendWeapon22;
     public Sprite MonthNorigae8;
     public Sprite MonthNorigae9;
     public Sprite MonthNorigae10;
+    public Sprite MonthNorigae11;
     public Sprite RecommendNorigae0;
     
     [Header ("DokebiHorn")]
@@ -431,6 +434,7 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill11;
     public Sprite VisionSkill12;
     public Sprite VisionSkill13;
+    public Sprite VisionSkill14;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -509,6 +513,8 @@ public Sprite RecommendWeapon22;
     public Sprite SinsunTreasure;
     public Sprite DragonScale;
     public Sprite YoPowerGoods;
+    public Sprite TaeguekGoods;
+    public Sprite TaeguekElixir;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -1029,6 +1035,14 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[166];
             case Item_Type.costume167:
                 return costumeThumbnail[167];
+            case Item_Type.costume168:
+                return costumeThumbnail[168];
+            case Item_Type.costume169:
+                return costumeThumbnail[169];
+            case Item_Type.costume170:
+                return costumeThumbnail[170];
+            case Item_Type.costume171:
+                return costumeThumbnail[171];
 
 
             case Item_Type.RankFrame1:
@@ -1530,6 +1544,10 @@ public Sprite RecommendWeapon22;
                 return DragonScale;      
             case Item_Type.YoPowerGoods:
                 return YoPowerGoods;   
+            case Item_Type.TaeguekGoods:
+                return TaeguekGoods;   
+            case Item_Type.TaeguekElixir:
+                return TaeguekElixir;   
             case Item_Type.GwisalTreasure:
                 return GwiSalTreasure;   
             case Item_Type.ChunguTreasure:
@@ -1839,6 +1857,8 @@ public Sprite RecommendWeapon22;
                 return DragonNorigae0;
             case Item_Type.DragonNorigae1:
                 return DragonNorigae1;
+            case Item_Type.DragonNorigae2:
+                return DragonNorigae2;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -1866,6 +1886,8 @@ public Sprite RecommendWeapon22;
                 return MonthNorigae9;
             case Item_Type.MonthNorigae10:
                 return MonthNorigae10;
+            case Item_Type.MonthNorigae11:
+                return MonthNorigae11;
             case Item_Type.RecommendNorigae0:
                 return RecommendNorigae0;
             //
@@ -2305,6 +2327,8 @@ public Sprite RecommendWeapon22;
                 return VisionSkill12;
             case Item_Type.VisionSkill13:
                 return VisionSkill13;
+            case Item_Type.VisionSkill14:
+                return VisionSkill14;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2545,6 +2569,8 @@ public Sprite RecommendWeapon22;
                 return DragonWeapon0;
             case Item_Type.DragonWeapon1:
                 return DragonWeapon1;
+            case Item_Type.DragonWeapon2:
+                return DragonWeapon2;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

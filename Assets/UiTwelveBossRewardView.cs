@@ -90,7 +90,8 @@ public class UiTwelveBossRewardView : MonoBehaviour
                                     rewardInfo.rewardType == (int)Item_Type.VisionSkill10||
                                     rewardInfo.rewardType == (int)Item_Type.VisionSkill11||
                                     rewardInfo.rewardType == (int)Item_Type.VisionSkill12||
-                                    rewardInfo.rewardType == (int)Item_Type.VisionSkill13
+                                    rewardInfo.rewardType == (int)Item_Type.VisionSkill13||
+                                    rewardInfo.rewardType == (int)Item_Type.VisionSkill14
             )
            )
         {
@@ -7369,6 +7370,37 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{localTableData.Name} 노리개 획득!!", null);
             });
         }
+        else if (type == Item_Type.DragonNorigae2)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.magicBookTable.TableDatas["magicBook113"].amount.Value += 1;
+            ServerData.magicBookTable.TableDatas["magicBook113"].hasItem.Value = 1;
+
+            Param magicBookParam = new Param();
+
+            magicBookParam.Add("magicBook113", ServerData.magicBookTable.TableDatas["magicBook113"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{localTableData.Name} 노리개 획득!!", null);
+            });
+        }
 
         //////
         //
@@ -9871,6 +9903,37 @@ public class UiTwelveBossRewardView : MonoBehaviour
             Param weaponParam = new Param();
 
             weaponParam.Add("weapon139", ServerData.weaponTable.TableDatas["weapon139"].ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+
+            //
+            Param bossParam = new Param();
+
+            bossServerData.rewardedId.Value += $"{BossServerTable.rewardSplit}{rewardInfo.idx}";
+
+            var localTableData = TableManager.Instance.TwelveBossTable.dataArray[bossServerData.idx];
+
+            bossParam.Add(localTableData.Stringid, bossServerData.ConvertToString());
+
+            transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            //
+
+            ServerData.SendTransaction(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{localTableData.Name} 무기 획득!!", null);
+            });
+        }
+        else if (type == Item_Type.DragonWeapon2)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.weaponTable.TableDatas["weapon140"].amount.Value += 1;
+            ServerData.weaponTable.TableDatas["weapon140"].hasItem.Value = 1;
+
+            Param weaponParam = new Param();
+
+            weaponParam.Add("weapon140", ServerData.weaponTable.TableDatas["weapon140"].ConvertToString());
 
             transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
 

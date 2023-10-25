@@ -208,11 +208,6 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
       #if UNITY_EDITOR
       if (int.TryParse(adjustNum.text, out var inputNum))
       {
-         if (inputNum == 0)
-         {
-            PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
-            return;
-         }
       }
       else
       {

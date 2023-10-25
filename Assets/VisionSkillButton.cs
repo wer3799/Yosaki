@@ -103,6 +103,7 @@ public class VisionSkillButton : MonoBehaviour
         ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill11).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
         ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill12).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
         ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill13).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
+        ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill14).AsObservable().Subscribe(e => { SetSkillImage(); }).AddTo(this);
         PlayerSkillCaster.Instance.visionSkillUseCount.AsObservable().Subscribe(e =>
         {
             //사용시 카운트 초기화

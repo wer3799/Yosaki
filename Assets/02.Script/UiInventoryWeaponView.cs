@@ -155,6 +155,7 @@ public class UiInventoryWeaponView : MonoBehaviour
     [SerializeField]
     private GameObject foxNorigaeGetButton;
 
+
     [SerializeField]
     private TextMeshProUGUI sealSkillDescription;
 
@@ -162,6 +163,10 @@ public class UiInventoryWeaponView : MonoBehaviour
     private TextMeshProUGUI sealWeaponName;
 
     
+    [SerializeField]
+    private GameObject gradeGameObject;
+    [SerializeField]
+    private GameObject sealSwordAwakeButtonObject;
     public WeaponData GetWeaponData()
     {
         return weaponData;
@@ -257,6 +262,7 @@ public class UiInventoryWeaponView : MonoBehaviour
         youngMulCreateButton.gameObject.SetActive(magicBookData != null && magicBookData.Id == 20);
         youngMulCreateButton2.gameObject.SetActive(magicBookData != null && magicBookData.Id == 21);
 
+        
         norigaeDescription.gameObject.SetActive(true);
 
         suhoSinDescription.gameObject.SetActive(magicBookData != null);
@@ -287,6 +293,13 @@ public class UiInventoryWeaponView : MonoBehaviour
         {
             norigaeDescription.gameObject.SetActive(false);
             weaponAbilityDescription.gameObject.SetActive(false);
+
+            gradeGameObject.SetActive(sealSwordData.Id != 28);
+            sealSwordAwakeButtonObject.SetActive(sealSwordData.Id == 28);
+            if (sealSwordData.Id == 28)
+            {
+                upgradeButton.SetActive(false);
+            }
             norigaeDescription.SetText($"미정 미정 미정");
         }
 

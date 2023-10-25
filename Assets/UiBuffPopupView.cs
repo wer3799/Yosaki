@@ -353,11 +353,11 @@ public class UiBuffPopupView : MonoBehaviour
         //월간패스 유료버프
         if (buffTableData.Stringid.Equals("ma11"))
         {
-            #if UNITY_EDITOR
-            string description = $"{serverTime.Month + 1}월 월간 패스권이 필요합니다.";
-            #else
+            // #if UNITY_EDITOR
+            // string description = $"{serverTime.Month + 1}월 월간 패스권이 필요합니다.";
+            // #else
+            //#endif
                 string description = $"{serverTime.Month}월 월간 패스권이 필요 합니다.";
-            #endif
             if (ServerData.userInfoTable.IsMonthlyPass2()) 
             {
                 if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value == 0)

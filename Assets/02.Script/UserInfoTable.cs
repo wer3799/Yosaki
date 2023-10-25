@@ -130,6 +130,7 @@ public class UserInfoTable
     public const string dosulpension = "dosulpension";
     public const string guimoonpension = "guimoonpension";
     public const string meditationpension = "meditationpension";
+    public const string taeguekpension = "taeguekpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -475,6 +476,7 @@ public class UserInfoTable
         { dosulpension, 0f },
         { guimoonpension, 0f },
         { meditationpension, 0f },
+        { taeguekpension, 0f },
 
         { marblePackChange, 0f },
         { yoguiSogulLastClear, 0f },
@@ -776,8 +778,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 21);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(21));
+                            defultValues.Add(e.Current.Key, 22);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(22));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1169,6 +1171,7 @@ public class UserInfoTable
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
 
         Param userInfo2Param = new Param();
+        
         //월간 초기화
         if (monthChanged)
         {
@@ -1186,8 +1189,8 @@ public class UserInfoTable
 
                 ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value = 0;
 
-                ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value = string.Empty;
-                ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value = string.Empty;
+                ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value = "-1";
+                ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value = "-1";
                 ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value = string.Empty;
                 ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value = string.Empty;
 
@@ -1331,6 +1334,11 @@ public class UserInfoTable
                 ServerData.userInfoTable.GetTableData(UserInfoTable.meditationpension).Value++;
             }
 
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.taeguekpension].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.taeguekpension).Value++;
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value++;
@@ -1369,6 +1377,7 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value++;
             }
+
         }
 
         attendanceUpdatedTime = ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value;
@@ -1405,6 +1414,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.dosulpension, ServerData.userInfoTable.GetTableData(UserInfoTable.dosulpension).Value);
         userInfoParam.Add(UserInfoTable.guimoonpension, ServerData.userInfoTable.GetTableData(UserInfoTable.guimoonpension).Value);
         userInfoParam.Add(UserInfoTable.meditationpension, ServerData.userInfoTable.GetTableData(UserInfoTable.meditationpension).Value);
+        userInfoParam.Add(UserInfoTable.taeguekpension, ServerData.userInfoTable.GetTableData(UserInfoTable.taeguekpension).Value);
 
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
@@ -1576,51 +1586,80 @@ public class UserInfoTable
 
         //주사위
         ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value += GameBalance.DailyEventDiceGetCount;
+        
+
         Param goodsParam = new Param();
 
+        //엘릭서
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value >= GameBalance.TaegeukSimbeopUnlockStage)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value += GameBalance.DailyElixirGetCount;
+            goodsParam.Add(GoodsTable.TaeguekElixir, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value);
+        }
         goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
         goodsParam.Add(GoodsTable.EventDice, ServerData.goodsTable.GetTableData(GoodsTable.EventDice).Value);
 
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.suhoAnimalStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value += GameBalance.DailyPetFeedClearGetValue;
-            goodsParam.Add(GoodsTable.SuhoPetFeedClear, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value);
         }
 
         //여우굴 소탕권
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.foxTowerStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value += GameBalance.FoxTowerTicketDailyGetAmount;
-            goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
         }
 
         //귀문
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.guimoonRelicStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value += GameBalance.GuimoonTicketDailyGetAmount;
-            goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
         }
 
         //귀문
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value += GameBalance.MeditationTicketDailyGetAmount;
-            goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
         }
-
         //봉인검
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.sealSwordStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.SealWeaponClear).Value += GameBalance.SealSwordTicketDailyGetAmount;
-            goodsParam.Add(GoodsTable.SealWeaponClear, ServerData.goodsTable.GetTableData(GoodsTable.SealWeaponClear).Value);
         }
 
         //도술
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.DosulClear).Value += GameBalance.dailyDosulClearTicketGetValue;
-            goodsParam.Add(GoodsTable.DosulClear, ServerData.goodsTable.GetTableData(GoodsTable.DosulClear).Value);
         }
+        var rewardData = TableManager.Instance.MonthReward.dataArray;
+        //홀수월+패스구매시
+        if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0)
+        {
+            for (int i = 0; i < rewardData.Length; i++)
+            {
+                if(rewardData[i].Monthsort!=true) continue;
+                ServerData.goodsTable.GetTableData((Item_Type)rewardData[i].Itemtype).Value += rewardData[i].Itemvalue;
+            }
+        }
+
+        goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
+        goodsParam.Add(GoodsTable.SealWeaponClear, ServerData.goodsTable.GetTableData(GoodsTable.SealWeaponClear).Value);
+        goodsParam.Add(GoodsTable.DosulClear, ServerData.goodsTable.GetTableData(GoodsTable.DosulClear).Value);
+        goodsParam.Add(GoodsTable.SuhoPetFeedClear, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value);
+        goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
+        goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
+        // List<Item_Type> itemTypes=new List<Item_Type>();
+        // for (int i = 0; i < rewardData.Length; i++)
+        // {
+        //     if (itemTypes.Contains((Item_Type)rewardData[i].Itemtype) == false)
+        //     {
+        //         goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype)).Value);
+        //         itemTypes.Add((Item_Type)rewardData[i].Itemtype);
+        //     }
+        // }
+
+
 
         //문파 소탕권
         if (tableDatas[guildTowerStart].Value != 0)

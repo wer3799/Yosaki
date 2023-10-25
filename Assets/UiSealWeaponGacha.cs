@@ -164,6 +164,11 @@ public class UiSealWeaponGacha : MonoBehaviour
         probs.Add(gachaTableData.Gachalv6 * gachaProb1);
         probs.Add(gachaTableData.Gachalv6 * gachaProb2);
         probs.Add(gachaTableData.Gachalv6 * gachaProb3);
+        
+        probs.Add(gachaTableData.Gachalv7 * gachaProb0);
+        probs.Add(gachaTableData.Gachalv7 * gachaProb1);
+        probs.Add(gachaTableData.Gachalv7 * gachaProb2);
+        probs.Add(gachaTableData.Gachalv7 * gachaProb3);
 
         List<int> serverUpdateList = new List<int>();
 

@@ -233,6 +233,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.MeditationClearTicket;
         }
+        else if (pensionKey == "taeguekpension")
+        {
+            itemType = Item_Type.TaeguekElixir;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 

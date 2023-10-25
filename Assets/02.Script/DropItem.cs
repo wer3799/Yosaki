@@ -576,6 +576,11 @@ public enum Item_Type
     costume165 = 1465, // 용인보스     
     costume166 = 1466, // 용인보스     
     costume167 = 1467, // 이벤트
+    
+    costume168 = 1468, //용인
+    costume169 = 1469, //용인
+    costume170 = 1470, // 11월 월간
+    costume171 = 1471, // 길드
 
 
     gumiho0 = 5000,
@@ -831,11 +836,13 @@ public enum Item_Type
     HyunSangWeapon11 = 7261,
     DragonWeapon0 = 7262,
     DragonWeapon1 = 7263,
+    DragonWeapon2 = 7264,
     
     HyunSangNorigae10 = 7280,
     HyunSangNorigae11 = 7281,
     DragonNorigae0 = 7282,
     DragonNorigae1 = 7283,
+    DragonNorigae2 = 7284,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -903,6 +910,7 @@ public enum Item_Type
     RecommendNorigae0 = 8612, // 투명노리개
     MonthNorigae9 = 8613, // 월간노리개
     MonthNorigae10 = 8614, // 월간노리개
+    MonthNorigae11 = 8615, // 월간노리개
 
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
@@ -961,6 +969,7 @@ public enum Item_Type
     SinsunSkill2 = 8758, 
     SinsunSkill3 = 8759,
     SinsunSkill4 = 8760,
+    VisionSkill14 = 8761,
     
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량
@@ -1026,6 +1035,8 @@ public enum Item_Type
     HonorGoods = 9046,
     DragonScale = 9047,
     YoPowerGoods = 9048,
+    TaeguekGoods = 9049,
+    TaeguekElixir = 9050,
 }
 //
 public class DropItem : PoolItem

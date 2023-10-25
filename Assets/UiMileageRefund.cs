@@ -654,6 +654,31 @@ public class UiMileageRefund : MonoBehaviour
 
             });
         }
+          if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 22)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 22;
+            //엘릭서재화 1로
+            ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value = 1;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.TaeguekElixir, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value);
+            
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("할로윈미션 및 재화 초기화");
+
+            });
+        }
         
     }
     

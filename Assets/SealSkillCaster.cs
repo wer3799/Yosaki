@@ -41,6 +41,8 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
 
         Subscribe();
 
+
+        count_Max = 100 - (int)PlayerStats.GetReduceSealSwordSkillRequireCount();
     }
 
     private void Subscribe()
@@ -82,6 +84,7 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
     private WaitForSeconds directionDelay = new WaitForSeconds(0.3f);
 
 
+    
     private IEnumerator SkillCountAnimRoutine()
     {
         while (true)

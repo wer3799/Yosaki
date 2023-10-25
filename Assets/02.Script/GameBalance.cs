@@ -546,6 +546,7 @@ public static class GameBalance
     
     //신규 하단전 각성시 하단전베기 피해량 추가상승분
     public static ObscuredFloat newLowGyungRockAwakeValue = 0.5f;
+    public static ObscuredFloat newMiddleGyungRockAwakeValue = 1f;
 
     public static ObscuredDouble GoldLimit = 1E+38;// 해당금화 이상 소지시 휴식보상 받을수없음.
     
@@ -563,6 +564,13 @@ public static class GameBalance
     
     public static ObscuredFloat dragonScaleAbilValue = 0.04f;//용인비늘베기 
     
+    public readonly static ObscuredInt TaegeukSimbeopUnlockStage = 9998;//태극심법 스테이지제한
+    public readonly static ObscuredInt DailyElixirGetCount = 1;//매일 엘릭서 얻는양
+    public static ObscuredFloat taegeukElixirValue = 360f;//360분 = 6시간 
+
+    public readonly static ObscuredFloat MonthPass_Exp = 10000;
+    public readonly static ObscuredFloat MonthPass_Gold = 20000;
+    public readonly static ObscuredFloat MonthPass_GrowthStone = 20;
     
     public static int GetSonIdx()
     {

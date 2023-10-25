@@ -123,6 +123,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //타격수
         description1 +=
             $"요도 시전 속도 강화: {Utils.ConvertNum((PlayerSkillCaster.Instance.sealChargeCount.Value + PlayerSkillCaster.Instance.sealChargeCount2.Value + PlayerSkillCaster.Instance.sealChargeCount3.Value- 1) * 100)}%\n";
+        //타격수
+        description1 +=
+            $"{CommonString.GetStatusName(StatusType.ReduceSealSwordSkillRequireCount)}: {Utils.ConvertNum(PlayerStats.GetReduceSealSwordSkillRequireCount())}\n";
         //방무 GetIgnoreDefenseValue
         
         //천공베기 확률
@@ -254,6 +257,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         description3 +=
             $"크리티컬 25단계 {CommonString.GetStatusName(StatusType.SuperCritical25DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical25DamPer() * 100f,1)}\n";
+
+        description3 +=
+            $"크리티컬 26단계 {CommonString.GetStatusName(StatusType.SuperCritical26DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical26DamPer() * 100f,1)}\n";
 
             //도술
             description1 +=

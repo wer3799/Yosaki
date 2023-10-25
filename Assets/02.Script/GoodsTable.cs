@@ -173,6 +173,7 @@ public class GoodsTable
     public static string VisionSkill11 = "VisionSkill11";
     public static string VisionSkill12 = "VisionSkill12";
     public static string VisionSkill13 = "VisionSkill13";
+    public static string VisionSkill14 = "VisionSkill14";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -247,6 +248,8 @@ public class GoodsTable
     public static string ChunguRelic = "ChunguRelic";
     public static string FoxRelic = "FR";
     public static string YoPowerGoods = "YPG";
+    public static string TaeguekGoods = "TG";
+    public static string TaeguekElixir = "TE";
     public static string FoxRelicClearTicket = "FRCT";
     public static string TransClearTicket = "TCT";
     public static string MeditationGoods = "MG";
@@ -422,6 +425,7 @@ public class GoodsTable
         { VisionSkill11, 0f },
         { VisionSkill12, 0f },
         { VisionSkill13, 0f },
+        { VisionSkill14, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -494,6 +498,8 @@ public class GoodsTable
         { ChunguRelic, 0f },
         { FoxRelic, 0f },
         { YoPowerGoods, 0f },
+        { TaeguekGoods, 0f },
+        { TaeguekElixir, 0f },
         { FoxRelicClearTicket, 0f },
         { TransClearTicket, 0f },
         { MeditationGoods, 0f },
@@ -756,6 +762,21 @@ public class GoodsTable
         {
             tableDatas[YoPowerGoods].Value += (int)yoPowerItemAddNum;
             yoPowerItemAddNum -= (int)yoPowerItemAddNum;
+        }
+    }
+    static float taeguekItemAddNum = 0;
+    public void GetTaegeukItem(float amount)
+    {
+        taeguekItemAddNum += amount;
+
+        //1개 획득할때마다 얻게하기 위해서
+        if (taeguekItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Taegeuk, 1))
+        {
+        }
+        else
+        {
+            tableDatas[TaeguekGoods].Value += (int)taeguekItemAddNum;
+            taeguekItemAddNum -= (int)taeguekItemAddNum;
         }
     }
     //
@@ -1541,6 +1562,10 @@ public class GoodsTable
             {
                 return GoodsTable.VisionSkill13;
             }
+            case Item_Type.VisionSkill14:
+            {
+                return GoodsTable.VisionSkill14;
+            }
 
             //
             //            //
@@ -1731,6 +1756,16 @@ public class GoodsTable
             case Item_Type.YoPowerGoods:
             {
                 return GoodsTable.YoPowerGoods;
+            }
+
+            case Item_Type.TaeguekGoods:
+            {
+                return GoodsTable.TaeguekGoods;
+            }
+
+            case Item_Type.TaeguekElixir:
+            {
+                return GoodsTable.TaeguekElixir;
             }
 
             case Item_Type.FoxRelicClearTicket:
@@ -2268,6 +2303,10 @@ public class GoodsTable
         {
             return Item_Type.VisionSkill13;
         }
+        else if (GoodsTable.VisionSkill14 == type)
+        {
+            return Item_Type.VisionSkill14;
+        }
 
         // //
         else if (GoodsTable.ThiefSkill0 == type)
@@ -2471,6 +2510,14 @@ public class GoodsTable
         else if (GoodsTable.YoPowerGoods == type)
         {
             return Item_Type.YoPowerGoods;
+        }
+        else if (GoodsTable.TaeguekGoods == type)
+        {
+            return Item_Type.TaeguekGoods;
+        }
+        else if (GoodsTable.TaeguekElixir == type)
+        {
+            return Item_Type.TaeguekElixir;
         }
         else if (GoodsTable.TransGoods == type)
         {

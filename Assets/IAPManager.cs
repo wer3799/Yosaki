@@ -262,6 +262,12 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
         MyDebug("OnInitializeFailed InitializationFailureReason:" + error);
     }
 
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        Debug.LogError($"OnInitializeFailed@@@@@@@@@@@@@@@@@@{error} {message}");
+        //throw new NotImplementedException();
+    }
+
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {

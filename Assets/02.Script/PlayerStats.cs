@@ -91,24 +91,28 @@ public enum StatusType
     PeachAbilUpgradePer, //복숭아 효과 강화
     SinsunHasValueUpgrade, //신선보옥당 신선베기
     HyunsangHasValueUpgrade=75, //귀멸증표당 귀멸베기
-    SuperCritical21DamPer, //초월베기
     
+    SuperCritical21DamPer, //초월베기
     SuperCritical8AddDam,
     SuperCritical13AddDam,
     SuperCritical18AddDam,
-    
     SuperCritical22DamPer, //진 귀살베기
+    
     StageRelicUpgrade, //유물 복원 강화
     MeditationGainPer, //내면세계 소탕량 증가
     SuperCritical23DamPer, //심상베기
     AddVisionSkillUseCount, //비전스킬횟수증가
     AddSealSwordSkillHitCount, //요도 타수강화
-    ReduceDosulSkillCoolTime, //도술재사용시간
     
+    ReduceDosulSkillCoolTime, //도술재사용시간
     EnhanceVisionSkill, //비전스킬효과 강화
     SuperCritical24DamPer, //용인베기
     SuperCritical25DamPer, //요력개방
+    EnhanceTaegeukCritical, //태극베기증폭
 
+    SuperCritical26DamPer, //진 요도베기
+
+    ReduceSealSwordSkillRequireCount, //요도 시전 타수 감소
 }
 
 
@@ -1036,6 +1040,7 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetSAHotTimeEventBuffEffect(StatusType.GoldGainPer);
+        ret += GetMonthBuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
         ret += GetGuimoonHasEffect2(StatusType.GoldGainPer);
         return ret;
@@ -1054,6 +1059,7 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetSAHotTimeEventBuffEffect(StatusType.GoldGainPer);
+        ret += GetMonthBuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
 
         ret += GetGuimoonHasEffect2(StatusType.GoldGainPer);
@@ -1118,6 +1124,8 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.ExpGainPer);
         ret += GetSAHotTimeEventBuffEffect(StatusType.ExpGainPer);
+        ret += GetMonthBuffEffect(StatusType.ExpGainPer);
+        
         ret += GetOneYearBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
         ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
@@ -1135,6 +1143,8 @@ public static class PlayerStats
         ret += GetHotTimeEventBuffEffect(StatusType.ExpGainPer);
         
         ret += GetSAHotTimeEventBuffEffect(StatusType.ExpGainPer);
+        
+        ret += GetMonthBuffEffect(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -1301,6 +1311,7 @@ public static class PlayerStats
         ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer);
+        ret += GetMonthBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetBuffValue(StatusType.MagicStoneAddPer);
         ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
         ret += GetChuSeokBuffValue(StatusType.MagicStoneAddPer);
@@ -1769,6 +1780,17 @@ public static class PlayerStats
             return 0f;
         }
     }
+    private static float GetNewMiddleGyungRockAwakeAbilValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower5).Value >= 10)
+        {
+            return GameBalance.newMiddleGyungRockAwakeValue;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
 
     //중단전베기
     public static float GetSuperCritical13DamPer()
@@ -1782,6 +1804,14 @@ public static class PlayerStats
         ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * SuperCritical13AddDam();
 
         ret += GetPassiveSkillValue(StatusType.SuperCritical13DamPer);
+        
+        ret += GetNewMiddleGyungRockAwakeAbilValue();
+        
+        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer);
+
+        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer) * GetGuildTowerChimUpgradeValue();
+        
+        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer) * SuperCritical8AddDam();
 
         return ret;
     }
@@ -1920,7 +1950,7 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical16DamPer);
 
-        return ret;
+        return ret * (1 + GetEnhanceTaegeukCriticalAbil(StatusType.EnhanceTaegeukCritical));
     }
 
     //영혼 베기
@@ -2034,6 +2064,18 @@ public static class PlayerStats
         
         return ret;
     }
+
+    //진 요도 피해
+    public static float GetSuperCritical26DamPer()
+    {
+        float ret = 0f;
+
+        ret += SealSwordEvolutionAbility(StatusType.SuperCritical26DamPer);
+        
+        return ret;
+    }
+
+ 
 
     //요도 추가피해량
     public static float GetSealSwordDam()
@@ -2544,6 +2586,42 @@ public static class PlayerStats
 
             return ret;
         }
+    }
+    //홀수 월간버프
+    public static float GetMonthBuffEffect(StatusType statusType)
+    {
+        float ret = 0f;
+        //홀수가 아니면 0
+        if (ServerData.userInfoTable.IsMonthlyPass2() != true) return 0f;
+        //패스권없으면 0 
+        if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value < 1) return 0f;
+
+        if (statusType == StatusType.GoldGainPer)
+        {
+            return GameBalance.MonthPass_Gold;
+        }
+        else if (statusType == StatusType.ExpGainPer)
+        {
+            return  GameBalance.MonthPass_Exp;
+        }
+        else if (statusType == StatusType.MagicStoneAddPer)
+        {
+            return  GameBalance.MonthPass_GrowthStone;
+        }
+
+        var tableData =  TableManager.Instance.MonthBuff.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            //홀수가 아니면
+            if (tableData[i].Monthsort != true) continue;
+            //타입이 아니면
+            if(statusType!=(StatusType)tableData[i].Statustype) continue;
+            //타입이 같으면
+            return tableData[i].Statusvalue;
+        }
+        
+        return ret;
     }
 
     public static float GetHotTimeEventBuffEffect(StatusType statusType)
@@ -3720,6 +3798,15 @@ public static class PlayerStats
         
         return ret;
     }
+    //요도 시전요구최대치 감소
+    public static float GetReduceSealSwordSkillRequireCount()
+    {
+        float ret = 0f;
+
+        ret += SealSwordEvolutionAbility(StatusType.ReduceSealSwordSkillRequireCount);
+        
+        return ret;
+    }
     
 
     public static float GetVisionTowerAbil()
@@ -4623,7 +4710,18 @@ public static class PlayerStats
 
         return (StatusType)tableData[grade].Abiltype != type ? 0f : tableData[grade].Abilvalue;
     }
+    public static float GetEnhanceTaegeukCriticalAbil(StatusType type)
+    {
+        int grade = -1;
+        
+        grade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.taegeukSimbeopIdx).Value;
 
+        if (grade < 0) return 0f;
+        
+        var tableData =  TableManager.Instance.TaegeukSimbeop.dataArray;
+
+        return (StatusType)tableData[grade].Abiltype != type ? 0f : tableData[grade].Abilvalue;
+    }
     public static float GetSusanoAbil(StatusType type)
     {
         int grade = GetSusanoGrade();
@@ -5651,6 +5749,27 @@ public static class PlayerStats
         meditationInitialize = true;
 
     }
+    public static float SealSwordEvolutionAbility(StatusType type)
+    {
+        Dictionary<StatusType, float> dictionary = new Dictionary<StatusType, float>();
+
+        var tableData = TableManager.Instance.SealSwordEvolution.dataArray;
+
+        var idx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).Value;
+
+        for (int i = 0; i <= idx; i++)
+        {
+            AddOrUpdateValue(dictionary, (StatusType)tableData[i].Abiltype, tableData[i].Abilvalue);
+        }
+        if(dictionary.TryGetValue(type, out float value))
+        {
+            return value;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
     public static void AddOrUpdateValue(Dictionary<StatusType, float> dictionary, StatusType key, float value)
     {
         if (dictionary.ContainsKey(key))
@@ -5922,6 +6041,8 @@ public static class PlayerStats
         ret += GetSpecialSuhoRelicAbil(StatusType.SuhoGainPer);
         
         ret += ServerData.petTable.GetStatusValue(StatusType.SuhoGainPer);
+        
+        ret += GetMonthBuffEffect(StatusType.SuhoGainPer);
 
         return ret;
     }
@@ -5934,6 +6055,8 @@ public static class PlayerStats
         ret += GetSpecialFoxRelicAbil(StatusType.FoxRelicGainPer);
 
         ret += ServerData.petTable.GetStatusValue(StatusType.FoxRelicGainPer);
+        
+        ret += GetMonthBuffEffect(StatusType.FoxRelicGainPer);
 
         return ret;
     }
@@ -5946,6 +6069,8 @@ public static class PlayerStats
         ret += GetSpecialDosulRelicAbil(StatusType.DosulGainPer);
         
         ret += ServerData.petTable.GetStatusValue(StatusType.DosulGainPer);
+        
+        ret += GetMonthBuffEffect(StatusType.DosulGainPer);
 
         return ret;
     }
@@ -5956,6 +6081,8 @@ public static class PlayerStats
         ret += GetSpecialMeditationRelicAbil(StatusType.MeditationGainPer);
         
         ret += ServerData.petTable.GetStatusValue(StatusType.MeditationGainPer);
+        
+        ret += GetMonthBuffEffect(StatusType.MeditationGainPer);
 
         return ret;
     }
@@ -6074,6 +6201,29 @@ public static class PlayerStats
         var tableDatas = TableManager.Instance.gyungRockTowerTable4.dataArray;
 
         int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower4).Value;
+
+        if (currentLevel == 0)
+        {
+            return 0f;
+        }
+
+        for (int i = 0; i < currentLevel; i++)
+        {
+            if ((StatusType)tableDatas[i].Rewardtype == statusType)
+            {
+                ret += tableDatas[i].Rewardvalue;
+            }
+        }
+
+        return ret;
+    }
+    public static float GetGyungRockEffect5(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.gyungRockTowerTable5.dataArray;
+
+        int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower5).Value;
 
         if (currentLevel == 0)
         {
