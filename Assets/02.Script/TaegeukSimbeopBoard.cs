@@ -240,7 +240,7 @@ public class TaegeukSimbeopBoard : MonoBehaviour
             return;
         }
 
-        upgradeButton.interactable = false;
+        upgradeButton.enabled = false;
         
         bool isUpgrade = false;
         var successProb= (int)((currentGoods + addValueSum) / maxRequire*100);//10~99
@@ -308,7 +308,7 @@ public class TaegeukSimbeopBoard : MonoBehaviour
         {
             LogManager.Instance.SendLogType("TaegeukSimbeop", isUpgrade.ToString(), $"성공확률 : {Mathf.Min(successProb,100)}%");
             currentElixir.Value = 0;
-            upgradeButton.interactable = true;
+            upgradeButton.enabled = true;
             if (isUpgrade)
             {
                 PopupManager.Instance.ShowAlarmMessage($"태극 심법 단련에 성공하셨습니다.");
