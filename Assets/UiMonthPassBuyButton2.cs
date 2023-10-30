@@ -65,11 +65,16 @@ public class UiMonthPassBuyButton2 : MonoBehaviour
         }
 
 #if UNITY_EDITOR|| TEST
-        GetPackageItem(monthPassKey);
+        PopupManager.Instance.ShowYesNoPopup($"{CommonString.Notice}",$"구매시 {ServerData.userInfoTable.currentServerTime.Day}일분의 패스 소탕권을 획득 합니다.",()=>
+        {
+            GetPackageItem(monthPassKey);    
+        },null);
         return;
 #endif
-
-        IAPManager.Instance.BuyProduct(monthPassKey);
+        PopupManager.Instance.ShowYesNoPopup($"{CommonString.Notice}",$"구매시 {ServerData.userInfoTable.currentServerTime.Day}일분의 패스 소탕권을 획득 합니다.",()=>
+        {
+            IAPManager.Instance.BuyProduct(monthPassKey);
+        },null);
     }
 
     public void GetPackageItem(string productId)
@@ -100,20 +105,22 @@ public class UiMonthPassBuyButton2 : MonoBehaviour
 
         string str = "";
         int ticketCount = 0;
+        var dayRefund = ServerData.userInfoTable.currentServerTime.Day;
         Param goodsParam = new Param();
         for (int i = 0; i < rewardData.Length; i++)
         {
             if(rewardData[i].Monthsort!=true) continue;
-            ServerData.goodsTable.GetTableData((Item_Type)rewardData[i].Itemtype).Value += rewardData[i].Itemvalue;
+            var itemValue = rewardData[i].Itemvalue * dayRefund;
+            ServerData.goodsTable.GetTableData((Item_Type)rewardData[i].Itemtype).Value += itemValue;
             str += rewardData[i].Description+",";
             if (ticketCount <1)
             {
-                ticketCount = (int)rewardData[i].Itemvalue;
+                ticketCount = (int)itemValue;
             }
             goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype)).Value);
         }
 
-        str += $"#소탕권 {ticketCount}개 획득!";
+        str += $"# 소탕권\n{ticketCount}일분 획득!";
         str = str.Replace(",#", "");
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 

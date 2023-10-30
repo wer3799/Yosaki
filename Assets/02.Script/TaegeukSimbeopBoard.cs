@@ -240,6 +240,8 @@ public class TaegeukSimbeopBoard : MonoBehaviour
             return;
         }
 
+        upgradeButton.interactable = false;
+        
         bool isUpgrade = false;
         var successProb= (int)((currentGoods + addValueSum) / maxRequire*100);//10~99
         //엘릭서 없는 강화 확률 100%
@@ -306,6 +308,7 @@ public class TaegeukSimbeopBoard : MonoBehaviour
         {
             LogManager.Instance.SendLogType("TaegeukSimbeop", isUpgrade.ToString(), $"성공확률 : {Mathf.Min(successProb,100)}%");
             currentElixir.Value = 0;
+            upgradeButton.interactable = true;
             if (isUpgrade)
             {
                 PopupManager.Instance.ShowAlarmMessage($"태극 심법 단련에 성공하셨습니다.");
