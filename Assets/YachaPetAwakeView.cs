@@ -26,7 +26,7 @@ public class YachaPetAwakeView : MonoBehaviour
 
     private void Intialize()
     {
-        priceText.SetText(Utils.ConvertBigNum(GameBalance.AwakePetUpgradePrice));
+        priceText.SetText(Utils.ConvertBigNum(GameBalance.AwakePetUpgradePrice*10f));
     }
 
     private void Subscribe()
@@ -79,14 +79,14 @@ public class YachaPetAwakeView : MonoBehaviour
     {
         float currentGrowthStoneAmount = ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
 
-        if (currentGrowthStoneAmount < GameBalance.AwakePetUpgradePrice)
+        if (currentGrowthStoneAmount < GameBalance.AwakePetUpgradePrice*10f)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)}이 부족합니다.");
             return;
         }
 
-        ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= GameBalance.AwakePetUpgradePrice;
-        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value += 1;
+        ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= GameBalance.AwakePetUpgradePrice*10f;
+        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value += 10;
         //버프시간저장
         SaveManager.Instance.SyncBuffData();
         if (syncRoutine != null)
