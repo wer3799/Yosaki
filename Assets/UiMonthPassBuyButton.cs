@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using TMPro;
 using UnityEngine;
 using UniRx;
@@ -12,7 +13,7 @@ public class UiMonthPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string monthPassKey = "monthpass23";
+    public static readonly string monthPassKey = "monthpass27";
     public static readonly string monthPassKey_New = "monthpass25";
 
     private Button buyButton;
@@ -65,11 +66,16 @@ public class UiMonthPassBuyButton : MonoBehaviour
         }
 
 #if UNITY_EDITOR|| TEST
-        GetPackageItem(monthPassKey_New);
+        PopupManager.Instance.ShowYesNoPopup($"{CommonString.Notice}",$"구매시 소탕권 {ServerData.userInfoTable.currentServerTime.Day}일치 획득가능합니다.",()=>
+        {
+            GetPackageItem(monthPassKey);    
+        },null);
         return;
 #endif
-
-        IAPManager.Instance.BuyProduct(monthPassKey_New);
+        PopupManager.Instance.ShowYesNoPopup($"{CommonString.Notice}",$"구매시 소탕권 {ServerData.userInfoTable.currentServerTime.Day}일치 획득가능합니다.",()=>
+        {
+            IAPManager.Instance.BuyProduct(monthPassKey);
+        },null);
     }
 
     public void GetPackageItem(string productId)
@@ -89,12 +95,44 @@ public class UiMonthPassBuyButton : MonoBehaviour
             // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
         }
 
-        if (tableData.Productid != monthPassKey_New) return;
+        if (tableData.Productid != monthPassKey) return;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
+        //짝수월+패스구매시
+        var rewardData = TableManager.Instance.MonthReward.dataArray;
+        List<TransactionValue> transactionList = new List<TransactionValue>();
 
+        string str = "";
+        int ticketCount = 0;
+        var dayRefund = ServerData.userInfoTable.currentServerTime.Day;
+        Param goodsParam = new Param();
+        for (int i = 0; i < rewardData.Length; i++)
+        {
+            if(rewardData[i].Monthsort!=false) continue;
+            var itemValue = rewardData[i].Itemvalue * dayRefund;
+            ServerData.goodsTable.GetTableData((Item_Type)rewardData[i].Itemtype).Value += itemValue;
+            str += rewardData[i].Description+",";
+            if (ticketCount <1)
+            {
+                ticketCount = (int)itemValue;
+            }
+            goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype)).Value);
+        }
+
+        str += $"# 소탕권 {ticketCount}개 획득!";
+        str = str.Replace(",#", "");
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+
+        Param iapParam = new Param();
+        
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
+        
+        iapParam.Add(tableData.Productid, ServerData.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
+        transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
 
-        ServerData.iapServerTable.UpData(tableData.Productid);
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, str, null);
+        });
     }
 }

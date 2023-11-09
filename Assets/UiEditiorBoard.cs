@@ -48,6 +48,8 @@ public class UiEditiorBoard : MonoBehaviour
     [SerializeField]
     private Toggle showClosedUiToggle;
     [SerializeField]
+    private Toggle showBlackFoxUiToggle;
+    [SerializeField]
     private Toggle showCatToggle;
     [SerializeField]
     private Toggle showTwelveToggle;
@@ -73,6 +75,8 @@ public class UiEditiorBoard : MonoBehaviour
     private Toggle showChunguToggle;
     [SerializeField]
     private Toggle showNewBossToggle;
+    [SerializeField]
+    private Toggle showSuhoBossToggle;
     [SerializeField]
     private Toggle showHellToggle;
     [SerializeField]
@@ -141,6 +145,8 @@ public class UiEditiorBoard : MonoBehaviour
         
         showClosedUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showClosed) == 1;
         
+        showBlackFoxUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showBlackFox) == 1;
+        
         showCatToggle.isOn = PlayerPrefs.GetInt(SettingKey.showCatUi) == 1;
         
         showTwelveToggle.isOn = PlayerPrefs.GetInt(SettingKey.showTwelveUi) == 1;
@@ -166,6 +172,8 @@ public class UiEditiorBoard : MonoBehaviour
         showChunguToggle.isOn = PlayerPrefs.GetInt(SettingKey.showChunguUi) == 1;
         
         showNewBossToggle.isOn = PlayerPrefs.GetInt(SettingKey.showNewBossUi) == 1;
+        
+        showSuhoBossToggle.isOn = PlayerPrefs.GetInt(SettingKey.showSuhoBossUi) == 1;
         
         showHellToggle.isOn = PlayerPrefs.GetInt(SettingKey.showHellUi) == 1;
 
@@ -400,6 +408,17 @@ public class UiEditiorBoard : MonoBehaviour
 
         SettingData.showClosed.Value = on ? 1 : 0;
     }
+    public void BlackFoxUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showBlackFox.Value = on ? 1 : 0;
+    }
     
     public void CatUiOnOff(bool on)
     {
@@ -543,6 +562,17 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showNewBossUi.Value = on ? 1 : 0;
+    }
+    public void SuhoBossUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showSuhoBossUi.Value = on ? 1 : 0;
     }
     public void HellUiOnOff(bool on)
     {

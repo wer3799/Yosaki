@@ -10,6 +10,9 @@ public class UiPackageShop : MonoBehaviour
     private UiIapItemCell iapCellPrefab;
 
     [SerializeField]
+    private UiLimitedCostumePackageCell costumeCellPrefab;
+
+    [SerializeField]
     private Transform gemCategoryParent;
 
     [SerializeField]
@@ -211,6 +214,16 @@ public class UiPackageShop : MonoBehaviour
                 cell.Initialize(e.Current.Value);//
             }
             
+        }
+
+        var costumeTableData = TableManager.Instance.Costume.dataArray;
+
+        for (int i = 0; i < costumeTableData.Length; i++)
+        {
+            if(costumeTableData[i].Price<1) continue;
+            
+            var cell = Instantiate<UiLimitedCostumePackageCell>(costumeCellPrefab, costumePetWeapon[3]);
+            cell.Initialize(costumeTableData[i]);
         }
     }
 }

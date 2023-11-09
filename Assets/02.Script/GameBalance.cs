@@ -404,15 +404,17 @@ public static class GameBalance
     public static ObscuredInt suhoAnimalAwakeLevel  = 6;
 
     //핫타임 이벤트
-    public readonly static ObscuredFloat HotTimeEvent_Exp = 10;
-    public readonly static ObscuredFloat HotTimeEvent_Gold = 10;
+    public readonly static ObscuredFloat HotTimeEvent_Exp = 0;
+    public readonly static ObscuredFloat HotTimeEvent_Gold = 0;
     public readonly static ObscuredFloat HotTimeEvent_GrowthStone = 7;
     public readonly static ObscuredFloat HotTimeEvent_Marble = 3;
+    public readonly static ObscuredFloat HotTimeEvent_YoPowerGoods = 0.1f;
     
-    public readonly static ObscuredFloat HotTimeEvent_Ad_Exp = 20;
-    public readonly static ObscuredFloat HotTimeEvent_Ad_Gold = 20;
+    public readonly static ObscuredFloat HotTimeEvent_Ad_Exp = 0;
+    public readonly static ObscuredFloat HotTimeEvent_Ad_Gold = 0;
     public readonly static ObscuredFloat HotTimeEvent_Ad_GrowthStone = 15;
     public readonly static ObscuredFloat HotTimeEvent_Ad_Marble = 5;
+    public readonly static ObscuredFloat HotTimeEvent_Ad_YoPowerGoods = 0.4f;
     //
     public readonly static ObscuredBool isOddMonthlyPass = false; // 월간훈련 홀수월, 짝수월
     
@@ -488,17 +490,19 @@ public static class GameBalance
     //
     
     public static ObscuredDouble refundGoldBarRatio = 1E+34; //보유금화환불단위
-    public static ObscuredInt refundCriDamGoldBarRatio = 4000;//크리티컬데미지환불 
+    public static ObscuredInt refundCriDamGoldBarRatio = 1;//크리티컬데미지 1차이당 백금화 환불 개수 
     public static ObscuredInt criticalGraduateValue = 7500;//각성시 크리티컬레벨
     public static ObscuredInt attackGraduateValue = 50000;//각성시 공격력
-    public static ObscuredInt criticalGraduateRefundStandard = 6850;//각성시 크리티컬 환불기준레벨
-    public static ObscuredInt goldGraduateScore = 65850;// 금화능력치총합레벨조건
+    public static ObscuredInt criticalGraduateRefundStandard = 5850;//각성시 크리티컬 환불기준레벨
+    public static ObscuredInt goldGraduateScore = 64850;// 금화능력치총합레벨조건
     public static ObscuredInt hellRelicGraduateScore = 4000;// 지옥영숲각성컷
     public static ObscuredInt hellRelicGraduateValue = 100000;// 지옥영숲각성시레벨
     
     public static ObscuredFloat Gum_memory = 0.0000010f;
     public static ObscuredFloat Sum_memory = 0.0000008f;
     public static ObscuredFloat Sim_memory = 0.0000004f;
+    public static ObscuredFloat Sin_memory = 0.0000002f;
+    public static ObscuredFloat Dragon_memory = 0.00000003f;
 
     
     public static ObscuredFloat Special0_GoldBar = 0.0000000004f;
@@ -533,7 +537,9 @@ public static class GameBalance
     //사신수구슬
     public static ObscuredFloat sinsuUpgradeValue = 0.15f;
     //천구재화
-    public static ObscuredFloat chunguAbil = 0.015f;
+    public static ObscuredFloat chunguAbil = 0.01f;
+    //수호구슬
+    public static ObscuredFloat suhoTreasureAbil = 0.05f;
     
     public static ObscuredInt visionSkill6GainIdx = 0;
     public static ObscuredInt visionSkill7GainIdx = 112;
@@ -566,6 +572,7 @@ public static class GameBalance
     
     public readonly static ObscuredInt TaegeukSimbeopUnlockStage = 9998;//태극심법 스테이지제한
     public readonly static ObscuredInt DailyElixirGetCount = 1;//매일 엘릭서 얻는양
+    public readonly static ObscuredInt DailyBlackFoxClearGetCount = 1;//검은구미호전
     public static ObscuredFloat taegeukElixirValue = 360f;//360분 = 6시간 
 
     public readonly static ObscuredFloat MonthPass_Exp = 10000;

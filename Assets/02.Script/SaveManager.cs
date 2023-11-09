@@ -51,16 +51,15 @@ public class SaveManager : SingletonMono<SaveManager>
 
     private void GetHotTimeGoods()
     {
-        // if (Utils.HasHotTimeEventPass() == false)
-        // {
-        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 1;
-        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += 1;
-        // }
-        // else
-        // {
-        //     ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 2;
-        // }
-        ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 2;
+        if (Utils.HasHotTimeEventPass() == false)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 1;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += 1;
+        }
+        else
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += 2;
+        }
     }
 
     private void CheckClientVersion()
@@ -284,6 +283,7 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.VisionTreasure,
         GoodsTable.DarkTreasure,
         GoodsTable.SinsunTreasure,
+        GoodsTable.GwisalTreasure,
         GoodsTable.DragonScale,
         GoodsTable.SumiFire,
         GoodsTable.SumiFireKey,
@@ -305,7 +305,18 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.GuildTowerHorn,
         GoodsTable.DosulClear,
         GoodsTable.DosulGoods,
+        GoodsTable.BlackFoxGoods,
+        GoodsTable.BlackFoxClear,
         GoodsTable.TransGoods,
+        GoodsTable.HonorGoods,
+        GoodsTable.DaesanGoods,
+        GoodsTable.MeditationGoods,
+        GoodsTable.MeditationClearTicket,
+        GoodsTable.GuimoonRelic,
+        GoodsTable.GuimoonRelicClearTicket,
+        
+        GoodsTable.TaeguekElixir,
+        GoodsTable.SuhoTreasure,
     };
 
 

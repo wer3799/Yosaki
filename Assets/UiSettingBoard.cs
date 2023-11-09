@@ -814,6 +814,7 @@ public static class SettingKey
     public static string showTransUi = "showTransUi";
     public static string showDanjeon = "showDanjeon";
     public static string showClosed = "showClosed";
+    public static string showBlackFox = "showBlackFox";
 
     public static string showCatUi = "showCatUi";
     public static string showTwelveUi = "showTwelveUi";
@@ -828,6 +829,7 @@ public static class SettingKey
     public static string showSangoonUi= "showSangoonUi";
     public static string showChunguUi= "showChunguUi";
     public static string showNewBossUi= "showNewBossUi";
+    public static string showSuhoBossUi= "showSuhoBossUi";
 
     public static string showHellUi = "showHellUi";
     public static string showChunUi = "showChunUi";
@@ -915,6 +917,7 @@ public static class SettingData
     public static ReactiveProperty<int> showTransUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showDanjeon = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showClosed = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showBlackFox = new ReactiveProperty<int>();
 
     //보스도전
     public static ReactiveProperty<int> showCatUi    = new ReactiveProperty<int>();
@@ -930,6 +933,7 @@ public static class SettingData
     public static ReactiveProperty<int> showSangoonUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showChunguUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showNewBossUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showSuhoBossUi = new ReactiveProperty<int>();
 
     //삼천세계
     public static ReactiveProperty<int> showHellUi  = new ReactiveProperty<int>();
@@ -1141,6 +1145,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.showClosed) == false)
             PlayerPrefs.SetInt(SettingKey.showClosed, 1);
         
+        if (PlayerPrefs.HasKey(SettingKey.showBlackFox) == false)
+            PlayerPrefs.SetInt(SettingKey.showBlackFox, 1);
+        
         //
 
     }
@@ -1242,6 +1249,8 @@ public static class SettingData
         
         showClosed.Value = PlayerPrefs.GetInt(SettingKey.showClosed, 1);
         
+        showBlackFox.Value = PlayerPrefs.GetInt(SettingKey.showBlackFox, 1);
+        
         
         //보스도전
         showCatUi.Value = PlayerPrefs.GetInt(SettingKey.showCatUi, 1);
@@ -1269,6 +1278,8 @@ public static class SettingData
         showChunguUi.Value = PlayerPrefs.GetInt(SettingKey.showChunguUi, 1);
 
         showNewBossUi.Value = PlayerPrefs.GetInt(SettingKey.showNewBossUi, 1);
+        
+        showSuhoBossUi.Value = PlayerPrefs.GetInt(SettingKey.showSuhoBossUi, 1);
 
         showHellUi.Value = PlayerPrefs.GetInt(SettingKey.showHellUi, 1);
 
@@ -1554,6 +1565,10 @@ public static class SettingData
         {
             PlayerPrefs.SetInt(SettingKey.showClosed, e);
         });
+        showBlackFox.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showBlackFox, e);
+        });
 //
         showCatUi.AsObservable().Subscribe(e =>
         {
@@ -1606,6 +1621,10 @@ public static class SettingData
         showNewBossUi.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showNewBossUi, e);
+        });
+        showSuhoBossUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showSuhoBossUi, e);
         });
         
         showHellUi.AsObservable().Subscribe(e =>

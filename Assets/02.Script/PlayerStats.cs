@@ -106,13 +106,20 @@ public enum StatusType
     
     ReduceDosulSkillCoolTime, //도술재사용시간
     EnhanceVisionSkill, //비전스킬효과 강화
-    SuperCritical24DamPer, //용인베기
+    SuperCritical24DamPer,  //용베기
     SuperCritical25DamPer, //요력개방
     EnhanceTaegeukCritical, //태극베기증폭
 
     SuperCritical26DamPer, //진 요도베기
 
     ReduceSealSwordSkillRequireCount, //요도 시전 타수 감소
+    EnhanceSuhoCritical, //수호베기증폭
+    EnhanceSinsuCritical, //신수베기증폭
+    EnhanceHyungsuCritical, //흉수베기증폭
+    EnhanceSoulCritical, //영혼베기증폭
+    EnhanceChunguCritical, //천구베기증폭
+    YoPowerGoodsGainPer, //요석 획득 증가
+    DragonHasValueUpgrade,//용인비늘당 개수증가
 }
 
 
@@ -1041,6 +1048,7 @@ public static class PlayerStats
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetSAHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetMonthBuffEffect(StatusType.GoldGainPer);
+        ret += GetMonth2BuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
         ret += GetGuimoonHasEffect2(StatusType.GoldGainPer);
         return ret;
@@ -1060,6 +1068,7 @@ public static class PlayerStats
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetSAHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetMonthBuffEffect(StatusType.GoldGainPer);
+        ret += GetMonth2BuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
 
         ret += GetGuimoonHasEffect2(StatusType.GoldGainPer);
@@ -1123,12 +1132,13 @@ public static class PlayerStats
         ret += GetBuffValue(StatusType.ExpGainPer);
         ret += GetHotTimeBuffEffect(StatusType.ExpGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.ExpGainPer);
-        ret += GetSAHotTimeEventBuffEffect(StatusType.ExpGainPer);
+       // ret += GetSAHotTimeEventBuffEffect(StatusType.ExpGainPer);
         ret += GetMonthBuffEffect(StatusType.ExpGainPer);
+        ret += GetMonth2BuffEffect(StatusType.ExpGainPer);
         
-        ret += GetOneYearBuffValue(StatusType.ExpGainPer);
-        ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
-        ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
+        //ret += GetOneYearBuffValue(StatusType.ExpGainPer);
+        //ret += GetChuSeokBuffValue(StatusType.ExpGainPer);
+        //ret += GetChuSeokBuffValue2(StatusType.ExpGainPer);
         //
 
         return ret;
@@ -1145,6 +1155,8 @@ public static class PlayerStats
         ret += GetSAHotTimeEventBuffEffect(StatusType.ExpGainPer);
         
         ret += GetMonthBuffEffect(StatusType.ExpGainPer);
+        
+        ret += GetMonth2BuffEffect(StatusType.ExpGainPer);
 
         return ret;
     }
@@ -1310,12 +1322,13 @@ public static class PlayerStats
 
         ret += GetHotTimeBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer);
-        ret += GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer);
+        //ret += GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetMonthBuffEffect(StatusType.MagicStoneAddPer);
+        ret += GetMonth2BuffEffect(StatusType.MagicStoneAddPer);
         ret += GetBuffValue(StatusType.MagicStoneAddPer);
-        ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
-        ret += GetChuSeokBuffValue(StatusType.MagicStoneAddPer);
-        ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
+        //ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
+        //ret += GetChuSeokBuffValue(StatusType.MagicStoneAddPer);
+        //ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
 
 
         //  ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
@@ -1330,12 +1343,12 @@ public static class PlayerStats
 
         ret += GetHotTimeBuffEffect(StatusType.MarbleAddPer);
         ret += GetHotTimeEventBuffEffect(StatusType.MarbleAddPer);
-        ret += GetSAHotTimeEventBuffEffect(StatusType.MarbleAddPer);
+        //ret += GetSAHotTimeEventBuffEffect(StatusType.MarbleAddPer);
         ret += GetBuffValue(StatusType.MarbleAddPer);
 
-        ret += GetOneYearBuffValue(StatusType.MarbleAddPer);
-        ret += GetChuSeokBuffValue(StatusType.MarbleAddPer);
-        ret += GetChuSeokBuffValue2(StatusType.MarbleAddPer);
+        //ret += GetOneYearBuffValue(StatusType.MarbleAddPer);
+        //ret += GetChuSeokBuffValue(StatusType.MarbleAddPer);
+        //ret += GetChuSeokBuffValue2(StatusType.MarbleAddPer);
 
         //  ret += GetMonthlyFreeBuffValue(StatusType.MarbleAddPer);
         // ret += GetMonthlyAdBuffValue(StatusType.MarbleAddPer);
@@ -1844,7 +1857,7 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical9DamPer);
 
-        return ret;
+        return ret * (1 + GetEnhanceHyungsuCritical());
     }
 
     //섬광베기
@@ -1935,6 +1948,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical15DamPer);
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical15DamPer);
+        
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Sin_memory);
 
         return ret;
     }
@@ -1950,9 +1965,63 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical16DamPer);
 
-        return ret * (1 + GetEnhanceTaegeukCriticalAbil(StatusType.EnhanceTaegeukCritical));
+        return ret * (1 + GetEnhanceTaegeukCritical());
     }
 
+    //태극증폭
+    public static float GetEnhanceTaegeukCritical()
+    {
+        float ret = 0f;
+
+        ret += GetEnhanceTaegeukCriticalAbil(StatusType.EnhanceTaegeukCritical);
+
+        return ret;
+    }
+    //수호증폭
+    public static float GetEnhanceSuhoCritical()
+    {
+        float ret = 0f;
+
+        ret += GetSuhoTreasureAbilHasEffect();
+
+        return ret;
+    }
+    //신수증폭
+    public static float GetEnhanceSinsuCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceSinsuCritical);
+        
+        return ret;
+    }    
+    //흉수증폭
+    public static float GetEnhanceHyungsuCritical()
+    {
+        float ret = 0f;
+        
+        ret += GetBlackFoxEffect(StatusType.EnhanceHyungsuCritical);
+
+        return ret;
+    }   
+    //영혼증폭
+    public static float GetEnhanceSoulCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceSoulCritical);
+
+        return ret;
+    }    
+    //천구증폭
+    public static float GetEnhanceChunguCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceChunguCritical);
+
+        return ret;
+    }
     //영혼 베기
     public static float GetSuperCritical17DamPer()
     {
@@ -1968,7 +2037,7 @@ public static class PlayerStats
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical17DamPer);
 
-        return ret;
+        return ret*(1+GetEnhanceSoulCritical());
     }
 
     //귀살 베기
@@ -2006,7 +2075,7 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical20DamPer);
 
-        return ret;
+        return ret *(1+GetEnhanceChunguCritical());
     }
     //초월 베기
     public static float GetSuperCritical21DamPer()
@@ -2040,7 +2109,7 @@ public static class PlayerStats
         
         return ret;
     }
-    //용살베기
+    //용인베기
     public static float GetSuperCritical24DamPer()
     {
         float ret = 0f;
@@ -2051,6 +2120,12 @@ public static class PlayerStats
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical24DamPer);
         
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Dragon_memory);
+
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical24DamPer);
+
+        ret += GetRelicHasEffect(StatusType.SuperCritical24DamPer);
+
         return ret;
     }
     
@@ -2164,9 +2239,10 @@ public static class PlayerStats
         //막아둠일단
         //return 0f;
 
-        return superCritical11Value;
+        return superCritical11Value * (1 + GetEnhanceSuhoCritical());
     }
 
+    //신수베기
     public static float GetSuperCritical6DamPer()
     {
         float ret = 0f;
@@ -2187,7 +2263,7 @@ public static class PlayerStats
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical6DamPer);
 
-        return ret;
+        return ret * (1 + GetEnhanceSinsuCritical());
     }
 
     public static float GetHellMarkValue()
@@ -2588,7 +2664,7 @@ public static class PlayerStats
         }
     }
     //홀수 월간버프
-    public static float GetMonthBuffEffect(StatusType statusType)
+    public static float GetMonth2BuffEffect(StatusType statusType)
     {
         float ret = 0f;
         //홀수가 아니면 0
@@ -2615,6 +2691,42 @@ public static class PlayerStats
         {
             //홀수가 아니면
             if (tableData[i].Monthsort != true) continue;
+            //타입이 아니면
+            if(statusType!=(StatusType)tableData[i].Statustype) continue;
+            //타입이 같으면
+            return tableData[i].Statusvalue;
+        }
+        
+        return ret;
+    }
+    //짝수 월간버프
+    public static float GetMonthBuffEffect(StatusType statusType)
+    {
+        float ret = 0f;
+        //짝수가 아니면 0
+        if (ServerData.userInfoTable.IsMonthlyPass2() != false) return 0f;
+        //패스권없으면 0 
+        if (ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value < 1) return 0f;
+
+        if (statusType == StatusType.GoldGainPer)
+        {
+            return GameBalance.MonthPass_Gold;
+        }
+        else if (statusType == StatusType.ExpGainPer)
+        {
+            return  GameBalance.MonthPass_Exp;
+        }
+        else if (statusType == StatusType.MagicStoneAddPer)
+        {
+            return  GameBalance.MonthPass_GrowthStone;
+        }
+
+        var tableData =  TableManager.Instance.MonthBuff.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            // 짝수가 아니면
+            if (tableData[i].Monthsort != false) continue;
             //타입이 아니면
             if(statusType!=(StatusType)tableData[i].Statustype) continue;
             //타입이 같으면
@@ -2660,6 +2772,14 @@ public static class PlayerStats
             if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 ret += GameBalance.HotTimeEvent_Ad_Marble;
+            }
+        }
+        else if (statusType == StatusType.YoPowerGoodsGainPer)
+        {
+            ret = GameBalance.HotTimeEvent_YoPowerGoods;
+            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            {
+                ret += GameBalance.HotTimeEvent_Ad_YoPowerGoods;
             }
         }
 
@@ -2788,6 +2908,7 @@ public static class PlayerStats
 
     private static Dictionary<StatusType, float> stageRelicValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> guimoonValue = new Dictionary<StatusType, float>();
+    private static Dictionary<StatusType, float> blackFoxValue = new Dictionary<StatusType, float>();
 
     private static void ResetStageRelicHas()
     {
@@ -2796,6 +2917,10 @@ public static class PlayerStats
     private static void ResetGuimoonRelicHas()
     {
         guimoonValue.Clear();
+    }
+    public static void ResetBlackFoxHas()
+    {
+        blackFoxValue.Clear();
     }
 
     public const float divideNum = 500f;
@@ -2868,6 +2993,34 @@ public static class PlayerStats
                 ret += serverData.level1.Value * tableDatas[i].Abilvalue1;
             }
             guimoonValue.Add(statusType, ret);
+        }
+
+        return ret;
+    }
+    public static float GetBlackFoxEffect(StatusType statusType)
+    {
+        float ret = 0f;
+
+        
+        if (blackFoxValue.ContainsKey(statusType))
+        {
+            ret = blackFoxValue[statusType];
+        }
+        else
+        {
+            var tableDatas = TableManager.Instance.BlackFoxAbil.dataArray;
+
+            for (int i = 0; i < tableDatas.Length; i++)
+            {
+                var serverData = ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid];
+
+                if (tableDatas[i].Abiltype != (int)statusType) continue;
+
+                if (serverData.level.Value == 0) continue;
+
+                ret += serverData.level.Value * tableDatas[i].Abilvalue;
+            }
+            blackFoxValue.Add(statusType, ret);
         }
 
         return ret;
@@ -3146,7 +3299,7 @@ public static class PlayerStats
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 17900-2) return 0f;
 
-        return (int)ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value * GameBalance.dragonScaleAbilValue;
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DragonScale).Value * (GameBalance.dragonScaleAbilValue+GetDragonScaleHasValueUpgrade()));
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -3186,6 +3339,18 @@ public static class PlayerStats
         int currentLevel = (int)ServerData.goodsTable.GetTableData(GoodsTable.ChunguTreasure).Value + addLevel;
 
         ret += currentLevel * GameBalance.chunguAbil;
+
+        return ret;
+    }
+    public static float GetSuhoTreasureAbilHasEffect(int addLevel = 0)
+    {
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < 4000000) return 0f;
+
+        float ret = 0f;
+
+        int currentLevel = (int)ServerData.goodsTable.GetTableData(GoodsTable.SuhoTreasure).Value + addLevel;
+
+        ret += currentLevel * GameBalance.suhoTreasureAbil;
 
         return ret;
     }
@@ -3739,6 +3904,7 @@ public static class PlayerStats
         PlayerStats.ResetTitleHas();
         PlayerStats.ResetStageRelicHas();
         PlayerStats.ResetGuimoonRelicHas();
+        PlayerStats.ResetBlackFoxHas();
     }
 
     public static int GetSusanoGrade()
@@ -3748,6 +3914,26 @@ public static class PlayerStats
         var tableData = TableManager.Instance.susanoTable.dataArray;
 
         var score = ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+
+    public static int GetBlackFoxGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.BlackFoxTable.dataArray;
+
+        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -5981,6 +6167,16 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetDragonScaleHasValueUpgrade()
+    {
+        float ret = 0f;
+        
+        ret += GetPassiveSkill2Value(StatusType.DragonHasValueUpgrade);
+        
+        ret += GetSkillHasValue(StatusType.DragonHasValueUpgrade);
+        
+        return ret;
+    }
     public static float GetPeachAbilValue()
     {
         float ret = 0f;
@@ -6043,6 +6239,8 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.SuhoGainPer);
         
         ret += GetMonthBuffEffect(StatusType.SuhoGainPer);
+        
+        ret += GetMonth2BuffEffect(StatusType.SuhoGainPer);
 
         return ret;
     }
@@ -6057,6 +6255,8 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.FoxRelicGainPer);
         
         ret += GetMonthBuffEffect(StatusType.FoxRelicGainPer);
+        
+        ret += GetMonth2BuffEffect(StatusType.FoxRelicGainPer);
 
         return ret;
     }
@@ -6071,6 +6271,8 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.DosulGainPer);
         
         ret += GetMonthBuffEffect(StatusType.DosulGainPer);
+        
+        ret += GetMonth2BuffEffect(StatusType.DosulGainPer);
 
         return ret;
     }
@@ -6083,7 +6285,17 @@ public static class PlayerStats
         ret += ServerData.petTable.GetStatusValue(StatusType.MeditationGainPer);
         
         ret += GetMonthBuffEffect(StatusType.MeditationGainPer);
+        
+        ret += GetMonth2BuffEffect(StatusType.MeditationGainPer);
 
+        return ret;
+    }
+    public static float GetYoPowerGoodsGainValue()
+    {
+        float ret = 0f;
+
+        ret += GetHotTimeEventBuffEffect(StatusType.YoPowerGoodsGainPer);
+        
         return ret;
     }
     public static float GetStageRelicUpgradeValue()

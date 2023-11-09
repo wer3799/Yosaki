@@ -180,14 +180,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             gold += gold * goldBuffRatio;
         }
 
-        float enemyKilldailyMissionRequire = TableManager.Instance.DailyMissionDatas[0].Rewardrequire;
-        float enemyKilldailyMissionReward = TableManager.Instance.DailyMissionDatas[0].Rewardvalue;
-
         float jade = 0;
 
         float GrowthStone = killedEnemyPerMin *
-                            (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * (1 + PlayerStats.GetHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)+
-                                PlayerStats.GetSAHotTimeEventBuffEffect(StatusType.MagicStoneAddPer)+PlayerStats.GetMonthBuffEffect(StatusType.MagicStoneAddPer)) *
+                            (stageTableData.Magicstoneamount + PlayerStats.GetSmithValue(StatusType.growthStoneUp)) * (1 + PlayerStats.GetMagicStonePlusValue()) *
                             GameBalance.sleepRewardRatio * elapsedMinutes;
 
         float marble = killedEnemyPerMin * (stageTableData.Marbleamount) *
@@ -237,10 +233,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
                 (1 + PlayerStats.GetDokebiFireGainValue());
         }
 
-        float yoPowerItem = (killedEnemyPerMin * stageTableData.Yokaiessence * GameBalance.sleepRewardRatio *
-                             elapsedMinutes);
-        float taegeukItem = (killedEnemyPerMin * stageTableData.Taegeuk * GameBalance.sleepRewardRatio *
-                             elapsedMinutes);
+        float yoPowerItem = (killedEnemyPerMin * stageTableData.Yokaiessence * GameBalance.sleepRewardRatio * elapsedMinutes) * (1 + PlayerStats.GetYoPowerGoodsGainValue());
+        float taegeukItem = (killedEnemyPerMin * stageTableData.Taegeuk * GameBalance.sleepRewardRatio * elapsedMinutes);
         
 
         int hotTimeItem = 0;

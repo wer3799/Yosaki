@@ -180,6 +180,7 @@ public class UiStatusBoard : MonoBehaviour
                         refund *= GameBalance.refundCriDamGoldBarRatio;
                         desc += $"\n초과된 레벨이 {refund} {CommonString.GetItemName(Item_Type.GoldBar)}로 환산되었습니다!";
                     }
+              
 
                     if (gold > 0)
                     {
@@ -189,7 +190,7 @@ public class UiStatusBoard : MonoBehaviour
                     List<TransactionValue> transactionList = new List<TransactionValue>();
 
                     Param goodsParam = new Param();
-                    ServerData.goodsTable.GetTableData(GoodsTable.GoldBar).Value += refund + gold;
+                    ServerData.goodsTable.GetTableData(GoodsTable.GoldBar).Value += Math.Max(0, refund) + Math.Max(gold, 0);
                     ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value = 0;
                     goodsParam.Add(GoodsTable.GoldBar, ServerData.goodsTable.GetTableData(GoodsTable.GoldBar).Value);
                     goodsParam.Add(GoodsTable.Gold, ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value);

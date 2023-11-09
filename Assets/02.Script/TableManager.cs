@@ -928,6 +928,8 @@ public class TableManager : SingletonMono<TableManager>
     public MonthReward MonthReward;
     public SealSwordEvolutionPass SealSwordEvolutionPass;
     public SealSwordEvolution SealSwordEvolution;
+    public BlackFoxAbil BlackFoxAbil;
+    public BlackFoxTable BlackFoxTable;
 
 }
 

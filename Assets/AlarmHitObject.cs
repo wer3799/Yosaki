@@ -8,15 +8,32 @@ public class AlarmHitObject : MonoBehaviour
 {
     private double damage = 10;
 
+    [SerializeField] private float startDelay = 0f;
+    [SerializeField] private float delay = 0f;
+    
     [SerializeField]
     private Animator animator;
 
+    private Coroutine _coroutine;
     public void AttackStart()
     {
-        this.gameObject.SetActive(true);
-        animator.SetTrigger("Attack");
+
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+
+        _coroutine = StartCoroutine(AttackRoutine());
     }
 
+    private IEnumerator AttackRoutine()
+    {
+        yield return new WaitForSeconds(startDelay+delay);;
+        this.gameObject.SetActive(true);
+        animator.SetTrigger("Attack");
+        startDelay = 0f;
+    }
+    
     float percentDamage = 0f;
 
     public void SetDamage(double damage, float percentDamage = 0f)
@@ -73,7 +90,16 @@ public class AlarmHitObject : MonoBehaviour
         isMove = true;
         movementCoroutine = StartCoroutine(MoveToTarget());
     }
-
+    public void StartSatelliteAttack()
+    {
+        isMove = true;
+        movementCoroutine = StartCoroutine(SatelliteAttackRoutine());
+    }
+    public void StartHorizonSatelliteAttack()
+    {
+        isMove = true;
+        movementCoroutine = StartCoroutine(HorizonSatelliteAttackRoutine());
+    }
     public void StopMovement()
     {
         if (movementCoroutine != null)
@@ -99,6 +125,56 @@ public class AlarmHitObject : MonoBehaviour
 
             elapsedTime += Time.deltaTime * movementSpeed;
             transform.position = Vector3.Lerp(startPosition, target, elapsedTime);
+            yield return null;
+        }
+
+        // 이동 완료
+        isMove = false;
+    }
+    IEnumerator SatelliteAttackRoutine()
+    {
+        Vector3 startPosition = Vector3.zero;
+        startPosition += new Vector3(transform.position.x, 0, 0);
+        
+        Vector3 targetPosition = Vector3.zero;
+        targetPosition += new Vector3(PlayerMoveController.Instance.transform.position.x, 0, 0);
+        
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 1f)
+        {
+            if (!isMove)
+            {
+                yield break; // 이동 멈춤 시 Coroutine 종료
+            }
+
+            elapsedTime += Time.deltaTime * movementSpeed;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime);
+            yield return null;
+        }
+
+        // 이동 완료
+        isMove = false;
+    }
+    IEnumerator HorizonSatelliteAttackRoutine()
+    {
+        Vector3 startPosition = Vector3.zero;
+        startPosition += new Vector3(0, transform.position.y, 0);
+        
+        Vector3 targetPosition = Vector3.zero;
+        targetPosition += new Vector3(0, PlayerMoveController.Instance.transform.position.y, 0);
+        
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 1f)
+        {
+            if (!isMove)
+            {
+                yield break; // 이동 멈춤 시 Coroutine 종료
+            }
+
+            elapsedTime += Time.deltaTime * movementSpeed;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime);
             yield return null;
         }
 

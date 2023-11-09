@@ -192,6 +192,12 @@ public class GoodsTable
     public static string SinsunSkill2 = "SinsunSkill2";
     public static string SinsunSkill3 = "SinsunSkill3";
     public static string SinsunSkill4 = "SinsunSkill4";
+    
+    public static string DragonSkill0 = "DragonSkill0";
+    public static string DragonSkill1 = "DragonSkill1";
+    public static string DragonSkill2 = "DragonSkill2";
+    public static string DragonSkill3 = "DragonSkill3";
+    public static string DragonSkill4 = "DragonSkill4";
 
     public static string Fw = "Fw";
     public const string Cw = "Cw"; //천계꽃
@@ -206,8 +212,8 @@ public class GoodsTable
 
     public static string Event_Kill1_Item = "EC0"; //곶감 - > 봄나물로 대체 -> 수박 ->보리ㅣ
     public static string Event_Kill1_Item_All = "ECA0"; //봄나물 총 획득량
-    public static string Event_HotTime = "Event_HotTime0"; //청사초롱
-    public static string Event_HotTime_Saved = "EHS0"; //청사초롱 총획득량
+    public static string Event_HotTime = "Event_HotTime0"; //요석 조각
+    public static string Event_HotTime_Saved = "EHS0"; //요석 조각 총획득량
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
     public static string Event_NewYear = "Event_NewYear"; //떡국
     public static string Event_NewYear_All = "Event_NewYear_All"; //신년재화 총생산량
@@ -250,6 +256,7 @@ public class GoodsTable
     public static string YoPowerGoods = "YPG";
     public static string TaeguekGoods = "TG";
     public static string TaeguekElixir = "TE";
+    public static string SuhoTreasure = "SUT";
     public static string FoxRelicClearTicket = "FRCT";
     public static string TransClearTicket = "TCT";
     public static string MeditationGoods = "MG";
@@ -270,6 +277,8 @@ public class GoodsTable
     public static string DosulGoods = "DosulGoods";
     public static string TransGoods = "TransGoods";
     public static string DosulClear = "DosulClear";
+    public static string BlackFoxGoods = "BFG";
+    public static string BlackFoxClear = "BFC";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -445,6 +454,12 @@ public class GoodsTable
         { SinsunSkill3, 0f },
         { SinsunSkill4, 0f },
 
+        { DragonSkill0, 0f },
+        { DragonSkill1, 0f },
+        { DragonSkill2, 0f },
+        { DragonSkill3, 0f },
+        { DragonSkill4, 0f },
+
         { Fw, 0f },
         { Cw, 0f },
         //
@@ -500,6 +515,7 @@ public class GoodsTable
         { YoPowerGoods, 0f },
         { TaeguekGoods, 0f },
         { TaeguekElixir, 0f },
+        { SuhoTreasure, 0f },
         { FoxRelicClearTicket, 0f },
         { TransClearTicket, 0f },
         { MeditationGoods, 0f },
@@ -520,6 +536,8 @@ public class GoodsTable
         { DosulGoods, 0f },
         { TransGoods, 0f },
         { DosulClear, 0f },
+        { BlackFoxGoods, 0f },
+        { BlackFoxClear, 0f },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -752,7 +770,7 @@ public class GoodsTable
     static float yoPowerItemAddNum = 0;
     public void GetYoPowerItem(float amount)
     {
-        yoPowerItemAddNum += amount;
+        yoPowerItemAddNum += amount * (1 + PlayerStats.GetYoPowerGoodsGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
         if (yoPowerItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Yokaiessence, 1))
@@ -1649,6 +1667,33 @@ public class GoodsTable
             }
 
             //
+            //            //
+            case Item_Type.DragonSkill0:
+            {
+                return GoodsTable.DragonSkill0;
+            }
+
+            case Item_Type.DragonSkill1:
+            {
+                return GoodsTable.DragonSkill1;
+            }
+
+            case Item_Type.DragonSkill2:
+            {
+                return GoodsTable.DragonSkill2;
+            }
+
+            case Item_Type.DragonSkill3:
+            {
+                return GoodsTable.DragonSkill3;
+            }
+
+            case Item_Type.DragonSkill4:
+            {
+                return GoodsTable.DragonSkill4;
+            }
+
+            //
             case Item_Type.GangrimSkill:
             {
                 return GoodsTable.GangrimSkill;
@@ -1766,6 +1811,20 @@ public class GoodsTable
             case Item_Type.TaeguekElixir:
             {
                 return GoodsTable.TaeguekElixir;
+            }
+
+            case Item_Type.BlackFoxGoods:
+            {
+                return GoodsTable.BlackFoxGoods;
+            }
+
+            case Item_Type.BlackFoxClear:
+            {
+                return GoodsTable.BlackFoxClear;
+            }
+            case Item_Type.SuhoTreasure:
+            {
+                return GoodsTable.SuhoTreasure;
             }
 
             case Item_Type.FoxRelicClearTicket:
@@ -2387,6 +2446,32 @@ public class GoodsTable
         }
 
         //
+        // //
+        else if (GoodsTable.DragonSkill0 == type)
+        {
+            return Item_Type.DragonSkill0;
+        }
+
+        else if (GoodsTable.DragonSkill1 == type)
+        {
+            return Item_Type.DragonSkill1;
+        }
+
+        else if (GoodsTable.DragonSkill2 == type)
+        {
+            return Item_Type.DragonSkill2;
+        }
+
+        else if (GoodsTable.DragonSkill3 == type)
+        {
+            return Item_Type.DragonSkill3;
+        }
+        else if (GoodsTable.DragonSkill4 == type)
+        {
+            return Item_Type.DragonSkill4;
+        }
+
+        //
         else if (GoodsTable.GangrimSkill == type)
         {
             return Item_Type.GangrimSkill;
@@ -2490,6 +2575,14 @@ public class GoodsTable
         {
             return Item_Type.DosulClear;
         }
+        else if (GoodsTable.BlackFoxGoods == type)
+        {
+            return Item_Type.BlackFoxGoods;
+        }
+        else if (GoodsTable.BlackFoxClear == type)
+        {
+            return Item_Type.BlackFoxClear;
+        }
 
         else if (GoodsTable.SinsuRelic == type)
         {
@@ -2518,6 +2611,10 @@ public class GoodsTable
         else if (GoodsTable.TaeguekElixir == type)
         {
             return Item_Type.TaeguekElixir;
+        }
+        else if (GoodsTable.SuhoTreasure == type)
+        {
+            return Item_Type.SuhoTreasure;
         }
         else if (GoodsTable.TransGoods == type)
         {

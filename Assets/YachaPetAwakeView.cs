@@ -74,34 +74,12 @@ public class YachaPetAwakeView : MonoBehaviour
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "환수 지배 습득!!", null);
         });
     }
-
-    public void OnClickLevelUpButton()
+        //count = 강화횟수
+    public void OnClickLevelUpButton_Count(int count)
     {
         float currentGrowthStoneAmount = ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
 
-        if (currentGrowthStoneAmount < GameBalance.AwakePetUpgradePrice*10f)
-        {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)}이 부족합니다.");
-            return;
-        }
-
-        ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= GameBalance.AwakePetUpgradePrice*10f;
-        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value += 10;
-        //버프시간저장
-        SaveManager.Instance.SyncBuffData();
-        if (syncRoutine != null)
-        {
-            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
-        }
-
-        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
-    }
-
-    public void OnClickLevelUpButton_100()
-    {
-        float currentGrowthStoneAmount = ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value;
-
-        float upgradePrice = GameBalance.AwakePetUpgradePrice * 100f;
+        float upgradePrice = GameBalance.AwakePetUpgradePrice * count;
         
         if (currentGrowthStoneAmount < upgradePrice)
         {
@@ -113,7 +91,7 @@ public class YachaPetAwakeView : MonoBehaviour
         
         ServerData.goodsTable.GetTableData(GoodsTable.GrowthStone).Value -= upgradePrice;
         
-        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value += 100;
+        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value += count;
         //버프시간저장
         SaveManager.Instance.SyncBuffData();
         if (syncRoutine != null)

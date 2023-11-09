@@ -82,6 +82,7 @@ public static class CommonString
     public static string ItemGrade_14_Skill = "섬광검";
     public static string ItemGrade_15_Skill = "심연검";
     public static string ItemGrade_16_Skill = "신선검";
+    public static string ItemGrade_17_Skill = "용인검";
 
     public static string GoldItemName = "금화";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -331,6 +332,9 @@ public static class CommonString
             case Item_Type.costume169: return TableManager.Instance.Costume.dataArray[169].Name;
             case Item_Type.costume170: return TableManager.Instance.Costume.dataArray[170].Name;
             case Item_Type.costume171: return TableManager.Instance.Costume.dataArray[171].Name;
+            case Item_Type.costume172: return TableManager.Instance.Costume.dataArray[172].Name;
+            case Item_Type.costume173: return TableManager.Instance.Costume.dataArray[173].Name;
+            case Item_Type.costume174: return TableManager.Instance.Costume.dataArray[174].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -468,11 +472,17 @@ public static class CommonString
             case Item_Type.DarkSkill2: return "심연 기술3";
             case Item_Type.DarkSkill3: return "심연 기술4";
             case Item_Type.DarkSkill4: return "심연 기술5";
-            case Item_Type.SinsunSkill0: return "신선 기술1";
-            case Item_Type.SinsunSkill1: return "신선 기술2";
-            case Item_Type.SinsunSkill2: return "신선 기술3";
-            case Item_Type.SinsunSkill3: return "신선 기술4";
-            case Item_Type.SinsunSkill4: return "신선 기술5";
+            case Item_Type.SinsunSkill0: return "용인 기술1";
+            case Item_Type.SinsunSkill1: return "용인 기술2";
+            case Item_Type.SinsunSkill2: return "용인 기술3";
+            case Item_Type.SinsunSkill3: return "용인 기술4";
+            case Item_Type.SinsunSkill4: return "용인 기술5";
+            //
+            case Item_Type.DragonSkill0: return "신선 기술1";
+            case Item_Type.DragonSkill1: return "신선 기술2";
+            case Item_Type.DragonSkill2: return "신선 기술3";
+            case Item_Type.DragonSkill3: return "신선 기술4";
+            case Item_Type.DragonSkill4: return "신선 기술5";
             //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
@@ -585,6 +595,7 @@ public static class CommonString
             case Item_Type.YoPowerGoods: return "요석";
             case Item_Type.TaeguekGoods: return "태극 조각";
             case Item_Type.TaeguekElixir: return "태극 영약";
+            case Item_Type.SuhoTreasure: return "수호 구슬";
             case Item_Type.TransClearTicket: return "초월석 소탕권";
             case Item_Type.Event_SA: return "2주년 도토리";
             case Item_Type.EventDice: return "이벤트 주사위";
@@ -594,7 +605,7 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "촛불";
+            case Item_Type.Event_HotTime: return "요석 조각";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";
@@ -603,6 +614,8 @@ public static class CommonString
             case Item_Type.MeditationClearTicket: return "내면세계 입장권";
             case Item_Type.DaesanGoods: return "대산의 정수";
             case Item_Type.HonorGoods: return "명예의 증표";
+            case Item_Type.BlackFoxGoods: return "검은 구미호 구슬";
+            case Item_Type.BlackFoxClear: return "검은 구미호 구슬 소탕권";
 
         }
         return "미등록";
@@ -759,6 +772,8 @@ public static class CommonString
                 return "신선의 보옥 레벨당 신선베기 피해량 증가(%)";
             case StatusType.HyunsangHasValueUpgrade:
                 return "현상수배 증표 갯수당 효과 증가(%)";
+            case StatusType.DragonHasValueUpgrade:
+                return "용인의 비늘 갯수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:
@@ -816,6 +831,8 @@ public static class CommonString
                 return "각성 시 도깨비불 방치 획득량 증가(%)";
             case StatusType.MeditationGainPer:
                 return "심득 조각 소탕량 증가 (%)";
+            case StatusType.YoPowerGoodsGainPer:
+                return "요석 획득 증가 (%)";
             case StatusType.SealAttackSpeed:
                 return "요도 시전 속도 증가 (%)";
             case StatusType.SuhoGainPer:
@@ -848,6 +865,16 @@ public static class CommonString
                 return "태극 베기 증폭(%)";
             case StatusType.ReduceSealSwordSkillRequireCount:
                 return "요도 시전 기술횟수 감소";
+            case StatusType.EnhanceSuhoCritical:
+                return "수호베기 증폭(%)";
+            case StatusType.EnhanceSinsuCritical:
+                return "신수베기 증폭(%)";
+            case StatusType.EnhanceHyungsuCritical:
+                return "흉수베기 증폭(%)";
+            case StatusType.EnhanceSoulCritical:
+                return "영혼베기 증폭(%)";
+            case StatusType.EnhanceChunguCritical:
+                return "천구베기 증폭(%)";
         }
 
         return "등록필요";

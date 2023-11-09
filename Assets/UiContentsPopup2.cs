@@ -48,6 +48,8 @@ public class UiContentsPopup2 : MonoBehaviour
         DanjeonBoard,
         ClosedTrainingBoard,
         DragonBoard,
+        SuhoBossBoard,
+        BlackFoxBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -74,7 +76,7 @@ public class UiContentsPopup2 : MonoBehaviour
         TransBoard,
         DanjeonBoard,
         ClosedTrainingBoard,
-
+        BlackFoxBoard,
         
         
     }
@@ -94,6 +96,7 @@ public class UiContentsPopup2 : MonoBehaviour
         Sangun,
         Chungu,
         NewBoss,
+        SuhoBoss,
         
     }
     //삼천세계 
@@ -400,7 +403,20 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 185:
                     case 186:
                     case 188:
+                    case 189:
                         lastBoards[(int)ContentsBoard.DragonBoard].SetActive(true);
+                        break;
+                    case 190:
+                    case 191:
+                    case 192:
+                    case 193:
+                    case 194:
+                    case 195:
+                    case 196:
+                    case 197:
+                    case 198:
+                    case 199:
+                        lastBoards[(int)ContentsBoard.SuhoBossBoard].SetActive(true);
                         break;
                         
                 }
@@ -506,6 +522,9 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.DragonTower :
                 lastBoards[(int)ContentsBoard.DragonBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.BlackFox :
+                lastBoards[(int)ContentsBoard.BlackFoxBoard].SetActive(true);
                 break;
 
         }
@@ -636,6 +655,11 @@ public class UiContentsPopup2 : MonoBehaviour
             newGrowthDoors[(int)GrowthContentsDoor.ClosedTrainingBoard].SetActive(e == 1);
             oldGrowthDoors[(int)GrowthContentsDoor.ClosedTrainingBoard].SetActive(e == 1);
         }).AddTo(this);
+        SettingData.showBlackFox.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.BlackFoxBoard].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.BlackFoxBoard].SetActive(e == 1);
+        }).AddTo(this);
         
         ////////////보스도전
         
@@ -704,6 +728,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newBossDoors[(int)BossChallengeDoor.NewBoss].SetActive(e == 1);
             oldBossDoors[(int)BossChallengeDoor.NewBoss].SetActive(e == 1);
+        }).AddTo(this);;
+        SettingData.showSuhoBossUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.SuhoBoss].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.SuhoBoss].SetActive(e == 1);
         }).AddTo(this);;
         
         ///////삼천세계

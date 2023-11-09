@@ -654,7 +654,7 @@ public class UiMileageRefund : MonoBehaviour
 
             });
         }
-          if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 22)
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 22)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 22;
             //엘릭서재화 1로
@@ -676,6 +676,59 @@ public class UiMileageRefund : MonoBehaviour
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
                 Debug.LogError("할로윈미션 및 재화 초기화");
+
+            });
+        }
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 24)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 24;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value = 0;
+            //핫타임 재화 1로
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value =0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value =0;
+            ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value = 1;
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_10, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_11, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
+            goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+            goodsParam.Add(GoodsTable.BlackFoxClear, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
+            
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("핫타임 재화 초기화");
 
             });
         }

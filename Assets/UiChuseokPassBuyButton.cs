@@ -14,7 +14,7 @@ public class UiChuseokPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string seasonPassKey = "chuseokpass0";
+    public static readonly string seasonPassKey = "yostonepass0";
     
     private Button buyButton;
 
@@ -98,8 +98,6 @@ public class UiChuseokPassBuyButton : MonoBehaviour
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 
-        ServerData.AddLocalValue(Item_Type.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
-        
         ServerData.AddLocalValue(Item_Type.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
 
         
@@ -114,9 +112,7 @@ public class UiChuseokPassBuyButton : MonoBehaviour
         transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
 
         Param goodsParam = new Param();
-        
-        goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
-        
+
         goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
         
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));

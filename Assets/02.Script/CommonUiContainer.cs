@@ -37,7 +37,9 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
         string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill,
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
-        CommonString.ItemGrade_16_Skill};
+        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill
+        
+    };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
 
     private List<string> itemGradeName_NewGacha= new List<string>() { 
@@ -167,6 +169,7 @@ public Sprite HyunSangWeapon11;
 public Sprite DragonWeapon0;
 public Sprite DragonWeapon1;
 public Sprite DragonWeapon2;
+public Sprite DragonWeapon3;
     
 [Header ("Weapon_View")]
 
@@ -295,6 +298,7 @@ public Sprite RecommendWeapon22;
     public Sprite DragonNorigae0;
     public Sprite DragonNorigae1;
     public Sprite DragonNorigae2;
+    public Sprite DragonNorigae3;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -456,6 +460,13 @@ public Sprite RecommendWeapon22;
     public Sprite SinsunSkill4;
 
     
+    public Sprite DragonSkill0;
+    public Sprite DragonSkill1;
+    public Sprite DragonSkill2;
+    public Sprite DragonSkill3;
+    public Sprite DragonSkill4;
+
+    
     [Header ("Goods")]
     
     public Sprite magicStone;
@@ -515,6 +526,13 @@ public Sprite RecommendWeapon22;
     public Sprite YoPowerGoods;
     public Sprite TaeguekGoods;
     public Sprite TaeguekElixir;
+    public Sprite SuhoTreasure;
+    
+    public Sprite DosulGoods;
+    public Sprite TransGoods;
+    public Sprite DosulClear;
+    public Sprite BlackFoxGoods;
+    public Sprite BlackFoxClear;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -594,9 +612,6 @@ public Sprite RecommendWeapon22;
     public Sprite HellMark5;
     public Sprite HellMark6;
     public Sprite HellMark7;
-    public Sprite DosulGoods;
-    public Sprite TransGoods;
-    public Sprite DosulClear;
     public Sprite SleepRewardItem;
 
 
@@ -1043,6 +1058,12 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[170];
             case Item_Type.costume171:
                 return costumeThumbnail[171];
+            case Item_Type.costume172:
+                return costumeThumbnail[172];
+            case Item_Type.costume173:
+                return costumeThumbnail[173];
+            case Item_Type.costume174:
+                return costumeThumbnail[174];
 
 
             case Item_Type.RankFrame1:
@@ -1548,6 +1569,8 @@ public Sprite RecommendWeapon22;
                 return TaeguekGoods;   
             case Item_Type.TaeguekElixir:
                 return TaeguekElixir;   
+            case Item_Type.SuhoTreasure:
+                return SuhoTreasure;   
             case Item_Type.GwisalTreasure:
                 return GwiSalTreasure;   
             case Item_Type.ChunguTreasure:
@@ -1558,10 +1581,16 @@ public Sprite RecommendWeapon22;
                 return TransGoods;   
             case Item_Type.DosulClear:
                 return DosulClear;   
+            
+            case Item_Type.BlackFoxGoods:
+                return BlackFoxGoods;  
+            case Item_Type.BlackFoxClear:
+                return BlackFoxClear;   
+            
             case Item_Type.GuildTowerClearTicket:
                 return GuildTowerClearTicket;  
             case Item_Type.GuildTowerHorn:
-                return GuildTowerHorn;    
+                return GuildTowerHorn; 
             
             case Item_Type.SleepRewardItem:
                 return SleepRewardItem;   
@@ -1859,6 +1888,8 @@ public Sprite RecommendWeapon22;
                 return DragonNorigae1;
             case Item_Type.DragonNorigae2:
                 return DragonNorigae2;
+            case Item_Type.DragonNorigae3:
+                return DragonNorigae3;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2365,6 +2396,18 @@ public Sprite RecommendWeapon22;
             case Item_Type.SinsunSkill4:
                 return SinsunSkill4;
             //
+            //
+            case Item_Type.DragonSkill0:
+                return DragonSkill0;
+            case Item_Type.DragonSkill1:
+                return DragonSkill1;
+            case Item_Type.DragonSkill2:
+                return DragonSkill2;
+            case Item_Type.DragonSkill3:
+                return DragonSkill3;
+            case Item_Type.DragonSkill4:
+                return DragonSkill4;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
 
@@ -2571,6 +2614,8 @@ public Sprite RecommendWeapon22;
                 return DragonWeapon1;
             case Item_Type.DragonWeapon2:
                 return DragonWeapon2;
+            case Item_Type.DragonWeapon3:
+                return DragonWeapon3;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
@@ -2776,6 +2821,7 @@ public Sprite RecommendWeapon22;
     public List<Sprite> buffIconList;
 
     public List<Sprite> relicIconList;
+    public List<Sprite> blackFoxIconList;
     public List<Sprite> stageRelicIconList;
     public List<Sprite> guimoonIcon1List;
     public List<Sprite> guimoonIcon2List;

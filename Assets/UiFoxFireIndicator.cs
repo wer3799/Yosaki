@@ -105,7 +105,7 @@ public class UiFoxFireIndicator : MonoBehaviour
         }
 
         currentAbilAmount.SetText(
-            $"{CommonString.GetStatusName(StatusType.SuperCritical14DamPer)} {PlayerStats.GetFoxFireEffect(StatusType.SuperCritical14DamPer) * 100} 증가");
+            $"{CommonString.GetStatusName(StatusType.SuperCritical14DamPer)} {Utils.ConvertNum(PlayerStats.GetFoxFireEffect(StatusType.SuperCritical14DamPer) * 100)} 증가");
 
         //그림
         if (fireIdx < 0)

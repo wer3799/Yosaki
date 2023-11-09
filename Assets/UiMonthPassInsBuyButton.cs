@@ -16,7 +16,7 @@ public class UiMonthPassInsBuyButton : MonoBehaviour
     [SerializeField]
     private ObscuredFloat killAddAmount = 30000000;
 
-    public static readonly string monthInsPassKey = "monthpass25ins";
+    public static readonly string monthInsPassKey = "monthpass27ins";
 
     private CompositeDisposable disposable = new CompositeDisposable();
 

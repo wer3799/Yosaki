@@ -4,6 +4,7 @@ using BackEnd;
 using TMPro;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class FoxMaskBoard : MonoBehaviour
 {
@@ -20,6 +21,13 @@ public class FoxMaskBoard : MonoBehaviour
 
     [SerializeField] private GameObject transBefore;
     [SerializeField] private GameObject transAfter;
+    
+    private bool initialized = false;
+    
+        
+    [SerializeField]
+    private Toggle towerAutoMode;
+
     public void Start()
     {
 
@@ -54,6 +62,13 @@ public class FoxMaskBoard : MonoBehaviour
         }
 
         transAfterDesc.SetText($"각성 효과로 강화됩니다.\n귀신 나무 능력치 {(GameBalance.GhostTreeGraduatePlusValue - 1) * 100}% 증가");
+        
+        if (PlayerPrefs.HasKey(SettingKey.towerAutoMode) == false)
+            PlayerPrefs.SetInt(SettingKey.towerAutoMode, 1);     
+        
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+        
+        initialized = true;
     }
 
     public void OnClickEnterButton()
@@ -112,4 +127,17 @@ public class FoxMaskBoard : MonoBehaviour
                 }, null);
         }
     }
+    
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
+    }
+
 }

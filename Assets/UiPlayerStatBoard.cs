@@ -155,9 +155,10 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         
         description2 +=
+            $"{CommonString.GetStatusName(StatusType.YoPowerGoodsGainPer)} : {PlayerStats.GetYoPowerGoodsGainValue() * 100f}\n";
+        
+        description2 +=
             $"{CommonString.GetStatusName(StatusType.DecreaseBossHp)} : {PlayerStats.DecreaseBossHp() * 100f}\n";
-        ////기억의파편 추가 획득
-        //description1 += $"{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} : {PlayerStats.GetMagicStonePlusValue() * 100f}\n";
 
         int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 

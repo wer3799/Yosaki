@@ -41,6 +41,10 @@ public class UiTwelveBossContentsView : MonoBehaviour
 
     [SerializeField]
     private SkeletonGraphic petGraphic;
+    [SerializeField]
+    private Image image0;
+    [SerializeField]
+    private Image image1;
 
     [SerializeField] private GameObject allClearMark; 
     
@@ -100,29 +104,42 @@ public class UiTwelveBossContentsView : MonoBehaviour
         {
             bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
         }
-
-        var costume = bossTableData.Displayskeletondata[0];
-        if (costume != -1)
+        //수호동물
+        if (bossTableData.Id >= 190 && bossTableData.Id <= 199)
         {
-            costumeGraphic.Clear();
+            var suho0 = bossTableData.Displayskeletondata[0];
+            var suho1 = bossTableData.Displayskeletondata[1];
+            
+            image0.sprite=CommonResourceContainer.GetSuhoAnimalSprite(suho0);
+            image1.sprite=CommonResourceContainer.GetSuhoAnimalSprite(suho1);
 
-            petGraphic.gameObject.SetActive(false);
-            costumeGraphic.gameObject.SetActive(true);
-            costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[costume];
-            costumeGraphic.Initialize(true);
-            costumeGraphic.SetMaterialDirty();
         }
+        else
+        {
+            var costume = bossTableData.Displayskeletondata[0];
+            if (costume != -1)
+            {
+                costumeGraphic.Clear();
+
+                petGraphic.gameObject.SetActive(false);
+                costumeGraphic.gameObject.SetActive(true);
+                costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[costume];
+                costumeGraphic.Initialize(true);
+                costumeGraphic.SetMaterialDirty();
+            }
         
-        var pet = bossTableData.Displayskeletondata[1];
-        if (pet != -1)
-        {
-            costumeGraphic.gameObject.SetActive(false);
-            petGraphic.gameObject.SetActive(true);
-            petGraphic.Clear();
-            petGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[pet];
-            petGraphic.Initialize(true);
-            petGraphic.SetMaterialDirty();
+            var pet = bossTableData.Displayskeletondata[1];
+            if (pet != -1)
+            {
+                costumeGraphic.gameObject.SetActive(false);
+                petGraphic.gameObject.SetActive(true);
+                petGraphic.Clear();
+                petGraphic.skeletonDataAsset = CommonUiContainer.Instance.petCostumeList[pet];
+                petGraphic.Initialize(true);
+                petGraphic.SetMaterialDirty();
+            }
         }
+
 
         OnOffAllClearMark();
     }

@@ -7,7 +7,7 @@ using System;
 using UniRx;
 
 [System.Serializable]
-public class RelicServerData
+public class  RelicServerData
 {
     public int idx;
     public ReactiveProperty<float> level;

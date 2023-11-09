@@ -36,4 +36,8 @@ public class CostumeData
   int displayorder;
   public int Displayorder { get {return displayorder; } set { this.displayorder = value;} }
   
+  [SerializeField]
+  int price;
+  public int Price { get {return price; } set { this.price = value;} }
+  
 }

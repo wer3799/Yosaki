@@ -25,11 +25,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     [SerializeField]
     private TextMeshProUGUI itemName_ad;
 
-    [SerializeField]
-    private Image itemIcon_new;
-
-    [SerializeField]
-    private TextMeshProUGUI itemName_new;
 
     
     [SerializeField]
@@ -38,9 +33,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     [SerializeField]
     private TextMeshProUGUI itemAmount_ad;
 
-    [SerializeField]
-    private TextMeshProUGUI itemAmount_new;
-
     
     [SerializeField]
     private GameObject lockIcon_Free;
@@ -48,10 +40,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     [SerializeField]
     private GameObject lockIcon_Ad;
 
-    [SerializeField]
-    private GameObject lockIcon_New;
-
-    
     private PassInfo passInfo;
 
     [SerializeField]
@@ -59,9 +47,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
 
     [SerializeField]
     private GameObject rewardedObject_Ad;
-
-    [SerializeField]
-    private GameObject rewardedObject_New;
 
     
     [SerializeField]
@@ -108,15 +93,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
             rewardedObject_Ad.SetActive(rewarded);
 
         }).AddTo(disposables);
-        
-        //신규보상 데이터 변경시
-        ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_New_Key].Subscribe(e =>
-        {
-            bool rewarded = HasReward(passInfo.rewardType_New_Key, passInfo.id);
-            rewardedObject_New.SetActive(rewarded);
-
-        }).AddTo(disposables);
-        
 
         //킬카운트 변경될때
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).AsObservable().Subscribe(e =>
@@ -125,7 +101,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
             {
                 lockIcon_Free.SetActive(!CanGetReward());
                 lockIcon_Ad.SetActive(!CanGetReward());
-                lockIcon_New.SetActive(!CanGetReward());
                 gaugeImage.SetActive(CanGetReward());
             }
         }).AddTo(disposables);
@@ -152,18 +127,15 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
     {
         itemAmount_free.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_Free));
         itemAmount_ad.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_IAP));
-        itemAmount_new.SetText(Utils.ConvertBigNum(passInfo.rewardTypeValue_New));
     }
 
     private void SetItemIcon()
     {
         itemIcon_free.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_Free);
         itemIcon_ad.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_IAP);
-        itemIcon_new.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)(int)passInfo.rewardType_New);
 
         itemName_free.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_Free));
         itemName_ad.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_IAP));
-        itemName_new.SetText(CommonString.GetItemName((Item_Type)(int)passInfo.rewardType_New));
     }
 
     private void SetDescriptionText()
@@ -560,12 +532,6 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
         int killCountTotal = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).Value;
         return killCountTotal >= passInfo.require;
     }
-
-    // private void OnEnable()
-    // {
-    //     RefreshParent();
-    // }
-
     public void RefreshParent()
     {
         if (passInfo == null) return;

@@ -40,6 +40,8 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
     private Transform skillCellParent_Dark;
     [SerializeField]
     private Transform skillCellParent_Sinsun;
+    [SerializeField]
+    private Transform skillCellParent_Dragon;
 
     [SerializeField]
     private UiPassiveSkillCell passiveSkillCellPrefab;
@@ -97,7 +99,19 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             }
 
             //신선검술
-            if (skillList[i].Skilltype == 13)
+            if (skillList[i].Skilltype == 14)
+            {
+
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Dragon);
+
+                cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+                skillCells.Add(cell);
+                 
+            }    
+
+            //신선검술
+            else if (skillList[i].Skilltype == 13)
             {
 
                 var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sinsun);

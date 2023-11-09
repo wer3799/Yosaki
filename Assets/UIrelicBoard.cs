@@ -1,4 +1,5 @@
-﻿using BackEnd;
+﻿using System;
+using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
@@ -278,5 +279,10 @@ public class UIrelicBoard : MonoBehaviour
             }
 
         }, () => { });
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.ResetAbilDic();
     }
 }

@@ -65,6 +65,7 @@ public static class ServerData
     public static ChildPassServerTable childPassServerTable { get; private set; } = new ChildPassServerTable();
 
     public static RelicServerTable relicServerTable { get; private set; } = new RelicServerTable();
+    public static BlackFoxServerTable blackFoxServerTable { get; private set; } = new BlackFoxServerTable();
     public static StageRelicServerTable stageRelicServerTable { get; private set; } = new StageRelicServerTable();
     
     public static GuimoonServerTable guimoonServerTable { get; private set; } = new GuimoonServerTable();
@@ -158,6 +159,8 @@ public static class ServerData
         childPassServerTable.Initialize();
 
         relicServerTable.Initialize();
+        
+        blackFoxServerTable.Initialize();
 
         stageRelicServerTable.Initialize();
         
@@ -617,6 +620,24 @@ public static class ServerData
                 break;
 
             //
+            //            
+            case Item_Type.DragonSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill0).Value += rewardValue;
+                break;
+            case Item_Type.DragonSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill1).Value += rewardValue;
+                break;
+            case Item_Type.DragonSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill2).Value += rewardValue;
+                break;
+            case Item_Type.DragonSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill3).Value += rewardValue;
+                break;
+            case Item_Type.DragonSkill4:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value += rewardValue;
+                break;
+
+            //
             //
             case Item_Type.GangrimSkill:
                 ServerData.goodsTable.GetTableData(GoodsTable.GangrimSkill).Value += rewardValue;
@@ -671,6 +692,12 @@ public static class ServerData
                 break;  
             case Item_Type.DosulGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value += rewardValue;
+                break;  
+            case Item_Type.BlackFoxGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += rewardValue;
+                break;  
+            case Item_Type.BlackFoxClear:
+                ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += rewardValue;
                 break;  
             case Item_Type.TransGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += rewardValue;
@@ -743,6 +770,9 @@ public static class ServerData
                 break;
             case Item_Type.TaeguekElixir:
                 ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value += rewardValue;
+                break;
+            case Item_Type.SuhoTreasure:
+                ServerData.goodsTable.GetTableData(GoodsTable.SuhoTreasure).Value += rewardValue;
                 break;
             case Item_Type.FoxRelicClearTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value += rewardValue;
@@ -1015,6 +1045,9 @@ public static class ServerData
             case Item_Type.costume169:
             case Item_Type.costume170:
             case Item_Type.costume171:
+            case Item_Type.costume172:
+            case Item_Type.costume173:
+            case Item_Type.costume174:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1275,6 +1308,9 @@ public static class ServerData
             case Item_Type.costume169:
             case Item_Type.costume170:
             case Item_Type.costume171:
+            case Item_Type.costume172:
+            case Item_Type.costume173:
+            case Item_Type.costume174:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1383,6 +1419,9 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.TaeguekElixir:
                 passParam.Add(GoodsTable.TaeguekElixir, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.SuhoTreasure:
+                passParam.Add(GoodsTable.SuhoTreasure, ServerData.goodsTable.GetTableData(GoodsTable.SuhoTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             case Item_Type.TransClearTicket:
                 passParam.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
@@ -1833,6 +1872,26 @@ public static class ServerData
                 passParam.Add(GoodsTable.SinsunSkill4, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             //
+            // //
+            case Item_Type.DragonSkill0:
+                passParam.Add(GoodsTable.DragonSkill0, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DragonSkill1:
+                passParam.Add(GoodsTable.DragonSkill1, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DragonSkill2:
+                passParam.Add(GoodsTable.DragonSkill2, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DragonSkill3:
+                passParam.Add(GoodsTable.DragonSkill3, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.DragonSkill4:
+                passParam.Add(GoodsTable.DragonSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            //
             case Item_Type.LeeMuGiStone:
                 passParam.Add(GoodsTable.LeeMuGiStone,
                     ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
@@ -1891,6 +1950,18 @@ public static class ServerData
             case Item_Type.DosulGoods:
                 passParam.Add(GoodsTable.DosulGoods,
                     ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
+            case Item_Type.BlackFoxGoods:
+                passParam.Add(GoodsTable.BlackFoxGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
+            case Item_Type.BlackFoxClear:
+                passParam.Add(GoodsTable.BlackFoxClear,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             
@@ -2243,6 +2314,16 @@ public static class ServerData
                 param.Add(GoodsTable.DosulGoods,
                     ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.BlackFoxGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
+                param.Add(GoodsTable.BlackFoxGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.BlackFoxClear:
+                ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += amount;
+                param.Add(GoodsTable.BlackFoxClear,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.TransGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;
@@ -2294,6 +2375,10 @@ public static class ServerData
             case Item_Type.TaeguekElixir:
                 ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value += amount;
                 param.Add(GoodsTable.TaeguekElixir, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.SuhoTreasure:
+                ServerData.goodsTable.GetTableData(GoodsTable.SuhoTreasure).Value += amount;
+                param.Add(GoodsTable.SuhoTreasure, ServerData.goodsTable.GetTableData(GoodsTable.SuhoTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             case Item_Type.TransClearTicket:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
@@ -2719,6 +2804,27 @@ public static class ServerData
             case Item_Type.SinsunSkill4:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value += amount;
                 param.Add(GoodsTable.SinsunSkill4, ServerData.goodsTable.GetTableData(GoodsTable.SinsunSkill4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //   //     //            //
+            case Item_Type.DragonSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill0).Value += amount;
+                param.Add(GoodsTable.DragonSkill0, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DragonSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill1).Value += amount;
+                param.Add(GoodsTable.DragonSkill1, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DragonSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill2).Value += amount;
+                param.Add(GoodsTable.DragonSkill2, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DragonSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill3).Value += amount;
+                param.Add(GoodsTable.DragonSkill3, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DragonSkill4:
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value += amount;
+                param.Add(GoodsTable.DragonSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //   //
             case Item_Type.SinSkill0:
@@ -4268,6 +4374,9 @@ public static class ServerData
                 case Item_Type.TaeguekElixir:
                     ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value += amount;
                     break;
+                case Item_Type.SuhoTreasure:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SuhoTreasure).Value += amount;
+                    break;
                 case Item_Type.TransClearTicket:
                     ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value += amount;
                     break;
@@ -4399,6 +4508,12 @@ public static class ServerData
                     break;
                 case Item_Type.DosulGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value += amount;
+                    break;
+                case Item_Type.BlackFoxGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
+                    break;
+                case Item_Type.BlackFoxClear:
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
                     break;
                 case Item_Type.TransGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;

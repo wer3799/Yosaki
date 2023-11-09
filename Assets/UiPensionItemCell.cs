@@ -299,6 +299,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             return Item_Type.TaeguekElixir;
         }
+        else if (key == "blacksoulpension")
+        {
+            return Item_Type.BlackFoxClear;
+        }
         else
         {
             return Item_Type.SmithFire;

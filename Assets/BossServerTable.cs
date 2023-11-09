@@ -240,6 +240,17 @@ public class BossServerTable
         return -1;
         
     }
+    public List<int> GetShadowCaveRewardedIdxList()
+    {
+        var rewards = ServerData.bossServerTable.TableDatas["b91"].rewardedId.Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
+        
+    }
 
     public List<int> GetHellRelicRewardedIdxList()
     {

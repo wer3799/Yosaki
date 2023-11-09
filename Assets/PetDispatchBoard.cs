@@ -33,6 +33,7 @@ public class PetDispatchBoard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
 
     [SerializeField] private GameObject petDispatchButton;
+    [SerializeField] private GameObject petAdButton;
     [SerializeField] private GameObject adReduceTimeButtonObject;
     [SerializeField] private Button adReduceTimeButton;
     
@@ -69,14 +70,19 @@ public class PetDispatchBoard : MonoBehaviour
     {
         disposable.Clear();    
     }
-    
+
     private void Subscribe()
     {
         disposable.Clear();
-        
+
         Observable.Interval(TimeSpan.FromSeconds(1))
             .Subscribe(_ => UpdateTimeText())
             .AddTo(disposable);
+
+        ServerData.iapServerTable.TableDatas["removead"].buyCount.AsObservable().Subscribe(e =>
+        {
+            petAdButton.SetActive(e<1);
+        }).AddTo(this);
 
     }
     private void Subscribe2()
@@ -323,7 +329,12 @@ public class PetDispatchBoard : MonoBehaviour
         //명상버튼 안누른 상태
         if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value < 0)
         {
+            
             DateTime currentServerTime = GetBackendServerTime();
+            if (HasRemoveAd())
+            {
+                currentServerTime = currentServerTime.AddHours(-4);
+            }
             var currentServerDate = (double)Utils.ConvertToUnixTimestamp(currentServerTime);
             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value = (int)currentServerDate;
             ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.petDispatchStartTime,false);

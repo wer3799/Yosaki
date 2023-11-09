@@ -340,8 +340,8 @@ MonoBehaviour:
     addvalue: 0
     destable: 
     statustype: 25
-    needstatuskey: SkillDamage_memory
-    unlocklevel: 100000
+    needstatuskey: CriticalLevel_memory
+    unlocklevel: 300
     needgoodskey: 
     unlockgoods: 0
     upgradeprice: 1
@@ -551,7 +551,7 @@ MonoBehaviour:
     destable: 
     statustype: 47
     needstatuskey: Gum_memory
-    unlocklevel: 2000000
+    unlocklevel: 10000000
     needgoodskey: 
     unlockgoods: 0
     upgradeprice: 1
@@ -566,7 +566,7 @@ MonoBehaviour:
     destable: 
     statustype: 50
     needstatuskey: Sum_memory
-    unlocklevel: 2000000
+    unlocklevel: 20000000
     needgoodskey: 
     unlockgoods: 0
     upgradeprice: 1
@@ -600,3 +600,33 @@ MonoBehaviour:
     needgoodskey: 
     unlockgoods: 0
     upgradeprice: 12
+  - key: Sin_memory
+    description: "\uC2E0\uC120\uBCA0\uAE30 \uD53C\uD574(%)"
+    statuswhere: 2
+    maxlv: 20000000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 0
+    destable: 
+    statustype: 54
+    needstatuskey: Sim_memory
+    unlocklevel: 20000000
+    needgoodskey: 
+    unlockgoods: 0
+    upgradeprice: 1
+  - key: Dragon_memory
+    description: "\uC6A9\uBCA0\uAE30 \uD53C\uD574(%)"
+    statuswhere: 2
+    maxlv: 20000000
+    active: 1
+    ispercent: 1
+    basevalue: 0
+    addvalue: 0
+    destable: 
+    statustype: 88
+    needstatuskey: Sin_memory
+    unlocklevel: 20000000
+    needgoodskey: 
+    unlockgoods: 0
+    upgradeprice: 1

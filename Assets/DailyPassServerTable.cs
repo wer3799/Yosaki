@@ -140,8 +140,8 @@ public class MonthlyPassServerTable
     public const string tableName = "MonthlyPass";
 
 
-    public static string MonthlypassFreeReward = "f10";
-    public static string MonthlypassAdReward = "a10";
+    public static string MonthlypassFreeReward = "f";
+    public static string MonthlypassAdReward = "a";
     public static string MonthlypassNewReward = "n10";
 
     public static string MonthlypassAttendFreeReward = "af11";

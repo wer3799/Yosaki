@@ -120,6 +120,9 @@ public class UserInfoTable_2
     public const string sealSwordEvolutionIdx = "ssei";
     public const string sealSwordEvolutionExp = "ssee";
 
+    public const string blackFoxScore = "bfx";
+    public const string usedblackFoxClearNum = "ubfcn";
+
     
     
     public bool isInitialize = false;
@@ -213,6 +216,8 @@ public class UserInfoTable_2
         { dailyPetDispatchReceiveCount, 0f },
         { sealSwordEvolutionIdx, -1f },
         { sealSwordEvolutionExp, 0f },
+        { blackFoxScore, 0f },
+        { usedblackFoxClearNum, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

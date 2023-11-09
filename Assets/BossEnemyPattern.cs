@@ -63,6 +63,10 @@ public class BossEnemyPattern : BossEnemyBase
     {
         StartCoroutine(RandomAttackRoutineV2());
     }
+    public void StartRandomAttackRoutineV3()
+    {
+        StartCoroutine(RandomAttackRoutineV3());
+    }
     private IEnumerator RandomAttackRoutine()
     {
         UpdateBossDamage();
@@ -93,6 +97,19 @@ public class BossEnemyPattern : BossEnemyBase
             yield return new WaitForSeconds(0.13f);
             yield return new WaitForSeconds(0.25f);
             skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+            //후딜
+            yield return new WaitForSeconds(attackInterval);
+
+
+        }
+    }
+    private IEnumerator RandomAttackRoutineV3()
+    {
+        UpdateBossDamage();
+        while (true)
+        {
+            RandomPatternAttack(2);
+            yield return new WaitForSeconds(1.08f);
             //후딜
             yield return new WaitForSeconds(attackInterval);
 

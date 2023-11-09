@@ -237,6 +237,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.TaeguekElixir;
         }
+        else if (pensionKey == "blacksoulpension")
+        {
+            itemType = Item_Type.BlackFoxClear;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 

@@ -21,11 +21,6 @@ public class MonthlyPass2Data_Fancy
 }
 public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
 {
-    [SerializeField]
-    private UiMonthlyPassCell2 uiPassCellPrefab;
-
-    [SerializeField]
-    private Transform cellParent;
 
     private List<UiMonthlyPassCell2> uiPassCellContainer = new List<UiMonthlyPassCell2>();
 
@@ -102,6 +97,10 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
         
         
         textList[8].SetText($"월간 훈련 구매 시, <color=#849e72ff>{CommonString.GetItemName(costumeType)}</color> 획득 가능 !\n월간 구매 혜택 및 월간 버프 사용 가능 !\n월간 훈련 패스로 다양한 보상 획득 가능!");
+
+        
+        textList[9].SetText($"{CommonString.GetItemName(costumeType)}");
+        textList[10].SetText($"{ServerData.userInfoTable.currentServerTime.Month}월 한정 외형");
 
 
         var rewardData = TableManager.Instance.MonthReward.dataArray;
