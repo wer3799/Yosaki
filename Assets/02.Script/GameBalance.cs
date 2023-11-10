@@ -501,7 +501,7 @@ public static class GameBalance
     public static ObscuredFloat Gum_memory = 0.0000010f;
     public static ObscuredFloat Sum_memory = 0.0000008f;
     public static ObscuredFloat Sim_memory = 0.0000004f;
-    public static ObscuredFloat Sin_memory = 0.0000002f;
+    public static ObscuredFloat Sin_memory = 0.0000003f;
     public static ObscuredFloat Dragon_memory = 0.00000003f;
 
     
