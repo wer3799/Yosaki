@@ -217,11 +217,10 @@ public class SealAwakeManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.SealSwordAwakeScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.SealSwordAwakeScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.SealSwordAwakeScore].Value = reqValue;
-
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.SealSwordAwakeScore, false);
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.SealSwordAwakeScore,reqValue);
+            
         }
 
 

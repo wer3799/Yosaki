@@ -257,6 +257,13 @@ public class GoogleManager : SingletonMono<GoogleManager>
         {
             yield return null;
         }
+        
+        ServerData.ThirdLoadTable();
+        
+        while (SendQueue.UnprocessedFuncCount != 0)
+        {
+            yield return null;
+        }
 
         if (isSignIn == false)
         {

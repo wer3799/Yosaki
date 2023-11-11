@@ -3857,7 +3857,7 @@ public static class PlayerStats
     public static float GetRelicTestAbilRing()
     {
         float ret = 0f;
-        var score = ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.relicTestScore).Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.relicTestScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
         var tabledata = TableManager.Instance.RelicTest.dataArray;
         for (int i = 0; i < tabledata.Length; i++)
@@ -3913,7 +3913,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.susanoTable.dataArray;
 
-        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.susanoScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -3933,7 +3933,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.BlackFoxTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4039,7 +4039,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.SealSwordAwakeTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.SealSwordAwakeScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.SealSwordAwakeScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4078,7 +4078,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.dosulTowerTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.dosulScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4159,7 +4159,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.gradeTestTable.dataArray;
 
-        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.gradeScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4178,7 +4178,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.DanjeonTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.danjeonScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.danjeonScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4197,7 +4197,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.ClosedTrainingTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.closedScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4329,7 +4329,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.HyunSangTowerTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyunsangTowerScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.hyunsangTowerScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4349,7 +4349,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.RelicTest.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.relicTestScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.relicTestScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)

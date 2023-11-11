@@ -84,6 +84,8 @@ public static class ServerData
     public static SuhoAnimalServerTable suhoAnimalServerTable { get; private set; } = new SuhoAnimalServerTable();
     public static SealSwordServerTable sealSwordServerTable { get; private set; } = new SealSwordServerTable();
     public static UserInfoTable_2 userInfoTable_2 { get; private set; } = new UserInfoTable_2();
+    
+    public static BossScoreTable bossScoreTable { get; private set; } = new BossScoreTable();
 
     #region string
 
@@ -187,8 +189,11 @@ public static class ServerData
         suhoAnimalServerTable.Initialize();
         
         sealSwordServerTable.Initialize();
-        
+    }
 
+    public static void BossTableInitialized()
+    {
+        bossScoreTable.Initialize();
     }
 
     public static void SecondLoadTable()
@@ -204,6 +209,11 @@ public static class ServerData
         {
             passServerTable.Initialize();
         }
+    }
+    
+    public static void ThirdLoadTable()
+    {
+        BossTableInitialized();
     }
     
     
@@ -282,7 +292,7 @@ public static class ServerData
                     }
                     else
                     {
-                        PopupManager.Instance.ShowConfirmPopup("Unity 환경에서만 보이는 창입니다.", log, null);
+                      //  PopupManager.Instance.ShowConfirmPopup("Unity 환경에서만 보이는 창입니다.", log, null);
                     }
                 }
             #endif

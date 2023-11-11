@@ -217,11 +217,9 @@ public class SusanoManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.susanoScore].Value)
         {
-            ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value = reqValue;
-
-            ServerData.userInfoTable.UpData(UserInfoTable.susanoScore, false);
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.susanoScore,reqValue);
         }
 
 

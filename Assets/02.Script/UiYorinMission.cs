@@ -312,7 +312,7 @@ public class UiYorinMission : MonoBehaviour
             }
         }).AddTo(this);
         
-        ServerData.userInfoTable.GetTableData(UserInfoTable.susanoScore).AsObservable().Subscribe(e =>
+        ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.susanoScore].AsObservable().Subscribe(e =>
         {
             if (e > 0)
             {

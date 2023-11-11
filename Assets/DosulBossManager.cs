@@ -272,11 +272,11 @@ public class DosulBossManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.dosulScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulScore].Value = reqValue;
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.dosulScore,reqValue);
+            
 
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.dosulScore, false);
         }
 
 

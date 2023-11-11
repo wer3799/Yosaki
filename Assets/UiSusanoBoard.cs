@@ -36,7 +36,7 @@ public class UiSusanoBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.susanoScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
         int grade = PlayerStats.GetSusanoGrade();
 

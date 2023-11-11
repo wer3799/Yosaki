@@ -44,7 +44,7 @@ public class UiBlackFoxBoard : MonoBehaviour
 
             cell.Initialize(tableDatas[i]);
         }
-        bestScoreText.SetText($"최고점수:{Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value* GameBalance.BossScoreConvertToOrigin)}");
+        bestScoreText.SetText($"최고점수:{Utils.ConvertBigNum(ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value* GameBalance.BossScoreConvertToOrigin)}");
 
 
         currentIdx = PlayerStats.GetBlackFoxGrade();
@@ -134,7 +134,7 @@ public class UiBlackFoxBoard : MonoBehaviour
 
         int clearAmount = currentTicketNum;
 
-        var currentKillCount = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value;
+        var currentKillCount = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value;
 
         if (currentKillCount == 0)
         {
@@ -291,7 +291,7 @@ public class UiBlackFoxBoard : MonoBehaviour
     public void RenewalAbil()
     {
         
-        var currentKillCount = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value;
+        var currentKillCount = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value;
 
         if (currentKillCount == 0)
         {

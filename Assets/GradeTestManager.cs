@@ -219,11 +219,10 @@ public class GradeTestManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value)
+        if (reqValue >ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.gradeScore].Value)
         {
-            ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value = reqValue;
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.gradeScore,reqValue);
 
-            ServerData.userInfoTable.UpData(UserInfoTable.gradeScore, false);
         }
 
 

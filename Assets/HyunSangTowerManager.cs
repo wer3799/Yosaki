@@ -218,11 +218,10 @@ public class HyunSangTowerManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyunsangTowerScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.hyunsangTowerScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyunsangTowerScore].Value = reqValue;
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.hyunsangTowerScore,reqValue);
 
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.hyunsangTowerScore, false);
         }
 
 

@@ -13,6 +13,7 @@ public class RelicTestManager : ContentsManagerBase
 {
     [Header("BossInfo")]
     private BossEnemyBase singleRaidEnemy;
+
     private AgentHpController bossHpController;
 
     private BossTableData bossTableData;
@@ -23,10 +24,12 @@ public class RelicTestManager : ContentsManagerBase
     {
         return singleRaidEnemy.transform;
     }
+
     public override double GetBossRemainHpRatio()
     {
         return damageAmount.Value / bossRemainHp.Value;
     }
+
     public double BossRemainHp => bossRemainHp.Value;
 
     public override double GetDamagedAmount()
@@ -37,8 +40,10 @@ public class RelicTestManager : ContentsManagerBase
     [Header("Ui")]
     [SerializeField]
     private TextMeshProUGUI damageIndicator;
+
     [SerializeField]
     private Animator damagedAnim;
+
     private string DamageAnimName = "Play";
 
     [Header("State")]
@@ -60,6 +65,7 @@ public class RelicTestManager : ContentsManagerBase
     private Transform bossSpawnParent;
 
     #region Security
+
     private void OnEnable()
     {
         StartCoroutine(RandomizeRoutine());
@@ -87,6 +93,7 @@ public class RelicTestManager : ContentsManagerBase
         bossRemainHp.Value.RandomizeCryptoKey();
         contentsState.Value.RandomizeCryptoKey();
     }
+
     #endregion
 
     protected new void Start()
@@ -94,9 +101,8 @@ public class RelicTestManager : ContentsManagerBase
         base.Start();
         Initialize();
         Subscribe();
-
-
     }
+
     private void Initialize()
     {
         SoundManager.Instance.PlaySound("BossAppear");
@@ -157,7 +163,9 @@ public class RelicTestManager : ContentsManagerBase
         damageAmount.Value -= damage;
         bossRemainHp.Value += damage;
     }
+
     #region EndConditions
+
     //클리어조건1 플레이어 사망
     private void WhenPlayerDead()
     {
@@ -193,6 +201,7 @@ public class RelicTestManager : ContentsManagerBase
         base.TimerEnd();
         contentsState.Value = (int)ContentsState.TimerEnd;
     }
+
     #endregion
 
     private void EndBossMode()
@@ -219,14 +228,10 @@ public class RelicTestManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.relicTestScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.relicTestScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.relicTestScore].Value = reqValue;
-
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.relicTestScore, false);
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.relicTestScore, reqValue);
         }
-
-
     }
 
     private void ShowResultPopup()
@@ -243,6 +248,7 @@ public class RelicTestManager : ContentsManagerBase
         {
             yield return null;
         }
+
         directionUi.SetActive(false);
         singleRaidEnemy.gameObject.SetActive(true);
 

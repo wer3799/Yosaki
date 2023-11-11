@@ -17,7 +17,7 @@ public class BlackFoxRefund : MonoBehaviour
             return;
         }
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
 

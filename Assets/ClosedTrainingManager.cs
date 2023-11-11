@@ -217,11 +217,11 @@ public class ClosedTrainingManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value)
+        if (reqValue >  ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.closedScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value = reqValue;
-
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.closedScore, false);
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.closedScore,reqValue);
+            
+       
         }
 
 

@@ -213,7 +213,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 sealChargeCount.Value = 1;   
             }
         }).AddTo(this);
-        ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.SealSwordAwakeScore].AsObservable().Subscribe(e =>
+        ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.SealSwordAwakeScore].AsObservable().Subscribe(e =>
         {
             var grade = PlayerStats.GetSealSwordAwakeGrade();
             if (grade > -1)

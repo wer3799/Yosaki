@@ -46,7 +46,7 @@ public class UiGuiinBoard : MonoBehaviour
         string description = string.Empty;
 
         description += $"{CommonString.GetStatusName((StatusType)tableData.Abiltype)} {Utils.ConvertNum(tableData.Abilvalue * 100,4).ToString()} 증가\n";
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyunsangTowerScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.hyunsangTowerScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
         abilDescription.SetText(description);
     }

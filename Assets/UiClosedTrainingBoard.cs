@@ -26,7 +26,7 @@ public class UiClosedTrainingBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum( ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.closedScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
         int grade = PlayerStats.GetClosedTrainingGrade();
 

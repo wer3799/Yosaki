@@ -36,7 +36,7 @@ public class UiGradeTestBoard : MonoBehaviour
 
     private void Initialize()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.gradeScore].Value * GameBalance.BossScoreConvertToOrigin)}");
 
         int grade = PlayerStats.GetGradeTestGrade();
 

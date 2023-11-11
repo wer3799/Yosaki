@@ -218,11 +218,10 @@ public class BlackFoxManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value)
+        if (reqValue >ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value = reqValue;
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.blackFoxScore,reqValue);
 
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.blackFoxScore, false);
         }
 
 

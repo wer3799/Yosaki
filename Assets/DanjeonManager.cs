@@ -8,6 +8,7 @@ using TMPro;
 using CodeStage.AntiCheat.ObscuredTypes;
 using static UiRewardView;
 using BackEnd;
+using Photon.Realtime;
 
 public class DanjeonManager : ContentsManagerBase
 {
@@ -217,11 +218,10 @@ public class DanjeonManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.danjeonScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.danjeonScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.danjeonScore].Value = reqValue;
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.danjeonScore,reqValue);
 
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.danjeonScore, false);
         }
 
 
