@@ -14,6 +14,7 @@ public class BossScoreTable
 
     //도술
     public const string dosulScore = "s0";
+ 
 
     //요도강화
     public const string SealSwordAwakeScore = "s1";
@@ -38,6 +39,9 @@ public class BossScoreTable
 
     //검은구미호
     public const string blackFoxScore = "s9";
+    
+    //도술강화
+    public const string DosulAwakeScore = "s10";
 
 
     public bool isInitialize = false;
@@ -56,6 +60,7 @@ public class BossScoreTable
         { hyunsangTowerScore, string.Empty },
 
         { blackFoxScore, string.Empty },
+        { DosulAwakeScore, string.Empty },
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -156,6 +161,11 @@ public class BossScoreTable
             case blackFoxScore: //
             {
                 return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value).ToString("0");
+            }
+                break;   
+            case DosulAwakeScore: //
+            {
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value).ToString("0");
             }
                 break;
             default:

@@ -4058,7 +4058,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.DosulAwakeTable.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.DosulAwakeScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)

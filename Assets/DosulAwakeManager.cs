@@ -217,11 +217,10 @@ public class DosulAwakeManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.DosulAwakeScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value = reqValue;
-
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.DosulAwakeScore, false);
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.DosulAwakeScore,reqValue);
+       
         }
 
 
