@@ -122,6 +122,7 @@ public class UserInfoTable_2
 
     public const string blackFoxScore = "bfx";
     public const string usedblackFoxClearNum = "ubfcn";
+    public const string blackFoxRefund = "brf";
 
     
     
@@ -218,6 +219,7 @@ public class UserInfoTable_2
         { sealSwordEvolutionExp, 0f },
         { blackFoxScore, 0f },
         { usedblackFoxClearNum, 0f },
+        { blackFoxRefund, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

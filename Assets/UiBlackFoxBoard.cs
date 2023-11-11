@@ -177,7 +177,7 @@ public class UiBlackFoxBoard : MonoBehaviour
         userinfoParam.Add(UserInfoTable_2.usedblackFoxClearNum, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value);
 
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userinfoParam));
 
         ServerData.SendTransaction(transactions,
          completeCallBack: () =>
