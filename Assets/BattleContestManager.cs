@@ -32,15 +32,13 @@ public class BattleContestManager : ContentsManagerBase
 
     public static string poolName;
 
-    private List<RankManager.RankInfo> rankData;
+    public static List<RankManager.RankInfo> rankData;
 
     private new void Start()
     {
         base.Start();
 
         Subscribe();
-        
-        rankData = BattleContestData.MakeRankData();
 
         StartCoroutine(ContentsRoutine());
     }

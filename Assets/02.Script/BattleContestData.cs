@@ -7,11 +7,11 @@ using UnityEngine;
 
 public static class BattleContestData
 {
-    public static List<RankManager.RankInfo> RankList0 =new List<RankManager.RankInfo>();
-    public static List<RankManager.RankInfo> RankList1=new List<RankManager.RankInfo>();
-    public static List<RankManager.RankInfo> RankList2=new List<RankManager.RankInfo>();
-    public static List<RankManager.RankInfo> RankList3=new List<RankManager.RankInfo>();
-    public static List<RankManager.RankInfo> RankList4=new List<RankManager.RankInfo>();
+    public static List<RankManager.RankInfo> RankList0 = new List<RankManager.RankInfo>();
+    public static List<RankManager.RankInfo> RankList1 = new List<RankManager.RankInfo>();
+    public static List<RankManager.RankInfo> RankList2 = new List<RankManager.RankInfo>();
+    public static List<RankManager.RankInfo> RankList3 = new List<RankManager.RankInfo>();
+    public static List<RankManager.RankInfo> RankList4 = new List<RankManager.RankInfo>();
 
     public static void ClearData()
     {
@@ -21,54 +21,86 @@ public static class BattleContestData
         RankList3.Clear();
         RankList4.Clear();
     }
-    public static List<RankManager.RankInfo> MakeRankData()
+
+    private static Action loadCompleteCallBack_;
+
+    public static List<RankManager.RankInfo> MakeRankData(Action loadCompleteCallBack)
     {
+        loadCompleteCallBack_ = loadCompleteCallBack;
+
         var bossId = GameManager.Instance.bossId;
         var tableData = TableManager.Instance.BattleContestTable.dataArray;
         switch (bossId)
         {
-            case 0 :
+            case 0:
                 if (RankList0.Count < 1)
                 {
                     RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, WhenAllRankerLoadComplete);
                 }
+                else
+                {
+                    //데이터 있는경우 바로시작
+                    loadCompleteCallBack?.Invoke();
+                }
 
                 return RankList0;
-            case 1 :
+            case 1:
                 if (RankList1.Count < 1)
                 {
                     RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, WhenAllRankerLoadComplete);
                 }
+                else
+                {
+                    //데이터 있는경우 바로시작
+                    loadCompleteCallBack?.Invoke();
+                }
                 return RankList1;
-                
-            case 2 :
+
+            case 2:
                 if (RankList2.Count < 1)
                 {
                     RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, tableData[bossId].Maxrank, WhenAllRankerLoadComplete);
                 }
+                else
+                {
+                    //데이터 있는경우 바로시작
+                    loadCompleteCallBack?.Invoke();
+                }
                 return RankList2;
-                
-            case 3 :
+
+            case 3:
                 if (RankList3.Count < 1)
                 {
                     RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, tableData[bossId].Maxrank, WhenAllRankerLoadComplete);
                 }
+                else
+                {
+                    //데이터 있는경우 바로시작
+                    loadCompleteCallBack?.Invoke();
+                }
                 return RankList3;
-                
-            case 4 :
+
+            case 4:
                 if (RankList4.Count < 1)
                 {
                     RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, tableData[bossId].Maxrank, WhenAllRankerLoadComplete);
                 }
+                else
+                {
+                    //데이터 있는경우 바로시작
+                    loadCompleteCallBack?.Invoke();
+                }
                 return RankList4;
-                
+
             default:
                 break;
         }
 
+
+        
         return null;
     }
-    
+
     public static void WhenAllRankerLoadComplete(BackendReturnObject bro)
     {
         if (bro.IsSuccess())
@@ -77,7 +109,6 @@ public static class BattleContestData
 
             if (rows.Count > 0)
             {
-
                 for (int i = 0; i < rows.Count; i++)
                 {
                     if (i < rows.Count)
@@ -101,7 +132,7 @@ public static class BattleContestData
                         {
                             hornIdx = int.Parse(splitData[8]);
                         }
-                        
+
                         int suhoAnimal = -1;
 
                         if (splitData.Length >= 10)
@@ -119,45 +150,50 @@ public static class BattleContestData
                         {
                             guildName = splitData[7];
                         }
+
                         var bossId = GameManager.Instance.bossId;
 
                         switch (bossId)
                         {
-                            case 0 :
-                            case 1 :
+                            case 0:
+                            case 1:
                                 if (i < 15)
                                 {
-                                    RankList0.Add(new RankManager.RankInfo( NickName:nickName, GuildName:guildName, Rank:rank, Score:level,costumeIdx:costumeId,  petIddx:petId,  weaponIdx:weaponId,  magicbookIdx:magicBookId,  gumgiIdx:gumgiIdx,  maskIdx:maskIdx,  hornIdx:hornIdx, suhoAnimal:suhoAnimal));
+                                    RankList0.Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
                                 }
                                 else
                                 {
-                                    RankList1.Add(new RankManager.RankInfo( NickName:nickName, GuildName:guildName, Rank:rank, Score:level,costumeIdx:costumeId,  petIddx:petId,  weaponIdx:weaponId,  magicbookIdx:magicBookId,  gumgiIdx:gumgiIdx,  maskIdx:maskIdx,  hornIdx:hornIdx, suhoAnimal:suhoAnimal));
+                                    RankList1.Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
                                 }
+
                                 break;
-                            case 2 :
-                                RankList2.Add(new RankManager.RankInfo( NickName:nickName, GuildName:guildName, Rank:rank, Score:level,costumeIdx:costumeId,  petIddx:petId,  weaponIdx:weaponId,  magicbookIdx:magicBookId,  gumgiIdx:gumgiIdx,  maskIdx:maskIdx,  hornIdx:hornIdx, suhoAnimal:suhoAnimal));
+                            case 2:
+                                RankList2.Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
                                 break;
-                            case 3 :
-                                RankList3.Add(new RankManager.RankInfo( NickName:nickName, GuildName:guildName, Rank:rank, Score:level,costumeIdx:costumeId,  petIddx:petId,  weaponIdx:weaponId,  magicbookIdx:magicBookId,  gumgiIdx:gumgiIdx,  maskIdx:maskIdx,  hornIdx:hornIdx, suhoAnimal:suhoAnimal));
+                            case 3:
+                                RankList3.Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
                                 break;
-                            case 4 :
-                                RankList4.Add(new RankManager.RankInfo( NickName:nickName, GuildName:guildName, Rank:rank, Score:level,costumeIdx:costumeId,  petIddx:petId,  weaponIdx:weaponId,  magicbookIdx:magicBookId,  gumgiIdx:gumgiIdx,  maskIdx:maskIdx,  hornIdx:hornIdx, suhoAnimal:suhoAnimal));
+                            case 4:
+                                RankList4.Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
                                 break;
                             default:
                                 break;
                         }
-                        
                     }
                     else
                     {
                     }
+                }
+
+                if (loadCompleteCallBack_ != null)
+                {
+                    loadCompleteCallBack_();
                 }
             }
             else
             {
                 //데이터 없을때
             }
-
         }
     }
 }
