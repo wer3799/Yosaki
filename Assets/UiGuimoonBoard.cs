@@ -27,7 +27,7 @@ public class UiGuimoonBoard : SingletonMono<UiGuimoonBoard>
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < GameBalance.GuimoonUnlockLevel)
         {
             this.gameObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.GuimoonUnlockLevel}레벨 이후에 사용 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.GuimoonUnlockLevel}레벨 이상일 때 개방됩니다!");
         }
     }
 

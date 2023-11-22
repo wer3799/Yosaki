@@ -15,6 +15,7 @@ public class UiBoardLevelLock : MonoBehaviour
     {
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < unlockLevel)
         {
+            PopupManager.Instance.ShowAlarmMessage($"레벨 {Utils.ConvertNum(unlockLevel)} 이상일 때 개방됩니다!");
             gameObject.SetActive(false);
         }
     }

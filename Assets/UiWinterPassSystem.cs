@@ -79,8 +79,10 @@ public class UiWinterPassSystem : MonoBehaviour
         string freeKey = ChildPassServerTable.childFree;
         string adKey = ChildPassServerTable.childAd;
 
-        List<int> splitData_Free = GetSplitData(ChildPassServerTable.childFree);
-        List<int> splitData_Ad = GetSplitData(ChildPassServerTable.childAd);
+        //받은 보상
+        var freeValue = int.Parse(ServerData.childPassServerTable.TableDatas[freeKey].Value);
+        var adValue = int.Parse(ServerData.childPassServerTable.TableDatas[adKey].Value);
+        
         
         List<int> rewardTypeList = new List<int>();
         
@@ -88,19 +90,16 @@ public class UiWinterPassSystem : MonoBehaviour
 
         int rewardedNum = 0;
 
-        string free = ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value;
-        string ad = ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value;
-
         bool hasCostumeItem = false;
 
-        for (int i = 0; i < tableData.Length; i++)
+        for (int i = freeValue+1; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward(tableData[i].Unlockamount);
 
             if (canGetReward == false) break;
 
             //무료보상
-            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            if (HasReward(freeKey, tableData[i].Id) == false)
             {
                 if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
                 {
@@ -108,33 +107,41 @@ public class UiWinterPassSystem : MonoBehaviour
                     break;
                 }
 
-                free += $",{tableData[i].Id}";
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
                 if (rewardTypeList.Contains(tableData[i].Reward1) == false)
                 {
                     rewardTypeList.Add(tableData[i].Reward1);
                 }
+
                 rewardedNum++;
+                freeValue = i;
             }
-
-            //유료보상
-            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+        }
+        if(HasPassItem())
+        {
+            for (int i = adValue+1; i < tableData.Length; i++)
             {
-                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
-                {
-                    hasCostumeItem = true;
-                    break;
-                }
+                if (CanGetReward(tableData[i].Unlockamount) == false) break;
 
-                ad += $",{tableData[i].Id}";
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
-                
-                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                //유료보상
+                if (HasReward(adKey, tableData[i].Id) == false)
                 {
-                    rewardTypeList.Add(tableData[i].Reward2);
+                    if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                    {
+                        hasCostumeItem = true;
+                        break;
+                    }
+
+                    ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+
+                    if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                    {
+                        rewardTypeList.Add(tableData[i].Reward2);
+                    }
+
+                    rewardedNum++;
+                    adValue = i;
                 }
-                
-                rewardedNum++;
             }
         }
 
@@ -146,8 +153,8 @@ public class UiWinterPassSystem : MonoBehaviour
 
         if (rewardedNum > 0)
         {
-            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = free;
-            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = ad;
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = $"{freeValue}";
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = $"{adValue}";
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -184,9 +191,9 @@ public class UiWinterPassSystem : MonoBehaviour
         int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value;
         return killCountTotal >= require;
     }
-    public bool HasReward(List<int> splitData, int id)
+    private bool HasReward(string key,int id)
     {
-        return splitData.Contains(id);
+        return int.Parse(ServerData.childPassServerTable.TableDatas[key].Value) >= id;
     }
 
     private bool HasPassItem()

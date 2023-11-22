@@ -309,7 +309,8 @@ public class SealSwordEvolutionBoard : MonoBehaviour
 
     public bool IsUpgradable()
     {
-   
+        
+
 
         var gauge = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionExp).Value;
         
@@ -321,6 +322,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
         {
             return false;
         }
+        
         var requireExp = tableData[grade + 1].Requireexp;
 
         return gauge+exp.Value>requireExp;
@@ -429,6 +431,8 @@ public class SealSwordEvolutionBoard : MonoBehaviour
         }
 
     }
+
+    private bool isEvolution = false;
     public void OnClickEvolution()
     {
         if (IsUpgradable() == false)
@@ -436,7 +440,15 @@ public class SealSwordEvolutionBoard : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("요도 각성이 불가능합니다.");
             return;
         }
-      
+
+        //중복방지
+        if (isEvolution == true)
+        {
+            return;
+        }
+        
+        isEvolution = true;
+        
         var expSum = 0f;
 
         //업그레이드 가능
@@ -447,14 +459,24 @@ public class SealSwordEvolutionBoard : MonoBehaviour
 
 
         var e = registeredContainer.GetEnumerator();
+
+        // while (e.MoveNext())
+        // {
+        //     if (ServerData.sealSwordServerTable.TableDatas[e.Current.GetSealSwordData().Stringid].amount.Value < 0)
+        //     {
+        //         // 마이너스 방지용 코드
+        //         PopupManager.Instance.ShowAlarmMessage("요도 개수가 부족합니다!");
+        //         return;
+        //     }
+        // }
+        
         
         while (e.MoveNext())
         {
             if (e.Current == null || e.Current.GetRegisterCount() < 1) continue;
-            expSum += TableManager.Instance.sealSwordTable.dataArray[e.Current.GetSealSwordData().Id].Sealswordexp *
-                      e.Current.GetRegisterCount();
-            ServerData.sealSwordServerTable.TableDatas[e.Current.GetSealSwordData().Stringid].amount.Value -=
-                e.Current.GetRegisterCount();
+            expSum += TableManager.Instance.sealSwordTable.dataArray[e.Current.GetSealSwordData().Id].Sealswordexp * e.Current.GetRegisterCount();
+            
+            ServerData.sealSwordServerTable.TableDatas[e.Current.GetSealSwordData().Stringid].amount.Value -= e.Current.GetRegisterCount();
             e.Current.SetRegister(0);
             sealSwordParam.Add(e.Current.GetSealSwordData().Stringid,
                 ServerData.sealSwordServerTable.TableDatas[e.Current.GetSealSwordData().Stringid]
@@ -485,6 +507,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
             CreateCells();
             SetExp();
             UpdateUi();
+            isEvolution = false;
         });
     }
 }

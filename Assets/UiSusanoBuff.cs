@@ -40,6 +40,7 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.TestThief) return;
         if (GameManager.contentsType == GameManager.ContentsType.TestDark) return;
         if (GameManager.contentsType == GameManager.ContentsType.TestSin) return;
+        if (GameManager.contentsType == GameManager.ContentsType.BattleContest) return;
         //산신령
         
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon)

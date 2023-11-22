@@ -17,13 +17,20 @@ public class AlarmHitObject : MonoBehaviour
     private Coroutine _coroutine;
     public void AttackStart()
     {
-
-        if (_coroutine != null)
+        if (GameManager.Instance.bossId < 190||this.gameObject.activeSelf==false)
         {
-            StopCoroutine(_coroutine);
+            this.gameObject.SetActive(true);
+            animator.SetTrigger("Attack");    
+        }
+        else
+        {
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }   
+            _coroutine = StartCoroutine(AttackRoutine());
         }
 
-        _coroutine = StartCoroutine(AttackRoutine());
     }
 
     private IEnumerator AttackRoutine()

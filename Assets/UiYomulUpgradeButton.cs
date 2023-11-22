@@ -10,7 +10,11 @@ public class UiYomulUpgradeButton : MonoBehaviour
     }
 
     public void OnClickYachaUpgradeButton()
-    {
+    {        
+        if (ServerData.weaponTable.TableDatas["weapon21"].hasItem.Value < 1)
+        {
+            return;
+        }
         UiYachaUpgradeBoard.Instance.ShowUpgradePopup(true);
     }
 }

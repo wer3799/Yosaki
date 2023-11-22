@@ -585,6 +585,11 @@ public enum Item_Type
     costume172 = 1472, //보스
     costume173 = 1473, //보스
     costume174 = 1474, //고양이
+    
+    costume175 = 1475, //보스
+    costume176 = 1476, //보스
+    costume177 = 1477, //월간
+    costume178 = 1478, //pvp
 
 
     gumiho0 = 5000,
@@ -842,6 +847,11 @@ public enum Item_Type
     DragonWeapon1 = 7263,
     DragonWeapon2 = 7264,
     DragonWeapon3 = 7265,
+    DragonWeapon4 = 7266,
+    DragonWeapon5 = 7267,
+    DragonWeapon6 = 7268,
+    DragonWeapon7 = 7269,
+    
     
     HyunSangNorigae10 = 7280,
     HyunSangNorigae11 = 7281,
@@ -897,6 +907,7 @@ public enum Item_Type
     RecommendWeapon20 = 8020,
     RecommendWeapon21= 8021,
     RecommendWeapon22 = 8022,
+    weapon146 = 8023,
 
     ChunNorigae5 = 8500,
     ChunNorigae6 = 8501,
@@ -917,6 +928,8 @@ public enum Item_Type
     MonthNorigae9 = 8613, // 월간노리개
     MonthNorigae10 = 8614, // 월간노리개
     MonthNorigae11 = 8615, // 월간노리개
+    magicBook116 = 8616,// pvp노리개
+    magicBook117 = 8617, // 월간노리개
 
     Chun0 = 8700, // 천계기술
     Chun1 = 8701,
@@ -1052,6 +1065,11 @@ public enum Item_Type
     SuhoTreasure = 9051,
     BlackFoxGoods = 9052,
     BlackFoxClear = 9053,
+    ByeolhoGoods = 9054,
+    ByeolhoClear = 9055,
+    BattleGoods = 9056,
+    BattleClear= 9057,
+    BattleScore= 9058,
 }
 //
 public class DropItem : PoolItem

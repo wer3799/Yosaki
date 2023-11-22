@@ -97,6 +97,8 @@ public class UiInventoryWeaponView : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI newGachaViewEquipDesc;
+    [SerializeField]
+    private TextMeshProUGUI hasEffectText;
 
     [SerializeField]
     private Sprite weaponViewEquipDisable;

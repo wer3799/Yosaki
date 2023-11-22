@@ -48,6 +48,20 @@ public class UiSleepRewardIndicator : SingletonMono<UiSleepRewardIndicator>
 
     public void OnClickGetRewardButton()
     {
+        var att = ServerData.statusTable.GetTableData(StatusTable.AttackLevel_Gold).Value;
+        var cri = ServerData.statusTable.GetTableData(StatusTable.CriticalLevel_Gold).Value;
+        var criDam = ServerData.statusTable.GetTableData(StatusTable.CriticalDamLevel_Gold).Value;
+        var hp = ServerData.statusTable.GetTableData(StatusTable.HpLevel_Gold).Value;
+        var hpRec = ServerData.statusTable.GetTableData(StatusTable.HpRecover_Gold).Value;
+
+        var sum = att + cri + criDam +  hp + hpRec;
+        int reqLv = GameBalance.goldGraduateScore;
+        if (sum >= reqLv&&ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateGold).Value < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage(
+                $"금화 각성을 먼저 시도해주세요!");
+            return;
+        }
         if(ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value> GameBalance.GoldLimit)
         {
             PopupManager.Instance.ShowAlarmMessage("금화가 너무 많습니다!\n기본 무공을 올려주세요!");

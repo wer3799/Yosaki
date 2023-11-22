@@ -795,6 +795,8 @@ public static class SettingKey
     public static string showVisionSkill = "showVisionSkill";
     public static string showDosulSkill = "showDosulSkill";
 
+    public static string showByeolhotitle = "showByeolhotitle";
+
     public static string showBanditUi = "showBanditUi";
     public static string showTowerUi = "showTowerUi";
     public static string showSmithUi = "showSmithUi";
@@ -890,6 +892,7 @@ public static class SettingData
     public static ReactiveProperty<int> showRingEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> newUi = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> towerAutoMode = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> showByeolhotitle = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> norigaeSize = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     
     public static ReactiveProperty<int> autoVisionSkill = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
@@ -1082,6 +1085,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.towerAutoMode) == false)
             PlayerPrefs.SetInt(SettingKey.towerAutoMode, 1);     
         
+        if (PlayerPrefs.HasKey(SettingKey.showByeolhotitle) == false)
+            PlayerPrefs.SetInt(SettingKey.showByeolhotitle, 1);     
+        
         if (PlayerPrefs.HasKey(SettingKey.norigaeSize) == false)
             PlayerPrefs.SetInt(SettingKey.norigaeSize, 1);
         
@@ -1200,6 +1206,8 @@ public static class SettingData
         newUi.Value = PlayerPrefs.GetInt(SettingKey.newUi, 1);
         
         towerAutoMode.Value = PlayerPrefs.GetInt(SettingKey.towerAutoMode, 1);
+        
+        showByeolhotitle.Value = PlayerPrefs.GetInt(SettingKey.showByeolhotitle, 1);
         
         norigaeSize.Value = PlayerPrefs.GetInt(SettingKey.norigaeSize, 1);
         
@@ -1479,6 +1487,10 @@ public static class SettingData
         towerAutoMode.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.towerAutoMode, e);
+        }); 
+        showByeolhotitle.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showByeolhotitle, e);
         }); 
         
         norigaeSize.AsObservable().Subscribe(e =>

@@ -120,6 +120,7 @@ public enum StatusType
     EnhanceChunguCritical, //천구베기증폭
     YoPowerGoodsGainPer, //요석 획득 증가
     DragonHasValueUpgrade,//용인비늘당 개수증가
+    SuperCritical27DamPer,//무공피해
 }
 
 
@@ -169,6 +170,10 @@ public static class PlayerStats
         double trans = GetSuperCritical21DamPer();
         double jingwisal = GetSuperCritical22DamPer();
         double simsang = GetSuperCritical23DamPer();
+        double dragon = GetSuperCritical24DamPer();
+        double yoPower = GetSuperCritical25DamPer();
+        double jinYodo = GetSuperCritical26DamPer();
+        double mugong = GetSuperCritical27DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -207,6 +212,10 @@ public static class PlayerStats
         totalPower += (totalPower * trans);
         totalPower += (totalPower * jingwisal);
         totalPower += (totalPower * simsang);
+        totalPower += (totalPower * dragon);
+        totalPower += (totalPower * yoPower);
+        totalPower += (totalPower * jinYodo);
+        totalPower += (totalPower * mugong);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -2107,6 +2116,8 @@ public static class PlayerStats
         
         ret += GetClosedTrainingValue();
         
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical23DamPer);
+
         return ret;
     }
     //용인베기
@@ -2117,6 +2128,8 @@ public static class PlayerStats
         ret += GetDragonScaleAbilHasEffect();
         
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical24DamPer);
+        
+        ret += GetWeaponHasPercentValue(StatusType.SuperCritical24DamPer);
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical24DamPer);
         
@@ -2146,6 +2159,16 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += SealSwordEvolutionAbility(StatusType.SuperCritical26DamPer);
+        
+        return ret;
+    }
+
+    //무공 피해
+    public static float GetSuperCritical27DamPer()
+    {
+        float ret = 0f;
+
+        ret += ByeolhoHasAbility(StatusType.SuperCritical27DamPer);
         
         return ret;
     }
@@ -2873,7 +2896,8 @@ public static class PlayerStats
     private static bool ActiveSmithValue(StatusType statustype)
     {
         return statustype != StatusType.Damdecrease && statustype != StatusType.SuperCritical1Prob &&
-               statustype != StatusType.ExpGainPer;
+               statustype != StatusType.ExpGainPer&&
+               statustype != StatusType.SuperCritical24DamPer;
     }
 
     public static float GetRelicHasEffect(StatusType statusType)
@@ -4102,6 +4126,27 @@ public static class PlayerStats
         var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Rewrardcut)
+            {
+                grade = i;
+            }
+        }
+
+
+        return grade;
+    }
+
+    public static int GetByeolhoTowerGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.ByeolhoTower.dataArray;
+
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.byeolhoTowerScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+        
         for (int i = 0; i < tableData.Length; i++)
         {
             if (score >= tableData[i].Rewrardcut)
@@ -5955,6 +6000,27 @@ public static class PlayerStats
         {
             return 0f;
         }
+    }
+    //해당 단계 하나만 갖고옴.
+    public static float ByeolhoHasAbility(StatusType type)
+    {
+        var ret = 0f;
+        
+        var tableData = TableManager.Instance.Byeolho.dataArray;
+
+        var idx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.byeolhoLevelIdx).Value;
+
+        if (idx < 0)
+        {
+            return ret;
+        }
+
+        if (type == (StatusType)tableData[idx].Abil_Type)
+        {
+            ret = tableData[idx].Abil_Value;
+        }
+        
+        return ret;
     }
     public static void AddOrUpdateValue(Dictionary<StatusType, float> dictionary, StatusType key, float value)
     {

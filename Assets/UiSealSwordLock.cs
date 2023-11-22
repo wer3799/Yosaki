@@ -17,7 +17,7 @@ public class UiSealSwordLock : MonoBehaviour
 
         if (isLock)
         {
-            PopupManager.Instance.ShowAlarmMessage($"레벨 {Utils.ConvertBigNum(lockLevel)}이상일때 사용 가능합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"레벨 150만 이상일 때 개방됩니다!");
         }
     }
 

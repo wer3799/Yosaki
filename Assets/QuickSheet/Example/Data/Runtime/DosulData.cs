@@ -32,4 +32,8 @@ public class DosulData
   int unlock_skill_id;
   public int Unlock_Skill_Id { get {return unlock_skill_id; } set { this.unlock_skill_id = value;} }
   
+  [SerializeField]
+  float retroactive_value;
+  public float Retroactive_Value { get {return retroactive_value; } set { this.retroactive_value = value;} }
+  
 }

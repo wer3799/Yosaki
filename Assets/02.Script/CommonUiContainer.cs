@@ -170,6 +170,10 @@ public Sprite DragonWeapon0;
 public Sprite DragonWeapon1;
 public Sprite DragonWeapon2;
 public Sprite DragonWeapon3;
+public Sprite DragonWeapon4;
+public Sprite DragonWeapon5;
+public Sprite DragonWeapon6;
+public Sprite DragonWeapon7;
     
 [Header ("Weapon_View")]
 
@@ -209,6 +213,7 @@ public Sprite weapon131;
 
 public Sprite RecommendWeapon21;
 public Sprite RecommendWeapon22;
+[FormerlySerializedAs("PvPWeapon0")] public Sprite weapon146;
 
     
 [Header ("Norigae")]
@@ -314,6 +319,8 @@ public Sprite RecommendWeapon22;
     public Sprite MonthNorigae10;
     public Sprite MonthNorigae11;
     public Sprite RecommendNorigae0;
+    public Sprite magicBook116;
+    public Sprite magicBook117;
     
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -533,6 +540,11 @@ public Sprite RecommendWeapon22;
     public Sprite DosulClear;
     public Sprite BlackFoxGoods;
     public Sprite BlackFoxClear;
+    public Sprite ByeolhoGoods;
+    public Sprite ByeolhoClear;
+    public Sprite BattleGoods;
+    public Sprite BattleClear;
+    public Sprite BattleScore;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -1064,6 +1076,14 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[173];
             case Item_Type.costume174:
                 return costumeThumbnail[174];
+            case Item_Type.costume175:
+                return costumeThumbnail[175];
+            case Item_Type.costume176:
+                return costumeThumbnail[176];
+            case Item_Type.costume177:
+                return costumeThumbnail[177];
+            case Item_Type.costume178:
+                return costumeThumbnail[178];
 
 
             case Item_Type.RankFrame1:
@@ -1586,6 +1606,16 @@ public Sprite RecommendWeapon22;
                 return BlackFoxGoods;  
             case Item_Type.BlackFoxClear:
                 return BlackFoxClear;   
+            case Item_Type.ByeolhoGoods:
+                return ByeolhoGoods;  
+            case Item_Type.ByeolhoClear:
+                return ByeolhoClear;  
+            case Item_Type.BattleGoods:
+                return BattleGoods;  
+            case Item_Type.BattleClear:
+                return BattleClear;   
+            case Item_Type.BattleScore:
+                return BattleScore;   
             
             case Item_Type.GuildTowerClearTicket:
                 return GuildTowerClearTicket;  
@@ -1921,6 +1951,10 @@ public Sprite RecommendWeapon22;
                 return MonthNorigae11;
             case Item_Type.RecommendNorigae0:
                 return RecommendNorigae0;
+            case Item_Type.magicBook116:
+                return magicBook116;
+            case Item_Type.magicBook117:
+                return magicBook117;
             //
             //
             case Item_Type.DokebiHorn0:
@@ -2616,6 +2650,14 @@ public Sprite RecommendWeapon22;
                 return DragonWeapon2;
             case Item_Type.DragonWeapon3:
                 return DragonWeapon3;
+            case Item_Type.DragonWeapon4:
+                return DragonWeapon4;
+            case Item_Type.DragonWeapon5:
+                return DragonWeapon5;
+            case Item_Type.DragonWeapon6:
+                return DragonWeapon6;
+            case Item_Type.DragonWeapon7:
+                return DragonWeapon7;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
@@ -2741,6 +2783,8 @@ public Sprite RecommendWeapon22;
 
             case Item_Type.RecommendWeapon22:
                 return RecommendWeapon22;
+            case Item_Type.weapon146:
+                return weapon146;
 
 
             case Item_Type.weapon81:

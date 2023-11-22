@@ -158,6 +158,11 @@ public class RankManager : SingletonMono<RankManager>
     {
         UiRankView.rank1Count = 0;
         Backend.URank.User.GetRankList(uuid, count, callback);
+    }    
+    public void GetRankerList(string uuid, int count,int interval, Backend.BackendCallback callback)
+    {
+        UiRankView.rank1Count = 0;
+        Backend.URank.User.GetRankList(uuid, count, interval,callback);
     }
 
     #region LevelRank

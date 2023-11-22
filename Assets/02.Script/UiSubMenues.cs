@@ -9,6 +9,8 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
     [SerializeField] private MainTabButtons _GangChulButton;
     [SerializeField] private MainTabButtons _SealSwordButton;
     [SerializeField] private MainTabButtons _DosulButton;
+    [SerializeField] private MainTabButtons _ByeolhoButton;
+    [SerializeField] private MainTabButtons _BattleContestButton;
 
     private void Start()
     {
@@ -69,6 +71,18 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                 {
                     GameManager.Instance.ResetLastContents2();
                     _DosulButton.OnClickButton();
+                    return;
+                }
+                case GameManager.ContentsType.ByeolhoTower:
+                {
+                    GameManager.Instance.ResetLastContents2();
+                    _ByeolhoButton.OnClickButton();
+                    return;
+                }
+                case GameManager.ContentsType.BattleContest:
+                {
+                    GameManager.Instance.ResetLastContents2();
+                    _BattleContestButton.OnClickButton();
                     return;
                 }
             }

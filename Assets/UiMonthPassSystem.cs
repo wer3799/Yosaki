@@ -93,9 +93,6 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
         textList[5].SetText($"종료 : {ServerData.userInfoTable.currentServerTime.Month}월 {DateTime.DaysInMonth(ServerData.userInfoTable.currentServerTime.Year,ServerData.userInfoTable.currentServerTime.Month)}일\n(100단위로 갱신됩니다!)");
         textList[6].SetText($"월간 훈련({ServerData.userInfoTable.currentServerTime.Month}월)");
         textList[7].SetText($"({ServerData.userInfoTable.currentServerTime.Month}월 01일 ~ {ServerData.userInfoTable.currentServerTime.Month}월 {DateTime.DaysInMonth(ServerData.userInfoTable.currentServerTime.Year,ServerData.userInfoTable.currentServerTime.Month)}일)");
-
-        
-        
         textList[8].SetText($"월간 훈련 구매 시, <color=#849e72ff>{CommonString.GetItemName(costumeType)}</color> 획득 가능 !\n월간 구매 혜택 및 월간 버프 사용 가능 !\n월간 훈련 패스로 다양한 보상 획득 가능!");
         textList[9].SetText($"{CommonString.GetItemName(costumeType)}");
         textList[10].SetText($"{ServerData.userInfoTable.currentServerTime.Month}월 한정 외형");
@@ -104,7 +101,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
         var str0 = "[";
         for (int i = 0; i < rewardData.Length; i++)
         {
-            if(rewardData[i].Monthsort!=true) continue;
+            if(rewardData[i].Monthsort!=false) continue;
             str0 += $"{rewardData[i].Description},";
         }
 
@@ -115,13 +112,12 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
         str0 += "]";
         _monthlyTrainingCells[0].SetText($"매일 소탕권 추가 지급(+{rewardData[0].Itemvalue}개)",str0);
-        
-        
+
         var buffData = TableManager.Instance.MonthBuff.dataArray;
         var str1 = "[";
         for (int i = 0; i < buffData.Length; i++)
         {
-            if(buffData[i].Monthsort!=true) continue;
+            if(buffData[i].Monthsort!=false) continue;
             str1 += $"{buffData[i].Description},";
         }
         if (str1.EndsWith(","))
@@ -199,6 +195,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
         //받은적 있는지 체크
         for (int i = adValue; i < tableData.Length; i++)
         {
+            if (HasPassItem() == false) break;
             if (HasReward(MonthlyPassServerTable.MonthlypassAdReward, tableData[i].Id) == false)
             {
                 //코스튬이나 노리개가 있다면?
@@ -490,7 +487,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
     private bool CanGetReward(int require)
     {
-        int killCountTotal = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value;
+        int killCountTotal = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).Value;
         return killCountTotal >= require;
     }
     public bool HasReward(string key, int data)
@@ -500,7 +497,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
     private bool HasPassItem()
     {
-        return ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton.monthPassKey].buyCount.Value > 0;
     }
 
     public List<int> GetSplitData(string key)
@@ -538,7 +535,6 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
     protected override GameObject CellPrefab => cellPrefab;
     private void Start()
     {
-
         FindMonthCostume();
 
         SetCostume();

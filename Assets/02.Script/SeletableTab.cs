@@ -31,6 +31,7 @@ public class SeletableTab : MonoBehaviour
     private bool useButtonColor = true;
 
     [SerializeField] private bool initDefaultSetting = true;
+    [SerializeField] private bool initOnlyUISetting = false;
 
     private void Awake()
     {
@@ -38,11 +39,19 @@ public class SeletableTab : MonoBehaviour
         {
             SetDefault();
         }
+        if (initOnlyUISetting)
+        {
+            SetDefaultUi();
+        }
     }
 
     private void SetDefault()
     {
         OnSelect(0);
+    }
+    private void SetDefaultUi()
+    {
+        OnSelectUi(0);
     }
 
     private void OnEnable()
@@ -96,6 +105,30 @@ public class SeletableTab : MonoBehaviour
             }
             
             objects[i].gameObject.SetActive(i == select);
+        }
+    }   
+    public void OnSelectUi(int select)
+    {
+        if (select == -1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("업데이트 예정 입니다!");
+            return;
+        }
+
+        for (int i = 0; i < tabs.Count; i++)
+        {
+            if (tabTexts.Count == tabs.Count)
+            {
+                if (useButtonColor)
+                {
+                    tabTexts[i].color = i == select ? enableColor_text : disableColor_text;
+                }
+            }
+
+            if (useButtonColor)
+            {
+                tabs[i].color = i == select ? enableColor : disableColor;
+            }
         }
     }
 }

@@ -46,6 +46,7 @@ public class TaegeukSimbeopBoard : MonoBehaviour
             ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value += 10000;
         }  
         
+        
     }
 #endif
     private void OnEnable()

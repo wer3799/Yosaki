@@ -32,7 +32,8 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
     
         if (ServerData.userInfoTable.IsHotTimeEvent())
         {
-            desc += $"~12월 17일\n";
+            var date = GameBalance.HotTimeEventEndPeriod;
+            desc += $"~{date.Month}월 {date.Day}일\n";
             float exp = GameBalance.HotTimeEvent_Exp;
             float gold = GameBalance.HotTimeEvent_Gold;
             float growthStone = GameBalance.HotTimeEvent_GrowthStone;

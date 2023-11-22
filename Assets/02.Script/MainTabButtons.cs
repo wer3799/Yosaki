@@ -46,4 +46,31 @@ public class MainTabButtons : MonoBehaviour
         // UiStatus.Instance.transform.SetAsLastSibling();
     }
 
+    public void OnClickYachaButton()
+    {
+        if (ServerData.weaponTable.TableDatas["weapon21"].hasItem.Value < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("야차검이 필요합니다.");
+            return;
+        }
+        
+        if (popupPrefab == null)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "업데이트 예정 입니다.", null);
+            return;
+        }
+
+        if (popupObject == null)
+        {
+
+            popupObject = Instantiate<GameObject>(popupPrefab,
+                popupParents == null ? InGameCanvas.Instance.transform : popupParents);
+        }
+        else
+        {
+            popupObject.transform.SetAsLastSibling();
+            popupObject.SetActive(true);
+        }
+    }
+
 }

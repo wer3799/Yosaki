@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using System.Linq;
 using BackEnd;
+using WebSocketSharp;
 
 public class UiMileageRefund : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class UiMileageRefund : MonoBehaviour
         RelocateLevelPass();
         TowerFloorAdjust();
         
-        InitializeXMasEvent();
+        InitializeEvent();
         InitializeCollectionEvent();
         ShopItemRefundRoutine();
         InitializeTrainingEvent();
@@ -130,8 +131,9 @@ public class UiMileageRefund : MonoBehaviour
         });
     }
 
-    private void InitializeXMasEvent()
+    private void InitializeEvent()
     {
+        #region InitializeEvent
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 1)
         {
                     
@@ -729,6 +731,86 @@ public class UiMileageRefund : MonoBehaviour
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
                 Debug.LogError("핫타임 재화 초기화");
+
+            });
+        }
+
+        #endregion
+
+     
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 30)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 30;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";
+            ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value = GameBalance.DailyByeolhoClearGetCount;
+            ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value = GameBalance.WeeklyBattleClearGetCount;
+
+            Param goodsParam = new Param();
+
+            var foxIdx = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.foxFireIdx).Value;
+
+            var dosulIdx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dosulLevel).Value;
+
+            var meditationIdx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationIndex).Value;
+
+            string refundMessage = "";
+            
+            if (foxIdx > -1)
+            {
+                var refundValue = TableManager.Instance.FoxFire.dataArray[foxIdx].Retroactive_Value;
+
+                ServerData.goodsTable.GetTableData(GoodsTable.FoxRelic).Value += refundValue;
+                goodsParam.Add(GoodsTable.FoxRelic, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelic).Value);
+
+                refundMessage += $"{CommonString.GetItemName(Item_Type.FoxRelic)} {Utils.ConvertNum(refundValue)}개 소급 완료!";
+            }
+            if (dosulIdx > -1)
+            {
+                var refundValue = TableManager.Instance.dosulTable.dataArray[dosulIdx].Retroactive_Value;
+
+                ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value += refundValue;
+                goodsParam.Add(GoodsTable.DosulGoods, ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
+
+                refundMessage += $"\n{CommonString.GetItemName(Item_Type.DosulGoods)} {Utils.ConvertNum(refundValue)}개 소급 완료!";
+            }
+            if (meditationIdx > -1)
+            {
+                var refundValue = TableManager.Instance.Meditation.dataArray[meditationIdx].Retroactive_Value;
+
+                ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value += refundValue;
+                goodsParam.Add(GoodsTable.MeditationGoods, ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value);
+
+                refundMessage += $"\n{CommonString.GetItemName(Item_Type.MeditationGoods)} {Utils.ConvertNum(refundValue)}개 소급 완료!";
+            }
+            goodsParam.Add(GoodsTable.ByeolhoClear, ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value);
+            goodsParam.Add(GoodsTable.BattleClear, ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value);
+
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+            
+            Param passParam = new Param();
+            passParam.Add(ChildPassServerTable.childFree, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+            passParam.Add(ChildPassServerTable.childAd, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+            
+            
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                Debug.LogError("겨울훈련 패스 초기화 / 소급");
+                if (refundMessage.IsNullOrEmpty()==false)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,refundMessage,null);
+                }
 
             });
         }

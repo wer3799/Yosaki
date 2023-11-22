@@ -288,11 +288,11 @@ public static class ServerData
                     }
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        Debug.LogError(log);
+                        PopupManager.Instance.ShowConfirmPopup("Unity 환경에서만 보이는 창입니다.", log, null);
                     }
                     else
                     {
-                      //  PopupManager.Instance.ShowConfirmPopup("Unity 환경에서만 보이는 창입니다.", log, null);
+                        Debug.LogError(log);
                     }
                 }
             #endif
@@ -709,6 +709,21 @@ public static class ServerData
             case Item_Type.BlackFoxClear:
                 ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += rewardValue;
                 break;  
+            case Item_Type.ByeolhoGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value += rewardValue;
+                break;  
+            case Item_Type.ByeolhoClear:
+                ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value += rewardValue;
+                break;  
+            case Item_Type.BattleGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value += rewardValue;
+                break;  
+            case Item_Type.BattleClear:
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value += rewardValue;
+                break;  
+            case Item_Type.BattleScore:
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += rewardValue;
+                break;  
             case Item_Type.TransGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += rewardValue;
                 break;  
@@ -1058,6 +1073,10 @@ public static class ServerData
             case Item_Type.costume172:
             case Item_Type.costume173:
             case Item_Type.costume174:
+            case Item_Type.costume175:
+            case Item_Type.costume176:
+            case Item_Type.costume177:
+            case Item_Type.costume178:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1068,6 +1087,15 @@ public static class ServerData
                 break;
             case Item_Type.weapon131:
                 ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.weapon146:
+                ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.magicBook116:
+                ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.magicBook117:
+                ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet52:
                 ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
@@ -1321,6 +1349,10 @@ public static class ServerData
             case Item_Type.costume172:
             case Item_Type.costume173:
             case Item_Type.costume174:
+            case Item_Type.costume175:
+            case Item_Type.costume176:
+            case Item_Type.costume177:
+            case Item_Type.costume178:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1975,6 +2007,36 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             
+            case Item_Type.ByeolhoGoods:
+                passParam.Add(GoodsTable.ByeolhoGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
+            case Item_Type.ByeolhoClear:
+                passParam.Add(GoodsTable.ByeolhoClear,
+                    ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
+            case Item_Type.BattleGoods:
+                passParam.Add(GoodsTable.BattleGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
+            case Item_Type.BattleClear:
+                passParam.Add(GoodsTable.BattleClear,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
+            case Item_Type.BattleScore:
+                passParam.Add(GoodsTable.BattleScore,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
             case Item_Type.TransGoods:
                 passParam.Add(GoodsTable.TransGoods,
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
@@ -2333,6 +2395,34 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += amount;
                 param.Add(GoodsTable.BlackFoxClear,
                     ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.ByeolhoGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value += amount;
+                param.Add(GoodsTable.ByeolhoGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.ByeolhoClear:
+                ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value += amount;
+                param.Add(GoodsTable.ByeolhoClear,
+                    ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.BattleGoods:
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value += amount;
+                param.Add(GoodsTable.BattleGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.BattleClear:
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value += amount;
+                param.Add(GoodsTable.BattleClear,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.BattleScore:
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += amount;
+                param.Add(GoodsTable.BattleScore,
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.TransGoods:
@@ -4524,6 +4614,21 @@ public static class ServerData
                     break;
                 case Item_Type.BlackFoxClear:
                     ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
+                    break;
+                case Item_Type.ByeolhoGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value += amount;
+                    break;
+                case Item_Type.ByeolhoClear:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value += amount;
+                    break;
+                case Item_Type.BattleGoods:
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value += amount;
+                    break;
+                case Item_Type.BattleClear:
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value += amount;
+                    break;
+                case Item_Type.BattleScore:
+                    ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += amount;
                     break;
                 case Item_Type.TransGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;

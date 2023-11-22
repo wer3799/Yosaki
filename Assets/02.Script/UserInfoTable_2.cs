@@ -124,6 +124,10 @@ public class UserInfoTable_2
     public const string usedblackFoxClearNum = "ubfcn";
     public const string blackFoxRefund = "brf";
 
+    public const string byeolhoLevelIdx = "bhli";
+    public const string byeolhoTowerRewardIndex = "bhtri"; //명상 타워 보상 단계
+
+
     
     
     public bool isInitialize = false;
@@ -220,6 +224,9 @@ public class UserInfoTable_2
         { blackFoxScore, 0f },
         { usedblackFoxClearNum, 0f },
         { blackFoxRefund, 0f },
+        
+        { byeolhoLevelIdx, -1f },
+        { byeolhoTowerRewardIndex, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -448,7 +455,7 @@ public class UserInfoTable_2
         UpDataV2(key, tableDatas[key].Value, LocalOnly);
     }
 
-    public void UpDataV2(string key, double data, bool LocalOnly, Action failCallBack = null)
+    public void UpDataV2(string key, double data, bool LocalOnly, Action failCallBack = null, Action successCallBack = null)
     {
         if (tableDatas.ContainsKey(key) == false)
         {
@@ -473,6 +480,10 @@ public class UserInfoTable_2
                     failCallBack?.Invoke();
                     Debug.LogError($"UserInfoTable {key} up failed");
                     return;
+                }
+                else
+                {
+                    successCallBack?.Invoke();
                 }
             });
         }

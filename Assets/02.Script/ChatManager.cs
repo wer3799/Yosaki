@@ -516,7 +516,28 @@ public class ChatManager : SingletonMono<ChatManager>
                 colorPrefix = "<color=#ffffffff>";
             }
 
-            message = $"{colorPrefix}({GetRankName(rankType)}{bestRank}위)</color>{CommonString.ChatSplitChar}{message}";
+            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.byeolhoLevelIdx).Value < 0)
+            {
+                message = $"{colorPrefix}({GetRankName(rankType)}{bestRank}위)</color>{CommonString.ChatSplitChar}{message}";
+            }
+            else
+            {
+                if (SettingData.showByeolhotitle.Value > 0)
+                {
+                    var tableData = TableManager.Instance.Byeolho.dataArray[
+                        (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.byeolhoLevelIdx).Value];
+                    var str = tableData.Title_Name;
+                    var color =CommonUiContainer.Instance.itemGradeColor[tableData.Grade];
+                    str = Utils.ColorToHexString(color, str);
+                    
+                    message = $"{str}{CommonString.ChatSplitChar}{message}";
+                }
+                else
+                {
+                    message = $"{colorPrefix}({GetRankName(rankType)}{bestRank}위)</color>{CommonString.ChatSplitChar}{message}";
+                }
+            }
+
         }
         else
         {

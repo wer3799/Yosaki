@@ -42,6 +42,9 @@ public class BossScoreTable
     
     //도술강화
     public const string DosulAwakeScore = "s10";
+    
+    //별호타워
+    public const string byeolhoTowerScore = "s11";
 
 
     public bool isInitialize = false;
@@ -61,6 +64,8 @@ public class BossScoreTable
 
         { blackFoxScore, string.Empty },
         { DosulAwakeScore, string.Empty },
+        
+        { byeolhoTowerScore, string.Empty },
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -171,7 +176,8 @@ public class BossScoreTable
             default:
 
             {
-                PopupManager.Instance.ShowConfirmPopup("알림", "없는키값 {currentKey}", null);
+                //PopupManager.Instance.ShowConfirmPopup("알림", $"없는키값 {currentKey}", null);
+                Debug.LogError($"없는키값 {currentKey}");
             }
                 break;
         }

@@ -178,4 +178,9 @@ public class UiWeaponCollectionView : MonoBehaviour
         });
 
     }
+
+    public void OnClickDescription()
+    {
+        PopupManager.Instance.ShowAlarmMessage($"{weaponData.Acquiredescription}");
+    }
 }

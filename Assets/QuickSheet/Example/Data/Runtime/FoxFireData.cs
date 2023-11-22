@@ -44,4 +44,8 @@ public class FoxFireData
   float reward_value;
   public float Reward_Value { get {return reward_value; } set { this.reward_value = value;} }
   
+  [SerializeField]
+  float retroactive_value;
+  public float Retroactive_Value { get {return retroactive_value; } set { this.retroactive_value = value;} }
+  
 }

@@ -307,6 +307,8 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.DosulGoods,
         GoodsTable.BlackFoxGoods,
         GoodsTable.BlackFoxClear,
+        GoodsTable.ByeolhoGoods,
+        GoodsTable.ByeolhoClear,
         GoodsTable.TransGoods,
         GoodsTable.HonorGoods,
         GoodsTable.DaesanGoods,

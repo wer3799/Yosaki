@@ -5,6 +5,7 @@ using Spine.Unity;
 using TMPro;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class TaegeukBoard : MonoBehaviour
 {
@@ -14,9 +15,17 @@ public class TaegeukBoard : MonoBehaviour
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
     
+    [SerializeField]
+    private Toggle towerAutoMode;
+    private bool initialized = false;
+
     public void Start()
     {
         Subscribe();
+        
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+
+        initialized = true;
     }
 
     private void Subscribe()
@@ -48,6 +57,17 @@ public class TaegeukBoard : MonoBehaviour
 
         }, null);
     }
-    
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
+    }
+
     
 }

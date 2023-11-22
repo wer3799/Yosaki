@@ -636,6 +636,36 @@ public class UiShop : SingletonMono<UiShop>
                 param.Add(GoodsTable.BlackFoxGoods, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
             }
                 break;  
+            case Item_Type.ByeolhoClear:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value += amount;
+                param.Add(GoodsTable.ByeolhoClear, ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value);
+            }
+                break;  
+            case Item_Type.ByeolhoGoods:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value += amount;
+                param.Add(GoodsTable.ByeolhoGoods, ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value);
+            }
+                break;  
+            case Item_Type.BattleClear:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value += amount;
+                param.Add(GoodsTable.BattleClear, ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value);
+            }
+                break;  
+            case Item_Type.BattleGoods:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value += amount;
+                param.Add(GoodsTable.BattleGoods, ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value);
+            }
+                break;  
+            case Item_Type.BattleScore:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += amount;
+                param.Add(GoodsTable.BattleScore, ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value);
+            }
+                break;  
             case Item_Type.TransGoods:
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;

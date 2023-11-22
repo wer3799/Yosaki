@@ -7,6 +7,7 @@ using System;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 public class EtcServerTable
 {
@@ -28,6 +29,7 @@ public class EtcServerTable
     public const string GuideMissionReward = "GMR";
     public const string GuideMissionClear = "GMC";
     public const string AdReward = "AdReward";
+    public const string battleWinScore = "bws";
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
@@ -48,6 +50,7 @@ public class EtcServerTable
         {GuideMissionReward,new ReactiveProperty<string>(string.Empty)},
         {GuideMissionClear,new ReactiveProperty<string>(string.Empty)},
         {AdReward,new ReactiveProperty<string>(string.Empty)},
+        {battleWinScore,new ReactiveProperty<string>("#0#0#0#0#0")},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -320,5 +323,22 @@ public class EtcServerTable
     public void UpdateGuideMissionReward(GuideMissionKey key)
     {
         ServerData.etcServerTable.TableDatas[GuideMissionReward].Value += $"{BossServerTable.rewardSplit}{(int)key}";
+    }
+
+    public int GetBattleContestScore(int difficulty)
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.battleWinScore].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList[difficulty];
+    }
+    public int GetBattleContestTotalScore()
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.battleWinScore].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList.Sum();
     }
 }

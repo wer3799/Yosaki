@@ -142,18 +142,18 @@ public class MonthlyPassServerTable
 
     public static string MonthlypassFreeReward = "f";
     public static string MonthlypassAdReward = "a";
-    public static string MonthlypassNewReward = "n10";
+   // public static string MonthlypassNewReward = "n10";
 
-    public static string MonthlypassAttendFreeReward = "af11";
-    public static string MonthlypassAttendAdReward = "aa11";
+    //public static string MonthlypassAttendFreeReward = "af11";
+    //public static string MonthlypassAttendAdReward = "aa11";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { MonthlypassFreeReward,string.Empty},
-        { MonthlypassAdReward,string.Empty},
-        { MonthlypassNewReward,string.Empty},
-        { MonthlypassAttendFreeReward,string.Empty},
-        { MonthlypassAttendAdReward,string.Empty}
+        { MonthlypassFreeReward,"-1"},
+        { MonthlypassAdReward,"-1"},
+       // { MonthlypassNewReward,string.Empty},
+       //{ MonthlypassAttendFreeReward,string.Empty},
+       // { MonthlypassAttendAdReward,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -861,6 +861,12 @@ public class ColdSeasonPassServerTable
     public static string sealswordEvolutionFree = "f18";
     public static string sealswordEvolutionAd = "a18";
 
+    public static string blackFoxFree = "f19";
+    public static string blackFoxAd = "a19";
+    
+    public static string dosulLevelFree = "f20";
+    public static string dosulLevelAd = "a20";
+
     public static string coldseasonFree_Atten = "fa2";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
@@ -896,6 +902,10 @@ public class ColdSeasonPassServerTable
         { meditationAd,string.Empty},
         { sealswordEvolutionFree,string.Empty},
         { sealswordEvolutionAd,string.Empty},
+        { blackFoxFree,"-1"},
+        { blackFoxAd,"-1"},
+        { dosulLevelFree,"-1"},
+        { dosulLevelAd,"-1"},
 
     };
 

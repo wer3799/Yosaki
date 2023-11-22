@@ -171,7 +171,7 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
       Refresh();
       SetUi();
    }
-
+   
    public void OnClickLocal()
    {
       #if UNITY_EDITOR
@@ -206,7 +206,7 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
    public void OnClickServer()
    {
       #if UNITY_EDITOR
-      if (int.TryParse(adjustNum.text, out var inputNum))
+      if (float.TryParse(adjustNum.text, out var inputNum))
       {
       }
       else

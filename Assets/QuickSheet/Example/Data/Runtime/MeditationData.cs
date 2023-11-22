@@ -24,4 +24,8 @@ public class MeditationData
   int consume;
   public int Consume { get {return consume; } set { this.consume = value;} }
   
+  [SerializeField]
+  float retroactive_value;
+  public float Retroactive_Value { get {return retroactive_value; } set { this.retroactive_value = value;} }
+  
 }

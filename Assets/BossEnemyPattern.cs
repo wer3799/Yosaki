@@ -41,6 +41,11 @@ public class BossEnemyPattern : BossEnemyBase
         {
             Initialize();
         }
+
+        if (GameManager.Instance.bossId >= 200)
+        {
+            UpdateBossDamage();
+        }
     }
     [SerializeField]
     private float percentDamageValue = 0f;

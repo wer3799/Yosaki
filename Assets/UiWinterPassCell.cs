@@ -60,7 +60,7 @@ public class UiWinterPassCell : MonoBehaviour
         //무료보상 데이터 변경시
         ServerData.childPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
         {
-            bool rewarded = HasReward(passInfo.rewardType_Free_Key, passInfo.id);
+            bool rewarded = HasReward(passInfo.rewardType_Free_Key);
             rewardedObject_Free.SetActive(rewarded);
 
         }).AddTo(disposables);
@@ -68,7 +68,7 @@ public class UiWinterPassCell : MonoBehaviour
         //광고보상 데이터 변경시
         ServerData.childPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
         {
-            bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
+            bool rewarded = HasReward(passInfo.rewardType_IAP_Key);
             rewardedObject_Ad.SetActive(rewarded);
 
         }).AddTo(disposables);
@@ -125,12 +125,16 @@ public class UiWinterPassCell : MonoBehaviour
         return ServerData.childPassServerTable.TableDatas[key].Value.Split(',').ToList();
     }
 
-    public bool HasReward(string key, int data)
+    
+    private bool HasReward(string key)
     {
-        var splitData = GetSplitData(key);
-        return splitData.Contains(data.ToString());
+        return int.Parse(ServerData.childPassServerTable.TableDatas[key].Value) >= passInfo.id;
     }
-
+    private bool IsBeforeRewarded(string key)
+    {
+        //0일때 1
+        return int.Parse(ServerData.childPassServerTable.TableDatas[key].Value) + 1 == passInfo.id;
+    }
     public void OnClickFreeRewardButton()
     {
         if (CanGetReward() == false)
@@ -139,9 +143,16 @@ public class UiWinterPassCell : MonoBehaviour
             return;
         }
 
-        if (HasReward(passInfo.rewardType_Free_Key, passInfo.id))
+        if (HasReward(passInfo.rewardType_Free_Key))
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            return;
+        }
+
+
+        if (IsBeforeRewarded(passInfo.rewardType_Free_Key)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
             return;
         }
 
@@ -160,12 +171,16 @@ public class UiWinterPassCell : MonoBehaviour
             return;
         }
 
-        if (HasReward(passInfo.rewardType_IAP_Key, passInfo.id))
+        if (HasReward(passInfo.rewardType_IAP_Key))
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
             return;
         }
-
+        if (IsBeforeRewarded(passInfo.rewardType_IAP_Key)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            return;
+        }
         if (HasPassItem())
         {
             GetAdReward();
@@ -186,7 +201,7 @@ public class UiWinterPassCell : MonoBehaviour
     private void GetFreeReward()
     {
         //로컬
-        ServerData.childPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.childPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -204,7 +219,7 @@ public class UiWinterPassCell : MonoBehaviour
         userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
             //  LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
         });
@@ -212,7 +227,7 @@ public class UiWinterPassCell : MonoBehaviour
     private void GetAdReward()
     {
         //로컬
-        ServerData.childPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.childPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -230,7 +245,7 @@ public class UiWinterPassCell : MonoBehaviour
         userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
             //   LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
         });
@@ -243,7 +258,6 @@ public class UiWinterPassCell : MonoBehaviour
         int killCountTotalChild = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value;
         return killCountTotalChild >= passInfo.require;
     }
-
     private void OnEnable()
     {
         RefreshParent();
@@ -255,7 +269,7 @@ public class UiWinterPassCell : MonoBehaviour
 
         if (HasPassItem() == false)
         {
-            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false)
+            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key) == false)
             {
                 this.transform.SetAsFirstSibling();
             }
@@ -263,7 +277,7 @@ public class UiWinterPassCell : MonoBehaviour
         else
         {
             if (CanGetReward() == true &&
-                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id) == false))
+                (HasReward(passInfo.rewardType_Free_Key) == false || HasReward(passInfo.rewardType_IAP_Key) == false))
             {
                 this.transform.SetAsFirstSibling();
             }

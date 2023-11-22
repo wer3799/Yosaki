@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
@@ -10,7 +11,8 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
     [SerializeField] private TextMeshProUGUI descriptionBoard2;
 
-    [SerializeField] private TextMeshProUGUI slashDescriptionBoard;
+    [FormerlySerializedAs("slashDescriptionBoard")] [SerializeField] private TextMeshProUGUI slashDescriptionBoard1;
+    [SerializeField] private TextMeshProUGUI slashDescriptionBoard2;
 
     [SerializeField] private TextMeshProUGUI fightPoint;
 
@@ -26,6 +28,7 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         string description1 = $"<color=red>공격능력</color>\n";
         string description2 = $"<color=yellow>기타능력</color>\n";
         string description3 = string.Empty;
+        string description4 = string.Empty;
 
         //전투력
         fightPoint.SetText($"무력 : {Utils.ConvertBigNum(PlayerStats.GetTotalPower())}");
@@ -244,24 +247,28 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description3 +=
             $"크리티컬 20단계 {CommonString.GetStatusName(StatusType.SuperCritical20DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical20DamPer() * 100f,1)}\n";
 
-        description3 +=
+        description4 +=
             $"크리티컬 21단계 {CommonString.GetStatusName(StatusType.SuperCritical21DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical21DamPer() * 100f,1)}\n";
 
-        description3 +=
+        description4 +=
             $"크리티컬 22단계 {CommonString.GetStatusName(StatusType.SuperCritical22DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical22DamPer() * 100f,1)}\n";
 
-        description3 +=
+        description4 +=
             $"크리티컬 23단계 {CommonString.GetStatusName(StatusType.SuperCritical23DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical23DamPer() * 100f,1)}\n";
 
-        description3 +=
+        description4 +=
             $"크리티컬 24단계 {CommonString.GetStatusName(StatusType.SuperCritical24DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical24DamPer() * 100f,1)}\n";
 
-        description3 +=
+        description4 +=
             $"크리티컬 25단계 {CommonString.GetStatusName(StatusType.SuperCritical25DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical25DamPer() * 100f,1)}\n";
 
-        description3 +=
+        description4 +=
             $"크리티컬 26단계 {CommonString.GetStatusName(StatusType.SuperCritical26DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical26DamPer() * 100f,1)}\n";
 
+        description4 +=
+            $"크리티컬 27단계 {CommonString.GetStatusName(StatusType.SuperCritical27DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical27DamPer() * 100f,1)}\n";
+
+        
             //도술
             description1 +=
                 $"{CommonString.GetStatusName(StatusType.DosulDamPer)} : {Utils.ConvertNum(PlayerStats.GetDosulDamPer() * 100f)}\n";
@@ -278,11 +285,11 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
             description1 +=
                 $"{CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} : {Utils.ConvertNum(PlayerStats.GetEnhanceVisionSkill() * 100f)}\n";
 
-    
-        descriptionBoard1.SetText(description1);
+            descriptionBoard1.SetText(description1);
 
         descriptionBoard2.SetText(description2);
 
-        slashDescriptionBoard.SetText(description3);
+        slashDescriptionBoard1.SetText(description3);
+        slashDescriptionBoard2.SetText(description4);
     }
 }

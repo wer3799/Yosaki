@@ -346,6 +346,13 @@ public class UserInfoTable
     public const string eventMission3_8 = "em_5_8";
     public const string eventMission3_9 = "em_5_9";
 
+    public const string eventMission4_0 = "em_6_0";
+    public const string eventMission4_1 = "em_6_1";
+    public const string eventMission4_2 = "em_6_2";
+    public const string eventMission4_3 = "em_6_3";
+    public const string eventMission4_4 = "em_6_4";
+    public const string eventMission4_5 = "em_6_5";
+
     public const string nickNameChange = "nickNameChange";
     public const string getPetHome = "gph";
     public const string dokebiPensionReset = "doke";
@@ -687,6 +694,13 @@ public class UserInfoTable
         { eventMission3_8, 0 },
         { eventMission3_9, 0 },
 
+        { eventMission4_0, 0 },
+        { eventMission4_1, 0 },
+        { eventMission4_2, 0 },
+        { eventMission4_3, 0 },
+        { eventMission4_4, 0 },
+        { eventMission4_5, 0 },
+
         { nickNameChange, 0 },
         { getPetHome, 0 },
         { dokebiPensionReset, 0 },
@@ -780,8 +794,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 24);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(24));
+                            defultValues.Add(e.Current.Key, 30);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(30));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1103,6 +1117,8 @@ public class UserInfoTable
         ClearDailyMission();
 
 
+        BattleContestData.ClearData();
+        
         //일일초기화
         Param dailyPassParam = new Param();
         ServerData.dailyPassServerTable.ResetDailyPassLocal();
@@ -1586,6 +1602,12 @@ public class UserInfoTable
             goodsParam.Add(GoodsTable.BlackFoxClear, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
         }
         
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 1000000)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value += GameBalance.DailyByeolhoClearGetCount;
+            goodsParam.Add(GoodsTable.ByeolhoClear, ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoClear).Value);
+        }
+        
         if (ServerData.userInfoTable.TableDatas[UserInfoTable.suhoAnimalStart].Value != 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value += GameBalance.DailyPetFeedClearGetValue;
@@ -1700,7 +1722,6 @@ public class UserInfoTable
         yoguiSogulParam.Add(EtcServerTable.sonReward, ServerData.etcServerTable.TableDatas[EtcServerTable.sonReward].Value);
         yoguiSogulParam.Add(EtcServerTable.hellReward, ServerData.etcServerTable.TableDatas[EtcServerTable.hellReward].Value);
         yoguiSogulParam.Add(EtcServerTable.AdReward, ServerData.etcServerTable.TableDatas[EtcServerTable.AdReward].Value);
-        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
         //로컬
         ServerData.etcServerTable.TableDatas[EtcServerTable.yoguiSogulReward].Value = string.Empty;
@@ -1725,6 +1746,9 @@ public class UserInfoTable
 
             goodsParam.Add(GoodsTable.DokebiFireKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
 
+
+            
+            
             ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value = string.Empty;
 
             yoguiSogulParam.Add(EtcServerTable.chunmaTopScore, ServerData.etcServerTable.TableDatas[EtcServerTable.chunmaTopScore].Value);
@@ -1736,6 +1760,13 @@ public class UserInfoTable
                 goodsParam.Add(GoodsTable.TransClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value);
             }
 
+            if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= GameBalance.WeeklyBattleClearLevelLimit)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value += GameBalance.WeeklyBattleClearGetCount;
+                goodsParam.Add(GoodsTable.BattleClear,ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value);
+            }
+            
+            
             //십만대산 교환소 주간 교환 횟수 초기화
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan1].Value = 0;
             ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan2].Value = 0;
@@ -1755,12 +1786,26 @@ public class UserInfoTable
             userInfo2Param.Add(UserInfoTable_2.exchage_Guild2, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild2].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Guild3, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild3].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Guild4, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild4].Value);
+            
+            //비무대회 주간 교환 횟수 초기화
+            ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_0].Value = 0;
+            ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_1].Value = 0;
+            ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_2].Value = 0;
+            ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_3].Value = 0;
+            ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_4].Value = 0;
+            ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_5].Value = 0;
+            userInfoParam.Add(UserInfoTable.eventMission4_0, ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_0].Value);
+            userInfoParam.Add(UserInfoTable.eventMission4_1, ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_1].Value);
+            userInfoParam.Add(UserInfoTable.eventMission4_2, ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_2].Value);
+            userInfoParam.Add(UserInfoTable.eventMission4_3, ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_3].Value);
+            userInfoParam.Add(UserInfoTable.eventMission4_4, ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_4].Value);
+            userInfoParam.Add(UserInfoTable.eventMission4_5, ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_5].Value);
 
             //그림자보스
             //ServerData.bossServerTable.TableDatas["b91"].rewardedId.Value = string.Empty;
             //bossParam.Add("b91", ServerData.bossServerTable.TableDatas["b91"].ConvertToString());
         }
-
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
         transactionList.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, yoguiSogulParam));
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
@@ -1868,10 +1913,20 @@ public class UserInfoTable
 // #if UNITY_EDITOR
 //         return true;
 // #endif
+        var hotTime = GameBalance.HotTimeEventEndPeriod;
 
-        return currentServerTime.Year <= 2023 && currentServerTime.Month <= 11 ||
-               (currentServerTime.Year <= 2023 &&currentServerTime.Month <= 12 && currentServerTime.Day <= 7);
+        var preMonth = hotTime.Month - 1;
+
+        if (preMonth < 1)
+        {
+            preMonth = 12;
+        }
+        
+        return currentServerTime.Year <= hotTime.Year && currentServerTime.Month <= preMonth ||
+               (currentServerTime.Year <= hotTime.Year &&currentServerTime.Month <= hotTime.Month && currentServerTime.Day <= hotTime.Day);
     }
+    
+    
 
     public bool IsMileageEvent(MileageRewardData rewardData)
     {
@@ -2014,7 +2069,7 @@ public class UserInfoTable
     // 가을훈련
     public bool IsEventPass2Period()
     {
-        return (currentServerTime.Year == 2023 && (currentServerTime.Month < 11 || (currentServerTime.Month == 11 && currentServerTime.Day <= 15)));
+        return (currentServerTime.Year <= 2023 && (currentServerTime.Month <= 12 || (currentServerTime.Month == 1 && currentServerTime.Day <= 2)));
     }
 
     public ReactiveProperty<bool> SnowCollectionComplete = new ReactiveProperty<bool>(false);

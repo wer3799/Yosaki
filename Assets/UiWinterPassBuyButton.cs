@@ -14,7 +14,7 @@ public class UiWinterPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string productKey = "fallpass3";
+    public static readonly string productKey = "winterpass1";
 
     private Button buyButton;
 

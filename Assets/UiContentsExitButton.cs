@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using UnityEngine;
 
 public class UiContentsExitButton : MonoBehaviour
@@ -168,11 +169,22 @@ public class UiContentsExitButton : MonoBehaviour
     {
         if (ShowWarningMessage == true)
         {
-            PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
+            if (GameManager.contentsType == GameManager.ContentsType.BattleContest)
             {
-                BuffOff();
-                GameManager.Instance.LoadNormalField();
-            }, null);
+                PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
+                {
+                    BuffOff();
+                    GameManager.Instance.LoadNormalField();
+                }, null);   
+            }
+            else
+            {
+                PopupManager.Instance.ShowYesNoPopup("알림", "포기하고 나가시겠습니까?", () =>
+                {
+                    BuffOff();
+                    GameManager.Instance.LoadNormalField();
+                }, null);   
+            }
         }
         else
         {
@@ -352,5 +364,36 @@ public class UiContentsExitButton : MonoBehaviour
     {
         UiSusanoBuff.isImmune.Value = false;
         UiDokebiBuff.isImmune.Value = false;
+    }
+    private void BattleContenstGetLoseReward()
+    {
+        var data = TableManager.Instance.BattleContestTable.dataArray[GameManager.Instance.bossId];
+        
+        List<UiRewardView.RewardData> loseData = new List<UiRewardView.RewardData>();
+
+        for (int i = 0; i < data.Losevalue.Length; i++)
+        {
+            var lose = new UiRewardView.RewardData((Item_Type)data.Rewardtype[i],data.Losevalue[i]);
+            loseData.Add(lose);
+        }
+        Param goodsParam = new Param();
+
+        for (int i = 0; i < loseData.Count; i++)
+        {
+            ServerData.goodsTable.GetTableData((Item_Type)loseData[i].itemType).Value += loseData[i].amount;
+            goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(loseData[i].itemType),
+                ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString(loseData[i].itemType))
+                    .Value);
+        }
+
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
+        {
+            //  StartCoroutine(AutoPlayRoutine());
+        });
     }
 }

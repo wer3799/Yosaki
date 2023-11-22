@@ -931,6 +931,16 @@ public class TableManager : SingletonMono<TableManager>
     public BlackFoxAbil BlackFoxAbil;
     public BlackFoxTable BlackFoxTable;
 
+    public Byeolho Byeolho;
+    public ByeolhoTower ByeolhoTower;
+
+    public BlackFoxPass BlackFoxPass;
+    public DosulLevelPass DosulLevelPass;
+    
+    public BattleContestTable BattleContestTable;
+
+    public BattleContestSpecialExchange BattleContestSpecialExchange;
+
 }
 
 
@@ -944,4 +954,5 @@ public enum CommonTableEventType
     Normal,
     SecondAnniversary,
     FullMoon,
+    BattleContest,
 }

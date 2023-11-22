@@ -1,7 +1,9 @@
+using System;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerBalance
 {
@@ -573,12 +575,16 @@ public static class GameBalance
     public readonly static ObscuredInt TaegeukSimbeopUnlockStage = 9998;//태극심법 스테이지제한
     public readonly static ObscuredInt DailyElixirGetCount = 1;//매일 엘릭서 얻는양
     public readonly static ObscuredInt DailyBlackFoxClearGetCount = 1;//검은구미호전
+    public readonly static ObscuredInt DailyByeolhoClearGetCount = 2;//별호
+    public readonly static ObscuredInt WeeklyBattleClearGetCount = 7;//pvp
+    public readonly static ObscuredInt WeeklyBattleClearLevelLimit = 5000000;//pvp레벨제한
     public static ObscuredFloat taegeukElixirValue = 360f;//360분 = 6시간 
 
     public readonly static ObscuredFloat MonthPass_Exp = 10000;
     public readonly static ObscuredFloat MonthPass_Gold = 20000;
     public readonly static ObscuredFloat MonthPass_GrowthStone = 20;
-    
+
+    public static DateTime HotTimeEventEndPeriod = new DateTime(2023, 12, 17);
     public static int GetSonIdx()
     {
         var level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

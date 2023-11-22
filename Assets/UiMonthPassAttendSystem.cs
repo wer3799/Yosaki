@@ -56,11 +56,11 @@ public class UiMonthPassAttendSystem : MonoBehaviour
 
                 passInfo.rewardType_Free = tableData[i].Reward1;
                 passInfo.rewardTypeValue_Free = tableData[i].Reward1_Value;
-                passInfo.rewardType_Free_Key = MonthlyPassServerTable.MonthlypassAttendFreeReward;
+                passInfo.rewardType_Free_Key = "MonthlyPassServerTable.MonthlypassAttendFreeReward";
 
                 passInfo.rewardType_IAP = tableData[i].Reward2;
                 passInfo.rewardTypeValue_IAP = tableData[i].Reward2_Value;
-                passInfo.rewardType_IAP_Key = MonthlyPassServerTable.MonthlypassAttendAdReward;
+                passInfo.rewardType_IAP_Key = "MonthlyPassServerTable.MonthlypassAttendAdReward";
 
                 uiPassCellContainer[i].gameObject.SetActive(true);
                 uiPassCellContainer[i].Initialize(passInfo);
@@ -76,11 +76,11 @@ public class UiMonthPassAttendSystem : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
-        string freeKey = MonthlyPassServerTable.MonthlypassAttendFreeReward;
-        string adKey = MonthlyPassServerTable.MonthlypassAttendAdReward;
+        string freeKey = "MonthlyPassServerTable.MonthlypassAttendFreeReward";
+        string adKey = "MonthlyPassServerTable.MonthlypassAttendAdReward";
 
-        List<int> splitData_Free = GetSplitData(MonthlyPassServerTable.MonthlypassAttendFreeReward);
-        List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable.MonthlypassAttendAdReward);
+        List<int> splitData_Free = GetSplitData("MonthlyPassServerTable.MonthlypassAttendFreeReward");
+        List<int> splitData_Ad = GetSplitData("MonthlyPassServerTable.MonthlypassAttendAdReward");
 
         List<int> rewardTypeList = new List<int>();
 
@@ -88,8 +88,8 @@ public class UiMonthPassAttendSystem : MonoBehaviour
 
         int rewardedNum = 0;
 
-        string free = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable.MonthlypassAttendFreeReward].Value;
-        string ad = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable.MonthlypassAttendAdReward].Value;
+        string free = ServerData.monthlyPassServerTable2.TableDatas["MonthlyPassServerTable.MonthlypassAttendFreeReward"].Value;
+        string ad = ServerData.monthlyPassServerTable2.TableDatas["MonthlyPassServerTable.MonthlypassAttendAdReward"].Value;
 
         bool hasCostumeItem = false;
         bool hasPassItem = false;
@@ -198,8 +198,8 @@ public class UiMonthPassAttendSystem : MonoBehaviour
 
         if (rewardedNum > 0)
         {
-            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable.MonthlypassAttendFreeReward].Value = free;
-            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable.MonthlypassAttendAdReward].Value = ad;
+            ServerData.monthlyPassServerTable2.TableDatas["MonthlyPassServerTable.MonthlypassAttendFreeReward"].Value = free;
+            ServerData.monthlyPassServerTable2.TableDatas["MonthlyPassServerTable.MonthlypassAttendAdReward"].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -228,8 +228,8 @@ public class UiMonthPassAttendSystem : MonoBehaviour
 
             Param passParam = new Param();
 
-            passParam.Add(MonthlyPassServerTable.MonthlypassAttendFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable.MonthlypassAttendFreeReward].Value);
-            passParam.Add(MonthlyPassServerTable.MonthlypassAttendAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable.MonthlypassAttendAdReward].Value);
+            passParam.Add("MonthlyPassServerTable.MonthlypassAttendFreeReward", ServerData.monthlyPassServerTable2.TableDatas["MonthlyPassServerTable.MonthlypassAttendFreeReward"].Value);
+            passParam.Add("MonthlyPassServerTable.MonthlypassAttendAdReward", ServerData.monthlyPassServerTable2.TableDatas["MonthlyPassServerTable.MonthlypassAttendAdReward"].Value);
 
             transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, passParam));
 

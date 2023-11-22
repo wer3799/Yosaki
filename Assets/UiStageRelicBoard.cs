@@ -33,7 +33,7 @@ public class UiStageRelicBoard : SingletonMono<UiStageRelicBoard>
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < GameBalance.StageRelicUnlockLevel)
         {
             this.gameObject.SetActive(false);
-            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.StageRelicUnlockLevel}레벨 이후에 사용 가능합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.StageRelicUnlockLevel}레벨 이상일 때 개방됩니다!");
         }
     }
 

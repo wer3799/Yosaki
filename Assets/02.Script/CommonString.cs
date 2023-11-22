@@ -335,6 +335,10 @@ public static class CommonString
             case Item_Type.costume172: return TableManager.Instance.Costume.dataArray[172].Name;
             case Item_Type.costume173: return TableManager.Instance.Costume.dataArray[173].Name;
             case Item_Type.costume174: return TableManager.Instance.Costume.dataArray[174].Name;
+            case Item_Type.costume175: return TableManager.Instance.Costume.dataArray[175].Name;
+            case Item_Type.costume176: return TableManager.Instance.Costume.dataArray[176].Name;
+            case Item_Type.costume177: return TableManager.Instance.Costume.dataArray[177].Name;
+            case Item_Type.costume178: return TableManager.Instance.Costume.dataArray[178].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -351,7 +355,13 @@ public static class CommonString
             case Item_Type.weapon40: return "화접선";
             case Item_Type.weapon41: return "천성선";
             case Item_Type.weapon42: return "천공선";
+            
+            case Item_Type.DragonWeapon4: return TableManager.Instance.WeaponData[142].Name;;
+            case Item_Type.DragonWeapon5: return TableManager.Instance.WeaponData[143].Name;;
+            case Item_Type.DragonWeapon6: return TableManager.Instance.WeaponData[144].Name;;
+            case Item_Type.DragonWeapon7: return TableManager.Instance.WeaponData[145].Name;;
 
+            
             //
             case Item_Type.magicBook11: return "특급 1등급 노리개";
             case Item_Type.skill3: return "전방베기4형 기술";
@@ -566,6 +576,9 @@ public static class CommonString
             case Item_Type.MonthNorigae9: return "9월 월간 노리개";
             case Item_Type.MonthNorigae10: return "10월 월간 노리개";
             case Item_Type.MonthNorigae11: return "11월 월간 노리개";
+            case Item_Type.magicBook116: return TableManager.Instance.MagicBookTable.dataArray[116].Name;
+            case Item_Type.magicBook117: return TableManager.Instance.MagicBookTable.dataArray[117].Name;
+            case Item_Type.weapon146: return TableManager.Instance.WeaponTable.dataArray[146].Name;
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
             case Item_Type.SahyungTreasure: return "사흉구슬";
@@ -616,6 +629,11 @@ public static class CommonString
             case Item_Type.HonorGoods: return "명예의 증표";
             case Item_Type.BlackFoxGoods: return "검은 구미호 구슬";
             case Item_Type.BlackFoxClear: return "검은 구미호 구슬 소탕권";
+            case Item_Type.ByeolhoGoods: return "수련의 증표";
+            case Item_Type.ByeolhoClear: return "수련의 방 입장권";
+            case Item_Type.BattleGoods: return "비무 증표";
+            case Item_Type.BattleClear: return "비무 대회 입장권";
+            case Item_Type.BattleScore: return "비무 점수";
 
         }
         return "미등록";
@@ -817,6 +835,8 @@ public static class CommonString
                 return "요력 피해(%)";
             case StatusType.SuperCritical26DamPer:
                 return "진 요도 피해(%)";
+            case StatusType.SuperCritical27DamPer:
+                return "무공 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:

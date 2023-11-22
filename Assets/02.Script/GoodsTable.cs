@@ -280,6 +280,13 @@ public class GoodsTable
     public static string BlackFoxGoods = "BFG";
     public static string BlackFoxClear = "BFC";
 
+    public static string ByeolhoGoods = "BHG";
+    public static string ByeolhoClear = "BHC";
+    
+    public static string BattleGoods = "BTG";
+    public static string BattleClear = "BTC";
+    public static string BattleScore = "BTS";
+
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
@@ -538,6 +545,11 @@ public class GoodsTable
         { DosulClear, 0f },
         { BlackFoxGoods, 0f },
         { BlackFoxClear, 0f },
+        { ByeolhoGoods, 0f },
+        { ByeolhoClear, 0f },
+        { BattleGoods, 0f },
+        { BattleClear, 7f },
+        { BattleScore, 0f },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -1047,7 +1059,7 @@ public class GoodsTable
             SyncToServerEach(key);
         }
     }
-    public void UpDataV2(string key, bool LocalOnly)
+    public void UpDataV2(string key, bool LocalOnly, Action successCallBack=null)
     {
         if (tableDatas.ContainsKey(key) == false)
         {
@@ -1055,10 +1067,10 @@ public class GoodsTable
             return;
         }
 
-        UpDataV2(key, tableDatas[key].Value, LocalOnly);
+        UpDataV2(key, tableDatas[key].Value, LocalOnly,successCallBack);
     }
 
-    public void UpDataV2(string key, float data, bool LocalOnly)
+    public void UpDataV2(string key, float data, bool LocalOnly, Action successCallBack=null)
     {
         if (tableDatas.ContainsKey(key) == false)
         {
@@ -1070,7 +1082,7 @@ public class GoodsTable
 
         if (LocalOnly == false)
         {
-            SyncToServerEachV2(key);
+            SyncToServerEachV2(key,whenSyncSuccess:successCallBack);
         }
     }
 
@@ -1817,11 +1829,33 @@ public class GoodsTable
             {
                 return GoodsTable.BlackFoxGoods;
             }
-
             case Item_Type.BlackFoxClear:
             {
                 return GoodsTable.BlackFoxClear;
             }
+            
+            case Item_Type.ByeolhoGoods:
+            {
+                return GoodsTable.ByeolhoGoods;
+            }
+            case Item_Type.ByeolhoClear:
+            {
+                return GoodsTable.ByeolhoClear;
+            }
+            
+            case Item_Type.BattleGoods:
+            {
+                return GoodsTable.BattleGoods;
+            }
+            case Item_Type.BattleClear:
+            {
+                return GoodsTable.BattleClear;
+            }
+            case Item_Type.BattleScore:
+            {
+                return GoodsTable.BattleScore;
+            }
+            
             case Item_Type.SuhoTreasure:
             {
                 return GoodsTable.SuhoTreasure;
@@ -2582,6 +2616,28 @@ public class GoodsTable
         else if (GoodsTable.BlackFoxClear == type)
         {
             return Item_Type.BlackFoxClear;
+        }
+
+        else if (GoodsTable.ByeolhoGoods == type)
+        {
+            return Item_Type.ByeolhoGoods;
+        }
+        else if (GoodsTable.ByeolhoClear == type)
+        {
+            return Item_Type.ByeolhoClear;
+        }
+
+        else if (GoodsTable.BattleGoods == type)
+        {
+            return Item_Type.BattleGoods;
+        }
+        else if (GoodsTable.BattleClear == type)
+        {
+            return Item_Type.BattleClear;
+        }
+        else if (GoodsTable.BattleScore == type)
+        {
+            return Item_Type.BattleScore;
         }
 
         else if (GoodsTable.SinsuRelic == type)

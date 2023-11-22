@@ -156,16 +156,6 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
     {
         disposables.Dispose();
     }
-    public WeaponData GetWeaponData()
-    {
-        return weaponData;
-    }
-
-    public MagicBookData GetMagicBookData()
-    {
-        return magicBookData;
-    }
-
     private void SetEquipButton(bool onOff)
     {
         equipButton.gameObject.SetActive(onOff);
@@ -185,8 +175,8 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
         if (weaponData != null && weaponData.Id >= 67 && weaponData.Id <= 70)
         {
             equipButton.gameObject.SetActive(false);
-            //
         }
+
     }
 
     public void OnClickWeaponViewButton()
@@ -980,7 +970,14 @@ public class UiInventoryWeaponNewView : FancyCell<WeaponData_Fancy>
             }
         }
 
-        description += "\n<color=#ffff00ff>보유 효과</color>\n";
+        if (weaponData != null && weaponData.WEAPONTYPE == WeaponType.HasEffectOnly && weaponData.Id >= 142)
+        {
+            description += "\n<color=#ff0000ff>특수 보유 효과</color>\n";
+        }
+        else
+        {
+            description += "\n<color=#ffff00ff>보유 효과</color>\n";
+        }
 
         if (effectData.Haseffecttype1 != -1)
         {

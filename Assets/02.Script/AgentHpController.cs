@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AgentHpController : MonoBehaviour
 {
@@ -118,6 +119,11 @@ public class AgentHpController : MonoBehaviour
         {
             double bossHp = enemyTableData.Hp * enemyTableData.Bosshpratio;
 
+            if (GameManager.contentsType == GameManager.ContentsType.BattleContest)
+            {
+                bossHp *= Random.Range(0.8f, 1f);
+            }
+            
             double decreaseValue = PlayerStats.DecreaseBossHp();
 
             bossHp -= bossHp * decreaseValue;
@@ -238,6 +244,8 @@ public class AgentHpController : MonoBehaviour
         value += value * PlayerStats.GetSuperCritical25DamPer();
         //진 요도 피해
         value += value * PlayerStats.GetSuperCritical26DamPer();
+        //무공 피해
+        value += value * PlayerStats.GetSuperCritical27DamPer();
         
     }
     private Vector3 damTextspawnPos;

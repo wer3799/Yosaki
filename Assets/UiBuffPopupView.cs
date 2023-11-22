@@ -395,12 +395,12 @@ public class UiBuffPopupView : MonoBehaviour
                 return;
             }
         }
-        //스노클링 패스 유료버프
+        //2023~24 겨울훈련 유료버프
         if (buffTableData.Stringid.Equals("winter1"))
         {
             if (ServerData.iapServerTable.TableDatas[UiWinterPassBuyButton.productKey].buyCount.Value == 0)
             {
-                PopupManager.Instance.ShowAlarmMessage("가을 훈련 패스권이 필요 합니다.");
+                PopupManager.Instance.ShowAlarmMessage("겨울 훈련 패스권이 필요 합니다.");
                 return;
             }
         }
