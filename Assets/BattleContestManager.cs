@@ -170,6 +170,18 @@ public class BattleContestManager : ContentsManagerBase
        var maxCount = tableData.Minrank-tableData.Maxrank; 
        
        var randomIdx = Random.Range(0, maxCount);
+
+       var randData = rankData[randomIdx];
+
+       var myNickName = Utils.GetOriginNickName(PlayerData.Instance.NickName);
+
+       //자기랭킹 나왔을때 다시뽑기
+       while(Utils.GetOriginNickName(randData.NickName).Equals(myNickName))
+       {
+           randomIdx = Random.Range(0, maxCount);
+           randData = rankData[randomIdx];
+       }
+       
     
        enemyNickName.SetText($"VS {rankData[randomIdx].NickName}<color=red>({rankData[randomIdx].Rank}위)</color>");
     
