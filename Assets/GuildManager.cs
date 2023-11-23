@@ -91,7 +91,6 @@ public class GuildManager : SingletonMono<GuildManager>
             }
             else
             {
-                //ChangeHasGuildState(false);
 
                 switch (bro.GetStatusCode())
                 {
@@ -107,6 +106,8 @@ public class GuildManager : SingletonMono<GuildManager>
                     case "412":
                     {
                         bro.GetErrorCode().Equals("PreconditionFailed");
+                        ChangeHasGuildState(false);
+
                     }
                         break;
                 }
