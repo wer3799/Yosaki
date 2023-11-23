@@ -91,7 +91,7 @@ public class GuildManager : SingletonMono<GuildManager>
             }
             else
             {
-                ChangeHasGuildState(false);
+                //ChangeHasGuildState(false);
 
                 switch (bro.GetStatusCode())
                 {
