@@ -42,6 +42,10 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
     {
         GuildManager.Instance.hasGuild.AsObservable().Subscribe(e =>
         {
+            //길드 정보 불러온적없으면 리턴
+            if (GuildManager.Instance.isLoadGuildInfo == false)
+                return;
+            
             //길드있음
             if (e == true)
             {

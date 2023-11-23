@@ -55,6 +55,8 @@ public class GuildManager : SingletonMono<GuildManager>
     {
         hasGuild.Value = state;
     }
+
+    public bool isLoadGuildInfo = false;
     public void LoadGuildInfo(bool showDelayPopup=true)
     {
         if (showDelayPopup)
@@ -71,6 +73,8 @@ public class GuildManager : SingletonMono<GuildManager>
             
             if (bro.IsSuccess())
             {
+                isLoadGuildInfo = true;
+                
                 // guildMemberInfos = new List<GuildMemberInfo>();
 
                 var returnValue = bro.GetReturnValuetoJSON();
@@ -108,10 +112,11 @@ public class GuildManager : SingletonMono<GuildManager>
                 }
             }
         });
-        
+
+ 
         //var bro = Backend.Social.Guild.GetMyGuildInfoV3();
 
-        
+
 
     }
 

@@ -212,9 +212,12 @@ public class UiBlackFoxPassCell : MonoBehaviour
 
     private void GetFreeReward()
     {
+
+        var type = (Item_Type)(int)passInfo.rewardType_Free;
         //로컬
         ServerData.coldSeasonPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";
-        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
+        //검은구미호전패스
+        ServerData.AddLocalValue(type, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
@@ -222,17 +225,22 @@ public class UiBlackFoxPassCell : MonoBehaviour
         Param passParam = new Param();
         passParam.Add(passInfo.rewardType_Free_Key, ServerData.coldSeasonPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value);
         transactionList.Add(TransactionValue.SetUpdate(ColdSeasonPassServerTable.tableName, ColdSeasonPassServerTable.Indate, passParam));
-
-        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
-        transactionList.Add(rewardTransactionValue);
-
+        
+        Param goodsParam = new Param();
+        goodsParam.Add(GoodsTable.BlackFoxGoods, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods));
+        
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        
         ServerData.SendTransactionV2(transactionList);
     }
     private void GetAdReward()
     {
+        
+        var type = (Item_Type)(int)passInfo.rewardType_IAP;
+
         //로컬
         ServerData.coldSeasonPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
-        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
+        ServerData.AddLocalValue(type, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
 

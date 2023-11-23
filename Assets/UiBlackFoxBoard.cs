@@ -198,114 +198,66 @@ public class UiBlackFoxBoard : MonoBehaviour
     {
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "모든 능력치를 초기화 합니까?", () =>
          {
-             float refundCount = 0;
+             int grade = (int)PlayerStats.GetBlackFoxGrade();
 
+             if (grade < 0)
+             {
+                 PopupManager.Instance.ShowAlarmMessage("초기화할 데이터가 없습니다.");
+                 return;
+             }
+             
              var tableDatas = TableManager.Instance.BlackFoxAbil.dataArray;
+
+             var tableData2 = TableManager.Instance.BlackFoxTable.dataArray;
+
+             float newTotal = tableData2[grade].Rewardvalue * (float)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value + AddPassReward();
+
+             ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value = newTotal;
 
              List<TransactionValue> transactions = new List<TransactionValue>();
 
              Param relicParam = new Param();
-
-             for (int i = 0; i < tableDatas.Length; i++)
+             
+             //구미호 레벨
+             foreach (var t in tableDatas)
              {
-                 refundCount += ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid].level.Value;
-                 ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid].level.Value = 0;
-
-                 relicParam.Add(tableDatas[i].Stringid, ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid].ConvertToString());
+                 ServerData.blackFoxServerTable.TableDatas[t.Stringid].level.Value = 0;
+                 
+                 relicParam.Add(t.Stringid, ServerData.blackFoxServerTable.TableDatas[t.Stringid].ConvertToString());
              }
-
-             if (refundCount == 0)
-             {
-                 PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
-                 return;
-             }
-
              transactions.Add(TransactionValue.SetUpdate(BlackFoxServerTable.tableName, BlackFoxServerTable.Indate, relicParam));
-
-
-             ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += refundCount;
-
+             //
+             //재화
              Param goodsParam = new Param();
              goodsParam.Add(GoodsTable.BlackFoxGoods, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
-
              transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-
+                //
              ServerData.SendTransaction(transactions, successCallBack: () =>
                {
                    PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
-                   LogManager.Instance.SendLogType("BlackFox", "초기화", $"{refundCount}개");
+                   LogManager.Instance.SendLogType("BlackFox", "초기화", $"{newTotal}개");
                });
 
          }, () => { });
     }
 
-    public void ExChangeAbilityToKey()
-    {
-        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"모든 능력치를 초기화 하고\n사용한 {CommonString.GetItemName(Item_Type.BlackFoxClear)}를 반환 합니까?", () =>
-        {
-            var tableDatas = TableManager.Instance.BlackFoxAbil.dataArray;
-
-            List<TransactionValue> transactions = new List<TransactionValue>();
-
-            Param relicParam = new Param();
-
-            for (int i = 0; i < tableDatas.Length; i++)
-            {
-                ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid].level.Value = 0;
-
-                relicParam.Add(tableDatas[i].Stringid, ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid].ConvertToString());
-            }
-
-            transactions.Add(TransactionValue.SetUpdate(BlackFoxServerTable.tableName, BlackFoxServerTable.Indate, relicParam));
-
-            ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value = 0;
-
-            int usedTicketNum = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value;
-            int prefticketNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value;
-
-            ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += usedTicketNum;
-
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value = 0;
-
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.BlackFoxGoods, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
-            goodsParam.Add(GoodsTable.BlackFoxClear, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
-
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable_2.usedblackFoxClearNum, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value);
-
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-
-            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-
-            ServerData.SendTransaction(transactions, successCallBack: () =>
-            {
-                PopupManager.Instance.ShowAlarmMessage($"초기화 성공!\n{CommonString.GetItemName(Item_Type.Ticket)} {usedTicketNum}개 획득!");
-                LogManager.Instance.SendLogType("BlackFox", "반환", $"pref {prefticketNum} get {usedTicketNum}개");
-            });
-
-        }, () => { });
-    }
-
-
     public void RenewalAbil()
     {
         
-        var currentKillCount = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.blackFoxScore].Value;
+        int grade = (int)PlayerStats.GetBlackFoxGrade();
 
-        if (currentKillCount == 0)
+        if (grade < 0)
         {
-            PopupManager.Instance.ShowAlarmMessage("점수가 등록되지 않았습니다.");
+            PopupManager.Instance.ShowAlarmMessage("갱신할 데이터가 없습니다.");
             return;
         }
         
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"현재 점수에 맞게 {CommonString.GetItemName(Item_Type.BlackFoxGoods)}을 갱신 하시겠습니까?", () =>
         {
-            int grade = (int)PlayerStats.GetBlackFoxGrade();
-
             var tableDatas = TableManager.Instance.BlackFoxAbil.dataArray;
 
             var tableData2 = TableManager.Instance.BlackFoxTable.dataArray;
+            
             float prefTotal = ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value;
 
             for (int i = 0; i < tableDatas.Length; i++)
@@ -313,13 +265,13 @@ public class UiBlackFoxBoard : MonoBehaviour
                 prefTotal += ServerData.blackFoxServerTable.TableDatas[tableDatas[i].Stringid].level.Value;
             }
 
-            float newTotal = tableData2[grade].Rewardvalue * (float)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value;
+            float newTotal = tableData2[grade].Rewardvalue * (float)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.usedblackFoxClearNum).Value + AddPassReward();
 
             float interval = newTotal - prefTotal;
 
             if (interval <= 0f)
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "갱신할 데이터가 없습니다.", null);
+                PopupManager.Instance.ShowAlarmMessage("갱신할 데이터가 없습니다.");
             }
             else
             {
@@ -328,5 +280,19 @@ public class UiBlackFoxBoard : MonoBehaviour
             }
 
         }, () => { });
+    }
+
+    private float AddPassReward()
+    {
+        var tableData3 = TableManager.Instance.BlackFoxPass.dataArray;
+        var passIdx = int.Parse(ServerData.coldSeasonPassServerTable.TableDatas[ColdSeasonPassServerTable.blackFoxFree].Value);
+
+        var passAddSum = 0f;
+        for (int i = 0; i <= passIdx; i++)
+        {
+            passAddSum += tableData3[i].Reward1_Value;
+        }
+
+        return passAddSum;
     }
 }

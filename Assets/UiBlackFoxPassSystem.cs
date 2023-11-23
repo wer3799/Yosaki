@@ -102,7 +102,6 @@ public class UiBlackFoxPassSystem : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
                 if (rewardTypeList.Contains(tableData[i].Reward1) == false)
                 {

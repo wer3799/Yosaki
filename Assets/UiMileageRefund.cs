@@ -815,6 +815,7 @@ public class UiMileageRefund : MonoBehaviour
             });
         }
         
+        
     }
     
     private void CommonAttendEventStart()

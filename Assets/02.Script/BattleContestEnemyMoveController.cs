@@ -149,11 +149,13 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
     private float idleDelay = 0.1f;
     private float moveDelay = 0.5f;
     private float attack1Delay = 0.6f;
+    private float startDelay = 1.5f;
     private IEnumerator StateRoutine()
     {
-
+        yield return new WaitForSeconds(startDelay);
         while (true)
         {
+            startDelay = 0f;
             RandomState();
             
 

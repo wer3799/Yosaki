@@ -2391,6 +2391,7 @@ public static class ServerData
                 param.Add(GoodsTable.BlackFoxGoods,
                     ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
             case Item_Type.BlackFoxClear:
                 ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += amount;
                 param.Add(GoodsTable.BlackFoxClear,
@@ -4613,7 +4614,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
                     break;
                 case Item_Type.BlackFoxClear:
-                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
+                    ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += amount;
                     break;
                 case Item_Type.ByeolhoGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.ByeolhoGoods).Value += amount;
