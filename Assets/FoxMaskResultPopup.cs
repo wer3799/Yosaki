@@ -136,6 +136,17 @@ public class FoxMaskResultPopup : MonoBehaviour
                     }
                 }
                 
+                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower6)
+                {
+                    if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower6).Value >= (TableManager.Instance.gyungRockTowerTable6.dataArray.Length))
+                    {
+                        if (stageChangeButton != null)
+                        {
+                            stageChangeButton.SetActive(false);
+                        }
+                    }
+                }
+                
                 return "클리어!!";
         }
 

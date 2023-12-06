@@ -27,11 +27,12 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                  GameManager.Instance.bossId == 17 ||
                  GameManager.Instance.bossId == 18 ||
                  GameManager.Instance.bossId == 20 || //강철이
-                 GameManager.Instance.bossId == 57
+                 GameManager.Instance.bossId == 57|| 
+                 GameManager.Instance.bossId == 204//강철이
                 ))
             {
                 //강철이
-                if (GameManager.Instance.bossId == 20)
+                if (GameManager.Instance.bossId == 20|GameManager.Instance.bossId == 204)
                 {
                     _GangChulButton.OnClickButton();
                     //아무거나로 변경
@@ -52,6 +53,7 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                 case GameManager.ContentsType.GyungRockTower3:
                 case GameManager.ContentsType.GyungRockTower4:
                 case GameManager.ContentsType.GyungRockTower5:
+                case GameManager.ContentsType.GyungRockTower6:
                 case GameManager.ContentsType.MeditationTower:
                     return;
                 case GameManager.ContentsType.SealSwordTower:

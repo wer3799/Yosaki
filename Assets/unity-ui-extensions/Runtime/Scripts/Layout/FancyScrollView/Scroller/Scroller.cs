@@ -293,8 +293,8 @@ namespace UnityEngine.UI.Extensions
                     viewCount = 6f;
                     break;
                 case TypeScroll.SnowManPass:
-                    splitData_Free = GetSnowAttenPassSplitData(OneYearPassServerTable.childFree);
-                    splitData_Ad = GetSnowAttenPassSplitData(OneYearPassServerTable.childAd);
+                    splitData_Free = GetSnowAttenPassSplitData(OneYearPassServerTable.childFree_Snow);
+                    splitData_Ad = GetSnowAttenPassSplitData(OneYearPassServerTable.childAd_Snow);
                     viewCount = 6f;
                     break;
                 case TypeScroll.SuhoPass:

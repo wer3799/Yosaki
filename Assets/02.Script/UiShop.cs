@@ -624,16 +624,34 @@ public class UiShop : SingletonMono<UiShop>
                 param.Add(GoodsTable.DosulGoods, ServerData.goodsTable.GetTableData(GoodsTable.DosulGoods).Value);
             }
                 break;  
+            case Item_Type.YoPowerGoods:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value += amount;
+                param.Add(GoodsTable.YoPowerGoods, ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value);
+            }
+                break;  
             case Item_Type.BlackFoxClear:
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value += amount;
                 param.Add(GoodsTable.BlackFoxClear, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxClear).Value);
             }
-                break;  
+                break;
             case Item_Type.BlackFoxGoods:
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += amount;
                 param.Add(GoodsTable.BlackFoxGoods, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
+            }
+                break;  
+            case Item_Type.TaeguekElixir:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value += amount;
+                param.Add(GoodsTable.TaeguekElixir, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekElixir).Value);
+            }
+                break;  
+            case Item_Type.TaeguekGoods:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.TaeguekGoods).Value += amount;
+                param.Add(GoodsTable.TaeguekGoods, ServerData.goodsTable.GetTableData(GoodsTable.TaeguekGoods).Value);
             }
                 break;  
             case Item_Type.ByeolhoClear:
@@ -658,6 +676,18 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value += amount;
                 param.Add(GoodsTable.BattleGoods, ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value);
+            }
+                break;  
+            case Item_Type.DragonPalaceTreasure:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value += amount;
+                param.Add(GoodsTable.DragonPalaceTreasure, ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value);
+            }
+                break;  
+            case Item_Type.GT:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += amount;
+                param.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
             }
                 break;  
             case Item_Type.BattleScore:
@@ -1076,6 +1106,18 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill14).Value += amount;
                 param.Add(GoodsTable.VisionSkill14, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill14).Value);
+            }
+                break;
+            case Item_Type.VisionSkill15:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill15).Value += amount;
+                param.Add(GoodsTable.VisionSkill15, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill15).Value);
+            }
+                break;
+            case Item_Type.VisionSkill16:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill16).Value += amount;
+                param.Add(GoodsTable.VisionSkill16, ServerData.goodsTable.GetTableData(GoodsTable.VisionSkill16).Value);
             }
                 break;
  

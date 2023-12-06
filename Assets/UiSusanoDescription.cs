@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,8 +32,17 @@ public class UiSusanoDescription : MonoBehaviour
         currentIdx = PlayerStats.GetSusanoGrade();
 
         Initialize(currentIdx);
-    }
 
+        Subscribe();
+    }
+    private void Subscribe()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.susanoGraduate).AsObservable().Subscribe(e =>
+        {
+            Initialize(PlayerStats.GetSusanoGrade());
+        }).AddTo(this);
+        
+    }
     public void Initialize(int idx)
     {
         if (idx == -1) idx = 0;

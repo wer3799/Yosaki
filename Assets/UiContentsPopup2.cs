@@ -50,6 +50,7 @@ public class UiContentsPopup2 : MonoBehaviour
         DragonBoard,
         SuhoBossBoard,
         BlackFoxBoard,
+        DragonPalaceBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -110,6 +111,7 @@ public class UiContentsPopup2 : MonoBehaviour
         Dark,
         Sinsun,
         Dragon,
+        DragonPalace,
 
     }
     
@@ -404,6 +406,8 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 186:
                     case 188:
                     case 189:
+                    case 200:
+                    case 201:
                         lastBoards[(int)ContentsBoard.DragonBoard].SetActive(true);
                         break;
                     case 190:
@@ -417,6 +421,10 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 198:
                     case 199:
                         lastBoards[(int)ContentsBoard.SuhoBossBoard].SetActive(true);
+                        break;
+                    case 202:
+                    case 203:
+                        lastBoards[(int)ContentsBoard.DragonPalaceBoard].SetActive(true);
                         break;
                         
                 }
@@ -775,6 +783,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newAdventureDoors[(int)AdventureDoor.Dragon].SetActive(e == 1);
             oldAdventureDoors[(int)AdventureDoor.Dragon].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showDragonPalaceUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.DragonPalace].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.DragonPalace].SetActive(e == 1);
         }).AddTo(this);
     }
     void Start()

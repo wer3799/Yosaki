@@ -59,7 +59,7 @@ public class UiGyungRockTowerResult : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower2)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower2)
                 {
                     if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx7).Value < (TableManager.Instance.gyungRockTowerTable2.dataArray.Length))
                     {
@@ -71,7 +71,7 @@ public class UiGyungRockTowerResult : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower3)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower3)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower3).Value < (TableManager.Instance.gyungRockTowerTable3.dataArray.Length))
                     {
@@ -83,7 +83,7 @@ public class UiGyungRockTowerResult : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower4)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower4)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower4).Value < (TableManager.Instance.gyungRockTowerTable4.dataArray.Length))
                     {
@@ -94,9 +94,20 @@ public class UiGyungRockTowerResult : MonoBehaviour
                         stageChangeButton.SetActive(false);
                     }
                 }
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower5)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower5)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower5).Value < (TableManager.Instance.gyungRockTowerTable5.dataArray.Length))
+                    {
+                        stageChangeText.SetText("다음 스테이지");
+                    }
+                    else
+                    {
+                        stageChangeButton.SetActive(false);
+                    }
+                }
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower6)
+                {
+                    if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower6).Value < (TableManager.Instance.gyungRockTowerTable6.dataArray.Length))
                     {
                         stageChangeText.SetText("다음 스테이지");
                     }

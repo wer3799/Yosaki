@@ -174,6 +174,8 @@ public class GoodsTable
     public static string VisionSkill12 = "VisionSkill12";
     public static string VisionSkill13 = "VisionSkill13";
     public static string VisionSkill14 = "VisionSkill14";
+    public static string VisionSkill15 = "VisionSkill15";
+    public static string VisionSkill16 = "VisionSkill16";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -286,6 +288,8 @@ public class GoodsTable
     public static string BattleGoods = "BTG";
     public static string BattleClear = "BTC";
     public static string BattleScore = "BTS";
+    public static string DragonPalaceTreasure = "DPT";
+    public static string GT = "GT";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -442,6 +446,8 @@ public class GoodsTable
         { VisionSkill12, 0f },
         { VisionSkill13, 0f },
         { VisionSkill14, 0f },
+        { VisionSkill15, 0f },
+        { VisionSkill16, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -550,6 +556,8 @@ public class GoodsTable
         { BattleGoods, 0f },
         { BattleClear, 7f },
         { BattleScore, 0f },
+        { DragonPalaceTreasure, 0f },
+        { GT, GameBalance.GachaTicketDailyGetAmount },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -1596,6 +1604,14 @@ public class GoodsTable
             {
                 return GoodsTable.VisionSkill14;
             }
+            case Item_Type.VisionSkill15:
+            {
+                return GoodsTable.VisionSkill15;
+            }
+            case Item_Type.VisionSkill16:
+            {
+                return GoodsTable.VisionSkill16;
+            }
 
             //
             //            //
@@ -1854,6 +1870,14 @@ public class GoodsTable
             case Item_Type.BattleScore:
             {
                 return GoodsTable.BattleScore;
+            }
+            case Item_Type.DragonPalaceTreasure:
+            {
+                return GoodsTable.DragonPalaceTreasure;
+            }
+            case Item_Type.GT:
+            {
+                return GoodsTable.GT;
             }
             
             case Item_Type.SuhoTreasure:
@@ -2400,6 +2424,14 @@ public class GoodsTable
         {
             return Item_Type.VisionSkill14;
         }
+        else if (GoodsTable.VisionSkill15 == type)
+        {
+            return Item_Type.VisionSkill15;
+        }
+        else if (GoodsTable.VisionSkill16 == type)
+        {
+            return Item_Type.VisionSkill16;
+        }
 
         // //
         else if (GoodsTable.ThiefSkill0 == type)
@@ -2638,6 +2670,15 @@ public class GoodsTable
         else if (GoodsTable.BattleScore == type)
         {
             return Item_Type.BattleScore;
+        }
+        else if (GoodsTable.GT == type)
+        {
+            return Item_Type.GT;
+        }
+
+        else if (GoodsTable.DragonPalaceTreasure == type)
+        {
+            return Item_Type.DragonPalaceTreasure;
         }
 
         else if (GoodsTable.SinsuRelic == type)

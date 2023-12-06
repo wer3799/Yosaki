@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,8 +27,17 @@ public class UiRelicTestDescription : MonoBehaviour
         currentIdx = PlayerStats.GetRelicTestGrade();
 
         Initialize(currentIdx);
+        
+        Subscribe();
     }
-
+    private void Subscribe()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.relicTestGraduate).AsObservable().Subscribe(e =>
+        {
+            Initialize(PlayerStats.GetRelicTestGrade());
+        }).AddTo(this);
+        
+    }
     public void Initialize(int idx)
     {
         if (idx == -1) idx = 0;

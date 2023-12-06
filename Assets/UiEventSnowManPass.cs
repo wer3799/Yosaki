@@ -34,70 +34,79 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 #endif
 
 
+    public void OnClickAllReceiveButtonV2()
+    {
 
+        
+    }
     public void OnClickAllReceiveButton()
     {
-        string freeKey = OneYearPassServerTable.childFree_Snow;
-        string adKey = OneYearPassServerTable.childAd_Snow;
+           var tableData = TableManager.Instance.snowManAtten.dataArray;
+        //현재 index가 -1이라면 0번째 보상을 받아야하기 때문에 +1
 
-        List<int> splitData_Free = GetSplitData(OneYearPassServerTable.childFree_Snow);
-        List<int> splitData_Ad = GetSplitData(OneYearPassServerTable.childAd_Snow);
+        var freeKey = OneYearPassServerTable.childFree_Snow;
+        var adKey = OneYearPassServerTable.childAd_Snow;
         
+        
+        
+        var passValue = int.Parse(ServerData.oneYearPassServerTable.TableDatas[freeKey].Value) + 1;
+        var adValue = int.Parse(ServerData.oneYearPassServerTable.TableDatas[adKey].Value) + 1;
+
         List<int> rewardTypeList = new List<int>();
         List<RewardItem> rewards = new List<RewardItem>();
 
-        var tableData = TableManager.Instance.snowManAtten.dataArray;
 
         int rewardedNum = 0;
 
-        string free = ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value;
-        string ad = ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value;
+        string free = ServerData.oneYearPassServerTable.TableDatas[freeKey]
+            .Value;
+        string ad = ServerData.oneYearPassServerTable.TableDatas[adKey].Value;
 
         bool hasCostumeItem = false;
+        bool hasPassItem = false;
 
-        for (int i = 0; i < tableData.Length; i++)
+        //받아야할 곳 부터 체크
+        for (int i = passValue; i < tableData.Length; i++)
         {
-            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+            //요구 조건 안되면 break.
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
 
-            if (canGetReward == false) break;
-
-            //무료보상
-            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            //받은적 있는지 체크
+            if (HasReward(freeKey, tableData[i].Id) == false)
             {
+                //코스튬이나 노리개가 있다면?
                 if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
                 {
                     hasCostumeItem = true;
                     break;
                 }
 
-                free += $",{tableData[i].Id}";
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
-                Utils.AddOrUpdateReward(ref rewards,(Item_Type)tableData[i].Reward1,tableData[i].Reward1_Value);
-
-                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
                 {
-                    rewardTypeList.Add(tableData[i].Reward1);
+                    hasPassItem = true;
+                    break;
                 }
-                rewardedNum++;
             }
+        }
 
-            ////유료보상
-            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+        //받은적 있는지 체크
+        for (int i = adValue; i < tableData.Length; i++)
+        {
+            if (HasPassItem() == false) break;
+            if (HasReward(adKey, tableData[i].Id) == false)
             {
+                //코스튬이나 노리개가 있다면?
                 if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
                 {
                     hasCostumeItem = true;
                     break;
                 }
 
-                ad += $",{tableData[i].Id}";
-                Utils.AddOrUpdateReward(ref rewards,(Item_Type)tableData[i].Reward2,tableData[i].Reward2_Value);
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
-                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
                 {
-                    rewardTypeList.Add(tableData[i].Reward2);
+                    hasPassItem = true;
+                    break;
                 }
-                rewardedNum++;
             }
         }
 
@@ -107,38 +116,96 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
             return;
         }
 
+        if (hasPassItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
+            return;
+        }
+        //보상모음 클리어
+        rewards.Clear();
+        
+        //받기
+        for (int i = passValue; i < tableData.Length; i++)
+        {
+            //요구 조건 안되면 break.
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+
+            //무료보상
+            if (HasReward(freeKey, tableData[i].Id) == false)
+            {
+                free = $"{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                Utils.AddOrUpdateReward(ref rewards, (Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+
+                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1);
+                }
+
+                rewardedNum++;
+            }
+        }
+
+        for (int i = adValue; i < tableData.Length; i++)
+        {
+            //요구 조건 안되면 break.
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+            if (HasPassItem() == false) break;
+            
+            //유료보상
+            if (HasReward(adKey, tableData[i].Id) == false)
+            {
+                ad = $"{tableData[i].Id}";
+                Utils.AddOrUpdateReward(ref rewards,(Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward2);
+                }
+
+                rewardedNum++;
+            }
+        }
+    
+
+
         if (rewardedNum > 0)
         {
-            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value = free;
-            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value = ad;
+            ServerData.oneYearPassServerTable.TableDatas[freeKey].Value = free;
+            ServerData.oneYearPassServerTable.TableDatas[adKey].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
-            
+
             var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
+
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
             }
+
+
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param passParam = new Param();
 
-            passParam.Add(OneYearPassServerTable.childFree_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value);
-            passParam.Add(OneYearPassServerTable.childAd_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value);
+            passParam.Add(freeKey, ServerData.oneYearPassServerTable.TableDatas[freeKey].Value);
+            passParam.Add(adKey, ServerData.oneYearPassServerTable.TableDatas[adKey].Value);
 
             transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
 
-            ServerData.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
                 List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
-                var e2 = rewards.GetEnumerator();
+                var e = rewards.GetEnumerator();
                 for (int i = 0 ;  i < rewards.Count;i++)
                 {
-                    if (e2.MoveNext())
+                    if (e.MoveNext())
                     {
-                        rewardData.Add(new UiRewardView.RewardData(e2.Current.ItemType,e2.Current.ItemValue));
+                        rewardData.Add(new UiRewardView.RewardData(e.Current.ItemType,e.Current.ItemValue));
                     }                    
                 }
                 if (rewardData.Count > 0)
@@ -152,6 +219,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
         {
             PopupManager.Instance.ShowAlarmMessage("수령할 보상이 없습니다.");
         }
+        
     }
 
     private bool HasPassItem()
@@ -160,33 +228,21 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 
         return hasIapProduct;
     }
-
+    private bool GetBeforeRewarded(string key,int data)
+    {
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) == data - 1;
+    }
     private bool CanGetReward(int require)
     {
         int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value;
         return killCountTotal >= require;
     }
-    public bool HasReward(List<int> splitData, int id)
+    public bool HasReward(string key, int data)
     {
-        return splitData.Contains(id);
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) >= data;
     }
 
-    public List<int> GetSplitData(string key)
-    {
-        List<int> returnValues = new List<int>();
 
-        var splits = ServerData.oneYearPassServerTable.TableDatas[key].Value.Split(',');
-
-        for (int i = 0; i < splits.Length; i++)
-        {
-            if (int.TryParse(splits[i], out var result))
-            {
-                returnValues.Add(result);
-            }
-        }
-
-        return returnValues;
-    }
 
 
     [SerializeField]

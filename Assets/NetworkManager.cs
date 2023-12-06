@@ -37,6 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         public int mask;
         public int horn;
         public int suhoAnimal=-1;
+        public int guildIcon=-1;
         public double score;
         public double score2;
         public bool endGame = false;
@@ -285,6 +286,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         int mask = ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
         int horn = ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
         int suhoAnimal = ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value;
+        int guildIcon = GuildManager.Instance.guildIconIdx.Value;
         string guildName = GuildManager.Instance.myGuildName;
         var level = ServerData.statusTable.GetTableData(StatusTable.Level).Value;
 
@@ -298,7 +300,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         platform = IOSPlatformKey;
         myPlatform = MatchingPlatform.IOS;
 #endif
-        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level},{platform},{horn},{suhoAnimal}";
+        PhotonNetwork.LocalPlayer.NickName = $"{PlayerData.Instance.NickName},{costume},{weapon},{magicbook},{pet},{gumgi},{guildName},{mask},{level},{platform},{horn},{suhoAnimal},{guildIcon}";
 
         connectMask.SetActive(true);
 
@@ -343,6 +345,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (splits.Length >= 12)
         {
             ret.suhoAnimal = int.Parse(splits[11]);
+        }  
+        
+        if (splits.Length >= 13)
+        {
+            ret.guildIcon = int.Parse(splits[12]);
         }
 
         return ret;
@@ -743,12 +750,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
                 var playerInfo = roomPlayerDatas[keys[i]];
 
-                playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn,playerInfo.suhoAnimal);
+                playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn,playerInfo.suhoAnimal,playerInfo.guildIcon);
                 playerView_Room[i].SetLevelText(playerInfo.level);
 
                 playerView_Result[i].gameObject.SetActive(true);
 
-                playerView_Result[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn,playerInfo.suhoAnimal);
+                playerView_Result[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn,playerInfo.suhoAnimal,playerInfo.guildIcon);
             }
             else
             {

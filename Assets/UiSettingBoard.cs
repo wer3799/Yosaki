@@ -841,6 +841,7 @@ public static class SettingKey
     public static string showDarkUi = "showDarkUi";
     public static string showSinsunUi = "showSinsunUi";
     public static string showDragonUi = "showDragonUi";
+    public static string showDragonPalaceUi = "showDragonPalaceUi";
 
 }
 
@@ -947,6 +948,7 @@ public static class SettingData
     public static ReactiveProperty<int> showDarkUi  = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showSinsunUi = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showDragonUi = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showDragonPalaceUi = new ReactiveProperty<int>();
     public static int screenWidth = Screen.width;
     public static int screenHeight = Screen.height;
 
@@ -1304,6 +1306,8 @@ public static class SettingData
         showSinsunUi.Value = PlayerPrefs.GetInt(SettingKey.showSinsunUi, 1);
 
         showDragonUi.Value = PlayerPrefs.GetInt(SettingKey.showDragonUi, 1);
+
+        showDragonPalaceUi.Value = PlayerPrefs.GetInt(SettingKey.showDragonPalaceUi, 1);
 
         Subscribe();
     }
@@ -1670,6 +1674,10 @@ public static class SettingData
         showDragonUi.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showDragonUi, e);
+        });
+        showDragonPalaceUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showDragonPalaceUi, e);
         });
 
     }

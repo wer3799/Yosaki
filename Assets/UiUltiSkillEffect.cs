@@ -129,6 +129,20 @@ public class UiUltiSkillEffect : SingletonMono<UiUltiSkillEffect>
             ultSkillEffect[index].SetActive(true);
             _animators[index].Play("UltSkill0", 0, 0f);
         }
+        
+        if (idx == 226)
+        {
+            var index = 15;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+        }
+        
+        if (idx == 227)
+        {
+            var index = 16;
+            ultSkillEffect[index].SetActive(true);
+            _animators[index].Play("UltSkill0", 0, 0f);
+        }
     }
 
     public void OffAllUltSkillEffect()

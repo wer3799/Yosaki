@@ -59,7 +59,7 @@ public class SubMenu_MoreButton : MonoBehaviour
             redDotBase.ForEach(e => e?.GoTargetButton());
         }
         else
-        {
+        {   
             redDotBase.ForEach(e => e?.GoMoreButton());
         }
     }

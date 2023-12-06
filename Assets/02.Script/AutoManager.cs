@@ -353,6 +353,12 @@ public class AutoManager : Singleton<AutoManager>
 
         if (GameManager.contentsType == GameManager.ContentsType.NormalField)
         {
+            if (MapInfo.Instance == null)
+            {
+                currentTarget = null;
+                return;
+            }
+            
             var spawnedEnemy = MapInfo.Instance.SpawnedEnemyList;
 
             if (spawnedEnemy == null || spawnedEnemy.Count == 0)

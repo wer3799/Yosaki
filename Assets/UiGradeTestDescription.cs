@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,8 +29,17 @@ public class UiGradeTestDescription : MonoBehaviour
         currentIdx = PlayerStats.GetGradeTestGrade();
 
         Initialize(currentIdx);
+        
+        Subscribe();
     }
-
+    private void Subscribe()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gradeTestGraduate).AsObservable().Subscribe(e =>
+        {
+            Initialize(PlayerStats.GetGradeTestGrade());    
+        }).AddTo(this);
+        
+    }
     public void Initialize(int idx)
     {
         if (idx == -1) idx = 0;

@@ -45,6 +45,8 @@ public class BossScoreTable
     
     //별호타워
     public const string byeolhoTowerScore = "s11";
+    //푸른강철이
+    public const string blueGangChul = "s12";
 
 
     public bool isInitialize = false;
@@ -66,6 +68,7 @@ public class BossScoreTable
         { DosulAwakeScore, string.Empty },
         
         { byeolhoTowerScore, string.Empty },
+        { blueGangChul, string.Empty },
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -98,7 +101,7 @@ public class BossScoreTable
 
     public void UpdateScoreToServer(string key, double score)
     {
-        tableDatas[key].Value = score.ToString("0");
+        tableDatas[key].Value = score.ToString();
 
         UpdateNumberValue(key, score);
 
@@ -125,52 +128,52 @@ public class BossScoreTable
         {
             case dosulScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulScore].Value).ToString();
             }
                 break;
             case SealSwordAwakeScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.SealSwordAwakeScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.SealSwordAwakeScore].Value).ToString();
             }
                 break;
             case susanoScore: //
             {
-                return (ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value).ToString("0");
+                return (ServerData.userInfoTable.TableDatas[UserInfoTable.susanoScore].Value).ToString();
             }
                 break;
             case gradeScore:
             {
-                return (ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value).ToString("0");
+                return (ServerData.userInfoTable.TableDatas[UserInfoTable.gradeScore].Value).ToString();
             }
                 break;
             case relicTestScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.relicTestScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.relicTestScore].Value).ToString();
             }
                 break;
             case danjeonScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.danjeonScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.danjeonScore].Value).ToString();
             }
                 break;
             case closedScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.closedScore].Value).ToString();
             }
                 break;
             case hyunsangTowerScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyunsangTowerScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyunsangTowerScore].Value).ToString();
             }
                 break;
             case blackFoxScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.blackFoxScore].Value).ToString();
             }
                 break;   
             case DosulAwakeScore: //
             {
-                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value).ToString("0");
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value).ToString();
             }
                 break;
             default:

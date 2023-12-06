@@ -63,11 +63,11 @@ public class UiStatus : SingletonMono<UiStatus>
     {
         if (loadedMyRank == -1)
         {
-            nameText.SetText($"Lv:{level} {PlayerData.Instance.NickName}");
+            nameText.SetText($"Lv:{Utils.ConvertNum(level)} {PlayerData.Instance.NickName}");
         }
         else
         {
-            nameText.SetText($"Lv:{level} {PlayerData.Instance.NickName} ({loadedMyRank}등)");
+            nameText.SetText($"Lv:{Utils.ConvertNum(level)} {PlayerData.Instance.NickName} ({loadedMyRank}등)");
         }
     }
 }

@@ -24,6 +24,8 @@ public class FoxMaskBoard : MonoBehaviour
     
     private bool initialized = false;
     
+    [SerializeField] private TextMeshProUGUI contentsDesc;
+    [SerializeField] private GameObject transObject;
         
     [SerializeField]
     private Toggle towerAutoMode;
@@ -47,6 +49,18 @@ public class FoxMaskBoard : MonoBehaviour
         {
             transBefore.SetActive(e<1);
             transAfter.SetActive(e > 0);
+        }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.foxMaskGraduate).AsObservable().Subscribe(e =>
+        {
+            transObject.SetActive(e<1);
+            if (e < 1)
+            {
+                contentsDesc.SetText($"탈을 쓴 요괴를 물리치고\n요괴 탈을 획득하세요!");
+            }
+            else
+            {
+                contentsDesc.SetText($"각성효과로 강화됩니다.\n능력치{GameBalance.foxMaskGraduateValue}배 증가");
+            }
         }).AddTo(this);
     }
 
@@ -127,7 +141,27 @@ public class FoxMaskBoard : MonoBehaviour
                 }, null);
         }
     }
-    
+    public void OnClickFoxMaskTransButton()
+    {
+        if ((int)ServerData.userInfoTable.TableDatas[UserInfoTable.foxMask].Value < GameBalance.foxmaskGraduateScore)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.foxmaskGraduateScore+1} 단계 요괴탈 보유 시 각성 가능!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                $"요괴탈을 각성하려면 {GameBalance.foxmaskGraduateScore + 1}단계 요괴탈을 보유해야 합니다.\n" +
+                $"각성 시 능력치 효과가 {Utils.ConvertNum(GameBalance.foxMaskGraduateValue * 100, 2)}% 강화 됩니다.\n" +
+                $"각성하시겠습니까?", () =>
+                {
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.foxMaskGraduate].Value = 1;
+
+                    ServerData.userInfoTable_2.UpData(UserInfoTable_2.foxMaskGraduate, false);
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+
+                }, null);
+        }
+    }
     public void AutoModeOnOff(bool on)
     {
         if (initialized == false) return;

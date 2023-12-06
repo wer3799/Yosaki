@@ -129,10 +129,13 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
 
     public bool HasReward(string key, int data)
     {
-        var splitData = GetSplitData(key);
-        return splitData.Contains(data.ToString());
-    }
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) >= data;
 
+    }
+    private bool GetBeforeRewarded(string key,int data)
+    {
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) == data - 1;
+    }
     public void OnClickFreeRewardButton()
     {
         if (CanGetReward() == false)
@@ -147,6 +150,12 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
             return;
         }
 
+        if (GetBeforeRewarded(passInfo.rewardType_Free_Key,passInfo.id) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            return;
+        }
+
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
 
         GetFreeReward();
@@ -158,7 +167,7 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage($"교환한 {CommonString.GetItemName(Item_Type.Event_Item_SnowMan)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"교환한 {CommonString.GetItemName(Item_Type.Event_Item_SnowMan)}이(가) 부족합니다.");
             return;
         }
 
@@ -167,7 +176,11 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
             return;
         }
-
+        if (GetBeforeRewarded(passInfo.rewardType_IAP_Key,passInfo.id) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            return;
+        }
 
         if (HasPassItem())
         {
@@ -190,7 +203,7 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
     private void GetFreeReward()
     {
         //로컬
-        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -208,7 +221,7 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
         //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
             //  LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
         });
@@ -216,7 +229,7 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
     private void GetAdReward()
     {
         //로컬
-        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -234,7 +247,7 @@ public class UiSnowManPassCell : FancyCell<SnowPassData_Fancy>
         //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
 
-        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
             //   LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
         });

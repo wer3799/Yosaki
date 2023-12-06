@@ -42,7 +42,7 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
 
                     var playerInfo = roomPlayerDatas[keys[i]];
 
-                    playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn,playerInfo.suhoAnimal);
+                    playerView_Room[i].Initialize(playerInfo.nickName, string.Empty, playerInfo.costumeId, playerInfo.petId, playerInfo.weaponId, playerInfo.magicBookId, playerInfo.gumgi, playerInfo.guildName, playerInfo.mask, playerInfo.horn,playerInfo.suhoAnimal,playerInfo.guildIcon);
                 }
                 else
                 {

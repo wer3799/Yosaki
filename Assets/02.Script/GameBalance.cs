@@ -397,6 +397,7 @@ public static class GameBalance
     public static ObscuredFloat SealSwordTicketDailyGetAmount = 4; // 
     public static ObscuredFloat GuimoonTicketDailyGetAmount = 4; // 
     public static ObscuredFloat MeditationTicketDailyGetAmount = 2; // 심득 
+    public static ObscuredInt GachaTicketDailyGetAmount = 10; // 
     public static ObscuredInt TransTicketWeeklyGetAmount = 3; // 
     
     public static ObscuredFloat GuildTowerChimAbilUpValue = 0.01f; // 
@@ -489,6 +490,19 @@ public static class GameBalance
     public static ObscuredDouble thiefGodGraduateScore = 5E+134;
     public static ObscuredDouble darkGodGraduateScore = 1E+136;
     public static ObscuredDouble sinsunGodGraduateScore = 1E+139;
+    
+    
+    public static ObscuredFloat foxMaskGraduateValue = 3f;
+    public static ObscuredFloat susanoGraduateValue = 1.1f;
+    public static ObscuredFloat gradeTestGraduateValue = 1.1f;
+    public static ObscuredFloat relicTestGraduateValue = 1.3f;
+    public static ObscuredDouble foxmaskGraduateScore = 208;
+    public static ObscuredDouble susanoGraduateScore = 1E+148;
+    public static ObscuredDouble gradeTestGraduateScore = 1E+152;
+    public static ObscuredDouble relicTestGraduateScore = 1E+144;
+    public static ObscuredDouble susanoGraduateAfterScore = 5E+171;
+    public static ObscuredDouble gradeTestGraduateAfterScore = 1E+171;
+    public static ObscuredDouble relicTestGraduateAfterScore = 5E+171;
     //
     
     public static ObscuredDouble refundGoldBarRatio = 1E+34; //보유금화환불단위
@@ -555,6 +569,7 @@ public static class GameBalance
     //신규 하단전 각성시 하단전베기 피해량 추가상승분
     public static ObscuredFloat newLowGyungRockAwakeValue = 0.5f;
     public static ObscuredFloat newMiddleGyungRockAwakeValue = 1f;
+    public static ObscuredFloat newTopGyungRockAwakeValue = 1f;
 
     public static ObscuredDouble GoldLimit = 1E+38;// 해당금화 이상 소지시 휴식보상 받을수없음.
     
@@ -563,6 +578,8 @@ public static class GameBalance
     public static ObscuredFloat GetSoulRingUpgradePrice = 10000f;// 강화비용
     public static ObscuredFloat GetSoulRingAdReward = 4000f;// 광고보상
 
+    public static ObscuredFloat GetTransSoulUpgradePrice = 1f;// 초월 강화비용
+    
     public static ObscuredInt MeditationHour = 24;// 명상시간
     public static ObscuredInt PetDispatchHour = 20;// 펫파견시간
     
@@ -571,6 +588,7 @@ public static class GameBalance
     public static ObscuredInt SuhoPetUpgradeIdx = 29;// 필요 수호펫 Idx
     
     public static ObscuredFloat dragonScaleAbilValue = 0.04f;//용인비늘베기 
+    public static ObscuredFloat dragonPalaceTreasureAbilValue = 0.02f;//심해의보물 파도베기 
     
     public readonly static ObscuredInt TaegeukSimbeopUnlockStage = 9998;//태극심법 스테이지제한
     public readonly static ObscuredInt DailyElixirGetCount = 1;//매일 엘릭서 얻는양

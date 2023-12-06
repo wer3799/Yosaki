@@ -49,6 +49,8 @@ public class StatusTable
     public const string PetEquip_Level = "PetEquip_Level";
     public const string RingEnhance_Level = "RingEnhance_Level";
     public const string SuhoEnhance_Level = "SuhoEnhance_Level";
+    public const string Trans_Level = "Trans_Level";
+    
     public const string ChunSlash_memory = "ChunSlash_memory";
     public const string PetAwakeLevel = "PetAwakeLevel";
     public const string FeelSlash_memory = "FeelSlash_memory";
@@ -122,6 +124,7 @@ public class StatusTable
         { PetEquip_Level, 0 },
         { RingEnhance_Level, 0 },
         { SuhoEnhance_Level, 0 },
+        { Trans_Level, 0 },
         { ChunSlash_memory, 0 },
         { PetAwakeLevel, 0 },
         { FeelSlash_memory, 0 },

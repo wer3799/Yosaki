@@ -13,7 +13,7 @@ public class UiSnowManEventBuyButton : MonoBehaviour
     private GameObject plusGoodsObject;
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string fallPassKey = "songpyeonpass";
+    public static readonly string fallPassKey = "candypass0";
 
     private Button buyButton;
 

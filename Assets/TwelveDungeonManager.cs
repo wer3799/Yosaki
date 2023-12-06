@@ -292,12 +292,136 @@ public class TwelveDungeonManager : ContentsManagerBase
         // }
 
         var serverData = ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid];
-
-        if (string.IsNullOrEmpty(serverData.score.Value) == false)
+        //푸른강철이
+        if (twelveBossTable.Stringid == "b204")
         {
-            if (damageAmount.Value < double.Parse(serverData.score.Value))
+            
+            Param bossScoreParam = new Param();
+
+            bool isRenewal = false;
+            if (ServerData.etcServerTable.IsBlueGangChulUnlocked(0))
             {
+                double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+
+                if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.DosulAwakeScore].Value)
+                {
+                    ServerData.bossScoreTable.TableDatas[BossScoreTable.DosulAwakeScore].Value = reqValue.ToString();
+                    ServerData.bossScoreTable.UpdateNumberValue(BossScoreTable.DosulAwakeScore,reqValue);
+                    bossScoreParam.Add(BossScoreTable.DosulAwakeScore,ServerData.bossScoreTable.TableDatas[BossScoreTable.DosulAwakeScore].Value);
+                    isRenewal = true;
+                }
+            }
+            if (ServerData.etcServerTable.IsBlueGangChulUnlocked(1))
+            {
+                double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+
+                if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.SealSwordAwakeScore].Value)
+                {
+                    ServerData.bossScoreTable.TableDatas[BossScoreTable.SealSwordAwakeScore].Value = reqValue.ToString();
+
+                    ServerData.bossScoreTable.UpdateNumberValue(BossScoreTable.SealSwordAwakeScore,reqValue);
+                    bossScoreParam.Add(BossScoreTable.SealSwordAwakeScore,ServerData.bossScoreTable.TableDatas[BossScoreTable.SealSwordAwakeScore].Value);
+                    isRenewal = true;
+                }
+            }
+
+            if (ServerData.etcServerTable.IsBlueGangChulUnlocked(2))
+            {
+                double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+
+                if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.danjeonScore].Value)
+                {
+                    ServerData.bossScoreTable.TableDatas[BossScoreTable.danjeonScore].Value = reqValue.ToString();
+
+                    ServerData.bossScoreTable.UpdateNumberValue(BossScoreTable.danjeonScore,reqValue);
+                    bossScoreParam.Add(BossScoreTable.danjeonScore,ServerData.bossScoreTable.TableDatas[BossScoreTable.danjeonScore].Value);
+                    isRenewal = true;
+                }
+            }
+
+            if (ServerData.etcServerTable.IsBlueGangChulUnlocked(3))
+            {
+                double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+
+                if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.hyunsangTowerScore].Value)
+                {
+                    ServerData.bossScoreTable.TableDatas[BossScoreTable.hyunsangTowerScore].Value = reqValue.ToString();
+
+                    ServerData.bossScoreTable.UpdateNumberValue(BossScoreTable.hyunsangTowerScore,reqValue);
+                    bossScoreParam.Add(BossScoreTable.hyunsangTowerScore,ServerData.bossScoreTable.TableDatas[BossScoreTable.hyunsangTowerScore].Value);
+                    isRenewal = true;
+                }
+            }
+            if (ServerData.etcServerTable.IsBlueGangChulUnlocked(4))
+            {
+                double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+
+                if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.closedScore].Value)
+                {
+                    ServerData.bossScoreTable.TableDatas[BossScoreTable.closedScore].Value = reqValue.ToString();
+
+                    ServerData.bossScoreTable.UpdateNumberValue(BossScoreTable.closedScore,reqValue);
+                    bossScoreParam.Add(BossScoreTable.closedScore,ServerData.bossScoreTable.TableDatas[BossScoreTable.closedScore].Value);
+                    isRenewal = true;
+                }
+            }
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            if (isRenewal)
+            {
+                transactions.Add(TransactionValue.SetUpdate(BossScoreTable.tableName, BossScoreTable.Indate, bossScoreParam));
+            }
+
+            if (string.IsNullOrEmpty(serverData.score.Value) == false)
+            {
+                if (damageAmount.Value < double.Parse(serverData.score.Value))
+                {
+                    
+                }
+                else
+                {
+                    serverData.score.Value = damageAmount.Value.ToString();
+
+
+                    Param bossParam = new Param();
+                    bossParam.Add(twelveBossTable.Stringid, ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid].ConvertToString());
+                    transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));                
+                }
+            }
+            else
+            {
+                serverData.score.Value = damageAmount.Value.ToString();
+
+                Param bossParam = new Param();
+                bossParam.Add(twelveBossTable.Stringid, ServerData.bossServerTable.TableDatas[twelveBossTable.Stringid].ConvertToString());
+                transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
+            }
+
+            //쏠거없음 안쏘기
+            if (transactions.Count < 1)
                 return;
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                //PopupManager.Instance.ShowAlarmMessage("보상을 받았습니다!");
+            });
+
+
+        }
+        else
+        {
+            if (string.IsNullOrEmpty(serverData.score.Value) == false)
+            {
+                if (damageAmount.Value < double.Parse(serverData.score.Value))
+                {
+                    return;
+                }
+                else
+                {
+                    serverData.score.Value = damageAmount.Value.ToString();
+
+                    ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
+                }
             }
             else
             {
@@ -305,12 +429,6 @@ public class TwelveDungeonManager : ContentsManagerBase
 
                 ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
             }
-        }
-        else
-        {
-            serverData.score.Value = damageAmount.Value.ToString();
-
-            ServerData.bossServerTable.UpdateData(twelveBossTable.Stringid);
         }
 
         //여래 예외처리

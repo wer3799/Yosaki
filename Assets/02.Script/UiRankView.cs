@@ -126,7 +126,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx,suhoAnimal);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx,suhoAnimal,-1);
             }
         }
         else if (rankType == RankType.GangChul)
@@ -210,7 +210,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx,suhoAnimal);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx, hornIdx,suhoAnimal,-1);
             }
         }
         else if (rankType == RankType.ChunMa)
@@ -298,7 +298,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal,-1);
             }
         }
 

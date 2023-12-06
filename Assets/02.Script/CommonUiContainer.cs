@@ -16,7 +16,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_11, CommonString.ItemGrade_12, CommonString.ItemGrade_13, CommonString.ItemGrade_14, CommonString.ItemGrade_15, 
         CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 ,
         CommonString.ItemGrade_21 , CommonString.ItemGrade_22 , CommonString.ItemGrade_23 , CommonString.ItemGrade_24, CommonString.ItemGrade_25,
-        CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29, CommonString.ItemGrade_30 };
+        CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29, CommonString.ItemGrade_30,
+        CommonString.ItemGrade_31, };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
@@ -26,6 +27,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae, string.Empty, string.Empty,//16~20
         string.Empty, CommonString.ItemGrade_22_Norigae, string.Empty,CommonString.ItemGrade_24_Norigae ,string.Empty, //21~25,
         CommonString.ItemGrade_26_Norigae, CommonString.ItemGrade_27_Norigae,CommonString.ItemGrade_28_Norigae,CommonString.ItemGrade_29_Norigae,CommonString.ItemGrade_30_Norigae,
+        CommonString.ItemGrade_31_Norigae,
     }; 
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
@@ -174,6 +176,9 @@ public Sprite DragonWeapon4;
 public Sprite DragonWeapon5;
 public Sprite DragonWeapon6;
 public Sprite DragonWeapon7;
+public Sprite weapon147;
+public Sprite weapon148;
+public Sprite weapon149;
     
 [Header ("Weapon_View")]
 
@@ -304,6 +309,9 @@ public Sprite RecommendWeapon22;
     public Sprite DragonNorigae1;
     public Sprite DragonNorigae2;
     public Sprite DragonNorigae3;
+    public Sprite magicbook118;
+    public Sprite magicbook119;
+    public Sprite magicbook120;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -446,6 +454,8 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill12;
     public Sprite VisionSkill13;
     public Sprite VisionSkill14;
+    public Sprite VisionSkill15;
+    public Sprite VisionSkill16;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -545,6 +555,8 @@ public Sprite RecommendWeapon22;
     public Sprite BattleGoods;
     public Sprite BattleClear;
     public Sprite BattleScore;
+    public Sprite DragonPalaceTreasure;
+    public Sprite GT;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -1084,6 +1096,14 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[177];
             case Item_Type.costume178:
                 return costumeThumbnail[178];
+            case Item_Type.costume179:
+                return costumeThumbnail[179];
+            case Item_Type.costume180:
+                return costumeThumbnail[180];
+            case Item_Type.costume181:
+                return costumeThumbnail[181];
+            case Item_Type.costume182:
+                return costumeThumbnail[182];
 
 
             case Item_Type.RankFrame1:
@@ -1616,6 +1636,10 @@ public Sprite RecommendWeapon22;
                 return BattleClear;   
             case Item_Type.BattleScore:
                 return BattleScore;   
+            case Item_Type.GT:
+                return GT;   
+            case Item_Type.DragonPalaceTreasure:
+                return DragonPalaceTreasure;   
             
             case Item_Type.GuildTowerClearTicket:
                 return GuildTowerClearTicket;  
@@ -1920,6 +1944,13 @@ public Sprite RecommendWeapon22;
                 return DragonNorigae2;
             case Item_Type.DragonNorigae3:
                 return DragonNorigae3;
+                
+            case Item_Type.magicBook118:
+                return magicbook118;
+            case Item_Type.magicBook119:
+                return magicbook119;
+            case Item_Type.magicBook120:
+                return magicbook120;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2394,6 +2425,10 @@ public Sprite RecommendWeapon22;
                 return VisionSkill13;
             case Item_Type.VisionSkill14:
                 return VisionSkill14;
+            case Item_Type.VisionSkill15:
+                return VisionSkill15;
+            case Item_Type.VisionSkill16:
+                return VisionSkill16;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2658,6 +2693,12 @@ public Sprite RecommendWeapon22;
                 return DragonWeapon6;
             case Item_Type.DragonWeapon7:
                 return DragonWeapon7;
+            case Item_Type.weapon147:
+                return weapon147;
+            case Item_Type.weapon148:
+                return weapon148;
+            case Item_Type.weapon149:
+                return weapon149;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

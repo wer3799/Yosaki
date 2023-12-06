@@ -94,6 +94,7 @@ public class GameManager : SingletonMono<GameManager>
         BlackFox,
         ByeolhoTower,
         BattleContest,
+        GyungRockTower6,
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -410,6 +411,8 @@ public class GameManager : SingletonMono<GameManager>
 
         // SaveManager.Instance.SyncDatasInQueue();
 
+        MainTabButtons.ResetPopups();
+        
         whenSceneChanged.Execute();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);

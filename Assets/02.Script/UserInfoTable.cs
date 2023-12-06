@@ -794,8 +794,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 30);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(30));
+                            defultValues.Add(e.Current.Key, 35);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(35));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1369,9 +1369,9 @@ public class UserInfoTable
             }
 
             //바캉스 이벤트 출석
-            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value != 0)
+            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value != 0)
             {
-                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value++;
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value++;
             }
 
         }
@@ -1464,7 +1464,7 @@ public class UserInfoTable
 
         userInfo2Param.Add(UserInfoTable_2.eventMission1AttendCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventMission1AttendCount].Value);
         userInfo2Param.Add(UserInfoTable_2.commonAttend2Count, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.commonAttend2Count].Value);
-        userInfo2Param.Add(UserInfoTable_2.eventAttendCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventAttendCount].Value);
+        userInfo2Param.Add(UserInfoTable_2.eventMission2AttendCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventMission2AttendCount].Value);
 
         if (monthChanged)
         {
@@ -1635,6 +1635,9 @@ public class UserInfoTable
         {
             ServerData.goodsTable.GetTableData(GoodsTable.SealWeaponClear).Value += GameBalance.SealSwordTicketDailyGetAmount;
         }
+        
+        ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += GameBalance.GachaTicketDailyGetAmount;
+        
 
         //도술
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulStart].Value != 0)
@@ -1672,6 +1675,7 @@ public class UserInfoTable
         goodsParam.Add(GoodsTable.SuhoPetFeedClear, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value);
         goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
         goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
+        goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
         // List<Item_Type> itemTypes=new List<Item_Type>();
         // for (int i = 0; i < rewardData.Length; i++)
         // {
@@ -1837,7 +1841,7 @@ public class UserInfoTable
     public bool CanSpawnSnowManItem()
     {
         //targetDate가 am 00시 기준이므로 AddDays해야함
-        DateTime targetDate = new DateTime(2023, 10, 18);
+        DateTime targetDate = new DateTime(2024, 1, 17);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

@@ -27,7 +27,7 @@ public class UiSAAttend : MonoBehaviour
 
     private void Subscribe()
     {
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).AsObservable().Subscribe(e =>
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).AsObservable().Subscribe(e =>
         {
             day.SetText($"출석일 : {(int)e}일");
         });

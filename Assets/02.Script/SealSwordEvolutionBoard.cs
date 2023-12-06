@@ -32,11 +32,14 @@ public class SealSwordEvolutionBoard : MonoBehaviour
     private List<RegisteredSealSwordEvolutionView> registeredContainer = new List<RegisteredSealSwordEvolutionView>();
 
     private ReactiveProperty<float> exp = new ReactiveProperty<float>(0f);
+
+    private int currentIdx = 0;
+    [SerializeField]
+    private GameObject applyObject;
+    
     // Start is called before the first frame update
     private void Start()
     {
-        Initialize();
-        
         Subscribe();
     }
 
@@ -55,38 +58,48 @@ public class SealSwordEvolutionBoard : MonoBehaviour
     {
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).AsObservable().Subscribe(e =>
         {
-            sealSwordEvolutionGradeText.SetText($"요도 각성 {e+1} 단계");
-            UpdateUi();
+            UpdateUi((int)e);
 
         }).AddTo(this);
 
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionExp).AsObservable()
             .Subscribe(e =>
             {
-                UpdateUi();
+                UpdateUi((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).Value);
             }).AddTo(this);
 
         exp.AsObservable().Subscribe(e =>
         {
             sealSwordEvolutionButton.interactable = IsUpgradable();
             
-            UpdateUi();
+            UpdateUi((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).Value);
         }).AddTo(this);
     }
 
     private void Initialize()
     {
+        currentIdx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).Value;
+        
         var data = TableManager.Instance.sealSwordTable.dataArray[28];
         
+        UpdateUi((int)currentIdx);
+
         mainSealSwordEvolutionView.Initialize(data);
 
         CreateCells();
         
     }
 
-    private void UpdateUi()
+    private void UpdateUi(int idx)
     {
-        UpdateAbilityText();
+        
+        applyObject.SetActive(currentIdx == (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).Value);
+        
+        
+        sealSwordEvolutionGradeText.SetText($"요도 각성 {idx+1} 단계");
+        
+        UpdateAbilityText(idx);
+        
         UpdateGaugeText();
         
         registeredDesc.SetActive(registCount<1);
@@ -100,10 +113,10 @@ public class SealSwordEvolutionBoard : MonoBehaviour
         exp.Value = 0;
         registCount = 0;
     }
-    private void UpdateAbilityText()
+    private void UpdateAbilityText(int idx)
     {
-        var abil0 = PlayerStats.SealSwordEvolutionAbility(StatusType.SuperCritical26DamPer);
-        var abil1 = PlayerStats.SealSwordEvolutionAbility(StatusType.ReduceSealSwordSkillRequireCount);
+        var abil0 = PlayerStats.GetSealSwordEvolutionAbilityByIdx(StatusType.SuperCritical26DamPer,idx);
+        var abil1 = PlayerStats.GetSealSwordEvolutionAbilityByIdx(StatusType.ReduceSealSwordSkillRequireCount,idx);
 
         string desc = "";
         if (abil0 > 0)
@@ -506,8 +519,33 @@ public class SealSwordEvolutionBoard : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("레벨업");
             CreateCells();
             SetExp();
-            UpdateUi();
+            UpdateUi((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sealSwordEvolutionIdx).Value);
             isEvolution = false;
         });
+    }
+
+    public void OnClickLeftButton()
+    {
+        if (currentIdx < 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("최초 단계입니다!");
+            return;
+        }
+        currentIdx--;
+        
+        UpdateUi(currentIdx);
+
+    }
+    public void OnClickRightButton()
+    {
+        if (currentIdx >=TableManager.Instance.SealSwordEvolution.dataArray.Length-1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("마지막 단계입니다!");
+            return;
+        }
+        currentIdx++;
+        
+        UpdateUi(currentIdx);
+
     }
 }

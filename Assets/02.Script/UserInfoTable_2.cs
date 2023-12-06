@@ -40,7 +40,7 @@ public class UserInfoTable_2
     public const string commonAttend2Count = "cac1";
     public const string yorinAttendRewarded = "yar";
     public const string eventAttendRewarded = "sar";
-    public const string eventAttendCount = "sac";
+    public const string eventMission2AttendCount = "sac"; // eventmission2Attend
     
     public const string killCountTotalSeason0 = "ks0"; //혹서기 훈련
     
@@ -58,6 +58,7 @@ public class UserInfoTable_2
     public const string gyungRockTower3 = "grt3";
     public const string gyungRockTower4 = "grt4";
     public const string gyungRockTower5 = "grt5";
+    public const string gyungRockTower6 = "grt6";
     public const string graduateSeolEvent = "gse";
     public const string hyunsangTowerScore = "hts";
     
@@ -126,6 +127,12 @@ public class UserInfoTable_2
 
     public const string byeolhoLevelIdx = "bhli";
     public const string byeolhoTowerRewardIndex = "bhtri"; //명상 타워 보상 단계
+    
+    public const string battleContestGradeLevel = "bcgl"; //비무 승급
+    public const string foxMaskGraduate = "fmg"; //요괴탈
+    public const string susanoGraduate = "sg"; //악귀퇴치
+    public const string gradeTestGraduate = "gtg"; //사냥꾼시험
+    public const string relicTestGraduate = "rtg"; //요괴탈
 
 
     
@@ -141,7 +148,7 @@ public class UserInfoTable_2
         { commonAttend2Count, 0f },
         { yorinAttendRewarded, 0f },
         { eventAttendRewarded, 0f },
-        { eventAttendCount, 0f },
+        { eventMission2AttendCount, 0f },
         
         { monkeyGodScore, 0f },
         { swordGodScore, 0f },
@@ -172,6 +179,7 @@ public class UserInfoTable_2
         { gyungRockTower3, 0f },
         { gyungRockTower4, 0f },
         { gyungRockTower5, 0f },
+        { gyungRockTower6, 0f },
         { hyunsangTowerScore, 0f },
         { graduateSeolEvent, 0f },
         { towerFloorAdjust, 0f },
@@ -227,6 +235,11 @@ public class UserInfoTable_2
         
         { byeolhoLevelIdx, -1f },
         { byeolhoTowerRewardIndex, -1f },
+        { battleContestGradeLevel, -1f },
+        { foxMaskGraduate, 0f },
+        { susanoGraduate, 0f },
+        { gradeTestGraduate, 0f },
+        { relicTestGraduate, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

@@ -30,6 +30,8 @@ public class EtcServerTable
     public const string GuideMissionClear = "GMC";
     public const string AdReward = "AdReward";
     public const string battleWinScore = "bws";
+    public const string gachaEventReward = "ger";
+    public const string blueGangChulUnlock = "bgu";
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
@@ -51,6 +53,8 @@ public class EtcServerTable
         {GuideMissionClear,new ReactiveProperty<string>(string.Empty)},
         {AdReward,new ReactiveProperty<string>(string.Empty)},
         {battleWinScore,new ReactiveProperty<string>("#0#0#0#0#0")},
+        {gachaEventReward,new ReactiveProperty<string>(string.Empty)},
+        {blueGangChulUnlock,new ReactiveProperty<string>(string.Empty)},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -97,6 +101,22 @@ public class EtcServerTable
         var rewards = tableDatas[GuideMissionClear].Value.Split(BossServerTable.rewardSplit).ToList();
 
         return rewards.Contains(stageId.ToString());
+    }
+    public bool GachaEventRewarded(int id)
+    {
+        var rewards = tableDatas[gachaEventReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
+    public List<int> GetGachaEventRewardedList()
+    {
+        var rewards = tableDatas[gachaEventReward].Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
     }
 
     public List<int> GetYoguiSoguilRewardedList()
@@ -198,6 +218,12 @@ public class EtcServerTable
     public bool IosCouponRewarded(float id)
     {
         var rewards = tableDatas[iosCoupon].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
+    public bool IsBlueGangChulUnlocked(float id)
+    {
+        var rewards = tableDatas[blueGangChulUnlock].Value.Split(BossServerTable.rewardSplit).ToList();
 
         return rewards.Contains(id.ToString());
     }

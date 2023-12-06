@@ -214,7 +214,11 @@ public static class Utils
                type == Item_Type.costume175||
                type == Item_Type.costume176||
                type == Item_Type.costume177||
-               type == Item_Type.costume178
+               type == Item_Type.costume178||
+               type == Item_Type.costume179||
+               type == Item_Type.costume180||
+               type == Item_Type.costume181||
+               type == Item_Type.costume182
             ;
     }
 
@@ -241,7 +245,8 @@ public static class Utils
                type == Item_Type.MonthNorigae10||
                type == Item_Type.MonthNorigae11||
                type == Item_Type.magicBook117||
-               type == Item_Type.magicBook116
+               type == Item_Type.magicBook116||
+               type == Item_Type.magicBook120
             ;
     }
 
@@ -250,7 +255,8 @@ public static class Utils
         return type == Item_Type.weapon81 ||
                type == Item_Type.weapon90||
                type == Item_Type.weapon131||
-               type == Item_Type.weapon146
+               type == Item_Type.weapon146||
+               type == Item_Type.weapon149
             ;
     }
     public static bool IsPassPetItem(this Item_Type type)
@@ -457,7 +463,9 @@ public static class Utils
                type == Item_Type.MonthNorigae11 ||
                type == Item_Type.magicBook116 ||
                type == Item_Type.magicBook117 ||
+               type == Item_Type.magicBook120 ||
                type == Item_Type.weapon146 ||
+               type == Item_Type.weapon149 ||
                type == Item_Type.DokebiHorn0 ||
                type == Item_Type.DokebiHorn1 ||
                type == Item_Type.DokebiHorn2 ||
@@ -532,9 +540,13 @@ public static class Utils
                type == Item_Type.DosulClear ||
                type == Item_Type.BlackFoxGoods ||
                type == Item_Type.BlackFoxClear ||
+               type == Item_Type.TaeguekGoods ||
+               type == Item_Type.TaeguekElixir ||
+               type == Item_Type.YoPowerGoods ||
                type == Item_Type.ByeolhoGoods ||
                type == Item_Type.ByeolhoClear ||
                type == Item_Type.GuildTowerHorn||
+               type == Item_Type.BattleClear||
                type == Item_Type.GuimoonRelic||
                type == Item_Type.GuimoonRelicClearTicket
             ;
@@ -829,7 +841,7 @@ public static class Utils
     private static string[] goldUnitArr = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","미정11","미정12","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","미정13","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
         
     };
 

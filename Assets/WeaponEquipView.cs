@@ -27,7 +27,6 @@ public class WeaponEquipView : MonoBehaviour
     private void Subscribe()
     {
         ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].AsObservable().Subscribe(WhenEquipIdxChanged).AddTo(this);
-
     }
 
     private void WhenEquipIdxChanged(int idx)
@@ -37,8 +36,10 @@ public class WeaponEquipView : MonoBehaviour
         weaponImage_Bu.sprite = CommonResourceContainer.GetWeaponSprite(idx);
 
         weaponImage.gameObject.SetActive(idx < 21);
-        weaponImage_long.gameObject.SetActive((idx >= 21 && idx < 37) || idx >= 42);
-        weaponImage_Bu.gameObject.SetActive(idx >= 37 && idx <= 41);
+        
+        //147->부적
+        weaponImage_long.gameObject.SetActive((idx >= 21 && idx < 37) || (idx >= 42 && idx != 147));
+        weaponImage_Bu.gameObject.SetActive((idx >= 37 && idx <= 41) || idx == 147);
         //weaponImage_long.gameObject.SetActive(idx >= 42);
 
         newEffect.gameObject.SetActive(idx == 22);
@@ -50,7 +51,5 @@ public class WeaponEquipView : MonoBehaviour
 
     private void OnDisable()
     {
-
     }
-
 }

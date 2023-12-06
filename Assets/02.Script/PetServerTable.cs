@@ -125,7 +125,10 @@ public class PetServerTable
 
         if (grade < 0)
             return 0f;
-        
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.susanoGraduate).Value > 0)
+        {
+            return  TableManager.Instance.susanoTable.dataArray[grade].Zibaeupvalue*GameBalance.susanoGraduateValue;
+        }
         return  TableManager.Instance.susanoTable.dataArray[grade].Zibaeupvalue;
     }
 

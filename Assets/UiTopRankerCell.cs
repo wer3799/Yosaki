@@ -80,6 +80,10 @@ public class UiTopRankerCell : MonoBehaviour
     [SerializeField]
     private Image suhoAnimal;
 
+    [SerializeField]
+    private Image guildIcon;
+
+    
     public void UpdatePartyRaidScore(double topRankerScore = 0, bool fightEnd = false, bool retireGame = false)
     {
         if (topRankerScoreText != null)
@@ -111,7 +115,7 @@ public class UiTopRankerCell : MonoBehaviour
         }
     }
 
-    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx, int suhoAnimal)
+    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx, int suhoAnimal,int guildIcon)
     {
         this.recNickName = nickName;
         this.nickName.SetText(nickName);
@@ -126,6 +130,17 @@ public class UiTopRankerCell : MonoBehaviour
             if (suhoAnimal != -1)
             {
                 this.suhoAnimal.sprite = CommonResourceContainer.GetSuhoAnimalSprite(suhoAnimal);
+            }
+        }   
+        
+        if (this.guildIcon != null)
+        {
+            //0번도 그냥 안보여줌
+            this.guildIcon.enabled = guildIcon != -1 && guildIcon != 0;
+            
+            if (guildIcon != -1  && guildIcon != 0)
+            {
+                this.guildIcon.sprite =CommonUiContainer.Instance.guildIcon[guildIcon];
             }
         }
 

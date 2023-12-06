@@ -940,7 +940,12 @@ public class TableManager : SingletonMono<TableManager>
     public BattleContestTable BattleContestTable;
 
     public BattleContestSpecialExchange BattleContestSpecialExchange;
-
+    public TowerTable13 gyungRockTowerTable6;
+    public BattleContestGrade BattleContestGrade;
+    public TransUpgrade TransUpgrade;
+    public GachaEvent GachaEvent;
+    public BlueGangCheol BlueGangCheol;
+    
 }
 
 

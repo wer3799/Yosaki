@@ -127,7 +127,6 @@ public class UiMileageRefund : MonoBehaviour
         
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            Debug.LogError("수박(봄나물)이벤트 교환 횟수 초기화!!");
         });
     }
 
@@ -168,7 +167,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                //Debug.LogError("이벤트 교환 횟수 초기화!!");
             });
         }
 
@@ -209,7 +207,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                //Debug.LogError("2주년 핫타임 이벤트 교환 횟수 초기화!!");
             });
         }
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 3)
@@ -245,7 +242,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                //Debug.LogError("송편 재화 초기화");
             });
         }
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 4)
@@ -266,7 +262,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("대산 보상 초기화");
             });
 
         }
@@ -289,7 +284,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("대산 비교용 최고 점수 초기화");
             });
 
         }
@@ -318,7 +312,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("송편 교환 횟수 초기화!!");
             });
         }
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 7)
@@ -356,7 +349,6 @@ public class UiMileageRefund : MonoBehaviour
             
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("복날 / 신년 /7일  출석 초기화");
             });
         }
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 8)
@@ -422,7 +414,6 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("미니게임 보상 초기화");
 
             });
         }
@@ -458,7 +449,7 @@ public class UiMileageRefund : MonoBehaviour
             ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
             
             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value = 0;
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value = 0;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value = 0;
             
             
             ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = string.Empty;
@@ -529,7 +520,7 @@ public class UiMileageRefund : MonoBehaviour
             
             Param userInfo2Param = new Param();
             userInfo2Param.Add(UserInfoTable_2.eventAttendRewarded, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value);
-            userInfo2Param.Add(UserInfoTable_2.eventAttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value);
+            userInfo2Param.Add(UserInfoTable_2.eventMission2AttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value);
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
             
             Param eventParam = new Param();
@@ -548,7 +539,6 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("추석미션 및 재화 초기화");
 
             });
         }
@@ -652,7 +642,6 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("할로윈미션 및 재화 초기화");
 
             });
         }
@@ -677,7 +666,6 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("할로윈미션 및 재화 초기화");
 
             });
         }
@@ -730,14 +718,10 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("핫타임 재화 초기화");
 
             });
         }
 
-        #endregion
-
-     
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 30)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 30;
@@ -806,12 +790,118 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                Debug.LogError("겨울훈련 패스 초기화 / 소급");
                 if (refundMessage.IsNullOrEmpty()==false)
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,refundMessage,null);
                 }
 
+            });
+        }
+        #endregion
+
+     
+      
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 35)
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 35;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value = 0;
+            
+            
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value = 1;
+
+            
+            ServerData.eventMissionTable.TableDatas["Mission1"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission2"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission3"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission1"].rewardCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission2"].rewardCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission3"].rewardCount.Value = 0;
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_9).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_10).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_11).Value = 0;
+            
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan_All).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.GT).Value = GameBalance.GachaTicketDailyGetAmount;
+
+           ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value="-1";
+           ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value="-1";
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            
+            Param userInfoParam = new Param();
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_9).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_10, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_10).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_11, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_11).Value);
+            
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_0, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_0).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_1, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_1).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_2, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_2).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_3, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_3).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_4, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_4).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_5, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_5).Value);
+            
+            userInfoParam.Add(UserInfoTable.usedSnowManCollectionCount, ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            Param userInfo2Param = new Param();
+            userInfo2Param.Add(UserInfoTable_2.eventMission2AttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+            
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+            goodsParam.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
+            goodsParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
+            goodsParam.Add(GoodsTable.Event_Item_SnowMan_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan_All).Value);
+            goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            //미션 초기화
+            Param eventParam = new Param();
+            eventParam.Add("Mission1", ServerData.eventMissionTable.TableDatas["Mission1"].ConvertToString());
+            eventParam.Add("Mission2", ServerData.eventMissionTable.TableDatas["Mission2"].ConvertToString());
+            eventParam.Add("Mission3", ServerData.eventMissionTable.TableDatas["Mission3"].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventParam));
+            
+            
+            Param passParam = new Param();
+            passParam.Add(OneYearPassServerTable.childFree_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value);
+            passParam.Add(OneYearPassServerTable.childAd_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value);
+
+            transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+        
             });
         }
         
@@ -825,10 +915,10 @@ public class UiMileageRefund : MonoBehaviour
             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value = 1;
             ServerData.userInfoTable_2.UpData(UserInfoTable_2.eventMission1AttendCount, false);
         }
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value == 0)
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value == 0)
         {
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value = 1;
-            ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.eventAttendCount, false);
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value = 1;
+            ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.eventMission2AttendCount, false);
         }
         if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttend2Count).Value == 0)
         {
@@ -982,7 +1072,6 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                Debug.LogError("출석 초기화 완료");
             });
         }
         //꽃송이
@@ -1363,8 +1452,6 @@ public class UiMileageRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            Debug.LogError(
-                $"Lv : {ServerData.userInfoTable.GetTableData(UserInfoTable.titleLevel).Value} / Stage : {ServerData.userInfoTable.GetTableData(UserInfoTable.titleStage).Value}");
         });
     }    
     private void TitleRefundRoutine2()
@@ -1426,8 +1513,7 @@ public class UiMileageRefund : MonoBehaviour
 
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            Debug.LogError(
-                $"Weapon : {ServerData.userInfoTable.GetTableData(UserInfoTable.titleWeapon).Value} ");
+
         });
     }
     
@@ -1472,8 +1558,7 @@ public class UiMileageRefund : MonoBehaviour
         
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            Debug.LogError($"요괴도장 : {ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx).Value}\n" +
-                           $"상급 요괴도장 : {ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx2).Value}");
+
         });
     }
     
@@ -1535,8 +1620,7 @@ public class UiMileageRefund : MonoBehaviour
         
         ServerData.SendTransaction(transactions, successCallBack: () =>
         {
-            Debug.LogError($" stageFree : {ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.stagePassFree).Value}" +
-                           $"stageAd : {ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.stagePassAd).Value}");
+
         });
     }
     private void ChunmaDokebiFireRefundRoutine()
@@ -1566,7 +1650,6 @@ public class UiMileageRefund : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             ServerData.SendTransaction(transactions, successCallBack: () =>
             {
-                Debug.LogError("소급 없음");
             });
         }
         else

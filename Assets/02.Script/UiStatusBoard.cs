@@ -86,7 +86,7 @@ public class UiStatusBoard : MonoBehaviour
         int petId = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
         int weaponId = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
         int magicBookId = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
-        topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value, string.Empty, ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value, ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value,ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value);
+        topRankerCell.Initialize(string.Empty, string.Empty, costumeId, petId, weaponId, magicBookId, ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value, string.Empty, ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value, ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value,ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value,-1);
     }
 
     public void OnClickStatResetButton()

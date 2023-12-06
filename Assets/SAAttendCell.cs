@@ -99,7 +99,7 @@ public class SAAttendCell : MonoBehaviour
 
     private bool CanGetReward()
     {
-        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value >= tableData.Unlockday;
+        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value >= tableData.Unlockday;
     }
 
     private bool IsBeforeRewarded()

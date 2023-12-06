@@ -1182,6 +1182,10 @@ public class OneYearPassServerTable
     public static string event1AttendFree = "cef0";
     public static string event1AttendAd = "cea0";
     
+    //2023 크리스마스 패스
+    public static string event2AttendFree = "cef2";
+    public static string event2AttendAd = "cea2";
+    
     //2023 보름달패스
     public static string event3AttendFree = "cef1";
     public static string event3AttendAd = "cea1";
@@ -1190,10 +1194,12 @@ public class OneYearPassServerTable
     {
         { childFree,string.Empty},
         { childAd,string.Empty},
-        { childFree_Snow,string.Empty},
-        { childAd_Snow,string.Empty},
+        { childFree_Snow,"-1"},
+        { childAd_Snow,"-1"},
         { event1AttendFree,string.Empty},
         { event1AttendAd,string.Empty},
+        { event2AttendFree,"-1"},
+        { event2AttendAd,"-1"},
         { event3AttendFree,string.Empty},
         { event3AttendAd,string.Empty},
     };
