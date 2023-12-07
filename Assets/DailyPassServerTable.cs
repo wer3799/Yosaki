@@ -18,8 +18,8 @@ public class DailyPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { DailypassFreeReward,string.Empty},
-        { DailypassAdReward,string.Empty}
+        { DailypassFreeReward, string.Empty },
+        { DailypassAdReward, string.Empty }
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -73,7 +73,6 @@ public class DailyPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -128,7 +127,6 @@ public class DailyPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
@@ -141,19 +139,20 @@ public class MonthlyPassServerTable
 
 
     public static string MonthlypassFreeReward = "f";
+
     public static string MonthlypassAdReward = "a";
-   // public static string MonthlypassNewReward = "n10";
+    // public static string MonthlypassNewReward = "n10";
 
     //public static string MonthlypassAttendFreeReward = "af11";
     //public static string MonthlypassAttendAdReward = "aa11";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { MonthlypassFreeReward,"-1"},
-        { MonthlypassAdReward,"-1"},
-       // { MonthlypassNewReward,string.Empty},
-       //{ MonthlypassAttendFreeReward,string.Empty},
-       // { MonthlypassAttendAdReward,string.Empty}
+        { MonthlypassFreeReward, "-1" },
+        { MonthlypassAdReward, "-1" },
+        // { MonthlypassNewReward,string.Empty},
+        //{ MonthlypassAttendFreeReward,string.Empty},
+        // { MonthlypassAttendAdReward,string.Empty}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -252,12 +251,11 @@ public class MonthlyPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
-
 }
+
 //
 public class MonthlyPassServerTable2
 {
@@ -273,15 +271,16 @@ public class MonthlyPassServerTable2
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { MonthlypassFreeReward,"-1"},
-        { MonthlypassAdReward,"-1"},
-        { MonthlypassAttendFreeReward,"-1"},
-        { MonthlypassAttendAdReward,"-1"}
+        { MonthlypassFreeReward, "-1" },
+        { MonthlypassAdReward, "-1" },
+        { MonthlypassAttendFreeReward, "-1" },
+        { MonthlypassAttendAdReward, "-1" }
     };
-    
+
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
     public ReactiveDictionary<string, ReactiveProperty<string>> TableDatas => tableDatas;
+
     private void LoadTable(bool isOddMonthlypass = false)
     {
         // var datas= TableManager.Instance.InAppPurchase.dataArray;
@@ -340,6 +339,7 @@ public class MonthlyPassServerTable2
         // tableSchema.Add(MonthlypassAttendFreeReward,string.Empty);
         // tableSchema.Add(MonthlypassAttendAdReward,string.Empty);
     }
+
     public void Initialize()
     {
         //LoadTable(ServerData.userInfoTable.IsMonthlyPass2());
@@ -379,7 +379,6 @@ public class MonthlyPassServerTable2
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -434,11 +433,9 @@ public class MonthlyPassServerTable2
                         return;
                     }
                 }
-
             }
         });
     }
-
 }
 
 public class SeolPassServerTable
@@ -448,10 +445,10 @@ public class SeolPassServerTable
 
 
     public static string MonthlypassFreeReward = "free";
-    public static string MonthlypassAdReward = "ad";  
+    public static string MonthlypassAdReward = "ad";
     public static string MonthlypassFreeReward_dol = "free_d";
     public static string MonthlypassAdReward_dol = "ad_d";
-    
+
     public static string PetPassFree = "p_free0";
     public static string PetPassAd = "p_ad0";
     public static string PetPassFree_1 = "p_free1";
@@ -461,16 +458,16 @@ public class SeolPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { MonthlypassFreeReward,string.Empty},
-        { MonthlypassAdReward,string.Empty},
-        { MonthlypassFreeReward_dol,string.Empty},
-        { MonthlypassAdReward_dol,string.Empty},
-        { PetPassFree,"-1"},
-        { PetPassAd,"-1"},
-        { PetPassFree_1,"-1"},
-        { PetPassAd_1,"-1"},
-        { PetPassFree_2,"-1"},
-        { PetPassAd_2,"-1"}
+        { MonthlypassFreeReward, string.Empty },
+        { MonthlypassAdReward, string.Empty },
+        { MonthlypassFreeReward_dol, string.Empty },
+        { MonthlypassAdReward_dol, string.Empty },
+        { PetPassFree, "-1" },
+        { PetPassAd, "-1" },
+        { PetPassFree_1, "-1" },
+        { PetPassAd_1, "-1" },
+        { PetPassFree_2, "-1" },
+        { PetPassAd_2, "-1" }
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -514,7 +511,6 @@ public class SeolPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -569,11 +565,9 @@ public class SeolPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
-
 }
 
 
@@ -588,8 +582,8 @@ public class SulPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { MonthlypassFreeReward,string.Empty},
-        { MonthlypassAdReward,string.Empty}
+        { MonthlypassFreeReward, string.Empty },
+        { MonthlypassAdReward, string.Empty }
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -633,7 +627,6 @@ public class SulPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -688,11 +681,9 @@ public class SulPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
-
 }
 
 public class ChildPassServerTable
@@ -709,10 +700,10 @@ public class ChildPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { childFree,string.Empty},
-        { childAd,string.Empty},
-        { childFree_Atten,string.Empty},
-        { childAd_Atten,string.Empty}
+        { childFree, "-1" },
+        { childAd, "-1" },
+        { childFree_Atten, string.Empty },
+        { childAd_Atten, string.Empty }
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -756,7 +747,6 @@ public class ChildPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -789,6 +779,12 @@ public class ChildPassServerTable
                         {
                             //값로드
                             var value = data[e.Current.Key][ServerData.format_string].ToString();
+
+                            if (string.IsNullOrEmpty(value) && (e.Current.Key == childFree || e.Current.Key == childAd))
+                            {
+                                value = "-1";
+                            }
+
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
                         }
                         //새로운값
@@ -811,12 +807,11 @@ public class ChildPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
-
 }
+
 //
 public class ColdSeasonPassServerTable
 {
@@ -848,13 +843,13 @@ public class ColdSeasonPassServerTable
 
     public static string secondAccumul = "f14";
     public static string secondTop = "a14";
-    
+
     public static string soulFree = "f15";
     public static string soulAd = "a15";
-    
+
     public static string peachFree = "f16";
     public static string peachAd = "a16";
-    
+
     public static string meditationFree = "f17";
     public static string meditationAd = "a17";
 
@@ -863,7 +858,7 @@ public class ColdSeasonPassServerTable
 
     public static string blackFoxFree = "f19";
     public static string blackFoxAd = "a19";
-    
+
     public static string dosulLevelFree = "f20";
     public static string dosulLevelAd = "a20";
 
@@ -871,42 +866,41 @@ public class ColdSeasonPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { coldseasonFree,string.Empty},
-        { coldseasonAd,string.Empty},
-        { coldseasonFree_Atten,string.Empty},
-        { seasonFree,string.Empty},
-        { seasonAd,string.Empty},
-        { suhoFree,string.Empty},
-        { suhoAd,string.Empty},
-        { foxfireFree,string.Empty},
-        { foxfireAd,string.Empty},
-        { sealSwordFree,string.Empty},
-        { sealSwordAd,string.Empty},
-        { gangChulFree,string.Empty},
-        { gangChuldAd,string.Empty},
-        { SoulForestFree,string.Empty},
-        { SoulForestdAd,string.Empty},
-        { SwordFree,string.Empty},
-        { SwordAd,string.Empty},
-        { dosulFree,string.Empty},
-        { dosulAd,string.Empty},
-        { guimoonFree,string.Empty},
-        { guimoonAd,string.Empty},
-        { secondAccumul,string.Empty},
-        { secondTop,string.Empty},
-        { soulFree,string.Empty},
-        { soulAd,string.Empty},
-        { peachFree,string.Empty},
-        { peachAd,string.Empty},
-        { meditationFree,string.Empty},
-        { meditationAd,string.Empty},
-        { sealswordEvolutionFree,string.Empty},
-        { sealswordEvolutionAd,string.Empty},
-        { blackFoxFree,"-1"},
-        { blackFoxAd,"-1"},
-        { dosulLevelFree,"-1"},
-        { dosulLevelAd,"-1"},
-
+        { coldseasonFree, string.Empty },
+        { coldseasonAd, string.Empty },
+        { coldseasonFree_Atten, string.Empty },
+        { seasonFree, string.Empty },
+        { seasonAd, string.Empty },
+        { suhoFree, string.Empty },
+        { suhoAd, string.Empty },
+        { foxfireFree, string.Empty },
+        { foxfireAd, string.Empty },
+        { sealSwordFree, string.Empty },
+        { sealSwordAd, string.Empty },
+        { gangChulFree, string.Empty },
+        { gangChuldAd, string.Empty },
+        { SoulForestFree, string.Empty },
+        { SoulForestdAd, string.Empty },
+        { SwordFree, string.Empty },
+        { SwordAd, string.Empty },
+        { dosulFree, string.Empty },
+        { dosulAd, string.Empty },
+        { guimoonFree, string.Empty },
+        { guimoonAd, string.Empty },
+        { secondAccumul, string.Empty },
+        { secondTop, string.Empty },
+        { soulFree, string.Empty },
+        { soulAd, string.Empty },
+        { peachFree, string.Empty },
+        { peachAd, string.Empty },
+        { meditationFree, string.Empty },
+        { meditationAd, string.Empty },
+        { sealswordEvolutionFree, string.Empty },
+        { sealswordEvolutionAd, string.Empty },
+        { blackFoxFree, "-1" },
+        { blackFoxAd, "-1" },
+        { dosulLevelFree, "-1" },
+        { dosulLevelAd, "-1" },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -950,7 +944,6 @@ public class ColdSeasonPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -1005,11 +998,9 @@ public class ColdSeasonPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
-
 }
 //
 
@@ -1027,11 +1018,11 @@ public class BokPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { childFree,string.Empty},
-        { childAd,string.Empty},
+        { childFree, string.Empty },
+        { childAd, string.Empty },
 
-        { springFree,string.Empty},
-        { springAd,string.Empty}
+        { springFree, string.Empty },
+        { springAd, string.Empty }
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -1075,7 +1066,6 @@ public class BokPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -1130,7 +1120,6 @@ public class BokPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
@@ -1162,8 +1151,8 @@ public class BokPassServerTable
         return true;
     }
     //
-
 }
+
 public class OneYearPassServerTable
 {
     public static string Indate;
@@ -1177,31 +1166,31 @@ public class OneYearPassServerTable
     //2023 송편패스
     public static string childFree_Snow = "fs1";
     public static string childAd_Snow = "as1";
-    
+
     //2023 바캉스패스 -> 할로윈 패스?
     public static string event1AttendFree = "cef0";
     public static string event1AttendAd = "cea0";
-    
+
     //2023 크리스마스 패스
     public static string event2AttendFree = "cef2";
     public static string event2AttendAd = "cea2";
-    
+
     //2023 보름달패스
     public static string event3AttendFree = "cef1";
     public static string event3AttendAd = "cea1";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { childFree,string.Empty},
-        { childAd,string.Empty},
-        { childFree_Snow,"-1"},
-        { childAd_Snow,"-1"},
-        { event1AttendFree,string.Empty},
-        { event1AttendAd,string.Empty},
-        { event2AttendFree,"-1"},
-        { event2AttendAd,"-1"},
-        { event3AttendFree,string.Empty},
-        { event3AttendAd,string.Empty},
+        { childFree, string.Empty },
+        { childAd, string.Empty },
+        { childFree_Snow, "-1" },
+        { childAd_Snow, "-1" },
+        { event1AttendFree, string.Empty },
+        { event1AttendAd, string.Empty },
+        { event2AttendFree, "-1" },
+        { event2AttendAd, "-1" },
+        { event3AttendFree, string.Empty },
+        { event3AttendAd, string.Empty },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -1245,7 +1234,6 @@ public class OneYearPassServerTable
                 }
                 else
                 {
-
                     var jsonData = bro.GetReturnValuetoJSON();
                     if (jsonData.Keys.Count > 0)
                     {
@@ -1300,9 +1288,7 @@ public class OneYearPassServerTable
                         return;
                     }
                 }
-
             }
         });
     }
-
 }

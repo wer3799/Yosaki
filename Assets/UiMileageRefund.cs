@@ -31,12 +31,9 @@ public class UiMileageRefund : MonoBehaviour
         RelocateLevelPass();
         TowerFloorAdjust();
         
-        InitializeEvent();
-        InitializeCollectionEvent();
         ShopItemRefundRoutine();
-        InitializeTrainingEvent();
         
-        CommonAttendEventStart();
+        InitializeEvent();
         #if UNITY_EDITOR
         CheckServerTime();
         #endif
@@ -51,83 +48,6 @@ public class UiMileageRefund : MonoBehaviour
             var time = ServerData.userInfoTable.currentServerTime; 
             Debug.LogError("현재 서버 시간 : "+time.ToLongDateString()+ " " + time.ToLongTimeString());   
         }
-    }
-    //7월 28일 업데이트
-    private void InitializeTrainingEvent()
-    {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.trainingEventInitialize0).Value <1)
-        {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.trainingEventInitialize0).Value = 1;
-            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
-            
-            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = string.Empty;
-            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = string.Empty;
-
-            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value = 0;
-            
-            List<TransactionValue> transactions = new List<TransactionValue>();
-        
-            Param userInfoParam = new Param();
-            userInfoParam.Add(UserInfoTable.trainingEventInitialize0, ServerData.userInfoTable.GetTableData(UserInfoTable.trainingEventInitialize0).Value);
-            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
-
-            Param passParam = new Param();
-            passParam.Add(ChildPassServerTable.childFree,ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
-            passParam.Add(ChildPassServerTable.childAd,ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
-        
-            Param goodsParam = new Param();
-            goodsParam.Add(GoodsTable.Event_HotTime,ServerData.goodsTable.TableDatas[GoodsTable.Event_HotTime].Value);
-            
-            
-            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
-        
-            ServerData.SendTransactionV2(transactions, successCallBack: () =>
-            {
-                Debug.LogError("스노클링 이벤트, 핫타임 재화 초기화!");
-            });
-        }    
-    }
-    private void InitializeCollectionEvent()
-    {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.collectionEventInitialize).Value > 0)
-            return;
-
-        ServerData.userInfoTable.GetTableData(UserInfoTable.collectionEventInitialize).Value = 1;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4).Value = 0;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value = 0;
-
-        ServerData.oneYearPassServerTable.TableDatas["f5"].Value = string.Empty;
-        ServerData.oneYearPassServerTable.TableDatas["a5"].Value = string.Empty;
-        
-        
-        
-        List<TransactionValue> transactions = new List<TransactionValue>();
-        
-        Param userInfoParam = new Param();
-        userInfoParam.Add(UserInfoTable.collectionEventInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.collectionEventInitialize).Value);
-        userInfoParam.Add(UserInfoTable.exchangeCount_0, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0).Value);
-        userInfoParam.Add(UserInfoTable.exchangeCount_1, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1).Value);
-        userInfoParam.Add(UserInfoTable.exchangeCount_2, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2).Value);
-        userInfoParam.Add(UserInfoTable.exchangeCount_3, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3).Value);
-        userInfoParam.Add(UserInfoTable.exchangeCount_4, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4).Value);
-        userInfoParam.Add(UserInfoTable.usedCollectionCount, ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value);
-
-        Param passParam = new Param();
-        passParam.Add(OneYearPassServerTable.childFree,ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value);
-        passParam.Add(OneYearPassServerTable.childAd,ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value);
-        
-        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
-        transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
-        
-        ServerData.SendTransaction(transactions, successCallBack: () =>
-        {
-        });
     }
 
     private void InitializeEvent()
@@ -908,24 +828,6 @@ public class UiMileageRefund : MonoBehaviour
         
     }
     
-    private void CommonAttendEventStart()
-    {
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value == 0)
-        {
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value = 1;
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.eventMission1AttendCount, false);
-        }
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value == 0)
-        {
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value = 1;
-            ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.eventMission2AttendCount, false);
-        }
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttend2Count).Value == 0)
-        {
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.commonAttend2Count).Value = 1;
-            ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.commonAttend2Count, false);
-        }
-    }    
     private void ShopItemRefundRoutine()
     {
         //월간소탕권소급
