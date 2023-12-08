@@ -98,7 +98,7 @@ public class UiHotTimeEventBuyButton : MonoBehaviour
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 
-        ServerData.AddLocalValue(Item_Type.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
+        ServerData.AddLocalValue(Item_Type.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
 
         
         ServerData.iapServerTable.UpData(tableData.Productid);
@@ -113,7 +113,7 @@ public class UiHotTimeEventBuyButton : MonoBehaviour
 
         Param goodsParam = new Param();
 
-        goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+        goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
         
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
