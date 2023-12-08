@@ -496,7 +496,7 @@ public static class GameBalance
     public static ObscuredFloat susanoGraduateValue = 1.1f;
     public static ObscuredFloat gradeTestGraduateValue = 1.1f;
     public static ObscuredFloat relicTestGraduateValue = 1.3f;
-    public static ObscuredDouble foxmaskGraduateScore = 208;
+    public static ObscuredInt foxmaskGraduateScore = 209;
     public static ObscuredDouble susanoGraduateScore = 1E+148;
     public static ObscuredDouble gradeTestGraduateScore = 1E+152;
     public static ObscuredDouble relicTestGraduateScore = 1E+144;

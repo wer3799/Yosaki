@@ -28,7 +28,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     }
     private void Subscribe()
     {
-        ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[UiHotTimeEventBuyButton.seasonPassKey].buyCount.AsObservable().Subscribe(e =>
         {
             descText2.SetText(e > 0 ? "적용중" : "패스권 구매시 적용");
         }).AddTo(this);
@@ -55,7 +55,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     }
     public void OnClickReceiveCostume()
     {
-        if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value < 1)
+        if (Utils.HasHotTimeEventPass()==false)
         {
             PopupManager.Instance.ShowAlarmMessage("패스권이 필요합니다!");
             return;

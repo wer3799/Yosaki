@@ -5795,8 +5795,8 @@ GameObject:
   - component: {fileID: 10013892328593585}
   - component: {fileID: 7339053405763137643}
   - component: {fileID: 8898116610114963105}
+  - component: {fileID: 9174091642103904325}
   - component: {fileID: 3141389392636416820}
-  - component: {fileID: 7342971125543964375}
   m_Layer: 5
   m_Name: StagePassBuyButton
   m_TagString: Untagged
@@ -5907,8 +5907,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7342971125543964375}
-        m_TargetAssemblyTypeName: UiChuseokPassBuyButton, Assembly-CSharp
+      - m_Target: {fileID: 9174091642103904325}
+        m_TargetAssemblyTypeName: UiHotTimeEventBuyButton, Assembly-CSharp
         m_MethodName: OnClickBuyButton
         m_Mode: 1
         m_Arguments:
@@ -5919,6 +5919,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9174091642103904325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6023030210610221199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca7f2dc7f78ea34898c6c08c314b3a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descText: {fileID: 8733611191273614004}
 --- !u!114 &3141389392636416820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5945,19 +5958,6 @@ MonoBehaviour:
     loop: 1
     loopDelay: 0
     updateMode: 0
---- !u!114 &7342971125543964375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6023030210610221199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe9db26afc692248a9b94df7377b0ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  descText: {fileID: 8733611191273614004}
 --- !u!1 &6267741306355520771
 GameObject:
   m_ObjectHideFlags: 0

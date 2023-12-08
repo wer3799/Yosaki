@@ -2808,7 +2808,7 @@ public static class PlayerStats
         if (statusType == StatusType.GoldGainPer)
         {
             ret = GameBalance.HotTimeEvent_Gold;
-            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (Utils.HasHotTimeEventPass())
             {
                 ret += GameBalance.HotTimeEvent_Ad_Gold;
             }
@@ -2816,7 +2816,7 @@ public static class PlayerStats
         else if (statusType == StatusType.ExpGainPer)
         {
             ret = GameBalance.HotTimeEvent_Exp;
-            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (Utils.HasHotTimeEventPass())
             {
                 ret += GameBalance.HotTimeEvent_Ad_Exp;
             }
@@ -2824,7 +2824,7 @@ public static class PlayerStats
         else if (statusType == StatusType.MagicStoneAddPer)
         {
             ret = GameBalance.HotTimeEvent_GrowthStone;
-            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (Utils.HasHotTimeEventPass())
             {
                 ret += GameBalance.HotTimeEvent_Ad_GrowthStone;
             }
@@ -2832,7 +2832,7 @@ public static class PlayerStats
         else if (statusType == StatusType.MarbleAddPer)
         {
             ret = GameBalance.HotTimeEvent_Marble;
-            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (Utils.HasHotTimeEventPass())
             {
                 ret += GameBalance.HotTimeEvent_Ad_Marble;
             }
@@ -2840,7 +2840,7 @@ public static class PlayerStats
         else if (statusType == StatusType.YoPowerGoodsGainPer)
         {
             ret = GameBalance.HotTimeEvent_YoPowerGoods;
-            if (ServerData.iapServerTable.TableDatas[UiChuseokPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            if (Utils.HasHotTimeEventPass())
             {
                 ret += GameBalance.HotTimeEvent_Ad_YoPowerGoods;
             }

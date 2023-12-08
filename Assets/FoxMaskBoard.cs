@@ -60,6 +60,11 @@ public class FoxMaskBoard : MonoBehaviour
             else
             {
                 contentsDesc.SetText($"각성효과로 강화됩니다.\n능력치{GameBalance.foxMaskGraduateValue}배 증가");
+                if ((int)ServerData.userInfoTable.TableDatas[UserInfoTable.foxMask].Value < GameBalance.foxmaskGraduateScore)
+                {
+                    ServerData.userInfoTable.TableDatas[UserInfoTable.foxMask].Value = GameBalance.foxmaskGraduateScore;
+                    ServerData.userInfoTable.UpData(UserInfoTable.foxMask,false);
+                }
             }
         }).AddTo(this);
     }
@@ -150,15 +155,29 @@ public class FoxMaskBoard : MonoBehaviour
         else
         {
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-                $"요괴탈을 각성하려면 {GameBalance.foxmaskGraduateScore + 1}단계 요괴탈을 보유해야 합니다.\n" +
+                $"요괴탈을 각성하려면 {GameBalance.foxmaskGraduateScore}단계 요괴탈을 보유해야 합니다.\n" +
                 $"각성 시 능력치 효과가 {Utils.ConvertNum(GameBalance.foxMaskGraduateValue * 100, 2)}% 강화 됩니다.\n" +
                 $"각성하시겠습니까?", () =>
                 {
+                    ServerData.userInfoTable.TableDatas[UserInfoTable.foxMask].Value=GameBalance.foxmaskGraduateScore;
                     ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.foxMaskGraduate].Value = 1;
+                    
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+            
+                                
+                    Param userinfoParam = new Param();
+                    userinfoParam.Add(UserInfoTable.foxMask,ServerData.userInfoTable.GetTableData(UserInfoTable.foxMask).Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
+                    
+                    Param userinfo2Param = new Param();
+                    userinfo2Param.Add(UserInfoTable_2.foxMaskGraduate,ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.foxMaskGraduate).Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userinfo2Param));
 
-                    ServerData.userInfoTable_2.UpData(UserInfoTable_2.foxMaskGraduate, false);
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
-
+                    ServerData.SendTransactionV2(transactions, successCallBack: () =>
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+                        Initialize();
+                    });
                 }, null);
         }
     }
