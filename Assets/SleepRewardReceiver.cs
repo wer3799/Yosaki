@@ -352,7 +352,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += sleepRewardInfo.hotTimeItem;
             
             //패스 미구매시 저장 재화 추가획득
-            if (Utils.HasHotTimeEventPass())
+            if (Utils.HasHotTimeEventPass()==false)
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
             }
