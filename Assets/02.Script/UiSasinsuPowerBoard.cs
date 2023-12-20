@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BackEnd;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using WebSocketSharp;
 
@@ -23,12 +24,15 @@ public class UiSasinsuPowerBoard : MonoBehaviour
     
     private void Start()
     {
-        Initialize();
+        Subscribe();
     }
 
-    private void Initialize()
+    private void Subscribe()
     {
-        UpdateUi();
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sasinsuAwakeGrade).AsObservable().Subscribe(e =>
+        {
+            UpdateUi();
+        }).AddTo(this);
     }
     public void OnSelectIcon(int idx)
     {
@@ -73,7 +77,7 @@ public class UiSasinsuPowerBoard : MonoBehaviour
         
         if (level < 0)
         {
-            currentAbilityText.SetText($"능력 없음.");
+            currentAbilityText.SetText($"{CommonString.GetStatusName((StatusType)tableData[idx].Abiltype)} 0");
         }
         else
         {
@@ -107,6 +111,11 @@ public class UiSasinsuPowerBoard : MonoBehaviour
             
             sum +=
                 $"{CommonString.GetStatusName((StatusType)tableData[idx].Abiltype)} {Utils.ConvertNum(tableData[idx].Abilvalue[level] * 100)}\n";
+        }
+
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sasinsuAwakeGrade).Value > 0)
+        {
+            sum+= $"<color=yellow>신수 각성 : {CommonString.GetStatusName(StatusType.SuperCritical30DamPer)} {Utils.ConvertNum(PlayerStats.GetSasinsuAwakePowerAbility(StatusType.SuperCritical30DamPer)*100)}";
         }
 
         if (sum.IsNullOrEmpty())
