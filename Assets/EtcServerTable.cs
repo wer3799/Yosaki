@@ -265,7 +265,7 @@ public class EtcServerTable
                     else
                     {
                         defultValues.Add(e.Current.Key, e.Current.Value.Value);
-                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(string.Empty));
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value.Value));
                     }
 
 
