@@ -18,6 +18,8 @@ public class UiSasinsuPowerBoard : MonoBehaviour
 
     [SerializeField] private List<TextMeshProUGUI> levelTexts = new List<TextMeshProUGUI>();
     [SerializeField] private List<GameObject> masks = new List<GameObject>();
+
+    [SerializeField] private TextMeshProUGUI nameText;
     
     private int currentIdx = 0;
 
@@ -99,6 +101,27 @@ public class UiSasinsuPowerBoard : MonoBehaviour
             nextAbilityText.SetText($"{CommonString.GetStatusName((StatusType)tableData[idx].Abiltype)} {Utils.ConvertNum(tableData[idx].Abilvalue[level+1] * 100)}");
             priceText.SetText($"({Utils.ConvertNum(levelData[level+1].Conditionvalue)})");
         }
+
+        string name = string.Empty;
+
+        if (idx == 0)
+        {
+            name = "현무";
+        }
+        else if (idx == 1)
+        {
+            name = "청룡";
+        }
+        else if (idx == 2)
+        {
+            name = "주작";
+        }
+        else if (idx == 3)
+        {
+            name = "백호"; 
+        }
+        
+        nameText.SetText(name);
     }
 
     private void SetAbilityDescription()

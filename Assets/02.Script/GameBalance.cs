@@ -546,7 +546,7 @@ public static class GameBalance
     public static ObscuredInt TwelveBoss_157_RequireTower10 = 6;
 
     
-    public static ObscuredInt addDay = 15;
+    public static ObscuredInt addDay = 0;
     
     public static ObscuredInt dosulUnlockStage = 300;
     public static ObscuredInt dailyDosulClearTicketGetValue = 2;
