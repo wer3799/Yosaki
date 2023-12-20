@@ -730,11 +730,20 @@ public static class ServerData
             case Item_Type.BattleScore:
                 ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += rewardValue;
                 break;  
-            case Item_Type.DragonPalaceTreasure:
+            case Item_Type.DPT:
                 ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value += rewardValue;
                 break;  
             case Item_Type.GT:
                 ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += rewardValue;
+                break;  
+            case Item_Type.WT:
+                ServerData.goodsTable.GetTableData(GoodsTable.WT).Value += rewardValue;
+                break;  
+            case Item_Type.SG:
+                ServerData.goodsTable.GetTableData(GoodsTable.SG).Value += rewardValue;
+                break;  
+            case Item_Type.SC:
+                ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += rewardValue;
                 break;  
             case Item_Type.TransGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += rewardValue;
@@ -1093,6 +1102,9 @@ public static class ServerData
             case Item_Type.costume180:
             case Item_Type.costume181:
             case Item_Type.costume182:
+            case Item_Type.costume183:
+            case Item_Type.costume184:
+            case Item_Type.costume185:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1117,6 +1129,9 @@ public static class ServerData
                 ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.magicBook120:
+                ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                break;
+            case Item_Type.magicBook123:
                 ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet52:
@@ -1379,6 +1394,9 @@ public static class ServerData
             case Item_Type.costume180:
             case Item_Type.costume181:
             case Item_Type.costume182:
+            case Item_Type.costume183:
+            case Item_Type.costume184:
+            case Item_Type.costume185:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -2069,7 +2087,7 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             
-            case Item_Type.DragonPalaceTreasure:
+            case Item_Type.DPT:
                 passParam.Add(GoodsTable.DragonPalaceTreasure,
                     ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -2078,6 +2096,21 @@ public static class ServerData
             case Item_Type.GT:
                 passParam.Add(GoodsTable.GT,
                     ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.WT:
+                passParam.Add(GoodsTable.WT,
+                    ServerData.goodsTable.GetTableData(GoodsTable.WT).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.SG:
+                passParam.Add(GoodsTable.SG,
+                    ServerData.goodsTable.GetTableData(GoodsTable.SG).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.SC:
+                passParam.Add(GoodsTable.SC,
+                    ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             
@@ -2470,7 +2503,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
-            case Item_Type.DragonPalaceTreasure:
+            case Item_Type.DPT:
                 ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value += amount;
                 param.Add(GoodsTable.DragonPalaceTreasure,
                     ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value);
@@ -2480,6 +2513,24 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += amount;
                 param.Add(GoodsTable.GT,
                     ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.WT:
+                ServerData.goodsTable.GetTableData(GoodsTable.WT).Value += amount;
+                param.Add(GoodsTable.WT,
+                    ServerData.goodsTable.GetTableData(GoodsTable.WT).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SG:
+                ServerData.goodsTable.GetTableData(GoodsTable.SG).Value += amount;
+                param.Add(GoodsTable.SG,
+                    ServerData.goodsTable.GetTableData(GoodsTable.SG).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SC:
+                ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += amount;
+                param.Add(GoodsTable.SC,
+                    ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.TransGoods:
@@ -3068,7 +3119,7 @@ public static class ServerData
             case Item_Type.weapon40:
             case Item_Type.weapon41:
             case Item_Type.weapon42:
-            case Item_Type.weapon149:
+            case Item_Type.weapon151:
             {
                 string key = type.ToString();
                 ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
@@ -4697,11 +4748,20 @@ public static class ServerData
                 case Item_Type.BattleScore:
                     ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += amount;
                     break;
-                case Item_Type.DragonPalaceTreasure:
+                case Item_Type.DPT:
                     ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value += amount;
                     break;
                 case Item_Type.GT:
                     ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += amount;
+                    break;
+                case Item_Type.WT:
+                    ServerData.goodsTable.GetTableData(GoodsTable.WT).Value += amount;
+                    break;
+                case Item_Type.SG:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SG).Value += amount;
+                    break;
+                case Item_Type.SC:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += amount;
                     break;
                 case Item_Type.TransGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;

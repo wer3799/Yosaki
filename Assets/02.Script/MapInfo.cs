@@ -157,20 +157,22 @@ public class MapInfo : SingletonMono<MapInfo>
             bool isEnemyEmpty = IsEnemyEmpty();
 
             //문파 추가소환
-            int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+            //int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
 
             //명부 추가소환
-            int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+           // int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 
             //천상계 꽃 추가소환
-            int chunPlusSpawnNum = 0;
+            //int chunPlusSpawnNum = 0;
 
-            if(PlayerStats.IsChunMonsterSpawnAdd())
-            {
-                chunPlusSpawnNum = 5;
-            }
+            // if(PlayerStats.IsChunMonsterSpawnAdd())
+            // {
+            //     chunPlusSpawnNum = 5;
+            // }
 
-            int spawnNum = maxEnemy - spawnedEnemyList.Count + plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum + PlayerStats.GetAddSummonYogui();
+            int spawnNum = maxEnemy - spawnedEnemyList.Count 
+                           //plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum 
+                           + PlayerStats.GetAddSummonYogui();
 
             while (canSpawnEnemy.Value == false)
             {

@@ -47,6 +47,10 @@ public class BossScoreTable
     public const string byeolhoTowerScore = "s11";
     //푸른강철이
     public const string blueGangChul = "s12";
+    //푸른강철이
+    public const string weeklyBossScore = "s13";
+    //푸른강철이
+    public const string meditationScore = "s14";
 
 
     public bool isInitialize = false;
@@ -69,6 +73,9 @@ public class BossScoreTable
         
         { byeolhoTowerScore, string.Empty },
         { blueGangChul, string.Empty },
+        
+        { weeklyBossScore, string.Empty },
+        { meditationScore, string.Empty },
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -174,6 +181,11 @@ public class BossScoreTable
             case DosulAwakeScore: //
             {
                 return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.DosulAwakeScore].Value).ToString();
+            }
+                break;
+            case meditationScore: //
+            {
+                return (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value).ToString();
             }
                 break;
             default:

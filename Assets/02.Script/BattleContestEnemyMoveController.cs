@@ -64,12 +64,12 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
     
     private void SetDifficulty()
     {
-        var idx = (UiBattleContestMatchingBoard.Difficulty)(int)GameManager.Instance.bossId; 
+        var idx = (Difficulty)(int)GameManager.Instance.bossId; 
         switch (idx)
         {
-            case UiBattleContestMatchingBoard.Difficulty.None:
+            case Difficulty.None:
                 break;
-            case UiBattleContestMatchingBoard.Difficulty.VeryHard:
+            case Difficulty.VeryHard:
                 moveSpeed = 40f; //이동속도
                 idleDelay = 0.1f; // 정지 
                 moveDelay = 0.80f; // 이동
@@ -79,7 +79,7 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
                     hit.SetDamage(0,0.8f); // 레이저 데미지
                 }
                 break;
-            case UiBattleContestMatchingBoard.Difficulty.Hard:
+            case Difficulty.Hard:
                 moveSpeed = 30f; //이동속도
                 idleDelay = 0.2f; // 정지 
                 moveDelay = 1f; // 이동
@@ -89,7 +89,7 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
                     hit.SetDamage(0,0.7f); // 레이저 데미지
                 }                
                 break;
-            case UiBattleContestMatchingBoard.Difficulty.Normal:
+            case Difficulty.Normal:
                 moveSpeed = 20f; //이동속도
                 idleDelay = 0.3f; // 정지 
                 moveDelay = 1f; // 이동
@@ -99,7 +99,7 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
                     hit.SetDamage(0,0.5f); // 레이저 데미지
                 }                
                 break;
-            case UiBattleContestMatchingBoard.Difficulty.Easy:
+            case Difficulty.Easy:
 
                 moveSpeed = 15f; //이동속도
                 idleDelay = 0.4f; // 정지 
@@ -110,7 +110,7 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
                     hit.SetDamage(0,0.5f); // 레이저 데미지
                 }
                 break;
-            case UiBattleContestMatchingBoard.Difficulty.VeryEasy:
+            case Difficulty.VeryEasy:
                 moveSpeed = 10f; //이동속도
                 idleDelay = 0.5f; // 정지 
                 moveDelay = 1f; // 이동

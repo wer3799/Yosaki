@@ -552,6 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7864103627325146558}
   - component: {fileID: 7196461315324741171}
+  - component: {fileID: 5117682542501515193}
   m_Layer: 5
   m_Name: DragonBoss2Board
   m_TagString: Untagged
@@ -597,6 +598,18 @@ MonoBehaviour:
   Boss:
   - {fileID: 7117280281774069762}
   BossIdx: ba000000
+--- !u!114 &5117682542501515193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244874172689946435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939f6aa4a7d25cb48a5f56f0c4ae3928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2798422864126756989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1015,7 @@ MonoBehaviour:
   disableColor_text: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   useButtonColor: 1
   initDefaultSetting: 1
+  initOnlyUISetting: 0
 --- !u!1 &5385748703756324502
 GameObject:
   m_ObjectHideFlags: 0
@@ -41514,6 +41528,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de5b6b690fd335d4ab3cc28ff9e2cbb2, type: 3}
+--- !u!224 &550282999053670344 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9155555187165306627, guid: de5b6b690fd335d4ab3cc28ff9e2cbb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8695869891116189899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7117280281774069762 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1902849057994821833, guid: de5b6b690fd335d4ab3cc28ff9e2cbb2,
@@ -41526,12 +41546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bed33b8e70f66849b35b6b54c9358d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &550282999053670344 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9155555187165306627, guid: de5b6b690fd335d4ab3cc28ff9e2cbb2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8695869891116189899}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9053663819509674118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 362817746281494605, guid: de5b6b690fd335d4ab3cc28ff9e2cbb2,

@@ -86,8 +86,20 @@ public class CurrentStageInfoPopup : SingletonMono<CurrentStageInfoPopup>
         {
             desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.DokebiFire)} 획득량 : {stageData.Dokebifireamount * 1000}";
         }
-        desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.YoPowerGoods)} 획득량 : {stageData.Yokaiessence * 1000}";
-        desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.TaeguekGoods)} 획득량 : {stageData.Taegeuk * 1000}";
+
+        if (stageData.Yokaiessence > 0)
+        {
+            desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.YoPowerGoods)} 획득량 : {stageData.Yokaiessence * 1000}";
+        }
+
+        if (stageData.Taegeuk > 0)
+        {
+            desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.TaeguekGoods)} 획득량 : {stageData.Taegeuk * 1000}";
+        }
+        if (stageData.Sinsu > 0)
+        {
+            desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.SG)} 획득량 : {stageData.Sinsu * 1000}";
+        }
         
         description.SetText(desc);
     }

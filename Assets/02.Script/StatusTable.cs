@@ -64,6 +64,7 @@ public class StatusTable
     public const string Sim_memory = "Sim_memory";
     public const string Sin_memory = "Sin_memory";
     public const string Dragon_memory = "Dragon_memory";
+    public const string DragonPlace_memory = "DragonPlace_memory";
     
     //public const string IgnoreDefense_GoldBar = "IgnoreDefense_GoldBar";
     //public const string GoldBarGain_GoldBar = "GoldBarGain_GoldBar";
@@ -136,6 +137,7 @@ public class StatusTable
         { Sim_memory, 0 },
         { Sin_memory, 0 },
         { Dragon_memory, 0 },
+        { DragonPlace_memory, 0 },
         //{ IgnoreDefense_GoldBar, 0 }, 
         //{ GoldBarGain_GoldBar, 0 },
         { Special0_GoldBar, 0 },
@@ -419,6 +421,12 @@ public class StatusTable
                         float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
 
                         return level * GameBalance.Dragon_memory * spcialAbilRatio;
+                    }
+                case DragonPlace_memory:
+                    {
+                        float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
+
+                        return level * GameBalance.DragonPlace_memory * spcialAbilRatio;
                     }
 
                 #endregion

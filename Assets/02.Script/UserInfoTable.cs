@@ -794,8 +794,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 35);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(35));
+                            defultValues.Add(e.Current.Key, 42);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(42));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1373,6 +1373,11 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value++;
             }
+            //바캉스 이벤트 출석
+            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value != 0)
+            {
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value++;
+            }
 
         }
 
@@ -1465,6 +1470,7 @@ public class UserInfoTable
         userInfo2Param.Add(UserInfoTable_2.eventMission1AttendCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventMission1AttendCount].Value);
         userInfo2Param.Add(UserInfoTable_2.commonAttend2Count, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.commonAttend2Count].Value);
         userInfo2Param.Add(UserInfoTable_2.eventMission2AttendCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventMission2AttendCount].Value);
+        userInfo2Param.Add(UserInfoTable_2.eventAttendCount, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.eventAttendCount].Value);
 
         if (monthChanged)
         {
@@ -1638,6 +1644,8 @@ public class UserInfoTable
         
         ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += GameBalance.GachaTicketDailyGetAmount;
         
+        ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += GameBalance.SinsuClearDailyGetAmount;
+        
 
         //도술
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulStart].Value != 0)
@@ -1676,6 +1684,7 @@ public class UserInfoTable
         goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
         goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
         goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+        goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
         // List<Item_Type> itemTypes=new List<Item_Type>();
         // for (int i = 0; i < rewardData.Length; i++)
         // {
@@ -1768,6 +1777,12 @@ public class UserInfoTable
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value += GameBalance.WeeklyBattleClearGetCount;
                 goodsParam.Add(GoodsTable.BattleClear,ServerData.goodsTable.GetTableData(GoodsTable.BattleClear).Value);
+            }
+            
+            if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= GameBalance.WeeklyBossLevelLimit)
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.WT).Value += GameBalance.WeeklyTicketWeeklyGetAmount;
+                goodsParam.Add(GoodsTable.WT,ServerData.goodsTable.GetTableData(GoodsTable.WT).Value);
             }
             
             

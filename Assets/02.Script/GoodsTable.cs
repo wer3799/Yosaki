@@ -290,6 +290,9 @@ public class GoodsTable
     public static string BattleScore = "BTS";
     public static string DragonPalaceTreasure = "DPT";
     public static string GT = "GT";
+    public static string WT = "WT";
+    public static string SG = "SG";
+    public static string SC = "SC";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -558,6 +561,9 @@ public class GoodsTable
         { BattleScore, 0f },
         { DragonPalaceTreasure, 0f },
         { GT, GameBalance.GachaTicketDailyGetAmount },
+        { WT, GameBalance.WeeklyTicketWeeklyGetAmount },
+        { SG, 0f },
+        { SC, GameBalance.SinsuClearDailyGetAmount },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -805,7 +811,7 @@ public class GoodsTable
     static float taeguekItemAddNum = 0;
     public void GetTaegeukItem(float amount)
     {
-        taeguekItemAddNum += amount;
+        taeguekItemAddNum += amount * (1 + PlayerStats.GetTaegeukGoodsGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
         if (taeguekItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Taegeuk, 1))
@@ -815,6 +821,21 @@ public class GoodsTable
         {
             tableDatas[TaeguekGoods].Value += (int)taeguekItemAddNum;
             taeguekItemAddNum -= (int)taeguekItemAddNum;
+        }
+    }
+    static float sgItemAddNum = 0;
+    public void GetSinsuItem(float amount)
+    {
+        sgItemAddNum += amount * (1 + PlayerStats.GetTaegeukGoodsGainValue());
+
+        //1개 획득할때마다 얻게하기 위해서
+        if (sgItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Sinsu, 1))
+        {
+        }
+        else
+        {
+            tableDatas[SG].Value += (int)sgItemAddNum;
+            sgItemAddNum -= (int)sgItemAddNum;
         }
     }
     //
@@ -1871,13 +1892,26 @@ public class GoodsTable
             {
                 return GoodsTable.BattleScore;
             }
-            case Item_Type.DragonPalaceTreasure:
+            case Item_Type.DPT:
             {
                 return GoodsTable.DragonPalaceTreasure;
             }
             case Item_Type.GT:
             {
                 return GoodsTable.GT;
+            }
+            
+            case Item_Type.WT:
+            {
+                return GoodsTable.WT;
+            }
+            case Item_Type.SG:
+            {
+                return GoodsTable.SG;
+            }
+            case Item_Type.SC:
+            {
+                return GoodsTable.SC;
             }
             
             case Item_Type.SuhoTreasure:
@@ -2675,10 +2709,22 @@ public class GoodsTable
         {
             return Item_Type.GT;
         }
+        else if (GoodsTable.WT == type)
+        {
+            return Item_Type.WT;
+        }
+        else if (GoodsTable.SG == type)
+        {
+            return Item_Type.SG;
+        }
+        else if (GoodsTable.SC == type)
+        {
+            return Item_Type.SC;
+        }
 
         else if (GoodsTable.DragonPalaceTreasure == type)
         {
-            return Item_Type.DragonPalaceTreasure;
+            return Item_Type.DPT;
         }
 
         else if (GoodsTable.SinsuRelic == type)

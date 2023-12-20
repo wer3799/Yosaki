@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
@@ -13,19 +14,47 @@ public class UiContentsStageLockMask : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelDesc;
 
+    [SerializeField] private bool isReverse = false;
+    
     void Start()
     {
-        levelDesc.SetText($"{Utils.ConvertStage(unlockStage)}스테이지에 해금!");
+        if (levelDesc != null)
+        {
+            levelDesc.SetText($"{Utils.ConvertStage(unlockStage)}스테이지에 해금!");
+        }
 
         Subscribe();
     }
 
     private void Subscribe()
     {
-        ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(currentLevel =>
+        if (isReverse == true)
         {
-            this.gameObject.SetActive(currentLevel+2 < unlockStage);
-        }).AddTo(this);
+        }
+        else
+        {
+            ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).AsObservable().Subscribe(currentLevel =>
+            {
+                this.gameObject.SetActive(currentLevel+2 < unlockStage);
+            }).AddTo(this);
+        }
+   
     }
 
+    private void OnEnable()
+    {
+        if (isReverse == true)
+        {
+            if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value + 2 >= unlockStage)
+            {
+                    
+            }
+            else
+            {
+                this.gameObject.SetActive(false);
+                PopupManager.Instance.ShowAlarmMessage($"{Utils.ConvertStage(unlockStage+2)}스테이지에 해금!");
+            }
+            
+        }    
+    }
 }

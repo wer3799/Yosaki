@@ -420,10 +420,17 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 197:
                     case 198:
                     case 199:
+                    case 207:
+                    case 208:
+                    case 209:
+                    case 210:
+                    case 211:
                         lastBoards[(int)ContentsBoard.SuhoBossBoard].SetActive(true);
                         break;
                     case 202:
                     case 203:
+                    case 205:
+                    case 206:
                         lastBoards[(int)ContentsBoard.DragonPalaceBoard].SetActive(true);
                         break;
                         
@@ -533,6 +540,9 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.BlackFox :
                 lastBoards[(int)ContentsBoard.BlackFoxBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.DragonPalaceTower :
+                lastBoards[(int)ContentsBoard.DragonPalaceBoard].SetActive(true);
                 break;
 
         }

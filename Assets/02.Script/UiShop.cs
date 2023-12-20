@@ -678,7 +678,7 @@ public class UiShop : SingletonMono<UiShop>
                 param.Add(GoodsTable.BattleGoods, ServerData.goodsTable.GetTableData(GoodsTable.BattleGoods).Value);
             }
                 break;  
-            case Item_Type.DragonPalaceTreasure:
+            case Item_Type.DPT:
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value += amount;
                 param.Add(GoodsTable.DragonPalaceTreasure, ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value);
@@ -688,6 +688,24 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += amount;
                 param.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+            }
+                break;  
+            case Item_Type.WT:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.WT).Value += amount;
+                param.Add(GoodsTable.WT, ServerData.goodsTable.GetTableData(GoodsTable.WT).Value);
+            }
+                break;  
+            case Item_Type.SG:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SG).Value += amount;
+                param.Add(GoodsTable.SG, ServerData.goodsTable.GetTableData(GoodsTable.SG).Value);
+            }
+                break;  
+            case Item_Type.SC:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += amount;
+                param.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
             }
                 break;  
             case Item_Type.BattleScore:

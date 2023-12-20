@@ -32,6 +32,8 @@ public class EtcServerTable
     public const string battleWinScore = "bws";
     public const string gachaEventReward = "ger";
     public const string blueGangChulUnlock = "bgu";
+    public const string sasinsuPowerLevel = "spl";    //0현무 1청룡 2주작 3백호 
+
 
 
     private Dictionary<string, ReactiveProperty<string>> tableSchema = new Dictionary<string, ReactiveProperty<string>>()
@@ -55,6 +57,7 @@ public class EtcServerTable
         {battleWinScore,new ReactiveProperty<string>("#0#0#0#0#0")},
         {gachaEventReward,new ReactiveProperty<string>(string.Empty)},
         {blueGangChulUnlock,new ReactiveProperty<string>(string.Empty)},
+        {sasinsuPowerLevel,new ReactiveProperty<string>("#-1#-1#-1#-1")},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -359,6 +362,20 @@ public class EtcServerTable
 
         return scoreList[difficulty];
     }
+    public int GetBattleContestTotalScoreFromIdx(int difficulty)
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.battleWinScore].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        var sum = 0;
+        for (int i = difficulty; i >= 0; i--)
+        {
+            sum += scoreList[i];
+        }
+
+        return sum;
+    }
     public int GetBattleContestTotalScore()
     {
         var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.battleWinScore].Value.Split(BossServerTable.rewardSplit);
@@ -366,5 +383,38 @@ public class EtcServerTable
         var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
 
         return scoreList.Sum();
+    }
+    //0현무 1청룡 2주작 3백호 
+    public int GetSasinsuPowerLevel(int idx)
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.sasinsuPowerLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList[idx];
+    }
+    public int GetSasinsuPowerTotalLevel()
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.sasinsuPowerLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList.Sum();
+    }
+    public int GetSasinsuPowerBestLevel()
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.sasinsuPowerLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList.Max();
+    }
+    public int GetSasinsuPowerLowestLevel()
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.sasinsuPowerLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList.Min();
     }
 }

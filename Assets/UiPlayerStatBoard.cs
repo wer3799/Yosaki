@@ -159,24 +159,25 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         
         description2 +=
             $"{CommonString.GetStatusName(StatusType.YoPowerGoodsGainPer)} : {PlayerStats.GetYoPowerGoodsGainValue() * 100f}\n";
+        description2 +=
+            $"{CommonString.GetStatusName(StatusType.TaegeukGoodsGainPer)} : {PlayerStats.GetTaegeukGoodsGainValue() * 100f}\n";
         
         description2 +=
             $"{CommonString.GetStatusName(StatusType.DecreaseBossHp)} : {PlayerStats.DecreaseBossHp() * 100f}\n";
 
-        int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
+       //int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 
         int chunPlusSpawnNum = 0;
 
-        if (PlayerStats.IsChunMonsterSpawnAdd())
-        {
-            chunPlusSpawnNum = 5;
-        }
+
 
 // #if  UNITY_EDITOR
 //         int plusSpawnNum = 71;
 // #else
-        int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value) +
-                           hellPlusSpawnNum + chunPlusSpawnNum + PlayerStats.GetAddSummonYogui();
+        int plusSpawnNum = //GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value) +
+                           //hellPlusSpawnNum + 
+                           // chunPlusSpawnNum +
+                           PlayerStats.GetAddSummonYogui();
 //#endif
         //지옥베기
         description3 +=
@@ -273,6 +274,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         description4 +=
             $"크리티컬 29단계 {CommonString.GetStatusName(StatusType.SuperCritical29DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical29DamPer() * 100f,1)}\n";
+
+        description4 +=
+            $"크리티컬 30단계 {CommonString.GetStatusName(StatusType.SuperCritical30DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical30DamPer() * 100f,1)}\n";
 
         
             //도술

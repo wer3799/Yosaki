@@ -188,11 +188,11 @@ public class SuhoPetUpgradeBoard : MonoBehaviour
             statusParam.Add(StatusTable.SuhoEnhance_Level, ServerData.statusTable.GetTableData(StatusTable.SuhoEnhance_Level).Value);
             transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
 
-            LogManager.Instance.SendLogType("SuhoPetUpgrade", "all", $"pref {ServerData.statusTable.GetTableData(StatusTable.SuhoEnhance_Level).Value - upgradableNum} +{upgradableNum}");
+            //LogManager.Instance.SendLogType("SuhoPetUpgrade", "all", $"pref {ServerData.statusTable.GetTableData(StatusTable.SuhoEnhance_Level).Value - upgradableNum} +{upgradableNum}");
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                LogManager.Instance.SendLogType("SuhoPetUpgrade", "complete", "complete");
+                //LogManager.Instance.SendLogType("SuhoPetUpgrade", "complete", "complete");
 
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"+{upgradableNum} 강화 성공!", null);
                 int currentSuhoPetUpgrade = PlayerStats.GetCurrentSuhoUpgradeIdx();

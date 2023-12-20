@@ -8,6 +8,8 @@ using Spine.Unity;
 public class SonBossEnemy : BossEnemyBase
 {
 
+    [SerializeField] private AlarmHitObjectV2 _hitObjectV2;
+    
     private void Start()
     {
         Initialize();
@@ -20,6 +22,11 @@ public class SonBossEnemy : BossEnemyBase
         hitObject.SetDamage(0f);
     }
 
+    public void AttackStart()
+    {
+        _hitObjectV2.AttackStart();
+        _hitObjectV2.SetDamage(0f,0.4f);
+    }
     private IEnumerator BossAttackPowerUpdateRoutine()
     {
         var updateDelay = new WaitForSeconds(5.0f);

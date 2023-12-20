@@ -397,7 +397,9 @@ public static class GameBalance
     public static ObscuredFloat SealSwordTicketDailyGetAmount = 4; // 
     public static ObscuredFloat GuimoonTicketDailyGetAmount = 4; // 
     public static ObscuredFloat MeditationTicketDailyGetAmount = 2; // 심득 
+    public static ObscuredFloat SinsuClearDailyGetAmount = 1; // 신수소탕권 
     public static ObscuredInt GachaTicketDailyGetAmount = 10; // 
+    public static ObscuredInt WeeklyTicketWeeklyGetAmount = 3; // 
     public static ObscuredInt TransTicketWeeklyGetAmount = 3; // 
     
     public static ObscuredFloat GuildTowerChimAbilUpValue = 0.01f; // 
@@ -412,12 +414,14 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTimeEvent_GrowthStone = 7;
     public readonly static ObscuredFloat HotTimeEvent_Marble = 3;
     public readonly static ObscuredFloat HotTimeEvent_YoPowerGoods = 0.1f;
+    public readonly static ObscuredFloat HotTimeEvent_TaegeukGoods = 0.1f;
     
     public readonly static ObscuredFloat HotTimeEvent_Ad_Exp = 0;
     public readonly static ObscuredFloat HotTimeEvent_Ad_Gold = 0;
     public readonly static ObscuredFloat HotTimeEvent_Ad_GrowthStone = 15;
     public readonly static ObscuredFloat HotTimeEvent_Ad_Marble = 5;
     public readonly static ObscuredFloat HotTimeEvent_Ad_YoPowerGoods = 0.4f;
+    public readonly static ObscuredFloat HotTimeEvent_Ad_TaegeukGoods = 0.4f;
     //
     public readonly static ObscuredBool isOddMonthlyPass = false; // 월간훈련 홀수월, 짝수월
     
@@ -519,6 +523,7 @@ public static class GameBalance
     public static ObscuredFloat Sim_memory = 0.0000004f;
     public static ObscuredFloat Sin_memory = 0.0000003f;
     public static ObscuredFloat Dragon_memory = 0.00000003f;
+    public static ObscuredFloat DragonPlace_memory = 0.000000005f;
 
     
     public static ObscuredFloat Special0_GoldBar = 0.0000000004f;
@@ -541,7 +546,7 @@ public static class GameBalance
     public static ObscuredInt TwelveBoss_157_RequireTower10 = 6;
 
     
-    public static ObscuredInt addDay = 0;
+    public static ObscuredInt addDay = 15;
     
     public static ObscuredInt dosulUnlockStage = 300;
     public static ObscuredInt dailyDosulClearTicketGetValue = 2;
@@ -596,13 +601,23 @@ public static class GameBalance
     public readonly static ObscuredInt DailyByeolhoClearGetCount = 2;//별호
     public readonly static ObscuredInt WeeklyBattleClearGetCount = 7;//pvp
     public readonly static ObscuredInt WeeklyBattleClearLevelLimit = 5000000;//pvp레벨제한
+    public readonly static ObscuredInt WeeklyBossLevelLimit = 1000000;//pvp레벨제한
     public static ObscuredFloat taegeukElixirValue = 360f;//360분 = 6시간 
+    public static ObscuredFloat sinsuElixirValue = 360f;//360분 = 6시간 
 
     public readonly static ObscuredFloat MonthPass_Exp = 10000;
     public readonly static ObscuredFloat MonthPass_Gold = 20000;
     public readonly static ObscuredFloat MonthPass_GrowthStone = 20;
 
-    public static DateTime HotTimeEventEndPeriod = new DateTime(2023, 12, 17);
+    public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 1, 30);
+
+    public readonly static string[] damageUnit = new string[]
+    {
+        "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
+        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
+        "피","동","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+
+    };
     public static int GetSonIdx()
     {
         var level = ServerData.statusTable.GetTableData(StatusTable.Son_Level).Value;

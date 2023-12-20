@@ -194,6 +194,7 @@ public class Enemy : PoolItem
         GetDokebiItem();
         GetYoPowerItem();
         GetTaegeukItem();
+        GetSinsuItem();
         
 
         //곶감 -> 봄나물
@@ -256,6 +257,11 @@ public class Enemy : PoolItem
     private void GetTaegeukItem()
     {
         ServerData.goodsTable.GetTaegeukItem(GameManager.Instance.CurrentStageData.Taegeuk);
+    }
+
+    private void GetSinsuItem()
+    {
+        ServerData.goodsTable.GetSinsuItem(GameManager.Instance.CurrentStageData.Sinsu);
     }
 
     private void GetSpringEventItem() 

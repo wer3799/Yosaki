@@ -109,6 +109,12 @@ public class UiHellTowerResult : MonoBehaviour
                     case GameManager.ContentsType.DragonTower:
                         stageChangeButton.SetActive(false);
                         break;
+                    case GameManager.ContentsType.DragonPalaceTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.DragonPalaceTowerIdx).Value < (TableManager.Instance.DragonPlaceTowerTable.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.DragonPalaceTower:
+                        stageChangeButton.SetActive(false);
+                        break;
                 }
                 
                 return "클리어!!";

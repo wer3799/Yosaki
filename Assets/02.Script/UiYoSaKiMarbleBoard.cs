@@ -349,13 +349,13 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
 
         ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
-            List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+            List<RewardData> rewardData = new List<RewardData>();
             var e = _rewardItems.GetEnumerator();
             for (int i = 0 ;  i < _rewardItems.Count;i++)
             {
                 if (e.MoveNext())
                 {
-                    rewardData.Add(new UiRewardView.RewardData(e.Current.ItemType,e.Current.ItemValue));
+                    rewardData.Add(new RewardData(e.Current.ItemType,e.Current.ItemValue));
                 }                    
             }
             if (rewardData.Count > 0)

@@ -78,12 +78,12 @@ public class UiYorinMission : MonoBehaviour
             rewards.Add(cell.OnClickGetButtonAll());
         }
 
-        List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+        List<RewardData> rewardData = new List<RewardData>();
 
         for (int i = 0; i < rewards.Count; i++)
         {
             if(rewards[i].Item1==Item_Type.None)continue;
-            rewardData.Add(new UiRewardView.RewardData(rewards[i].Item1,rewards[i].Item2));
+            rewardData.Add(new RewardData(rewards[i].Item1,rewards[i].Item2));
         }
 
         if (rewardData.Count > 0)

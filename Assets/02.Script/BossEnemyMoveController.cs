@@ -86,19 +86,26 @@ public class BossEnemyMoveController : MonoBehaviour
                 moveSpeed = 25f; //이동속도
                 idleDelay = 0.2f; // 정지 
                 moveDelay = 0.75f; // 이동
-                attack1Delay = 0.33f; // 공격
+                attack1Delay = 0.6f; // 공격
                 break;
             case 202:
-                moveSpeed = 35f; //이동속도
+                moveSpeed = 15f; //이동속도
                 idleDelay = 0.5f; // 정지 
                 moveDelay = 0.5f; // 이동
-                attack1Delay = 0.3f; // 공격
+                attack1Delay = 1f; // 공격
                 break;
             case 203:
                 moveSpeed = 15f; //이동속도
                 idleDelay = 0.5f; // 정지 
                 moveDelay = 0.3f; // 이동
-                attack1Delay = 0.3f; // 공격
+                attack1Delay = 1f; // 공격
+                break;
+            case 205:
+            case 206:
+                moveSpeed = 15f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 0.8f; // 공격
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -136,8 +143,8 @@ public class BossEnemyMoveController : MonoBehaviour
         {
             RandomState();
             
-
             yield return new WaitForSeconds(stateDelay);
+
         }
     }
 
@@ -176,7 +183,7 @@ public class BossEnemyMoveController : MonoBehaviour
             FollowPlayer();
             WhenDirectionChanged(moveDirectionType.Value);
 
-            Debug.LogError($"state : {moveState}");
+            //Debug.LogError($"state : {moveState}");
             
             switch (e)
             {

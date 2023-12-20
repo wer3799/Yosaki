@@ -154,11 +154,11 @@ public class TransUpgradeBoard : MonoBehaviour
             statusParam.Add(StatusTable.Trans_Level, ServerData.statusTable.GetTableData(StatusTable.Trans_Level).Value);
             transactions.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
 
-            LogManager.Instance.SendLogType("TransUpgrade", "all", $"pref {ServerData.statusTable.GetTableData(StatusTable.Trans_Level).Value - upgradableNum} +{upgradableNum}");
+            //LogManager.Instance.SendLogType("TransUpgrade", "all", $"pref {ServerData.statusTable.GetTableData(StatusTable.Trans_Level).Value - upgradableNum} +{upgradableNum}");
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                LogManager.Instance.SendLogType("TransUpgrade", "complete", "complete");
+                //LogManager.Instance.SendLogType("TransUpgrade", "complete", "complete");
 
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"+{upgradableNum} 강화 성공!", null);
                 var currentUpgrade = PlayerStats.GetCurrentTransUpgradeIdx();

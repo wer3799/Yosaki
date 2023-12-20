@@ -20,15 +20,7 @@ public class UiBattleContestMatchingBoard : MonoBehaviour
     private List<UiRewardView> winPrefabContainer = new List<UiRewardView>();
     private List<UiRewardView> losePrefabContainer = new List<UiRewardView>();
 
-    public enum Difficulty
-    {
-        None = -1,
-        VeryHard,
-        Hard,
-        Normal,
-        Easy,
-        VeryEasy,
-    }
+  
 
     private Difficulty _difficulty = Difficulty.VeryHard;
 
@@ -71,13 +63,13 @@ public class UiBattleContestMatchingBoard : MonoBehaviour
 
         var data = TableManager.Instance.BattleContestTable.dataArray[idx];
 
-        List<UiRewardView.RewardData> winData = new List<UiRewardView.RewardData>();
-        List<UiRewardView.RewardData> loseData = new List<UiRewardView.RewardData>();
+        List<RewardData> winData = new List<RewardData>();
+        List<RewardData> loseData = new List<RewardData>();
 
         for (int i = 0; i < data.Winvalue.Length; i++)
         {
-            var win = new UiRewardView.RewardData((Item_Type)data.Rewardtype[i], data.Winvalue[i]);
-            var lose = new UiRewardView.RewardData((Item_Type)data.Rewardtype[i], data.Losevalue[i]);
+            var win = new RewardData((Item_Type)data.Rewardtype[i], data.Winvalue[i]);
+            var lose = new RewardData((Item_Type)data.Rewardtype[i], data.Losevalue[i]);
             winData.Add(win);
             loseData.Add(lose);
         }
@@ -159,10 +151,10 @@ public class UiBattleContestMatchingBoard : MonoBehaviour
             {
                 var data = TableManager.Instance.BattleContestTable.dataArray[GameManager.Instance.bossId];
                 //패배보상 선제획득
-                List<UiRewardView.RewardData> loseData = new List<UiRewardView.RewardData>();
+                List<RewardData> loseData = new List<RewardData>();
                 for (int i = 0; i < data.Losevalue.Length; i++)
                 {
-                    var lose = new UiRewardView.RewardData((Item_Type)data.Rewardtype[i], data.Losevalue[i]);
+                    var lose = new RewardData((Item_Type)data.Rewardtype[i], data.Losevalue[i]);
                     loseData.Add(lose);
                 }
 

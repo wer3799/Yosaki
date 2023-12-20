@@ -76,8 +76,8 @@ public enum StatusType
     SuperCritical19DamPer, //귀살베기
     
     SuperCritical20DamPer, //천구베기
-    SealSwordDam, //요도 피해량 증가
-    DosulDamPer, //도술 피해량 증가
+    SealSwordDam=62, //요도 피해량 증가
+    DosulDamPer=63, //도술 피해량 증가
     PeachGainPer, //복숭아획득량 증가
     HellGainPer, //지옥석 획득량 증가
     ChunGainPer, //천계꽃 획득량 증가
@@ -105,7 +105,7 @@ public enum StatusType
     AddSealSwordSkillHitCount, //요도 타수강화
     
     ReduceDosulSkillCoolTime, //도술재사용시간
-    EnhanceVisionSkill, //비전스킬효과 강화
+    EnhanceVisionSkill=87, //비전스킬효과 강화
     SuperCritical24DamPer,  //용베기
     SuperCritical25DamPer, //요력개방
     EnhanceTaegeukCritical, //태극베기증폭
@@ -121,8 +121,11 @@ public enum StatusType
     YoPowerGoodsGainPer, //요석 획득 증가
     DragonHasValueUpgrade,//용인비늘당 개수증가
     SuperCritical27DamPer,//무공피해
-    SuperCritical28DamPer,//파도베기
+    SuperCritical28DamPer=101,//파도베기
     SuperCritical29DamPer,//비무 피해(%)
+    TaegeukGoodsGainPer,//태극 획득 증가
+    EnhanceTransCritical,//초월증폭
+    SuperCritical30DamPer,//신력피해(%)
 }
 
 
@@ -178,6 +181,7 @@ public static class PlayerStats
         double mugong = GetSuperCritical27DamPer();
         double wave = GetSuperCritical28DamPer();
         double bimu = GetSuperCritical29DamPer();
+        double sinpower = GetSuperCritical29DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -222,6 +226,7 @@ public static class PlayerStats
         totalPower += (totalPower * mugong);
         totalPower += (totalPower * wave);
         totalPower += (totalPower * bimu);
+        totalPower += (totalPower * sinpower);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -1061,7 +1066,6 @@ public static class PlayerStats
         //ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
-        ret += GetSAHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetMonthBuffEffect(StatusType.GoldGainPer);
         ret += GetMonth2BuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
@@ -1081,7 +1085,6 @@ public static class PlayerStats
         //ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
-        ret += GetSAHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetMonthBuffEffect(StatusType.GoldGainPer);
         ret += GetMonth2BuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
@@ -1166,8 +1169,6 @@ public static class PlayerStats
         ret += GetBaseExpPlusValue_BuffAllIgnored();
 
         ret += GetHotTimeEventBuffEffect(StatusType.ExpGainPer);
-        
-        ret += GetSAHotTimeEventBuffEffect(StatusType.ExpGainPer);
         
         ret += GetMonthBuffEffect(StatusType.ExpGainPer);
         
@@ -2049,6 +2050,15 @@ public static class PlayerStats
 
         return ret;
     }
+    //초월증폭
+    public static float GetEnhanceTransCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceTransCritical);
+
+        return ret;
+    }
     //영혼 베기
     public static float GetSuperCritical17DamPer()
     {
@@ -2115,7 +2125,7 @@ public static class PlayerStats
 
         ret += GetTransUpgradeAbilValue(GetCurrentTransUpgradeIdx());
 
-        return ret;
+        return ret * (1 + GetEnhanceTransCritical());
     }
     //진 귀살 베기
     public static float GetSuperCritical22DamPer()
@@ -2159,6 +2169,8 @@ public static class PlayerStats
 
         ret += GetRelicHasEffect(StatusType.SuperCritical24DamPer);
 
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical24DamPer);
+
         return ret;
     }
     
@@ -2200,6 +2212,12 @@ public static class PlayerStats
 
         ret += GetDragonPalaceTreasureAbilHasEffect();
         
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical28DamPer);
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical28DamPer);
+        
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.DragonPlace_memory);
+
         return ret;
     }
 
@@ -2209,6 +2227,20 @@ public static class PlayerStats
         float ret = 0f;
         
         ret += BattleContestGradeAbility(StatusType.SuperCritical29DamPer);
+        
+        return ret;
+    }
+
+    //신력피해
+    public static float GetSuperCritical30DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetSasinsuPowerAbility(StatusType.SuperCritical30DamPer,1);
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical30DamPer);
+        
+        ret += GetSasinsuAwakePowerAbility(StatusType.SuperCritical30DamPer);
         
         return ret;
     }
@@ -2225,6 +2257,8 @@ public static class PlayerStats
         ret += GetSealSwordCollectionHasValue(StatusType.SealSwordDam);
         
         ret += GetAwakeAbilityValue(AbilAwakeType.SealSword, StatusType.SealSwordDam);
+        
+        ret += GetSasinsuPowerAbility(StatusType.SealSwordDam,2);
 
         
         return ret;
@@ -2249,6 +2283,8 @@ public static class PlayerStats
         ret += GetCurrentDosulAddValue();
         
         ret += GetAwakeAbilityValue(AbilAwakeType.Dosul, StatusType.DosulDamPer);
+        
+        ret += GetSasinsuPowerAbility(StatusType.DosulDamPer,0);
 
         return ret;
     }
@@ -2845,38 +2881,18 @@ public static class PlayerStats
                 ret += GameBalance.HotTimeEvent_Ad_YoPowerGoods;
             }
         }
-
-        return ret;
-    }
-    public static float GetSAHotTimeEventBuffEffect(StatusType statusType)
-    {
-        float ret = 0f;
-
-        if (ServerData.userInfoTable.IsHotTimeEvent() == false) return 0f;
-
-        if (statusType == StatusType.GoldGainPer)
+        else if (statusType == StatusType.TaegeukGoodsGainPer)
         {
-            ret = GameBalance.HotTimeEvent_Gold;
-            ret += GameBalance.HotTimeEvent_Ad_Gold;
-        }
-        else if (statusType == StatusType.ExpGainPer)
-        {
-            ret = GameBalance.HotTimeEvent_Exp;
-            ret += GameBalance.HotTimeEvent_Ad_Exp;
-        }
-        else if (statusType == StatusType.MagicStoneAddPer)
-        {
-            ret = GameBalance.HotTimeEvent_GrowthStone;
-            ret += GameBalance.HotTimeEvent_Ad_GrowthStone;
-        }
-        else if (statusType == StatusType.MarbleAddPer)
-        {
-            ret = GameBalance.HotTimeEvent_Marble;
-            ret += GameBalance.HotTimeEvent_Ad_Marble;
+            ret = GameBalance.HotTimeEvent_TaegeukGoods;
+            if (Utils.HasHotTimeEventPass())
+            {
+                ret += GameBalance.HotTimeEvent_Ad_TaegeukGoods;
+            }
         }
 
         return ret;
     }
+
 
     private static Dictionary<StatusType, float> sinsuHasValue = new Dictionary<StatusType, float>();
 
@@ -4044,6 +4060,8 @@ public static class PlayerStats
         ret += GameBalance.VisionTreasurePerDamage * ServerData.goodsTable.GetTableData(GoodsTable.VisionTreasure).Value;
 
         ret += GetAwakeAbilityValue(AbilAwakeType.Vision, StatusType.EnhanceVisionSkill);
+
+        ret += GetSasinsuPowerAbility(StatusType.EnhanceVisionSkill, 3);
         
         return ret;
     }
@@ -4179,7 +4197,7 @@ public static class PlayerStats
 
         var tableData = TableManager.Instance.MeditationTower.dataArray;
 
-        var score = ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value *
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.meditationScore].Value *
                     GameBalance.BossScoreConvertToOrigin;
 
         for (int i = 0; i < tableData.Length; i++)
@@ -4266,6 +4284,25 @@ public static class PlayerStats
         for (int i = 0; i < tableData.Length; i++)
         {
             if (score >= tableData[i].Score)
+            {
+                grade = i;
+            }
+        }
+
+        return grade;
+    }
+    public static int GetWeeklyBossGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.WeeklyBoss.dataArray;
+
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.weeklyBossScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Hp)
             {
                 grade = i;
             }
@@ -6494,6 +6531,18 @@ public static class PlayerStats
 
         ret += GetHotTimeEventBuffEffect(StatusType.YoPowerGoodsGainPer);
         
+        ret += GetGuimoonHasEffect2(StatusType.YoPowerGoodsGainPer);
+        
+        return ret;
+    }
+    public static float GetTaegeukGoodsGainValue()
+    {
+        float ret = 0f;
+
+        ret += GetHotTimeEventBuffEffect(StatusType.TaegeukGoodsGainPer);
+        
+        ret += GetGuimoonHasEffect2(StatusType.TaegeukGoodsGainPer);
+        
         return ret;
     }
     public static float GetStageRelicUpgradeValue()
@@ -6510,9 +6559,14 @@ public static class PlayerStats
     public static int GetAddSummonYogui()
     {
         float ret = 0f;
-
+        
+        ret+= GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
+        
         ret += GetGuimoonHasEffect2(StatusType.AddSummonYogui);
+        
+        ret += (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
 
+        ret += PlayerStats.IsChunMonsterSpawnAdd() ? 5 : 0;
 
         return (int)ret;
     }
@@ -6706,5 +6760,44 @@ public static class PlayerStats
         }
         return grade;
     }
-    
+//0현무 1청룡 2주작 3백호
+    public static float GetSasinsuPowerAbility(StatusType statusType,int idx)
+    {
+        var sum = 0f;
+        
+        var level = ServerData.etcServerTable.GetSasinsuPowerLevel(idx);
+
+        if (level < 0) return 0f;
+        
+        var tableData = TableManager.Instance.PetAwakeTable.dataArray[idx];
+
+        if ((StatusType)tableData.Abiltype != statusType) return 0f;
+
+        sum = tableData.Abilvalue[level];
+
+        return sum;
+    }
+//신수 각성
+    public static float GetSasinsuAwakePowerAbility(StatusType statusType)
+    {
+        var sum = 0f;
+
+        var level = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.sasinsuAwakeGrade).Value;
+
+        //0부터시작이라서 0도 0점
+        if (level <= 0) return 0f;
+        
+        var tableData = TableManager.Instance.PetAwakeLevel.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].Grade == level)
+            {
+                if ((StatusType)tableData[i].Abiltype != statusType) return 0f;
+                return tableData[i].Abilvalue;
+            }
+        }
+
+        return sum;
+    }
 }

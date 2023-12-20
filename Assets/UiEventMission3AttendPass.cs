@@ -113,13 +113,13 @@ public class UiEventMission3AttendPass : FancyScrollView<PassData_Fancy>
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+                List<RewardData> rewardData = new List<RewardData>();
                 var e2 = rewards.GetEnumerator();
                 for (int i = 0 ;  i < rewards.Count;i++)
                 {
                     if (e2.MoveNext())
                     {
-                        rewardData.Add(new UiRewardView.RewardData(e2.Current.ItemType,e2.Current.ItemValue));
+                        rewardData.Add(new RewardData(e2.Current.ItemType,e2.Current.ItemValue));
                     }                    
                 }
                 if (rewardData.Count > 0)

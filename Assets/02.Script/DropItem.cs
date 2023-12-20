@@ -595,6 +595,9 @@ public enum Item_Type
     costume180 = 1480, //보스
     costume181 = 1481, //이벤트
     costume182 = 1482, //이벤트
+    costume183 = 1483, //용궁
+    costume184 = 1484, //용궁
+    costume185 = 1485, //월간
 
 
     gumiho0 = 5000,
@@ -859,6 +862,8 @@ public enum Item_Type
     weapon147 = 7270,
     weapon148 = 7271,
     weapon149 = 7272,
+    weapon150 = 7273,
+    weapon151 = 7274,
     
     
     HyunSangNorigae10 = 7280,
@@ -870,6 +875,10 @@ public enum Item_Type
     magicBook118 = 7286,
     magicBook119 = 7287,
     magicBook120 = 7288,
+    
+    magicBook121 = 7289,
+    magicBook122 = 7290,
+    magicBook123 = 7291,
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -1083,8 +1092,12 @@ public enum Item_Type
     BattleGoods = 9056,
     BattleClear= 9057,
     BattleScore= 9058,
-    DragonPalaceTreasure= 9059,
+    DPT= 9059,
     GT= 9060,
+    WT= 9061,
+    SG = 9062,
+    SC = 9063,
+    
 }
 //
 public class DropItem : PoolItem

@@ -41,8 +41,9 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.TestDark) return;
         if (GameManager.contentsType == GameManager.ContentsType.TestSin) return;
         if (GameManager.contentsType == GameManager.ContentsType.BattleContest) return;
+        if (GameManager.contentsType == GameManager.ContentsType.WeeklyBoss) return;
         //산신령
-        
+
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon)
         {
             var twelveBossTableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];

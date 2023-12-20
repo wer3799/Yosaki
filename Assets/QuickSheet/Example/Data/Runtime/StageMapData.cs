@@ -120,4 +120,8 @@ public class StageMapData
   float taegeuk;
   public float Taegeuk { get {return taegeuk; } set { this.taegeuk = value;} }
   
+  [SerializeField]
+  float sinsu;
+  public float Sinsu { get {return sinsu; } set { this.sinsu = value;} }
+  
 }

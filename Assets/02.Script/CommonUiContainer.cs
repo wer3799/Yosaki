@@ -179,6 +179,8 @@ public Sprite DragonWeapon7;
 public Sprite weapon147;
 public Sprite weapon148;
 public Sprite weapon149;
+public Sprite weapon150;
+public Sprite weapon151;
     
 [Header ("Weapon_View")]
 
@@ -312,6 +314,8 @@ public Sprite RecommendWeapon22;
     public Sprite magicbook118;
     public Sprite magicbook119;
     public Sprite magicbook120;
+    public Sprite magicbook121;
+    public Sprite magicbook122;
     
     [Header ("Norigae_View")]
     public Sprite MonthNorigae0;
@@ -329,7 +333,8 @@ public Sprite RecommendWeapon22;
     public Sprite RecommendNorigae0;
     public Sprite magicBook116;
     public Sprite magicBook117;
-    
+    public Sprite magicbook123;
+
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
     public Sprite DokebiHorn1;
@@ -557,6 +562,9 @@ public Sprite RecommendWeapon22;
     public Sprite BattleScore;
     public Sprite DragonPalaceTreasure;
     public Sprite GT;
+    public Sprite WT;
+    public Sprite SG;
+    public Sprite SC;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -1104,6 +1112,12 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[181];
             case Item_Type.costume182:
                 return costumeThumbnail[182];
+            case Item_Type.costume183:
+                return costumeThumbnail[183];
+            case Item_Type.costume184:
+                return costumeThumbnail[184];
+            case Item_Type.costume185:
+                return costumeThumbnail[185];
 
 
             case Item_Type.RankFrame1:
@@ -1638,7 +1652,13 @@ public Sprite RecommendWeapon22;
                 return BattleScore;   
             case Item_Type.GT:
                 return GT;   
-            case Item_Type.DragonPalaceTreasure:
+            case Item_Type.WT:
+                return WT;   
+            case Item_Type.SG:
+                return SG;   
+            case Item_Type.SC:
+                return SC;   
+            case Item_Type.DPT:
                 return DragonPalaceTreasure;   
             
             case Item_Type.GuildTowerClearTicket:
@@ -1951,6 +1971,12 @@ public Sprite RecommendWeapon22;
                 return magicbook119;
             case Item_Type.magicBook120:
                 return magicbook120;
+            case Item_Type.magicBook121:
+                return magicbook121;
+            case Item_Type.magicBook122:
+                return magicbook122;
+            case Item_Type.magicBook123:
+                return magicbook123;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2699,6 +2725,10 @@ public Sprite RecommendWeapon22;
                 return weapon148;
             case Item_Type.weapon149:
                 return weapon149;
+            case Item_Type.weapon150:
+                return weapon150;
+            case Item_Type.weapon151:
+                return weapon151;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

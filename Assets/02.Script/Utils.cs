@@ -218,7 +218,10 @@ public static class Utils
                type == Item_Type.costume179||
                type == Item_Type.costume180||
                type == Item_Type.costume181||
-               type == Item_Type.costume182
+               type == Item_Type.costume182||
+               type == Item_Type.costume183||
+               type == Item_Type.costume184||
+               type == Item_Type.costume185
             ;
     }
 
@@ -246,7 +249,8 @@ public static class Utils
                type == Item_Type.MonthNorigae11||
                type == Item_Type.magicBook117||
                type == Item_Type.magicBook116||
-               type == Item_Type.magicBook120
+               type == Item_Type.magicBook120||
+               type == Item_Type.magicBook123
             ;
     }
 
@@ -464,6 +468,7 @@ public static class Utils
                type == Item_Type.magicBook116 ||
                type == Item_Type.magicBook117 ||
                type == Item_Type.magicBook120 ||
+               type == Item_Type.magicBook123 ||
                type == Item_Type.weapon146 ||
                type == Item_Type.weapon149 ||
                type == Item_Type.DokebiHorn0 ||
@@ -838,12 +843,7 @@ public static class Utils
 
     #region BigFloat
 
-    private static string[] goldUnitArr = new string[]
-    {
-        "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
-        "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채","미정14","미정15","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
-        
-    };
+    private static string[] goldUnitArr = GameBalance.damageUnit;
 
     private static double p = (double)Mathf.Pow(10, 4);
     private static List<double> numList = new List<double>();
@@ -1157,5 +1157,10 @@ public static class Utils
             Mathf.RoundToInt(color.a * 255));
 
         return $"<color={hexString}>{str}</color>";
+    }
+    public static bool IsNumberInRange(float a, float b, float c)
+    {
+        // c가 a와 b 사이에 있는지 확인
+        return (c >= Mathf.Min(a, b) && c <= Mathf.Max(a, b));
     }
 }

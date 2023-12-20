@@ -96,6 +96,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.DragonTower:
                         return false;
+                    case GameManager.ContentsType.DragonPalaceTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.DragonPalaceTowerIdx).Value <
+                                                                      (TableManager.Instance.DragonPlaceTowerTable.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.DragonPalaceTower:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)
@@ -370,11 +375,11 @@ public class UiContentsExitButton : MonoBehaviour
     {
         var data = TableManager.Instance.BattleContestTable.dataArray[GameManager.Instance.bossId];
         
-        List<UiRewardView.RewardData> loseData = new List<UiRewardView.RewardData>();
+        List<RewardData> loseData = new List<RewardData>();
 
         for (int i = 0; i < data.Losevalue.Length; i++)
         {
-            var lose = new UiRewardView.RewardData((Item_Type)data.Rewardtype[i],data.Losevalue[i]);
+            var lose = new RewardData((Item_Type)data.Rewardtype[i],data.Losevalue[i]);
             loseData.Add(lose);
         }
         Param goodsParam = new Param();

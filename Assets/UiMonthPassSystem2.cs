@@ -459,13 +459,13 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
-                List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+                List<RewardData> rewardData = new List<RewardData>();
                 var e = rewardList.GetEnumerator();
                 for (int i = 0 ;  i < rewardList.Count;i++)
                 {
                     if (e.MoveNext())
                     {
-                        rewardData.Add(new UiRewardView.RewardData(e.Current.ItemType,e.Current.ItemValue));
+                        rewardData.Add(new RewardData(e.Current.ItemType,e.Current.ItemValue));
                     }                    
                 }
                 if (rewardData.Count > 0)

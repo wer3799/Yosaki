@@ -272,14 +272,10 @@ public class MeditationTowerManager : ContentsManagerBase
     {
         double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
 
-        if (reqValue > ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value)
+        if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.meditationScore].Value)
         {
-            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value = reqValue;
-
-            ServerData.userInfoTable_2.UpData(UserInfoTable_2.meditationTowerScore, false);
+            ServerData.bossScoreTable.UpdateScoreToServer(BossScoreTable.meditationScore,reqValue);
         }
-
-
     }
 
     private void ShowResultPopup()

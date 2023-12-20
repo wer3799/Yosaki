@@ -323,4 +323,12 @@ public class UiStageRelicCell : MonoBehaviour
         UiStageRelicBoard.Instance.whenRelicLevelUpButtonClicked.Execute();
 
     }
+
+    private void OnEnable()
+    {
+        if (subscribed == true)
+        {
+            UpdateDescription(relicServerData.level.Value);
+        }
+    }
 }

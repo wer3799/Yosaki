@@ -32,7 +32,7 @@ public class UiMeditationTowerBoard : MonoBehaviour
 
     private void Start()
     {
-        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationTowerScore].Value * GameBalance.BossScoreConvertToOrigin)}");
+        scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.meditationScore].Value * GameBalance.BossScoreConvertToOrigin)}");
     }
 
     void OnEnable()

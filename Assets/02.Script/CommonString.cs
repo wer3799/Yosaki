@@ -345,6 +345,9 @@ public static class CommonString
             case Item_Type.costume180: return TableManager.Instance.Costume.dataArray[180].Name;
             case Item_Type.costume181: return TableManager.Instance.Costume.dataArray[181].Name;
             case Item_Type.costume182: return TableManager.Instance.Costume.dataArray[182].Name;
+            case Item_Type.costume183: return TableManager.Instance.Costume.dataArray[183].Name;
+            case Item_Type.costume184: return TableManager.Instance.Costume.dataArray[184].Name;
+            case Item_Type.costume185: return TableManager.Instance.Costume.dataArray[185].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -379,11 +382,14 @@ public static class CommonString
                 ;
             case Item_Type.weapon148:
                 return TableManager.Instance.WeaponData[148].Name;
-                ;
+                
             case Item_Type.weapon149:
                 return TableManager.Instance.WeaponData[149].Name;
-                ;
-
+            case Item_Type.weapon150:
+                return TableManager.Instance.WeaponData[150].Name;
+            case Item_Type.weapon151:
+                return TableManager.Instance.WeaponData[151].Name;
+                
 
             //
             case Item_Type.magicBook11: return "특급 1등급 노리개";
@@ -606,6 +612,9 @@ public static class CommonString
             case Item_Type.magicBook118: return TableManager.Instance.MagicBookTable.dataArray[118].Name;
             case Item_Type.magicBook119: return TableManager.Instance.MagicBookTable.dataArray[119].Name;
             case Item_Type.magicBook120: return TableManager.Instance.MagicBookTable.dataArray[120].Name;
+            case Item_Type.magicBook121: return TableManager.Instance.MagicBookTable.dataArray[121].Name;
+            case Item_Type.magicBook122: return TableManager.Instance.MagicBookTable.dataArray[122].Name;
+            case Item_Type.magicBook123: return TableManager.Instance.MagicBookTable.dataArray[123].Name;
             case Item_Type.weapon146: return TableManager.Instance.WeaponTable.dataArray[146].Name;
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
@@ -646,7 +655,7 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "요석 조각";
+            case Item_Type.Event_HotTime: return "신년 저고리";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";
@@ -662,8 +671,11 @@ public static class CommonString
             case Item_Type.BattleGoods: return "비무 증표";
             case Item_Type.BattleClear: return "비무 대회 입장권";
             case Item_Type.BattleScore: return "비무 점수";
-            case Item_Type.DragonPalaceTreasure: return "거북 문양";
+            case Item_Type.DPT: return "거북 문양";
             case Item_Type.GT: return "뽑기 티켓";
+            case Item_Type.WT: return "적안 마수 소탕권";
+            case Item_Type.SG: return "사신수 기운";
+            case Item_Type.SC: return "사신수 영약";
         
     }
         return "미등록";
@@ -871,6 +883,8 @@ public static class CommonString
                 return "해신베기 피해(%)";
             case StatusType.SuperCritical29DamPer:
                 return "비무 피해(%)";
+            case StatusType.SuperCritical30DamPer:
+                return "신력 피해(%)";
             case StatusType.SealSwordDam:
                 return "요도 피해량 증가";
             case StatusType.DosulDamPer:
@@ -887,6 +901,8 @@ public static class CommonString
                 return "심득 조각 소탕량 증가 (%)";
             case StatusType.YoPowerGoodsGainPer:
                 return "요석 획득 증가 (%)";
+            case StatusType.TaegeukGoodsGainPer:
+                return "태극 조각 획득 증가 (%)";
             case StatusType.SealAttackSpeed:
                 return "요도 시전 속도 증가 (%)";
             case StatusType.SuhoGainPer:
@@ -929,6 +945,8 @@ public static class CommonString
                 return "영혼베기 증폭(%)";
             case StatusType.EnhanceChunguCritical:
                 return "천구베기 증폭(%)";
+            case StatusType.EnhanceTransCritical:
+                return "초월 피해 증폭(%)";
         }
 
         return "등록필요";

@@ -231,7 +231,7 @@ public class UiEventMission2ShopCell : MonoBehaviour
 
         if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission2)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission2)}이(가) 부족합니다.");
             return;
         }
 

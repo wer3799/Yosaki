@@ -307,7 +307,7 @@ public class TaegeukSimbeopBoard : MonoBehaviour
 
         ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("TaegeukSimbeop", isUpgrade.ToString(), $"성공확률 : {Mathf.Min(successProb,100)}%");
+            //LogManager.Instance.SendLogType("TaegeukSimbeop", isUpgrade.ToString(), $"성공확률 : {Mathf.Min(successProb,100)}%");
             currentElixir.Value = 0;
             upgradeButton.enabled = true;
             if (isUpgrade)

@@ -6,21 +6,28 @@ using Random = UnityEngine.Random;
 
 public class AlarmHitObject : MonoBehaviour
 {
-    private double damage = 10;
+    protected double damage = 10;
 
-    [SerializeField] private float startDelay = 0f;
-    [SerializeField] private float delay = 0f;
+    [SerializeField] protected float startDelay = 0f;
+    [SerializeField] protected float delay = 0f;
     
     [SerializeField]
-    private Animator animator;
+    protected Animator animator;
 
     private Coroutine _coroutine;
-    public void AttackStart()
+    
+    private string attackAnimationKey="Attack"; 
+    protected float percentDamage = 0f;
+
+    protected bool isMove = false;
+    private Coroutine movementCoroutine;
+    public float movementSpeed = 20f; // 이동 속
+    public virtual void AttackStart()
     {
         if (GameManager.Instance.bossId < 190||this.gameObject.activeSelf==false)
         {
             this.gameObject.SetActive(true);
-            animator.SetTrigger("Attack");    
+            animator.SetTrigger(attackAnimationKey);    
         }
         else
         {
@@ -37,13 +44,12 @@ public class AlarmHitObject : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay+delay);;
         this.gameObject.SetActive(true);
-        animator.SetTrigger("Attack");
+        animator.SetTrigger(attackAnimationKey);
         startDelay = 0f;
     }
     
-    float percentDamage = 0f;
 
-    public void SetDamage(double damage, float percentDamage = 0f)
+    public virtual void SetDamage(double damage, float percentDamage = 0f)
     {
         this.damage = damage;
         this.percentDamage = percentDamage;
@@ -88,9 +94,6 @@ public class AlarmHitObject : MonoBehaviour
         }
     }
 
-    private bool isMove = false;
-    private Coroutine movementCoroutine;
-    public float movementSpeed = 20f; // 이동 속
 
     public void StartMovement()
     {

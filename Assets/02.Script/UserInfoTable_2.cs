@@ -41,6 +41,7 @@ public class UserInfoTable_2
     public const string yorinAttendRewarded = "yar";
     public const string eventAttendRewarded = "sar";
     public const string eventMission2AttendCount = "sac"; // eventmission2Attend
+    public const string eventAttendCount = "eac"; //2024 신년출석이벤트 
     
     public const string killCountTotalSeason0 = "ks0"; //혹서기 훈련
     
@@ -50,6 +51,7 @@ public class UserInfoTable_2
     public const string taeguekLock = "tgll";
     public const string SansinTowerIdx = "sst";
     public const string DragonTowerIdx = "dti";
+    public const string DragonPalaceTowerIdx = "dpti";
     public const string KingTrialGraduateIdx = "ktgi";
     public const string GodTrialGraduateIdx = "gtgi";
     public const string darkScore = "ds";
@@ -134,6 +136,8 @@ public class UserInfoTable_2
     public const string gradeTestGraduate = "gtg"; //사냥꾼시험
     public const string relicTestGraduate = "rtg"; //요괴탈
 
+    public const string sasinsuAwakeGrade = "sag"; //요괴탈
+
 
     
     
@@ -149,6 +153,7 @@ public class UserInfoTable_2
         { yorinAttendRewarded, 0f },
         { eventAttendRewarded, 0f },
         { eventMission2AttendCount, 0f },
+        { eventAttendCount, 0f },
         
         { monkeyGodScore, 0f },
         { swordGodScore, 0f },
@@ -171,6 +176,7 @@ public class UserInfoTable_2
         { taeguekLock, 0f },
         { SansinTowerIdx, 0f },
         { DragonTowerIdx, 0f },
+        { DragonPalaceTowerIdx, 0f },
         { KingTrialGraduateIdx, 0f },
         { GodTrialGraduateIdx, 0f },
         { darkScore, 0f },
@@ -240,6 +246,7 @@ public class UserInfoTable_2
         { susanoGraduate, 0f },
         { gradeTestGraduate, 0f },
         { relicTestGraduate, 0f },
+        { sasinsuAwakeGrade, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

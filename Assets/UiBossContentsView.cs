@@ -124,7 +124,7 @@ public class UiBossContentsView : MonoBehaviour
         if (rewardList.Find(element => element.itemType == Item_Type.Ticket) == null)
         {
             //티켓 차감도 트랜젝션에 전송되도록
-            rewardList.Add(new UiRewardView.RewardData(Item_Type.Ticket, 0));
+            rewardList.Add(new RewardData(Item_Type.Ticket, 0));
         }
 
         //티켓차감

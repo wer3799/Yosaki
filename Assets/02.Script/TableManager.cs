@@ -945,7 +945,11 @@ public class TableManager : SingletonMono<TableManager>
     public TransUpgrade TransUpgrade;
     public GachaEvent GachaEvent;
     public BlueGangCheol BlueGangCheol;
-    
+    public DragonPlaceTowerTable DragonPlaceTowerTable;
+    public WeeklyBoss WeeklyBoss;
+    public PetAwakeLevel PetAwakeLevel;
+    public PetAwakeTable PetAwakeTable;
+    public BimuPass BimuPass;
 }
 
 

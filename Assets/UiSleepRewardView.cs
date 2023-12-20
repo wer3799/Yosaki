@@ -43,6 +43,8 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
     private GameObject yoPowerObject;
     [SerializeField]
     private GameObject taegeukObject;
+    [SerializeField]
+    private GameObject sasinsuObject;
 
     [SerializeField] private Image GoldIcon;
     //[SerializeField]
@@ -178,7 +180,6 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         //봄나물
         if (ServerData.userInfoTable.CanSpawnSpringEventItem())
         {
-
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value <= 0)
             {
                 rewards[10].SetText(Utils.ConvertBigNum(reward.eventItem));
@@ -214,10 +215,12 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         }
         rewards[17].SetText(Utils.ConvertBigNum(reward.yoPowerItem));
         rewards[18].SetText(Utils.ConvertBigNum(reward.taegeukItem));
+        rewards[19].SetText(Utils.ConvertBigNum(reward.sasinsuItem));
         
 
         yoPowerObject.SetActive(reward.yoPowerItem > 0);
         taegeukObject.SetActive(reward.taegeukItem > 0);
+        sasinsuObject.SetActive(reward.sasinsuItem > 0);
         
         
         SleepRewardReceiver.Instance.GetRewardSuccess();

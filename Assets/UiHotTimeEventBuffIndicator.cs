@@ -39,6 +39,7 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
             float growthStone = GameBalance.HotTimeEvent_GrowthStone;
             float marble = GameBalance.HotTimeEvent_Marble;
             float yoPowerGoods = GameBalance.HotTimeEvent_YoPowerGoods;
+            float TaegeukGoods = GameBalance.HotTimeEvent_TaegeukGoods;
             if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 exp += GameBalance.HotTimeEvent_Ad_Exp;
@@ -46,6 +47,7 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
                 growthStone += GameBalance.HotTimeEvent_Ad_GrowthStone;
                 marble += GameBalance.HotTimeEvent_Ad_Marble;
                 yoPowerGoods += GameBalance.HotTimeEvent_Ad_YoPowerGoods;
+                TaegeukGoods += GameBalance.HotTimeEvent_Ad_TaegeukGoods;
             }
 
             if (exp > 0)
@@ -66,9 +68,13 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
             {
                 desc += $"여우구슬 +{marble * 100f}%\n";
             }
-            if (marble > 0)
+            if (yoPowerGoods > 0)
             {
-                desc += $"요석 +{yoPowerGoods * 100f}%";
+                desc += $"{CommonString.GetItemName(Item_Type.YoPowerGoods)} +{yoPowerGoods * 100f}%\n";
+            }
+            if (TaegeukGoods > 0)
+            {
+                desc += $"{CommonString.GetItemName(Item_Type.TaeguekGoods)} +{TaegeukGoods * 100f}%";
             }
         }
 

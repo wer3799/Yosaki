@@ -84,4 +84,8 @@ public class TwelveBossTableData
   int[] displayskeletondata = new int[0];
   public int[] Displayskeletondata { get {return displayskeletondata; } set { this.displayskeletondata = value;} }
   
+  [SerializeField]
+  BossType bosstype;
+  public BossType BOSSTYPE { get {return bosstype; } set { this.bosstype = value;} }
+  
 }

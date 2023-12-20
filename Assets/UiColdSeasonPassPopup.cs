@@ -39,18 +39,63 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     }
     private void Initialize()
     {
-         descText0.SetText(
-             //$"경험치 획득 + {GameBalance.HotTimeEvent_Exp * 100}% 증가\n"
-        //                   + $"금화 획득 + {GameBalance.HotTimeEvent_Gold * 100}% 증가\n"
-                           $"요석 획득 증가 + {GameBalance.HotTimeEvent_YoPowerGoods * 100}% 증가\n"
-                          + $"수련의돌 획득 + {GameBalance.HotTimeEvent_GrowthStone * 100}% 증가\n"
-                          + $"여우구슬 획득 + {GameBalance.HotTimeEvent_Marble * 100}% 증가\n");
-        descText1.SetText(
-            // $"경험치 획득 + {GameBalance.HotTimeEvent_Ad_Exp * 100}% 증가\n"
-            //               + $"금화 획득 + {GameBalance.HotTimeEvent_Ad_Gold * 100}% 증가\n"
-            $"요석 획득 증가 + {GameBalance.HotTimeEvent_Ad_YoPowerGoods * 100}% 증가\n"
-                          + $"수련의돌 획득 + {GameBalance.HotTimeEvent_Ad_GrowthStone * 100}% 증가\n"
-                          + $"여우구슬 획득 + {GameBalance.HotTimeEvent_Ad_Marble * 100}% 증가\n");
+        string desc0 = "";
+        string desc1 = "";
+///////////////////
+        if (GameBalance.HotTimeEvent_TaegeukGoods > 0)
+        {
+            desc0 += $"{CommonString.GetStatusName(StatusType.TaegeukGoodsGainPer)} + {GameBalance.HotTimeEvent_TaegeukGoods * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_YoPowerGoods > 0)
+        {
+            desc0 += $"{CommonString.GetStatusName(StatusType.YoPowerGoodsGainPer)} + {GameBalance.HotTimeEvent_YoPowerGoods * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_GrowthStone > 0)
+        {
+            desc0 += $"수련의돌 획득 + {GameBalance.HotTimeEvent_GrowthStone * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Marble > 0)
+        {
+            desc0 += $"여우구슬 획득 + {GameBalance.HotTimeEvent_Marble * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Exp > 0)
+        {
+            desc0 += $"경험치 획득 + {GameBalance.HotTimeEvent_Exp * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Gold > 0)
+        {
+            desc0 += $"금화 획득 + {GameBalance.HotTimeEvent_Gold * 100}% 증가\n";
+        }       
+        ///////////////////////////////
+        if (GameBalance.HotTimeEvent_Ad_TaegeukGoods > 0)
+        {
+            desc1 += $"{CommonString.GetStatusName(StatusType.TaegeukGoodsGainPer)} + {GameBalance.HotTimeEvent_Ad_TaegeukGoods * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Ad_YoPowerGoods > 0)
+        {
+            desc1 += $"{CommonString.GetStatusName(StatusType.YoPowerGoodsGainPer)} + {GameBalance.HotTimeEvent_Ad_YoPowerGoods * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Ad_GrowthStone > 0)
+        {
+            desc1 += $"수련의돌 획득 + {GameBalance.HotTimeEvent_Ad_GrowthStone * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Ad_Marble > 0)
+        {
+            desc1 += $"여우구슬 획득 + {GameBalance.HotTimeEvent_Ad_Marble * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Ad_Exp > 0)
+        {
+            desc1 += $"경험치 획득 + {GameBalance.HotTimeEvent_Ad_Exp * 100}% 증가\n";
+        }
+        if (GameBalance.HotTimeEvent_Ad_Gold > 0)
+        {
+            desc1 += $"금화 획득 + {GameBalance.HotTimeEvent_Ad_Gold * 100}% 증가\n";
+        }
+///////////////////////
+
+        descText0.SetText(desc0);
+             
+        descText1.SetText(desc1);
 
     }
     public void OnClickReceiveCostume()

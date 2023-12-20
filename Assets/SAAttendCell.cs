@@ -134,7 +134,7 @@ public class SAAttendCell : MonoBehaviour
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
-        List<UiRewardView.RewardData> rewardData = new List<UiRewardView.RewardData>();
+        List<RewardData> rewardData = new List<RewardData>();
 
         Param goodsParam = new Param();
 
@@ -142,7 +142,7 @@ public class SAAttendCell : MonoBehaviour
         {
             ServerData.goodsTable.GetTableData((Item_Type)tableData.Reward[i]).Value += tableData.Reward_Value[i];
             goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Reward[i]), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Reward[i])).Value);
-            rewardData.Add(new UiRewardView.RewardData((Item_Type)tableData.Reward[i], tableData.Reward_Value[i]));
+            rewardData.Add(new RewardData((Item_Type)tableData.Reward[i], tableData.Reward_Value[i]));
         }
 
 

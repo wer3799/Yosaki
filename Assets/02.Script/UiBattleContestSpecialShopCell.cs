@@ -105,8 +105,9 @@ public class UiBattleContestSpecialShopCell : MonoBehaviour
         
             return tableData.Wincount <= totalScore;
         }
-        var score = ServerData.etcServerTable.GetBattleContestScore(tableData.Level);
+        var score = ServerData.etcServerTable.GetBattleContestTotalScoreFromIdx(tableData.Level);
 
+        Debug.LogError(score);
         return tableData.Wincount <= score;
 
     }

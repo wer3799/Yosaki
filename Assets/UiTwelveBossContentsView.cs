@@ -8,6 +8,14 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using static UiRewardView;
+
+public enum BossType
+{
+    Normal,
+    Suho,
+    None,
+    
+}
 public class UiTwelveBossContentsView : MonoBehaviour
 {
     [SerializeField]
@@ -105,13 +113,13 @@ public class UiTwelveBossContentsView : MonoBehaviour
             bossIcon.sprite = CommonUiContainer.Instance.bossIcon[bossTableData.Id];
         }
         //수호동물
-        if (bossTableData.Id >= 190 && bossTableData.Id <= 199)
+        if (bossTableData.BOSSTYPE==BossType.Suho)
         {
             var suho0 = bossTableData.Displayskeletondata[0];
             var suho1 = bossTableData.Displayskeletondata[1];
-            
-            image0.sprite=CommonResourceContainer.GetSuhoAnimalSprite(suho0);
-            image1.sprite=CommonResourceContainer.GetSuhoAnimalSprite(suho1);
+
+            image0.sprite = CommonResourceContainer.GetSuhoAnimalSprite(suho0);
+            image1.sprite = CommonResourceContainer.GetSuhoAnimalSprite(suho1);
 
         }
         else

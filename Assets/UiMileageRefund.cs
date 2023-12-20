@@ -89,7 +89,6 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         }
-
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 2)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 2;
@@ -185,7 +184,6 @@ public class UiMileageRefund : MonoBehaviour
             });
 
         }
-        
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 5)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 5;
@@ -641,7 +639,6 @@ public class UiMileageRefund : MonoBehaviour
 
             });
         }
-
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 30)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 30;
@@ -717,10 +714,6 @@ public class UiMileageRefund : MonoBehaviour
 
             });
         }
-        #endregion
-
-     
-      
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 35)
         {
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 35;
@@ -825,6 +818,97 @@ public class UiMileageRefund : MonoBehaviour
             });
         }
         
+        #endregion
+
+        //12월 21일 업데이트
+         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 42)
+         {           
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 42;
+             
+             if (int.Parse(ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value) > 300)
+             {
+                 ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value = "97";
+             }
+             if (int.Parse(ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value) > 300)
+             {
+                 ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value = "97";
+             }
+             //핫타임 교환상점
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value = 0;
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value = 0;
+             
+             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value = 0;
+             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value =1;
+
+             var refundCount = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value;
+
+             var multiply = 1000;
+
+             ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value += refundCount * multiply;
+             
+             //핫타임 재화 1로
+
+             ServerData.goodsTable.GetTableData(GoodsTable.SC).Value = GameBalance.SinsuClearDailyGetAmount;
+
+             ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value =0;
+             ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value =0;
+             ServerData.goodsTable.GetTableData(GoodsTable.WT).Value = GameBalance.WeeklyTicketWeeklyGetAmount;
+             
+             List<TransactionValue> transactions = new List<TransactionValue>();
+             
+             Param userInfo2Param = new Param();
+             userInfo2Param.Add(UserInfoTable_2.eventAttendRewarded, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value);
+             userInfo2Param.Add(UserInfoTable_2.eventAttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value);
+             transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+             
+             Param userInfoParam = new Param();
+             userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_10, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value);
+             userInfoParam.Add(UserInfoTable.eventMission1_11, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value);
+             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+             
+             Param goodsParam = new Param();
+             goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
+             goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+             goodsParam.Add(GoodsTable.WT, ServerData.goodsTable.GetTableData(GoodsTable.WT).Value);
+             goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+             goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
+
+             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+             
+             Param passParam = new Param();
+             passParam.Add(OneYearPassServerTable.childFree_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value);
+             passParam.Add(OneYearPassServerTable.childAd_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value);
+             transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
+
+             ServerData.SendTransactionV2(transactions, successCallBack: () =>
+             {
+                 if (refundCount > 0)   
+                 {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"요석 핫타임 이벤트 미사용 재화 소급\n영혼석 {refundCount*multiply}개 소급 완료",null);
+                 }
+             });
+         }
         
     }
     

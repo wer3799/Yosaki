@@ -1,6 +1,9 @@
 ﻿public enum Difficulty
 {
+	None = -1,
+	VeryHard,
+	Hard,
+	Normal,
 	Easy,
-	Medium,
-	Hard
+	VeryEasy,
 }

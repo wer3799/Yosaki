@@ -188,7 +188,7 @@ public class UiBlackFoxBoard : MonoBehaviour
         {
             clearButton.interactable = true;
 
-            LogManager.Instance.SendLogType("BlackFox", "c", $"grade:{grade+1} clear{clearAmount}");
+            //LogManager.Instance.SendLogType("BlackFox", "c", $"grade:{grade+1} clear{clearAmount}");
 
             PopupManager.Instance.ShowConfirmPopup($"소탕", $"단계 : {grade+1} 소탕 : {clearAmount}\n보상 {CommonString.GetItemName(Item_Type.BlackFoxGoods)} {data.Rewardvalue * clearAmount}개", null);
         });
@@ -235,7 +235,7 @@ public class UiBlackFoxBoard : MonoBehaviour
              ServerData.SendTransaction(transactions, successCallBack: () =>
                {
                    PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
-                   LogManager.Instance.SendLogType("BlackFox", "초기화", $"{newTotal}개");
+                   //LogManager.Instance.SendLogType("BlackFox", "초기화", $"{newTotal}개");
                });
 
          }, () => { });

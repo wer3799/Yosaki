@@ -234,12 +234,12 @@ public class BattleContestManager : ContentsManagerBase
     {
         var data = TableManager.Instance.BattleContestTable.dataArray[GameManager.Instance.bossId];
         
-        List<UiRewardView.RewardData> winData = new List<UiRewardView.RewardData>();
+        List<RewardData> winData = new List<RewardData>();
 
         for (int i = 0; i < data.Winvalue.Length; i++)
         {
             //패배시 재화를 빼야함
-            var win = new UiRewardView.RewardData((Item_Type)data.Rewardtype[i],data.Winvalue[i]-data.Losevalue[i]);
+            var win = new RewardData((Item_Type)data.Rewardtype[i],data.Winvalue[i]-data.Losevalue[i]);
             winData.Add(win);
         }
         Param goodsParam = new Param();

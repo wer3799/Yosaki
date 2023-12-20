@@ -552,6 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7864103627325146558}
   - component: {fileID: 7196461315324741171}
+  - component: {fileID: 7542232619749212334}
   m_Layer: 5
   m_Name: DragonBoss3Board
   m_TagString: Untagged
@@ -598,6 +599,18 @@ MonoBehaviour:
   Boss:
   - {fileID: 7117280281774069762}
   BossIdx: bc000000
+--- !u!114 &7542232619749212334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244874172689946435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939f6aa4a7d25cb48a5f56f0c4ae3928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2798422864126756989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1016,7 @@ MonoBehaviour:
   disableColor_text: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   useButtonColor: 1
   initDefaultSetting: 1
+  initOnlyUISetting: 0
 --- !u!1 &5385748703756324502
 GameObject:
   m_ObjectHideFlags: 0
