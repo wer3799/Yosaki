@@ -89,6 +89,11 @@ public class SasinsuPowerAwakeBoard : MonoBehaviour
         {
             str +=
                 $"\n<size=25>{CommonString.GetStatusName(StatusType.SuperCritical30DamPer)} {Utils.ConvertNum(PlayerStats.GetSasinsuAwakePowerAbility(StatusType.SuperCritical30DamPer)*100)}</size>";        }
+        else
+        {
+            str +=
+                $"\n<size=25>{CommonString.GetStatusName(StatusType.SuperCritical30DamPer)} 0</size>";        
+        }
         currentGradeText.SetText(str);
     }
 
