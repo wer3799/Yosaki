@@ -1373,11 +1373,9 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value++;
             }
-            //바캉스 이벤트 출석
-            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value != 0)
-            {
-                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value++;
-            }
+            //신년 출석 이벤트
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value++;
+            
 
         }
 

@@ -29,6 +29,12 @@ public class UiAttendEventBoard : MonoBehaviour
             var obj = Instantiate(prefab, parent);
             obj.Initialize(tableData[i], resultView);
         }
+
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value < 1)
+        {
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value = 1;
+            ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.eventAttendCount,false);
+        }
     }
 
     private void Subscribe()

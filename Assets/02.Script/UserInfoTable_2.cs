@@ -153,7 +153,7 @@ public class UserInfoTable_2
         { yorinAttendRewarded, 0f },
         { eventAttendRewarded, 0f },
         { eventMission2AttendCount, 0f },
-        { eventAttendCount, 0f },
+        { eventAttendCount, 1f },
         
         { monkeyGodScore, 0f },
         { swordGodScore, 0f },
