@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BackEnd;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -27,11 +28,18 @@ public class UiBattleContestMatchingBoard : MonoBehaviour
 
     void Start()
     {
-        UpdateWinText();
-        UpdateReward();
-        UpdateRankRangeText();
+        Subscribe();
     }
 
+    private void Subscribe()
+    {
+        ServerData.etcServerTable.TableDatas[EtcServerTable.battleWinScore].AsObservable().Subscribe(e =>
+        {
+            UpdateWinText();
+            UpdateReward();
+            UpdateRankRangeText();
+        }).AddTo(this);
+    }
     private void UpdateWinText()
     {
         var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.battleWinScore].Value.Split(BossServerTable.rewardSplit);

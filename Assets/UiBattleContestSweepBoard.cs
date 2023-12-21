@@ -34,8 +34,22 @@ public class UiBattleContestSweepBoard : MonoBehaviour
         UpdateUi();
 
         Subscribe();
-        
 
+
+        isInitialize = true;
+    }
+
+    private bool isInitialize = false;
+    private void OnEnable()
+    {
+        if (isInitialize == false)
+        {
+            return;
+        }
+        currentIdx = GetCurrentIdx(currentRank);
+
+        UpdateUi();
+        
     }
 
     private void Subscribe()
@@ -61,7 +75,7 @@ public class UiBattleContestSweepBoard : MonoBehaviour
     public int GetCurrentIdx(int rankIdx)
     {
         var tableData = TableManager.Instance.BattleContestTable.dataArray;
-        var data = new BattleContestTableData();
+        var data = new BattleContestTableData(){Id = 4};
 
         foreach (var t in tableData)
         {
@@ -184,8 +198,8 @@ public class UiBattleContestSweepBoard : MonoBehaviour
         string desc = "";
             desc +=
                 $"{tableData.Name} 난이도를 {inputNum}번 소탕하여\n" +
-                $"{CommonString.GetItemName(rewardData[0].itemType)} {Utils.ConvertNum(rewardData[0].amount)}점," +
-                $"{CommonString.GetItemName(rewardData[1].itemType)} {Utils.ConvertNum(rewardData[1].amount)}개를 획득 하시겠습니까?";
+                $"{CommonString.GetItemName(rewardData[0].itemType)} {Utils.ConvertNum(rewardData[0].amount*inputNum)}점," +
+                $"{CommonString.GetItemName(rewardData[1].itemType)} {Utils.ConvertNum(rewardData[1].amount*inputNum)}개를 획득 하시겠습니까?";
         
         PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
             desc,
@@ -264,8 +278,8 @@ public class UiBattleContestSweepBoard : MonoBehaviour
                     {
                         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
                             $"소탕 완료!\n"+
-                            $"{CommonString.GetItemName(rewardData[0].itemType)} {Utils.ConvertNum(rewardData[0].amount)}점," +
-                            $"{CommonString.GetItemName(rewardData[1].itemType)} {Utils.ConvertNum(rewardData[1].amount)}개 획득!"
+                            $"{CommonString.GetItemName(rewardData[0].itemType)} {Utils.ConvertNum(rewardData[0].amount*inputNum)}점," +
+                            $"{CommonString.GetItemName(rewardData[1].itemType)} {Utils.ConvertNum(rewardData[1].amount*inputNum)}개 획득!"
                             , null);
 
                         //남은재화(소탕권) / 사용한재화(소탕권) / 획득한 재화갯수
