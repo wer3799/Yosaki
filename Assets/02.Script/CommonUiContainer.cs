@@ -181,6 +181,9 @@ public Sprite weapon148;
 public Sprite weapon149;
 public Sprite weapon150;
 public Sprite weapon151;
+public Sprite weapon152;
+public Sprite weapon153;
+public Sprite weapon154;
     
 [Header ("Weapon_View")]
 
@@ -334,6 +337,9 @@ public Sprite RecommendWeapon22;
     public Sprite magicBook116;
     public Sprite magicBook117;
     public Sprite magicbook123;
+    public Sprite magicbook124;
+    public Sprite magicbook125;
+    public Sprite magicbook126;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -565,6 +571,7 @@ public Sprite RecommendWeapon22;
     public Sprite WT;
     public Sprite SG;
     public Sprite SC;
+    public Sprite SB;
     [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     public Sprite GuildTowerClearTicket;
@@ -1118,6 +1125,16 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[184];
             case Item_Type.costume185:
                 return costumeThumbnail[185];
+            case Item_Type.costume186:
+                return costumeThumbnail[186];
+            case Item_Type.costume187:
+                return costumeThumbnail[187];
+            case Item_Type.costume188:
+                return costumeThumbnail[188];
+            case Item_Type.costume189:
+                return costumeThumbnail[189];
+            case Item_Type.costume190:
+                return costumeThumbnail[190];
 
 
             case Item_Type.RankFrame1:
@@ -1658,6 +1675,8 @@ public Sprite RecommendWeapon22;
                 return SG;   
             case Item_Type.SC:
                 return SC;   
+            case Item_Type.SB:
+                return SB;   
             case Item_Type.DPT:
                 return DragonPalaceTreasure;   
             
@@ -1977,6 +1996,12 @@ public Sprite RecommendWeapon22;
                 return magicbook122;
             case Item_Type.magicBook123:
                 return magicbook123;
+            case Item_Type.magicBook124:
+                return magicbook124;
+            case Item_Type.magicBook125:
+                return magicbook125;
+            case Item_Type.magicBook126:
+                return magicbook126;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2729,6 +2754,12 @@ public Sprite RecommendWeapon22;
                 return weapon150;
             case Item_Type.weapon151:
                 return weapon151;
+            case Item_Type.weapon152:
+                return weapon152;
+            case Item_Type.weapon153:
+                return weapon153;
+            case Item_Type.weapon154:
+                return weapon154;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

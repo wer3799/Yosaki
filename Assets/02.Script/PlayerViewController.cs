@@ -11,6 +11,9 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
     [SerializeField]
     private SkeletonGraphic skeletonGraphic;
 
+    [SerializeField]
+    private SkeletonGraphic munHaSkeletonGraphic;
+
     private AnimState animState;
 
     private string CurrentAnimation;
@@ -117,6 +120,7 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
         if (isAttackAnim)
         {
             skeletonGraphic.timeScale = 4f;
+            munHaSkeletonGraphic.timeScale = 4f;
             if (attackAnimEndRoutine != null)
             {
                 StopCoroutine(attackAnimEndRoutine);
@@ -127,12 +131,14 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
         else
         {
             skeletonGraphic.timeScale = 2f;
+            munHaSkeletonGraphic.timeScale = 2f;
         }
 
         bool loop = animName.Equals(Anim_Idle) || animName.Equals(Anim_Run);
 
 
         skeletonGraphic.AnimationState.SetAnimation(0, animName, loop);
+        munHaSkeletonGraphic.AnimationState.SetAnimation(0, animName, loop);
 
         CurrentAnimation = animName;
     }

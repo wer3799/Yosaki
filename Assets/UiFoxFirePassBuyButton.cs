@@ -5,19 +5,21 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 
-public class UiFoxFirePassBuyButton : MonoBehaviour
+public class UiFoxFirePassBuyButton : PassBuyButton
 {
     [SerializeField]
     private TextMeshProUGUI descText;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string PassKey = "foxfirepass";
 
     private Button buyButton;
 
     void Start()
     {
+        SetPassKey(foxfirePassKey);
+
+        
         Subscribe();
     }
 
@@ -32,7 +34,7 @@ public class UiFoxFirePassBuyButton : MonoBehaviour
 
         disposable.Clear();
 
-        ServerData.iapServerTable.TableDatas[PassKey].buyCount.AsObservable().Subscribe(e =>
+        ServerData.iapServerTable.TableDatas[seasonPassKey].buyCount.AsObservable().Subscribe(e =>
         {
             descText.SetText(e >= 1 ? "구매완료" : "패스권 구매");
             this.gameObject.SetActive(e <= 0);
@@ -57,47 +59,18 @@ public class UiFoxFirePassBuyButton : MonoBehaviour
 
     public void OnClickBuyButton()
     {
-        if (ServerData.iapServerTable.TableDatas[PassKey].buyCount.Value >= 1)
+        if (ServerData.iapServerTable.TableDatas[seasonPassKey].buyCount.Value >= 1)
         {
             PopupManager.Instance.ShowAlarmMessage("이미 구매 했습니다.");
             return;
         }
 
 #if UNITY_EDITOR|| TEST
-        GetPackageItem(PassKey);
+        GetPackageItem(seasonPassKey);
         return;
 #endif
 
-        IAPManager.Instance.BuyProduct(PassKey);
+        IAPManager.Instance.BuyProduct(seasonPassKey);
     }
 
-    public void GetPackageItem(string productId)
-    {
-        if (productId.Equals("removeadios"))
-        {
-            productId = "removead";
-        }
-
-        if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
-            return;
-        }
-        else
-        {
-            // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
-        }
-
-        if (tableData.Productid != PassKey) return;
-
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
-
-        ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value += 50000;
-        
-        ServerData.goodsTable.UpData(GoodsTable.FoxRelic,false);
-
-        ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
-
-        ServerData.iapServerTable.UpData(tableData.Productid);
-    }
 }

@@ -431,6 +431,8 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 203:
                     case 205:
                     case 206:
+                    case 212:
+                    case 213:
                         lastBoards[(int)ContentsBoard.DragonPalaceBoard].SetActive(true);
                         break;
                         

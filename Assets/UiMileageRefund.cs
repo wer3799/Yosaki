@@ -817,9 +817,6 @@ public class UiMileageRefund : MonoBehaviour
         
             });
         }
-        
-        #endregion
-
         //12월 21일 업데이트
          if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 42)
          {           
@@ -909,6 +906,93 @@ public class UiMileageRefund : MonoBehaviour
                  }
              });
          }
+        
+        #endregion
+
+        //1월4일 업데이트
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 44)
+        {           
+             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 44;
+             
+             ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+             ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
+             ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";
+
+             var refundMileageSum = 0;
+             
+             if (ServerData.iapServerTable.TableDatas["petpass0"].buyCount.Value > 0)
+             {
+                 refundMileageSum += 5;
+             }
+             if (ServerData.iapServerTable.TableDatas["petpass1"].buyCount.Value > 0)
+             {
+                 refundMileageSum += 5;
+             }
+             if (ServerData.iapServerTable.TableDatas["petpass2"].buyCount.Value > 0)
+             {
+                 refundMileageSum += 5;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.dosulPassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 3;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.foxfirePassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 3;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.sealswordPassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 3;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.suhoPassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 3;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.blackfoxPassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 5;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.dosullevelPassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 3;
+             }
+             if (ServerData.iapServerTable.TableDatas[PassBuyButton.bimuPassKey].buyCount.Value > 0)
+             {
+                 refundMileageSum += 3;
+             }
+
+             ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value += refundMileageSum;
+            
+             
+             List<TransactionValue> transactions = new List<TransactionValue>();
+             
+             Param userInfo2Param = new Param();
+             //userInfo2Param.Add(UserInfoTable_2.eventAttendRewarded, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value);
+             transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+             
+             Param userInfoParam = new Param();
+             userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+             userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+             
+             Param goodsParam = new Param();
+             goodsParam.Add(GoodsTable.Mileage, ServerData.goodsTable.GetTableData(GoodsTable.Mileage).Value);
+    
+
+             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+             
+             Param passParam = new Param();
+             passParam.Add(ChildPassServerTable.childFree, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+             passParam.Add(ChildPassServerTable.childAd, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+             transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+
+             ServerData.SendTransactionV2(transactions, successCallBack: () =>
+             {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"패스 마일리지 소급 완료!\n" +
+                                                                           $"{CommonString.GetItemName(Item_Type.Mileage)} {refundMileageSum}개 소급",
+                    null);
+             });
+        }
         
     }
     

@@ -199,7 +199,7 @@ public class UiFoxFirePassSystem : FancyScrollView<FoxFirePassData_Fancy>
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiFoxFirePassBuyButton.PassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[PassBuyButton.foxfirePassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

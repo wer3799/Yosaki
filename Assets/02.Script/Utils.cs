@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Globalization;
+using BackEnd;
 using Firebase.Analytics;
 using Random = UnityEngine.Random;
 
@@ -221,7 +222,12 @@ public static class Utils
                type == Item_Type.costume182||
                type == Item_Type.costume183||
                type == Item_Type.costume184||
-               type == Item_Type.costume185
+               type == Item_Type.costume185||
+               type == Item_Type.costume186||
+               type == Item_Type.costume187||
+               type == Item_Type.costume188||
+               type == Item_Type.costume189||
+               type == Item_Type.costume190
             ;
     }
 
@@ -250,7 +256,8 @@ public static class Utils
                type == Item_Type.magicBook117||
                type == Item_Type.magicBook116||
                type == Item_Type.magicBook120||
-               type == Item_Type.magicBook123
+               type == Item_Type.magicBook123||
+               type == Item_Type.magicBook126
             ;
     }
 
@@ -260,7 +267,8 @@ public static class Utils
                type == Item_Type.weapon90||
                type == Item_Type.weapon131||
                type == Item_Type.weapon146||
-               type == Item_Type.weapon149
+               type == Item_Type.weapon149||
+               type == Item_Type.weapon154
             ;
     }
     public static bool IsPassPetItem(this Item_Type type)
@@ -471,6 +479,7 @@ public static class Utils
                type == Item_Type.magicBook123 ||
                type == Item_Type.weapon146 ||
                type == Item_Type.weapon149 ||
+               type == Item_Type.weapon154 ||
                type == Item_Type.DokebiHorn0 ||
                type == Item_Type.DokebiHorn1 ||
                type == Item_Type.DokebiHorn2 ||
@@ -552,6 +561,9 @@ public static class Utils
                type == Item_Type.ByeolhoClear ||
                type == Item_Type.GuildTowerHorn||
                type == Item_Type.BattleClear||
+               type == Item_Type.SG||
+               type == Item_Type.SC||
+               type == Item_Type.SB||
                type == Item_Type.GuimoonRelic||
                type == Item_Type.GuimoonRelicClearTicket
             ;
@@ -564,12 +576,24 @@ public static class Utils
 
     public static bool IsWeaponItem(this Item_Type type)
     {
-        return type >= Item_Type.weapon0 && type <= Item_Type.weapon42;
+        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon42)||
+               type == Item_Type.weapon149||
+               type == Item_Type.weapon150||
+               type == Item_Type.weapon151||
+               type == Item_Type.weapon152||
+               type == Item_Type.weapon153||
+               type == Item_Type.weapon154;
     }
 
     public static bool IsNorigaeItem(this Item_Type type)
     {
-        return type >= Item_Type.magicBook0 && type <= Item_Type.magicBook11;
+        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook11)||
+               type==Item_Type.magicBook121||
+               type==Item_Type.magicBook122||
+               type==Item_Type.magicBook123||
+               type==Item_Type.magicBook124||
+               type==Item_Type.magicBook125||
+               type==Item_Type.magicBook126;
     }
 
     public static bool IsSkillItem(this Item_Type type)
@@ -1162,5 +1186,11 @@ public static class Utils
     {
         // c가 a와 b 사이에 있는지 확인
         return (c >= Mathf.Min(a, b) && c <= Mathf.Max(a, b));
+    }
+    public static DateTime GetBackendServerTime()
+    {
+        BackendReturnObject servertime = Backend.Utils.GetServerTime();
+        string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
+        return DateTime.Parse(time).ToUniversalTime().AddHours(9);
     }
 }

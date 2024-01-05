@@ -126,6 +126,8 @@ public enum StatusType
     TaegeukGoodsGainPer,//태극 획득 증가
     EnhanceTransCritical,//초월증폭
     SuperCritical30DamPer,//신력피해(%)
+    BigiDamPer=106,//비기 추가 피해량 증가(%)
+    DragonPalaceHasValueUpgrade,//용궁 재화당 개수증가
 }
 
 
@@ -371,6 +373,30 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetCostumeSpecialAbilityValue(StatusType statusType)
+    {
+        float ret = 0f;
+
+        var tableData = TableManager.Instance.CostumeSpecialAbility.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].Abilitytype != (int)statusType) continue;
+
+            var serverData = ServerData.costumeSpecialAbilityServerTable.TableDatas[tableData[i].Stringid];
+
+            int level = serverData.level.Value;
+
+
+            if (level != 0)
+            {
+                ret += level * tableData[i].Abilityvalue;
+            }
+        }
+
+
+        return ret;
+    }
 
     public static float GetPassiveAdvanceValue()
     {
@@ -587,7 +613,7 @@ public static class PlayerStats
 
         if (ActiveSmithValue(type))
         {
-            ret = ret * GetSmithValue(StatusType.WeaponHasUp);
+            ret = ret * (GetSmithValue(StatusType.WeaponHasUp)+GetCostumeSpecialAbilityValue(StatusType.WeaponHasUp));
         }
         else
         {
@@ -824,7 +850,7 @@ public static class PlayerStats
 
         if (ActiveSmithValue(type))
         {
-            ret = ret * GetSmithValue(StatusType.NorigaeHasUp);
+            ret = ret * (GetSmithValue(StatusType.NorigaeHasUp)+GetCostumeSpecialAbilityValue(StatusType.NorigaeHasUp));
         }
         else
         {
@@ -2216,6 +2242,9 @@ public static class PlayerStats
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical28DamPer);
         
+        ret += GetRelicHasEffect(StatusType.SuperCritical28DamPer);
+
+        
         ret += ServerData.statusTable.GetStatusValue(StatusTable.DragonPlace_memory);
 
         return ret;
@@ -2260,6 +2289,19 @@ public static class PlayerStats
         
         ret += GetSasinsuPowerAbility(StatusType.SealSwordDam,2);
 
+        
+        return ret;
+    }
+    //비기 추가 피해량
+    public static float GetBigiDamPer()
+    {
+        
+        float ret = 0f;
+
+        ret += GetMunhaAbility(StatusType.BigiDamPer);
+        
+        ret += GetMunhaTowerAbility();
+        
         
         return ret;
     }
@@ -3386,7 +3428,8 @@ public static class PlayerStats
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 17900-2) return 0f;
 
-        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value * (GameBalance.dragonPalaceTreasureAbilValue));
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value *
+                (GameBalance.dragonPalaceTreasureAbilValue + GetDragonPalaceHasValueUpgrade()));
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -4203,6 +4246,26 @@ public static class PlayerStats
         for (int i = 0; i < tableData.Length; i++)
         {
             if (score >= tableData[i].Rewrardcut)
+            {
+                grade = i;
+            }
+        }
+
+
+        return grade;
+    }
+    public static int GetMunhaTowerGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.StudentAwakeTable.dataArray;
+
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.munhaScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Score)
             {
                 grade = i;
             }
@@ -6325,6 +6388,7 @@ public static class PlayerStats
 
         ret += GetPassiveSkill2Value(StatusType.FlowerHasValueUpgrade);
 
+        ret += GetCostumeSpecialAbilityValue(StatusType.FlowerHasValueUpgrade);
 
         return ret;
     }
@@ -6337,6 +6401,9 @@ public static class PlayerStats
 
         ret += GetPassiveSkill2Value(StatusType.HellHasValueUpgrade);
 
+        ret += GetCostumeSpecialAbilityValue(StatusType.HellHasValueUpgrade);
+
+        
         return ret;
     }
 
@@ -6350,6 +6417,9 @@ public static class PlayerStats
 
         ret += GetPassiveSkill2Value(StatusType.DokebiFireHasValueUpgrade);
 
+        ret += GetCostumeSpecialAbilityValue(StatusType.DokebiFireHasValueUpgrade);
+
+        
         return ret;
     }
 
@@ -6362,6 +6432,8 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.TreasureHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.TreasureHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.TreasureHasValueUpgrade);
 
         return ret;
     }
@@ -6375,6 +6447,8 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.DarkHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.DarkHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.DarkHasValueUpgrade);
 
         return ret;
     }
@@ -6388,6 +6462,10 @@ public static class PlayerStats
 
         ret += GetPassiveSkill2Value(StatusType.SinsunHasValueUpgrade);
 
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.SinsunHasValueUpgrade);
+
+        
         return ret;
     }
     public static float GetGwisalTreasureHasAddValue()
@@ -6399,6 +6477,8 @@ public static class PlayerStats
         ret += GetHyunSangTowerAbilValue(StatusType.HyunsangHasValueUpgrade);
         
         ret += GetPassiveSkill2Value(StatusType.HyunsangHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.HyunsangHasValueUpgrade);
 
         return ret;
     }
@@ -6410,6 +6490,20 @@ public static class PlayerStats
         
         ret += GetSkillHasValue(StatusType.DragonHasValueUpgrade);
         
+        ret += GetCostumeSpecialAbilityValue(StatusType.DragonHasValueUpgrade);
+        
+        return ret;
+    }
+    public static float GetDragonPalaceHasValueUpgrade()
+    {
+        float ret = 0f;
+        
+        ret += GetPassiveSkill2Value(StatusType.DragonPalaceHasValueUpgrade);
+        
+        ret += GetSkillHasValue(StatusType.DragonPalaceHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.DragonPalaceHasValueUpgrade);
+
         return ret;
     }
     public static float GetPeachAbilValue()
@@ -6419,6 +6513,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.PeachAbilUpgradePer);
 
         ret += GetMonkeyGodAbil0();
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.PeachAbilUpgradePer);
 
         return ret;
     }
@@ -6580,6 +6676,9 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.SumiHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.SumiHasValueUpgrade);
+            
+        ret += GetCostumeSpecialAbilityValue(StatusType.SumiHasValueUpgrade);
+
         return ret;
     }
 
@@ -6760,6 +6859,25 @@ public static class PlayerStats
         }
         return grade;
     }
+    public static int GetMunhaDispatchGrade()
+    {
+        var grade = 0;
+        
+        var tableData = TableManager.Instance.StudentDispatch.dataArray;
+        
+        var currentLv = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.munhaLevel).Value;
+        
+        for (int i = 0; i<tableData.Length; i++)
+        {
+            if (tableData[i].Maxlevel >= currentLv && tableData[i].Minlevel <= currentLv)
+            {
+                grade = i;
+                break;
+            }
+        }
+
+        return grade;
+    }
 //0현무 1청룡 2주작 3백호
     public static float GetSasinsuPowerAbility(StatusType statusType,int idx)
     {
@@ -6799,5 +6917,36 @@ public static class PlayerStats
         }
 
         return sum;
+    }
+    
+    
+    //문하생
+    public static float GetMunhaAbility(StatusType statusType)
+    {
+        var ret = 0f;
+
+        var idx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.munhaLevel).Value;
+
+        if (idx == -1) return 0f;
+        
+        var tableData = TableManager.Instance.StudentTable.dataArray[idx];
+        
+        if(statusType!=(StatusType)tableData.Abil_Type) return 0f;
+        
+        return tableData.Abil_Value;
+
+    }//문하생
+    public static float GetMunhaTowerAbility()
+    {
+        var ret = 0f;
+
+        var idx = GetMunhaTowerGrade();
+
+        if (idx == -1) return 0f;
+        
+        var tableData = TableManager.Instance.StudentAwakeTable.dataArray[idx];
+        
+        return tableData.Awakevalue;
+
     }
 }

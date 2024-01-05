@@ -587,6 +587,7 @@ public static class GameBalance
     
     public static ObscuredInt MeditationHour = 24;// 명상시간
     public static ObscuredInt PetDispatchHour = 20;// 펫파견시간
+    public static ObscuredInt MunhaDispatchHour = 12;// 문하생파견시간
     
     public static ObscuredInt DosulAwakeRequireLevel = 99;// 필요 도술 ID
     
@@ -615,7 +616,7 @@ public static class GameBalance
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","미정16","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "피","동","멸","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
 
     };
     public static int GetSonIdx()

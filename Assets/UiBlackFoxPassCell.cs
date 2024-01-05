@@ -205,7 +205,7 @@ public class UiBlackFoxPassCell : MonoBehaviour
     }
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiBlackFoxPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[PassBuyButton.blackfoxPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

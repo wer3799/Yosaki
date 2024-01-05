@@ -205,7 +205,7 @@ public class UiDosulLevelPassCell : MonoBehaviour
     }
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiDosulLevelPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[PassBuyButton.dosullevelPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

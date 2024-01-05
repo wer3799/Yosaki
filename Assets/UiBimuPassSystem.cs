@@ -196,6 +196,6 @@ public class UiBimuPassSystem : MonoBehaviour
 
     private bool HasPassItem()
     {
-        return ServerData.iapServerTable.TableDatas[UiBimuPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas[PassBuyButton.bimuPassKey].buyCount.Value > 0;
     }
 }

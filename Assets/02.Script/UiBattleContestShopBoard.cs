@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiBattleContestShopBoard : MonoBehaviour
@@ -14,9 +15,10 @@ public class UiBattleContestShopBoard : MonoBehaviour
     
     [SerializeField] private UiBattleContestSpecialShopCell costumeCell;
 
-    [SerializeField] private Transform cellParent;
+    [FormerlySerializedAs("cellParent")] [SerializeField] private Transform costumeParent;
+    [FormerlySerializedAs("cellParent")] [SerializeField] private Transform equipmentParent;
+    [FormerlySerializedAs("cellParent")] [SerializeField] private Transform etcParent;
 
-    [SerializeField] private SkeletonGraphic skeletonGraphic;
     private void Start()
     {
          Initialize();
@@ -28,19 +30,17 @@ public class UiBattleContestShopBoard : MonoBehaviour
 
         foreach (var t in tableData2)
         {
-            if (t.Id == 0)
+            if (t.Shopcategory==0)
             {
-                costumeCell.Initialize(t);
-                skeletonGraphic.Clear();
-                var idx = ServerData.costumeServerTable.TableDatas[((Item_Type)t.Itemtype).ToString()].idx;
-                skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
-                skeletonGraphic.Initialize(true);
-                skeletonGraphic.SetMaterialDirty();
+                var cell = Instantiate<UiBattleContestSpecialShopCell>(costumeCell, costumeParent);
+
+                cell.Initialize(t);
+
                 
             }
             else
             {
-                var cell = Instantiate<UiBattleContestSpecialShopCell>(prefab2, cellParent);
+                var cell = Instantiate<UiBattleContestSpecialShopCell>(prefab2, equipmentParent);
                 cell.Initialize(t);    
             }
             
@@ -52,7 +52,7 @@ public class UiBattleContestShopBoard : MonoBehaviour
         {
             if (t.COMMONTABLEEVENTTYPE != CommonTableEventType.BattleContest) continue;
             if (t.Active == false) continue;
-            var cell = Instantiate<UiBattleContestShopCell>(prefab, cellParent);
+            var cell = Instantiate<UiBattleContestShopCell>(prefab, etcParent);
 
             cell.Initialize(t);
         }

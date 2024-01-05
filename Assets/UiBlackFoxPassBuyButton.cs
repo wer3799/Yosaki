@@ -6,20 +6,20 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 
-public class UiBlackFoxPassBuyButton : MonoBehaviour
+public class UiBlackFoxPassBuyButton : PassBuyButton
 {
     [SerializeField]
     private TextMeshProUGUI descText;
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string seasonPassKey = "blackfoxpass0";
-    
     private Button buyButton;
 
 
     void Start()
     {
+        SetPassKey(blackfoxPassKey);
+
         Subscribe();
     }
 
@@ -74,29 +74,4 @@ public class UiBlackFoxPassBuyButton : MonoBehaviour
         IAPManager.Instance.BuyProduct(seasonPassKey);
     }
 
-    public void GetPackageItem(string productId)
-    {
-        if (productId.Equals("removeadios"))
-        {
-            productId = "removead";
-        }
-
-        if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
-            return;
-        }
-        else
-        {
-            // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
-        }
-
-        if (tableData.Productid != seasonPassKey) return;
-
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
-
-        ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
-
-        ServerData.iapServerTable.UpData(tableData.Productid);
-    }
 }

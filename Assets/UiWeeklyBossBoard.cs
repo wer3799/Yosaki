@@ -15,6 +15,7 @@ public class UiWeeklyBossBoard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gradeText; 
     [SerializeField] private TextMeshProUGUI topScoreText;
     [SerializeField] private TextMeshProUGUI sweepCountText;
+    [SerializeField] private TextMeshProUGUI getCostumeButtonText;
 
     [SerializeField] private WeeklyBossRewardCell prefab;
     [SerializeField] private Transform prefabParent;
@@ -22,7 +23,8 @@ public class UiWeeklyBossBoard : MonoBehaviour
 
     [SerializeField] private UiRewardResultView sweepPopup;
     [SerializeField] private UiRewardResultView rewardPopup;
-        
+    string costumeKey = "costume190";
+
     private List<WeeklyBossRewardCell> cellContainer = new List<WeeklyBossRewardCell>();
     private List<RewardData> rewardDatas = new List<RewardData>();
 
@@ -46,6 +48,17 @@ public class UiWeeklyBossBoard : MonoBehaviour
 
         
         UpdateUi();
+        
+        Subscribe();
+    }
+
+    private void Subscribe()
+    {
+        ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.AsObservable().Subscribe(e =>
+        {
+            getCostumeButtonText.SetText(e ==true ? "보유중" : "획득");
+            ;
+        }).AddTo(this);
     }
     #if UNITY_EDITOR
     private void Update()
@@ -237,6 +250,41 @@ public class UiWeeklyBossBoard : MonoBehaviour
                     
         });
     }
-    
+    public void OnClickGetCostumeButton()
+    {
+        if (ServerData.bossScoreTable.GetTableData(BossScoreTable.weeklyBossScore).Value.IsNullOrEmpty())
+        {
+            PopupManager.Instance.ShowAlarmMessage("적안 마수 30단계 달성이 필요합니다!");
+            return;
+        }
+        if (double.Parse(ServerData.bossScoreTable.GetTableData(BossScoreTable.weeklyBossScore).Value)*GameBalance.BossScoreConvertToOrigin< 1E+188)
+        {
+            PopupManager.Instance.ShowAlarmMessage("적안 마수 30단계 달성이 필요합니다!");
+            return;
+        }
+        
+ 
+        
+        if(ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.Value==true)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이미 보유중입니다!");
+            return;
+        };
+        ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.Value = true;
+        
+        List<TransactionValue> transactions = new List<TransactionValue>();
+
+        Param costumeParam = new Param();
+
+        costumeParam.Add(costumeKey.ToString(), ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
+
+        transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+
+        ServerData.SendTransactionV2(transactions, successCallBack: () =>
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
+        });
+    }
     
 }

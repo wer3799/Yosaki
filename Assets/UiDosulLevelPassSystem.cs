@@ -193,6 +193,6 @@ public class UiDosulLevelPassSystem : MonoBehaviour
 
     private bool HasPassItem()
     {
-        return ServerData.iapServerTable.TableDatas[UiDosulLevelPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas[PassBuyButton.dosullevelPassKey].buyCount.Value > 0;
     }
 }

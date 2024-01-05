@@ -21,6 +21,7 @@ public class StatusTable
     public const string Skill2Point = "Skill2Point";
     public const string StatPoint = "StatPoint";
     public const string Memory = "memory";
+    public const string CostumeSkillPoint = "CostumeSkillPoint";
 
     public const string AttackLevel_Gold = "AttackLevel_Gold";
     public const string CriticalLevel_Gold = "CriticalLevel_Gold";
@@ -94,6 +95,7 @@ public class StatusTable
         { Level, 1 },
         { SkillPoint, GameBalance.SkillPointGet },
         { Skill2Point, 0 },
+        { CostumeSkillPoint, 0 },
         { StatPoint, 0 },
         { Memory, 0 },
         { AttackLevel_Gold, 0 },

@@ -14,3 +14,7 @@ public class DosulSkill0 : TraceSlash0
 {
 }
 
+public class StudentSkill0 : TraceSlash0
+{
+}
+

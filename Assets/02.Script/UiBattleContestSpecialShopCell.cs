@@ -15,7 +15,16 @@ public class UiBattleContestSpecialShopCell : MonoBehaviour
     [SerializeField] private TextMeshProUGUI requireText;
 
     private BattleContestSpecialExchangeData tableData;
-    
+    [SerializeField] private SkeletonGraphic skeletonGraphic;
+
+    private void ChangeCostume()
+    {
+        var idx = ServerData.costumeServerTable.TableDatas[((Item_Type)tableData.Itemtype).ToString()].idx;
+        skeletonGraphic.Clear();
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        skeletonGraphic.Initialize(true);
+        skeletonGraphic.SetMaterialDirty();
+    }
     private void Subscribe()
     {
         string itemKey = ((Item_Type)tableData.Itemtype).ToString();
@@ -80,7 +89,11 @@ public class UiBattleContestSpecialShopCell : MonoBehaviour
         itemIcon.sprite = CommonUiContainer.Instance.GetItemIcon((Item_Type)tableData.Itemtype);
         
         titleText.SetText($"{CommonString.GetItemName((Item_Type)tableData.Itemtype)}");
-        
+
+        if (((Item_Type)tableData.Itemtype).IsCostumeItem())
+        {
+            ChangeCostume();
+        }
         Subscribe();
     }
     private bool IsCostumeItem()

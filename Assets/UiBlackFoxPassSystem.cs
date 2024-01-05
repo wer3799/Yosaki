@@ -210,6 +210,6 @@ public class UiBlackFoxPassSystem : MonoBehaviour
 
     private bool HasPassItem()
     {
-        return ServerData.iapServerTable.TableDatas[UiBlackFoxPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        return ServerData.iapServerTable.TableDatas[PassBuyButton.blackfoxPassKey].buyCount.Value > 0;
     }
 }

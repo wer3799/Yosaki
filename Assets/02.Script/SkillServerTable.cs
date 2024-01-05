@@ -433,6 +433,12 @@ public class SkillServerTable
         }
 
 
+        if (tableData.SKILLCASTTYPE == SkillCastType.Student)
+        {
+            return ret * (1 + PlayerStats.GetBigiDamPer());
+        }
+
+
         return ret;
     }
 

@@ -293,6 +293,7 @@ public class GoodsTable
     public static string WT = "WT";
     public static string SG = "SG";
     public static string SC = "SC";
+    public static string SB = "SB";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -564,6 +565,7 @@ public class GoodsTable
         { WT, GameBalance.WeeklyTicketWeeklyGetAmount },
         { SG, 0f },
         { SC, GameBalance.SinsuClearDailyGetAmount },
+        { SB, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -1913,6 +1915,10 @@ public class GoodsTable
             {
                 return GoodsTable.SC;
             }
+            case Item_Type.SB:
+            {
+                return GoodsTable.SB;
+            }
             
             case Item_Type.SuhoTreasure:
             {
@@ -2720,6 +2726,10 @@ public class GoodsTable
         else if (GoodsTable.SC == type)
         {
             return Item_Type.SC;
+        }
+        else if (GoodsTable.SB == type)
+        {
+            return Item_Type.SB;
         }
 
         else if (GoodsTable.DragonPalaceTreasure == type)

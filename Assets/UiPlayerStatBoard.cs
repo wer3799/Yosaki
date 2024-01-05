@@ -294,6 +294,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
             //궁극기술
             description1 +=
                 $"{CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} : {Utils.ConvertNum(PlayerStats.GetEnhanceVisionSkill() * 100f)}\n";
+            //비기
+            description1 +=
+                $"{CommonString.GetStatusName(StatusType.BigiDamPer)} : {Utils.ConvertNum(PlayerStats.GetBigiDamPer() * 100f)}\n";
 
             descriptionBoard1.SetText(description1);
 

@@ -32,4 +32,8 @@ public class BattleContestSpecialExchangeData
   int wincount;
   public int Wincount { get {return wincount; } set { this.wincount = value;} }
   
+  [SerializeField]
+  int shopcategory;
+  public int Shopcategory { get {return shopcategory; } set { this.shopcategory = value;} }
+  
 }

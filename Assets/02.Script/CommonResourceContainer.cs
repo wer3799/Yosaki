@@ -480,6 +480,11 @@ public static class CommonResourceContainer
         return GetPassiveSkill2IconSprite(TableManager.Instance.PassiveSkill2.dataArray[idx]);
     }
 
+    public static Sprite GetCostumeSpecialAbilityIconSprite(int idx)
+    {
+        return GetCostumeSpecialAbilityIconSprite(TableManager.Instance.CostumeSpecialAbility.dataArray[idx]);
+    }
+
     public static Sprite GetPassiveSkillIconSprite(PassiveSkillData skillData)
     {
         return Resources.Load<Sprite>($"PassiveSkillIcon/{skillData.Id}");
@@ -487,6 +492,11 @@ public static class CommonResourceContainer
     public static Sprite GetPassiveSkill2IconSprite(PassiveSkill2Data skillData)
     {
         return Resources.Load<Sprite>($"PassiveSkill2Icon/{skillData.Id}");
+    }
+
+    public static Sprite GetCostumeSpecialAbilityIconSprite(CostumeSpecialAbilityData skillData)
+    {
+        return Resources.Load<Sprite>($"CostumeSpecialAbilityIcon/{skillData.Id}");
     }
 
     public static Sprite GetSusanoIcon()

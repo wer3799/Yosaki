@@ -199,7 +199,7 @@ public class UiSealSwordPassSystem : FancyScrollView<SealSwordPassData_Fancy>
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiSealSwordPassBuyButton.PassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[PassBuyButton.sealswordPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

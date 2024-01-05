@@ -39,12 +39,14 @@ public class DamageCalculator : MonoBehaviour
         var dosul = DamageCalculateManager.Instance.dosulDamage.Value;   
         var sealSword = DamageCalculateManager.Instance.sealSwordDamage.Value;   
         var vision = DamageCalculateManager.Instance.VisionDamage.Value;   
-        var sum = normal+dosul+sealSword+vision;   
+        var munha = DamageCalculateManager.Instance.MunhaDamage.Value;   
+        var sum = normal+dosul+sealSword+vision+munha;   
         calculatorText.SetText($"딜 미터기\n" +
                                $"기본 : {Utils.ConvertBigNum(normal)}({Utils.ConvertNum((normal/sum*100),2)}%)\n" +
                                $"도술 : {Utils.ConvertBigNum(dosul)}({Utils.ConvertNum((dosul/sum*100),2)}%)\n" +
                                $"요도 : {Utils.ConvertBigNum(sealSword)}({Utils.ConvertNum((sealSword/sum*100),2)}%)\n" +
                                $"필살 : {Utils.ConvertBigNum(vision)}({Utils.ConvertNum((vision/sum*100),2)}%)\n" +
+                               $"문하 : {Utils.ConvertBigNum(munha)}({Utils.ConvertNum((munha/sum*100),2)}%)\n" +
                                $"합계 : {Utils.ConvertBigNum(sum)}");
     }
     

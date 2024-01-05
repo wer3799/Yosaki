@@ -283,8 +283,12 @@ public class UserInfoTable
     public const string exchangeCount_23_Mileage = "m23";
     public const string exchangeCount_24_Mileage = "m24";
     public const string exchangeCount_25_Mileage = "m25";
+    public const string exchangeCount_26_Mileage = "m26";
+    public const string exchangeCount_27_Mileage = "m27";
+    public const string exchangeCount_28_Mileage = "m28";
+    public const string exchangeCount_29_Mileage = "m29";
 
-
+ 
     public const string ny_ex_0 = "ny_ex_0";
     public const string ny_ex_1 = "ny_ex_1";
     public const string ny_ex_2 = "ny_ex_2";
@@ -635,6 +639,10 @@ public class UserInfoTable
         { exchangeCount_23_Mileage, 0 },
         { exchangeCount_24_Mileage, 0 },
         { exchangeCount_25_Mileage, 0 },
+        { exchangeCount_26_Mileage, 0 },
+        { exchangeCount_27_Mileage, 0 },
+        { exchangeCount_28_Mileage, 0 },
+        { exchangeCount_29_Mileage, 0 },
 
         { ny_ex_0, 0 },
         { ny_ex_1, 0 },
@@ -794,8 +802,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 42);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(42));
+                            defultValues.Add(e.Current.Key, 43);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(44));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1524,6 +1532,10 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_23_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_24_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_25_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_26_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_27_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_28_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_29_Mileage).Value = 0;
 
             userInfoParam.Add(UserInfoTable.exchangeCount_0_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_1_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value);
@@ -1552,6 +1564,10 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.exchangeCount_23_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_23_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_24_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_24_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_25_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_25_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_26_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_26_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_27_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_27_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_28_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_28_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_29_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_29_Mileage).Value);
         }
 
         Param iapParam = null;

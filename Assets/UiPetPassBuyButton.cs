@@ -1,34 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using Photon.Pun.Demo.Cockpit;
 using TMPro;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 
-public class UiPetPassBuyButton : MonoBehaviour
+public class UiPetPassBuyButton : PassBuyButton
 {
     [SerializeField]
     private TextMeshProUGUI descText;
 
     private CompositeDisposable disposable = new CompositeDisposable();
-
-    private string seasonPassKey;
     
     private Button buyButton;
-
-
-    public void SetPassKey(string key)
-    {
-        seasonPassKey = key;
-    }
-
 
     private void OnDestroy()
     {
         disposable.Dispose();
     }
-
     public void Subscribe()
     {
         buyButton = GetComponent<Button>();
@@ -75,29 +66,5 @@ public class UiPetPassBuyButton : MonoBehaviour
         IAPManager.Instance.BuyProduct(seasonPassKey);
     }
 
-    public void GetPackageItem(string productId)
-    {
-        if (productId.Equals("removeadios"))
-        {
-            productId = "removead";
-        }
-
-        if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
-            return;
-        }
-        else
-        {
-            // PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{tableData.Title} 구매 성공!", null);
-        }
-
-        if (tableData.Productid != seasonPassKey) return;
-
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
-
-        ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
-
-        ServerData.iapServerTable.UpData(tableData.Productid);
-    }
+   
 }

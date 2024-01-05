@@ -104,6 +104,8 @@ public class UiSettingBoard : MonoBehaviour
     private Toggle showWolfRing;
     [SerializeField]
     private Toggle showDragonBracelet;
+    [SerializeField]
+    private Toggle showMunha;
 
     [SerializeField]
     private Toggle showRingEffect; 
@@ -188,6 +190,7 @@ public class UiSettingBoard : MonoBehaviour
         showFoxCup.isOn = PlayerPrefs.GetInt(SettingKey.showFoxCup) == 1;
         showWolfRing.isOn = PlayerPrefs.GetInt(SettingKey.showWolfRing) == 1;
         showDragonBracelet.isOn = PlayerPrefs.GetInt(SettingKey.showDragonBracelet) == 1;
+        showMunha.isOn = PlayerPrefs.GetInt(SettingKey.showMunha) == 1;
         
         showRingEffect.isOn = PlayerPrefs.GetInt(SettingKey.showRingEffect) == 1;
         newUi.isOn = PlayerPrefs.GetInt(SettingKey.newUi) == 1;
@@ -623,6 +626,17 @@ public class UiSettingBoard : MonoBehaviour
 
         SettingData.showDragonBracelet.Value = on ? 1 : 0;
     }
+    public void ShowMunhaOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showMunha.Value = on ? 1 : 0;
+    }
 
     public void ShowRingEffectOnOff(bool on)
     {
@@ -785,6 +799,7 @@ public static class SettingKey
     public static string showFoxCup = "showFoxCup";
     public static string showWolfRing = "showWolfRing";
     public static string showDragonBracelet = "showDragonBracelet";
+    public static string showMunha = "showMunha";
     public static string showRingEffect = "showRingEffect";
     public static string newUi = "newUi";
     public static string towerAutoMode = "towerAutoMode";
@@ -890,6 +905,7 @@ public static class SettingData
     public static ReactiveProperty<int> showFoxCup = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showWolfRing = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showDragonBracelet = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
+    public static ReactiveProperty<int> showMunha = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> showRingEffect = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> newUi = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
     public static ReactiveProperty<int> towerAutoMode = new ReactiveProperty<int>();//x이하일떄 (3개옵션)
@@ -1068,6 +1084,9 @@ public static class SettingData
         
         if (PlayerPrefs.HasKey(SettingKey.showDragonBracelet) == false)
             PlayerPrefs.SetInt(SettingKey.showDragonBracelet, 1);
+        
+        if (PlayerPrefs.HasKey(SettingKey.showMunha) == false)
+            PlayerPrefs.SetInt(SettingKey.showMunha, 1);
 
         if (PlayerPrefs.HasKey(SettingKey.showRingEffect) == false)
             PlayerPrefs.SetInt(SettingKey.showRingEffect, 1); 
@@ -1203,6 +1222,7 @@ public static class SettingData
         showFoxCup.Value = PlayerPrefs.GetInt(SettingKey.showFoxCup, 1);
         showWolfRing.Value = PlayerPrefs.GetInt(SettingKey.showWolfRing, 1);
         showDragonBracelet.Value = PlayerPrefs.GetInt(SettingKey.showDragonBracelet, 1);
+        showMunha.Value = PlayerPrefs.GetInt(SettingKey.showMunha, 1);
         showRingEffect.Value = PlayerPrefs.GetInt(SettingKey.showRingEffect, 1);
         
         newUi.Value = PlayerPrefs.GetInt(SettingKey.newUi, 1);
@@ -1477,6 +1497,11 @@ public static class SettingData
         showDragonBracelet.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showDragonBracelet, e);
+        });
+        
+        showMunha.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showMunha, e);
         });
 
         showRingEffect.AsObservable().Subscribe(e =>

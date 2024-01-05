@@ -205,7 +205,7 @@ public class UiBimuPassCell : MonoBehaviour
     }
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiBimuPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[PassBuyButton.bimuPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }

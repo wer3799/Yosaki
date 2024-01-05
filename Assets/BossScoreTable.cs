@@ -47,10 +47,12 @@ public class BossScoreTable
     public const string byeolhoTowerScore = "s11";
     //푸른강철이
     public const string blueGangChul = "s12";
-    //푸른강철이
+    //주간보스
     public const string weeklyBossScore = "s13";
-    //푸른강철이
+    //명상타워
     public const string meditationScore = "s14";
+    //문하생타워
+    public const string munhaScore = "s15";
 
 
     public bool isInitialize = false;
@@ -76,6 +78,7 @@ public class BossScoreTable
         
         { weeklyBossScore, string.Empty },
         { meditationScore, string.Empty },
+        { munhaScore, string.Empty },
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();

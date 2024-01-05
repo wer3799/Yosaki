@@ -49,6 +49,7 @@ public static class ServerData
     public static BuffServerTable buffServerTable { get; private set; } = new BuffServerTable();
     public static PassiveServerTable passiveServerTable { get; private set; } = new PassiveServerTable();
     public static Passive2ServerTable passive2ServerTable { get; private set; } = new Passive2ServerTable();
+    public static CostumeSpecialAbilityServerTable costumeSpecialAbilityServerTable { get; private set; } = new CostumeSpecialAbilityServerTable();
 
     public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
     public static EtcServerTable etcServerTable { get; private set; } = new EtcServerTable();
@@ -140,6 +141,7 @@ public static class ServerData
         buffServerTable.Initialize();
         passiveServerTable.Initialize();
         passive2ServerTable.Initialize();
+        costumeSpecialAbilityServerTable.Initialize();
         //rankTables_Boss1.Initialize();
         marbleServerTable.Initialize();
         etcServerTable.Initialize();
@@ -745,6 +747,9 @@ public static class ServerData
             case Item_Type.SC:
                 ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += rewardValue;
                 break;  
+            case Item_Type.SB:
+                ServerData.goodsTable.GetTableData(GoodsTable.SB).Value += rewardValue;
+                break;  
             case Item_Type.TransGoods:
                 ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += rewardValue;
                 break;  
@@ -1105,53 +1110,38 @@ public static class ServerData
             case Item_Type.costume183:
             case Item_Type.costume184:
             case Item_Type.costume185:
+            case Item_Type.costume186:
+            case Item_Type.costume187:
+            case Item_Type.costume188:
+            case Item_Type.costume189:
+            case Item_Type.costume190:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
-                ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.weapon90:
-                ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.weapon131:
-                ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.weapon146:
-                ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.weapon149:
+            case Item_Type.weapon152:
+            case Item_Type.weapon153:
+            case Item_Type.weapon154:
                 ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.magicBook116:
-                ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.magicBook117:
-                ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.magicBook120:
-                ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.magicBook123:
+            case Item_Type.magicBook124:
+            case Item_Type.magicBook125:
+            case Item_Type.magicBook126:
                 ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet52:
-                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.pet53:
-                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.pet54:
-                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.pet55:
-                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.pet56:
-                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.pet57:
-                ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
-                break;
             case Item_Type.pet58:
                 ServerData.petTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
@@ -1397,6 +1387,11 @@ public static class ServerData
             case Item_Type.costume183:
             case Item_Type.costume184:
             case Item_Type.costume185:
+            case Item_Type.costume186:
+            case Item_Type.costume187:
+            case Item_Type.costume188:
+            case Item_Type.costume189:
+            case Item_Type.costume190:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -2114,6 +2109,12 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
             
+            case Item_Type.SB:
+                passParam.Add(GoodsTable.SB,
+                    ServerData.goodsTable.GetTableData(GoodsTable.SB).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            
             case Item_Type.TransGoods:
                 passParam.Add(GoodsTable.TransGoods,
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value);
@@ -2531,6 +2532,12 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += amount;
                 param.Add(GoodsTable.SC,
                     ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+
+            case Item_Type.SB:
+                ServerData.goodsTable.GetTableData(GoodsTable.SB).Value += amount;
+                param.Add(GoodsTable.SB,
+                    ServerData.goodsTable.GetTableData(GoodsTable.SB).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
             case Item_Type.TransGoods:
@@ -3119,7 +3126,11 @@ public static class ServerData
             case Item_Type.weapon40:
             case Item_Type.weapon41:
             case Item_Type.weapon42:
+            case Item_Type.weapon149:
             case Item_Type.weapon151:
+            case Item_Type.weapon152:
+            case Item_Type.weapon153:
+            case Item_Type.weapon154:
             {
                 string key = type.ToString();
                 ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
@@ -3143,6 +3154,12 @@ public static class ServerData
             case Item_Type.magicBook10:
             case Item_Type.magicBook11:
             case Item_Type.magicBook120:
+            case Item_Type.magicBook121:
+            case Item_Type.magicBook122:
+            case Item_Type.magicBook123:
+            case Item_Type.magicBook124:
+            case Item_Type.magicBook125:
+            case Item_Type.magicBook126:
             {
                 string key = type.ToString();
                 ServerData.magicBookTable.TableDatas[key].hasItem.Value = 1;
@@ -4762,6 +4779,9 @@ public static class ServerData
                     break;
                 case Item_Type.SC:
                     ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += amount;
+                    break;
+                case Item_Type.SB:
+                    ServerData.goodsTable.GetTableData(GoodsTable.SB).Value += amount;
                     break;
                 case Item_Type.TransGoods:
                     ServerData.goodsTable.GetTableData(GoodsTable.TransGoods).Value += amount;

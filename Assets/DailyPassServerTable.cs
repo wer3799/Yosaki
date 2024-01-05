@@ -863,6 +863,8 @@ public class ColdSeasonPassServerTable
     public static string dosulLevelAd = "a20";
     public static string bimuFree = "f21";
     public static string bimuAd = "a21";
+    public static string sasinsuFree = "f22";
+    public static string sasinsuAd = "a22";
 
     public static string coldseasonFree_Atten = "fa2";
 
@@ -905,6 +907,8 @@ public class ColdSeasonPassServerTable
         { dosulLevelAd, "-1" },
         { bimuFree, "-1" },
         { bimuAd, "-1" },
+        { sasinsuFree, "-1" },
+        { sasinsuAd, "-1" },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

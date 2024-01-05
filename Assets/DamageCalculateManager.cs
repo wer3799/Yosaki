@@ -15,6 +15,7 @@ public class DamageCalculateManager : SingletonMono<DamageCalculateManager>
     public ReactiveProperty<double> dosulDamage = new ReactiveProperty<double>();
     public ReactiveProperty<double> sealSwordDamage = new ReactiveProperty<double>();
     public ReactiveProperty<double> VisionDamage = new ReactiveProperty<double>();
+    public ReactiveProperty<double> MunhaDamage = new ReactiveProperty<double>();
 
     public bool isCalculate = false;
     private void Start()
@@ -32,6 +33,7 @@ public class DamageCalculateManager : SingletonMono<DamageCalculateManager>
         dosulDamage.Value = 0;
         sealSwordDamage.Value = 0;
         VisionDamage.Value = 0;
+        MunhaDamage.Value = 0;
     }
 
     public void StartCalculate()
@@ -63,6 +65,9 @@ public class DamageCalculateManager : SingletonMono<DamageCalculateManager>
                     break;
                 case SkillCastType.Vision:
                     VisionDamage.Value += data;
+                    break;
+                case SkillCastType.Student:
+                    MunhaDamage.Value += data;
                     break;
                 default:
                     normalDamage.Value += data;

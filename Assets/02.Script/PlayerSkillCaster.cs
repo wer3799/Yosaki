@@ -17,6 +17,7 @@ public enum SkillCastType
     Indra,
     SealSword,
     Dosul,
+    Student,
 }
 
 public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
@@ -94,8 +95,9 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
             if (TableManager.Instance.SkillTable.dataArray[skillIdx].SKILLCASTTYPE == SkillCastType.Player)
             {
                 SealSkillCaster.currentHitCount.Value += sealChargeCount.Value + sealChargeCount2.Value+ sealChargeCount3.Value;
-            }
+                MunhaSkillCaster.currentHitCount.Value += 1;
 
+            }
             
             UserSkills[skillIdx].UseSkill();
 

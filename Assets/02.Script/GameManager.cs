@@ -97,6 +97,7 @@ public class GameManager : SingletonMono<GameManager>
         GyungRockTower6,
         DragonPalaceTower,
         WeeklyBoss,
+        MunhaTower,
     }
     
     public bool SpawnMagicStone => IsNormalField;

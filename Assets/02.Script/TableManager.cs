@@ -950,6 +950,11 @@ public class TableManager : SingletonMono<TableManager>
     public PetAwakeLevel PetAwakeLevel;
     public PetAwakeTable PetAwakeTable;
     public BimuPass BimuPass;
+    public PetAwakePass PetAwakePass;
+    public StudentTable StudentTable;
+    public StudentDispatch StudentDispatch;
+    public CostumeSpecialAbility CostumeSpecialAbility;
+    public StudentAwakeTable StudentAwakeTable;
 }
 
 

@@ -137,7 +137,9 @@ public class UserInfoTable_2
     public const string relicTestGraduate = "rtg"; //요괴탈
 
     public const string sasinsuAwakeGrade = "sag"; //요괴탈
+    public const string munhaLevel = "mhl"; //문하생 레벨
 
+    public const string munhaDispatchStartTime = "mdst";
 
     
     
@@ -204,6 +206,7 @@ public class UserInfoTable_2
         { usedGuimoonRelicTicket, 0f },
         { getRelicUpgrade, 0f },
         { petDispatchStartTime, -1f },
+        { munhaDispatchStartTime, -1f },
         { yoPowerIdx, -1f },
 
         { transTowerIdx, 0f },
@@ -247,6 +250,7 @@ public class UserInfoTable_2
         { gradeTestGraduate, 0f },
         { relicTestGraduate, 0f },
         { sasinsuAwakeGrade, 0f },
+        { munhaLevel, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

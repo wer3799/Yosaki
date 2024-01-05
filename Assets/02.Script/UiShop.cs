@@ -708,6 +708,12 @@ public class UiShop : SingletonMono<UiShop>
                 param.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
             }
                 break;  
+            case Item_Type.SB:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.SB).Value += amount;
+                param.Add(GoodsTable.SB, ServerData.goodsTable.GetTableData(GoodsTable.SB).Value);
+            }
+                break;  
             case Item_Type.BattleScore:
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.BattleScore).Value += amount;

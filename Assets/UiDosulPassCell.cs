@@ -180,7 +180,7 @@ public class UiDosulPassCell : FancyCell<DosulPassData_Fancy>
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiDosulPassBuyButton.seasonPassKey].buyCount.Value > 0;
+        bool hasIapProduct = ServerData.iapServerTable.TableDatas[PassBuyButton.dosulPassKey].buyCount.Value > 0;
 
         return hasIapProduct;
     }
