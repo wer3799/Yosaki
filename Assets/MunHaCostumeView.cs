@@ -13,6 +13,21 @@ public class MunHaCostumeView : MonoBehaviour
 
     [SerializeField] private GameObject rootObject;
 
+    private void Awake()
+    {
+        SetSpine();
+    }
+
+    private void SetSpine()
+    {
+        var data= TableManager.Instance.StudentTable.dataArray[0];
+
+        skeletonGraphic.Clear();
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[data.Change_Costume];
+        skeletonGraphic.Initialize(true);
+        skeletonGraphic.SetMaterialDirty();
+    }
+
     void Start()
     {
         Subscribe();
