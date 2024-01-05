@@ -400,11 +400,11 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value += sleepRewardInfo.killCount;
         //가을훈련
-        if (ServerData.userInfoTable.IsEventPass2Period())
-        {
+        // if (ServerData.userInfoTable.IsEventPass2Period())
+        // {
+        // }
             ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value +=
                 sleepRewardInfo.killCount;
-        }
 
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason].Value += sleepRewardInfo.killCount;
         //ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason2].Value += sleepRewardInfo.killCount;
@@ -512,10 +512,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         //userInfoParam.Add(UserInfoTable.killCountTotalChild, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalChild].Value);
         //가을훈련
-        if (ServerData.userInfoTable.IsEventPass2Period())
-        {
-            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value);
-        }
+        // if (ServerData.userInfoTable.IsEventPass2Period())
+        // {
+        // }
+        userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalWinterPass].Value);
         userInfoParam.Add(UserInfoTable.killCountTotalSeason3, ServerData.userInfoTable.TableDatas[UserInfoTable.killCountTotalSeason3].Value);
         
         Param userInfo_2Param = new Param();

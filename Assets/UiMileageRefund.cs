@@ -988,9 +988,12 @@ public class UiMileageRefund : MonoBehaviour
 
              ServerData.SendTransactionV2(transactions, successCallBack: () =>
              {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"패스 마일리지 소급 완료!\n" +
-                                                                           $"{CommonString.GetItemName(Item_Type.Mileage)} {refundMileageSum}개 소급",
-                    null);
+                 if (refundMileageSum > 0)
+                 {
+                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"패스 마일리지 소급 완료!\n" +
+                         $"{CommonString.GetItemName(Item_Type.Mileage)} {refundMileageSum}개 소급",
+                         null);     
+                 }
              });
         }
         
