@@ -41,6 +41,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     
     public ReactiveProperty<int> addChargeCount;
     public ReactiveProperty<int> visionChargeCount;
+    public ReactiveProperty<int> munHaChargeCount;
     public ReactiveProperty<float> sealChargeCount;//상단전속도증가
     public ReactiveProperty<float> sealChargeCount2;//요도해방으로 인한 속도증가
     public ReactiveProperty<float> sealChargeCount3;//능력치로 증가
@@ -141,6 +142,10 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         visionSkillUseCount.Value = 1 + PlayerStats.GetAddVisionSkillUseCount();
 
         VisionSkillCaster.Instance.StartSkillRoutine();
+    }   
+    public void InitializeMunhaSkill()
+    {
+        MunhaSkillCaster.Instance.InitializeSkillCount();
     }
 
     public void UseVisionSkill()
@@ -169,6 +174,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
         InitSkill();
         ignoreDamDecrease = ServerData.userInfoTable.TableDatas[UserInfoTable.IgnoreDamDec].Value == 1;
         InitializeVisionSkill();
+        InitializeMunhaSkill();
         Subscribe();
     }
 

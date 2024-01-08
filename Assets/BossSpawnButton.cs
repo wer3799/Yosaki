@@ -82,6 +82,7 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
                 PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스테이지 보스를 소환합니까?\n\n<color=red>(1층에 소환됩니다.)</color>", () =>
                 {
                     PlayerSkillCaster.Instance.InitializeVisionSkill();
+                    PlayerSkillCaster.Instance.InitializeMunhaSkill();
                     MapInfo.Instance.SpawnBossEnemy();
                 }, null);
             }
@@ -93,12 +94,14 @@ public class BossSpawnButton : SingletonMono<BossSpawnButton>
                     PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "스테이지 보스를 소환합니까?\n\n<color=red>(1층에 소환됩니다.)</color>", () =>
                     {
                         PlayerSkillCaster.Instance.InitializeVisionSkill();
+                        PlayerSkillCaster.Instance.InitializeMunhaSkill();
                         MapInfo.Instance.SpawnBossEnemy();
                     }, null);
                 }
                 else 
                 {
                     PlayerSkillCaster.Instance.InitializeVisionSkill();
+                    PlayerSkillCaster.Instance.InitializeMunhaSkill();
                     MapInfo.Instance.SpawnBossEnemy();
                 }
             }

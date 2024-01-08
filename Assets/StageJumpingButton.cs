@@ -73,6 +73,7 @@ public class StageJumpingButton : MonoBehaviour
         {
             GameManager.Instance.IsJumpBoss = true;
             PlayerSkillCaster.Instance.InitializeVisionSkill();
+            PlayerSkillCaster.Instance.InitializeMunhaSkill();
             GameManager.Instance.MoveMapByIdx(arriveStageNum);
         }, null);
     }

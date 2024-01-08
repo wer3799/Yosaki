@@ -38,9 +38,6 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
         StartCoroutine(SkillCountAnimRoutine());
 
         Subscribe();
-
-
-        count_Max = 100 - (int)PlayerStats.GetReduceSealSwordSkillRequireCount();
     }
 
     private void Subscribe()
@@ -72,7 +69,27 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
     private WaitForSeconds directionDelay = new WaitForSeconds(0.3f);
 
 
-    
+    public void InitializeSkillCount()
+    {
+        int currentValue = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.munhaLevel).Value;
+
+        if (currentValue < 0)
+        {
+            return;
+        }
+        useSkillCount = 0;
+
+
+        var skillIdx = TableManager.Instance.StudentTable.dataArray[currentValue].Unlock_Skill_Id;
+
+        if (skillIdx >= 0 && skillIdx < TableManager.Instance.SkillTable.dataArray.Length)
+        {
+            currentSkillData = TableManager.Instance.SkillTable.dataArray[skillIdx];
+
+            count_Max = currentSkillData.Requirehit;
+        }
+    }
+
     private IEnumerator SkillCountAnimRoutine()
     {
         while (true)

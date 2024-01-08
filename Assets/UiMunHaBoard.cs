@@ -79,13 +79,15 @@ public class UiMunHaBoard : MonoBehaviour
       
       var tableData = TableManager.Instance.StudentTable.dataArray;
 
+      var nextLevel = level + 1;
+      
       if (level >= tableData.Length - 1)
       {
          priceText.SetText("Max");
       }
       else
       {
-         desc+=$"{Utils.ConvertNum(tableData[level].Conditoin_Value)}";
+         desc+=$"{Utils.ConvertNum(tableData[nextLevel].Conditoin_Value)}";
       
          priceText.SetText("레벨업\n"+desc);   
       }
