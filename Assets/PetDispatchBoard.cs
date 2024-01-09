@@ -229,7 +229,7 @@ public class PetDispatchBoard : MonoBehaviour
         
         //명상누름
         
-        TimeSpan timeRemaining = targetTime - DateTime.Now;
+        TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime;
         
         // #if UNITY_EDITOR
         // Debug.LogError("앱이 실행된 시간 :" + timeRemaining.TotalSeconds + "초");
