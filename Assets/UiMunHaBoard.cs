@@ -233,11 +233,9 @@ public class UiMunHaBoard : MonoBehaviour
        ButtonObject.SetActive(true);
        return;
     }
-        
-    //명상누름
-        
-    TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime;
-        
+
+    TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
+    
     if (timeRemaining.TotalSeconds > 3600)
     {
        string formattedTime = string.Format("훈련중\n<color=white>남은시간 {0:D2}시:{1:D2}분</color>", timeRemaining.Hours, timeRemaining.Minutes);

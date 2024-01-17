@@ -168,7 +168,7 @@ public class UiSealSwordStageIndicator : MonoBehaviour
 
         int slotNum = (maxGrade - minGrade) * 4;
 
-        Debug.LogError(slotNum);
+       // Debug.LogError(slotNum);
 
         while (viewContainer.Count < slotNum)
         {

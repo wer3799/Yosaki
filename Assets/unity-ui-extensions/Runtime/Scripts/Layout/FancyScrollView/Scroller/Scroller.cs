@@ -311,6 +311,11 @@ namespace UnityEngine.UI.Extensions
                     splitData_Free = GetSuhoPassSplitData(ColdSeasonPassServerTable.sealSwordFree);
                     splitData_Ad = GetSuhoPassSplitData(ColdSeasonPassServerTable.sealSwordAd);
                     viewCount = 6f;
+                    break;
+                case TypeScroll.Kill1Pass:
+                    splitData_Free = GetSnowAttenPassSplitData(OneYearPassServerTable.childFree);
+                    splitData_Ad = GetSnowAttenPassSplitData(OneYearPassServerTable.childAd);
+                    viewCount = 6f;
                     //0.86f 50개
                     //0.906f 70
                     //0.933f
@@ -360,7 +365,7 @@ namespace UnityEngine.UI.Extensions
                 }
                 else
                 {
-                    scrollbar.value = Mathf.Clamp01(Mathf.Max(freeMax,3) / Mathf.Max(totalCount - 1f, 1e-4f));
+                    scrollbar.value = Mathf.Clamp01(Mathf.Max(freeMax,0) / Mathf.Max(totalCount - 1f, 1e-4f));
                 }
             }
         }

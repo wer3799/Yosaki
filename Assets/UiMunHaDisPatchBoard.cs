@@ -245,7 +245,7 @@ public class UiMunHaDisPatchBoard : MonoBehaviour
         
          //명상누름
         
-         TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime;
+         TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
         
          if (timeRemaining.TotalSeconds > 3600)
          {

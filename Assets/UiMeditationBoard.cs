@@ -73,7 +73,7 @@ public class UiMeditationBoard : MonoBehaviour
         
         //명상누름
         
-        TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime;
+        TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
         
         // var seconds = ElapsedTimeManager.Instance.GetElapsedTimeReal();
         // TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime.AddSeconds(seconds);
@@ -123,12 +123,6 @@ public class UiMeditationBoard : MonoBehaviour
         return tableData[nextGrade].Consume;
     }
 
-    private DateTime GetBackendServerTime()
-    {
-        BackendReturnObject servertime = Backend.Utils.GetServerTime();
-        string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
-        return DateTime.Parse(time).ToUniversalTime().AddHours(9);
-    }
     public void OnClickMeditation()
     {
         var tableDataLength = TableManager.Instance.Meditation.dataArray.Length;
@@ -140,7 +134,7 @@ public class UiMeditationBoard : MonoBehaviour
         //명상버튼 안누른 상태
         if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationStartTime).Value < 0)
         {
-            DateTime currentServerTime = GetBackendServerTime();
+            DateTime currentServerTime = Utils.GetBackendServerTime();
             var currentServerDate = (double)Utils.ConvertToUnixTimestamp(currentServerTime);
             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationStartTime).Value = currentServerDate;
             ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.meditationStartTime,false);
@@ -155,7 +149,7 @@ public class UiMeditationBoard : MonoBehaviour
         {
            
             
-            TimeSpan timeRemaining = targetTime - GetBackendServerTime();
+            TimeSpan timeRemaining = targetTime - Utils.GetBackendServerTime();
             //남은시간있음
             if (timeRemaining.TotalSeconds > 0)
             {

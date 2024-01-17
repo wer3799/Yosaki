@@ -101,6 +101,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.DragonPalaceTower:
                         return false;
+                    case GameManager.ContentsType.MunhaTower2 when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.munhaTower).Value <
+                                                                      (TableManager.Instance.StudentTower.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.MunhaTower2:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)

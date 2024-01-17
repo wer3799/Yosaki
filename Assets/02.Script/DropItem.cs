@@ -109,7 +109,7 @@ public enum Item_Type
     ChunSun0,
     ChunSun1,
     ChunSun2,
-    Event_Collection,//봄나물
+    Event_Kill1_Item,//봄나물
     Event_Fall_Gold,
     ChunNorigae3,
     ChunNorigae4,
@@ -603,6 +603,11 @@ public enum Item_Type
     costume188 = 1488, //천마
     costume189 = 1489, //비무
     costume190 = 1490, //주간보스
+    
+    costume191 = 1491, //천마
+    costume192 = 1492, //비무
+    costume193 = 1493, //주간보스
+    costume194 = 1494, //주간보스
 
 
     gumiho0 = 5000,
@@ -872,6 +877,8 @@ public enum Item_Type
     weapon152 = 7275,
     weapon153 = 7276,
     weapon154 = 7277,
+    weapon155 = 7278,
+    weapon156 = 7279,
     
     
     HyunSangNorigae10 = 7280,
@@ -891,6 +898,9 @@ public enum Item_Type
     magicBook124 = 7292, //용궁
     magicBook125 = 7293, //용궁
     magicBook126 = 7294,
+    magicBook127 = 7295, //용궁
+    magicBook128 = 7296,//2월월간
+    magicBook129 = 7297,//2월월간
     
     ChunGuPet0 = 7600,
     ChunGuPet1 = 7601,
@@ -1029,6 +1039,12 @@ public enum Item_Type
     DragonSkill4 = 8766,
     VisionSkill15 = 8767,
     VisionSkill16 = 8768,
+    
+    DPSkill0 = 8769,
+    DPSkill1 = 8770,
+    DPSkill2 = 8771,
+    DPSkill3 = 8772,
+    DPSkill4 = 8773,
     
     Event_NewYear = 8800, //떡국
     Event_NewYear_All = 8801, // 총 습득량

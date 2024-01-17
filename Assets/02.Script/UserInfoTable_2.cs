@@ -140,6 +140,7 @@ public class UserInfoTable_2
     public const string munhaLevel = "mhl"; //문하생 레벨
 
     public const string munhaDispatchStartTime = "mdst";
+    public const string munhaTower = "mt";//문하타워2
 
     
     
@@ -251,6 +252,7 @@ public class UserInfoTable_2
         { relicTestGraduate, 0f },
         { sasinsuAwakeGrade, 0f },
         { munhaLevel, -1f },
+        { munhaTower, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

@@ -101,6 +101,12 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                     _MunhaButton.OnClickButton();
                     return;
                 }
+                case GameManager.ContentsType.MunhaTower2:
+                {
+                    GameManager.Instance.ResetLastContents2();
+                    _MunhaButton.OnClickButton();
+                    return;
+                }
             }
 
             _mainTabButtons.OnClickButton();

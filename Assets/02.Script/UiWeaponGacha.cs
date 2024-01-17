@@ -141,7 +141,8 @@ public class UiWeaponGacha : MonoBehaviour
         //재화 체크
         if (CanGacha(price) == false)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Jade)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetJongsung(CommonString.GetItemName(Item_Type.Jade),JongsungType.Type_IGA)} 부족합니다.");
+
             UiGachaResultView.Instance.autoToggle.isOn = false;
             return;
         }

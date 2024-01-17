@@ -278,6 +278,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         description4 +=
             $"크리티컬 30단계 {CommonString.GetStatusName(StatusType.SuperCritical30DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical30DamPer() * 100f,1)}\n";
 
+        description4 +=
+            $"크리티컬 31단계 {CommonString.GetStatusName(StatusType.SuperCritical31DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical31DamPer() * 100f,1)}\n";
+
         
             //도술
             description1 +=

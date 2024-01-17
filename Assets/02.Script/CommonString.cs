@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using static GameManager;
 using static UiGuildMemberCell;
@@ -85,6 +87,7 @@ public static class CommonString
     public static string ItemGrade_15_Skill = "심연검";
     public static string ItemGrade_16_Skill = "신선검";
     public static string ItemGrade_17_Skill = "용인검";
+    public static string ItemGrade_18_Skill = "용궁검";
 
     public static string GoldItemName = "금화";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -353,6 +356,10 @@ public static class CommonString
             case Item_Type.costume188: return TableManager.Instance.Costume.dataArray[188].Name;
             case Item_Type.costume189: return TableManager.Instance.Costume.dataArray[189].Name;
             case Item_Type.costume190: return TableManager.Instance.Costume.dataArray[190].Name;
+            case Item_Type.costume191: return TableManager.Instance.Costume.dataArray[191].Name;
+            case Item_Type.costume192: return TableManager.Instance.Costume.dataArray[192].Name;
+            case Item_Type.costume193: return TableManager.Instance.Costume.dataArray[193].Name;
+            case Item_Type.costume194: return TableManager.Instance.Costume.dataArray[194].Name;
 
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
@@ -400,6 +407,10 @@ public static class CommonString
                 return TableManager.Instance.WeaponData[153].Name;
             case Item_Type.weapon154:
                 return TableManager.Instance.WeaponData[154].Name;
+            case Item_Type.weapon155:
+                return TableManager.Instance.WeaponData[155].Name;
+            case Item_Type.weapon156:
+                return TableManager.Instance.WeaponData[156].Name;
                 
 
             //
@@ -416,7 +427,7 @@ public static class CommonString
             case Item_Type.Relic: return "영혼 조각";
             case Item_Type.RelicTicket: return "영혼 열쇠";
             case Item_Type.RabitBossStone: return "영혼의 증표";
-            case Item_Type.Event_Item_0: return "주사위";
+            case Item_Type.Event_Item_0: return "윷가락";
             case Item_Type.Event_Item_1: return "벚꽃";
             case Item_Type.StageRelic: return "유물 파편";
             case Item_Type.GuimoonRelic: return "귀문석";
@@ -536,6 +547,12 @@ public static class CommonString
             case Item_Type.DragonSkill3: return "신선 기술4";
             case Item_Type.DragonSkill4: return "신선 기술5";
             //
+            case Item_Type.DPSkill0: return "용궁 검술1";
+            case Item_Type.DPSkill1: return "용궁 검술2";
+            case Item_Type.DPSkill2: return "용궁 검술3";
+            case Item_Type.DPSkill3: return "용궁 검술4";
+            case Item_Type.DPSkill4: return "용궁 검술5";
+            //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
 
@@ -582,13 +599,13 @@ public static class CommonString
             case Item_Type.du: return "저승 명부";
             case Item_Type.Fw: return "분홍 꽃";
             case Item_Type.Cw: return "천계 꽃";
-            case Item_Type.Event_Collection: return "황금 보리"; //봄나물
-            case Item_Type.Event_Collection_All: return "황금 보리 총 획득량";
+            case Item_Type.Event_Kill1_Item: return "만두"; //봄나물
+            case Item_Type.Event_Collection_All: return "만두 총 획득량";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
-            case Item_Type.Event_Mission1: return "요괴 호박";
-            case Item_Type.Event_Mission1_All: return "요괴 호박 총 획득량";
+            case Item_Type.Event_Mission1: return "설날 까치";
+            case Item_Type.Event_Mission1_All: return "설날 까치 총 획득량";
             case Item_Type.Event_Mission2: return "크리스마스 양말";
             case Item_Type.Event_Mission2_All: return "크리스마스 양말 총 획득량";
             case Item_Type.Event_Mission3: return "보름달";
@@ -629,6 +646,9 @@ public static class CommonString
             case Item_Type.magicBook124: return TableManager.Instance.MagicBookTable.dataArray[124].Name;
             case Item_Type.magicBook125: return TableManager.Instance.MagicBookTable.dataArray[125].Name;
             case Item_Type.magicBook126: return TableManager.Instance.MagicBookTable.dataArray[126].Name;
+            case Item_Type.magicBook127: return TableManager.Instance.MagicBookTable.dataArray[127].Name;
+            case Item_Type.magicBook128: return TableManager.Instance.MagicBookTable.dataArray[128].Name;
+            case Item_Type.magicBook129: return TableManager.Instance.MagicBookTable.dataArray[129].Name;
             case Item_Type.weapon146: return TableManager.Instance.WeaponTable.dataArray[146].Name;
             case Item_Type.DokebiTreasure: return "도깨비 보물";
             case Item_Type.SusanoTreasure: return "악의 씨앗";
@@ -902,6 +922,8 @@ public static class CommonString
                 return "비무 피해(%)";
             case StatusType.SuperCritical30DamPer:
                 return "신력 피해(%)";
+            case StatusType.SuperCritical31DamPer:
+                return "협동 피해(%)";
             case StatusType.BigiDamPer:
                 return "비기 추가 피해량 증가(%)";
             case StatusType.SealSwordDam:
@@ -966,6 +988,8 @@ public static class CommonString
                 return "천구베기 증폭(%)";
             case StatusType.EnhanceTransCritical:
                 return "초월 피해 증폭(%)";
+            case StatusType.EnhanceSP:
+                return "검기 능력치 효과 증가(%)";
         }
 
         return "등록필요";
@@ -992,5 +1016,100 @@ public static class CommonString
         }
 
         return "미등록";
+    }
+    public static string GetJongsung(string str, JongsungType jongsungType)
+    {
+        return stringUtils.GetJongsung(str, jongsungType);
+    }
+    private static readonly StringUtils stringUtils = new StringUtils();
+
+
+}
+
+public enum JongsungType
+{
+    /// <summary>
+    /// 은(는)
+    /// </summary>
+    Type_EunNeun,
+    /// <summary>
+    /// 이(가)
+    /// </summary>
+    Type_IGA,
+    /// <summary>
+    /// 을(를)
+    /// </summary>
+    Type_EulRul,
+    /// <summary>
+    /// 과(와)
+    /// </summary>
+    Type_GwaWa
+}
+
+public class StringUtils
+{
+    private StringBuilder sb = new StringBuilder();
+
+    private Dictionary<JongsungType, Dictionary<string, string>> textCache =
+        new Dictionary<JongsungType, Dictionary<string, string>>();
+
+    private Dictionary<JongsungType, (char, char)> jongsungContainer = new Dictionary<JongsungType, (char, char)>()
+    {
+        { JongsungType.Type_EunNeun, ('은', '는') },
+        { JongsungType.Type_IGA, ('이', '가') },
+        { JongsungType.Type_EulRul, ('을', '를') },
+        { JongsungType.Type_GwaWa, ('과', '와') },
+    };
+
+    public string GetJongsung(string str, JongsungType jongsungType)
+    {
+        string result = str;
+
+        if (textCache.ContainsKey(jongsungType) == false)
+        {
+            textCache.Add(jongsungType, new Dictionary<string, string>());
+        }
+
+        if (textCache[jongsungType].ContainsKey(str) == true)
+        {
+            return textCache[jongsungType][str];
+        }
+
+        sb.Clear();
+
+        for (int i = 1; i <= str.Length; i++)
+        {
+            char lastWord = str[str.Length - i];
+
+            if (lastWord >= 0xAC00 && lastWord <= 0xD7A3)
+            {
+                int localCode = lastWord - 0xAC00;
+                int jongCode = localCode % 28;
+
+                if (jongCode == 0)
+                {
+                    sb.Append(str);
+                    sb.Append(jongsungContainer[jongsungType].Item2);
+
+                    result = sb.ToString();
+                }
+                else
+                {
+                    sb.Append(str);
+                    sb.Append(jongsungContainer[jongsungType].Item1);
+
+                    result = sb.ToString();
+                }
+
+                break;
+            }
+        }
+
+        if (textCache[jongsungType].ContainsKey(str) == false)
+        {
+            textCache[jongsungType].Add(str, result);
+        }
+
+        return textCache[jongsungType][str];
     }
 }

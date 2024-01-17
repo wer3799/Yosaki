@@ -92,4 +92,8 @@ public class SuhopetTableData
   string gradedescription;
   public string Gradedescription { get {return gradedescription; } set { this.gradedescription = value;} }
   
+  [SerializeField]
+  int grade;
+  public int Grade { get {return grade; } set { this.grade = value;} }
+  
 }

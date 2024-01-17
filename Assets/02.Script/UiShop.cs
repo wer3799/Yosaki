@@ -750,7 +750,7 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.SinsuMarble, ServerData.goodsTable.GetTableData(GoodsTable.SinsuMarble).Value);
                 }
                 break; 
-            case Item_Type.Event_Collection:
+            case Item_Type.Event_Kill1_Item:
                 {
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += amount;
                     param.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
@@ -1276,6 +1276,40 @@ public class UiShop : SingletonMono<UiShop>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value += amount;
                 param.Add(GoodsTable.DragonSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value);
+            }
+                break;
+ 
+            //
+            //
+            case Item_Type.DPSkill0:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill0).Value += amount;
+                param.Add(GoodsTable.DPSkill0, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill0).Value);
+            }
+                break;
+            case Item_Type.DPSkill1:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill1).Value += amount;
+                param.Add(GoodsTable.DPSkill1, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill1).Value);
+            }
+                break;
+            case Item_Type.DPSkill2:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill2).Value += amount;
+                param.Add(GoodsTable.DPSkill2, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill2).Value);
+            }
+                break;
+            case Item_Type.DPSkill3:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill3).Value += amount;
+                param.Add(GoodsTable.DPSkill3, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill3).Value);
+            }
+                break;
+ 
+            case Item_Type.DPSkill4:
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill4).Value += amount;
+                param.Add(GoodsTable.DPSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill4).Value);
             }
                 break;
  

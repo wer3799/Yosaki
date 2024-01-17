@@ -77,9 +77,6 @@ public class UiEventFallPass : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
-        string freeKey = OneYearPassServerTable.childFree;
-        string adKey = OneYearPassServerTable.childAd;
-
         List<int> splitData_Free = GetSplitData(OneYearPassServerTable.childFree);
         List<int> splitData_Ad = GetSplitData(OneYearPassServerTable.childAd);
 

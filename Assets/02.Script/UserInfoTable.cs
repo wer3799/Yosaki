@@ -802,8 +802,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 44);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(44));
+                            defultValues.Add(e.Current.Key, 51);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(51));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1866,7 +1866,7 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    //송편
+    //캔디
     public bool CanSpawnSnowManItem()
     {
         //targetDate가 am 00시 기준이므로 AddDays해야함
@@ -1875,10 +1875,10 @@ public class UserInfoTable
         return currentServerTime <= targetDate.AddDays(1);
     }
 
-    //보리 이벤트 12월5일까지
+    //만두 이벤트
     public bool CanSpawnSpringEventItem()
     {
-        DateTime targetDate = new DateTime(2023, 12, 5);
+        DateTime targetDate = new DateTime(2024, 2, 27);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

@@ -1167,7 +1167,7 @@ public class OneYearPassServerTable
     public const string tableName = "onePass";
 
 
-    //2023 봄나물 사용중
+    //2024 만두 사용중
     public static string childFree = "f5";
     public static string childAd = "a5";
 
@@ -1175,7 +1175,7 @@ public class OneYearPassServerTable
     public static string childFree_Snow = "fs1";
     public static string childAd_Snow = "as1";
 
-    //2023 바캉스패스 -> 할로윈 패스?
+    // 할로윈 패스? - > 설날 패스 
     public static string event1AttendFree = "cef0";
     public static string event1AttendAd = "cea0";
 
@@ -1189,12 +1189,12 @@ public class OneYearPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { childFree, string.Empty },
-        { childAd, string.Empty },
+        { childFree, "-1" },
+        { childAd, "-1" },
         { childFree_Snow, "-1" },
         { childAd_Snow, "-1" },
-        { event1AttendFree, string.Empty },
-        { event1AttendAd, string.Empty },
+        { event1AttendFree, "-1" },
+        { event1AttendAd, "-1" },
         { event2AttendFree, "-1" },
         { event2AttendAd, "-1" },
         { event3AttendFree, string.Empty },

@@ -39,7 +39,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
         string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill,
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
-        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill
+        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill
         
     };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
@@ -184,6 +184,8 @@ public Sprite weapon151;
 public Sprite weapon152;
 public Sprite weapon153;
 public Sprite weapon154;
+public Sprite weapon155;
+public Sprite weapon156;
     
 [Header ("Weapon_View")]
 
@@ -340,6 +342,9 @@ public Sprite RecommendWeapon22;
     public Sprite magicbook124;
     public Sprite magicbook125;
     public Sprite magicbook126;
+    public Sprite magicbook127;
+    public Sprite magicBook128;
+    public Sprite magicBook129;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -493,6 +498,12 @@ public Sprite RecommendWeapon22;
     public Sprite DragonSkill2;
     public Sprite DragonSkill3;
     public Sprite DragonSkill4;
+
+    public Sprite DPSkill0;
+    public Sprite DPSkill1;
+    public Sprite DPSkill2;
+    public Sprite DPSkill3;
+    public Sprite DPSkill4;
 
     
     [Header ("Goods")]
@@ -1135,6 +1146,14 @@ public Sprite RecommendWeapon22;
                 return costumeThumbnail[189];
             case Item_Type.costume190:
                 return costumeThumbnail[190];
+            case Item_Type.costume191:
+                return costumeThumbnail[191];
+            case Item_Type.costume192:
+                return costumeThumbnail[192];
+            case Item_Type.costume193:
+                return costumeThumbnail[193];
+            case Item_Type.costume194:
+                return costumeThumbnail[194];
 
 
             case Item_Type.RankFrame1:
@@ -1705,7 +1724,7 @@ public Sprite RecommendWeapon22;
                 return ClearTicket;
 
 
-            case Item_Type.Event_Collection:
+            case Item_Type.Event_Kill1_Item:
                 return Event_Fall;
             case Item_Type.Event_HotTime:
                 return Event_HotTime;
@@ -2002,6 +2021,12 @@ public Sprite RecommendWeapon22;
                 return magicbook125;
             case Item_Type.magicBook126:
                 return magicbook126;
+            case Item_Type.magicBook127:
+                return magicbook127;
+            case Item_Type.magicBook128:
+                return magicBook128;
+            case Item_Type.magicBook129:
+                return magicBook129;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2528,6 +2553,17 @@ public Sprite RecommendWeapon22;
             case Item_Type.DragonSkill4:
                 return DragonSkill4;
             //
+            case Item_Type.DPSkill0:
+                return DPSkill0;
+            case Item_Type.DPSkill1:
+                return DPSkill1;
+            case Item_Type.DPSkill2:
+                return DPSkill2;
+            case Item_Type.DPSkill3:
+                return DPSkill3;
+            case Item_Type.DPSkill4:
+                return DPSkill4;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
 
@@ -2760,6 +2796,10 @@ public Sprite RecommendWeapon22;
                 return weapon153;
             case Item_Type.weapon154:
                 return weapon154;
+            case Item_Type.weapon155:
+                return weapon155;
+            case Item_Type.weapon156:
+                return weapon156;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

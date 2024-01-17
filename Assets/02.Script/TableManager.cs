@@ -955,6 +955,8 @@ public class TableManager : SingletonMono<TableManager>
     public StudentDispatch StudentDispatch;
     public CostumeSpecialAbility CostumeSpecialAbility;
     public StudentAwakeTable StudentAwakeTable;
+    public Title_Special Title_Special;
+    public StudentTower StudentTower;
 }
 
 

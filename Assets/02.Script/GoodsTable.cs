@@ -5,6 +5,7 @@ using BackEnd;
 using BackEnd.Game.GameInfo;
 using LitJson;
 using System;
+using System.Linq;
 using GooglePlayGames.BasicApi;
 using UniRx;
 
@@ -201,6 +202,12 @@ public class GoodsTable
     public static string DragonSkill3 = "DragonSkill3";
     public static string DragonSkill4 = "DragonSkill4";
 
+    public static string DPSkill0 = "DPSkill0";
+    public static string DPSkill1 = "DPSkill1";
+    public static string DPSkill2 = "DPSkill2";
+    public static string DPSkill3 = "DPSkill3";
+    public static string DPSkill4 = "DPSkill4";
+
     public static string Fw = "Fw";
     public const string Cw = "Cw"; //천계꽃
 
@@ -212,8 +219,8 @@ public class GoodsTable
     public static string c5 = "c5"; //천계꽃
     public static string c6 = "c6"; //천계꽃
 
-    public static string Event_Kill1_Item = "EC0"; //곶감 - > 봄나물로 대체 -> 수박 ->보리ㅣ
-    public static string Event_Kill1_Item_All = "ECA0"; //봄나물 총 획득량
+    public static string Event_Kill1_Item = "EC0"; //보리->만두
+    public static string Event_Kill1_Item_All = "ECA0"; 
     public static string Event_HotTime = "Event_HotTime0"; //요석 조각
     public static string Event_HotTime_Saved = "EHS0"; //요석 조각 총획득량
     public static string Event_Fall_Gold = "Event_Fall_Gold"; //황금 곶감
@@ -476,6 +483,12 @@ public class GoodsTable
         { DragonSkill2, 0f },
         { DragonSkill3, 0f },
         { DragonSkill4, 0f },
+
+        { DPSkill0, 0f },
+        { DPSkill1, 0f },
+        { DPSkill2, 0f },
+        { DPSkill3, 0f },
+        { DPSkill4, 0f },
 
         { Fw, 0f },
         { Cw, 0f },
@@ -895,7 +908,7 @@ public class GoodsTable
     public void GetSpringEventItem(float amount)
     {
         if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Collection)} 획득(+{(int)amount})");
+            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Kill1_Item)} 획득(+{(int)amount})");
 
         eventItemAddNum_Spring += (int)amount;
 
@@ -1743,6 +1756,31 @@ public class GoodsTable
             {
                 return GoodsTable.DragonSkill4;
             }
+            //            //
+            case Item_Type.DPSkill0:
+            {
+                return GoodsTable.DPSkill0;
+            }
+
+            case Item_Type.DPSkill1:
+            {
+                return GoodsTable.DPSkill1;
+            }
+
+            case Item_Type.DPSkill2:
+            {
+                return GoodsTable.DPSkill2;
+            }
+
+            case Item_Type.DPSkill3:
+            {
+                return GoodsTable.DPSkill3;
+            }
+
+            case Item_Type.DPSkill4:
+            {
+                return GoodsTable.DPSkill4;
+            }
 
             //
             case Item_Type.GangrimSkill:
@@ -1999,7 +2037,7 @@ public class GoodsTable
             {
                 return GoodsTable.SumiFireKey;
             }
-            case Item_Type.Event_Collection:
+            case Item_Type.Event_Kill1_Item:
             {
                 return GoodsTable.Event_Kill1_Item;
             }
@@ -2135,13 +2173,21 @@ public class GoodsTable
         {
             return Item_Type.Gold;
         }
-        if (GoodsTable.GoldBar == type)
+        else if (GoodsTable.GoldBar == type)
         {
             return Item_Type.GoldBar;
         }
         else if (GoodsTable.Jade == type)
         {
             return Item_Type.Jade;
+        }
+        else if (GoodsTable.Mileage == type)
+        {
+            return Item_Type.Mileage;
+        }
+        else if (GoodsTable.ClearTicket == type)
+        {
+            return Item_Type.ClearTicket;
         }
         else if (GoodsTable.GrowthStone == type)
         {
@@ -2578,6 +2624,31 @@ public class GoodsTable
         }
 
         //
+        else if (GoodsTable.DPSkill0 == type)
+        {
+            return Item_Type.DPSkill0;
+        }
+
+        else if (GoodsTable.DPSkill1 == type)
+        {
+            return Item_Type.DPSkill1;
+        }
+
+        else if (GoodsTable.DPSkill2 == type)
+        {
+            return Item_Type.DPSkill2;
+        }
+
+        else if (GoodsTable.DPSkill3 == type)
+        {
+            return Item_Type.DPSkill3;
+        }
+        else if (GoodsTable.DPSkill4 == type)
+        {
+            return Item_Type.DPSkill4;
+        }
+
+        //
         else if (GoodsTable.GangrimSkill == type)
         {
             return Item_Type.GangrimSkill;
@@ -2841,7 +2912,7 @@ public class GoodsTable
         }
         else if (GoodsTable.Event_Kill1_Item == type)
         {
-            return Item_Type.Event_Collection;
+            return Item_Type.Event_Kill1_Item;
         }
         else if (GoodsTable.Event_HotTime == type)
         {
@@ -2857,6 +2928,15 @@ public class GoodsTable
         }
         else
         {
+            if (type.Contains("costume"))
+            {
+                var tableData  = TableManager.Instance.Costume.dataArray;
+
+                if (tableData.Any(t => t.Stringid == type))
+                {
+                    return (Item_Type)Enum.Parse(typeof(Item_Type), type);
+                }   
+            }
             return Item_Type.None;
         }
     }

@@ -122,22 +122,21 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
         descriptionText.SetText($"{Utils.ConvertBigNum(passInfo.require)}");
     }
 
-    public List<string> GetSplitData(string key)
-    {
-        return ServerData.oneYearPassServerTable.TableDatas[key].Value.Split(',').ToList();
-    }
-
     public bool HasReward(string key, int data)
     {
-        var splitData = GetSplitData(key);
-        return splitData.Contains(data.ToString());
-    }
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) >= data;
 
+    }
+    private bool GetBeforeRewarded(string key,int data)
+    {
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) == data - 1;
+    }
+    
     public void OnClickFreeRewardButton()
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage($"교환한 {CommonString.GetItemName(Item_Type.Event_Mission1)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"출석일 수 가 부족합니다.");
             return;
         }
 
@@ -146,7 +145,11 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
             return;
         }
-
+        if (GetBeforeRewarded(passInfo.rewardType_Free_Key,passInfo.id) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            return;
+        }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
 
         GetFreeReward();
@@ -158,13 +161,18 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage($"교환한 {CommonString.GetItemName(Item_Type.Event_Mission1)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"출석일 수 가 부족합니다.");
             return;
         }
 
         if (HasReward(passInfo.rewardType_IAP_Key, passInfo.id))
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            return;
+        }
+        if (GetBeforeRewarded(passInfo.rewardType_IAP_Key,passInfo.id) == false)
+        {
+            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
             return;
         }
 
@@ -175,7 +183,7 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"할로윈 패스권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"패스권이 필요합니다.");
             return;
         }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
@@ -190,7 +198,7 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
     private void GetFreeReward()
     {
         //로컬
-        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -203,7 +211,12 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
         transactionList.Add(rewardTransactionValue);
 
-        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        //킬카운트
+        Param userInfoParam = new Param();
+        //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
             //  LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
         });
@@ -211,7 +224,7 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
     private void GetAdReward()
     {
         //로컬
-        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.oneYearPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -224,7 +237,12 @@ public class UiEventMission1AttendCell : FancyCell<PassData_Fancy>
         var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_IAP);
         transactionList.Add(rewardTransactionValue);
 
-        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        //킬카운트
+        Param userInfoParam = new Param();
+        //userInfoParam.Add(UserInfoTable.attenCountOne, ServerData.userInfoTable.GetTableData(UserInfoTable.attenCountOne).Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
             //   LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
         });

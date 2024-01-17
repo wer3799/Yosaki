@@ -12,7 +12,7 @@ public class UiFallEventPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string fallPassKey = "boripass0";
+    public static readonly string fallPassKey = "mandupass0";
 
     private Button buyButton;
 

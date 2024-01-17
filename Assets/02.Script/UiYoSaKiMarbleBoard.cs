@@ -32,6 +32,8 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
     
     [SerializeField] private UiRewardResultView _uiRewardResultView;
 
+    [SerializeField] private TextMeshProUGUI resultText;
+    
     private void OnEnable()
     {
         MissionCheck();
@@ -101,6 +103,8 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
     private void Awake()
     {
         Initialize();
+        
+        MakeProb();
     }
 
     private void Start()
@@ -216,22 +220,30 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
     }
 
     private List<Item_Type> _syncItemTypes = new List<Item_Type>();
-    
+    private List<float> probList = new List<float>();
+
+    private void MakeProb()
+    {
+        probList.Clear();
+        probList.Add(GameBalance.YutNori_0);
+        probList.Add(GameBalance.YutNori_1);
+        probList.Add(GameBalance.YutNori_2);
+        probList.Add(GameBalance.YutNori_3);
+        probList.Add(GameBalance.YutNori_4);
+    }
     public void OnClickRollDice()
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value < 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}이(가) 부족합니다.");
             return;
         }
 
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value--;
 
-        int diceCount = 0;
-        
-        diceCount = (int)UnityEngine.Random.Range(1, 6+1);
+        int diceCount = Utils.GetRandomIdx(probList) + 1;//0부터라 
 
-        diceImage.sprite = diceImages[diceCount - 1];
+        diceImage.sprite = diceImages[diceCount-1];
         diceParticle.gameObject.SetActive((true));
         diceParticle.Play();
         
@@ -240,8 +252,33 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
         var rewardIdx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.yosakiMarbleScore).Value % 18;
 
         var rewardItem = GetRewardByTable2(rewardIdx,diceCount);
-        
-        PopupManager.Instance.ShowAlarmMessage($"주사위 {diceCount} 굴리기 완료!\n{CommonString.GetItemName((Item_Type)rewardItem.ItemType)} {Utils.ConvertNum(rewardItem.ItemValue)}개 획득!");
+        var str = "";
+        bool isOneMore = false;
+        switch (diceCount)
+        {
+            case 1:
+                str += "도";
+                break;
+            case 2:
+                str += "개";
+                break;
+            case 3:
+                str += "걸";
+                break;
+            case 4:
+                str += "윷";
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value++;
+                isOneMore = true;
+                break;
+            case 5:
+                str += "모";
+                ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value++;
+                isOneMore = true;
+                break;
+        }
+
+        var addText = isOneMore?$"({CommonString.GetItemName(Item_Type.Event_Item_0)} 1개 획득)":"";
+        PopupManager.Instance.ShowAlarmMessage($"{str} 굴리기 완료!\n{CommonString.GetItemName((Item_Type)rewardItem.ItemType)} {Utils.ConvertNum(rewardItem.ItemValue)}개 획득!{addText}");
 
         if (_syncItemTypes.Contains(rewardItem.ItemType)==false)
         {
@@ -263,13 +300,19 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
 
     private WaitForSeconds syncDelay = new WaitForSeconds(0.5f);
     
-    private RewardItem OnClickRollDice2()
+    private RewardItem OnClickRollDice_All()
     {
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value--;
 
-        int diceCount = 0;
+        int diceCount = Utils.GetRandomIdx(probList) + 1;//0부터라 
+
+        Utils.AddOrUpdateValue(ref GetYutList,diceCount-1,1);
         
-        diceCount = (int)UnityEngine.Random.Range(1, 6+1);
+        
+        if (diceCount >= 4)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value++;
+        }
 
         diceImage.sprite = diceImages[diceCount - 1];
         diceParticle.gameObject.SetActive((true));
@@ -318,13 +361,20 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
 
     private Coroutine diceCoroutine;
     private List<RewardItem> _rewardItems = new List<RewardItem>();
+    private Dictionary<int, int> GetYutList = new Dictionary<int, int>();
+
     private void OnClickAllDice()
     {
         _rewardItems.Clear();
+        GetYutList.Clear();
         
+        for (int i = 0; i < 5; i++)
+        {
+            Utils.AddOrUpdateValue(ref GetYutList,i,0);
+        }
         while (ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value>0)
         {
-            var rewardItem = OnClickRollDice2();
+            var rewardItem = OnClickRollDice_All();
             Utils.AddOrUpdateReward(ref _rewardItems,rewardItem.ItemType,rewardItem.ItemValue);
         }
 
@@ -362,6 +412,8 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
             {
                 _uiRewardResultView.gameObject.SetActive(true);
                 _uiRewardResultView.Initialize(rewardData);
+                resultText.SetText($"도:{GetYutList[0]} 개:{GetYutList[1]} 걸:{GetYutList[2]} 윷:{GetYutList[3]} 모:{GetYutList[4]} ");
+
             }
             
             diceParticle.gameObject.SetActive((true));
@@ -379,7 +431,7 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
     {
         if (ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value < 1)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}가 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Item_0)}이(가) 부족합니다.");
             return;
         }
         //

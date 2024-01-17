@@ -227,7 +227,11 @@ public static class Utils
                type == Item_Type.costume187||
                type == Item_Type.costume188||
                type == Item_Type.costume189||
-               type == Item_Type.costume190
+               type == Item_Type.costume190||
+               type == Item_Type.costume191||
+               type == Item_Type.costume192||
+               type == Item_Type.costume193||
+               type == Item_Type.costume194
             ;
     }
 
@@ -521,7 +525,7 @@ public static class Utils
                type == Item_Type.SinsuMarble ||
                type == Item_Type.Mileage ||
                type == Item_Type.ClearTicket ||
-               type == Item_Type.Event_Collection ||
+               type == Item_Type.Event_Kill1_Item ||
                type == Item_Type.Event_HotTime ||
                type == Item_Type.Event_Collection_All ||
                type == Item_Type.Event_Fall_Gold ||
@@ -582,18 +586,23 @@ public static class Utils
                type == Item_Type.weapon151||
                type == Item_Type.weapon152||
                type == Item_Type.weapon153||
-               type == Item_Type.weapon154;
+               type == Item_Type.weapon154||
+               type == Item_Type.weapon155||
+               type == Item_Type.weapon156;
     }
 
     public static bool IsNorigaeItem(this Item_Type type)
     {
-        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook11)||
-               type==Item_Type.magicBook121||
-               type==Item_Type.magicBook122||
-               type==Item_Type.magicBook123||
-               type==Item_Type.magicBook124||
-               type==Item_Type.magicBook125||
-               type==Item_Type.magicBook126;
+        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook11) ||
+               type == Item_Type.magicBook121 ||
+               type == Item_Type.magicBook122 ||
+               type == Item_Type.magicBook123 ||
+               type == Item_Type.magicBook124 ||
+               type == Item_Type.magicBook125 ||
+               type == Item_Type.magicBook126 ||
+               type == Item_Type.magicBook127 ||
+               type == Item_Type.magicBook128 ||
+               type == Item_Type.magicBook129;
     }
 
     public static bool IsSkillItem(this Item_Type type)
@@ -814,6 +823,25 @@ public static class Utils
         return stage;
 
     }    
+
+    public static void AddOrUpdateValue<T1,T2>(ref Dictionary<T1, T2> dictionary, T1 key, T2 value)
+    {
+        if (dictionary.ContainsKey(key))
+        {
+            // 형식 T2로 변환
+            T2 existingValue = dictionary[key];
+
+            // 덧셈을 수행하고 결과를 T2로 변환
+            T2 newValue = (T2)Convert.ChangeType(Convert.ToDouble(existingValue) + Convert.ToDouble(value), typeof(T2));
+
+            // 딕셔너리 업데이트
+            dictionary[key] = newValue;        
+        }
+        else
+        {
+            dictionary.Add(key, value);
+        }
+    }
     public static void AddOrUpdateReward(ref List<RewardItem> rewardList, Item_Type itemType, float itemValue)
     {
         int existingRewardIndex = rewardList.FindIndex(r => r.ItemType == itemType);
@@ -1192,5 +1220,34 @@ public static class Utils
         BackendReturnObject servertime = Backend.Utils.GetServerTime();
         string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
         return DateTime.Parse(time).ToUniversalTime().AddHours(9);
+    }
+
+    public static TimeSpan GetTimeDifferenceFromKorea()
+    {
+        // 현재 지역 시간을 가져옵니다.
+        DateTime localTime = DateTime.Now;
+        TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+        DateTime utcTime = DateTime.UtcNow;
+
+        TimeZoneInfo koreaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
+        
+        DateTime koreaTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, koreaTimeZone);
+        
+        //테스트용 영국
+        //TimeZoneInfo localTimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+        //DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, localTimeZone);
+
+        TimeSpan localUtcOffSet = localTimeZone.GetUtcOffset(localTime);
+        TimeSpan koreaUtcOffSet = koreaTimeZone.GetUtcOffset(koreaTime);
+
+        // 지역 시간과 한국 시간의 차이를 계산합니다.
+        TimeSpan timeDifference = localUtcOffSet-koreaUtcOffSet;
+        
+        return timeDifference;
+    }    
+    public static TimeSpan GetTimeRemaining(DateTime targetTime)
+    {
+        var timeRemaining = targetTime - DateTime.Now;
+        return timeRemaining.Add(Utils.GetTimeDifferenceFromKorea());
     }
 }

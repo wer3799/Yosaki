@@ -114,8 +114,20 @@ public class BossEnemyMoveController : MonoBehaviour
                 moveDelay = 0.3f; // 이동
                 attack1Delay = 0.8f; // 공격
                 break;
+            //용왕
+            case 214:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1f; // 공격
+                break;
             default:
-                throw new ArgumentOutOfRangeException();
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 0.8f; // 공격
+                break;
+                
         }
         
     }

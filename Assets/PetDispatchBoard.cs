@@ -229,7 +229,7 @@ public class PetDispatchBoard : MonoBehaviour
         
         //명상누름
         
-        TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime;
+        TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
         
         // #if UNITY_EDITOR
         // Debug.LogError("앱이 실행된 시간 :" + timeRemaining.TotalSeconds + "초");
@@ -259,12 +259,6 @@ public class PetDispatchBoard : MonoBehaviour
         }
     }
     
-    private DateTime GetBackendServerTime()
-    {
-        BackendReturnObject servertime = Backend.Utils.GetServerTime();
-        string time = servertime.GetReturnValuetoJSON()["utcTime"].ToString();
-        return DateTime.Parse(time).ToUniversalTime().AddHours(9);
-    }
 
     public void OnClickReducePetDispatchTimeButton()
     {
@@ -330,7 +324,7 @@ public class PetDispatchBoard : MonoBehaviour
         if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.petDispatchStartTime).Value < 0)
         {
             
-            DateTime currentServerTime = GetBackendServerTime();
+            DateTime currentServerTime = Utils.GetBackendServerTime();
             if (HasRemoveAd())
             {
                 currentServerTime = currentServerTime.AddHours(-4);
@@ -349,7 +343,7 @@ public class PetDispatchBoard : MonoBehaviour
         {
            
             
-            TimeSpan timeRemaining = targetTime - GetBackendServerTime();
+            TimeSpan timeRemaining = targetTime - Utils.GetBackendServerTime();
             //남은시간있음
             if (timeRemaining.TotalSeconds > 0)
             {

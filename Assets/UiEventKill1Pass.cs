@@ -19,7 +19,7 @@ public class UiEventKill1Pass : FancyScrollView<PassData_Fancy>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value += 1000000;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value += 1000000;
         }
     }
 #endif
@@ -27,63 +27,73 @@ public class UiEventKill1Pass : FancyScrollView<PassData_Fancy>
 
     public void OnClickAllReceiveButton()
     {
-          string freeKey = OneYearPassServerTable.childFree;
+        string freeKey = OneYearPassServerTable.childFree;
         string adKey = OneYearPassServerTable.childAd;
 
-        List<int> splitData_Free = GetSplitData(OneYearPassServerTable.childFree);
-        List<int> splitData_Ad = GetSplitData(OneYearPassServerTable.childAd);
-
-        List<int> rewardTypeList = new List<int>();
 
         var tableData = TableManager.Instance.oneYearAtten.dataArray;
+        //현재 index가 -1이라면 0번째 보상을 받아야하기 때문에 +1
+        
+        
+        
+        var passValue = int.Parse(ServerData.oneYearPassServerTable.TableDatas[freeKey].Value) + 1;
+        var adValue = int.Parse(ServerData.oneYearPassServerTable.TableDatas[adKey].Value) + 1;
+
+        List<int> rewardTypeList = new List<int>();
+        List<RewardItem> rewards = new List<RewardItem>();
+
 
         int rewardedNum = 0;
 
-        string free = ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value;
-        string ad = ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value;
+        string free = ServerData.oneYearPassServerTable.TableDatas[freeKey]
+            .Value;
+        string ad = ServerData.oneYearPassServerTable.TableDatas[adKey].Value;
 
         bool hasCostumeItem = false;
+        bool hasPassItem = false;
 
-        for (int i = 0; i < tableData.Length; i++)
+        //받아야할 곳 부터 체크
+        for (int i = passValue; i < tableData.Length; i++)
         {
-            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+            //요구 조건 안되면 break.
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
 
-            if (canGetReward == false) break;
-
-            //무료보상
-            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            //받은적 있는지 체크
+            if (HasReward(freeKey, tableData[i].Id) == false)
             {
+                //코스튬이나 노리개가 있다면?
                 if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
                 {
                     hasCostumeItem = true;
                     break;
                 }
 
-                free += $",{tableData[i].Id}";
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
-                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
                 {
-                    rewardTypeList.Add(tableData[i].Reward1);
+                    hasPassItem = true;
+                    break;
                 }
-                rewardedNum++;
             }
+        }
 
-            ////유료보상
-            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+        //받은적 있는지 체크
+        for (int i = adValue; i < tableData.Length; i++)
+        {
+            if (HasPassItem() == false) break;
+            if (HasReward(adKey, tableData[i].Id) == false)
             {
+                //코스튬이나 노리개가 있다면?
                 if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
                 {
                     hasCostumeItem = true;
                     break;
                 }
 
-                ad += $",{tableData[i].Id}";
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
-                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
                 {
-                    rewardTypeList.Add(tableData[i].Reward2);
+                    hasPassItem = true;
+                    break;
                 }
-                rewardedNum++;
             }
         }
 
@@ -93,40 +103,109 @@ public class UiEventKill1Pass : FancyScrollView<PassData_Fancy>
             return;
         }
 
+        if (hasPassItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
+            return;
+        }
+        //보상모음 클리어
+        rewards.Clear();
+        
+        //받기
+        for (int i = passValue; i < tableData.Length; i++)
+        {
+            //요구 조건 안되면 break.
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+
+            //무료보상
+            if (HasReward(freeKey, tableData[i].Id) == false)
+            {
+                free = $"{tableData[i].Id}";
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+                Utils.AddOrUpdateReward(ref rewards, (Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
+
+                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward1);
+                }
+
+                rewardedNum++;
+            }
+        }
+
+        for (int i = adValue; i < tableData.Length; i++)
+        {
+            //요구 조건 안되면 break.
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+            if (HasPassItem() == false) break;
+            
+            //유료보상
+            if (HasReward(adKey, tableData[i].Id) == false)
+            {
+                ad = $"{tableData[i].Id}";
+                Utils.AddOrUpdateReward(ref rewards,(Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+
+                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
+                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
+                {
+                    rewardTypeList.Add(tableData[i].Reward2);
+                }
+
+                rewardedNum++;
+            }
+        }
+    
+
+
         if (rewardedNum > 0)
         {
-            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value = free;
-            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value = ad;
+            ServerData.oneYearPassServerTable.TableDatas[freeKey].Value = free;
+            ServerData.oneYearPassServerTable.TableDatas[adKey].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
+
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
             }
 
+
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             Param passParam = new Param();
 
-            passParam.Add(OneYearPassServerTable.childFree, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value);
-            passParam.Add(OneYearPassServerTable.childAd, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value);
+            passParam.Add(freeKey, ServerData.oneYearPassServerTable.TableDatas[freeKey].Value);
+            passParam.Add(adKey, ServerData.oneYearPassServerTable.TableDatas[adKey].Value);
 
             transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
 
-            ServerData.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
-                //LogManager.Instance.SendLogType("ChildPass", "A", "A");
+                List<RewardData> rewardData = new List<RewardData>();
+                var e = rewards.GetEnumerator();
+                for (int i = 0 ;  i < rewards.Count;i++)
+                {
+                    if (e.MoveNext())
+                    {
+                        rewardData.Add(new RewardData(e.Current.ItemType,e.Current.ItemValue));
+                    }                    
+                }
+                if (rewardData.Count > 0)
+                {
+                    _uiRewardResultView.gameObject.SetActive(true);
+                    _uiRewardResultView.Initialize(rewardData);
+                }
             });
         }
         else
         {
             PopupManager.Instance.ShowAlarmMessage("수령할 보상이 없습니다.");
         }
+        
     }
 
     private bool HasPassItem()
@@ -141,26 +220,9 @@ public class UiEventKill1Pass : FancyScrollView<PassData_Fancy>
         int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value;
         return killCountTotal >= require;
     }
-    public bool HasReward(List<int> splitData, int id)
+    public bool HasReward(string key, int data)
     {
-        return splitData.Contains(id);
-    }
-
-    public List<int> GetSplitData(string key)
-    {
-        List<int> returnValues = new List<int>();
-
-        var splits = ServerData.oneYearPassServerTable.TableDatas[key].Value.Split(',');
-
-        for (int i = 0; i < splits.Length; i++)
-        {
-            if (int.TryParse(splits[i], out var result))
-            {
-                returnValues.Add(result);
-            }
-        }
-
-        return returnValues;
+        return int.Parse(ServerData.oneYearPassServerTable.TableDatas[key].Value) >= data;
     }
 
 
@@ -174,11 +236,11 @@ public class UiEventKill1Pass : FancyScrollView<PassData_Fancy>
     
     private void Start()
     {
-        scroller.Initialize(TypeScroll.SnowManPass);
+        scroller.Initialize(TypeScroll.Kill1Pass);
             
         scroller.OnValueChanged(UpdatePosition);
     
-        var tableData = TableManager.Instance.snowManAtten.dataArray;
+        var tableData = TableManager.Instance.oneYearAtten.dataArray;
     
         List<PassData_Fancy> passInfos = new List<PassData_Fancy>();
     
@@ -203,4 +265,6 @@ public class UiEventKill1Pass : FancyScrollView<PassData_Fancy>
         this.UpdateContents(passInfos.ToArray());
         scroller.SetTotalCount(passInfos.Count);
     }
+    void OnEnable() => UpdatePosition(currentPosition);
+
 }

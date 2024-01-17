@@ -34,6 +34,11 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
     [SerializeField]
     private GameObject idleWeapon;
+    [SerializeField]
+    private GameObject attackWeapon_student;
+
+    [SerializeField]
+    private GameObject idleWeapon_student;
 
 
     private void Start()
@@ -116,6 +121,8 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
 
         attackWeapon.SetActive(isAttackAnim);
         idleWeapon.SetActive(!isAttackAnim);
+        attackWeapon_student.SetActive(isAttackAnim);
+        idleWeapon_student.SetActive(!isAttackAnim);
 
         if (isAttackAnim)
         {

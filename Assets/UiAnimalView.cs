@@ -25,7 +25,7 @@ public class UiAnimalView : MonoBehaviour
     {
         this.suhoPetTableData = suhoPetTableData;
 
-        int grade = suhoPetTableData.Id / 2;
+        int grade = suhoPetTableData.Grade;
 
         gradeDescription.SetText($"{this.suhoPetTableData.Gradedescription}");
 

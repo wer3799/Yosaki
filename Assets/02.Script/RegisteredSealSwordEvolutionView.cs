@@ -47,10 +47,14 @@ public class RegisteredSealSwordEvolutionView : MonoBehaviour
     
     public void Initialize(SealSwordData sealSwordData = null,SealSwordEvolutionBoard parent=null)
     {
+        registerCount.Value = 0;
+        
         if (sealSwordData == null)
         {
+
             return;
         }
+        
         this.sealSwordData = sealSwordData;
 
         this.parentsBoard = parent;
@@ -76,7 +80,6 @@ public class RegisteredSealSwordEvolutionView : MonoBehaviour
 
         uishiny.brightness = ((float)grade / 3f) * 0.8f;
 
-        registerCount.Value = 0;
         
         SubscribeSealSword();
     }

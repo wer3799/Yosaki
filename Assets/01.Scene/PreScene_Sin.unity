@@ -2107,6 +2107,8 @@ MonoBehaviour:
   CostumeSpecialAbility: {fileID: 11400000, guid: 0f6a99d973c7bbf41b06428ea8f00aaf,
     type: 2}
   StudentAwakeTable: {fileID: 11400000, guid: 7f9158a088861f445a2772ba4362d5de, type: 2}
+  Title_Special: {fileID: 11400000, guid: 625c080057257054d859946643ba81a6, type: 2}
+  StudentTower: {fileID: 11400000, guid: 5d4ab87944a5a034882c3b3ace001f52, type: 2}
 --- !u!224 &1672999882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3778453797765526293, guid: 341961fb75a51fb4c844909972cb6b1a,
@@ -2264,6 +2266,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e684bb6245b6fb64e966cae2664edd01, type: 3}
   - {fileID: 21300000, guid: b57ac018c278b1e40aa5081ca859d2a1, type: 3}
   - {fileID: 21300000, guid: b57ac018c278b1e40aa5081ca859d2a1, type: 3}
+  - {fileID: 21300000, guid: 8923d9d3215ea5a43840df95cae662ef, type: 3}
   itemGradeColor:
   - {r: 0.42352945, g: 0.34117648, b: 0.24705884, a: 1}
   - {r: 0.36862746, g: 0.8000001, b: 0.23529413, a: 1}
@@ -2298,6 +2301,7 @@ MonoBehaviour:
   - {r: 0.058823533, g: 0.1764706, b: 0.14509805, a: 1}
   - {r: 0.21176472, g: 0.9960785, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.06666667, g: 0.23137257, b: 0.60784316, a: 1}
   costumeThumbnail:
   - {fileID: 21300000, guid: e1fdee06b1ace764e99a14c848a213ad, type: 3}
   - {fileID: 21300000, guid: be316b91f67a3bc458b47904aec3c83a, type: 3}
@@ -2490,6 +2494,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 767a28e1d0eb51a47ab9f7ac1102165f, type: 3}
   - {fileID: 21300000, guid: 176b5a8ba684ae947851840cb176f78f, type: 3}
   - {fileID: 21300000, guid: 22de7232bc3d6204780f34d73ee13328, type: 3}
+  - {fileID: 21300000, guid: 16f947a1ebb04004d8e77ef4e6d91e31, type: 3}
+  - {fileID: 21300000, guid: f74dfb7cbe222934c8562bd3c9097669, type: 3}
+  - {fileID: 21300000, guid: c7431d09a73231d48a89147ee83d201d, type: 3}
+  - {fileID: 21300000, guid: 566f935eb4918774487cc3665ae12fa3, type: 3}
   rankFrame:
   - {fileID: 21300000, guid: 180b014bbd854ff4c8d26a3bc3108a29, type: 3}
   - {fileID: 21300000, guid: 045aff0737bd68d449d44a4a9bb5b849, type: 3}
@@ -2637,6 +2645,8 @@ MonoBehaviour:
   weapon152: {fileID: 21300000, guid: e901976f7ac540b4089250456ce96ea6, type: 3}
   weapon153: {fileID: 21300000, guid: 2ec4eeb229bf95742a994e96f5147020, type: 3}
   weapon154: {fileID: 21300000, guid: 95395d11f9ae90242a29c3b41c69dff9, type: 3}
+  weapon155: {fileID: 21300000, guid: 7f02577baf806594bae6f88f0e03f420, type: 3}
+  weapon156: {fileID: 21300000, guid: 6c8e4565390a09849b159e68d9d17168, type: 3}
   ChunSun0: {fileID: 21300000, guid: 4f63300c771529e49801fd1615d788fa, type: 3}
   ChunSun1: {fileID: 21300000, guid: e785d28ef5135714bbc245dafaa158e3, type: 3}
   ChunSun2: {fileID: 21300000, guid: 52ad30337e6bb1f4fb00a32d5bb21019, type: 3}
@@ -2768,6 +2778,9 @@ MonoBehaviour:
   magicbook124: {fileID: 21300000, guid: 4604efc57a411bf41964bd2bec0edfd1, type: 3}
   magicbook125: {fileID: 21300000, guid: b05d2c8f3b3ebc74db2e19296becd5c1, type: 3}
   magicbook126: {fileID: 21300000, guid: aabc8898f7bc65749bca9fa2fc9a362c, type: 3}
+  magicbook127: {fileID: 21300000, guid: da2cff06b22a9fa42b9d9f999a48d891, type: 3}
+  magicBook128: {fileID: 21300000, guid: 1974f6cdf1a5db947974684ac4e9a6f7, type: 3}
+  magicBook129: {fileID: 21300000, guid: fd074d3aa9b984c448b0964a81f0aab4, type: 3}
   DokebiHorn0: {fileID: 21300000, guid: 92f9f58d12795c74ba90cc7fbf939313, type: 3}
   DokebiHorn1: {fileID: 21300000, guid: 6b45cec8b763a8a4dbe42106090790b3, type: 3}
   DokebiHorn2: {fileID: 21300000, guid: b9a7ada2415dc2c41af80d8e59d7a05c, type: 3}
@@ -2898,6 +2911,11 @@ MonoBehaviour:
   DragonSkill2: {fileID: 21300000, guid: e2c446ec882b9984584cadfe4c2c105b, type: 3}
   DragonSkill3: {fileID: 21300000, guid: bdd523c4cc0e04c49b9bb67c7ce66a42, type: 3}
   DragonSkill4: {fileID: 21300000, guid: 1e7b60c204b0cfa4c8fede8ba94db363, type: 3}
+  DPSkill0: {fileID: 21300000, guid: 052393d518d746f44a9663cb675990ff, type: 3}
+  DPSkill1: {fileID: 21300000, guid: a25305f74d614744593ff47955453e19, type: 3}
+  DPSkill2: {fileID: 21300000, guid: cd22a84edf6860c45b8864dd3beea6ae, type: 3}
+  DPSkill3: {fileID: 21300000, guid: 12952380033af6243a9c2196d8e05a1c, type: 3}
+  DPSkill4: {fileID: 21300000, guid: 1fbfc61eba9dd12489c4658c5b161483, type: 3}
   magicStone: {fileID: 21300000, guid: a04b455a2016d0d4db39dd66b1d507ab, type: 3}
   blueStone: {fileID: 21300000, guid: 99f2d7ae766e00d4b88b7f2b3f1b81a0, type: 3}
   gold: {fileID: 21300000, guid: 3746ae3bc982cb34395dac845129215b, type: 3}
@@ -3427,6 +3445,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 74ff8d2d60f48454198b2f6064ec39fe, type: 2}
   - {fileID: 11400000, guid: c029ecfb18c3abc469af0f90eca1a0cb, type: 2}
   - {fileID: 11400000, guid: ea0131433bd99ec4d8e63fc4bb54c211, type: 2}
+  - {fileID: 11400000, guid: a02ee2a621440e24fb0aebf63bf9b268, type: 2}
+  - {fileID: 11400000, guid: a93c9bf2ae262074681914632a37dea3, type: 2}
+  - {fileID: 11400000, guid: 745d0a930af32024fa32fe55d71b9a8d, type: 2}
+  - {fileID: 11400000, guid: bd97a9eebbdafdc428410d335bd897b3, type: 2}
   petCostumeList:
   - {fileID: 11400000, guid: 3d9145f3f8361c944acb6cd70679d6e2, type: 2}
   - {fileID: 11400000, guid: 206e7bbe5e49e2f4bb8859c83698d1d7, type: 2}
@@ -4546,7 +4568,7 @@ PrefabInstance:
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}
       propertyPath: editorLoginId
-      value: clone6
+      value: clone8
       objectReference: {fileID: 0}
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}

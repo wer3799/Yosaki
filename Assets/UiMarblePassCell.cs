@@ -25,6 +25,10 @@ public class UiMarblePassCell : MonoBehaviour
 
     [SerializeField] int tableIdx= 0;
 
+    [SerializeField] private Image bgImage;
+
+    [SerializeField] private List<Sprite> _sprites;
+    
     private void Start()
     {
         Initialize();
@@ -39,6 +43,16 @@ public class UiMarblePassCell : MonoBehaviour
         SetItemIcon();
         
         tableIdxText.SetText($"{tableIdx+1}");
+
+        if (tableIdx == 0 || tableIdx == 5 || tableIdx == 9 || tableIdx == 14)
+        {
+            bgImage.sprite = _sprites[0];
+        }
+        else
+        {
+            bgImage.sprite = _sprites[1];
+        }
+        
     }
 
     private void SetAmount()

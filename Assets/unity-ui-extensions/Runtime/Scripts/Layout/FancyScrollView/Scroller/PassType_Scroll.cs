@@ -18,5 +18,6 @@ namespace UnityEngine.UI.Extensions
         OnlyEffectView,
         LevelPass,
         DosulPass,
+        Kill1Pass,
     }
 }

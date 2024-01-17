@@ -87,6 +87,7 @@ public static class ServerData
     public static UserInfoTable_2 userInfoTable_2 { get; private set; } = new UserInfoTable_2();
     
     public static BossScoreTable bossScoreTable { get; private set; } = new BossScoreTable();
+    public static SpecialTitleServerTable specialTitleServerTable { get; private set; } = new SpecialTitleServerTable();
 
     #region string
 
@@ -191,6 +192,8 @@ public static class ServerData
         suhoAnimalServerTable.Initialize();
         
         sealSwordServerTable.Initialize();
+        
+        specialTitleServerTable.Initialize();
     }
 
     public static void BossTableInitialized()
@@ -654,6 +657,22 @@ public static class ServerData
             case Item_Type.DragonSkill4:
                 ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value += rewardValue;
                 break;
+            //            
+            case Item_Type.DPSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill0).Value += rewardValue;
+                break;
+            case Item_Type.DPSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill1).Value += rewardValue;
+                break;
+            case Item_Type.DPSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill2).Value += rewardValue;
+                break;
+            case Item_Type.DPSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill3).Value += rewardValue;
+                break;
+            case Item_Type.DPSkill4:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill4).Value += rewardValue;
+                break;
 
             //
             //
@@ -876,7 +895,7 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += rewardValue;
                 break;
 
-            case Item_Type.Event_Collection:
+            case Item_Type.Event_Kill1_Item:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += rewardValue;
                 break;
             case Item_Type.Event_HotTime:
@@ -1115,6 +1134,10 @@ public static class ServerData
             case Item_Type.costume188:
             case Item_Type.costume189:
             case Item_Type.costume190:
+            case Item_Type.costume191:
+            case Item_Type.costume192:
+            case Item_Type.costume193:
+            case Item_Type.costume194:
                 ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
                 break;
             case Item_Type.weapon81:
@@ -1125,6 +1148,8 @@ public static class ServerData
             case Item_Type.weapon152:
             case Item_Type.weapon153:
             case Item_Type.weapon154:
+            case Item_Type.weapon155:
+            case Item_Type.weapon156:
                 ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.magicBook116:
@@ -1134,6 +1159,9 @@ public static class ServerData
             case Item_Type.magicBook124:
             case Item_Type.magicBook125:
             case Item_Type.magicBook126:
+            case Item_Type.magicBook127:
+            case Item_Type.magicBook128:
+            case Item_Type.magicBook129:
                 ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet52:
@@ -1167,6 +1195,11 @@ public static class ServerData
                 break;
             default:
             {
+                if (type.IsNorigaeItem())
+                {
+                    ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                    break;
+                }
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Item_Type {type} is not defined", null);
             }
                 break;
@@ -1392,6 +1425,10 @@ public static class ServerData
             case Item_Type.costume188:
             case Item_Type.costume189:
             case Item_Type.costume190:
+            case Item_Type.costume191:
+            case Item_Type.costume192:
+            case Item_Type.costume193:
+            case Item_Type.costume194:
                 string costumeKey = type.ToString();
                 passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
                 return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
@@ -1584,7 +1621,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.DokebiFireKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
 
-            case Item_Type.Event_Collection:
+            case Item_Type.Event_Kill1_Item:
                 passParam.Add(GoodsTable.Event_Kill1_Item,
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -1979,6 +2016,26 @@ public static class ServerData
                 passParam.Add(GoodsTable.DragonSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
             //
+            // //
+            case Item_Type.DPSkill0:
+                passParam.Add(GoodsTable.DPSkill0, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DPSkill1:
+                passParam.Add(GoodsTable.DPSkill1, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DPSkill2:
+                passParam.Add(GoodsTable.DPSkill2, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+
+            case Item_Type.DPSkill3:
+                passParam.Add(GoodsTable.DPSkill3, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            case Item_Type.DPSkill4:
+                passParam.Add(GoodsTable.DPSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
+            //
             case Item_Type.LeeMuGiStone:
                 passParam.Add(GoodsTable.LeeMuGiStone,
                     ServerData.goodsTable.GetTableData(GoodsTable.LeeMuGiStone).Value);
@@ -2138,6 +2195,14 @@ public static class ServerData
             case Item_Type.pet58:
                 passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
                 return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
+            default :
+                if (type.IsNorigaeItem())
+                {
+                    var magicBookKey = type.ToString();
+                    passParam.Add(magicBookKey, ServerData.magicBookTable.TableDatas[magicBookKey].ConvertToString());
+                    return TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, passParam);
+                }
+                break;
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -2320,7 +2385,7 @@ public static class ServerData
                 param.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
 
-            case Item_Type.Event_Collection:
+            case Item_Type.Event_Kill1_Item:
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += amount;
                 param.Add(GoodsTable.Event_Kill1_Item,
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
@@ -3049,6 +3114,27 @@ public static class ServerData
                 ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value += amount;
                 param.Add(GoodsTable.DragonSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DragonSkill4).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            //   //  //            //
+            case Item_Type.DPSkill0:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill0).Value += amount;
+                param.Add(GoodsTable.DPSkill0, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill0).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DPSkill1:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill1).Value += amount;
+                param.Add(GoodsTable.DPSkill1, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill1).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DPSkill2:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill2).Value += amount;
+                param.Add(GoodsTable.DPSkill2, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill2).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DPSkill3:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill3).Value += amount;
+                param.Add(GoodsTable.DPSkill3, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill3).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
+            case Item_Type.DPSkill4:
+                ServerData.goodsTable.GetTableData(GoodsTable.DPSkill4).Value += amount;
+                param.Add(GoodsTable.DPSkill4, ServerData.goodsTable.GetTableData(GoodsTable.DPSkill4).Value);
+                return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             //   //
             case Item_Type.SinSkill0:
                 ServerData.goodsTable.GetTableData(GoodsTable.SinSkill0).Value += amount;
@@ -3131,6 +3217,8 @@ public static class ServerData
             case Item_Type.weapon152:
             case Item_Type.weapon153:
             case Item_Type.weapon154:
+            case Item_Type.weapon155:
+            case Item_Type.weapon156:
             {
                 string key = type.ToString();
                 ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
@@ -3160,6 +3248,9 @@ public static class ServerData
             case Item_Type.magicBook124:
             case Item_Type.magicBook125:
             case Item_Type.magicBook126:
+            case Item_Type.magicBook127:
+            case Item_Type.magicBook128:
+            case Item_Type.magicBook129:
             {
                 string key = type.ToString();
                 ServerData.magicBookTable.TableDatas[key].hasItem.Value = 1;
@@ -4578,7 +4669,7 @@ public static class ServerData
                     ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value += amount;
                     break;
 
-                case Item_Type.Event_Collection:
+                case Item_Type.Event_Kill1_Item:
                     ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += amount;
                     break;
                 case Item_Type.Event_HotTime:

@@ -513,8 +513,8 @@ public static class GameBalance
     public static ObscuredInt refundCriDamGoldBarRatio = 1;//크리티컬데미지 1차이당 백금화 환불 개수 
     public static ObscuredInt criticalGraduateValue = 7500;//각성시 크리티컬레벨
     public static ObscuredInt attackGraduateValue = 50000;//각성시 공격력
-    public static ObscuredInt criticalGraduateRefundStandard = 5850;//각성시 크리티컬 환불기준레벨
-    public static ObscuredInt goldGraduateScore = 64850;// 금화능력치총합레벨조건
+    public static ObscuredInt criticalGraduateRefundStandard = 5500;//각성시 크리티컬 환불기준레벨
+    public static ObscuredInt goldGraduateScore = 55500;// 금화능력치총합레벨조건
     public static ObscuredInt hellRelicGraduateScore = 4000;// 지옥영숲각성컷
     public static ObscuredInt hellRelicGraduateValue = 100000;// 지옥영숲각성시레벨
     
@@ -533,6 +533,8 @@ public static class GameBalance
     public static ObscuredFloat Special4_GoldBar = 0.000000013f;
     public static ObscuredFloat Special5_GoldBar = 0.000000018f;
     public static ObscuredFloat Special6_GoldBar = 0.00000003f;
+    public static ObscuredFloat Special7_GoldBar = 0.000000045f;
+    public static ObscuredFloat Special8_GoldBar = 0.00000006f;
     
     public static ObscuredInt JumpStageStartValue = 1;//시작 가능 스테이지
     public static ObscuredInt JumpStageAdjustValue = 10;//강철이 데미지 스테이지 계산(스테이지보스체력x2<강철이체력)의 인덱스 -50짜리 보스
@@ -545,7 +547,7 @@ public static class GameBalance
     public static ObscuredInt TwelveBoss_156_RequireTower10 = 4;
     public static ObscuredInt TwelveBoss_157_RequireTower10 = 6;
 
-    
+
     public static ObscuredInt addDay = 0;
     
     public static ObscuredInt dosulUnlockStage = 300;
@@ -587,7 +589,7 @@ public static class GameBalance
     
     public static ObscuredInt MeditationHour = 24;// 명상시간
     public static ObscuredInt PetDispatchHour = 20;// 펫파견시간
-    public static ObscuredInt MunhaDispatchHour = 12;// 문하생파견시간
+    public static ObscuredInt MunhaDispatchHour = 24;// 문하생파견시간
     
     public static ObscuredInt DosulAwakeRequireLevel = 99;// 필요 도술 ID
     
@@ -609,6 +611,11 @@ public static class GameBalance
     public readonly static ObscuredFloat MonthPass_Exp = 10000;
     public readonly static ObscuredFloat MonthPass_Gold = 20000;
     public readonly static ObscuredFloat MonthPass_GrowthStone = 20;
+    public readonly static ObscuredFloat YutNori_0 = 0.3f;
+    public readonly static ObscuredFloat YutNori_1 = 0.3f;
+    public readonly static ObscuredFloat YutNori_2 = 0.3f;
+    public readonly static ObscuredFloat YutNori_3 = 0.05f;
+    public readonly static ObscuredFloat YutNori_4 = 0.05f;
 
     public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 1, 30);
 
@@ -616,7 +623,7 @@ public static class GameBalance
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","멸","미정17","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "피","동","멸","향","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
 
     };
     public static int GetSonIdx()

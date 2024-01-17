@@ -205,11 +205,11 @@ public class UiCollectionFallEventCell : MonoBehaviour
         }
 
 
-        int currentEventItemNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value;
+        var currentEventItemNum = ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value;
 
         if (currentEventItemNum < tableData.Price)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Collection)}이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetJongsung(CommonString.GetItemName(Item_Type.Event_Kill1_Item),JongsungType.Type_IGA)} 부족합니다.");
             return;
         }
 

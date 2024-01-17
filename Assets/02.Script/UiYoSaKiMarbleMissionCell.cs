@@ -126,29 +126,80 @@ public class UiYoSaKiMarbleMissionCell : MonoBehaviour
         
         if (Utils.IsCostumeItem((Item_Type)tableData.Rewardtype))
         {
-            if ((Item_Type)tableData.Rewardtype == Item_Type.costume161)
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            var costumeKey = ((Item_Type)tableData.Rewardtype).ToString();
+            var costumeServerData = ServerData.costumeServerTable.TableDatas[costumeKey];
+
+            costumeServerData.hasCostume.Value = true;
+
+            Param costumeParam = new Param();
+            costumeParam.Add(costumeKey, costumeServerData.ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+            Param eventMissionParam = new Param();
+            eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                List<TransactionValue> transactions = new List<TransactionValue>();
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)} 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+            
+        }
+        else if (Utils.IsWeaponItem((Item_Type)tableData.Rewardtype))
+        {
+           
+            List<TransactionValue> transactions = new List<TransactionValue>();
 
-                var costumeServerData = ServerData.costumeServerTable.TableDatas["costume161"];
+            var weaponKey = ((Item_Type)tableData.Rewardtype).ToString();
+            var weaponServerData = ServerData.weaponTable.TableDatas[weaponKey];
 
-                costumeServerData.hasCostume.Value = true;
+            weaponServerData.hasItem.Value = 1;
 
-                Param costumeParam = new Param();
-                costumeParam.Add("costume161", costumeServerData.ConvertToString());
-                transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+            Param weaponParam = new Param();
+            weaponParam.Add(weaponKey, weaponServerData.ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
 
-                Param eventMissionParam = new Param();
-                eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
-                transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
+            Param eventMissionParam = new Param();
+            eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
-                ServerData.SendTransactionV2(transactions, successCallBack: () =>
-                {
-                    SoundManager.Instance.PlaySound("Reward");
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.costume161)} 획득!!", null);
-                    // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
-                });
-            }
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)} 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+            
+        }
+        else if (Utils.IsNorigaeItem((Item_Type)tableData.Rewardtype))
+        {
+           
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            var magicbookKey = ((Item_Type)tableData.Rewardtype).ToString();
+            var magicBookServerData = ServerData.magicBookTable.TableDatas[magicbookKey];
+
+            magicBookServerData.hasItem.Value = 1;
+
+            Param magicBookParam = new Param();
+            magicBookParam.Add(magicbookKey, magicBookServerData.ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+
+            Param eventMissionParam = new Param();
+            eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                SoundManager.Instance.PlaySound("Reward");
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)} 획득!!", null);
+                // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
+            });
+            
         }
         else
         {

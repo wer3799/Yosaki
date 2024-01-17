@@ -53,7 +53,7 @@ public enum StatusType
     SuperCritical5DamPer, //도깨비
     DokebiFireHasValueUpgrade,
     
-    HellHasValueUpgrade,
+    HellHasValueUpgrade=41,
     SuperCritical6DamPer, //신수
     SuperCritical7DamPer, //금강베기
     SumiHasValueUpgrade,
@@ -128,6 +128,9 @@ public enum StatusType
     SuperCritical30DamPer,//신력피해(%)
     BigiDamPer=106,//비기 추가 피해량 증가(%)
     DragonPalaceHasValueUpgrade,//용궁 재화당 개수증가
+    SuperCritical31DamPer,//협동피해(%)
+    EnhanceSP,//검기 능력치 효과(%)
+
 }
 
 
@@ -183,7 +186,8 @@ public static class PlayerStats
         double mugong = GetSuperCritical27DamPer();
         double wave = GetSuperCritical28DamPer();
         double bimu = GetSuperCritical29DamPer();
-        double sinpower = GetSuperCritical29DamPer();
+        double sinpower = GetSuperCritical30DamPer();
+        double munha = GetSuperCritical31DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -229,6 +233,7 @@ public static class PlayerStats
         totalPower += (totalPower * wave);
         totalPower += (totalPower * bimu);
         totalPower += (totalPower * sinpower);
+        totalPower += (totalPower * munha);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -455,7 +460,7 @@ public static class PlayerStats
             ret += over200 * GameBalance.gumgiAttackValue200;
         }
 
-        return (ret + ret * GetGumgiAbilAddValue()) * GetSwordGodAbil0();
+        return (ret + ret * GetGumgiAbilAddValue()) * (GetEnhanceSP());
     }
 
     public static float GetGumIgDefenseValue()
@@ -473,7 +478,7 @@ public static class PlayerStats
             ret += over200 * GameBalance.gumgiDefenseValue200;
         }
 
-        return (ret + ret * GetGumgiAbilAddValue()) * GetSwordGodAbil0();
+        return (ret + ret * GetGumgiAbilAddValue()) * GetEnhanceSP();
     }
 
     public static float GetCollectionAbilValue(StatusType type)
@@ -2037,6 +2042,8 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetSuhoTreasureAbilHasEffect();
+        
+        ret += GetSpecialTypeAbility(StatusType.EnhanceSuhoCritical);
 
         return ret;
     }
@@ -2097,6 +2104,8 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special4_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special5_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special6_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special7_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special8_GoldBar);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical17DamPer);
 
@@ -2271,6 +2280,27 @@ public static class PlayerStats
         
         ret += GetSasinsuAwakePowerAbility(StatusType.SuperCritical30DamPer);
         
+        return ret;
+    }
+
+    //협동피해
+    public static float GetSuperCritical31DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetMunhaTower2Ability(StatusType.SuperCritical31DamPer);
+
+        return ret;
+    }
+    //검기 능력치 효과 증가(%)
+    public static float GetEnhanceSP()
+    {
+        float ret = 0f;
+        
+        ret += GetMunhaTower2Ability(StatusType.EnhanceSP);
+        
+        ret += GetSpecialTypeAbility(StatusType.EnhanceSP);
+
         return ret;
     }
 
@@ -4092,6 +4122,8 @@ public static class PlayerStats
 
         ret += (int)GetAwakeAbilityValue(AbilAwakeType.Vision, StatusType.AddVisionSkillUseCount);
         
+        ret += GetDragonKingWeaponHasAbility();
+        
         return ret;
     }
     public static float GetEnhanceVisionSkill()
@@ -4171,6 +4203,12 @@ public static class PlayerStats
     public static int GetTaeguekGrade()
     {
         int ret = (int)ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.taeguekTower].Value - 1;
+        return ret;
+    }
+    //문하도장(특훈아님)
+    public static int GetMunhaGrade()
+    {
+        int ret = (int)ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.munhaTower].Value - 1;
         return ret;
     }
 
@@ -4254,6 +4292,7 @@ public static class PlayerStats
 
         return grade;
     }
+    //특훈
     public static int GetMunhaTowerGrade()
     {
         int grade = -1;
@@ -4507,6 +4546,10 @@ public static class PlayerStats
         }
 
         return ret;
+    }
+    public static int GetDragonKingWeaponHasAbility()
+    {
+        return ServerData.weaponTable.GetWeaponData("weapon155").hasItem.Value > 0 ? 1 : 0;
     }
 
     public static float GetClosedTrainingValue()
@@ -6377,6 +6420,21 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetHellFireHasAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetGradeTestAbilValue(StatusType.HellHasValueUpgrade);
+
+        ret += GetPassiveSkill2Value(StatusType.HellHasValueUpgrade);
+
+        ret += GetCostumeSpecialAbilityValue(StatusType.HellHasValueUpgrade);
+        
+        ret += GetSpecialTypeAbility(StatusType.HellHasValueUpgrade);
+
+        
+        return ret;
+    }
 
     public static float GetChunFlowerHasAddValue()
     {
@@ -6389,23 +6447,12 @@ public static class PlayerStats
         ret += GetPassiveSkill2Value(StatusType.FlowerHasValueUpgrade);
 
         ret += GetCostumeSpecialAbilityValue(StatusType.FlowerHasValueUpgrade);
-
-        return ret;
-    }
-
-    public static float GetHellFireHasAddValue()
-    {
-        float ret = 0f;
-
-        ret += GetGradeTestAbilValue(StatusType.HellHasValueUpgrade);
-
-        ret += GetPassiveSkill2Value(StatusType.HellHasValueUpgrade);
-
-        ret += GetCostumeSpecialAbilityValue(StatusType.HellHasValueUpgrade);
-
         
+        ret += GetSpecialTypeAbility(StatusType.FlowerHasValueUpgrade);
+
         return ret;
     }
+
 
     public static float GetDokebiFireHasAddValue()
     {
@@ -6418,6 +6465,25 @@ public static class PlayerStats
         ret += GetPassiveSkill2Value(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetCostumeSpecialAbilityValue(StatusType.DokebiFireHasValueUpgrade);
+
+        ret += GetSpecialTypeAbility(StatusType.DokebiFireHasValueUpgrade);
+
+        
+        return ret;
+    }
+    public static float GetSumiFireHasAddValue()
+    {
+        float ret = 0f;
+
+        ret += GetSkillHasValue(StatusType.SumiHasValueUpgrade);
+
+        ret += GetGradeTestAbilValue(StatusType.SumiHasValueUpgrade);
+
+        ret += GetPassiveSkill2Value(StatusType.SumiHasValueUpgrade);
+            
+        ret += GetCostumeSpecialAbilityValue(StatusType.SumiHasValueUpgrade);
+
+        ret += GetSpecialTypeAbility(StatusType.SumiHasValueUpgrade);
 
         
         return ret;
@@ -6435,6 +6501,8 @@ public static class PlayerStats
         
         ret += GetCostumeSpecialAbilityValue(StatusType.TreasureHasValueUpgrade);
 
+        ret += GetSpecialTypeAbility(StatusType.TreasureHasValueUpgrade);
+
         return ret;
     }
 
@@ -6450,6 +6518,8 @@ public static class PlayerStats
         
         ret += GetCostumeSpecialAbilityValue(StatusType.DarkHasValueUpgrade);
 
+        ret += GetSpecialTypeAbility(StatusType.DarkHasValueUpgrade);
+
         return ret;
     }
     public static float GetSinsunTreasureHasAddValue()
@@ -6461,9 +6531,10 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.SinsunHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.SinsunHasValueUpgrade);
-
         
         ret += GetCostumeSpecialAbilityValue(StatusType.SinsunHasValueUpgrade);
+
+        ret += GetSpecialTypeAbility(StatusType.SinsunHasValueUpgrade);
 
         
         return ret;
@@ -6480,6 +6551,8 @@ public static class PlayerStats
         
         ret += GetCostumeSpecialAbilityValue(StatusType.HyunsangHasValueUpgrade);
 
+        ret += GetSpecialTypeAbility(StatusType.HyunsangHasValueUpgrade);
+
         return ret;
     }
     public static float GetDragonScaleHasValueUpgrade()
@@ -6491,6 +6564,8 @@ public static class PlayerStats
         ret += GetSkillHasValue(StatusType.DragonHasValueUpgrade);
         
         ret += GetCostumeSpecialAbilityValue(StatusType.DragonHasValueUpgrade);
+        
+        ret += GetSpecialTypeAbility(StatusType.DragonHasValueUpgrade);
         
         return ret;
     }
@@ -6504,6 +6579,8 @@ public static class PlayerStats
         
         ret += GetCostumeSpecialAbilityValue(StatusType.DragonPalaceHasValueUpgrade);
 
+        ret += GetSpecialTypeAbility(StatusType.DragonPalaceHasValueUpgrade);
+
         return ret;
     }
     public static float GetPeachAbilValue()
@@ -6515,6 +6592,8 @@ public static class PlayerStats
         ret += GetMonkeyGodAbil0();
         
         ret += GetCostumeSpecialAbilityValue(StatusType.PeachAbilUpgradePer);
+
+        ret += GetSpecialTypeAbility(StatusType.PeachAbilUpgradePer);
 
         return ret;
     }
@@ -6667,20 +6746,6 @@ public static class PlayerStats
         return (int)ret;
     }
 
-    public static float GetSumiFireHasAddValue()
-    {
-        float ret = 0f;
-
-        ret += GetSkillHasValue(StatusType.SumiHasValueUpgrade);
-
-        ret += GetGradeTestAbilValue(StatusType.SumiHasValueUpgrade);
-
-        ret += GetPassiveSkill2Value(StatusType.SumiHasValueUpgrade);
-            
-        ret += GetCostumeSpecialAbilityValue(StatusType.SumiHasValueUpgrade);
-
-        return ret;
-    }
 
     public static float GetSasinsuStarAddValue()
     {
@@ -6948,5 +7013,46 @@ public static class PlayerStats
         
         return tableData.Awakevalue;
 
+    }
+
+    public static float GetMunhaTower2Ability(StatusType type)
+    {
+        var ret = 0f;
+        var idx = (int)PlayerStats.GetMunhaGrade();
+
+        if (idx < 0)
+        {
+            return 0f;
+        }
+
+        var data = TableManager.Instance.StudentTower.dataArray[idx];
+
+        if (type != (StatusType)data.Abil_Type) return 0f;
+
+        return data.Abil_Value;
+
+    }
+
+    public static float GetSpecialTypeAbility(StatusType type)
+    {
+        var ret = 0f;
+
+        var tableData = TableManager.Instance.Title_Special.dataArray;
+
+        foreach (var t in tableData)
+        {
+            if((StatusType)t.Abiltype!=type) continue;
+            if (ServerData.specialTitleServerTable.TableDatas[t.Stringid].hasItem.Value < 1) continue;
+            ret += t.Abilvalue;
+        }
+        
+        return ret;
+
+    }
+    public static float GetSpecialTypeAbility(int idx)
+    {
+        var tableData = TableManager.Instance.Title_Special.dataArray[idx];
+
+        return tableData.Abilvalue;
     }
 }
