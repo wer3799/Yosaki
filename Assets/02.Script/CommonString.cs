@@ -923,7 +923,7 @@ public static class CommonString
             case StatusType.SuperCritical30DamPer:
                 return "신력 피해(%)";
             case StatusType.SuperCritical31DamPer:
-                return "협동 피해(%)";
+                return "협동 베기(%)";
             case StatusType.BigiDamPer:
                 return "비기 추가 피해량 증가(%)";
             case StatusType.SealSwordDam:

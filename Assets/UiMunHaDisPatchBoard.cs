@@ -159,8 +159,8 @@ public class UiMunHaDisPatchBoard : MonoBehaviour
         {
            
             
-            TimeSpan timeRemaining = targetTime - Utils.GetBackendServerTime();
-            //남은시간있음
+         TimeSpan timeRemaining = targetTime - DateTime.Now;          
+         //남은시간있음
             if (timeRemaining.TotalSeconds > 0)
             {
                 var lastMinute = Mathf.Max(1,(int)(timeRemaining.TotalSeconds / 60));

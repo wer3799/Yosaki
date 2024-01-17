@@ -234,7 +234,7 @@ public class UiMunHaBoard : MonoBehaviour
        return;
     }
 
-    TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
+    TimeSpan timeRemaining = targetTime - DateTime.Now;  
     
     if (timeRemaining.TotalSeconds > 3600)
     {

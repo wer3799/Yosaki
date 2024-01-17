@@ -73,8 +73,7 @@ public class UiMeditationBoard : MonoBehaviour
         
         //명상누름
         
-        TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
-        
+        TimeSpan timeRemaining = targetTime - DateTime.Now;        
         // var seconds = ElapsedTimeManager.Instance.GetElapsedTimeReal();
         // TimeSpan timeRemaining = targetTime - ServerData.userInfoTable.currentServerTime.AddSeconds(seconds);
         //

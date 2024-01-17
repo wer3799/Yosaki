@@ -36,8 +36,7 @@ public class UiStatusRedDot : UiRedDotBase
             Utils.ConvertFromUnixTimestamp(ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationStartTime).Value);
         var targetTime = startTime.AddHours(GameBalance.MeditationHour);
         
-        TimeSpan timeRemaining = Utils.GetTimeRemaining(targetTime);
-
+        TimeSpan timeRemaining = targetTime - DateTime.Now;
         
         if (timeRemaining.TotalSeconds >0)
         {
