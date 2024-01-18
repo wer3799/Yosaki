@@ -478,7 +478,7 @@ public static class PlayerStats
             ret += over200 * GameBalance.gumgiDefenseValue200;
         }
 
-        return (ret + ret * GetGumgiAbilAddValue()) * (1 + GetEnhanceSP());
+        return (ret + ret * GetGumgiAbilAddValue()) * (GetEnhanceSP());
     }
 
     public static float GetCollectionAbilValue(StatusType type)
@@ -2297,8 +2297,8 @@ public static class PlayerStats
     {
         float ret = 0f;
         
-        ret += GetMunhaTower2Ability(StatusType.EnhanceSP);
-        
+        ret += GetSwordGodAbil0();
+
         ret += GetSpecialTypeAbility(StatusType.EnhanceSP);
 
         return ret;
