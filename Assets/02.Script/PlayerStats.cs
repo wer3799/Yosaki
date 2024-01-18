@@ -478,7 +478,7 @@ public static class PlayerStats
             ret += over200 * GameBalance.gumgiDefenseValue200;
         }
 
-        return (ret + ret * GetGumgiAbilAddValue()) * GetEnhanceSP();
+        return (ret + ret * GetGumgiAbilAddValue()) * (1 + GetEnhanceSP());
     }
 
     public static float GetCollectionAbilValue(StatusType type)
