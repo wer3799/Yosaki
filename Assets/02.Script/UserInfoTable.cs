@@ -178,7 +178,7 @@ public class UserInfoTable
     public const string smithpensionAttendance = "smithpension";
     public const string weaponpensionAttendance = "weaponpension";
 
-    public const string monthreset = "monthreset";
+    public const string monthreset = "manduReset";
     public const string sonScore = "son6";
     public const string hellWarScore = "hws";
     public const string catScore = "csc";

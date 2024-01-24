@@ -11,6 +11,7 @@ public class UiMarblePackRefund : MonoBehaviour
 
     private void Start()
     {
+        return;
         Check();
     }
 
