@@ -259,7 +259,7 @@ public class UiIapItemCell : MonoBehaviour
         //설날무료
         if (productData.Productid.Equals("seolpackage0"))
         {
-            UiLevelUpEventShop.Instance.GetPackageItem(productData.Productid);
+            UiShop.Instance.GetPackageItem(productData.Productid);
             Debug.LogError("Get SeolFreePackage");
         }
         else if (productData.Needlevel == 0)
