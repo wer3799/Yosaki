@@ -256,7 +256,13 @@ public class UiIapItemCell : MonoBehaviour
             return;
         }
 
-        if (productData.Needlevel == 0)
+        //설날무료
+        if (productData.Productid.Equals("seolpackage0"))
+        {
+            UiLevelUpEventShop.Instance.GetPackageItem(productData.Productid);
+            Debug.LogError("Get SeolFreePackage");
+        }
+        else if (productData.Needlevel == 0)
         {
 
             if (productData.Id == 101)
