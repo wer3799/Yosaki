@@ -186,6 +186,8 @@ public Sprite weapon153;
 public Sprite weapon154;
 public Sprite weapon155;
 public Sprite weapon156;
+public Sprite weapon157;
+public Sprite weapon158;
     
 [Header ("Weapon_View")]
 
@@ -345,6 +347,8 @@ public Sprite RecommendWeapon22;
     public Sprite magicbook127;
     public Sprite magicBook128;
     public Sprite magicBook129;
+    public Sprite magicBook130;
+    public Sprite magicBook131;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -472,6 +476,8 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill14;
     public Sprite VisionSkill15;
     public Sprite VisionSkill16;
+    public Sprite VisionSkill17;
+    public Sprite VisionSkill18;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -583,8 +589,10 @@ public Sprite RecommendWeapon22;
     public Sprite SG;
     public Sprite SC;
     public Sprite SB;
-    [FormerlySerializedAs("BossTreasure")] public Sprite GwiSalTreasure;
+    [FormerlySerializedAs("BossTreasure")] 
+    public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
+    [FormerlySerializedAs("MurimTreasure")] public Sprite MRT;
     public Sprite GuildTowerClearTicket;
     public Sprite GuildTowerHorn;
     public Sprite SinsuMarble;
@@ -693,469 +701,6 @@ public Sprite RecommendWeapon22;
                 return marble;
             case Item_Type.Dokebi:
                 return dokebi;
-            case Item_Type.costume1:
-                return costumeThumbnail[1];
-            case Item_Type.costume2:
-                return costumeThumbnail[2];
-            case Item_Type.costume3:
-                return costumeThumbnail[3];
-            case Item_Type.costume4:
-                return costumeThumbnail[4];
-
-
-            case Item_Type.costume8:
-                return costumeThumbnail[8];
-
-
-            case Item_Type.costume11:
-                return costumeThumbnail[11];
-
-
-            case Item_Type.costume12:
-                return costumeThumbnail[12];
-
-
-            case Item_Type.costume13:
-                return costumeThumbnail[13];
-
-
-            case Item_Type.costume14:
-                return costumeThumbnail[14];
-
-
-            case Item_Type.costume15:
-                return costumeThumbnail[15];
-
-
-            case Item_Type.costume16:
-                return costumeThumbnail[16];
-
-
-            case Item_Type.costume17:
-                return costumeThumbnail[17];
-
-
-            case Item_Type.costume18:
-                return costumeThumbnail[18];
-
-
-            case Item_Type.costume19:
-                return costumeThumbnail[19];
-
-
-            case Item_Type.costume20:
-                return costumeThumbnail[20];
-
-
-            case Item_Type.costume21:
-                return costumeThumbnail[21];
-
-
-            case Item_Type.costume22:
-                return costumeThumbnail[22];
-
-
-
-            case Item_Type.costume23:
-                return costumeThumbnail[23];
-
-
-
-            case Item_Type.costume24:
-                return costumeThumbnail[24];
-
-
-
-            case Item_Type.costume25:
-                return costumeThumbnail[25];
-
-
-
-            case Item_Type.costume26:
-                return costumeThumbnail[26];
-
-
-
-            case Item_Type.costume27:
-                return costumeThumbnail[27];
-
-
-
-            case Item_Type.costume28:
-                return costumeThumbnail[28];
-
-
-
-
-            case Item_Type.costume29:
-                return costumeThumbnail[29];
-
-
-
-            case Item_Type.costume30:
-                return costumeThumbnail[30];
-
-
-            case Item_Type.costume31:
-                return costumeThumbnail[31];
-
-
-
-            case Item_Type.costume32:
-                return costumeThumbnail[32];
-
-
-
-            case Item_Type.costume33:
-                return costumeThumbnail[33];
-
-
-
-            case Item_Type.costume34:
-                return costumeThumbnail[34];
-
-
-
-            case Item_Type.costume35:
-                return costumeThumbnail[35];
-
-
-            case Item_Type.costume36:
-                return costumeThumbnail[36];
-
-
-
-            case Item_Type.costume37:
-                return costumeThumbnail[37];
-
-
-
-            case Item_Type.costume38:
-                return costumeThumbnail[38];
-
-
-            case Item_Type.costume39:
-                return costumeThumbnail[39];
-
-
-            case Item_Type.costume40:
-                return costumeThumbnail[40];
-
-
-            case Item_Type.costume41:
-                return costumeThumbnail[41];
-            case Item_Type.costume42:
-                return costumeThumbnail[42];
-            case Item_Type.costume43:
-                return costumeThumbnail[43];
-            case Item_Type.costume44:
-                return costumeThumbnail[44];
-            case Item_Type.costume45:
-                return costumeThumbnail[45];
-            case Item_Type.costume46:
-                return costumeThumbnail[46];
-            case Item_Type.costume47:
-                return costumeThumbnail[47];
-            case Item_Type.costume48:
-                return costumeThumbnail[48];
-            case Item_Type.costume49:
-                return costumeThumbnail[49];
-            case Item_Type.costume50:
-                return costumeThumbnail[50];
-            case Item_Type.costume51:
-                return costumeThumbnail[51];
-            case Item_Type.costume52:
-                return costumeThumbnail[52];
-            case Item_Type.costume53:
-                return costumeThumbnail[53];
-            case Item_Type.costume54:
-                return costumeThumbnail[54];
-            case Item_Type.costume55:
-                return costumeThumbnail[55];
-
-            //
-            case Item_Type.costume56:
-                return costumeThumbnail[56];
-            case Item_Type.costume57:
-                return costumeThumbnail[57];
-            case Item_Type.costume58:
-                return costumeThumbnail[58];
-
-            case Item_Type.costume59:
-                return costumeThumbnail[59];
-            case Item_Type.costume60:
-                return costumeThumbnail[60];
-            case Item_Type.costume61:
-                return costumeThumbnail[61];
-            //
-            case Item_Type.costume62:
-                return costumeThumbnail[62];
-            case Item_Type.costume63:
-                return costumeThumbnail[63];
-            case Item_Type.costume64:
-                return costumeThumbnail[64];
-            case Item_Type.costume65:
-                return costumeThumbnail[65];
-            case Item_Type.costume66:
-                return costumeThumbnail[66];
-            case Item_Type.costume67:
-                return costumeThumbnail[67];
-            case Item_Type.costume68:
-                return costumeThumbnail[68];
-            case Item_Type.costume69:
-                return costumeThumbnail[69];
-            case Item_Type.costume70:
-                return costumeThumbnail[70];
-            case Item_Type.costume71:
-                return costumeThumbnail[71];
-            case Item_Type.costume72:
-                return costumeThumbnail[72];
-            case Item_Type.costume73:
-                return costumeThumbnail[73];
-            case Item_Type.costume74:
-                return costumeThumbnail[74];
-            case Item_Type.costume75:
-                return costumeThumbnail[75];
-            case Item_Type.costume76:
-                return costumeThumbnail[76];
-            case Item_Type.costume77:
-                return costumeThumbnail[77];
-            case Item_Type.costume78:
-                return costumeThumbnail[78];
-            case Item_Type.costume79:
-                return costumeThumbnail[79];
-            case Item_Type.costume80:
-                return costumeThumbnail[80];
-            case Item_Type.costume81:
-                return costumeThumbnail[81];
-            case Item_Type.costume82:
-                return costumeThumbnail[82];
-            case Item_Type.costume83:
-                return costumeThumbnail[83];
-            case Item_Type.costume84:
-                return costumeThumbnail[84];
-            case Item_Type.costume85:
-                return costumeThumbnail[85];
-            case Item_Type.costume86:
-                return costumeThumbnail[86];
-            case Item_Type.costume87:
-                return costumeThumbnail[87];
-            case Item_Type.costume88:
-                return costumeThumbnail[88];
-            case Item_Type.costume89:
-                return costumeThumbnail[89];
-            case Item_Type.costume90:
-                return costumeThumbnail[90];
-            case Item_Type.costume91:
-                return costumeThumbnail[91];
-            case Item_Type.costume92:
-                return costumeThumbnail[92];
-            case Item_Type.costume93:
-                return costumeThumbnail[93];
-            case Item_Type.costume94:
-                return costumeThumbnail[94];
-            case Item_Type.costume95:
-                return costumeThumbnail[95];
-            case Item_Type.costume96:
-                return costumeThumbnail[96];
-            case Item_Type.costume97:
-                return costumeThumbnail[97];
-            case Item_Type.costume98:
-                return costumeThumbnail[98];
-            case Item_Type.costume99:
-                return costumeThumbnail[99];
-            case Item_Type.costume100:
-                return costumeThumbnail[100];
-            case Item_Type.costume101:
-                return costumeThumbnail[101];
-            case Item_Type.costume102:
-                return costumeThumbnail[102];
-            case Item_Type.costume103:
-                return costumeThumbnail[103];
-            case Item_Type.costume104:
-                return costumeThumbnail[104];
-            case Item_Type.costume105:
-                return costumeThumbnail[105];
-            case Item_Type.costume106:
-                return costumeThumbnail[106];
-            case Item_Type.costume107:
-                return costumeThumbnail[107];
-            case Item_Type.costume108:
-                return costumeThumbnail[108];
-            case Item_Type.costume109:
-                return costumeThumbnail[109];
-            case Item_Type.costume110:
-                return costumeThumbnail[110];
-            case Item_Type.costume111:
-                return costumeThumbnail[111];
-            case Item_Type.costume112:
-                return costumeThumbnail[112];
-            case Item_Type.costume113:
-                return costumeThumbnail[113];
-            case Item_Type.costume114:
-                return costumeThumbnail[114];
-            case Item_Type.costume115:
-                return costumeThumbnail[115];
-            case Item_Type.costume116:
-                return costumeThumbnail[116];
-            case Item_Type.costume117:
-                return costumeThumbnail[117];
-            case Item_Type.costume118:
-                return costumeThumbnail[118];
-            case Item_Type.costume119:
-                return costumeThumbnail[119];
-            case Item_Type.costume120:
-                return costumeThumbnail[120];
-            case Item_Type.costume121:
-                return costumeThumbnail[121];
-            case Item_Type.costume122:
-                return costumeThumbnail[122];
-            case Item_Type.costume123:
-                return costumeThumbnail[123];
-            case Item_Type.costume124:
-                return costumeThumbnail[124];
-            case Item_Type.costume125:
-                return costumeThumbnail[125];
-            case Item_Type.costume126:
-                return costumeThumbnail[126];
-            case Item_Type.costume127:
-                return costumeThumbnail[127];
-            case Item_Type.costume128:
-                return costumeThumbnail[128];
-            case Item_Type.costume129:
-                return costumeThumbnail[129];
-            case Item_Type.costume130:
-                return costumeThumbnail[130];
-            case Item_Type.costume131:
-                return costumeThumbnail[131];
-            case Item_Type.costume132:
-                return costumeThumbnail[132];
-            case Item_Type.costume133:
-                return costumeThumbnail[133];
-            case Item_Type.costume134:
-                return costumeThumbnail[134];
-            case Item_Type.costume135:
-                return costumeThumbnail[135];
-            case Item_Type.costume136:
-                return costumeThumbnail[136];
-            case Item_Type.costume137:
-                return costumeThumbnail[137];
-            case Item_Type.costume138:
-                return costumeThumbnail[138];
-            case Item_Type.costume139:
-                return costumeThumbnail[139];
-            case Item_Type.costume140:
-                return costumeThumbnail[140];
-            case Item_Type.costume141:
-                return costumeThumbnail[141];
-            case Item_Type.costume142:
-                return costumeThumbnail[142];
-            case Item_Type.costume143:
-                return costumeThumbnail[143];
-            case Item_Type.costume144:
-                return costumeThumbnail[144];
-            case Item_Type.costume145:
-                return costumeThumbnail[145];
-            case Item_Type.costume146:
-                return costumeThumbnail[146];
-            case Item_Type.costume147:
-                return costumeThumbnail[147];
-            case Item_Type.costume148:
-                return costumeThumbnail[148];
-            case Item_Type.costume149:
-                return costumeThumbnail[149];
-            case Item_Type.costume150:
-                return costumeThumbnail[150];
-            case Item_Type.costume151:
-                return costumeThumbnail[151];
-            case Item_Type.costume152:
-                return costumeThumbnail[152];
-            case Item_Type.costume153:
-                return costumeThumbnail[153];
-            case Item_Type.costume154:
-                return costumeThumbnail[154];
-            case Item_Type.costume155:
-                return costumeThumbnail[155];
-            case Item_Type.costume156:
-                return costumeThumbnail[156];
-            case Item_Type.costume157:
-                return costumeThumbnail[157];
-            case Item_Type.costume158:
-                return costumeThumbnail[158];
-            case Item_Type.costume159:
-                return costumeThumbnail[159];
-            case Item_Type.costume160:
-                return costumeThumbnail[160];
-            case Item_Type.costume161:
-                return costumeThumbnail[161];
-            case Item_Type.costume162:
-                return costumeThumbnail[162];
-            case Item_Type.costume163:
-                return costumeThumbnail[163];
-            case Item_Type.costume164:
-                return costumeThumbnail[164];
-            case Item_Type.costume165:
-                return costumeThumbnail[165];
-            case Item_Type.costume166:
-                return costumeThumbnail[166];
-            case Item_Type.costume167:
-                return costumeThumbnail[167];
-            case Item_Type.costume168:
-                return costumeThumbnail[168];
-            case Item_Type.costume169:
-                return costumeThumbnail[169];
-            case Item_Type.costume170:
-                return costumeThumbnail[170];
-            case Item_Type.costume171:
-                return costumeThumbnail[171];
-            case Item_Type.costume172:
-                return costumeThumbnail[172];
-            case Item_Type.costume173:
-                return costumeThumbnail[173];
-            case Item_Type.costume174:
-                return costumeThumbnail[174];
-            case Item_Type.costume175:
-                return costumeThumbnail[175];
-            case Item_Type.costume176:
-                return costumeThumbnail[176];
-            case Item_Type.costume177:
-                return costumeThumbnail[177];
-            case Item_Type.costume178:
-                return costumeThumbnail[178];
-            case Item_Type.costume179:
-                return costumeThumbnail[179];
-            case Item_Type.costume180:
-                return costumeThumbnail[180];
-            case Item_Type.costume181:
-                return costumeThumbnail[181];
-            case Item_Type.costume182:
-                return costumeThumbnail[182];
-            case Item_Type.costume183:
-                return costumeThumbnail[183];
-            case Item_Type.costume184:
-                return costumeThumbnail[184];
-            case Item_Type.costume185:
-                return costumeThumbnail[185];
-            case Item_Type.costume186:
-                return costumeThumbnail[186];
-            case Item_Type.costume187:
-                return costumeThumbnail[187];
-            case Item_Type.costume188:
-                return costumeThumbnail[188];
-            case Item_Type.costume189:
-                return costumeThumbnail[189];
-            case Item_Type.costume190:
-                return costumeThumbnail[190];
-            case Item_Type.costume191:
-                return costumeThumbnail[191];
-            case Item_Type.costume192:
-                return costumeThumbnail[192];
-            case Item_Type.costume193:
-                return costumeThumbnail[193];
-            case Item_Type.costume194:
-                return costumeThumbnail[194];
-
-
             case Item_Type.RankFrame1:
                 return rankFrame[8];
 
@@ -1664,7 +1209,9 @@ public Sprite RecommendWeapon22;
             case Item_Type.GwisalTreasure:
                 return GwiSalTreasure;   
             case Item_Type.ChunguTreasure:
-                return ChunguTreasure;   
+                return ChunguTreasure;  
+            case Item_Type.MRT:
+                return MRT;   
             case Item_Type.DosulGoods:
                 return DosulGoods;   
             case Item_Type.TransGoods:
@@ -2027,6 +1574,10 @@ public Sprite RecommendWeapon22;
                 return magicBook128;
             case Item_Type.magicBook129:
                 return magicBook129;
+            case Item_Type.magicBook130:
+                return magicBook130;
+            case Item_Type.magicBook131:
+                return magicBook131;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2505,6 +2056,10 @@ public Sprite RecommendWeapon22;
                 return VisionSkill15;
             case Item_Type.VisionSkill16:
                 return VisionSkill16;
+            case Item_Type.VisionSkill17:
+                return VisionSkill17;
+            case Item_Type.VisionSkill18:
+                return VisionSkill18;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2800,6 +2355,10 @@ public Sprite RecommendWeapon22;
                 return weapon155;
             case Item_Type.weapon156:
                 return weapon156;
+            case Item_Type.weapon157:
+                return weapon157;
+            case Item_Type.weapon158:
+                return weapon158;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
@@ -2988,7 +2547,12 @@ public Sprite RecommendWeapon22;
 
 
         }
+        if (type.IsCostumeItem())
+        {
+            var idx= int.Parse(type.ToString().Substring("costume".Length));
+            return costumeThumbnail[idx];
 
+        }
         return null;
     }
 

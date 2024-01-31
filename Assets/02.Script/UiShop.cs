@@ -1364,7 +1364,14 @@ public class UiShop : SingletonMono<UiShop>
                     param.Add(GoodsTable.GuildReward, ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value);
                 }
                 break;
-
+            default:
+                if (type.IsGoodsItem())
+                {
+                    var key = type.ToString();
+                    ServerData.goodsTable.GetTableData(key).Value += amount;
+                    param.Add(key, ServerData.goodsTable.GetTableData(key).Value);
+                }
+                break;
         }
     }
 

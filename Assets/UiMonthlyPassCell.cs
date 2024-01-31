@@ -150,7 +150,7 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
         }
         if (GetBeforeRewarded(passInfo.rewardType_Free_Key,passInfo.id) == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Before);
             return;
         }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");

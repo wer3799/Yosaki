@@ -130,6 +130,8 @@ public enum StatusType
     DragonPalaceHasValueUpgrade,//용궁 재화당 개수증가
     SuperCritical31DamPer,//협동피해(%)
     EnhanceSP,//검기 능력치 효과(%)
+    SuperCritical32DamPer,//무림피해(%)
+    SasinsuGoodsGainPer,//무림피해(%)
 
 }
 
@@ -188,6 +190,7 @@ public static class PlayerStats
         double bimu = GetSuperCritical29DamPer();
         double sinpower = GetSuperCritical30DamPer();
         double munha = GetSuperCritical31DamPer();
+        double murim = GetSuperCritical32DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -234,6 +237,7 @@ public static class PlayerStats
         totalPower += (totalPower * bimu);
         totalPower += (totalPower * sinpower);
         totalPower += (totalPower * munha);
+        totalPower += (totalPower * murim);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -799,7 +803,6 @@ public static class PlayerStats
         return ret;
     }
 
-    private static Dictionary<StatusType, float> magicBookHasValue = new Dictionary<StatusType, float>();
 
     private static void ResetMagicBookHas()
     {
@@ -2292,6 +2295,16 @@ public static class PlayerStats
 
         return ret;
     }
+
+    //무림피해
+    public static float GetSuperCritical32DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetMurimTreasureAbilHasEffect();
+
+        return ret;
+    }
     //검기 능력치 효과 증가(%)
     public static float GetEnhanceSP()
     {
@@ -2633,7 +2646,6 @@ public static class PlayerStats
         return ret;
     }
 
-    private static Dictionary<StatusType, float> titleHasValue = new Dictionary<StatusType, float>();
 
     public static void ResetTitleHas()
     {
@@ -2961,14 +2973,21 @@ public static class PlayerStats
                 ret += GameBalance.HotTimeEvent_Ad_TaegeukGoods;
             }
         }
+        else if (statusType == StatusType.SasinsuGoodsGainPer)
+        {
+            ret = GameBalance.HotTimeEvent_SasinsuGoods;
+            if (Utils.HasHotTimeEventPass())
+            {
+                ret += GameBalance.HotTimeEvent_Ad_SasinsuGoods;
+            }
+        }
 
         return ret;
     }
 
 
-    private static Dictionary<StatusType, float> sinsuHasValue = new Dictionary<StatusType, float>();
 
-    private static void ResetSinsuBookHas()
+    private static void ResetSinsuHas()
     {
         sinsuHasValue.Clear();
     }
@@ -3061,6 +3080,12 @@ public static class PlayerStats
     private static Dictionary<StatusType, float> stageRelicValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> guimoonValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> blackFoxValue = new Dictionary<StatusType, float>();
+    private static Dictionary<StatusType, float> meditationDictionary = new Dictionary<StatusType, float>();
+    private static Dictionary<StatusType, float> magicBookHasValue = new Dictionary<StatusType, float>();
+    private static Dictionary<StatusType, float> titleHasValue = new Dictionary<StatusType, float>();
+    private static Dictionary<StatusType, float> sinsuHasValue = new Dictionary<StatusType, float>();
+
+    private static bool meditationInitialize = false;
 
     private static void ResetStageRelicHas()
     {
@@ -3460,6 +3485,13 @@ public static class PlayerStats
 
         return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DragonPalaceTreasure).Value *
                 (GameBalance.dragonPalaceTreasureAbilValue + GetDragonPalaceHasValueUpgrade()));
+    }
+
+    public static float GetMurimTreasureAbilHasEffect()
+    {
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 21399-2) return 0f;
+
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.MRT).Value * (GameBalance.murimTreasureAbilValue));
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -4068,12 +4100,14 @@ public static class PlayerStats
     public static void ResetAbilDic()
     {
         PlayerStats.ResetMagicBookHas();
-        PlayerStats.ResetSinsuBookHas();
+        PlayerStats.ResetSinsuHas();
         PetServerTable.ResetPetHas();
         PlayerStats.ResetTitleHas();
         PlayerStats.ResetStageRelicHas();
         PlayerStats.ResetGuimoonRelicHas();
         PlayerStats.ResetBlackFoxHas();
+        PlayerStats.ResetMeditationDictionary();
+        PlayerStats.ResetSuperCritical11CalculatedValue();
     }
 
     public static int GetSusanoGrade()
@@ -6184,8 +6218,6 @@ public static class PlayerStats
 
         return ret;
     }
-    private static Dictionary<StatusType, float> meditationDictionary = new Dictionary<StatusType, float>();
-    private static bool meditationInitialize = false;
 
     public static Dictionary<StatusType, float> GetMeditationDictionary()
     {
@@ -6717,6 +6749,14 @@ public static class PlayerStats
         ret += GetHotTimeEventBuffEffect(StatusType.TaegeukGoodsGainPer);
         
         ret += GetGuimoonHasEffect2(StatusType.TaegeukGoodsGainPer);
+        
+        return ret;
+    }
+    public static float GetSasinsuGoodsGainValue()
+    {
+        float ret = 0f;
+
+        ret += GetHotTimeEventBuffEffect(StatusType.SasinsuGoodsGainPer);
         
         return ret;
     }

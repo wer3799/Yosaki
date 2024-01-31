@@ -34,7 +34,7 @@ public class ManduRefund : MonoBehaviour
 
         if (canGetId <= 0)
         {
-            canGetId = 0;
+            canGetId = -1;
         }
 
         string freeKey = OneYearPassServerTable.childFree;

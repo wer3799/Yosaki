@@ -177,6 +177,8 @@ public class GoodsTable
     public static string VisionSkill14 = "VisionSkill14";
     public static string VisionSkill15 = "VisionSkill15";
     public static string VisionSkill16 = "VisionSkill16";
+    public static string VisionSkill17 = "VisionSkill17";
+    public static string VisionSkill18 = "VisionSkill18";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -301,6 +303,7 @@ public class GoodsTable
     public static string SG = "SG";
     public static string SC = "SC";
     public static string SB = "SB";
+    public static string MRT = "MRT";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -459,6 +462,8 @@ public class GoodsTable
         { VisionSkill14, 0f },
         { VisionSkill15, 0f },
         { VisionSkill16, 0f },
+        { VisionSkill17, 0f },
+        { VisionSkill18, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -579,6 +584,7 @@ public class GoodsTable
         { SG, 0f },
         { SC, GameBalance.SinsuClearDailyGetAmount },
         { SB, 0f},
+        { MRT, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -841,7 +847,7 @@ public class GoodsTable
     static float sgItemAddNum = 0;
     public void GetSinsuItem(float amount)
     {
-        sgItemAddNum += amount * (1 + PlayerStats.GetTaegeukGoodsGainValue());
+        sgItemAddNum += amount * (1 + PlayerStats.GetSasinsuGoodsGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
         if (sgItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Sinsu, 1))
@@ -2926,6 +2932,7 @@ public class GoodsTable
         {
             return Item_Type.Event_Fall_Gold;
         }
+        
         else
         {
             if (type.Contains("costume"))
@@ -2937,7 +2944,8 @@ public class GoodsTable
                     return (Item_Type)Enum.Parse(typeof(Item_Type), type);
                 }   
             }
-            return Item_Type.None;
+
+            return Enum.TryParse<Item_Type>(type, out Item_Type itemType) ? itemType : Item_Type.None;
         }
     }
 }

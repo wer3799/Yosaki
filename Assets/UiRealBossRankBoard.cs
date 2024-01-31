@@ -83,11 +83,52 @@ public class UiRealBossRankBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        //RankManager.Instance.GetRankerList(RankManager.Rank_Real_Boss_Uuid, 100, WhenAllRankerLoadComplete);
-        RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaV2_Uuid, 100, WhenAllRankerLoadComplete);
+        
+        LoadRank(RankType.Real_Boss);
+        
         RankManager.Instance.RequestMyRealBossRank();
     }
 
+    private void LoadRank(RankType type)
+    {
+        //리스트 없으면 Get
+        if (RankManager.Instance.RankList.ContainsKey(type)==false)
+        {
+            RankManager.Instance.RankList[type] = new List<RankManager.RankInfo>();
+            RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaV2_Uuid, 100, WhenAllRankerLoadComplete);
+        }
+        else
+        {
+            LoadRankList();
+        }
+    }
+    private void LoadRankList()
+    {
+        UiRankView.rank1Count = 0;
+
+        rankViewParent.gameObject.SetActive(true);
+        var rankList = RankManager.Instance.RankList[RankType.Real_Boss];
+        int interval = rankList.Count - rankViewContainer.Count;
+
+        for (int i = 0; i < interval; i++)
+        {
+            var view = Instantiate<UiRankView>(uiRankViewPrefab, rankViewParent);
+            rankViewContainer.Add(view);
+        }
+        for (int i = 0; i < rankViewContainer.Count; i++)
+        {
+            if (i < rankList.Count)
+            {
+                rankViewContainer[i].gameObject.SetActive(true);
+                
+                rankViewContainer[i].Initialize($"{rankList[i].Rank}", $"{rankList[i].NickName}", $"{Utils.ConvertBigNum(rankList[i].Score)}", rankList[i].Rank, rankList[i].costumeIdx, rankList[i].petIddx, rankList[i].weaponIdx, rankList[i].magicbookIdx, rankList[i].gumgiIdx,rankList[i].GuildName, rankList[i].maskIdx,rankList[i].hornIdx,rankList[i].suhoAnimal);
+            }
+            else
+            {
+                rankViewContainer[i].gameObject.SetActive(false);
+            }
+        }
+    }
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
     {
         if (bro.IsSuccess())
@@ -172,6 +213,8 @@ public class UiRealBossRankBoard : MonoBehaviour
                         }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
                         rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal);
+                        RankManager.Instance.RankList[RankType.Real_Boss].Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: score, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
+
                     }
                     else
                     {

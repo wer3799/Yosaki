@@ -31,6 +31,7 @@ public class EtcServerTable
     public const string AdReward = "AdReward";
     public const string battleWinScore = "bws";
     public const string gachaEventReward = "ger";
+    public const string gachaEventBingoReward = "gebr";
     public const string blueGangChulUnlock = "bgu";
     public const string sasinsuPowerLevel = "spl";    //0현무 1청룡 2주작 3백호 
 
@@ -56,6 +57,7 @@ public class EtcServerTable
         {AdReward,new ReactiveProperty<string>(string.Empty)},
         {battleWinScore,new ReactiveProperty<string>("#0#0#0#0#0")},
         {gachaEventReward,new ReactiveProperty<string>(string.Empty)},
+        {gachaEventBingoReward,new ReactiveProperty<string>(string.Empty)},
         {blueGangChulUnlock,new ReactiveProperty<string>(string.Empty)},
         {sasinsuPowerLevel,new ReactiveProperty<string>("#-1#-1#-1#-1")},
     };
@@ -111,9 +113,25 @@ public class EtcServerTable
 
         return rewards.Contains(id.ToString());
     }
+    public bool GachaEventBingoRewarded(int id)
+    {
+        var rewards = tableDatas[gachaEventBingoReward].Value.Split(BossServerTable.rewardSplit).ToList();
+
+        return rewards.Contains(id.ToString());
+    }
     public List<int> GetGachaEventRewardedList()
     {
         var rewards = tableDatas[gachaEventReward].Value
+            .Split(BossServerTable.rewardSplit)
+            .Where(e => string.IsNullOrEmpty(e) == false)
+            .Select(e => int.Parse(e))
+            .ToList();
+
+        return rewards;
+    }
+    public List<int> GetGachaEventBingoRewardedList()
+    {
+        var rewards = tableDatas[gachaEventBingoReward].Value
             .Split(BossServerTable.rewardSplit)
             .Where(e => string.IsNullOrEmpty(e) == false)
             .Select(e => int.Parse(e))

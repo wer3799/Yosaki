@@ -106,6 +106,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.MunhaTower2:
                         return false;
+                    case GameManager.ContentsType.MurimTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.MurimTowerIdx).Value <
+                                                                      (TableManager.Instance.MurimTowerTable.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.MurimTower:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)

@@ -37,202 +37,8 @@ public static class Utils
     }
     public static bool IsCostumeItem(this Item_Type type)
     {
-        return type == Item_Type.costume0 ||
-               type == Item_Type.costume1 ||
-               type == Item_Type.costume2 ||
-               type == Item_Type.costume3 ||
-               type == Item_Type.costume4 ||
-               type == Item_Type.costume5 ||
-               type == Item_Type.costume6 ||
-               type == Item_Type.costume7 ||
-               type == Item_Type.costume8 ||
-               type == Item_Type.costume9 ||
-               type == Item_Type.costume10 ||
-               type == Item_Type.costume11 ||
-               type == Item_Type.costume12 ||
-               type == Item_Type.costume13 ||
-               type == Item_Type.costume14 ||
-               type == Item_Type.costume15 ||
-               type == Item_Type.costume16 ||
-               type == Item_Type.costume17 ||
-               type == Item_Type.costume18 ||
-               type == Item_Type.costume19 ||
-               type == Item_Type.costume20 ||
-               type == Item_Type.costume21 ||
-               type == Item_Type.costume22 ||
-               type == Item_Type.costume23 ||
-               type == Item_Type.costume24 ||
-               type == Item_Type.costume25 ||
-               type == Item_Type.costume26 ||
-               type == Item_Type.costume27 ||
-               type == Item_Type.costume28 ||
-               type == Item_Type.costume29 ||
-               type == Item_Type.costume30 ||
-               type == Item_Type.costume31 ||
-               type == Item_Type.costume32 ||
-               type == Item_Type.costume33 ||
-               type == Item_Type.costume34 ||
-               type == Item_Type.costume35 ||
-               type == Item_Type.costume36 ||
-               type == Item_Type.costume37 ||
-               type == Item_Type.costume38 ||
-               type == Item_Type.costume39 ||
-               type == Item_Type.costume40 ||
-               type == Item_Type.costume41 ||
-               type == Item_Type.costume42 ||
-               type == Item_Type.costume43 ||
-               type == Item_Type.costume44 ||
-               type == Item_Type.costume45 ||
-               type == Item_Type.costume46 ||
-               type == Item_Type.costume47 ||
-               type == Item_Type.costume48 ||
-               type == Item_Type.costume49 ||
-               type == Item_Type.costume50 ||
-               type == Item_Type.costume51 ||
-               type == Item_Type.costume52 ||
-               type == Item_Type.costume53 ||
-               type == Item_Type.costume54 ||
-               type == Item_Type.costume55 ||
-               type == Item_Type.costume56 ||
-               type == Item_Type.costume57 ||
-               type == Item_Type.costume58 ||
-               type == Item_Type.costume59 ||
-               type == Item_Type.costume60 ||
-               type == Item_Type.costume61 ||
-               type == Item_Type.costume62 ||
-               type == Item_Type.costume63 ||
-               type == Item_Type.costume64 ||
-               type == Item_Type.costume65 ||
-               type == Item_Type.costume66 ||
-               type == Item_Type.costume67 ||
-               type == Item_Type.costume68 ||
-               type == Item_Type.costume69 ||
-               type == Item_Type.costume70 ||
-               type == Item_Type.costume71 ||
-               type == Item_Type.costume72 ||
-               type == Item_Type.costume73 ||
-               type == Item_Type.costume74 ||
-               type == Item_Type.costume75 ||
-               type == Item_Type.costume76 ||
-               type == Item_Type.costume77 ||
-               type == Item_Type.costume78 ||
-               type == Item_Type.costume79 ||
-               type == Item_Type.costume80 ||
-               type == Item_Type.costume81 ||
-               type == Item_Type.costume82 ||
-               type == Item_Type.costume83 ||
-               type == Item_Type.costume84 ||
-               type == Item_Type.costume85 ||
-               type == Item_Type.costume86 ||
-               type == Item_Type.costume87 ||
-               type == Item_Type.costume88 ||
-               type == Item_Type.costume89 ||
-               type == Item_Type.costume90 ||
-               type == Item_Type.costume91 ||
-               type == Item_Type.costume92 ||
-               type == Item_Type.costume93 ||
-               type == Item_Type.costume94 ||
-               type == Item_Type.costume95 ||
-               type == Item_Type.costume96 ||
-               type == Item_Type.costume97 ||
-               type == Item_Type.costume98 ||
-               type == Item_Type.costume99 ||
-               type == Item_Type.costume100 ||
-               type == Item_Type.costume101 ||
-               type == Item_Type.costume102 ||
-               type == Item_Type.costume103 ||
-               type == Item_Type.costume104 ||
-               type == Item_Type.costume105 ||
-               type == Item_Type.costume106 ||
-               type == Item_Type.costume107 ||
-               type == Item_Type.costume108 ||
-               type == Item_Type.costume109 ||
-               type == Item_Type.costume110 ||
-               type == Item_Type.costume111 ||
-               type == Item_Type.costume112 ||
-               type == Item_Type.costume113 ||
-               type == Item_Type.costume114 ||
-               type == Item_Type.costume115 ||
-               type == Item_Type.costume116 ||
-               type == Item_Type.costume117 ||
-               type == Item_Type.costume118 ||
-               type == Item_Type.costume119 ||
-               type == Item_Type.costume120 ||
-               type == Item_Type.costume121 ||
-               type == Item_Type.costume122 ||
-               type == Item_Type.costume123 ||
-               type == Item_Type.costume124 ||
-               type == Item_Type.costume125 ||
-               type == Item_Type.costume126 ||
-               type == Item_Type.costume127 ||
-               type == Item_Type.costume128 ||
-               type == Item_Type.costume129 ||
-               type == Item_Type.costume130||
-               type == Item_Type.costume131||
-               type == Item_Type.costume132||
-               type == Item_Type.costume133||
-               type == Item_Type.costume134||
-               type == Item_Type.costume135||
-               type == Item_Type.costume136||
-               type == Item_Type.costume137||
-               type == Item_Type.costume138||
-               type == Item_Type.costume139||
-               type == Item_Type.costume140||
-               type == Item_Type.costume141||
-               type == Item_Type.costume142||
-               type == Item_Type.costume143||
-               type == Item_Type.costume144||
-               type == Item_Type.costume145||
-               type == Item_Type.costume146||
-               type == Item_Type.costume147||
-               type == Item_Type.costume148||
-               type == Item_Type.costume149||
-               type == Item_Type.costume150||
-               type == Item_Type.costume151||
-               type == Item_Type.costume152||
-               type == Item_Type.costume153||
-               type == Item_Type.costume154||
-               type == Item_Type.costume155||
-               type == Item_Type.costume156||
-               type == Item_Type.costume157||
-               type == Item_Type.costume158||
-               type == Item_Type.costume159||
-               type == Item_Type.costume160||
-               type == Item_Type.costume161||
-               type == Item_Type.costume162||
-               type == Item_Type.costume163||
-               type == Item_Type.costume164||
-               type == Item_Type.costume165||
-               type == Item_Type.costume166||
-               type == Item_Type.costume167||
-               type == Item_Type.costume168||
-               type == Item_Type.costume169||
-               type == Item_Type.costume170||
-               type == Item_Type.costume171||
-               type == Item_Type.costume172||
-               type == Item_Type.costume173||
-               type == Item_Type.costume174||
-               type == Item_Type.costume175||
-               type == Item_Type.costume176||
-               type == Item_Type.costume177||
-               type == Item_Type.costume178||
-               type == Item_Type.costume179||
-               type == Item_Type.costume180||
-               type == Item_Type.costume181||
-               type == Item_Type.costume182||
-               type == Item_Type.costume183||
-               type == Item_Type.costume184||
-               type == Item_Type.costume185||
-               type == Item_Type.costume186||
-               type == Item_Type.costume187||
-               type == Item_Type.costume188||
-               type == Item_Type.costume189||
-               type == Item_Type.costume190||
-               type == Item_Type.costume191||
-               type == Item_Type.costume192||
-               type == Item_Type.costume193||
-               type == Item_Type.costume194
-            ;
+        return (type >= Item_Type.costume0 && type <= Item_Type.costume99) ||
+               (type >= Item_Type.costume100 && type <= Item_Type.costume_end);
     }
 
     public static bool IsPetItem(this Item_Type type)
@@ -368,6 +174,15 @@ public static class Utils
             ;
     }
 
+    public static bool IsTreasureItem(this Item_Type type)
+    {
+        return type >= Item_Type.MRT && type <= Item_Type.Treasure_End;
+    }
+    public static bool IsVisionSkill(this Item_Type type)
+    {
+        return type >= Item_Type.VisionSkill17 && type <= Item_Type.VisionSkill_End;
+    }
+
     public static bool IsGoodsItem(this Item_Type type)
     {
         return type == Item_Type.Gold ||
@@ -439,10 +254,10 @@ public static class Utils
                type == Item_Type.SpecialSuhoPet7 ||
                type == Item_Type.SpecialSuhoPet8 ||
                type == Item_Type.SpecialSuhoPet9 ||
-               type == Item_Type.SpecialSuhoPet10||
-               type == Item_Type.SpecialSuhoPet11||
-               type == Item_Type.SpecialSuhoPet12||
-               type == Item_Type.SpecialSuhoPet13||
+               type == Item_Type.SpecialSuhoPet10 ||
+               type == Item_Type.SpecialSuhoPet11 ||
+               type == Item_Type.SpecialSuhoPet12 ||
+               type == Item_Type.SpecialSuhoPet13 ||
                type == Item_Type.RabitPet ||
                type == Item_Type.RabitNorigae ||
                type == Item_Type.YeaRaeNorigae ||
@@ -563,13 +378,15 @@ public static class Utils
                type == Item_Type.YoPowerGoods ||
                type == Item_Type.ByeolhoGoods ||
                type == Item_Type.ByeolhoClear ||
-               type == Item_Type.GuildTowerHorn||
-               type == Item_Type.BattleClear||
-               type == Item_Type.SG||
-               type == Item_Type.SC||
-               type == Item_Type.SB||
-               type == Item_Type.GuimoonRelic||
-               type == Item_Type.GuimoonRelicClearTicket
+               type == Item_Type.GuildTowerHorn ||
+               type == Item_Type.BattleClear ||
+               type == Item_Type.SG ||
+               type == Item_Type.SC ||
+               type == Item_Type.SB ||
+               type == Item_Type.GuimoonRelic ||
+               type == Item_Type.GuimoonRelicClearTicket ||
+               IsTreasureItem(type)||
+               IsVisionSkill(type)
             ;
     }
 
@@ -580,7 +397,7 @@ public static class Utils
 
     public static bool IsWeaponItem(this Item_Type type)
     {
-        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon42)||
+        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon_end)||
                type == Item_Type.weapon149||
                type == Item_Type.weapon150||
                type == Item_Type.weapon151||
@@ -593,7 +410,7 @@ public static class Utils
 
     public static bool IsNorigaeItem(this Item_Type type)
     {
-        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook11) ||
+        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook_End) ||
                type == Item_Type.magicBook121 ||
                type == Item_Type.magicBook122 ||
                type == Item_Type.magicBook123 ||

@@ -349,4 +349,48 @@ public class UiRelicCell : MonoBehaviour
 
         ServerData.SendTransaction(transactions);
     }
+    
+    public void OnClickResetButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "해당 능력치를 초기화 합니까?", () =>
+        {
+            float refundCount = 0;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param relicParam = new Param();
+
+            refundCount += ServerData.relicServerTable.TableDatas[relicLocalData.Stringid].level.Value * relicLocalData.Upgradeprice;
+            ServerData.relicServerTable.TableDatas[relicLocalData.Stringid].level.Value = 0;
+
+            relicParam.Add(relicLocalData.Stringid, ServerData.relicServerTable.TableDatas[relicLocalData.Stringid].ConvertToString());
+            
+
+            if (refundCount == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
+                return;
+            }
+
+            transactions.Add(TransactionValue.SetUpdate(RelicServerTable.tableName, RelicServerTable.Indate, relicParam));
+
+
+            ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value += refundCount;
+            
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.Relic, ServerData.goodsTable.GetTableData(GoodsTable.Relic).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            
+            PlayerStats.ResetAbilDic();
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
+            });
+
+        }, () => { });
+    
+    }
 }

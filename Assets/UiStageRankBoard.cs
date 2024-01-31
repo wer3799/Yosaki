@@ -28,6 +28,8 @@ public class UiStageRankBoard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI title;
 
+    [SerializeField] private UiRankHonorBoard honorBoard;
+    
 
     private void OnEnable()
     {
@@ -68,10 +70,56 @@ public class UiStageRankBoard : MonoBehaviour
         rankViewParent.gameObject.SetActive(false);
         loadingMask.SetActive(false);
         failObject.SetActive(false);
-        RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, WhenAllRankerLoadComplete);
+        LoadRank(RankType.Stage);
+
         RankManager.Instance.RequestMyStageRank();
     }
+    private void LoadRank(RankType type)
+    {
+        //리스트 없으면 Get
+        if (RankManager.Instance.RankList.ContainsKey(type)==false)
+        {
+            RankManager.Instance.RankList[type] = new List<RankManager.RankInfo>();
+            RankManager.Instance.GetRankerList(RankManager.Rank_Stage_Uuid, 100, WhenAllRankerLoadComplete);
+        }
+        else
+        {
+            LoadRankList();
+        }
+    }
+    private void InitializeHonorBoard(RankManager.RankInfo rankInfo)
+    {
+        honorBoard.Initialize(rankInfo);
+    }
+    private void LoadRankList()
+    {
+        UiRankView.rank1Count = 0;
 
+        rankViewParent.gameObject.SetActive(true);
+        
+        var rankList = RankManager.Instance.RankList[RankType.Stage];
+
+        int interval = rankList.Count - rankViewContainer.Count;
+
+        for (int i = 0; i < interval; i++)
+        {
+            var view = Instantiate<UiRankView>(uiRankViewPrefab, rankViewParent);
+            rankViewContainer.Add(view);
+        }
+        for (int i = 0; i < rankViewContainer.Count; i++)
+        {
+            if (i < rankList.Count)
+            {
+                rankViewContainer[i].gameObject.SetActive(true);
+                
+                rankViewContainer[i].Initialize($"{rankList[i].Rank}", $"{rankList[i].NickName}", $"{Utils.ConvertStage((int)rankList[i].Score+2)}단계", rankList[i].Rank, rankList[i].costumeIdx, rankList[i].petIddx, rankList[i].weaponIdx, rankList[i].magicbookIdx, rankList[i].gumgiIdx,rankList[i].GuildName, rankList[i].maskIdx,rankList[i].hornIdx,rankList[i].suhoAnimal);
+            }
+            else
+            {
+                rankViewContainer[i].gameObject.SetActive(false);
+            }
+        }
+    }
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
     {
         if (bro.IsSuccess())
@@ -80,6 +128,7 @@ public class UiStageRankBoard : MonoBehaviour
 
             if (rows.Count > 0)
             {
+                
                 rankViewParent.gameObject.SetActive(true);
 
                 int interval = rows.Count - rankViewContainer.Count;
@@ -89,7 +138,6 @@ public class UiStageRankBoard : MonoBehaviour
                     var view = Instantiate<UiRankView>(uiRankViewPrefab, rankViewParent);
                     rankViewContainer.Add(view);
                 }
-
                 for (int i = 0; i < rankViewContainer.Count; i++)
                 {
                     if (i < rows.Count)
@@ -152,6 +200,11 @@ public class UiStageRankBoard : MonoBehaviour
                             guildName = splitData[7];
                         }
                         rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertStage(level+2)}단계", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx,guildName, maskIdx,hornIdx,suhoAnimal);
+                        RankManager.Instance.RankList[RankType.Stage].Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
+                        if (i == 0)
+                        {
+                            InitializeHonorBoard(RankManager.Instance.RankList[RankType.Stage][i]);
+                        }
                     }
                     else
                     {

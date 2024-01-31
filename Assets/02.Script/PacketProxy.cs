@@ -18,7 +18,8 @@ public class PacketProxy : SingletonMono<PacketProxy>
     }
     private void Update()
     {
-        SendQueue.Poll();        Backend.AsyncPoll();
+        SendQueue.Poll();        
+        Backend.AsyncPoll();
 
     }
 

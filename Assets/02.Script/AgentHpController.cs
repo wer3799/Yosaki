@@ -53,6 +53,7 @@ public class AgentHpController : MonoBehaviour
     {
         GetRequireComponents();
     }
+
     private void GetRequireComponents()
     {
         enemyMoveController = GetComponent<EnemyMoveController>();
@@ -97,7 +98,7 @@ public class AgentHpController : MonoBehaviour
         this.defense = defense;
     }
 
-    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, bool updateSubHpBar = false)
+    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, bool updateSubHpBar = false, bool setHpOne = false)
     {
         fieldBossTimerStarted = false;
 
@@ -106,14 +107,21 @@ public class AgentHpController : MonoBehaviour
         this.enemyTableData = enemyTableData;
 
         gainGoldFromStage = TableManager.Instance.StageMapTable.dataArray[enemyTableData.Id].Goldbar;
-        
+
         this.updateSubHpBar = isFieldBossEnemy || updateSubHpBar;
 
         SetDefense(enemyTableData.Defense);
 
         if (isFieldBossEnemy == false)
         {
-            SetHp(enemyTableData.Hp);
+            if (setHpOne == false)
+            {
+                SetHp(enemyTableData.Hp);
+            }
+            else
+            {
+                SetHp(1);
+            }
         }
         else
         {
@@ -123,14 +131,13 @@ public class AgentHpController : MonoBehaviour
             {
                 bossHp *= Random.Range(0.8f, 1f);
             }
-            
+
             double decreaseValue = PlayerStats.DecreaseBossHp();
 
             bossHp -= bossHp * decreaseValue;
 
             SetHp(bossHp);
         }
-
     }
 
     public void SetHp(double hp)
@@ -144,8 +151,10 @@ public class AgentHpController : MonoBehaviour
         if (enemyMoveController == null) return;
         enemyMoveController.SetKnockBack();
     }
+
     private static string hitSfxName = "EnemyHitted";
     private static string deadSfxName = "EnemyDead";
+
     public void ApplyPlusDamage(ref double value, bool isCritical, bool isSuperCritical)
     {
         SoundManager.Instance.PlaySound(hitSfxName);
@@ -186,13 +195,13 @@ public class AgentHpController : MonoBehaviour
 
         //필멸 데미지
         value += value * PlayerStats.GetSuperCritical2DamPer();
-        
+
         //단전베기
-        value += value * PlayerStats.GetSuperCritical8DamPer(); 
-        
+        value += value * PlayerStats.GetSuperCritical8DamPer();
+
         //중단전베기
         value += value * PlayerStats.GetSuperCritical13DamPer();
-        
+
         //상단전베기
         value += value * PlayerStats.GetSuperCritical18DamPer();
 
@@ -207,19 +216,19 @@ public class AgentHpController : MonoBehaviour
 
         //수호베기
         value += value * PlayerStats.GetSuperCritical11DamPer();
-        
+
         //여우베기
         value += value * PlayerStats.GetSuperCritical14DamPer();
-        
+
         //신수베기 데미지
         value += value * PlayerStats.GetSuperCritical6DamPer();
-        
+
         //사흉베기
         value += value * PlayerStats.GetSuperCritical9DamPer();
 
         //수미베기
         value += value * PlayerStats.GetSuperCritical7DamPer();
-        
+
         //도적베기
         value += value * PlayerStats.GetSuperCritical10DamPer();
         //심연베기
@@ -254,8 +263,10 @@ public class AgentHpController : MonoBehaviour
         value += value * PlayerStats.GetSuperCritical30DamPer();
         //협동피해
         value += value * PlayerStats.GetSuperCritical31DamPer();
-        
+        //무림피해
+        value += value * PlayerStats.GetSuperCritical32DamPer();
     }
+
     private Vector3 damTextspawnPos;
     private Coroutine damTextRoutine;
     private int attackCount = 0;
@@ -328,6 +339,7 @@ public class AgentHpController : MonoBehaviour
 
         ResetDamTextValue();
     }
+
     private void ResetDamTextValue()
     {
         attackCount = 0;
@@ -350,7 +362,6 @@ public class AgentHpController : MonoBehaviour
         //        GetGoldByEnemy(-(value - currentHp.Value));
         //    }
         //}
-
     }
 
     public void UpdateHp(double value)
@@ -368,7 +379,7 @@ public class AgentHpController : MonoBehaviour
 
         if (isEnemyDead == true) return;
 
-        if(ReverseDamage)
+        if (ReverseDamage)
         {
             value *= -1f;
         }
@@ -376,7 +387,6 @@ public class AgentHpController : MonoBehaviour
         if (value < 0f)
         {
             WhenAgentDamaged.Execute(-value);
-        
         }
 
         //GetHitGold(value);
@@ -385,7 +395,7 @@ public class AgentHpController : MonoBehaviour
             currentHp.Value += value;
         }
 
-        
+
         whenEnemyDamaged.Execute(value);
 
         if (currentHp.Value <= 0 && isRaidEnemy == false)
@@ -395,6 +405,7 @@ public class AgentHpController : MonoBehaviour
             return;
         }
     }
+
     private float ignoreDefenseValue;
 
     public void ApplyDefense(ref double value)
@@ -431,7 +442,7 @@ public class AgentHpController : MonoBehaviour
     private void AddEnemyDeadCount()
     {
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value += GameManager.Instance.CurrentStageData.Marbleamount;
-        ServerData.userInfoTable.GetTableData(UserInfoTable.dailybooty).Value += GameManager.Instance.CurrentStageData.Dailyitemgetamount*GameManager.Instance.CurrentStageData.Marbleamount;
+        ServerData.userInfoTable.GetTableData(UserInfoTable.dailybooty).Value += GameManager.Instance.CurrentStageData.Dailyitemgetamount * GameManager.Instance.CurrentStageData.Marbleamount;
         ServerData.userInfoTable.GetKillCountTotal();
         ServerData.userInfoTable_2.GetKillCountTotal();
     }
@@ -447,10 +458,11 @@ public class AgentHpController : MonoBehaviour
 
         ServerData.goodsTable.GetGold(gold);
     }
+
     private void GetGoldBarByEnemy(float goldbar)
     {
         goldbar += goldbar *= PlayerStats.GetGoldBarPlusValue();
-        
+
         ServerData.goodsTable.GetGoldBar(goldbar);
     }
 

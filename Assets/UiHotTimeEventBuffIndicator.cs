@@ -18,7 +18,7 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
 
     void Subscribe()
     {
-        ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.AsObservable().Subscribe(
+        ServerData.iapServerTable.TableDatas[UiHotTimeEventBuyButton.seasonPassKey].buyCount.AsObservable().Subscribe(
             e =>
             {
                 SetDescription();
@@ -33,14 +33,15 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
         if (ServerData.userInfoTable.IsHotTimeEvent())
         {
             var date = GameBalance.HotTimeEventEndPeriod;
-            desc += $"~{date.Month}월 {date.Day}일\n";
+            desc += $"~{date.Month}월 {date.Day}일";
             float exp = GameBalance.HotTimeEvent_Exp;
             float gold = GameBalance.HotTimeEvent_Gold;
             float growthStone = GameBalance.HotTimeEvent_GrowthStone;
             float marble = GameBalance.HotTimeEvent_Marble;
             float yoPowerGoods = GameBalance.HotTimeEvent_YoPowerGoods;
             float TaegeukGoods = GameBalance.HotTimeEvent_TaegeukGoods;
-            if (ServerData.iapServerTable.TableDatas[UiColdSeasonPassBuyButton.seasonPassKey].buyCount.Value > 0)
+            float sasinsuGoods = GameBalance.HotTimeEvent_SasinsuGoods;
+            if (ServerData.iapServerTable.TableDatas[UiHotTimeEventBuyButton.seasonPassKey].buyCount.Value > 0)
             {
                 exp += GameBalance.HotTimeEvent_Ad_Exp;
                 gold += GameBalance.HotTimeEvent_Ad_Gold;
@@ -48,33 +49,38 @@ public class UiHotTimeEventBuffIndicator : MonoBehaviour
                 marble += GameBalance.HotTimeEvent_Ad_Marble;
                 yoPowerGoods += GameBalance.HotTimeEvent_Ad_YoPowerGoods;
                 TaegeukGoods += GameBalance.HotTimeEvent_Ad_TaegeukGoods;
+                sasinsuGoods += GameBalance.HotTimeEvent_Ad_SasinsuGoods;
             }
 
             if (exp > 0)
             {
-                desc += $"경험치 +{exp * 100f}%\n";
+                desc += $"\n경험치 +{exp * 100f}%";
             }
             if (gold > 0)
             {
-                desc += $"금화 +{gold * 100f}%\n";
+                desc += $"\n금화 +{gold * 100f}%";
             }
 
             if (growthStone > 0)
             {
-                desc += $"수련의돌 +{growthStone * 100f}%\n";
+                desc += $"\n수련의돌 +{growthStone * 100f}%";
             }
 
             if (marble > 0)
             {
-                desc += $"여우구슬 +{marble * 100f}%\n";
+                desc += $"\n여우구슬 +{marble * 100f}%";
             }
             if (yoPowerGoods > 0)
             {
-                desc += $"{CommonString.GetItemName(Item_Type.YoPowerGoods)} +{yoPowerGoods * 100f}%\n";
+                desc += $"\n{CommonString.GetItemName(Item_Type.YoPowerGoods)} +{yoPowerGoods * 100f}%";
             }
             if (TaegeukGoods > 0)
             {
-                desc += $"{CommonString.GetItemName(Item_Type.TaeguekGoods)} +{TaegeukGoods * 100f}%";
+                desc += $"\n{CommonString.GetItemName(Item_Type.TaeguekGoods)} +{TaegeukGoods * 100f}%";
+            }
+            if (sasinsuGoods > 0)
+            {
+                desc += $"\n{CommonString.GetItemName(Item_Type.SG)} +{sasinsuGoods * 100f}%";
             }
         }
 

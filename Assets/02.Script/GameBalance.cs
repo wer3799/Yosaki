@@ -415,6 +415,7 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTimeEvent_Marble = 3;
     public readonly static ObscuredFloat HotTimeEvent_YoPowerGoods = 0.1f;
     public readonly static ObscuredFloat HotTimeEvent_TaegeukGoods = 0.1f;
+    public readonly static ObscuredFloat HotTimeEvent_SasinsuGoods = 0.1f;
     
     public readonly static ObscuredFloat HotTimeEvent_Ad_Exp = 0;
     public readonly static ObscuredFloat HotTimeEvent_Ad_Gold = 0;
@@ -422,6 +423,7 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTimeEvent_Ad_Marble = 5;
     public readonly static ObscuredFloat HotTimeEvent_Ad_YoPowerGoods = 0.4f;
     public readonly static ObscuredFloat HotTimeEvent_Ad_TaegeukGoods = 0.4f;
+    public readonly static ObscuredFloat HotTimeEvent_Ad_SasinsuGoods = 0.4f;
     //
     public readonly static ObscuredBool isOddMonthlyPass = false; // 월간훈련 홀수월, 짝수월
     
@@ -496,6 +498,7 @@ public static class GameBalance
     public static ObscuredDouble sinsunGodGraduateScore = 1E+139;
     
     
+    
     public static ObscuredFloat foxMaskGraduateValue = 3f;
     public static ObscuredFloat susanoGraduateValue = 1.1f;
     public static ObscuredFloat gradeTestGraduateValue = 1.1f;
@@ -507,6 +510,11 @@ public static class GameBalance
     public static ObscuredDouble susanoGraduateAfterScore = 5E+171;
     public static ObscuredDouble gradeTestGraduateAfterScore = 1E+171;
     public static ObscuredDouble relicTestGraduateAfterScore = 5E+171;
+    
+    public static ObscuredDouble sonCloneGraduateScore = 65000;
+    public static ObscuredDouble sonCloneGraduateAfterScore = 150000;
+    public static ObscuredDouble smithTreeGraduateScore = 70000;
+    public static ObscuredDouble smithTreeGraduateAfterScore = 150000;
     //
     
     public static ObscuredDouble refundGoldBarRatio = 1E+34; //보유금화환불단위
@@ -597,6 +605,8 @@ public static class GameBalance
     
     public static ObscuredFloat dragonScaleAbilValue = 0.04f;//용인비늘베기 
     public static ObscuredFloat dragonPalaceTreasureAbilValue = 0.02f;//심해의보물 파도베기 
+    public static ObscuredFloat murimTreasureAbilValue = 0.02f; 
+    
     
     public readonly static ObscuredInt TaegeukSimbeopUnlockStage = 9998;//태극심법 스테이지제한
     public readonly static ObscuredInt DailyElixirGetCount = 1;//매일 엘릭서 얻는양
@@ -617,13 +627,13 @@ public static class GameBalance
     public readonly static ObscuredFloat YutNori_3 = 0.05f;
     public readonly static ObscuredFloat YutNori_4 = 0.05f;
 
-    public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 1, 30);
+    public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 3, 12);
 
     public readonly static string[] damageUnit = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","멸","향","미정18","미정19","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "피","동","멸","향","증","쾌","미정20","미정21","미정22","미정23","미정24","미정25","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
 
     };
     public static int GetSonIdx()

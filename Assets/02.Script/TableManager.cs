@@ -957,6 +957,10 @@ public class TableManager : SingletonMono<TableManager>
     public StudentAwakeTable StudentAwakeTable;
     public Title_Special Title_Special;
     public StudentTower StudentTower;
+    public EventPackageBonus EventPackageBonus;
+    public MurimTowerTable MurimTowerTable;
+    public HonorReward HonorReward;
+    public BingoEvent BingoEvent;
 }
 
 
@@ -971,4 +975,13 @@ public enum CommonTableEventType
     SecondAnniversary,
     FullMoon,
     BattleContest,
+}
+
+public enum BingoEventRewardType
+{
+    Normal,
+    HorizontalBingo,
+    VerticalBingo,
+    DiagonalBingo,
+    Finish
 }

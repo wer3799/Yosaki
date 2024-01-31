@@ -242,7 +242,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         
 
         float sasinsuItem =
-            (killedEnemyPerMin * stageTableData.Sinsu * GameBalance.sleepRewardRatio * elapsedMinutes);
+            (killedEnemyPerMin * stageTableData.Sinsu * GameBalance.sleepRewardRatio * elapsedMinutes) * (1 + PlayerStats.GetSasinsuGoodsGainValue());
         
 
         int hotTimeItem = 0;

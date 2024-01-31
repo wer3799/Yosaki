@@ -153,4 +153,5 @@ public class PopupManager : SingletonMono<PopupManager>
         }
         popupList.Clear();
     }
+
 }

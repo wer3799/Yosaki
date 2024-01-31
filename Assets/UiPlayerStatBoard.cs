@@ -161,6 +161,8 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
             $"{CommonString.GetStatusName(StatusType.YoPowerGoodsGainPer)} : {PlayerStats.GetYoPowerGoodsGainValue() * 100f}\n";
         description2 +=
             $"{CommonString.GetStatusName(StatusType.TaegeukGoodsGainPer)} : {PlayerStats.GetTaegeukGoodsGainValue() * 100f}\n";
+        description2 +=
+            $"{CommonString.GetStatusName(StatusType.SasinsuGoodsGainPer)} : {PlayerStats.GetSasinsuGoodsGainValue() * 100f}\n";
         
         description2 +=
             $"{CommonString.GetStatusName(StatusType.DecreaseBossHp)} : {PlayerStats.DecreaseBossHp() * 100f}\n";
@@ -280,6 +282,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
 
         description4 +=
             $"크리티컬 31단계 {CommonString.GetStatusName(StatusType.SuperCritical31DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical31DamPer() * 100f,1)}\n";
+        
+        description4 +=
+            $"크리티컬 32단계 {CommonString.GetStatusName(StatusType.SuperCritical32DamPer)} : {Utils.ConvertNum(PlayerStats.GetSuperCritical32DamPer() * 100f,1)}\n";
 
         
             //도술

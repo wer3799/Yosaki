@@ -305,7 +305,7 @@ public enum Item_Type
     MergePartyRaidRankFrame_1_501_1000 = 920,
     MergePartyRaidRankFrame_1_1001_5000 = 921,
 
-    //1000~1100 무기
+    //1000~1200 무기
     weapon0 = 1000,
     weapon1 = 1001,
     weapon2 = 1002,
@@ -330,34 +330,12 @@ public enum Item_Type
     weapon40 = 1040,
     weapon41 = 1041,
     weapon42 = 1042,
+    weapon157 = 1043, //무림
+    weapon158 = 1044, //무림
+    
+    weapon_end = 1200,
     //
 
-    //2000~2100 마도서
-    magicBook0 = 2000,
-    magicBook1 = 2001,
-    magicBook2 = 2002,
-    magicBook3 = 2003,
-    magicBook4 = 2004,
-    magicBook5 = 2005,
-    magicBook6 = 2006,
-    magicBook7 = 2007,
-    magicBook8 = 2008,
-    magicBook9 = 2009,
-    magicBook10 = 2010,
-    magicBook11 = 2011,
-    //3000~3100스킬
-    skill0 = 3000,
-    skill1 = 3001,
-    skill2 = 3002,
-    skill3 = 3003,
-    skill4 = 3004,
-    skill5 = 3005,
-    skill6 = 3006,
-    skill7 = 3007,
-    skill8 = 3008,
-    skill9 = 3009,
-    skill10 = 3010,
-    skill11 = 3011,
     //코스튬 테이블 키값임 대소문자 변경X
     costume0 = 1201,
     costume1 = 1202,
@@ -608,8 +586,45 @@ public enum Item_Type
     costume192 = 1492, //비무
     costume193 = 1493, //주간보스
     costume194 = 1494, //주간보스
+    
+    costume195 = 1495, //무림
+    costume196 = 1496, //무림
+    costume197 = 1497, //패키지외형
+    costume198 = 1498, //패키지외형
 
+    costume_end=1999,
 
+    //2000~2999 마도서
+    magicBook0 = 2000,
+    magicBook1 = 2001,
+    magicBook2 = 2002,
+    magicBook3 = 2003,
+    magicBook4 = 2004,
+    magicBook5 = 2005,
+    magicBook6 = 2006,
+    magicBook7 = 2007,
+    magicBook8 = 2008,
+    magicBook9 = 2009,
+    magicBook10 = 2010,
+    magicBook11 = 2011,
+    magicBook130 = 2012,//무림
+    magicBook131 = 2013,//무림
+
+    magicBook_End=2999,
+    //3000~3100스킬
+    skill0 = 3000,
+    skill1 = 3001,
+    skill2 = 3002,
+    skill3 = 3003,
+    skill4 = 3004,
+    skill5 = 3005,
+    skill6 = 3006,
+    skill7 = 3007,
+    skill8 = 3008,
+    skill9 = 3009,
+    skill10 = 3010,
+    skill11 = 3011,
+    
     gumiho0 = 5000,
     gumiho1 = 5001,
     gumiho2 = 5002,
@@ -1127,6 +1142,14 @@ public enum Item_Type
     SC = 9063,
     SB = 9064,
     
+    //Treasure=10001~10100
+    MRT=10001,
+    Treasure_End=10100,
+    
+    //VisionSkill=10001~10100
+    VisionSkill17=10101,
+    VisionSkill18=10102,
+    VisionSkill_End=10200,
 }
 //
 public class DropItem : PoolItem

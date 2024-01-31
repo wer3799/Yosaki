@@ -51,6 +51,7 @@ public class UiContentsPopup2 : MonoBehaviour
         SuhoBossBoard,
         BlackFoxBoard,
         DragonPalaceBoard,
+        MurimBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -112,6 +113,7 @@ public class UiContentsPopup2 : MonoBehaviour
         Sinsun,
         Dragon,
         DragonPalace,
+        Murim,
 
     }
     
@@ -437,6 +439,11 @@ public class UiContentsPopup2 : MonoBehaviour
                         lastBoards[(int)ContentsBoard.DragonPalaceBoard].SetActive(true);
                         break;
                         
+                    case 215:
+                    case 216:
+                        lastBoards[(int)ContentsBoard.MurimBoard].SetActive(true);
+                        break;
+                        
                 }
                 break;
             case GameManager.ContentsType.YoguiSoGul:
@@ -546,6 +553,9 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.DragonPalaceTower :
                 lastBoards[(int)ContentsBoard.DragonPalaceBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.MurimTower :
+                lastBoards[(int)ContentsBoard.MurimBoard].SetActive(true);
                 break;
 
         }
@@ -801,6 +811,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newAdventureDoors[(int)AdventureDoor.DragonPalace].SetActive(e == 1);
             oldAdventureDoors[(int)AdventureDoor.DragonPalace].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showMurimUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.Murim].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.Murim].SetActive(e == 1);
         }).AddTo(this);
     }
     void Start()

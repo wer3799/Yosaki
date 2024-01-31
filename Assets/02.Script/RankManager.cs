@@ -14,6 +14,15 @@ public enum RankType
 
 public class RankManager : SingletonMono<RankManager>
 {
+    private Dictionary<RankType, List<RankInfo>> rankList = new Dictionary<RankType, List<RankInfo>>();
+
+    public Dictionary<RankType, List<RankInfo>> RankList => rankList;
+
+    public void ClearRankList()
+    {
+        rankList.Clear();
+    }
+    
     private Dictionary<RankType, RankInfo> myRankInfo = new Dictionary<RankType, RankInfo>()
     {
         //채팅 표기 우선순위
@@ -26,6 +35,7 @@ public class RankManager : SingletonMono<RankManager>
         { RankType.GangChul,null },
         { RankType.ChunmaTop,null },
     };
+
 
     public Dictionary<RankType, RankInfo> MyRankInfo => myRankInfo;
 
@@ -146,19 +156,13 @@ public class RankManager : SingletonMono<RankManager>
     public ReactiveCommand<RankInfo> WhenMyRealGangChulBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyChunMaTopRankLoadComplete = new ReactiveCommand<RankInfo>();
 
-    //public void Subscribe()
-    //{
-    //    ServerData.statusTable.GetTableData(StatusTable.Level).AsObservable().Pairwise((pre, cur) => cur > pre).Subscribe(e =>
-    //         {
-    //             UpdateUserRank_Level();
-    //         }).AddTo(this);
-    //}
-
     public void GetRankerList(string uuid, int count, Backend.BackendCallback callback)
     {
+        Debug.LogError("랭크서버 호출");
         UiRankView.rank1Count = 0;
         Backend.URank.User.GetRankList(uuid, count, callback);
-    }    
+    }
+
     public void GetRankerList(string uuid, int count,int interval, Backend.BackendCallback callback)
     {
         UiRankView.rank1Count = 0;

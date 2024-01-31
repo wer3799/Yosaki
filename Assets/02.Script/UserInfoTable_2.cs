@@ -52,6 +52,7 @@ public class UserInfoTable_2
     public const string SansinTowerIdx = "sst";
     public const string DragonTowerIdx = "dti";
     public const string DragonPalaceTowerIdx = "dpti";
+    public const string MurimTowerIdx = "mti";
     public const string KingTrialGraduateIdx = "ktgi";
     public const string GodTrialGraduateIdx = "gtgi";
     public const string darkScore = "ds";
@@ -141,6 +142,10 @@ public class UserInfoTable_2
 
     public const string munhaDispatchStartTime = "mdst";
     public const string munhaTower = "mt";//문하타워2
+    
+    public const string eventPackageRewardIdx = "epri";//설날패키지
+    
+    public const string rankHonorRewardIdx = "rhri";//랭크명예보상
 
     
     
@@ -180,6 +185,7 @@ public class UserInfoTable_2
         { SansinTowerIdx, 0f },
         { DragonTowerIdx, 0f },
         { DragonPalaceTowerIdx, 0f },
+        { MurimTowerIdx, 0f },
         { KingTrialGraduateIdx, 0f },
         { GodTrialGraduateIdx, 0f },
         { darkScore, 0f },
@@ -253,6 +259,8 @@ public class UserInfoTable_2
         { sasinsuAwakeGrade, 0f },
         { munhaLevel, -1f },
         { munhaTower, 0f },
+        { eventPackageRewardIdx, -1f },
+        { rankHonorRewardIdx, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

@@ -123,6 +123,9 @@ public static class CommonString
     public static string SavedLoginPassWordKey = "SavedLoginPassWordKey";
     public static string weapon78Key = "weapon78";
     public static string weapon79Key = "weapon79";
+    public static string Reward_Before = "이전 보상을 받아주세요!";
+    public static string Reward_Can = "조건을 만족하지 못하였습니다.";
+    public static string Reward_Has = "이미 보상을 받았습니다.";
 
 
     public static string GetContentsName(ContentsType contentsType)
@@ -162,205 +165,6 @@ public static class CommonString
             case Item_Type.GrowthStone: return "수련의돌";
             case Item_Type.Memory: return "무공비급";
             case Item_Type.Ticket: return "소환서";
-            case Item_Type.costume0: return TableManager.Instance.Costume.dataArray[0].Name;
-            case Item_Type.costume1: return TableManager.Instance.Costume.dataArray[1].Name;
-            case Item_Type.costume2: return TableManager.Instance.Costume.dataArray[2].Name;
-            case Item_Type.costume3: return TableManager.Instance.Costume.dataArray[3].Name;
-            case Item_Type.costume4: return TableManager.Instance.Costume.dataArray[4].Name;
-            case Item_Type.costume5: return TableManager.Instance.Costume.dataArray[5].Name;
-            case Item_Type.costume6: return TableManager.Instance.Costume.dataArray[6].Name;
-            case Item_Type.costume7: return TableManager.Instance.Costume.dataArray[7].Name;
-            case Item_Type.costume8: return TableManager.Instance.Costume.dataArray[8].Name;
-            case Item_Type.costume9: return TableManager.Instance.Costume.dataArray[9].Name;
-            case Item_Type.costume10: return TableManager.Instance.Costume.dataArray[10].Name;
-            case Item_Type.costume11: return TableManager.Instance.Costume.dataArray[11].Name;
-            case Item_Type.costume12: return TableManager.Instance.Costume.dataArray[12].Name;
-            case Item_Type.costume13: return TableManager.Instance.Costume.dataArray[13].Name;
-            case Item_Type.costume14: return TableManager.Instance.Costume.dataArray[14].Name;
-            case Item_Type.costume15: return TableManager.Instance.Costume.dataArray[15].Name;
-            case Item_Type.costume16: return TableManager.Instance.Costume.dataArray[16].Name;
-            case Item_Type.costume17: return TableManager.Instance.Costume.dataArray[17].Name;
-            case Item_Type.costume18: return TableManager.Instance.Costume.dataArray[18].Name;
-            case Item_Type.costume19: return TableManager.Instance.Costume.dataArray[19].Name;
-            case Item_Type.costume20: return TableManager.Instance.Costume.dataArray[20].Name;
-            case Item_Type.costume21: return TableManager.Instance.Costume.dataArray[21].Name;
-            case Item_Type.costume22: return TableManager.Instance.Costume.dataArray[22].Name;
-
-            case Item_Type.costume23: return TableManager.Instance.Costume.dataArray[23].Name;
-            case Item_Type.costume24: return TableManager.Instance.Costume.dataArray[24].Name;
-            case Item_Type.costume25: return TableManager.Instance.Costume.dataArray[25].Name;
-            case Item_Type.costume26: return TableManager.Instance.Costume.dataArray[26].Name;
-            case Item_Type.costume27: return TableManager.Instance.Costume.dataArray[27].Name;
-            case Item_Type.costume28: return TableManager.Instance.Costume.dataArray[28].Name;
-            case Item_Type.costume29: return TableManager.Instance.Costume.dataArray[29].Name;
-            case Item_Type.costume30: return TableManager.Instance.Costume.dataArray[30].Name;
-            case Item_Type.costume31: return TableManager.Instance.Costume.dataArray[31].Name;
-            case Item_Type.costume32: return TableManager.Instance.Costume.dataArray[32].Name;
-            case Item_Type.costume33: return TableManager.Instance.Costume.dataArray[33].Name;
-            case Item_Type.costume34: return TableManager.Instance.Costume.dataArray[34].Name;
-            case Item_Type.costume35: return TableManager.Instance.Costume.dataArray[35].Name;
-            case Item_Type.costume36: return TableManager.Instance.Costume.dataArray[36].Name;
-            case Item_Type.costume37: return TableManager.Instance.Costume.dataArray[37].Name;
-            case Item_Type.costume38: return TableManager.Instance.Costume.dataArray[38].Name;
-            case Item_Type.costume39: return TableManager.Instance.Costume.dataArray[39].Name;
-            case Item_Type.costume40: return TableManager.Instance.Costume.dataArray[40].Name;
-            case Item_Type.costume41: return TableManager.Instance.Costume.dataArray[41].Name;
-            case Item_Type.costume42: return TableManager.Instance.Costume.dataArray[42].Name;
-            case Item_Type.costume43: return TableManager.Instance.Costume.dataArray[43].Name;
-            case Item_Type.costume44: return TableManager.Instance.Costume.dataArray[44].Name;
-            case Item_Type.costume45: return TableManager.Instance.Costume.dataArray[45].Name;
-            case Item_Type.costume46: return TableManager.Instance.Costume.dataArray[46].Name;
-            case Item_Type.costume47: return TableManager.Instance.Costume.dataArray[47].Name;
-            case Item_Type.costume48: return TableManager.Instance.Costume.dataArray[48].Name;
-            case Item_Type.costume49: return TableManager.Instance.Costume.dataArray[49].Name;
-            case Item_Type.costume50: return TableManager.Instance.Costume.dataArray[50].Name;
-            case Item_Type.costume51: return TableManager.Instance.Costume.dataArray[51].Name;
-            case Item_Type.costume52: return TableManager.Instance.Costume.dataArray[52].Name;
-            case Item_Type.costume53: return TableManager.Instance.Costume.dataArray[53].Name;
-            case Item_Type.costume54: return TableManager.Instance.Costume.dataArray[54].Name;
-            case Item_Type.costume55: return TableManager.Instance.Costume.dataArray[55].Name;
-            case Item_Type.costume56: return TableManager.Instance.Costume.dataArray[56].Name;
-            case Item_Type.costume57: return TableManager.Instance.Costume.dataArray[57].Name;
-            case Item_Type.costume58: return TableManager.Instance.Costume.dataArray[58].Name;
-            case Item_Type.costume59: return TableManager.Instance.Costume.dataArray[59].Name;
-            case Item_Type.costume60: return TableManager.Instance.Costume.dataArray[60].Name;
-            case Item_Type.costume61: return TableManager.Instance.Costume.dataArray[61].Name;
-
-            case Item_Type.costume62: return TableManager.Instance.Costume.dataArray[62].Name;
-            case Item_Type.costume63: return TableManager.Instance.Costume.dataArray[63].Name;
-            case Item_Type.costume64: return TableManager.Instance.Costume.dataArray[64].Name;
-            case Item_Type.costume65: return TableManager.Instance.Costume.dataArray[65].Name;
-            case Item_Type.costume66: return TableManager.Instance.Costume.dataArray[66].Name;
-            case Item_Type.costume67: return TableManager.Instance.Costume.dataArray[67].Name;
-            case Item_Type.costume68: return TableManager.Instance.Costume.dataArray[68].Name;
-            case Item_Type.costume69: return TableManager.Instance.Costume.dataArray[69].Name;
-            case Item_Type.costume70: return TableManager.Instance.Costume.dataArray[70].Name;
-            case Item_Type.costume71: return TableManager.Instance.Costume.dataArray[71].Name;
-            case Item_Type.costume72: return TableManager.Instance.Costume.dataArray[72].Name;
-
-            case Item_Type.costume73: return TableManager.Instance.Costume.dataArray[73].Name;
-            case Item_Type.costume74: return TableManager.Instance.Costume.dataArray[74].Name;
-            case Item_Type.costume75: return TableManager.Instance.Costume.dataArray[75].Name;
-            case Item_Type.costume76: return TableManager.Instance.Costume.dataArray[76].Name;
-            case Item_Type.costume77: return TableManager.Instance.Costume.dataArray[77].Name;
-            case Item_Type.costume78: return TableManager.Instance.Costume.dataArray[78].Name;
-            case Item_Type.costume79: return TableManager.Instance.Costume.dataArray[79].Name;
-            case Item_Type.costume80: return TableManager.Instance.Costume.dataArray[80].Name;
-            case Item_Type.costume81: return TableManager.Instance.Costume.dataArray[81].Name;
-            case Item_Type.costume82: return TableManager.Instance.Costume.dataArray[82].Name;
-            case Item_Type.costume83: return TableManager.Instance.Costume.dataArray[83].Name;
-            case Item_Type.costume84: return TableManager.Instance.Costume.dataArray[84].Name;
-            case Item_Type.costume85: return TableManager.Instance.Costume.dataArray[85].Name;
-            case Item_Type.costume86: return TableManager.Instance.Costume.dataArray[86].Name;
-            case Item_Type.costume87: return TableManager.Instance.Costume.dataArray[87].Name;
-            case Item_Type.costume88: return TableManager.Instance.Costume.dataArray[88].Name;
-            case Item_Type.costume89: return TableManager.Instance.Costume.dataArray[89].Name;
-            case Item_Type.costume90: return TableManager.Instance.Costume.dataArray[90].Name;
-            case Item_Type.costume91: return TableManager.Instance.Costume.dataArray[91].Name;
-            case Item_Type.costume92: return TableManager.Instance.Costume.dataArray[92].Name;
-            case Item_Type.costume93: return TableManager.Instance.Costume.dataArray[93].Name;
-            case Item_Type.costume94: return TableManager.Instance.Costume.dataArray[94].Name;
-            case Item_Type.costume95: return TableManager.Instance.Costume.dataArray[95].Name;
-            case Item_Type.costume96: return TableManager.Instance.Costume.dataArray[96].Name;
-            case Item_Type.costume97: return TableManager.Instance.Costume.dataArray[97].Name;
-            case Item_Type.costume98: return TableManager.Instance.Costume.dataArray[98].Name;
-            case Item_Type.costume99: return TableManager.Instance.Costume.dataArray[99].Name;
-            case Item_Type.costume100: return TableManager.Instance.Costume.dataArray[100].Name;
-            case Item_Type.costume101: return TableManager.Instance.Costume.dataArray[101].Name;
-            case Item_Type.costume102: return TableManager.Instance.Costume.dataArray[102].Name;
-            case Item_Type.costume103: return TableManager.Instance.Costume.dataArray[103].Name;
-            case Item_Type.costume104: return TableManager.Instance.Costume.dataArray[104].Name;
-            case Item_Type.costume105: return TableManager.Instance.Costume.dataArray[105].Name;
-            case Item_Type.costume106: return TableManager.Instance.Costume.dataArray[106].Name;
-            case Item_Type.costume107: return TableManager.Instance.Costume.dataArray[107].Name;
-            case Item_Type.costume108: return TableManager.Instance.Costume.dataArray[108].Name;
-            case Item_Type.costume109: return TableManager.Instance.Costume.dataArray[109].Name;
-            case Item_Type.costume110: return TableManager.Instance.Costume.dataArray[110].Name;
-            case Item_Type.costume111: return TableManager.Instance.Costume.dataArray[111].Name;
-            case Item_Type.costume112: return TableManager.Instance.Costume.dataArray[112].Name;
-            case Item_Type.costume113: return TableManager.Instance.Costume.dataArray[113].Name;
-            case Item_Type.costume114: return TableManager.Instance.Costume.dataArray[114].Name;
-            case Item_Type.costume115: return TableManager.Instance.Costume.dataArray[115].Name;
-            case Item_Type.costume116: return TableManager.Instance.Costume.dataArray[116].Name;
-            case Item_Type.costume117: return TableManager.Instance.Costume.dataArray[117].Name;
-            case Item_Type.costume118: return TableManager.Instance.Costume.dataArray[118].Name;
-            case Item_Type.costume119: return TableManager.Instance.Costume.dataArray[119].Name;
-            case Item_Type.costume120: return TableManager.Instance.Costume.dataArray[120].Name;
-            case Item_Type.costume121: return TableManager.Instance.Costume.dataArray[121].Name;
-            case Item_Type.costume122: return TableManager.Instance.Costume.dataArray[122].Name;
-            case Item_Type.costume123: return TableManager.Instance.Costume.dataArray[123].Name;
-            case Item_Type.costume124: return TableManager.Instance.Costume.dataArray[124].Name;
-            case Item_Type.costume125: return TableManager.Instance.Costume.dataArray[125].Name;
-            case Item_Type.costume126: return TableManager.Instance.Costume.dataArray[126].Name;
-            case Item_Type.costume127: return TableManager.Instance.Costume.dataArray[127].Name;
-            case Item_Type.costume128: return TableManager.Instance.Costume.dataArray[128].Name;
-            case Item_Type.costume129: return TableManager.Instance.Costume.dataArray[129].Name;
-            case Item_Type.costume130: return TableManager.Instance.Costume.dataArray[130].Name;
-            case Item_Type.costume131: return TableManager.Instance.Costume.dataArray[131].Name;
-            case Item_Type.costume132: return TableManager.Instance.Costume.dataArray[132].Name;
-            case Item_Type.costume133: return TableManager.Instance.Costume.dataArray[133].Name;
-            case Item_Type.costume134: return TableManager.Instance.Costume.dataArray[134].Name;
-            case Item_Type.costume135: return TableManager.Instance.Costume.dataArray[135].Name;
-            case Item_Type.costume136: return TableManager.Instance.Costume.dataArray[136].Name;
-            case Item_Type.costume137: return TableManager.Instance.Costume.dataArray[137].Name;
-            case Item_Type.costume138: return TableManager.Instance.Costume.dataArray[138].Name;
-            case Item_Type.costume139: return TableManager.Instance.Costume.dataArray[139].Name;
-            case Item_Type.costume140: return TableManager.Instance.Costume.dataArray[140].Name;
-            case Item_Type.costume141: return TableManager.Instance.Costume.dataArray[141].Name;
-            case Item_Type.costume142: return TableManager.Instance.Costume.dataArray[142].Name;
-            case Item_Type.costume143: return TableManager.Instance.Costume.dataArray[143].Name;
-            case Item_Type.costume144: return TableManager.Instance.Costume.dataArray[144].Name;
-            case Item_Type.costume145: return TableManager.Instance.Costume.dataArray[145].Name;
-            case Item_Type.costume146: return TableManager.Instance.Costume.dataArray[146].Name;
-            case Item_Type.costume147: return TableManager.Instance.Costume.dataArray[147].Name;
-            case Item_Type.costume148: return TableManager.Instance.Costume.dataArray[148].Name;
-            case Item_Type.costume149: return TableManager.Instance.Costume.dataArray[149].Name;
-            case Item_Type.costume150: return TableManager.Instance.Costume.dataArray[150].Name;
-            case Item_Type.costume151: return TableManager.Instance.Costume.dataArray[151].Name;
-            case Item_Type.costume152: return TableManager.Instance.Costume.dataArray[152].Name;
-            case Item_Type.costume153: return TableManager.Instance.Costume.dataArray[153].Name;
-            case Item_Type.costume154: return TableManager.Instance.Costume.dataArray[154].Name;
-            case Item_Type.costume155: return TableManager.Instance.Costume.dataArray[155].Name;
-            case Item_Type.costume156: return TableManager.Instance.Costume.dataArray[156].Name;
-            case Item_Type.costume157: return TableManager.Instance.Costume.dataArray[157].Name;
-            case Item_Type.costume158: return TableManager.Instance.Costume.dataArray[158].Name;
-            case Item_Type.costume159: return TableManager.Instance.Costume.dataArray[159].Name;
-            case Item_Type.costume160: return TableManager.Instance.Costume.dataArray[160].Name;
-            case Item_Type.costume161: return TableManager.Instance.Costume.dataArray[161].Name;
-            case Item_Type.costume162: return TableManager.Instance.Costume.dataArray[162].Name;
-            case Item_Type.costume163: return TableManager.Instance.Costume.dataArray[163].Name;
-            case Item_Type.costume164: return TableManager.Instance.Costume.dataArray[164].Name;
-            case Item_Type.costume165: return TableManager.Instance.Costume.dataArray[165].Name;
-            case Item_Type.costume166: return TableManager.Instance.Costume.dataArray[166].Name;
-            case Item_Type.costume167: return TableManager.Instance.Costume.dataArray[167].Name;
-            case Item_Type.costume168: return TableManager.Instance.Costume.dataArray[168].Name;
-            case Item_Type.costume169: return TableManager.Instance.Costume.dataArray[169].Name;
-            case Item_Type.costume170: return TableManager.Instance.Costume.dataArray[170].Name;
-            case Item_Type.costume171: return TableManager.Instance.Costume.dataArray[171].Name;
-            case Item_Type.costume172: return TableManager.Instance.Costume.dataArray[172].Name;
-            case Item_Type.costume173: return TableManager.Instance.Costume.dataArray[173].Name;
-            case Item_Type.costume174: return TableManager.Instance.Costume.dataArray[174].Name;
-            case Item_Type.costume175: return TableManager.Instance.Costume.dataArray[175].Name;
-            case Item_Type.costume176: return TableManager.Instance.Costume.dataArray[176].Name;
-            case Item_Type.costume177: return TableManager.Instance.Costume.dataArray[177].Name;
-            case Item_Type.costume178: return TableManager.Instance.Costume.dataArray[178].Name;
-            case Item_Type.costume179: return TableManager.Instance.Costume.dataArray[179].Name;
-            case Item_Type.costume180: return TableManager.Instance.Costume.dataArray[180].Name;
-            case Item_Type.costume181: return TableManager.Instance.Costume.dataArray[181].Name;
-            case Item_Type.costume182: return TableManager.Instance.Costume.dataArray[182].Name;
-            case Item_Type.costume183: return TableManager.Instance.Costume.dataArray[183].Name;
-            case Item_Type.costume184: return TableManager.Instance.Costume.dataArray[184].Name;
-            case Item_Type.costume185: return TableManager.Instance.Costume.dataArray[185].Name;
-            case Item_Type.costume186: return TableManager.Instance.Costume.dataArray[186].Name;
-            case Item_Type.costume187: return TableManager.Instance.Costume.dataArray[187].Name;
-            case Item_Type.costume188: return TableManager.Instance.Costume.dataArray[188].Name;
-            case Item_Type.costume189: return TableManager.Instance.Costume.dataArray[189].Name;
-            case Item_Type.costume190: return TableManager.Instance.Costume.dataArray[190].Name;
-            case Item_Type.costume191: return TableManager.Instance.Costume.dataArray[191].Name;
-            case Item_Type.costume192: return TableManager.Instance.Costume.dataArray[192].Name;
-            case Item_Type.costume193: return TableManager.Instance.Costume.dataArray[193].Name;
-            case Item_Type.costume194: return TableManager.Instance.Costume.dataArray[194].Name;
-
             case Item_Type.pet0: return TableManager.Instance.PetDatas[0].Name;
             case Item_Type.pet1: return TableManager.Instance.PetDatas[1].Name;
             case Item_Type.pet2: return TableManager.Instance.PetDatas[2].Name;
@@ -395,22 +199,6 @@ public static class CommonString
             case Item_Type.weapon148:
                 return TableManager.Instance.WeaponData[148].Name;
                 
-            case Item_Type.weapon149:
-                return TableManager.Instance.WeaponData[149].Name;
-            case Item_Type.weapon150:
-                return TableManager.Instance.WeaponData[150].Name;
-            case Item_Type.weapon151:
-                return TableManager.Instance.WeaponData[151].Name;
-            case Item_Type.weapon152:
-                return TableManager.Instance.WeaponData[152].Name;
-            case Item_Type.weapon153:
-                return TableManager.Instance.WeaponData[153].Name;
-            case Item_Type.weapon154:
-                return TableManager.Instance.WeaponData[154].Name;
-            case Item_Type.weapon155:
-                return TableManager.Instance.WeaponData[155].Name;
-            case Item_Type.weapon156:
-                return TableManager.Instance.WeaponData[156].Name;
                 
 
             //
@@ -525,6 +313,8 @@ public static class CommonString
             case Item_Type.VisionSkill14: return "궁극 기술15";
             case Item_Type.VisionSkill15: return "궁극 기술16";
             case Item_Type.VisionSkill16: return "궁극 기술17";
+            case Item_Type.VisionSkill17: return "궁극 기술18";
+            case Item_Type.VisionSkill18: return "궁극 기술19";
             case Item_Type.ThiefSkill0: return "도적 기술1";
             case Item_Type.ThiefSkill1: return "도적 기술2";
             case Item_Type.ThiefSkill2: return "도적 기술3";
@@ -680,6 +470,7 @@ public static class CommonString
             case Item_Type.TaeguekGoods: return "태극 조각";
             case Item_Type.TaeguekElixir: return "태극 영약";
             case Item_Type.SuhoTreasure: return "수호 구슬";
+            case Item_Type.MRT: return "무공 비급";
             case Item_Type.TransClearTicket: return "초월석 소탕권";
             case Item_Type.Event_SA: return "2주년 도토리";
             case Item_Type.EventDice: return "이벤트 주사위";
@@ -689,7 +480,7 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "신년 저고리";
+            case Item_Type.Event_HotTime: return "청룡 복주머니";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";
@@ -706,13 +497,30 @@ public static class CommonString
             case Item_Type.BattleClear: return "비무 대회 입장권";
             case Item_Type.BattleScore: return "비무 점수";
             case Item_Type.DPT: return "거북 문양";
-            case Item_Type.GT: return "뽑기 티켓";
+            case Item_Type.GT: return "빙고 티켓";
             case Item_Type.WT: return "적안 마수 소탕권";
             case Item_Type.SG: return "사신수 기운";
             case Item_Type.SC: return "사신수 영약";
             case Item_Type.SB: return "수련서";
         
     }
+
+        if (item_type.IsCostumeItem())
+        {
+            var idx= int.Parse(item_type.ToString().Substring("costume".Length));
+            return TableManager.Instance.Costume.dataArray[idx].Name;
+
+        }
+        else if (item_type.IsNorigaeItem())
+        {
+            var idx= int.Parse(item_type.ToString().Substring("magicBook".Length));
+            return TableManager.Instance.MagicBookTable.dataArray[idx].Name;
+        }
+        else if (item_type.IsWeaponItem())
+        {
+            var idx= int.Parse(item_type.ToString().Substring("weapon".Length));
+            return TableManager.Instance.WeaponData[idx].Name;
+        }
         return "미등록";
     }
     
@@ -924,6 +732,8 @@ public static class CommonString
                 return "신력 피해(%)";
             case StatusType.SuperCritical31DamPer:
                 return "협동 베기(%)";
+            case StatusType.SuperCritical32DamPer:
+                return "극락 베기(%)";
             case StatusType.BigiDamPer:
                 return "비기 추가 피해량 증가(%)";
             case StatusType.SealSwordDam:
@@ -944,6 +754,8 @@ public static class CommonString
                 return "요석 획득 증가 (%)";
             case StatusType.TaegeukGoodsGainPer:
                 return "태극 조각 획득 증가 (%)";
+            case StatusType.SasinsuGoodsGainPer:
+                return "사신수 기운 획득 증가 (%)";
             case StatusType.SealAttackSpeed:
                 return "요도 시전 속도 증가 (%)";
             case StatusType.SuhoGainPer:

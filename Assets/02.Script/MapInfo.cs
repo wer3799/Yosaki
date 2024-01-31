@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -6,6 +7,7 @@ using Cinemachine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
 using BackEnd;
+using Random = UnityEngine.Random;
 
 public class MapInfo : SingletonMono<MapInfo>
 {
@@ -73,9 +75,50 @@ public class MapInfo : SingletonMono<MapInfo>
 
         Subscribe();
 
+        
         // UpdateStageRank();
     }
 
+    private CompositeDisposable disposable = new CompositeDisposable();
+
+
+
+    private Coroutine resetCoroutine;
+    public void ResetEnemy()
+    {
+        if (resetCoroutine != null)
+        {
+            StopCoroutine(resetCoroutine);
+        }
+        resetCoroutine = StartCoroutine(ResetStage());
+    }
+    private IEnumerator ResetStage()
+    {
+        yield return new WaitForSeconds(5f);
+        //아직도 맥스면 초기화.
+        if (IsEnemyMax())
+        {
+            //소환된 몹 전부 꺼버림
+            var spawnedEnemies = new List<Enemy>(spawnedEnemyList);
+
+            spawnedEnemies.ForEach(e => e.gameObject.SetActive(false));
+        
+            //몹생성 막음
+            SetCanSpawnEnemy(false);
+
+            yield return new WaitForSeconds(1f);
+        
+            Debug.LogError("재생성");
+            PlayerStats.ResetAbilDic();
+            SetCanSpawnEnemy(true);
+        }
+        else
+        {
+            yield return null;
+        }
+
+
+    }
 
     private void Subscribe()
     {
@@ -96,6 +139,21 @@ public class MapInfo : SingletonMono<MapInfo>
                 GameManager.Instance.LoadNormalField();
             });
 
+        }).AddTo(this);
+        
+        //5분마다
+        Observable.Interval(TimeSpan.FromSeconds(300f)).Subscribe(_ =>
+        {
+            //몬스터가 꽉차있으니까 리셋
+            if (IsEnemyMax())
+            {
+                //Debug.LogError("리셋O");
+                ResetEnemy();
+            }
+            else
+            {
+                //Debug.LogError("리셋X");
+            }
         }).AddTo(this);
 
         UiStageNameIndicater.Instance.whenFieldBossTimerEnd.AsObservable().Subscribe(WhenFieldBossTimerEnd).AddTo(this);
@@ -156,23 +214,8 @@ public class MapInfo : SingletonMono<MapInfo>
 
             bool isEnemyEmpty = IsEnemyEmpty();
 
-            //문파 추가소환
-            //int plusSpawnNum = GuildManager.Instance.GetGuildSpawnEnemyNum(GuildManager.Instance.guildLevelExp.Value);
 
-            //명부 추가소환
-           // int hellPlusSpawnNum = (int)ServerData.goodsTable.GetTableData(GoodsTable.du).Value;
-
-            //천상계 꽃 추가소환
-            //int chunPlusSpawnNum = 0;
-
-            // if(PlayerStats.IsChunMonsterSpawnAdd())
-            // {
-            //     chunPlusSpawnNum = 5;
-            // }
-
-            int spawnNum = maxEnemy - spawnedEnemyList.Count 
-                           //plusSpawnNum + hellPlusSpawnNum + chunPlusSpawnNum 
-                           + PlayerStats.GetAddSummonYogui();
+            int spawnNum = maxEnemy - spawnedEnemyList.Count + PlayerStats.GetAddSummonYogui();
 
             while (canSpawnEnemy.Value == false)
             {
@@ -310,44 +353,13 @@ public class MapInfo : SingletonMono<MapInfo>
 
         enemyObject.SetReturnCallBack(EnemyRemoveCallBack);
 
-        enemyObject.Initialize(spawnEnemyData[0], isBossEnemy, spawnedIdx);
+        //10000스테이지 이상은 그냥 한방처리
+        bool setHpOne = isBossEnemy == false && spawnEnemyData[0].Id >= 10000;
+        
+        enemyObject.Initialize(spawnEnemyData[0], isBossEnemy, spawnedIdx,setHpOne:setHpOne);
 
         spawnedEnemyList.Add(enemyObject);
     }
-    //
-    // //Jumping
-    // private void SpawnEnemy(bool isBossEnemy, bool isRandomTurn,int idx)
-    // {
-    //     if (spawnEnemyData.Count == 0)
-    //     {
-    //         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "데이터 없음", null);
-    //         return;
-    //     }
-    //
-    //     var enemyObject = BattleObjectManager.Instance.GetItem($"Enemy/{TableManager.Instance.EnemyData[idx].Prefabname}") as Enemy;
-    //     int spawnedIdx = 0;
-    //
-    //
-    //     UiStageNameIndicater.Instance.SerFieldBossTimerDefault();
-    //     //UiStageNameIndicater.Instance.StartFieldBossTimer(15);
-    //
-    //     PopupManager.Instance.ShowAlarmMessage("필드보스 출현!");
-    //
-    //     //첫번째 발판에 소환
-    //     enemyObject.transform.position = spawnPlatforms[GetBossSpawnPlatformIdx()].GetRandomSpawnPos();
-    //
-    //     EffectManager.SpawnEffectAllTime("FieldBossSpawn", enemyObject.transform.position);
-    //
-    //     EffectManager.SpawnEffectAllTime("Circle1", enemyObject.transform.position);
-    //     SoundManager.Instance.PlaySound("4-1");
-    //
-    //
-    //     enemyObject.SetReturnCallBack(EnemyRemoveCallBack);
-    //
-    //     enemyObject.Initialize(TableManager.Instance.EnemyData[idx], isBossEnemy, spawnedIdx, isJumpStage: true);
-    //
-    //     spawnedEnemyList.Add(enemyObject);
-    // }
 
     private Coroutine gaugeRoutine;
 

@@ -207,6 +207,49 @@ public class UiGuimoonCell : MonoBehaviour
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
     
     }
+    public void OnClickResetButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "해당 능력치를 초기화 합니까?", () =>
+        {
+            float refundCount = 0;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param guimoonParam = new Param();
+
+            refundCount += ServerData.guimoonServerTable.TableDatas[guimoonLocalData.Stringid].level1.Value * guimoonLocalData.Upgradeprice1;
+            ServerData.guimoonServerTable.TableDatas[guimoonLocalData.Stringid].level1.Value = 0;
+
+            guimoonParam.Add(guimoonLocalData.Stringid, ServerData.guimoonServerTable.TableDatas[guimoonLocalData.Stringid].ConvertToString());
+            
+
+            if (refundCount == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
+                return;
+            }
+
+            transactions.Add(TransactionValue.SetUpdate(GuimoonServerTable.tableName, GuimoonServerTable.Indate, guimoonParam));
+
+
+            ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value += refundCount;
+            
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.GuimoonRelic, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelic).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            
+            PlayerStats.ResetAbilDic();
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
+            });
+
+        }, () => { });
+    
+    }
     public void OnClickUpgradeAllButton()
     {
         if (IsMaxLevel())

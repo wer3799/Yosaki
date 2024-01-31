@@ -11,7 +11,7 @@ public class SaveManager : SingletonMono<SaveManager>
 
     private WaitForSeconds versionCheckDelay = new WaitForSeconds(1200.0f);
 
-    private WaitForSeconds getHotTimeGoodsdDelay = new WaitForSeconds(600.0f);
+    private WaitForSeconds tenMinuteDelay = new WaitForSeconds(600.0f);
 
     //12시간
     private WaitForSeconds tockenRefreshDelay = new WaitForSeconds(43200f);
@@ -23,15 +23,18 @@ public class SaveManager : SingletonMono<SaveManager>
         StartCoroutine(AutoSaveRoutine_Mission());
         StartCoroutine(TockenRefreshRoutine());
         StartCoroutine(VersionCheckRoutine());
-        StartCoroutine(HotTimeGoodsGetRoutine());
+        StartCoroutine(TenMinuteSaveRoutine());
     }
 
-    private IEnumerator HotTimeGoodsGetRoutine()
+    private IEnumerator TenMinuteSaveRoutine()
     {
         while (true)
         {
-            yield return getHotTimeGoodsdDelay;
+            yield return tenMinuteDelay;
 
+            Debug.LogError("10분에 한번");
+            RankManager.Instance.ClearRankList();
+            
             if (ServerData.userInfoTable.IsHotTimeEvent())
             {
                 GetHotTimeGoods();
@@ -260,6 +263,8 @@ public class SaveManager : SingletonMono<SaveManager>
         GoodsTable.VisionSkill14,
         GoodsTable.VisionSkill15,
         GoodsTable.VisionSkill16,
+        GoodsTable.VisionSkill17,
+        GoodsTable.VisionSkill18,
 
         GoodsTable.c0,
         GoodsTable.c1,

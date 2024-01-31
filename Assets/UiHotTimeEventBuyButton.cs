@@ -14,7 +14,7 @@ public class UiHotTimeEventBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string seasonPassKey = "hottimepass2";
+    public static readonly string seasonPassKey = "hottimepass3";
     
     private Button buyButton;
 

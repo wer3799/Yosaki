@@ -193,4 +193,48 @@ public class UiBlackFoxCell : MonoBehaviour
 
         ServerData.SendTransactionV2(transactions);
     }
+    
+    public void OnClickResetButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "해당 능력치를 초기화 합니까?", () =>
+        {
+            float refundCount = 0;
+
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            Param relicParam = new Param();
+
+            refundCount += ServerData.blackFoxServerTable.TableDatas[blackFoxLocalData.Stringid].level.Value;
+            ServerData.blackFoxServerTable.TableDatas[blackFoxLocalData.Stringid].level.Value = 0;
+
+            relicParam.Add(blackFoxLocalData.Stringid, ServerData.blackFoxServerTable.TableDatas[blackFoxLocalData.Stringid].ConvertToString());
+            
+
+            if (refundCount == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
+                return;
+            }
+
+            transactions.Add(TransactionValue.SetUpdate(BlackFoxServerTable.tableName, BlackFoxServerTable.Indate, relicParam));
+
+
+            ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value += refundCount;
+            
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.BlackFoxGoods, ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            
+            PlayerStats.ResetAbilDic();
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowAlarmMessage("초기화 성공!");
+            });
+
+        }, () => { });
+    
+    }
 }

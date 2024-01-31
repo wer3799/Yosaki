@@ -42,6 +42,10 @@ public class UiColdSeasonPassPopup : MonoBehaviour
         string desc0 = "";
         string desc1 = "";
 ///////////////////
+        if (GameBalance.HotTimeEvent_SasinsuGoods > 0)
+        {
+            desc0 += $"{CommonString.GetStatusName(StatusType.SasinsuGoodsGainPer)} + {GameBalance.HotTimeEvent_SasinsuGoods * 100}% 증가\n";
+        }
         if (GameBalance.HotTimeEvent_TaegeukGoods > 0)
         {
             desc0 += $"{CommonString.GetStatusName(StatusType.TaegeukGoodsGainPer)} + {GameBalance.HotTimeEvent_TaegeukGoods * 100}% 증가\n";
@@ -67,6 +71,10 @@ public class UiColdSeasonPassPopup : MonoBehaviour
             desc0 += $"금화 획득 + {GameBalance.HotTimeEvent_Gold * 100}% 증가\n";
         }       
         ///////////////////////////////
+        if (GameBalance.HotTimeEvent_Ad_SasinsuGoods > 0)
+        {
+            desc1 += $"{CommonString.GetStatusName(StatusType.SasinsuGoodsGainPer)} + {GameBalance.HotTimeEvent_Ad_SasinsuGoods * 100}% 증가\n";
+        }
         if (GameBalance.HotTimeEvent_Ad_TaegeukGoods > 0)
         {
             desc1 += $"{CommonString.GetStatusName(StatusType.TaegeukGoodsGainPer)} + {GameBalance.HotTimeEvent_Ad_TaegeukGoods * 100}% 증가\n";

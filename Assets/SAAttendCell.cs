@@ -127,7 +127,7 @@ public class SAAttendCell : MonoBehaviour
         }
         else if (IsBeforeRewarded() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("이전 보상을 받아주세요!");
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Before);
             return;
         }
 

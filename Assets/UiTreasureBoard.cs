@@ -15,6 +15,7 @@ public class UiTreasureBoard : MonoBehaviour
     enum treasureType
     {
         DragonPalace,
+        Murim,
     }
 
     [SerializeField] private treasureType _treasureType;
@@ -32,6 +33,9 @@ public class UiTreasureBoard : MonoBehaviour
         {
             case treasureType.DragonPalace:
                 abilDesc += $"{CommonString.GetStatusName(StatusType.SuperCritical28DamPer)} {Utils.ConvertNum(PlayerStats.GetDragonPalaceTreasureAbilHasEffect() * 100f, 2)}";
+                break;
+            case treasureType.Murim:
+                abilDesc += $"{CommonString.GetStatusName(StatusType.SuperCritical32DamPer)} {Utils.ConvertNum(PlayerStats.GetMurimTreasureAbilHasEffect() * 100f, 2)}";
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

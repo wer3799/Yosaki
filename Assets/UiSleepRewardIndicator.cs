@@ -59,7 +59,7 @@ public class UiSleepRewardIndicator : SingletonMono<UiSleepRewardIndicator>
         if (sum >= reqLv&&ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateGold).Value < 1)
         {
             PopupManager.Instance.ShowAlarmMessage(
-                $"금화 각성을 먼저 시도해주세요!");
+                $"금화 각성을 먼저 시도해주세요!\n 금화 각성은 수련 - 우측의 백금화 아이콘을 통해 가능합니다!");
             return;
         }
         if(ServerData.goodsTable.GetTableData(GoodsTable.Gold).Value> GameBalance.GoldLimit)

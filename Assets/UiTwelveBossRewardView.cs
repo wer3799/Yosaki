@@ -93,7 +93,8 @@ public class UiTwelveBossRewardView : MonoBehaviour
                                     rewardInfo.rewardType == (int)Item_Type.VisionSkill13||
                                     rewardInfo.rewardType == (int)Item_Type.VisionSkill14||
                                     rewardInfo.rewardType == (int)Item_Type.VisionSkill15||
-                                    rewardInfo.rewardType == (int)Item_Type.VisionSkill16
+                                    rewardInfo.rewardType == (int)Item_Type.VisionSkill16||
+                                    ((Item_Type)rewardInfo.rewardType).IsVisionSkill()
             )
            )
         {

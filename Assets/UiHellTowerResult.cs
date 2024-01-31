@@ -121,6 +121,12 @@ public class UiHellTowerResult : MonoBehaviour
                     case GameManager.ContentsType.MunhaTower2:
                         stageChangeButton.SetActive(false);
                         break;
+                    case GameManager.ContentsType.MurimTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.MurimTowerIdx).Value < (TableManager.Instance.MurimTowerTable.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.MurimTower:
+                        stageChangeButton.SetActive(false);
+                        break;
                 }
                 
                 return "클리어!!";

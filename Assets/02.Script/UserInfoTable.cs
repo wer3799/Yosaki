@@ -802,8 +802,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 51);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(51));
+                            defultValues.Add(e.Current.Key, 53);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(53));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {

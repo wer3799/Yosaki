@@ -93,7 +93,7 @@ public class Enemy : PoolItem
         Subscribe();
     }
 
-    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, int spawnedPlatformIdx = 0, bool updateSubHpBar = false)
+    public void Initialize(EnemyTableData enemyTableData, bool isFieldBossEnemy = false, int spawnedPlatformIdx = 0, bool updateSubHpBar = false,bool setHpOne=false)
     {
         SetRequireComponents();
 
@@ -109,7 +109,7 @@ public class Enemy : PoolItem
         
         this.tableData = enemyTableData;
 
-        agentHpController.Initialize(enemyTableData, isFieldBossEnemy, updateSubHpBar);
+        agentHpController.Initialize(enemyTableData, isFieldBossEnemy, updateSubHpBar,setHpOne:setHpOne);
 
         this.transform.localScale = isFieldBossEnemy == false ? originScale : originScale * bossSize;
 
@@ -154,8 +154,8 @@ public class Enemy : PoolItem
     {
         agentHpController.whenEnemyDead.AsObservable().Subscribe(WhenEnemyDead).AddTo(this);
         agentHpController.WhenAgentDamaged.AsObservable().Subscribe(WhenAgentDamaged).AddTo(this);
-    }
 
+    }
     private void WhenAgentDamaged(double damage)
     {
         if (isFlyingEnemy == false)
@@ -205,7 +205,7 @@ public class Enemy : PoolItem
         GetStageRelicItem();
 
         enemyDeadCallBack?.Invoke(this);
-
+        
         if (this.isFieldBossEnemy)
         {
             WhenFieldBossEnemyDead();

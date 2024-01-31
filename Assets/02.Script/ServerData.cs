@@ -356,6 +356,8 @@ public static class ServerData
 
     public static void AddLocalValue(Item_Type type, float rewardValue)
     {
+  
+        
         switch (type)
         {
             case Item_Type.Gold:
@@ -947,221 +949,14 @@ public static class ServerData
                 ServerData.userInfoTable.TableDatas[UserInfoTable.sleepRewardSavedTime].Value += GameBalance.fastSleepRewardTimeValue * rewardValue;
                 break;
 
-            case Item_Type.costume1:
-            case Item_Type.costume6:
-            case Item_Type.costume7:
-            case Item_Type.costume8:
-            case Item_Type.costume9:
-            case Item_Type.costume10:
-            case Item_Type.costume11:
-            case Item_Type.costume12:
-            case Item_Type.costume13:
-            case Item_Type.costume14:
-            case Item_Type.costume15:
-            case Item_Type.costume16:
-            case Item_Type.costume17:
-            case Item_Type.costume18:
-            case Item_Type.costume19:
-            case Item_Type.costume20:
-            case Item_Type.costume21:
-            case Item_Type.costume22:
-            case Item_Type.costume23:
-            case Item_Type.costume24:
-            case Item_Type.costume25:
-            case Item_Type.costume26:
-            case Item_Type.costume27:
-            case Item_Type.costume28:
-            case Item_Type.costume29:
-            case Item_Type.costume30:
-            case Item_Type.costume31:
-            case Item_Type.costume32:
-            case Item_Type.costume33:
-            case Item_Type.costume34:
-            case Item_Type.costume35:
-            case Item_Type.costume36:
-            case Item_Type.costume37:
-            case Item_Type.costume38:
-            case Item_Type.costume39:
-            case Item_Type.costume40:
-            case Item_Type.costume41:
-            case Item_Type.costume42:
-            case Item_Type.costume43:
-            case Item_Type.costume44:
-            case Item_Type.costume45:
-            case Item_Type.costume46:
-            case Item_Type.costume47:
-            case Item_Type.costume48:
-            case Item_Type.costume49:
-            case Item_Type.costume50:
-            case Item_Type.costume51:
-            case Item_Type.costume52:
-            case Item_Type.costume53:
-            case Item_Type.costume54:
-            case Item_Type.costume55:
-            case Item_Type.costume56:
-            case Item_Type.costume57:
-            case Item_Type.costume58:
-            case Item_Type.costume59:
-            case Item_Type.costume60:
-            case Item_Type.costume61:
-
-            case Item_Type.costume62:
-            case Item_Type.costume63:
-            case Item_Type.costume64:
-            case Item_Type.costume65:
-            case Item_Type.costume66:
-            case Item_Type.costume67:
-            case Item_Type.costume68:
-            case Item_Type.costume69:
-            case Item_Type.costume70:
-            case Item_Type.costume71:
-            case Item_Type.costume72:
-            case Item_Type.costume73:
-            case Item_Type.costume74:
-            case Item_Type.costume75:
-            case Item_Type.costume76:
-            case Item_Type.costume77:
-            case Item_Type.costume78:
-            case Item_Type.costume79:
-            case Item_Type.costume80:
-            case Item_Type.costume81:
-            case Item_Type.costume82:
-            case Item_Type.costume83:
-            case Item_Type.costume84:
-            case Item_Type.costume85:
-            case Item_Type.costume86:
-            case Item_Type.costume87:
-            case Item_Type.costume88:
-            case Item_Type.costume89:
-            case Item_Type.costume90:
-            case Item_Type.costume91:
-            case Item_Type.costume92:
-            case Item_Type.costume93:
-            case Item_Type.costume94:
-            case Item_Type.costume95:
-            case Item_Type.costume96:
-            case Item_Type.costume97:
-            case Item_Type.costume98:
-            case Item_Type.costume99:
-            case Item_Type.costume100:
-            case Item_Type.costume101:
-            case Item_Type.costume102:
-            case Item_Type.costume103:
-            case Item_Type.costume104:
-            case Item_Type.costume105:
-            case Item_Type.costume106:
-            case Item_Type.costume107:
-            case Item_Type.costume108:
-            case Item_Type.costume109:
-            case Item_Type.costume110:
-            case Item_Type.costume111:
-            case Item_Type.costume112:
-            case Item_Type.costume113:
-            case Item_Type.costume114:
-            case Item_Type.costume115:
-            case Item_Type.costume116:
-            case Item_Type.costume117:
-            case Item_Type.costume118:
-            case Item_Type.costume119:
-            case Item_Type.costume120:
-            case Item_Type.costume121:
-            case Item_Type.costume122:
-            case Item_Type.costume123:
-            case Item_Type.costume124:
-            case Item_Type.costume125:
-            case Item_Type.costume126:
-            case Item_Type.costume127:
-            case Item_Type.costume128:
-            case Item_Type.costume129:
-            case Item_Type.costume130:
-            case Item_Type.costume131:
-            case Item_Type.costume132:
-            case Item_Type.costume133:
-            case Item_Type.costume134:
-            case Item_Type.costume135:
-            case Item_Type.costume136:
-            case Item_Type.costume137:
-            case Item_Type.costume138:
-            case Item_Type.costume139:
-            case Item_Type.costume140:
-            case Item_Type.costume141:
-            case Item_Type.costume142:
-            case Item_Type.costume143:
-            case Item_Type.costume144:
-            case Item_Type.costume145:
-            case Item_Type.costume146:
-            case Item_Type.costume147:
-            case Item_Type.costume148:
-            case Item_Type.costume149:
-            case Item_Type.costume150:
-            case Item_Type.costume151:
-            case Item_Type.costume152:
-            case Item_Type.costume153:
-            case Item_Type.costume154:
-            case Item_Type.costume155:
-            case Item_Type.costume156:
-            case Item_Type.costume157:
-            case Item_Type.costume158:
-            case Item_Type.costume159:
-            case Item_Type.costume160:
-            case Item_Type.costume161:
-            case Item_Type.costume162:
-            case Item_Type.costume163:
-            case Item_Type.costume164:
-            case Item_Type.costume165:
-            case Item_Type.costume166:
-            case Item_Type.costume167:
-            case Item_Type.costume168:
-            case Item_Type.costume169:
-            case Item_Type.costume170:
-            case Item_Type.costume171:
-            case Item_Type.costume172:
-            case Item_Type.costume173:
-            case Item_Type.costume174:
-            case Item_Type.costume175:
-            case Item_Type.costume176:
-            case Item_Type.costume177:
-            case Item_Type.costume178:
-            case Item_Type.costume179:
-            case Item_Type.costume180:
-            case Item_Type.costume181:
-            case Item_Type.costume182:
-            case Item_Type.costume183:
-            case Item_Type.costume184:
-            case Item_Type.costume185:
-            case Item_Type.costume186:
-            case Item_Type.costume187:
-            case Item_Type.costume188:
-            case Item_Type.costume189:
-            case Item_Type.costume190:
-            case Item_Type.costume191:
-            case Item_Type.costume192:
-            case Item_Type.costume193:
-            case Item_Type.costume194:
-                ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
-                break;
             case Item_Type.weapon81:
             case Item_Type.weapon90:
             case Item_Type.weapon131:
             case Item_Type.weapon146:
-            case Item_Type.weapon149:
-            case Item_Type.weapon152:
-            case Item_Type.weapon153:
-            case Item_Type.weapon154:
-            case Item_Type.weapon155:
-            case Item_Type.weapon156:
                 ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.magicBook116:
             case Item_Type.magicBook117:
-            case Item_Type.magicBook120:
-            case Item_Type.magicBook123:
-            case Item_Type.magicBook124:
-            case Item_Type.magicBook125:
-            case Item_Type.magicBook126:
-            case Item_Type.magicBook127:
-            case Item_Type.magicBook128:
-            case Item_Type.magicBook129:
                 ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
                 break;
             case Item_Type.pet52:
@@ -1198,6 +993,21 @@ public static class ServerData
                 if (type.IsNorigaeItem())
                 {
                     ServerData.magicBookTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                    break;
+                }
+                else if (type.IsCostumeItem())
+                {
+                    ServerData.costumeServerTable.TableDatas[type.ToString()].hasCostume.Value = true;
+                    break;
+                }
+                else if (type.IsWeaponItem())
+                {
+                    ServerData.weaponTable.TableDatas[type.ToString()].hasItem.Value += (int)rewardValue;
+                    break;
+                }
+                else if (type.IsGoodsItem())
+                {
+                    ServerData.goodsTable.TableDatas[type.ToString()].Value += (int)rewardValue;
                     break;
                 }
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"Item_Type {type} is not defined", null);
@@ -1242,197 +1052,6 @@ public static class ServerData
             case Item_Type.Dokebi:
                 passParam.Add(GoodsTable.DokebiKey, ServerData.goodsTable.GetTableData(GoodsTable.DokebiKey).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
-            case Item_Type.costume1:
-            case Item_Type.costume8:
-            case Item_Type.costume11:
-            case Item_Type.costume12:
-            case Item_Type.costume13:
-            case Item_Type.costume14:
-            case Item_Type.costume15:
-            case Item_Type.costume16:
-            case Item_Type.costume17:
-            case Item_Type.costume18:
-            case Item_Type.costume19:
-            case Item_Type.costume20:
-            case Item_Type.costume21:
-            case Item_Type.costume22:
-            case Item_Type.costume23:
-            case Item_Type.costume24:
-            case Item_Type.costume25:
-            case Item_Type.costume26:
-            case Item_Type.costume27:
-            case Item_Type.costume28:
-            case Item_Type.costume29:
-            case Item_Type.costume30:
-            case Item_Type.costume31:
-            case Item_Type.costume32:
-            case Item_Type.costume33:
-            case Item_Type.costume34:
-            case Item_Type.costume35:
-            case Item_Type.costume36:
-            case Item_Type.costume37:
-            case Item_Type.costume38:
-            case Item_Type.costume39:
-            case Item_Type.costume40:
-            case Item_Type.costume41:
-            case Item_Type.costume42:
-            case Item_Type.costume43:
-            case Item_Type.costume44:
-            case Item_Type.costume45:
-            case Item_Type.costume46:
-            case Item_Type.costume47:
-            case Item_Type.costume48:
-            case Item_Type.costume49:
-            case Item_Type.costume50:
-            case Item_Type.costume51:
-            case Item_Type.costume52:
-            case Item_Type.costume53:
-            case Item_Type.costume54:
-            case Item_Type.costume55:
-
-            case Item_Type.costume56:
-            case Item_Type.costume57:
-            case Item_Type.costume58:
-            case Item_Type.costume59:
-            case Item_Type.costume60:
-            case Item_Type.costume61:
-            case Item_Type.costume62:
-            case Item_Type.costume63:
-            case Item_Type.costume64:
-            case Item_Type.costume65:
-            case Item_Type.costume66:
-            case Item_Type.costume67:
-            case Item_Type.costume68:
-            case Item_Type.costume69:
-            case Item_Type.costume70:
-            case Item_Type.costume71:
-            case Item_Type.costume72:
-            case Item_Type.costume73:
-            case Item_Type.costume74:
-            case Item_Type.costume75:
-            case Item_Type.costume76:
-            case Item_Type.costume77:
-            case Item_Type.costume78:
-            case Item_Type.costume79:
-            case Item_Type.costume80:
-            case Item_Type.costume81:
-            case Item_Type.costume82:
-            case Item_Type.costume83:
-            case Item_Type.costume84:
-            case Item_Type.costume85:
-            case Item_Type.costume86:
-            case Item_Type.costume87:
-            case Item_Type.costume88:
-            case Item_Type.costume89:
-            case Item_Type.costume90:
-            case Item_Type.costume91:
-            case Item_Type.costume92:
-            case Item_Type.costume93:
-            case Item_Type.costume94:
-            case Item_Type.costume95:
-            case Item_Type.costume96:
-            case Item_Type.costume97:
-            case Item_Type.costume98:
-            case Item_Type.costume99:
-            case Item_Type.costume100:
-            case Item_Type.costume101:
-            case Item_Type.costume102:
-            case Item_Type.costume103:
-            case Item_Type.costume104:
-            case Item_Type.costume105:
-            case Item_Type.costume106:
-            case Item_Type.costume107:
-            case Item_Type.costume108:
-            case Item_Type.costume109:
-            case Item_Type.costume110:
-            case Item_Type.costume111:
-            case Item_Type.costume112:
-            case Item_Type.costume113:
-            case Item_Type.costume114:
-            case Item_Type.costume115:
-            case Item_Type.costume116:
-            case Item_Type.costume117:
-            case Item_Type.costume118:
-            case Item_Type.costume119:
-            case Item_Type.costume120:
-            case Item_Type.costume121:
-            case Item_Type.costume122:
-            case Item_Type.costume123:
-            case Item_Type.costume124:
-            case Item_Type.costume125:
-            case Item_Type.costume126:
-            case Item_Type.costume127:
-            case Item_Type.costume128:
-            case Item_Type.costume129:
-            case Item_Type.costume130:
-            case Item_Type.costume131:
-            case Item_Type.costume132:
-            case Item_Type.costume133:
-            case Item_Type.costume134:
-            case Item_Type.costume135:
-            case Item_Type.costume136:
-            case Item_Type.costume137:
-            case Item_Type.costume138:
-            case Item_Type.costume139:
-            case Item_Type.costume140:
-            case Item_Type.costume141:
-            case Item_Type.costume142:
-            case Item_Type.costume143:
-            case Item_Type.costume144:
-            case Item_Type.costume145:
-            case Item_Type.costume146:
-            case Item_Type.costume147:
-            case Item_Type.costume148:
-            case Item_Type.costume149:
-            case Item_Type.costume150:
-            case Item_Type.costume151:
-            case Item_Type.costume152:
-            case Item_Type.costume153:
-            case Item_Type.costume154:
-            case Item_Type.costume155:
-            case Item_Type.costume156:
-            case Item_Type.costume157:
-            case Item_Type.costume158:
-            case Item_Type.costume159:
-            case Item_Type.costume160:
-            case Item_Type.costume161:
-            case Item_Type.costume162:
-            case Item_Type.costume163:
-            case Item_Type.costume164:
-            case Item_Type.costume165:
-            case Item_Type.costume166:
-            case Item_Type.costume167:
-            case Item_Type.costume168:
-            case Item_Type.costume169:
-            case Item_Type.costume170:
-            case Item_Type.costume171:
-            case Item_Type.costume172:
-            case Item_Type.costume173:
-            case Item_Type.costume174:
-            case Item_Type.costume175:
-            case Item_Type.costume176:
-            case Item_Type.costume177:
-            case Item_Type.costume178:
-            case Item_Type.costume179:
-            case Item_Type.costume180:
-            case Item_Type.costume181:
-            case Item_Type.costume182:
-            case Item_Type.costume183:
-            case Item_Type.costume184:
-            case Item_Type.costume185:
-            case Item_Type.costume186:
-            case Item_Type.costume187:
-            case Item_Type.costume188:
-            case Item_Type.costume189:
-            case Item_Type.costume190:
-            case Item_Type.costume191:
-            case Item_Type.costume192:
-            case Item_Type.costume193:
-            case Item_Type.costume194:
-                string costumeKey = type.ToString();
-                passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
-                return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
-                break;
             case Item_Type.Songpyeon:
                 passParam.Add(GoodsTable.Songpyeon, ServerData.goodsTable.GetTableData(GoodsTable.Songpyeon).Value);
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
@@ -2196,11 +1815,30 @@ public static class ServerData
                 passParam.Add(type.ToString(), ServerData.petTable.TableDatas[type.ToString()].ConvertToString());
                 return TransactionValue.SetUpdate(PetServerTable.tableName, PetServerTable.Indate, passParam);
             default :
-                if (type.IsNorigaeItem())
+                if (type.IsCostumeItem())
+                {
+                    string costumeKey = type.ToString();
+                    passParam.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
+                    return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, passParam);
+                    break;
+                }
+                else if (type.IsNorigaeItem())
                 {
                     var magicBookKey = type.ToString();
                     passParam.Add(magicBookKey, ServerData.magicBookTable.TableDatas[magicBookKey].ConvertToString());
                     return TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, passParam);
+                }
+                else if (type.IsWeaponItem())
+                {
+                    var weaponKey = type.ToString();
+                    passParam.Add(weaponKey, ServerData.weaponTable.TableDatas[weaponKey].ConvertToString());
+                    return TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, passParam);
+                }
+                else if (type.IsGoodsItem())
+                {
+                    var key = type.ToString();
+                    passParam.Add(key, ServerData.goodsTable.GetTableData(key).Value);
+                    return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, passParam);
                 }
                 break;
         }
@@ -3212,13 +2850,6 @@ public static class ServerData
             case Item_Type.weapon40:
             case Item_Type.weapon41:
             case Item_Type.weapon42:
-            case Item_Type.weapon149:
-            case Item_Type.weapon151:
-            case Item_Type.weapon152:
-            case Item_Type.weapon153:
-            case Item_Type.weapon154:
-            case Item_Type.weapon155:
-            case Item_Type.weapon156:
             {
                 string key = type.ToString();
                 ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
@@ -3241,16 +2872,6 @@ public static class ServerData
             case Item_Type.magicBook9:
             case Item_Type.magicBook10:
             case Item_Type.magicBook11:
-            case Item_Type.magicBook120:
-            case Item_Type.magicBook121:
-            case Item_Type.magicBook122:
-            case Item_Type.magicBook123:
-            case Item_Type.magicBook124:
-            case Item_Type.magicBook125:
-            case Item_Type.magicBook126:
-            case Item_Type.magicBook127:
-            case Item_Type.magicBook128:
-            case Item_Type.magicBook129:
             {
                 string key = type.ToString();
                 ServerData.magicBookTable.TableDatas[key].hasItem.Value = 1;
@@ -3541,6 +3162,42 @@ public static class ServerData
                 return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
             }
                 break;
+        }
+        
+        if(type.IsNorigaeItem())
+        {
+            string key = type.ToString();
+            ServerData.magicBookTable.TableDatas[key].hasItem.Value = 1;
+            ServerData.magicBookTable.TableDatas[key].amount.Value += (int)amount;
+
+            param.Add(key, ServerData.magicBookTable.TableDatas[key].ConvertToString());
+
+            return TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, param);
+        }
+        else if(type.IsCostumeItem())
+        {
+            string costumeKey = type.ToString();
+            ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.Value = true;
+            param.Add(costumeKey, ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
+            return TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, param);
+        }
+        else if(type.IsWeaponItem())
+        {
+            string key = type.ToString();
+            ServerData.weaponTable.TableDatas[key].hasItem.Value = 1;
+            ServerData.weaponTable.TableDatas[key].amount.Value += (int)amount;
+
+            param.Add(key, ServerData.weaponTable.TableDatas[key].ConvertToString());
+
+            return TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, param);
+        }
+
+        else if(type.IsGoodsItem())
+        {
+            string key = type.ToString();
+            ServerData.goodsTable.GetTableData(key).Value += amount;
+            param.Add(key, ServerData.goodsTable.GetTableData(key).Value);
+            return TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, param);
         }
 
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 트랜젝션 타입 {type}", null);
@@ -4982,7 +4639,14 @@ public static class ServerData
                 case Item_Type.GuildReward:
                     ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += amount;
                     break;
+                default:
+                    if (type.IsGoodsItem())
+                    {
+                        ServerData.goodsTable.GetTableData(type.ToString()).Value += amount;
+                    }
+                    break;
             }
+            
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
 
