@@ -334,7 +334,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         ret.gumgi = int.Parse(splits[5]);
         ret.guildName = splits[6];
         ret.mask = int.Parse(splits[7]);
-        ret.level = int.Parse(splits[8]);
+        ret.level = (int)float.Parse(splits[8]);
         ret.platform = splits[9] == AndPlatformKey ? MatchingPlatform.And : MatchingPlatform.IOS;
 
         if (splits.Length >= 11)
