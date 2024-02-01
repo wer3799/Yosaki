@@ -67,7 +67,9 @@ public static class Utils
                type == Item_Type.magicBook116||
                type == Item_Type.magicBook120||
                type == Item_Type.magicBook123||
-               type == Item_Type.magicBook126
+               type == Item_Type.magicBook126||
+               type == Item_Type.magicBook128||
+               type == Item_Type.magicBook117
             ;
     }
 
