@@ -17,7 +17,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 ,
         CommonString.ItemGrade_21 , CommonString.ItemGrade_22 , CommonString.ItemGrade_23 , CommonString.ItemGrade_24, CommonString.ItemGrade_25,
         CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29, CommonString.ItemGrade_30,
-        CommonString.ItemGrade_31, };
+        CommonString.ItemGrade_31,CommonString.ItemGrade_32,CommonString.ItemGrade_33,CommonString.ItemGrade_34,CommonString.ItemGrade_35, };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
@@ -27,7 +27,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae, string.Empty, string.Empty,//16~20
         string.Empty, CommonString.ItemGrade_22_Norigae, string.Empty,CommonString.ItemGrade_24_Norigae ,string.Empty, //21~25,
         CommonString.ItemGrade_26_Norigae, CommonString.ItemGrade_27_Norigae,CommonString.ItemGrade_28_Norigae,CommonString.ItemGrade_29_Norigae,CommonString.ItemGrade_30_Norigae,
-        CommonString.ItemGrade_31_Norigae,
+        CommonString.ItemGrade_31_Norigae, string.Empty,string.Empty,CommonString.ItemGrade_34_Norigae,CommonString.ItemGrade_35_Norigae,
     }; 
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
@@ -188,6 +188,10 @@ public Sprite weapon155;
 public Sprite weapon156;
 public Sprite weapon157;
 public Sprite weapon158;
+public Sprite weapon159;
+public Sprite weapon160;
+public Sprite weapon161;
+public Sprite weapon162;
     
 [Header ("Weapon_View")]
 
@@ -349,6 +353,8 @@ public Sprite RecommendWeapon22;
     public Sprite magicBook129;
     public Sprite magicBook130;
     public Sprite magicBook131;
+    public Sprite magicBook132;
+    public Sprite magicBook133;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -478,6 +484,7 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill16;
     public Sprite VisionSkill17;
     public Sprite VisionSkill18;
+    public Sprite VisionSkill19;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -593,6 +600,7 @@ public Sprite RecommendWeapon22;
     public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
     [FormerlySerializedAs("MurimTreasure")] public Sprite MRT;
+    public Sprite DBT;
     public Sprite GuildTowerClearTicket;
     public Sprite GuildTowerHorn;
     public Sprite SinsuMarble;
@@ -1212,6 +1220,8 @@ public Sprite RecommendWeapon22;
                 return ChunguTreasure;  
             case Item_Type.MRT:
                 return MRT;   
+            case Item_Type.DBT:
+                return DBT;   
             case Item_Type.DosulGoods:
                 return DosulGoods;   
             case Item_Type.TransGoods:
@@ -1578,6 +1588,10 @@ public Sprite RecommendWeapon22;
                 return magicBook130;
             case Item_Type.magicBook131:
                 return magicBook131;
+            case Item_Type.magicBook132:
+                return magicBook132;
+            case Item_Type.magicBook133:
+                return magicBook133;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2060,6 +2074,8 @@ public Sprite RecommendWeapon22;
                 return VisionSkill17;
             case Item_Type.VisionSkill18:
                 return VisionSkill18;
+            case Item_Type.VisionSkill19:
+                return VisionSkill19;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2359,6 +2375,14 @@ public Sprite RecommendWeapon22;
                 return weapon157;
             case Item_Type.weapon158:
                 return weapon158;
+            case Item_Type.weapon159:
+                return weapon159;
+            case Item_Type.weapon160:
+                return weapon160;
+            case Item_Type.weapon161:
+                return weapon161;
+            case Item_Type.weapon162:
+                return weapon162;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

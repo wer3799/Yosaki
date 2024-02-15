@@ -179,6 +179,7 @@ public class GoodsTable
     public static string VisionSkill16 = "VisionSkill16";
     public static string VisionSkill17 = "VisionSkill17";
     public static string VisionSkill18 = "VisionSkill18";
+    public static string VisionSkill19 = "VisionSkill19";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -304,6 +305,7 @@ public class GoodsTable
     public static string SC = "SC";
     public static string SB = "SB";
     public static string MRT = "MRT";
+    public static string DBT = "DBT";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -464,6 +466,7 @@ public class GoodsTable
         { VisionSkill16, 0f },
         { VisionSkill17, 0f },
         { VisionSkill18, 0f },
+        { VisionSkill19, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -585,6 +588,7 @@ public class GoodsTable
         { SC, GameBalance.SinsuClearDailyGetAmount },
         { SB, 0f},
         { MRT, 0f},
+        { DBT, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

@@ -159,7 +159,7 @@ public class UiMunHaDisPatchBoard : MonoBehaviour
         {
            
             
-            TimeSpan timeRemaining = targetTime - Utils.GetBackendServerTime();      
+         TimeSpan timeRemaining = targetTime - Utils.GetBackendServerTime();          
          //남은시간있음
             if (timeRemaining.TotalSeconds > 0)
             {

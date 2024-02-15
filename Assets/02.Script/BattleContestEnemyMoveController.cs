@@ -198,7 +198,7 @@ public class BattleContestEnemyMoveController : EnemyMoveBase
             FollowPlayer();
             WhenDirectionChanged(moveDirectionType.Value);
 
-            Debug.LogError($"state : {moveState}");
+            //Debug.LogError($"state : {moveState}");
             
             switch (e)
             {

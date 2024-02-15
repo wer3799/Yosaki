@@ -32,9 +32,16 @@ public class UiFoxTowerBoard : MonoBehaviour
     [SerializeField]
     private TMP_InputField instantClearNum;
 
+    [SerializeField]
+    private Toggle towerAutoMode;
+    private bool initialized = false;
     private void Start()
     {
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+        
         startObject.SetActive(true);
+        
+        initialized = true;
     }
 
     void OnEnable()
@@ -211,7 +218,17 @@ public class UiFoxTowerBoard : MonoBehaviour
                 });
         }, null);
      }
-    
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
+    }
     #if UNITY_EDITOR
     private void Update()
     {

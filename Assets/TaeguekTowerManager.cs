@@ -144,9 +144,7 @@ public class TaeguekTowerManager : ContentsManagerBase
         //
         if(SettingData.towerAutoMode.Value>0)
         {
-            
             StartCoroutine(StartAutoStart());
-            
         }
     }
     private readonly WaitForSeconds toNextStage = new WaitForSeconds(2f);

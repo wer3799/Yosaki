@@ -55,6 +55,10 @@ public static class CommonString
     public static string ItemGrade_29 = "현상";
     public static string ItemGrade_30 = "용인";
     public static string ItemGrade_31 = "용궁";
+    public static string ItemGrade_32 = "???";
+    public static string ItemGrade_33 = "???";
+    public static string ItemGrade_34 = "극락";
+    public static string ItemGrade_35 = "무림";
     public static string ItemGrade_5_Norigae = "신물";
     public static string ItemGrade_6_Norigae = "영물";
     public static string ItemGrade_7_Norigae = "영물";
@@ -72,6 +76,8 @@ public static class CommonString
     public static string ItemGrade_29_Norigae = "현상";
     public static string ItemGrade_30_Norigae = "용인";
     public static string ItemGrade_31_Norigae = "용궁";
+    public static string ItemGrade_34_Norigae = "극락";
+    public static string ItemGrade_35_Norigae = "무림";
 
     public static string ItemGrade_4_Skill = "주작";
     public static string ItemGrade_5_Skill = "청룡";
@@ -315,6 +321,7 @@ public static class CommonString
             case Item_Type.VisionSkill16: return "궁극 기술17";
             case Item_Type.VisionSkill17: return "궁극 기술18";
             case Item_Type.VisionSkill18: return "궁극 기술19";
+            case Item_Type.VisionSkill19: return "궁극 기술20";
             case Item_Type.ThiefSkill0: return "도적 기술1";
             case Item_Type.ThiefSkill1: return "도적 기술2";
             case Item_Type.ThiefSkill2: return "도적 기술3";
@@ -471,6 +478,7 @@ public static class CommonString
             case Item_Type.TaeguekElixir: return "태극 영약";
             case Item_Type.SuhoTreasure: return "수호 구슬";
             case Item_Type.MRT: return "무공 비급";
+            case Item_Type.DBT: return "무림 구슬";
             case Item_Type.TransClearTicket: return "초월석 소탕권";
             case Item_Type.Event_SA: return "2주년 도토리";
             case Item_Type.EventDice: return "이벤트 주사위";
@@ -734,6 +742,10 @@ public static class CommonString
                 return "협동 베기(%)";
             case StatusType.SuperCritical32DamPer:
                 return "극락 베기(%)";
+            case StatusType.SuperCritical33DamPer:
+                return "극혈 베기(%)";
+            case StatusType.SuperCritical34DamPer:
+                return "무림 베기(%)";
             case StatusType.BigiDamPer:
                 return "비기 추가 피해량 증가(%)";
             case StatusType.SealSwordDam:

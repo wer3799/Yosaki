@@ -158,7 +158,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public void GetRankerList(string uuid, int count, Backend.BackendCallback callback)
     {
-        Debug.LogError("랭크서버 호출");
+        //Debug.LogError("랭크서버 호출");
         UiRankView.rank1Count = 0;
         Backend.URank.User.GetRankList(uuid, count, callback);
     }

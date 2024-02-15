@@ -20,6 +20,15 @@ public class UiDarkTowerBoard : MonoBehaviour
     [SerializeField]
     private GameObject allClearRoot;
 
+    [SerializeField]
+    private Toggle towerAutoMode;
+    private bool initialized = false;
+    private void Start()
+    {
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+        
+        initialized = true;
+    }
     void OnEnable()
     {
         SetStageText();
@@ -88,5 +97,16 @@ public class UiDarkTowerBoard : MonoBehaviour
             GameManager.Instance.LoadContents(GameManager.ContentsType.DarkTower);
 
         }, () => { });
+    }
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 using BackEnd;
 using LitJson;
 using System;
+using System.Linq;
 using UniRx;
 
 public class SuhoSuhoPetServerData
@@ -184,7 +185,6 @@ public class SuhoAnimalServerTable
 
         return lastIdx;
     }
-
     public int GetSuhoAnimalAwakeSkillIdx()
     {
         int ret = -1;

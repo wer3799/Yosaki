@@ -244,7 +244,7 @@ public class UiEventMission1ShopCell : MonoBehaviour
     }
     private bool IsPassWeaponItem()
     {
-        return ((Item_Type)tableData.Itemtype).IsPassWeaponItem();
+        return ((Item_Type)tableData.Itemtype).IsWeaponItem();
     }
 
     private Coroutine syncRoutine;

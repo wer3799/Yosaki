@@ -241,9 +241,7 @@ namespace UnityQuickSheet
                 // collect non-changed column headers
                 var exist = titleList.Select(t => GetColumnHeaderString(t))
                     .Where(e => headerDic.ContainsKey(e) == true)
-                    .Select(t => new ColumnHeader { name = t, type = headerDic[t].type, isArray = headerDic[t].isArray, OrderNO = headerDic[t].OrderNO });
-
-                
+                    .Select(t => new ColumnHeader { name = t, type = headerDic[t].type, isArray = headerDic[t].isArray, OrderNO = titleList.IndexOf(t) });                
                 // collect newly added or changed column headers
                 var changed = titleList.Select(t => GetColumnHeaderString(t))
                     .Where(e => headerDic.ContainsKey(e) == false)

@@ -486,7 +486,7 @@ public class UiMileageRefund : MonoBehaviour
             ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value = string.Empty;
             ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value = string.Empty;
             //할로윈 출석일수 초기화
-            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value = 0;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value = 1;
             
             //할로윈 출석 보상 초기화
             ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event1AttendFree].Value = string.Empty;
@@ -1149,8 +1149,6 @@ public class UiMileageRefund : MonoBehaviour
             });
         }
         
-        #endregion
-
         //1/17  업데이트
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 53)
         {
@@ -1216,6 +1214,82 @@ public class UiMileageRefund : MonoBehaviour
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
 
+            });
+        }
+        //2/2 핫픽스
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 54)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 54;
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            var stringId = "p47";
+            
+            var reward = ServerData.suhoAnimalServerTable.TableDatas[stringId].rewardedItem.Value;
+
+            var rewardString = "#4";
+            
+            if (reward.Contains(rewardString))
+            {
+                Param suhoPetParam = new Param();
+
+                ServerData.suhoAnimalServerTable.TableDatas[stringId].rewardedItem.Value = ServerData.suhoAnimalServerTable.TableDatas[stringId].rewardedItem.Value.Replace(rewardString, "");
+                suhoPetParam.Add(stringId, ServerData.suhoAnimalServerTable.TableDatas[stringId].ConvertToString());
+                transactions.Add(TransactionValue.SetUpdate(SuhoAnimalServerTable.tableName, SuhoAnimalServerTable.Indate, suhoPetParam));
+                
+                var refund = Mathf.Max(ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value - 5, 0);
+                
+                ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value = refund;
+                Param goodsParam = new Param();
+                goodsParam.Add(GoodsTable.SuhoPetFeedClear, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value);
+                transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            }
+            //없는 경우
+            else
+            {
+                
+            }
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+
+            });
+        }
+        #endregion
+
+        //2/16
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 55)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            Param passParam = new Param();
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 55;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+
+            
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";
+            
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            
+            passParam.Add(ChildPassServerTable.childFree, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+            passParam.Add(ChildPassServerTable.childAd, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            
             });
         }
     }

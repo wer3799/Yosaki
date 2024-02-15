@@ -52,6 +52,7 @@ public class UiContentsPopup2 : MonoBehaviour
         BlackFoxBoard,
         DragonPalaceBoard,
         MurimBoard,
+        DifficultyBossBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -99,6 +100,7 @@ public class UiContentsPopup2 : MonoBehaviour
         Chungu,
         NewBoss,
         SuhoBoss,
+        DifficultyBoss,
         
     }
     //삼천세계 
@@ -441,7 +443,13 @@ public class UiContentsPopup2 : MonoBehaviour
                         
                     case 215:
                     case 216:
+                    case 217:
                         lastBoards[(int)ContentsBoard.MurimBoard].SetActive(true);
+                        break;
+                    case 218:
+                    case 219:
+                    case 220:
+                        lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                         
                 }
@@ -764,6 +772,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newBossDoors[(int)BossChallengeDoor.SuhoBoss].SetActive(e == 1);
             oldBossDoors[(int)BossChallengeDoor.SuhoBoss].SetActive(e == 1);
+        }).AddTo(this);;
+        SettingData.showDifficultyBossUi.AsObservable().Subscribe(e =>
+        {
+            newBossDoors[(int)BossChallengeDoor.DifficultyBoss].SetActive(e == 1);
+            oldBossDoors[(int)BossChallengeDoor.DifficultyBoss].SetActive(e == 1);
         }).AddTo(this);;
         
         ///////삼천세계

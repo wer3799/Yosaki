@@ -333,6 +333,11 @@ public enum Item_Type
     weapon157 = 1043, //무림
     weapon158 = 1044, //무림
     
+    weapon159 = 1045, //극락
+    weapon160 = 1046, //보스도전
+    weapon161 = 1047, //보스도전
+    weapon162 = 1048, //보스도전
+    
     weapon_end = 1200,
     //
 
@@ -591,6 +596,10 @@ public enum Item_Type
     costume196 = 1496, //무림
     costume197 = 1497, //패키지외형
     costume198 = 1498, //패키지외형
+    costume199 = 1499, //무림
+    costume200 = 1500, //보스도전
+    costume201 = 1501, //보스도전
+    costume202 = 1502, //월간훈련
 
     costume_end=1999,
 
@@ -609,6 +618,9 @@ public enum Item_Type
     magicBook11 = 2011,
     magicBook130 = 2012,//무림
     magicBook131 = 2013,//무림
+    
+    magicBook132 = 2014,//무림
+    magicBook133 = 2015,//3월 월간
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -938,6 +950,7 @@ public enum Item_Type
     pet57 = 7705, //패스펫
     pet58 = 7706, //패스펫
 
+    pet_end = 7999,
     RecommendWeapon0 = 8000,
     RecommendWeapon1 = 8001,
     RecommendWeapon2 = 8002,
@@ -1143,12 +1156,14 @@ public enum Item_Type
     SB = 9064,
     
     //Treasure=10001~10100
-    MRT=10001,
+    MRT=10001, //무림유물
+    DBT=10002, //무림유물
     Treasure_End=10100,
     
     //VisionSkill=10001~10100
     VisionSkill17=10101,
     VisionSkill18=10102,
+    VisionSkill19=10103,
     VisionSkill_End=10200,
 }
 //

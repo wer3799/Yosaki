@@ -265,6 +265,10 @@ public class AgentHpController : MonoBehaviour
         value += value * PlayerStats.GetSuperCritical31DamPer();
         //무림피해
         value += value * PlayerStats.GetSuperCritical32DamPer();
+        //극혈피해
+        value += value * PlayerStats.GetSuperCritical33DamPer();
+        //??피해
+        value += value * PlayerStats.GetSuperCritical34DamPer();
     }
 
     private Vector3 damTextspawnPos;

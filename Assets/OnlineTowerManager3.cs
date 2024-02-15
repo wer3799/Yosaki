@@ -41,6 +41,8 @@ public class OnlineTowerManager3 : ContentsManagerBase
     [SerializeField]
     private GameObject bossSpawnEffectObject;
 
+    [SerializeField] private GameObject guildHelpButton;
+    
     private enum BossLevel
     {
         firstBoss, wait, final
@@ -80,6 +82,8 @@ public class OnlineTowerManager3 : ContentsManagerBase
 
     private Coroutine sendScoreRoutine;
 
+    [SerializeField] private GameObject loadingMask;
+    
     public bool allPlayerEnd { get; private set; } = false;
 
 
@@ -147,9 +151,12 @@ public class OnlineTowerManager3 : ContentsManagerBase
 
         PartyRaidManager.Instance.NetworkManager.middleBossClearCount.AsObservable().Subscribe(e =>
         {
-
+            if (PartyRaidManager.Instance.NetworkManager.RoomPlayerDatas.Count==1)
+            {
+                guildHelpButton.SetActive(e == 1);
+            }
             //최종보스 시작
-            if (e == 2)
+            else if (e == 2)
             {
                 StartCoroutine(StartFinalBoss());
             }
@@ -609,13 +616,13 @@ public class OnlineTowerManager3 : ContentsManagerBase
     private List<RewardData> rewardDatas;
 
     private bool rewarded = false;
+    private string bossKey = "b91";
 
     private void SetClear()
     {
         PopupManager.Instance.ShowAlarmMessage("클리어!!");
         Debug.LogError("클리어!!");
 
-        string bossKey = "b91";
 
         var serverData = ServerData.bossServerTable.TableDatas[bossKey];
 
@@ -650,5 +657,121 @@ public class OnlineTowerManager3 : ContentsManagerBase
     public void WhenDirectionAnimEnd()
     {
         direciontEnd = true;
+    }
+
+    public void OnClickGuildHelpButton()
+    {
+        //길드가없으면
+        if (GuildManager.Instance.hasGuild.Value == false) 
+        {
+            PopupManager.Instance.ShowAlarmMessage("혼자 입장 시 문파가 없으면 입장할 수 없습니다.");
+            
+            return;
+        }
+        
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,"<size=40>문파 - 대산군에 등록된 점수에 따라 단계를 클리어할 수 있습니다.\n단계를 클리어 하시겠습니까?</size>",YesCallBack,NoCallBack);
+    }
+
+    private void YesCallBack()
+    {
+
+
+        
+        Backend.Social.Guild.GetMyGuildGoodsV3((guildInfoBro) =>
+        {
+            if (guildInfoBro.IsSuccess())
+            {
+                var returnValue = guildInfoBro.GetReturnValuetoJSON();
+
+                int currentScore = int.Parse(returnValue["goods"]["totalGoods7Amount"]["N"].ToString());
+
+                //
+                var sangoonData = ServerData.bossServerTable.TableDatas["b73"];
+                var shadowData = ServerData.bossServerTable.TableDatas[bossKey];
+
+                sangoonData.score.Value = currentScore.ToString();
+
+                ServerData.bossServerTable.UpdateData("b73");
+
+                var tableData = TableManager.Instance.TwelveBossTable.dataArray[73];
+                var scoreData = TableManager.Instance.TwelveBossTable.dataArray[74];
+
+                var idx = -1;
+                for (int i = 0; i < tableData.Rewardcut.Length; i++)
+                {
+                    if ((int)tableData.Rewardcut[i] == int.Parse(sangoonData.score.Value))
+                    {
+                        idx = i;
+                        break;
+                    }
+                }
+
+                if (idx < 0)
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "등록된 대산군 점수가 없습니다. ", LoadNormalField);
+                    return;
+                }
+
+                var guildDamage = scoreData.Rewardcut[idx] / GameBalance.shadowCaveGuildScoreDevideValue;
+                
+                int currentStage = PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor2;
+
+                var cave = TableManager.Instance.twoCave.dataArray[currentStage];
+                Debug.LogError($"Require : {cave.Lastbosshp}\ndamage : {guildDamage}");
+                //클리어
+                if (cave.Lastbosshp<=guildDamage)
+                {
+                    currentStage++;
+                    
+                    if (string.IsNullOrEmpty(shadowData.score.Value) == false)
+                    {
+                        if (currentStage <= int.Parse(shadowData.score.Value))
+                        {
+                            //본인 원래 점수가 스테이지보다 큰 경우
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"이미 클리어한 스테이지입니다!", LoadNormalField);
+                        }
+                        else
+                        {
+                            shadowData.score.Value = currentStage.ToString();
+
+                            ServerData.bossServerTable.UpdateData(bossKey);
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 : { currentStage.ToString()} 등록 완료", LoadNormalField);
+                        }
+                    }
+                    else
+                    {
+                        shadowData.score.Value = currentStage.ToString();
+
+                        ServerData.bossServerTable.UpdateData(bossKey);
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"점수 : { currentStage.ToString()} 등록 완료", LoadNormalField);
+                    }
+                }
+                else
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,"등록된 대산군 점수가 부족합니다.", LoadNormalField);
+                }
+                    
+                //
+            }
+            else
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "점수 갱신 실패", null);
+            }
+
+            loadingMask.SetActive(false);
+            // 이후 처리
+        });   
+    }
+    
+    private void NoCallBack()
+    {
+        
+    }
+
+    private void LoadNormalField()
+    {
+        PartyRaidManager.Instance.OnClickCloseButton();
+
+        GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField);    
     }
 }

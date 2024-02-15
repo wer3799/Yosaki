@@ -32,7 +32,11 @@ public class SuhoPetUpgradeBoard : MonoBehaviour
     private UiAnimalView SuhoPetView;
 
     private int currentIdx = -1;
+    [SerializeField] private GameObject transBeforeObject;
+    [SerializeField] private GameObject transAfterObject;
+    
 
+    [SerializeField] private TextMeshProUGUI transDesc;
     private void Awake()
     {
         oneClickCost.SetText($"{Utils.ConvertNum(GameBalance.GetSuhoPetUpgradePrice)}");
@@ -57,11 +61,19 @@ public class SuhoPetUpgradeBoard : MonoBehaviour
         var tableData = TableManager.Instance.suhoPetTable.dataArray[lastPetId];
 
         SuhoPetView.Initialize(tableData);
+        
+        transDesc.SetText($"(각성으로 효율 {GameBalance.suhoGraduateValue}배 증가)");
     }
 
     private void Subscribe()
     {
         ServerData.statusTable.GetTableData(StatusTable.SuhoEnhance_Level).AsObservable().Subscribe(e => { UpdateByCurrentId(); }).AddTo(this);
+        
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.suhoUpgradeGraduateIdx).AsObservable().Subscribe(e =>
+        {
+            transBeforeObject.SetActive(e < 1);
+            transAfterObject.SetActive(e >= 1);
+        }).AddTo(this);
     }
 
     private bool CheckHasRequire()
@@ -91,6 +103,7 @@ public class SuhoPetUpgradeBoard : MonoBehaviour
         requireText.SetText($"강화 {tableData.Require} 필요");
 
         string description = string.Empty;
+
 
         float abilValue0 = PlayerStats.GetSuhoUpgradeAbilValue(currentIdx);
 
@@ -315,5 +328,37 @@ public class SuhoPetUpgradeBoard : MonoBehaviour
                             $"소탕 완료!\n{CommonString.GetItemName(Item_Type.SuhoPetFeed)} {Utils.ConvertNum(instanClearGetNum+(instanClearGetNum * PlayerStats.GetSuhoGainValue()))}개 획득!", null);
                     });
             }, null);
+    }
+
+    private string suhoKingId = "p47";
+    public void OnClickTransButton()
+    {
+        if (ServerData.suhoAnimalServerTable.TableDatas[suhoKingId].hasItem.Value <1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"수호왕 획득 시 각성 가능!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                "수호 보주를 각성하려면 수호왕을 획득해야 합니다.\n" +
+                $"각성 시 수호 보주 강화 수치가 1.5배 증가합니다.\n" +
+                $"각성 하시겠습니까?", () =>
+                {
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.suhoUpgradeGraduateIdx].Value = 1;
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+                    
+                    Param userInfo2Param = new Param();
+                    userInfo2Param.Add(UserInfoTable_2.suhoUpgradeGraduateIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.suhoUpgradeGraduateIdx].Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName,UserInfoTable_2.Indate,userInfo2Param));
+                    
+                    ServerData.SendTransaction(transactions,successCallBack: () =>
+                    {
+                        UpdateByCurrentId();
+                    });
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+              
+                    
+                }, null);
+        }
     }
 }

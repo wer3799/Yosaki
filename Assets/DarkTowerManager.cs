@@ -146,8 +146,25 @@ public class DarkTowerManager : ContentsManagerBase
         uiInfinityTowerResult.gameObject.SetActive(true);
         uiInfinityTowerResult.Initialize((ContentsState)(int)contentsState.Value, rewardDatas);
         //
+        if(SettingData.towerAutoMode.Value>0)
+        {
+            
+            StartCoroutine(StartAutoStart());
+            
+        }
     }
-
+    private readonly WaitForSeconds toNextStage = new WaitForSeconds(2f);
+    private IEnumerator StartAutoStart()
+    {
+        yield return toNextStage;
+        if (contentsState.Value == (int)ContentsState.Clear)
+        {
+            GameManager.Instance.LoadContents((ServerData.userInfoTable.GetTableData(UserInfoTable.DarkTowerIdx).Value >=
+                                               TableManager.Instance.DarkTowerTable.dataArray.Length) == false
+                ? GameManager.contentsType
+                : GameManager.ContentsType.NormalField);
+        }
+    }
     private IEnumerator ContentsRoutine()
     {
         yield return null;

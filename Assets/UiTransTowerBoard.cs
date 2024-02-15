@@ -31,10 +31,15 @@ public class UiTransTowerBoard : MonoBehaviour
 
     [SerializeField]
     private TMP_InputField instantClearNum;
-
+    [SerializeField]
+    private Toggle towerAutoMode;
+    private bool initialized = false;
     private void Start()
     {
         startObject.SetActive(true);
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+        
+        initialized = true;
     }
 
     void OnEnable()
@@ -202,7 +207,17 @@ public class UiTransTowerBoard : MonoBehaviour
                 });
         }, null);
      }
-    
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
+    }
     #if UNITY_EDITOR
     private void Update()
     {

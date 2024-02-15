@@ -82,6 +82,7 @@ public class StatusTable
     public const string Sin_StatPoint = "Sin_StatPoint";
     public const string Hyung_StatPoint = "Hyung_StatPoint";
     public const string Chungu_StatPoint = "Chungu_StatPoint";
+    public const string Difficulty_StatPoint = "Difficulty_StatPoint";
 
 
     public const string Skill0_AddValue = "Sk0_Add";
@@ -157,6 +158,7 @@ public class StatusTable
         { Sin_StatPoint, 0 },
         { Hyung_StatPoint, 0 },
         { Chungu_StatPoint, 0 },
+        { Difficulty_StatPoint, 0 },
         
         { Skill0_AddValue, 0 },
         { Skill1_AddValue, 0 },
@@ -319,6 +321,11 @@ public class StatusTable
                 case Chungu_StatPoint:
                     {
                         return level * GameBalance.Stat_Chungu_Slash;
+                    }
+                    break;
+                case Difficulty_StatPoint:
+                    {
+                        return level * GameBalance.Stat_Difficulty_Slash;
                     }
                     break;
 

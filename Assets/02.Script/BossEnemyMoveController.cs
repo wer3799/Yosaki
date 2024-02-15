@@ -133,6 +133,30 @@ public class BossEnemyMoveController : MonoBehaviour
                 moveDelay = 0.3f; // 이동
                 attack1Delay = 1f; // 공격
                 break;
+            case 217:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1.3f; // 공격
+                break;
+            case 218:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1f; // 공격
+                break;
+            case 219:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1f; //
+                break;
+            case 220:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1f; // 공격
+                break;
             default:
                 moveSpeed = 20f; //이동속도
                 idleDelay = 0.5f; // 정지 

@@ -200,7 +200,7 @@ public class UiHotTimeShopCell : MonoBehaviour
     }
     private bool IsPassWeaponItem()
     {
-        return ((Item_Type)tableData.Itemtype).IsPassWeaponItem();
+        return ((Item_Type)tableData.Itemtype).IsWeaponItem();
     }
 
     private Coroutine syncRoutine;

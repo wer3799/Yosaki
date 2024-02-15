@@ -108,7 +108,7 @@ public class UiMonthPassAttendSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -123,7 +123,7 @@ public class UiMonthPassAttendSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -155,7 +155,7 @@ public class UiMonthPassAttendSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -178,7 +178,7 @@ public class UiMonthPassAttendSystem2 : MonoBehaviour
                     hasCostumeItem = true;
                     break;
                 }
-                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;

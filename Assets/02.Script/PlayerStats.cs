@@ -131,7 +131,9 @@ public enum StatusType
     SuperCritical31DamPer,//협동피해(%)
     EnhanceSP,//검기 능력치 효과(%)
     SuperCritical32DamPer,//무림피해(%)
-    SasinsuGoodsGainPer,//무림피해(%)
+    SasinsuGoodsGainPer,
+    SuperCritical33DamPer,//극혈 피해(%)
+    SuperCritical34DamPer,//보스 피해(%)
 
 }
 
@@ -191,6 +193,8 @@ public static class PlayerStats
         double sinpower = GetSuperCritical30DamPer();
         double munha = GetSuperCritical31DamPer();
         double murim = GetSuperCritical32DamPer();
+        double hyul = GetSuperCritical33DamPer();
+        double df = GetSuperCritical34DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -238,6 +242,8 @@ public static class PlayerStats
         totalPower += (totalPower * sinpower);
         totalPower += (totalPower * munha);
         totalPower += (totalPower * murim);
+        totalPower += (totalPower * hyul);
+        totalPower += (totalPower * df);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -1632,6 +1638,7 @@ public static class PlayerStats
         return ret;
     }
 
+
     public static float GetSuperCritical2DamPer()
     {
         float ret = 0f;
@@ -1762,6 +1769,30 @@ public static class PlayerStats
 
         return ret;
     }
+    //신수베기
+    public static float GetSuperCritical6DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetPetHomeAbilValue(StatusType.SuperCritical6DamPer);
+
+        ret += GetSasinsuStarAddValue();
+
+        ret += GetFoxCupAbilValue(GetCurrentFoxCupIdx(), 1);
+
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical6DamPer);
+
+        ret += GetSinsuTreasureAbilPlusValue();
+
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Sin_StatPoint);
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical6DamPer);
+        
+        ret += GetMeditationAbilValue(StatusType.SuperCritical6DamPer);
+
+        return ret * (1 + GetEnhanceSinsuCritical());
+    }
+
 
     //수미베기
     public static float GetSuperCritical7DamPer()
@@ -1822,84 +1853,6 @@ public static class PlayerStats
 
         return ret;
     }
-    public static float SuperCritical8AddDam()
-    {
-        float ret = 0f;
-
-        
-        ret += GetDanjeonAbilValue(StatusType.SuperCritical8AddDam);
-        
-        return ret;
-    }
-
-    private static float GetNewLowGyungRockAwakeAbilValue()
-    {
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower4).Value >= 10)
-        {
-            return GameBalance.newLowGyungRockAwakeValue;
-        }
-        else
-        {
-            return 0f;
-        }
-    }
-    private static float GetNewMiddleGyungRockAwakeAbilValue()
-    {
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower5).Value >= 10)
-        {
-            return GameBalance.newMiddleGyungRockAwakeValue;
-        }
-        else
-        {
-            return 0f;
-        }
-    }
-
-    private static float GetNewTopGyungRockAwakeAbilValue()
-    {
-        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower6).Value >= 10)
-        {
-            return GameBalance.newTopGyungRockAwakeValue;
-        }
-        else
-        {
-            return 0f;
-        }
-    }
-
-    //중단전베기
-    public static float GetSuperCritical13DamPer()
-    {
-        float ret = 0f;
-
-        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer);
-
-        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * GetGuildTowerChimUpgradeValue();
-        
-        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * SuperCritical13AddDam();
-
-        ret += GetPassiveSkillValue(StatusType.SuperCritical13DamPer);
-        
-        ret += GetNewMiddleGyungRockAwakeAbilValue();
-        
-        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer);
-
-        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer) * GetGuildTowerChimUpgradeValue();
-        
-        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer) * SuperCritical8AddDam();
-
-        return ret;
-    }
-    
-    public static float SuperCritical13AddDam()
-    {
-        float ret = 0f;
-
-        
-        ret += GetDanjeonAbilValue(StatusType.SuperCritical13AddDam);
-        
-        return ret;
-    }
     //흉수베기
     public static float GetSuperCritical9DamPer()
     {
@@ -1948,6 +1901,41 @@ public static class PlayerStats
         
         return ret;
     }
+    private static float superCritical11Value = -1;
+
+    public static void ResetSuperCritical11CalculatedValue()
+    {
+        superCritical11Value = -1;
+    }
+
+    //수호베기
+    public static float GetSuperCritical11DamPer()
+    {
+        if (superCritical11Value == -1)
+        {
+            superCritical11Value = 0;
+
+            var tableData = TableManager.Instance.suhoPetTable.dataArray;
+
+            for (int i = 0; i < tableData.Length; i++)
+            {
+                var serverData = ServerData.suhoAnimalServerTable.TableDatas[tableData[i].Stringid];
+
+                if (serverData.hasItem.Value == 0) continue;
+
+                int currentLevel = serverData.level.Value;
+
+                superCritical11Value += tableData[i].Abilvalue[currentLevel];
+            }
+            superCritical11Value += GetGuimoonHasEffect1(StatusType.SuperCritical11DamPer);
+            superCritical11Value += GetSuhoUpgradeAbilValue(GetCurrentSuhoUpgradeIdx());
+        }
+
+        //막아둠일단
+        //return 0f;
+
+        return superCritical11Value * (1 + GetEnhanceSuhoCritical());
+    }
 
     //심연베기
     public static float GetSuperCritical12DamPer()
@@ -1977,6 +1965,31 @@ public static class PlayerStats
         
         return ret;
     }
+
+    //중단전베기
+    public static float GetSuperCritical13DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer);
+
+        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * GetGuildTowerChimUpgradeValue();
+        
+        ret += GetGyungRockEffect2(StatusType.SuperCritical13DamPer) * SuperCritical13AddDam();
+
+        ret += GetPassiveSkillValue(StatusType.SuperCritical13DamPer);
+        
+        ret += GetNewMiddleGyungRockAwakeAbilValue();
+        
+        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer);
+
+        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer) * GetGuildTowerChimUpgradeValue();
+        
+        ret += GetGyungRockEffect5(StatusType.SuperCritical13DamPer) * SuperCritical13AddDam();
+
+        return ret;
+    }
+    
 
     //여우
     public static float GetSuperCritical14DamPer()
@@ -2029,72 +2042,6 @@ public static class PlayerStats
 
         return ret * (1 + GetEnhanceTaegeukCritical());
     }
-
-    //태극증폭
-    public static float GetEnhanceTaegeukCritical()
-    {
-        float ret = 0f;
-
-        ret += GetEnhanceTaegeukCriticalAbil(StatusType.EnhanceTaegeukCritical);
-
-        return ret;
-    }
-    //수호증폭
-    public static float GetEnhanceSuhoCritical()
-    {
-        float ret = 0f;
-
-        ret += GetSuhoTreasureAbilHasEffect();
-        
-        ret += GetSpecialTypeAbility(StatusType.EnhanceSuhoCritical);
-
-        return ret;
-    }
-    //신수증폭
-    public static float GetEnhanceSinsuCritical()
-    {
-        float ret = 0f;
-
-        ret += GetBlackFoxEffect(StatusType.EnhanceSinsuCritical);
-        
-        return ret;
-    }    
-    //흉수증폭
-    public static float GetEnhanceHyungsuCritical()
-    {
-        float ret = 0f;
-        
-        ret += GetBlackFoxEffect(StatusType.EnhanceHyungsuCritical);
-
-        return ret;
-    }   
-    //영혼증폭
-    public static float GetEnhanceSoulCritical()
-    {
-        float ret = 0f;
-
-        ret += GetBlackFoxEffect(StatusType.EnhanceSoulCritical);
-
-        return ret;
-    }    
-    //천구증폭
-    public static float GetEnhanceChunguCritical()
-    {
-        float ret = 0f;
-
-        ret += GetBlackFoxEffect(StatusType.EnhanceChunguCritical);
-
-        return ret;
-    }
-    //초월증폭
-    public static float GetEnhanceTransCritical()
-    {
-        float ret = 0f;
-
-        ret += GetBlackFoxEffect(StatusType.EnhanceTransCritical);
-
-        return ret;
-    }
     //영혼 베기
     public static float GetSuperCritical17DamPer()
     {
@@ -2115,6 +2062,29 @@ public static class PlayerStats
         return ret*(1+GetEnhanceSoulCritical());
     }
 
+    //상단전베기
+    public static float GetSuperCritical18DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer);
+
+        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer) * GetGuildTowerChimUpgradeValue();
+
+        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer) * SuperCritical18AddDam();
+
+        ret += GetPassiveSkillValue(StatusType.SuperCritical18DamPer);
+
+        ret += GetNewTopGyungRockAwakeAbilValue();
+        
+        ret += GetGyungRockEffect6(StatusType.SuperCritical18DamPer);
+
+        ret += GetGyungRockEffect6(StatusType.SuperCritical18DamPer) * GetGuildTowerChimUpgradeValue();
+        
+        ret += GetGyungRockEffect6(StatusType.SuperCritical18DamPer) * SuperCritical18AddDam();
+        
+        return ret;
+    }
     //귀살 베기
     public static float GetSuperCritical19DamPer()
     {
@@ -2292,6 +2262,8 @@ public static class PlayerStats
         float ret = 0f;
         
         ret += GetMunhaTower2Ability(StatusType.SuperCritical31DamPer);
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical31DamPer);
 
         return ret;
     }
@@ -2302,6 +2274,105 @@ public static class PlayerStats
         float ret = 0f;
         
         ret += GetMurimTreasureAbilHasEffect();
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical32DamPer);
+
+        return ret;
+    }
+    //극혈 피해
+    public static float GetSuperCritical33DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetGeukGyungRockAwakeAbilValue();
+        
+        ret += GetGyungRockEffect7(StatusType.SuperCritical33DamPer);
+
+        ret += GetGyungRockEffect7(StatusType.SuperCritical33DamPer) * GetGuildTowerChimUpgradeValue();
+
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical33DamPer);
+
+        return ret;
+    }
+    //?? 피해
+    public static float GetSuperCritical34DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetDifficultyBossTreasureAbilHasEffect();
+        
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Difficulty_StatPoint);
+
+        ret += GetWeaponHasPercentValue(StatusType.SuperCritical34DamPer);
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical34DamPer);
+
+        return ret;
+    }
+    
+
+    //태극증폭
+    public static float GetEnhanceTaegeukCritical()
+    {
+        float ret = 0f;
+
+        ret += GetEnhanceTaegeukCriticalAbil(StatusType.EnhanceTaegeukCritical);
+
+        return ret;
+    }
+    //수호증폭
+    public static float GetEnhanceSuhoCritical()
+    {
+        float ret = 0f;
+
+        ret += GetSuhoTreasureAbilHasEffect();
+        
+        ret += GetSpecialTypeAbility(StatusType.EnhanceSuhoCritical);
+
+        return ret;
+    }
+    //신수증폭
+    public static float GetEnhanceSinsuCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceSinsuCritical);
+        
+        return ret;
+    }    
+    //흉수증폭
+    public static float GetEnhanceHyungsuCritical()
+    {
+        float ret = 0f;
+        
+        ret += GetBlackFoxEffect(StatusType.EnhanceHyungsuCritical);
+
+        return ret;
+    }   
+    //영혼증폭
+    public static float GetEnhanceSoulCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceSoulCritical);
+
+        return ret;
+    }    
+    //천구증폭
+    public static float GetEnhanceChunguCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceChunguCritical);
+
+        return ret;
+    }
+    //초월증폭
+    public static float GetEnhanceTransCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceTransCritical);
 
         return ret;
     }
@@ -2345,6 +2416,8 @@ public static class PlayerStats
         
         ret += GetMunhaTowerAbility();
         
+        ret += GetGuimoonHasEffect1(StatusType.BigiDamPer);
+
         
         return ret;
     }
@@ -2390,66 +2463,7 @@ public static class PlayerStats
         return TableData.Abilvalue;
     }
 
-    private static float superCritical11Value = -1;
-
-    public static void ResetSuperCritical11CalculatedValue()
-    {
-        superCritical11Value = -1;
-    }
-
-    //수호베기
-    public static float GetSuperCritical11DamPer()
-    {
-        if (superCritical11Value == -1)
-        {
-            superCritical11Value = 0;
-
-            var tableData = TableManager.Instance.suhoPetTable.dataArray;
-
-            for (int i = 0; i < tableData.Length; i++)
-            {
-                var serverData = ServerData.suhoAnimalServerTable.TableDatas[tableData[i].Stringid];
-
-                if (serverData.hasItem.Value == 0) continue;
-
-                int currentLevel = serverData.level.Value;
-
-                superCritical11Value += tableData[i].Abilvalue[currentLevel];
-            }
-            superCritical11Value += GetGuimoonHasEffect1(StatusType.SuperCritical11DamPer);
-            superCritical11Value += GetSuhoUpgradeAbilValue(GetCurrentSuhoUpgradeIdx());
-        }
-
-        //막아둠일단
-        //return 0f;
-
-        return superCritical11Value * (1 + GetEnhanceSuhoCritical());
-    }
-
-    //신수베기
-    public static float GetSuperCritical6DamPer()
-    {
-        float ret = 0f;
-
-        ret += GetPetHomeAbilValue(StatusType.SuperCritical6DamPer);
-
-        ret += GetSasinsuStarAddValue();
-
-        ret += GetFoxCupAbilValue(GetCurrentFoxCupIdx(), 1);
-
-        ret += GetStageRelicHasEffect(StatusType.SuperCritical6DamPer);
-
-        ret += GetSinsuTreasureAbilPlusValue();
-
-        ret += ServerData.statusTable.GetStatusValue(StatusTable.Sin_StatPoint);
-        
-        ret += GetGuimoonHasEffect1(StatusType.SuperCritical6DamPer);
-        
-        ret += GetMeditationAbilValue(StatusType.SuperCritical6DamPer);
-
-        return ret * (1 + GetEnhanceSinsuCritical());
-    }
-
+   
     public static float GetHellMarkValue()
     {
         float ret = 0f;
@@ -3044,7 +3058,8 @@ public static class PlayerStats
     {
         return statustype != StatusType.Damdecrease && statustype != StatusType.SuperCritical1Prob &&
                statustype != StatusType.ExpGainPer&&
-               statustype != StatusType.SuperCritical24DamPer;
+               statustype != StatusType.SuperCritical24DamPer&&
+               statustype != StatusType.SuperCritical34DamPer;
     }
 
     public static float GetRelicHasEffect(StatusType statusType)
@@ -3492,6 +3507,11 @@ public static class PlayerStats
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 21399-2) return 0f;
 
         return ((int)ServerData.goodsTable.GetTableData(GoodsTable.MRT).Value * (GameBalance.murimTreasureAbilValue));
+    }
+
+    public static float GetDifficultyBossTreasureAbilHasEffect()
+    {
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DBT).Value * (GameBalance.difficultyBossTreasureAbilValue));
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -5975,7 +5995,12 @@ public static class PlayerStats
         //if (ServerData.userInfoTable.GetTableData(UserInfoTable.getRelicUpgrade).Value == 0) return 0f;
         if (idx == -1) return 0f;
 
-        return TableManager.Instance.SuhoUpgrade.dataArray[idx].Abilvalue;
+        var multipleValue = ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.suhoUpgradeGraduateIdx).Value > 0
+            ? GameBalance.suhoGraduateValue
+            : 1;
+ 
+        
+        return TableManager.Instance.SuhoUpgrade.dataArray[idx].Abilvalue * multipleValue;
     }
     public static float GetDragonBraceletAbilValue(int idx, int abilIdx)
     {
@@ -6812,40 +6837,9 @@ public static class PlayerStats
         return ServerData.goodsTable.TableDatas[GoodsTable.GuildTowerHorn].Value * GameBalance.GuildTowerChimAbilUpValue;
     }
 
-    //상단전베기
-    public static float GetSuperCritical18DamPer()
-    {
-        float ret = 0f;
-
-        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer);
-
-        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer) * GetGuildTowerChimUpgradeValue();
-
-        ret += GetGyungRockEffect3(StatusType.SuperCritical18DamPer) * SuperCritical18AddDam();
-
-        ret += GetPassiveSkillValue(StatusType.SuperCritical18DamPer);
-
-        ret += GetNewTopGyungRockAwakeAbilValue();
-        
-        ret += GetGyungRockEffect6(StatusType.SuperCritical18DamPer);
-
-        ret += GetGyungRockEffect6(StatusType.SuperCritical18DamPer) * GetGuildTowerChimUpgradeValue();
-        
-        ret += GetGyungRockEffect6(StatusType.SuperCritical18DamPer) * SuperCritical8AddDam();
-        
-        return ret;
-    }
 
     
-    public static float SuperCritical18AddDam()
-    {
-        float ret = 0f;
 
-        
-        ret += GetDanjeonAbilValue(StatusType.SuperCritical18AddDam);
-        
-        return ret;
-    }
     public static float GetGyungRockEffect3(StatusType statusType, int addLevel = 0)
     {
         float ret = 0f;
@@ -6924,6 +6918,29 @@ public static class PlayerStats
         var tableDatas = TableManager.Instance.gyungRockTowerTable6.dataArray;
 
         int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower6).Value;
+
+        if (currentLevel == 0)
+        {
+            return 0f;
+        }
+
+        for (int i = 0; i < currentLevel; i++)
+        {
+            if ((StatusType)tableDatas[i].Rewardtype == statusType)
+            {
+                ret += tableDatas[i].Rewardvalue;
+            }
+        }
+
+        return ret;
+    }    
+    public static float GetGyungRockEffect7(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.gyungRockTowerTable7.dataArray;
+
+        int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower7).Value;
 
         if (currentLevel == 0)
         {
@@ -7094,5 +7111,81 @@ public static class PlayerStats
         var tableData = TableManager.Instance.Title_Special.dataArray[idx];
 
         return tableData.Abilvalue;
+    }
+    
+
+    private static float GetNewLowGyungRockAwakeAbilValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower4).Value >= 10)
+        {
+            return GameBalance.newLowGyungRockAwakeValue;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+    private static float GetNewMiddleGyungRockAwakeAbilValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower5).Value >= 10)
+        {
+            return GameBalance.newMiddleGyungRockAwakeValue;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+    private static float GetNewTopGyungRockAwakeAbilValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower6).Value >= 10)
+        {
+            return GameBalance.newTopGyungRockAwakeValue;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+    private static float GetGeukGyungRockAwakeAbilValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower7).Value >= 10)
+        {
+            return GameBalance.newGeukGyungRockAwakeValue;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+    
+    
+    public static float SuperCritical8AddDam()
+    {
+        float ret = 0f;
+
+        
+        ret += GetDanjeonAbilValue(StatusType.SuperCritical8AddDam);
+        
+        return ret;
+    }
+    public static float SuperCritical13AddDam()
+    {
+        float ret = 0f;
+
+        
+        ret += GetDanjeonAbilValue(StatusType.SuperCritical13AddDam);
+        
+        return ret;
+    }
+    public static float SuperCritical18AddDam()
+    {
+        float ret = 0f;
+
+        
+        ret += GetDanjeonAbilValue(StatusType.SuperCritical18AddDam);
+        
+        return ret;
     }
 }

@@ -101,6 +101,7 @@ public class UiStatusBoard : MonoBehaviour
             ServerData.statusTable.GetTableData(StatusTable.Sin_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.Hyung_StatPoint).Value = 1;
             ServerData.statusTable.GetTableData(StatusTable.Chungu_StatPoint).Value = 1;
+            ServerData.statusTable.GetTableData(StatusTable.Difficulty_StatPoint).Value = 1;
           
             
             ServerData.statusTable.GetTableData(StatusTable.StatPoint).Value = (ServerData.statusTable.GetTableData(StatusTable.Level).Value - 1) * GameBalance.StatPoint;

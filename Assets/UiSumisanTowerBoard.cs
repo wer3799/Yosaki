@@ -16,7 +16,15 @@ public class UiSumisanTowerBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI currentCriticalText;
-
+    [SerializeField]
+    private Toggle towerAutoMode;
+    private bool initialized = false;
+    private void Start()
+    {
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+        
+        initialized = true;
+    }
     void OnEnable()
     {
         SetStageText();
@@ -120,5 +128,16 @@ public class UiSumisanTowerBoard : MonoBehaviour
             GameManager.Instance.LoadContents(GameManager.ContentsType.SumisanTower);
 
         }, () => { });
+    }
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
     }
 }

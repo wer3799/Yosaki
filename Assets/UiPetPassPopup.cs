@@ -214,8 +214,8 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
             var passNum = int.Parse(tableData[i].Shopid.Replace("petpass", ""));
             if (passNum > idx) break;
             if (passNum < idx) continue;
-            if(Utils.IsPassPetItem((Item_Type)tableData[i].Reward1))continue;
-            if(Utils.IsPassPetItem((Item_Type)tableData[i].Reward2))continue;
+            if(Utils.IsPetItem((Item_Type)tableData[i].Reward1))continue;
+            if(Utils.IsPetItem((Item_Type)tableData[i].Reward2))continue;
             
             Utils.AddOrUpdateReward(ref rewardItems,(Item_Type)tableData[i].Reward1,tableData[i].Reward1_Value);
             Utils.AddOrUpdateReward(ref rewardItems,(Item_Type)tableData[i].Reward2,tableData[i].Reward2_Value);

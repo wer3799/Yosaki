@@ -961,6 +961,8 @@ public class TableManager : SingletonMono<TableManager>
     public MurimTowerTable MurimTowerTable;
     public HonorReward HonorReward;
     public BingoEvent BingoEvent;
+    public TowerTable14 gyungRockTowerTable7;
+    public StudentPass StudentPass;
 }
 
 

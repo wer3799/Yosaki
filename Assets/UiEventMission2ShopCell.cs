@@ -263,11 +263,11 @@ public class UiEventMission2ShopCell : MonoBehaviour
     }
     private bool IsPassWeaponItem()
     {
-        return ((Item_Type)tableData.Itemtype).IsPassWeaponItem();
+        return ((Item_Type)tableData.Itemtype).IsWeaponItem();
     }
     private bool IsPassPetItem()
     {
-        return ((Item_Type)tableData.Itemtype).IsPassPetItem();
+        return ((Item_Type)tableData.Itemtype).IsPetItem();
     }
 
     private Coroutine syncRoutine;

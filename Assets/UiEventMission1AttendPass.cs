@@ -69,7 +69,7 @@ public class UiEventMission1AttendPass : FancyScrollView<PassData_Fancy>
                     break;
                 }
 
-                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -90,7 +90,7 @@ public class UiEventMission1AttendPass : FancyScrollView<PassData_Fancy>
                     break;
                 }
 
-                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BackEnd;
@@ -20,6 +21,69 @@ public class PassBuyButton : MonoBehaviour
     public static readonly string blackfoxPassKey = "blackfoxpass0";
     public static readonly string dosullevelPassKey = "dosullevelpass0";
     public static readonly string bimuPassKey = "bimupass0";
+    public static readonly string studentPassKey = "studentpass0";
+
+    
+    private enum PassKey 
+    {
+        None=-1,
+        Sasinsu,
+        Suho,
+        FoxFire,
+        SealSword,
+        Dosul,
+        BlackFox,
+        DosulLevel,
+        Bimu,
+        Student
+    }
+
+    [SerializeField] private PassKey passKey = PassKey.None;
+
+    protected void Start()
+    {
+        if (passKey != PassKey.None)
+        {
+            var key = string.Empty; 
+            switch (passKey)
+            {
+                case PassKey.None:
+                    key = sasinsuPassKey;
+                    break;
+                case PassKey.Sasinsu:
+                    key = sasinsuPassKey;
+                    break;
+                case PassKey.Suho:
+                    key = suhoPassKey;
+                    break;
+                case PassKey.FoxFire:
+                    key = foxfirePassKey;
+                    break;
+                case PassKey.SealSword:
+                    key = sealswordPassKey;
+                    break;
+                case PassKey.Dosul:
+                    key = dosulPassKey;
+                    break;
+                case PassKey.BlackFox:
+                    key = blackfoxPassKey;
+                    break;
+                case PassKey.DosulLevel:
+                    key = dosullevelPassKey;
+                    break;
+                case PassKey.Bimu:
+                    key = bimuPassKey;
+                    break;
+                case PassKey.Student:
+                    key = studentPassKey;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            SetPassKey(key);
+        }
+    }
 
     protected void GetTableData()
     {

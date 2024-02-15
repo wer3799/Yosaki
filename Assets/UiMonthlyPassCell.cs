@@ -95,13 +95,28 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
         }).AddTo(disposables);
 
         //킬카운트 변경될때
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount).AsObservable().Subscribe(e =>
-        {
-                lockIcon_Free.SetActive(!CanGetReward());
-                lockIcon_Ad.SetActive(!CanGetReward());
-                gaugeImage.SetActive(CanGetReward());
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.evenMonthKillCount)
+            .ThrottleFrame(10)
+            .AsObservable()
+            .Subscribe(e =>
+            {
+                if (lockIcon_Free != null)
+                {
+                    lockIcon_Free.SetActive(!CanGetReward());
+                }
+
+                if (lockIcon_Ad != null)
+                {
+                    lockIcon_Ad.SetActive(!CanGetReward());
+                }
+
+                if (gaugeImage != null)
+                {
+                    gaugeImage.SetActive(CanGetReward());
+                }
             
-        }).AddTo(disposables);
+            })
+            .AddTo(disposables);
     }
 
     private void SetAmount()
@@ -199,7 +214,7 @@ public class UiMonthlyPassCell : FancyCell<MonthlyPassData_Fancy>
 
     private void GetFreeReward()
     {
-        if (((Item_Type)(int)passInfo.rewardType_Free).IsPassNorigaeItem())
+        if (((Item_Type)(int)passInfo.rewardType_Free).IsNorigaeItem())
         {
             //로컬
             ServerData.monthlyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";

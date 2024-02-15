@@ -102,12 +102,12 @@ public class UiBattleContestSpecialShopCell : MonoBehaviour
     }
     private bool IsPassWeaponItem()
     {
-        return ((Item_Type)tableData.Itemtype).IsPassWeaponItem();
+        return ((Item_Type)tableData.Itemtype).IsWeaponItem();
     }
 
     private bool IsPassNoriGaeItem()
     {
-        return ((Item_Type)tableData.Itemtype).IsPassNorigaeItem();
+        return ((Item_Type)tableData.Itemtype).IsNorigaeItem();
     }
 
     private bool CanGetReward()

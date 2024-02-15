@@ -62,6 +62,7 @@ public class UserInfoTable_2
     public const string gyungRockTower4 = "grt4";
     public const string gyungRockTower5 = "grt5";
     public const string gyungRockTower6 = "grt6";
+    public const string gyungRockTower7 = "grt7";
     public const string graduateSeolEvent = "gse";
     public const string hyunsangTowerScore = "hts";
     
@@ -104,11 +105,13 @@ public class UserInfoTable_2
     public const string exchage_Daesan3 = "exchage_Daesan3";
     public const string exchage_Daesan4 = "exchage_Daesan4";
     public const string exchage_Daesan5 = "exchage_Daesan5";
+    public const string exchage_Daesan6 = "exchage_Daesan6";
     
     public const string exchage_Guild1 = "exchage_Guild1";
     public const string exchage_Guild2 = "exchage_Guild2";
     public const string exchage_Guild3 = "exchage_Guild3";
     public const string exchage_Guild4 = "exchage_Guild4";
+    public const string exchage_Guild5 = "exchage_Guild5";
     
     
     public const string enhanceRelicIdx = "eri";
@@ -147,6 +150,8 @@ public class UserInfoTable_2
     
     public const string rankHonorRewardIdx = "rhri";//랭크명예보상
 
+    public const string suhoUpgradeGraduateIdx = "sugi";//수호보주강화 졸업
+
     
     
     public bool isInitialize = false;
@@ -156,11 +161,11 @@ public class UserInfoTable_2
         { stagePassFree, -1f },
         { stagePassAd, -1f },
         { killCountTotalSeason0, 0f },
-        { eventMission1AttendCount, 0f },
+        { eventMission1AttendCount, 1f },
         { commonAttend2Count, 0f },
         { yorinAttendRewarded, 0f },
         { eventAttendRewarded, 0f },
-        { eventMission2AttendCount, 0f },
+        { eventMission2AttendCount,1f },
         { eventAttendCount, 1f },
         
         { monkeyGodScore, 0f },
@@ -195,6 +200,7 @@ public class UserInfoTable_2
         { gyungRockTower4, 0f },
         { gyungRockTower5, 0f },
         { gyungRockTower6, 0f },
+        { gyungRockTower7, 0f },
         { hyunsangTowerScore, 0f },
         { graduateSeolEvent, 0f },
         { towerFloorAdjust, 0f },
@@ -230,11 +236,13 @@ public class UserInfoTable_2
         { exchage_Daesan3, 0f },
         { exchage_Daesan4, 0f },
         { exchage_Daesan5, 0f },
+        { exchage_Daesan6, 0f },
         
         { exchage_Guild1, 0f },
         { exchage_Guild2, 0f },
         { exchage_Guild3, 0f },
         { exchage_Guild4, 0f },
+        { exchage_Guild5, 0f },
         
         { enhanceRelicIdx, -1f },
         { awakeVisionSkill, -1f },
@@ -261,6 +269,7 @@ public class UserInfoTable_2
         { munhaTower, 0f },
         { eventPackageRewardIdx, -1f },
         { rankHonorRewardIdx, -1f },
+        { suhoUpgradeGraduateIdx, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

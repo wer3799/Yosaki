@@ -81,7 +81,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
                     break;
                 }
 
-                if (((Item_Type)(tableData[i].Reward1)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;
@@ -102,7 +102,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
                     break;
                 }
 
-                if (((Item_Type)(tableData[i].Reward2)).IsPassNorigaeItem())
+                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
                 {
                     hasPassItem = true;
                     break;

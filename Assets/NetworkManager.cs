@@ -117,6 +117,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     [SerializeField]
     private Toggle visibleRoomToggle_PartyTower2;
+    [SerializeField]
+    private Toggle soloPlayToggle_PartyTower2;
 
     [SerializeField]
     private TMP_InputField roomNameInput;
@@ -471,13 +473,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void MakePartyTowerRoom2(int maxNum, int stageNum)
     {
+        //길드가없으면
+        if (GuildManager.Instance.hasGuild.Value == false) 
+        {
+            if (soloPlayToggle_PartyTower2.isOn)
+            {
+                PopupManager.Instance.ShowAlarmMessage("문파가 없으면 솔로 플레이가 불가능합니다.");  
+                return;
+            }
+        }
+        
         this.partyRaidTargetFloor2 = stageNum;
 
         uiPartyTowerBoard.SetActive(false);
 
         RoomOptions roomOption = new RoomOptions();
 
-        roomOption.MaxPlayers = (byte)maxNum;
+
+        
+        roomOption.MaxPlayers = soloPlayToggle_PartyTower2.isOn ? (byte)1 : (byte)maxNum;
 
         roomOption.IsVisible = !visibleRoomToggle_PartyTower2.isOn;
 
@@ -1017,7 +1031,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 }
                 else if (IsPartyTower2Boss())
                 {
-                    if (roomPlayerDatas.Count != 2)
+                    if (soloPlayToggle_PartyTower2.isOn)
+                    {
+                        //on이면 출발
+                    }
+                    else if (roomPlayerDatas.Count != 2)
                     {
                         PopupManager.Instance.ShowAlarmMessage("2인으로만 플레이 가능 합니다.");
 #if !UNITY_EDITOR

@@ -40,18 +40,19 @@ public static class Utils
         return (type >= Item_Type.costume0 && type <= Item_Type.costume99) ||
                (type >= Item_Type.costume100 && type <= Item_Type.costume_end);
     }
-
     public static bool IsPetItem(this Item_Type type)
     {
         return type == Item_Type.pet0 ||
                type == Item_Type.pet1 ||
                type == Item_Type.pet2 ||
-               type == Item_Type.pet3;
+               type == Item_Type.pet3 ||
+               type >= Item_Type.pet52 && type < Item_Type.pet_end;
     }
 
-    public static bool IsPassNorigaeItem(this Item_Type type)
+    public static bool IsNorigaeItem(this Item_Type type)
     {
-        return type == Item_Type.MonthNorigae0 ||
+        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook_End) ||
+               type == Item_Type.MonthNorigae0 ||
                type == Item_Type.MonthNorigae1 ||
                type == Item_Type.MonthNorigae2 ||
                type == Item_Type.MonthNorigae3 ||
@@ -63,36 +64,37 @@ public static class Utils
                type == Item_Type.MonthNorigae9||
                type == Item_Type.MonthNorigae10||
                type == Item_Type.MonthNorigae11||
-               type == Item_Type.magicBook117||
                type == Item_Type.magicBook116||
+               type == Item_Type.magicBook117||
                type == Item_Type.magicBook120||
-               type == Item_Type.magicBook123||
-               type == Item_Type.magicBook126||
-               type == Item_Type.magicBook128||
-               type == Item_Type.magicBook117
-            ;
+               type == Item_Type.magicBook121 ||
+               type == Item_Type.magicBook122 ||
+               type == Item_Type.magicBook123 ||
+               type == Item_Type.magicBook124 ||
+               type == Item_Type.magicBook125 ||
+               type == Item_Type.magicBook126 ||
+               type == Item_Type.magicBook127 ||
+               type == Item_Type.magicBook128 ||
+               type == Item_Type.magicBook129;
     }
 
-    public static bool IsPassWeaponItem(this Item_Type type)
+    public static bool IsWeaponItem(this Item_Type type)
     {
-        return type == Item_Type.weapon81 ||
+        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon_end)||
+               type == Item_Type.weapon81 ||
                type == Item_Type.weapon90||
                type == Item_Type.weapon131||
                type == Item_Type.weapon146||
                type == Item_Type.weapon149||
-               type == Item_Type.weapon154
-            ;
+               type == Item_Type.weapon150||
+               type == Item_Type.weapon151||
+               type == Item_Type.weapon152||
+               type == Item_Type.weapon153||
+               type == Item_Type.weapon154||
+               type == Item_Type.weapon155||
+               type == Item_Type.weapon156;
     }
-    public static bool IsPassPetItem(this Item_Type type)
-    {
-        return type == Item_Type.pet52 ||
-               type == Item_Type.pet53 ||
-               type == Item_Type.pet54 ||
-               type == Item_Type.pet55 ||
-               type == Item_Type.pet56 ||
-               type == Item_Type.pet57 ||
-               type == Item_Type.pet58;
-    }
+    
 
 
     public static bool IsIgnoreMissionKey(this MonthMissionKey type)
@@ -397,32 +399,9 @@ public static class Utils
         return type == Item_Type.Memory;
     }
 
-    public static bool IsWeaponItem(this Item_Type type)
-    {
-        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon_end)||
-               type == Item_Type.weapon149||
-               type == Item_Type.weapon150||
-               type == Item_Type.weapon151||
-               type == Item_Type.weapon152||
-               type == Item_Type.weapon153||
-               type == Item_Type.weapon154||
-               type == Item_Type.weapon155||
-               type == Item_Type.weapon156;
-    }
 
-    public static bool IsNorigaeItem(this Item_Type type)
-    {
-        return (type >= Item_Type.magicBook0 && type <= Item_Type.magicBook_End) ||
-               type == Item_Type.magicBook121 ||
-               type == Item_Type.magicBook122 ||
-               type == Item_Type.magicBook123 ||
-               type == Item_Type.magicBook124 ||
-               type == Item_Type.magicBook125 ||
-               type == Item_Type.magicBook126 ||
-               type == Item_Type.magicBook127 ||
-               type == Item_Type.magicBook128 ||
-               type == Item_Type.magicBook129;
-    }
+
+
 
     public static bool IsSkillItem(this Item_Type type)
     {

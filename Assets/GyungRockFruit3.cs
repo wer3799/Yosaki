@@ -52,6 +52,23 @@ public class GyungRockFruit3 : MonoBehaviour
                 icon_SpriteRenderer.sprite = fruits[currentIdx];
             }
         }
+        else if(GameManager.contentsType == GameManager.ContentsType.GyungRockTower7)
+        {
+            icon_Image = GetComponent<Image>();
+            icon_SpriteRenderer = GetComponent<SpriteRenderer>();
+
+            int currentIdx = (int)ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.gyungRockTower7].Value;
+            
+            if (icon_Image != null)
+            {
+                icon_Image.sprite = fruits[currentIdx];
+            }
+
+            if (icon_SpriteRenderer != null)
+            {
+                icon_SpriteRenderer.sprite = fruits[currentIdx];
+            }
+        }
         else
         {
             Debug.LogError("컨텐츠 타입이 올바르지 않습니다.");
