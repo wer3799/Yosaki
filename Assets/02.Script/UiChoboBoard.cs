@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -166,5 +167,14 @@ public class UiChoboBoard : MonoBehaviour
     public void OnClickDamageGuideButton() 
     {
         Application.OpenURL("https://cafe.naver.com/yokiki/23117");
+    }
+
+    private void OnEnable()
+    {
+        var mission = PlayerPrefs.GetInt(CommonString.YorinMission_Help,0);
+        if (mission <1)
+        {
+            PlayerPrefs.SetInt(CommonString.YorinMission_Help,1);
+        }
     }
 }

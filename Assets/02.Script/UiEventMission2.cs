@@ -21,7 +21,7 @@ public class UiEventMission2 : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI costumeDesc;
     
-    string costumeKey = "costume181";
+    string costumeKey = "costume206";
     private void OnEnable()
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
@@ -34,7 +34,11 @@ public class UiEventMission2 : MonoBehaviour
             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.SMISSION7].Stringid;
             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
         }
-
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.SMISSION8].Stringid;
+            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+        } 
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value > 0)
         {
             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.SMISSION1].Stringid;

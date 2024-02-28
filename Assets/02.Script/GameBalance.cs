@@ -20,7 +20,34 @@ public class PotionBalance
     public readonly static ObscuredFloat potionUseDelay = 0.9f;
 }
 
-
+public enum RewardColor
+{
+    None=-1,
+    Brown0=0,
+    Green0,
+    Blue0,
+    Purple0,
+    Red0,
+    Cyan0,
+    Orange0,
+    Indigo0,
+    Purple1,
+    Pink0,
+    Yellow0,
+    Blue1,
+    Red1,
+    Gray0,
+    Black0,
+    Cyan1,
+    Red2,
+    Yellow1,
+    Indigo1,
+    Indigo2,
+    Indigo3,
+    Cyan2,
+    Purple2,
+    MixRedBlue0=36,
+}
 public static class GameBalance
 {
     #region Stat_LevelUp
@@ -33,6 +60,7 @@ public static class GameBalance
 
     #endregion
     
+    public static List<string> samchunTitle = new List<string>() { "요괴지옥", "천상계","도깨비나라","수미산"  };
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
     public readonly static List<ObscuredFloat> potion_Option = new List<ObscuredFloat>() { 0.3f, 0.6f, 0.9f };
 
@@ -404,14 +432,6 @@ public static class GameBalance
     
 
     #endregion
-    
-    #region Contents_GumSoul
-
-    public static ObscuredDouble GumSoulGraduateScore = 9000; // 졸업하는 수치
-    public static ObscuredDouble GumSoulFixedScore = 11000; //  졸업시 고정되는 수치.
-    public static ObscuredFloat GumSoulGraduatePlusValue = 2f; 
-
-    #endregion
 
     #region Contents_NorigaeSoul
     //노리개 영혼
@@ -571,12 +591,23 @@ public static class GameBalance
     
     #region Contents_Graduate
     
+    public static ObscuredDouble GumSoulGraduateScore = 9000; // 졸업하는 수치
+    public static ObscuredDouble GumSoulFixedScore = 11000; //  졸업시 고정되는 수치.
+    public static ObscuredFloat GumSoulGraduatePlusValue = 2f; 
+    
+    public static ObscuredDouble GumgiGraduateScore = 20000; // 졸업하는 수치
+    public static ObscuredDouble GumgiFixedScore = 50000; //  졸업시 고정되는 수치.
+    
     public static ObscuredDouble sonGraduateScore = 1E+88;
     public static ObscuredDouble helGraduateScore = 1E+91;
     public static ObscuredDouble flowerGraduateScore = 2200;
     public static ObscuredDouble dokebiFireGraduateScore = 3500; //졸업하는수치
     public static ObscuredDouble dokebiFireFixedScore = 4000; //졸업시 고정되는 수치
     public static ObscuredFloat dokebiGraduatePlusValue = 1.5f;
+    
+    public static ObscuredDouble sumiFireGraduateScore = 70000; //졸업하는수치
+    public static ObscuredDouble sumiFireFixedScore = 100000; //졸업시 고정되는 수치
+    public static ObscuredFloat sumiGraduatePlusValue = 1.5f;
     
     public static ObscuredFloat foxMaskGraduateValue = 3f;
     public static ObscuredFloat susanoGraduateValue = 1.1f;

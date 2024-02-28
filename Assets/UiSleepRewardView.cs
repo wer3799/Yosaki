@@ -45,6 +45,8 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
     private GameObject taegeukObject;
     [SerializeField]
     private GameObject sasinsuObject;
+    [SerializeField]
+    private GameObject sumiObject;
 
     [SerializeField] private Image GoldIcon;
     //[SerializeField]
@@ -80,6 +82,10 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
             GoldIcon.sprite = e < 1
                 ? CommonUiContainer.Instance.GetItemIcon(Item_Type.Gold)
                 : CommonUiContainer.Instance.GetItemIcon(Item_Type.GoldBar);
+        }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).AsObservable().Subscribe(e =>
+        {
+            sumiObject.SetActive(e == 1);
         }).AddTo(this);
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSeolEvent).AsObservable().Subscribe(e =>
         {
@@ -216,11 +222,13 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         rewards[17].SetText(Utils.ConvertBigNum(reward.yoPowerItem));
         rewards[18].SetText(Utils.ConvertBigNum(reward.taegeukItem));
         rewards[19].SetText(Utils.ConvertBigNum(reward.sasinsuItem));
+        rewards[20].SetText(Utils.ConvertBigNum(reward.sumiItem));
         
 
         yoPowerObject.SetActive(reward.yoPowerItem > 0);
         taegeukObject.SetActive(reward.taegeukItem > 0);
         sasinsuObject.SetActive(reward.sasinsuItem > 0);
+        sumiObject.SetActive(reward.sumiItem > 0);
         
         
         SleepRewardReceiver.Instance.GetRewardSuccess();

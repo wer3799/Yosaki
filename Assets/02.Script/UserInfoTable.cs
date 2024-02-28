@@ -802,8 +802,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 54);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(54));
+                            defultValues.Add(e.Current.Key, 59);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(59));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1856,11 +1856,11 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    //캔디
+    //냉이
     public bool CanSpawnSnowManItem()
     {
         //targetDate가 am 00시 기준이므로 AddDays해야함
-        DateTime targetDate = new DateTime(2024, 1, 17);
+        DateTime targetDate = new DateTime(2024, 4, 9);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

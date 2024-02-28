@@ -55,7 +55,9 @@ public class UiTwelveBossContentsView : MonoBehaviour
     private Image image1;
 
     [SerializeField] private GameObject allClearMark; 
-    
+    [SerializeField] private UiSinRewardPopup_0 uiiSinRewardPopup_0;
+    [SerializeField] private UiTwelveRewardPopupV2 uiTwelveRewardPopupV2;
+
     private void Start()
     {
         InitByInspector();
@@ -85,7 +87,7 @@ public class UiTwelveBossContentsView : MonoBehaviour
     public void Initialize(TwelveBossTableData bossTableData)
     {
         this.bossTableData = bossTableData;
-
+        bossId = bossTableData.Id;
         if (title != null)
         {
             title.SetText(bossTableData.Name);
@@ -150,6 +152,16 @@ public class UiTwelveBossContentsView : MonoBehaviour
 
 
         OnOffAllClearMark();
+        if (uiiSinRewardPopup_0 != null)
+        {
+            uiiSinRewardPopup_0.Initialize(bossId);
+        }
+        if (uiTwelveRewardPopupV2 != null)
+        {
+            uiTwelveRewardPopupV2.Initialize(bossId);
+        }
+
+        
     }
 
     private void OnOffAllClearMark()

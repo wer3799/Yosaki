@@ -865,6 +865,21 @@ public class GoodsTable
     }
     //
 
+    static float sumiItemAddNum = 0;
+    public void GetSumiItem(float amount)
+    {
+        sumiItemAddNum += amount * (1 + PlayerStats.GetSumiFireGainValue());
+
+        //1개 획득할때마다 얻게하기 위해서
+        if (sumiItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Dokebifireamount, 1))
+        {
+        }
+        else
+        {
+            tableDatas[SumiFire].Value += (int)sumiItemAddNum;
+            sumiItemAddNum -= (int)sumiItemAddNum;
+        }
+    }
     public int GetFourSkillHasCount()
     {
         int fourLevel = 0;
@@ -1247,6 +1262,10 @@ public class GoodsTable
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
         {
             goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            goodsParam.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
         }
         //if (ServerData.userInfoTable.CanSpawnEventItem())
         //{

@@ -124,4 +124,8 @@ public class StageMapData
   float sinsu;
   public float Sinsu { get {return sinsu; } set { this.sinsu = value;} }
   
+  [SerializeField]
+  float sumifloweramount;
+  public float Sumifloweramount { get {return sumifloweramount; } set { this.sumifloweramount = value;} }
+  
 }

@@ -132,6 +132,7 @@ public static class CommonString
     public static string Reward_Before = "이전 보상을 받아주세요!";
     public static string Reward_Can = "조건을 만족하지 못하였습니다.";
     public static string Reward_Has = "이미 보상을 받았습니다.";
+    public static string YorinMission_Help = "ChoboBoard";
 
 
     public static string GetContentsName(ContentsType contentsType)
@@ -265,7 +266,7 @@ public static class CommonString
             case Item_Type.SP: return "검조각";
             case Item_Type.Hae_Norigae: return "해태 노리개 조각";
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
-            case Item_Type.Event_Item_SnowMan: return "막대 사탕"; //(구)송편
+            case Item_Type.Event_Item_SnowMan: return "냉이"; //(구)송편
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
@@ -403,8 +404,8 @@ public static class CommonString
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
             case Item_Type.Event_Mission1: return "설날 까치";
             case Item_Type.Event_Mission1_All: return "설날 까치 총 획득량";
-            case Item_Type.Event_Mission2: return "크리스마스 양말";
-            case Item_Type.Event_Mission2_All: return "크리스마스 양말 총 획득량";
+            case Item_Type.Event_Mission2: return "봄바람";
+            case Item_Type.Event_Mission2_All: return "봄바람 총 획득량";
             case Item_Type.Event_Mission3: return "보름달";
             case Item_Type.Event_Mission3_All: return "보름달 총 획득량";
             case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;

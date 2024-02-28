@@ -963,6 +963,7 @@ public class TableManager : SingletonMono<TableManager>
     public BingoEvent BingoEvent;
     public TowerTable14 gyungRockTowerTable7;
     public StudentPass StudentPass;
+    public Title_Samcheon Title_Samcheon;
 }
 
 

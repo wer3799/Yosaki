@@ -37,17 +37,12 @@ public class UiDokebiFireBoard : MonoBehaviour
     {
         Initialize();
         Subscribe();
-        SetFlowerReward();
 
         graduateDescription.SetText($"각성 효과로 효과 {GameBalance.dokebiGraduatePlusValue*100f}% 증가!");
 
     }
 
-    //기능 보류
-    private void SetFlowerReward()
-    {
-        //chunFlowerReward.Initialize(TableManager.Instance.TwelveBossTable.dataArray[65]);
-    }
+
     private void OnEnable()
     {
         UpdateAbilText1((int)ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);

@@ -42,6 +42,10 @@ public class CurrentStageInfoPopup : SingletonMono<CurrentStageInfoPopup>
         {
             SetDescription();
         }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).AsObservable().Subscribe(e =>
+        {
+            SetDescription();
+        }).AddTo(this);
     }
 
     private void SetDescription()
@@ -85,6 +89,10 @@ public class CurrentStageInfoPopup : SingletonMono<CurrentStageInfoPopup>
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
         {
             desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.DokebiFire)} 획득량 : {stageData.Dokebifireamount * 1000}";
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            desc += $"\n요괴 500마리당 {CommonString.GetItemName(Item_Type.SumiFire)} 획득량 : {stageData.Sumifloweramount * 1000}";
         }
 
         if (stageData.Yokaiessence > 0)

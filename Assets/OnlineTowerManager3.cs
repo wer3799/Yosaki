@@ -717,7 +717,7 @@ public class OnlineTowerManager3 : ContentsManagerBase
                 int currentStage = PartyRaidManager.Instance.NetworkManager.partyRaidTargetFloor2;
 
                 var cave = TableManager.Instance.twoCave.dataArray[currentStage];
-                Debug.LogError($"Require : {cave.Lastbosshp}\ndamage : {guildDamage}");
+                //Debug.LogError($"Require : {cave.Lastbosshp}\ndamage : {guildDamage}");
                 //클리어
                 if (cave.Lastbosshp<=guildDamage)
                 {

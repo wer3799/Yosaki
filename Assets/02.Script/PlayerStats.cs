@@ -3398,7 +3398,10 @@ public static class PlayerStats
         {
             ret += GetSumiFireHasAddValue() * currentLevel;
         }
-
+        var transAddValue = GetSumiTransPlusValue();
+        
+        ret = (ret * transAddValue);
+        
         return ret * GetSumiGodAbil0();
     }
 
@@ -5642,6 +5645,15 @@ public static class PlayerStats
 
         return 1f;
     }
+    private static float GetSumiTransPlusValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            return GameBalance.sumiGraduatePlusValue;
+        }
+
+        return 1f;
+    }
 
     public static float GetGumSoulTransPlusValue()
     {
@@ -6272,6 +6284,20 @@ public static class PlayerStats
         meditationInitialize = true;
 
     }
+    public static float GetSamchunAbility(StatusType type)
+    {
+
+        var tableData = TableManager.Instance.Title_Samcheon.dataArray;
+        var ret = 0f;
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if ((StatusType)tableData[i].Abiltype != type) continue;
+            if (ServerData.samchunTitleServerTable.TableDatas[tableData[i].Stringid].hasReward.Value < 1) continue;
+            ret += tableData[i].Abilvalue;
+        }
+
+        return ret;
+    }
     public static float SealSwordEvolutionAbility(StatusType type)
     {
         Dictionary<StatusType, float> dictionary = new Dictionary<StatusType, float>();
@@ -6489,7 +6515,8 @@ public static class PlayerStats
         
         ret += GetSpecialTypeAbility(StatusType.HellHasValueUpgrade);
 
-        
+        ret += GetSamchunAbility(StatusType.HellHasValueUpgrade);
+
         return ret;
     }
 
@@ -6506,6 +6533,8 @@ public static class PlayerStats
         ret += GetCostumeSpecialAbilityValue(StatusType.FlowerHasValueUpgrade);
         
         ret += GetSpecialTypeAbility(StatusType.FlowerHasValueUpgrade);
+
+        ret += GetSamchunAbility(StatusType.FlowerHasValueUpgrade);
 
         return ret;
     }
@@ -6524,6 +6553,8 @@ public static class PlayerStats
         ret += GetCostumeSpecialAbilityValue(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetSpecialTypeAbility(StatusType.DokebiFireHasValueUpgrade);
+        
+        ret += GetSamchunAbility(StatusType.DokebiFireHasValueUpgrade);
 
         
         return ret;
@@ -6542,7 +6573,8 @@ public static class PlayerStats
 
         ret += GetSpecialTypeAbility(StatusType.SumiHasValueUpgrade);
 
-        
+        ret += GetSamchunAbility(StatusType.SumiHasValueUpgrade);
+
         return ret;
     }
 
@@ -6692,6 +6724,13 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect2(StatusType.DokebiFireGainPer);
         
         ret += GetDoGodAbil1();
+        
+        return ret;
+    }
+    public static float GetSumiFireGainValue()
+    {
+        float ret = 0f;
+
         
         return ret;
     }

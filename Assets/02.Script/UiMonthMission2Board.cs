@@ -26,6 +26,11 @@ public class UiMonthMission2Board : MonoBehaviour
             string key = TableManager.Instance.MonthMission2Datas[(int)MonthMission2Key.ClearDokebiFire].Stringid;
             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 10);
         }    
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            string key = TableManager.Instance.MonthMission2Datas[(int)MonthMission2Key.ClearSumiFire].Stringid;
+            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+        } 
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateHel).Value > 0)
         {
             string key = TableManager.Instance.MonthMission2Datas[(int)MonthMission2Key.ClearHell].Stringid;

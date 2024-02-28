@@ -22,6 +22,14 @@ public class PartyRaidOtherPlayerView_Ingame : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.ContentsType.Online_Tower == GameManager.contentsType)
+        {
+            if (PlayerPrefs.GetInt(SettingKey.towerAutoMode) > 0)
+            {
+                this.gameObject.SetActive(false);
+            }
+            return;
+        }
         Initialize();
     }
 

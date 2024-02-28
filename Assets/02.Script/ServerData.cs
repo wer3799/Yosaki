@@ -88,6 +88,7 @@ public static class ServerData
     
     public static BossScoreTable bossScoreTable { get; private set; } = new BossScoreTable();
     public static SpecialTitleServerTable specialTitleServerTable { get; private set; } = new SpecialTitleServerTable();
+    public static SamchunTitleServerTable samchunTitleServerTable { get; private set; } = new SamchunTitleServerTable();
 
     #region string
 
@@ -194,6 +195,8 @@ public static class ServerData
         sealSwordServerTable.Initialize();
         
         specialTitleServerTable.Initialize();
+        
+        samchunTitleServerTable.Initialize();
     }
 
     public static void BossTableInitialized()

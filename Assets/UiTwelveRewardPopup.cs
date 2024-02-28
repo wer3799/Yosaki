@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
 {
     public class TwelveBossRewardInfo
     {
-        public TwelveBossRewardInfo(int idx, double damageCut, int rewardType, float rewardAmount, string rewardCutString, double currentDamage)
+        public TwelveBossRewardInfo(int idx, double damageCut, int rewardType, float rewardAmount, string rewardCutString, double currentDamage, RewardColor rewardColor=RewardColor.None)
         {
             this.idx = idx;
 
@@ -20,6 +21,8 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
             this.rewardCutString = rewardCutString;
 
             this.currentDamage = currentDamage;
+            
+            this.rewardColor = rewardColor;
         }
 
         public int idx;
@@ -28,6 +31,7 @@ public class UiTwelveRewardPopup : SingletonMono<UiTwelveRewardPopup>
         public float rewardAmount;
         public double currentDamage;
         public string rewardCutString;
+        public RewardColor rewardColor;
     }
 
     [SerializeField]

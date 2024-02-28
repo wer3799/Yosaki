@@ -19,7 +19,11 @@ public class UiSumisanFireBoard : MonoBehaviour
 
 
     public Button registerButton;
-
+    
+    [SerializeField]
+    private TextMeshProUGUI graduateDescription;
+    [SerializeField] private GameObject transBeforeObject;
+    [SerializeField] private GameObject transAfterObject;
 
     public TextMeshProUGUI getButtonDesc;
 
@@ -29,16 +33,12 @@ public class UiSumisanFireBoard : MonoBehaviour
     {
         Initialize();
         Subscribe();
-        SetFlowerReward();
 
+        graduateDescription.SetText($"각성 효과로 효과 {GameBalance.sumiGraduatePlusValue*100f}% 증가!");
 
     }
 
-    //기능 보류
-    private void SetFlowerReward()
-    {
-        //chunFlowerReward.Initialize(TableManager.Instance.TwelveBossTable.dataArray[65]);
-    }
+
     private void OnEnable()
     {
         UpdateAbilText1((int)ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
@@ -63,6 +63,12 @@ public class UiSumisanFireBoard : MonoBehaviour
 
             getButtonDesc.SetText(e == 0 ? "획득" : "오늘 획득함");
         }).AddTo(this);
+        
+        ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateSumiFire].AsObservable().Subscribe(e =>
+        {
+            transBeforeObject.SetActive(e < 1);
+            transAfterObject.SetActive(e >= 1);
+        }).AddTo(this);
     }
 
     private void UpdateAbilText1(int currentLevel)
@@ -81,7 +87,7 @@ public class UiSumisanFireBoard : MonoBehaviour
             }
             else
             {
-                abilDesc += $"{CommonString.GetStatusName(type)} {PlayerStats.GetSumiFireAbilHasEffect(type) * 100f}\n";
+                abilDesc += $"{CommonString.GetStatusName(type)} {Utils.ConvertNum(PlayerStats.GetSumiFireAbilHasEffect(type) * 100f)}\n";
             }
         }
 
@@ -278,5 +284,45 @@ public class UiSumisanFireBoard : MonoBehaviour
         }
 
 
+    }
+    
+     public void OnClickTransButton()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.sumiFireClear].Value < GameBalance.sumiFireGraduateScore)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"처치 수 {GameBalance.sumiFireGraduateScore} 이상일때 각성 가능!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                "각성시 수미산에서 수미꽃 획득이 더이상 불가능 합니다.\n" +
+                $"대신 수미꽃 효과가 강화되고({GameBalance.sumiGraduatePlusValue*100}%)\n" +
+                $"수미산 각성시 최고점수가 {GameBalance.sumiFireFixedScore}로 고정 됩니다. \n" +
+                $"그리고 스테이지 일반요괴 처치시 수미꽃을 자동 획득 합니다.\n" +
+                "각성 하시겠습니까?", () =>
+                {
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateSumiFire].Value = 1;
+                    ServerData.userInfoTable.TableDatas[UserInfoTable.sumiFireClear].Value = GameBalance.sumiFireFixedScore;
+                    
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+                    
+                    Param userInfoParam = new Param();
+                    userInfoParam.Add(UserInfoTable.sumiFireClear, ServerData.userInfoTable.TableDatas[UserInfoTable.sumiFireClear].Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+                        
+                    Param userInfo2Param = new Param();
+                    userInfo2Param.Add(UserInfoTable_2.graduateSumiFire, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateSumiFire].Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName,UserInfoTable_2.Indate,userInfo2Param));
+                    
+                    ServerData.SendTransaction(transactions,successCallBack: () =>
+                    {
+                        UpdateAbilText1((int)ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
+                        Initialize();
+                    });
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+              
+                    
+                }, null);
+        }
     }
 }

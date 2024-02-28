@@ -18,6 +18,11 @@ public class UiGumGiContentsBoard : MonoBehaviour
     public TextMeshProUGUI getButtonDesc;
     public TextMeshProUGUI expDescription;
     public TextMeshProUGUI abilDescription;
+    
+    
+    [SerializeField] private GameObject transBeforeObject;
+    [SerializeField] private GameObject transAfterObject;
+    
     private void Start()
     {
         Subscribe();
@@ -53,6 +58,12 @@ public class UiGumGiContentsBoard : MonoBehaviour
             expDescription.SetText($"{e}");
         }).AddTo(this);
 
+        
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateGumgi).AsObservable().Subscribe(e =>
+        {
+            transBeforeObject.SetActive(e < 1);
+            //transAfterObject.SetActive(e >= 1);
+        }).AddTo(this);
     }
 
     public void OnClickEnterButton()
@@ -140,5 +151,40 @@ public class UiGumGiContentsBoard : MonoBehaviour
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.SP)} {score + Utils.GetDokebiTreasureAddValue()}개 획득!", null);
             });
         }, null);
+    }
+    public void OnClickTransButton()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value < GameBalance.GumgiGraduateScore)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"최고 점수 {GameBalance.GumgiGraduateScore} 이상일때 각성 가능!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                $"검의 산 각성시 최고점수가 {GameBalance.GumgiFixedScore}로 고정 됩니다. \n" +
+                "각성 하시겠습니까??", () =>
+                {
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateGumgi].Value = 1;
+                    ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value = GameBalance.GumgiFixedScore;
+                    
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+                    
+                    Param userInfoParam = new Param();
+                    userInfoParam.Add(UserInfoTable.gumGiClear, ServerData.userInfoTable.TableDatas[UserInfoTable.gumGiClear].Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName,UserInfoTable.Indate,userInfoParam));
+                    
+                    Param userInfo2Param = new Param();
+                    userInfo2Param.Add(UserInfoTable_2.graduateGumgi, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateGumgi].Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName,UserInfoTable_2.Indate,userInfo2Param));
+                    
+                    ServerData.SendTransaction(transactions,successCallBack: () =>
+                    {
+                        
+                    });
+                    
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+              
+                }, null);
+        }
     }
 }

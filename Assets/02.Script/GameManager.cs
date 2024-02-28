@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System;
+using Photon.Pun;
 
 //
 public class GameManager : SingletonMono<GameManager>
@@ -101,6 +102,7 @@ public class GameManager : SingletonMono<GameManager>
         MunhaTower2,
         MurimTower,
         GyungRockTower7,
+        OffLine_Tower,//십만동굴 솔플
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -413,6 +415,12 @@ public class GameManager : SingletonMono<GameManager>
             {
                 //   UiTutorialManager.Instance.SetClear(TutorialStep._1_MoveField);
             }
+
+            if (lastContentsType == ContentsType.OffLine_Tower)
+            {
+                PhotonNetwork.Disconnect();
+            }
+
         }
 
         // SaveManager.Instance.SyncDatasInQueue();

@@ -88,4 +88,8 @@ public class TwelveBossTableData
   BossType bosstype;
   public BossType BOSSTYPE { get {return bosstype; } set { this.bosstype = value;} }
   
+  [SerializeField]
+  RewardColor rewardcolor;
+  public RewardColor REWARDCOLOR { get {return rewardcolor; } set { this.rewardcolor = value;} }
+  
 }

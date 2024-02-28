@@ -192,6 +192,8 @@ public Sprite weapon159;
 public Sprite weapon160;
 public Sprite weapon161;
 public Sprite weapon162;
+public Sprite weapon163;
+public Sprite weapon164;
     
 [Header ("Weapon_View")]
 
@@ -355,6 +357,7 @@ public Sprite RecommendWeapon22;
     public Sprite magicBook131;
     public Sprite magicBook132;
     public Sprite magicBook133;
+    public Sprite magicBook134;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -1592,6 +1595,8 @@ public Sprite RecommendWeapon22;
                 return magicBook132;
             case Item_Type.magicBook133:
                 return magicBook133;
+            case Item_Type.magicBook134:
+                return magicBook134;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2383,6 +2388,10 @@ public Sprite RecommendWeapon22;
                 return weapon161;
             case Item_Type.weapon162:
                 return weapon162;
+            case Item_Type.weapon163:
+                return weapon163;
+            case Item_Type.weapon164:
+                return weapon164;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

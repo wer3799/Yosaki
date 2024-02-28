@@ -336,7 +336,11 @@ public enum Item_Type
     weapon159 = 1045, //극락
     weapon160 = 1046, //보스도전
     weapon161 = 1047, //보스도전
-    weapon162 = 1048, //보스도전
+    
+    weapon162 = 1048, //극락
+    weapon163 = 1049, //무림
+    weapon164 = 1050, //무림
+    
     
     weapon_end = 1200,
     //
@@ -600,6 +604,11 @@ public enum Item_Type
     costume200 = 1500, //보스도전
     costume201 = 1501, //보스도전
     costume202 = 1502, //월간훈련
+    
+    costume203 = 1503, //극락
+    costume204 = 1504, //무림
+    costume205 = 1505, //무림
+    costume206 = 1506, //이벤트
 
     costume_end=1999,
 
@@ -621,6 +630,8 @@ public enum Item_Type
     
     magicBook132 = 2014,//무림
     magicBook133 = 2015,//3월 월간
+    
+    magicBook134 = 2016,//극락
 
     magicBook_End=2999,
     //3000~3100스킬

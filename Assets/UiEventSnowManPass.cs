@@ -34,11 +34,6 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 #endif
 
 
-    public void OnClickAllReceiveButtonV2()
-    {
-
-        
-    }
     public void OnClickAllReceiveButton()
     {
            var tableData = TableManager.Instance.snowManAtten.dataArray;

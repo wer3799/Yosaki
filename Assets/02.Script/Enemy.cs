@@ -192,6 +192,7 @@ public class Enemy : PoolItem
         GetHelItem();
         GetChunItem();
         GetDokebiItem();
+        GetSumiItem();
         GetYoPowerItem();
         GetTaegeukItem();
         GetSinsuItem();
@@ -247,6 +248,12 @@ public class Enemy : PoolItem
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value == 0) return;
 
         ServerData.goodsTable.GetDokebiItem(GameManager.Instance.CurrentStageData.Dokebifireamount);
+    }
+    private void GetSumiItem()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value == 0) return;
+
+        ServerData.goodsTable.GetDokebiItem(GameManager.Instance.CurrentStageData.Sumifloweramount);
     }
 
     private void GetYoPowerItem()

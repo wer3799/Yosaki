@@ -53,6 +53,11 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.NMARBLEMISSION6].Stringid;
             ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
         }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.NMARBLEMISSION7].Stringid;
+            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
+        } 
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value > 0)
         {
             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.NMARBLEMISSION1].Stringid;

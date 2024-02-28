@@ -43,8 +43,9 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         public readonly float yoPowerItem;
         public readonly float taegeukItem;
         public readonly float sasinsuItem;
+        public readonly float sumiItem;
 
-        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic, float sulItem, float springItem, float peachItem, float helItem, float chunItem, float dailybootyItem, float dokebiItem, float hotTimeItem, float yoPowerItem, float taegeukItem, float sasinsuItem)
+        public SleepRewardInfo(float gold, float jade, float GrowthStone, float marble, float yoguiMarble, float eventItem, float exp, int elapsedSeconds, int killCount, float stageRelic, float sulItem, float springItem, float peachItem, float helItem, float chunItem, float dailybootyItem, float dokebiItem, float hotTimeItem, float yoPowerItem, float taegeukItem, float sasinsuItem, float sumiItem)
         {
             this.gold = gold;
 
@@ -87,6 +88,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             this.taegeukItem = taegeukItem;
             
             this.sasinsuItem = sasinsuItem;
+            
+            this.sumiItem = sumiItem;
         }
     }
 
@@ -235,6 +238,13 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
                 (killedEnemyPerMin * stageTableData.Dokebifireamount * GameBalance.sleepRewardRatio * elapsedMinutes) *
                 (1 + PlayerStats.GetDokebiFireGainValue());
         }
+        float sumiItem = 0;
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            sumiItem =
+                (killedEnemyPerMin * stageTableData.Sumifloweramount * GameBalance.sleepRewardRatio * elapsedMinutes) *
+                (1 + PlayerStats.GetSumiFireGainValue());
+        }
 
         float yoPowerItem = (killedEnemyPerMin * stageTableData.Yokaiessence * GameBalance.sleepRewardRatio * elapsedMinutes) * (1 + PlayerStats.GetYoPowerGoodsGainValue());
         float taegeukItem =
@@ -270,7 +280,8 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             killCount: (int)(elapsedMinutes * killedEnemyPerMin * stageTableData.Marbleamount *
                              GameBalance.sleepRewardRatio), stageRelic: stageRelic, sulItem: sulItem,
             springItem: springItem, peachItem: peachItem, helItem: helItem, chunItem: chunItem,
-            dailybootyItem: dailybootyItem, dokebiItem: dokebiItem, hotTimeItem: hotTimeItem, yoPowerItem: yoPowerItem, taegeukItem: taegeukItem, sasinsuItem: sasinsuItem);
+            dailybootyItem: dailybootyItem, dokebiItem: dokebiItem, hotTimeItem: hotTimeItem, yoPowerItem: yoPowerItem,
+            taegeukItem: taegeukItem, sasinsuItem: sasinsuItem, sumiItem: sumiItem);
 
         UiSleepRewardView.Instance.CheckReward();
     }
@@ -321,6 +332,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value += (int)sleepRewardInfo.dokebiItem;
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value += (int)sleepRewardInfo.sumiItem;
         }
         ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value += (int)sleepRewardInfo.yoPowerItem;
         ServerData.goodsTable.GetTableData(GoodsTable.TaeguekGoods).Value += (int)sleepRewardInfo.taegeukItem;
@@ -489,6 +504,10 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
         {
             goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
+        }
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            goodsParam.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
         }
         //요괴정수
         goodsParam.Add(GoodsTable.YoPowerGoods, ServerData.goodsTable.GetTableData(GoodsTable.YoPowerGoods).Value);

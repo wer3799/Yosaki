@@ -447,4 +447,14 @@ public class UiYorinMission : MonoBehaviour
         }).AddTo(this);
     }
 
+
+    private void OnEnable()
+    {
+        if (PlayerPrefs.GetInt(CommonString.YorinMission_Help, 0) > 0)
+        {
+            string key = TableManager.Instance.YorinMissionDatas[(int)YorinMissionKey.YMission1_10].Stringid;
+            ServerData.yorinMissionServerTable.UpdateMissionClearToCount(key, 1);
+        }
+        
+    }
 }

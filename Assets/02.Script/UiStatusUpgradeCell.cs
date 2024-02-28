@@ -122,7 +122,7 @@ public class UiStatusUpgradeCell : MonoBehaviour
         }
         else
         {
-            _100UpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
+            _100UpgradeButton.SetActive(true);
             _10000UpgradeButton.SetActive(statusData.STATUSWHERE != StatusWhere.gold);
         }
 
@@ -707,6 +707,42 @@ public class UiStatusUpgradeCell : MonoBehaviour
                 ServerData.goodsTable.GetTableData(Item_Type.GoldBar).Value -= upgradableGoldBar*statusData.Upgradeprice;
                 ServerData.statusTable.GetTableData(statusData.Key).Value += (int)upgradableGoldBar;
             }
+        }
+        else if (statusData.STATUSWHERE == StatusWhere.gold)
+        {
+            
+            if (IsMaxLevel())
+            {
+                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
+                return;
+            }
+            var currentGoods = ServerData.goodsTable.GetTableData(Item_Type.Gold).Value;
+            var currentLevel = ServerData.statusTable.GetTableData(statusData.Key).Value;
+
+            int maxLevel = statusData.Maxlv;
+            //업그레이드가능한 레벨 * 코스트
+            var upgradableAmount = maxLevel - currentLevel;
+            var price = 0f;
+
+            var upgradeCount = 0;
+            upgradableAmount = Mathf.Min(upgradableAmount, 100);
+            for (int i = 0; i < upgradableAmount; i++)
+            {
+                var addPrice = ServerData.statusTable.GetStatusUpgradePrice(statusData.Key, currentLevel + i);
+                if (currentGoods < price + addPrice) break;
+                price += addPrice;
+                upgradeCount++;
+            }
+            
+            //Debug.LogError($"가능한 강화 수 : {upgradableAmount}\n가격: {price}\n업그레이드 횟수 : {upgradeCount}");
+            if (upgradeCount < 1)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Gold)}가 부족합니다.");
+                return;
+            }
+            
+            ServerData.goodsTable.GetTableData(Item_Type.Gold).Value -= price;
+            ServerData.statusTable.GetTableData(statusData.Key).Value += upgradeCount;
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {

@@ -56,6 +56,8 @@ public class UiRewardCollection : MonoBehaviour
     private GameObject ChunObject;
     [SerializeField]
     private GameObject DokebiObject;
+    [SerializeField]
+    private GameObject SumiObject;
 
     private void Start()
     {
@@ -109,6 +111,10 @@ public class UiRewardCollection : MonoBehaviour
         ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).AsObservable().Subscribe(e =>
         {
             DokebiObject.SetActive(e == 0);
+        }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).AsObservable().Subscribe(e =>
+        {
+            SumiObject.SetActive(e == 0);
         }).AddTo(this);
     }
 
@@ -1003,6 +1009,12 @@ public class UiRewardCollection : MonoBehaviour
 
     public void OnClickSumiReward(bool isPopUp=true)
     {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value > 0)
+        {
+            //졸업했으면 못받게
+            return;
+        }
+        
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value == 1)
         {
             if (isPopUp)

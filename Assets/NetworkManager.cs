@@ -119,6 +119,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private Toggle visibleRoomToggle_PartyTower2;
     [SerializeField]
     private Toggle soloPlayToggle_PartyTower2;
+    [SerializeField]
+    private Toggle autoSoloPlayToggle_PartyTower;
 
     [SerializeField]
     private TMP_InputField roomNameInput;
@@ -161,6 +163,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public int partyRaidTargetFloor2 { get; private set; }
 
     public ReactiveProperty<int> middleBossClearCount = new ReactiveProperty<int>(0);
+    private bool initialized = false;
 
     #region 방리스트 갱신
     // ◀버튼 -2 , ▶버튼 -1 , 셀 숫자
@@ -462,6 +465,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     #endregion
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey(SettingKey.towerAutoMode) == false)
+        {
+            PlayerPrefs.SetInt(SettingKey.towerAutoMode, 1);
+        }
+
+        autoSoloPlayToggle_PartyTower.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode, 1) > 0;
+        
+        initialized = true;
+
+    }
+
     public void ShowPartyRaidResultPopup()
     {
         partyRaidResultBoard.SetActive(true);
@@ -513,6 +529,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void MakePartyTowerRoom(int maxNum)
     {
+        if (autoSoloPlayToggle_PartyTower.isOn)
+        {
+            switch (maxNum)
+            {
+                case 1:
+                    uiPartyTowerBoard.SetActive(false);
+                    LobbyPanel.SetActive(false);
+                    loadingMask.SetActive(false);
+                    RoomPanel.SetActive(false);
+                    
+                    GameManager.Instance.LoadContents(GameManager.ContentsType.OffLine_Tower);
+                    break;
+                case 2:
+                    PopupManager.Instance.ShowAlarmMessage($"자동 도전은 혼자하기로만 가능합니다.");
+                    break;
+            }
+                
+            return;
+        }
+        
         int currentFloor = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.partyTowerFloor].Value;
 
         if (Utils.IsPartyTowerMaxFloor(currentFloor))
@@ -1626,4 +1662,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
     }
 #endif
+    
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
+    }
 }

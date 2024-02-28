@@ -175,7 +175,7 @@ public class GumGiManager : SingletonMono<GumGiManager>
     [SerializeField]
     private TextMeshProUGUI currentWaveText;
 
-    private WaitForSeconds spawnDelay = new WaitForSeconds(0.75f);
+    private WaitForSeconds spawnDelay = new WaitForSeconds(0.1f);
 
     private IEnumerator MainGameRoutine()
     {

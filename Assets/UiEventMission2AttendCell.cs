@@ -187,7 +187,7 @@ public class UiEventMission2AttendCell : FancyCell<PassData_Fancy>
         }
         else
         {
-            PopupManager.Instance.ShowAlarmMessage($"크리스마스 패스권이 필요합니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Mission2)} 패스권이 필요합니다.");
             return;
         }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");

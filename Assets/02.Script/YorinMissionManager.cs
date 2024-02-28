@@ -51,7 +51,8 @@ public enum YorinMissionKey
     YMission7_5, //PlayCave
     
     YMission1_9, //뽑기레벨
-    YMission2_7 //기술흡수
+    YMission2_7, //기술흡수
+    YMission1_10, //도움말확인
 
 
 }

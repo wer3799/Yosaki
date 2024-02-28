@@ -151,6 +151,8 @@ public class UserInfoTable_2
     public const string rankHonorRewardIdx = "rhri";//랭크명예보상
 
     public const string suhoUpgradeGraduateIdx = "sugi";//수호보주강화 졸업
+    public const string graduateSumiFire = "gsf";//수미산졸업
+    public const string graduateGumgi = "ggg";//검의산졸업
 
     
     
@@ -270,6 +272,8 @@ public class UserInfoTable_2
         { eventPackageRewardIdx, -1f },
         { rankHonorRewardIdx, -1f },
         { suhoUpgradeGraduateIdx, 0f },
+        { graduateSumiFire, 0f },
+        { graduateGumgi, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

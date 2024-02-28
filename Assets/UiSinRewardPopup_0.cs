@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using static UiTwelveRewardPopup;
 
-public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
+public class UiSinRewardPopup_0 : MonoBehaviour
 {
     [SerializeField]
     private GameObject rootObject;
@@ -20,16 +20,20 @@ public class UiSinRewardPopup_0 : SingletonMono<UiSinRewardPopup_0>
     [SerializeField]
     private Transform cellParent;
 
-
-
     [SerializeField]
     private TextMeshProUGUI damText;
 
     public int bossId = 13;
+    
+    [SerializeField]
+    private bool initByInspector = true;
 
     private void OnEnable()
     {
-        Initialize(bossId);
+        if (initByInspector)
+        {
+            Initialize(bossId);
+        }
     }
 
     

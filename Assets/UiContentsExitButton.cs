@@ -111,6 +111,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.MurimTower:
                         return false;
+                    case GameManager.ContentsType.OffLine_Tower when (int)ServerData.userInfoTable.GetTableData(UserInfoTable.partyTowerFloor).Value <
+                                                                     (TableManager.Instance.towerTableMulti.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.OffLine_Tower:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)
