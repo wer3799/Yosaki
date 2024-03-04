@@ -69,10 +69,15 @@ public class UiLimitedCostumePackageCell : MonoBehaviour
 
             return;
         }
-        
+
+        var log = string.Empty;
+
+        log += $"before = {ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value}/";
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value -= costumeData.Price;
+        log += $"after = {ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value}/";
         
         ServerData.costumeServerTable.TableDatas[costumeData.Stringid].hasCostume.Value = true;
+        log += $"costume = {costumeData.Stringid}";
         
         List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -91,6 +96,7 @@ public class UiLimitedCostumePackageCell : MonoBehaviour
 
         ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
+            LogManager.Instance.SendLogType("황금 곶감","황금 곶감",log);
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{costumeData.Name} 획득!!", null);
         });
 

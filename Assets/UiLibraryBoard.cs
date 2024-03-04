@@ -15,7 +15,7 @@ public class UiLibraryBoard : MonoBehaviour
 
     private void Initialize()
     {
-        twelveBossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[57]);
+        twelveBossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[72]);
     }
 
 }
