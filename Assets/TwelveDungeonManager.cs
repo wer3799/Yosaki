@@ -533,6 +533,8 @@ public class TwelveDungeonManager : ContentsManagerBase
                 Param userinfo2Param = new Param();
 
                 userinfo2Param.Add(UserInfoTable_2.hyulTowerRewardIndex, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyulTowerRewardIndex].Value);
+               
+                transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
                 transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userinfo2Param));
 
 
