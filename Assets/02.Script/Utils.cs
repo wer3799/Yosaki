@@ -186,6 +186,10 @@ public static class Utils
     {
         return type >= Item_Type.VisionSkill17 && type <= Item_Type.VisionSkill_End;
     }
+    public static bool IsGoods(this Item_Type type)
+    {
+        return type >= Item_Type.SB && type <= Item_Type.Goods_End;
+    }
 
     public static bool IsGoodsItem(this Item_Type type)
     {
@@ -390,7 +394,8 @@ public static class Utils
                type == Item_Type.GuimoonRelic ||
                type == Item_Type.GuimoonRelicClearTicket ||
                IsTreasureItem(type)||
-               IsVisionSkill(type)
+               IsVisionSkill(type)||
+               IsGoods(type)
             ;
     }
 

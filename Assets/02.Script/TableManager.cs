@@ -964,6 +964,8 @@ public class TableManager : SingletonMono<TableManager>
     public TowerTable14 gyungRockTowerTable7;
     public StudentPass StudentPass;
     public Title_Samcheon Title_Samcheon;
+    public StudentSpotTower StudentSpotTower;
+    public StudentSpot StudentSpot;
 }
 
 

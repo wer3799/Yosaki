@@ -422,20 +422,27 @@ public class SkillServerTable
             {
                 var sealTableData = TableManager.Instance.DosulAwakeTable.dataArray[getDosulAwakeGrade];
                 //ret->originDamage       
-                return (ret + sealTableData.Awakevalue* addDamageValue) * (1 + PlayerStats.GetDosulDamPer());
+                //return (ret + sealTableData.Awakevalue* addDamageValue) * (1 + PlayerStats.GetDosulDamPer())*(1+PlayerStats.GetEnhanceDosul());
+                var addDam = sealTableData.Awakevalue * addDamageValue;
+                ret += addDam;
             }
-            return ret * (1 + PlayerStats.GetDosulDamPer());
+            return ret * (1 + PlayerStats.GetDosulDamPer())*(1+PlayerStats.GetEnhanceDosul());
         }
 
-        if (tableData.SKILLCASTTYPE == SkillCastType.Vision)
+        else if (tableData.SKILLCASTTYPE == SkillCastType.Vision)
         {
-            return ret * (1 + PlayerStats.GetEnhanceVisionSkill());
+            return ret * (1 + PlayerStats.GetEnhanceVisionSkill()) * (1 + PlayerStats.GetEnhanceVision());
         }
 
 
-        if (tableData.SKILLCASTTYPE == SkillCastType.Student)
+        else if (tableData.SKILLCASTTYPE == SkillCastType.Student)
         {
             return ret * (1 + PlayerStats.GetBigiDamPer());
+        }
+
+        else if (tableData.SKILLCASTTYPE == SkillCastType.SealSword)
+        {
+            return ret * (1+PlayerStats.GetEnhanceSealSword());
         }
 
 

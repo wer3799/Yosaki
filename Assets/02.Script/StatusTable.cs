@@ -83,6 +83,7 @@ public class StatusTable
     public const string Hyung_StatPoint = "Hyung_StatPoint";
     public const string Chungu_StatPoint = "Chungu_StatPoint";
     public const string Difficulty_StatPoint = "Difficulty_StatPoint";
+    public const string Murim_memory = "Murim_memory";
 
 
     public const string Skill0_AddValue = "Sk0_Add";
@@ -159,6 +160,7 @@ public class StatusTable
         { Hyung_StatPoint, 0 },
         { Chungu_StatPoint, 0 },
         { Difficulty_StatPoint, 0 },
+        { Murim_memory, 0 },
         
         { Skill0_AddValue, 0 },
         { Skill1_AddValue, 0 },
@@ -326,6 +328,11 @@ public class StatusTable
                 case Difficulty_StatPoint:
                     {
                         return level * GameBalance.Stat_Difficulty_Slash;
+                    }
+                    break;
+                case Murim_memory:
+                    {
+                        return level * GameBalance.Stat_Murim_Slash;
                     }
                     break;
 

@@ -478,7 +478,7 @@ public static class CommonString
             case Item_Type.TaeguekGoods: return "태극 조각";
             case Item_Type.TaeguekElixir: return "태극 영약";
             case Item_Type.SuhoTreasure: return "수호 구슬";
-            case Item_Type.MRT: return "무공 비급";
+            case Item_Type.MRT: return "극락의 정수";
             case Item_Type.DBT: return "무림 구슬";
             case Item_Type.TransClearTicket: return "초월석 소탕권";
             case Item_Type.Event_SA: return "2주년 도토리";
@@ -489,7 +489,7 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "청룡 복주머니";
+            case Item_Type.Event_HotTime: return "벚꽃";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";
@@ -506,11 +506,13 @@ public static class CommonString
             case Item_Type.BattleClear: return "비무 대회 입장권";
             case Item_Type.BattleScore: return "비무 점수";
             case Item_Type.DPT: return "거북 문양";
-            case Item_Type.GT: return "빙고 티켓";
+            case Item_Type.GT: return "뽑기 티켓";
             case Item_Type.WT: return "적안 마수 소탕권";
             case Item_Type.SG: return "사신수 기운";
             case Item_Type.SC: return "사신수 영약";
             case Item_Type.SB: return "수련서";
+            case Item_Type.HYG: return "혈의 기운";
+            case Item_Type.HYC: return "혈자리 전수권";
         
     }
 
@@ -683,11 +685,13 @@ public static class CommonString
             case StatusType.SinsunHasValueUpgrade:
                 return "신선의 보옥 레벨당 신선베기 피해량 증가(%)";
             case StatusType.HyunsangHasValueUpgrade:
-                return "현상수배 증표 갯수당 효과 증가(%)";
+                return "현상수배 증표 개수당 효과 증가(%)";
             case StatusType.DragonHasValueUpgrade:
-                return "용인의 비늘 갯수당 효과 증가(%)";
+                return "용인의 비늘 개수당 효과 증가(%)";
             case StatusType.DragonPalaceHasValueUpgrade:
-                return "거북 문양 갯수당 효과 증가(%)";
+                return "거북 문양 개수당 효과 증가(%)";
+            case StatusType.MurimHasValueUpgrade:
+                return "극락의 정수 개수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:
@@ -813,6 +817,14 @@ public static class CommonString
                 return "천구베기 증폭(%)";
             case StatusType.EnhanceTransCritical:
                 return "초월 피해 증폭(%)";
+            case StatusType.EnhanceGwisalCritical:
+                return "[진] 귀살 베기 증폭(%)";
+            case StatusType.EnhanceSealSword:
+                return "요도 피해량 증폭(%)";
+            case StatusType.EnhanceDosul:
+                return "도술 피해량 증폭(%)";
+            case StatusType.EnhanceVision:
+                return "궁극기 피해량 증폭(%)";
             case StatusType.EnhanceSP:
                 return "검기 능력치 효과 증가(%)";
         }

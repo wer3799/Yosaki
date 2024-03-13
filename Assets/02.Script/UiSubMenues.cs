@@ -30,13 +30,21 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                  GameManager.Instance.bossId == 18 ||
                  GameManager.Instance.bossId == 20 || //강철이
                  GameManager.Instance.bossId == 57|| 
-                 GameManager.Instance.bossId == 204//강철이
+                 GameManager.Instance.bossId == 204|| //강철이
+                 GameManager.Instance.bossId == 296
                 ))
             {
                 //강철이
                 if (GameManager.Instance.bossId == 20|GameManager.Instance.bossId == 204)
                 {
                     _GangChulButton.OnClickButton();
+                    //아무거나로 변경
+                    GameManager.Instance.SetBossId(12);
+                }
+                //강철이
+                else if (GameManager.Instance.bossId == 296)
+                {
+                    _MunhaButton.OnClickButton();
                     //아무거나로 변경
                     GameManager.Instance.SetBossId(12);
                 }

@@ -380,11 +380,6 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             {
                 ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value += sleepRewardInfo.hotTimeItem;
             }
-            //구매시 2배
-            else
-            {
-                ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value += sleepRewardInfo.hotTimeItem;
-            }
         }
 
 

@@ -194,6 +194,9 @@ public Sprite weapon161;
 public Sprite weapon162;
 public Sprite weapon163;
 public Sprite weapon164;
+public Sprite weapon165;
+public Sprite weapon166;
+public Sprite weapon167;
     
 [Header ("Weapon_View")]
 
@@ -358,6 +361,7 @@ public Sprite RecommendWeapon22;
     public Sprite magicBook132;
     public Sprite magicBook133;
     public Sprite magicBook134;
+    public Sprite magicBook135;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -599,6 +603,8 @@ public Sprite RecommendWeapon22;
     public Sprite SG;
     public Sprite SC;
     public Sprite SB;
+    public Sprite HYG;
+    public Sprite HYC;
     [FormerlySerializedAs("BossTreasure")] 
     public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
@@ -1256,6 +1262,10 @@ public Sprite RecommendWeapon22;
                 return SC;   
             case Item_Type.SB:
                 return SB;   
+            case Item_Type.HYG:
+                return HYG;   
+            case Item_Type.HYC:
+                return HYC;   
             case Item_Type.DPT:
                 return DragonPalaceTreasure;   
             
@@ -1597,6 +1607,8 @@ public Sprite RecommendWeapon22;
                 return magicBook133;
             case Item_Type.magicBook134:
                 return magicBook134;
+            case Item_Type.magicBook135:
+                return magicBook135;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2392,6 +2404,12 @@ public Sprite RecommendWeapon22;
                 return weapon163;
             case Item_Type.weapon164:
                 return weapon164;
+            case Item_Type.weapon165:
+                return weapon165;
+            case Item_Type.weapon166:
+                return weapon166;
+            case Item_Type.weapon167:
+                return weapon167;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

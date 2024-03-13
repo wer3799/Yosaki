@@ -56,6 +56,11 @@ public class UiLimitedCostumePackageCell : MonoBehaviour
     public void OnClickBuyButton()
     {
 
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            PopupManager.Instance.ShowAlarmMessage("인터넷 연결을 확인해 주세요!");
+            return;
+        }
         if (CanBuyProduct() == false)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_Fall_Gold)}이 부족합니다.");
@@ -96,7 +101,7 @@ public class UiLimitedCostumePackageCell : MonoBehaviour
 
         ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
-            LogManager.Instance.SendLogType("황금 곶감","황금 곶감",log);
+            LogManager.Instance.SendLogType("황금 곶감","상점",log);
             PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{costumeData.Name} 획득!!", null);
         });
 

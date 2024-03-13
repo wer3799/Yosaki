@@ -2,6 +2,7 @@ using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,6 +26,8 @@ public class OffLineTowerManager : ContentsManagerBase
     public UnityEvent retryFunc;
 
     public static string poolName;
+    
+    private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
 
     private new void Start()
     {

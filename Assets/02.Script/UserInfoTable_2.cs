@@ -153,6 +153,10 @@ public class UserInfoTable_2
     public const string suhoUpgradeGraduateIdx = "sugi";//수호보주강화 졸업
     public const string graduateSumiFire = "gsf";//수미산졸업
     public const string graduateGumgi = "ggg";//검의산졸업
+    public const string graduateVisionTower = "gvt";//검의산졸업
+
+    public const string studentSpotGrade = "ssg";//제자 혈자리
+    public const string hyulTowerRewardIndex = "htri"; //명상 타워 보상 단계
 
     
     
@@ -217,6 +221,7 @@ public class UserInfoTable_2
         { meditationStartTime, -1f },
         { meditationIndex, -1f },
         { meditationTowerRewardIndex, -1f },
+        { hyulTowerRewardIndex, -1f },
         { meditationTowerScore, 0f },
         { usedGuimoonRelicTicket, 0f },
         { getRelicUpgrade, 0f },
@@ -274,6 +279,8 @@ public class UserInfoTable_2
         { suhoUpgradeGraduateIdx, 0f },
         { graduateSumiFire, 0f },
         { graduateGumgi, 0f },
+        { graduateVisionTower, 0f },
+        { studentSpotGrade, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

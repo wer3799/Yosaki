@@ -132,6 +132,7 @@ public class UserInfoTable
     public const string meditationpension = "meditationpension";
     public const string taeguekpension = "taeguekpension";
     public const string blacksoulpension = "blacksoulpension";
+    public const string studentspotpension = "studentspotpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -287,6 +288,8 @@ public class UserInfoTable
     public const string exchangeCount_27_Mileage = "m27";
     public const string exchangeCount_28_Mileage = "m28";
     public const string exchangeCount_29_Mileage = "m29";
+    public const string exchangeCount_30_Mileage = "m30";
+    public const string exchangeCount_31_Mileage = "m31";
 
  
     public const string ny_ex_0 = "ny_ex_0";
@@ -490,6 +493,7 @@ public class UserInfoTable
         { meditationpension, 0f },
         { taeguekpension, 0f },
         { blacksoulpension, 0f },
+        { studentspotpension, 0f },
 
         { marblePackChange, 0f },
         { yoguiSogulLastClear, 0f },
@@ -643,6 +647,8 @@ public class UserInfoTable
         { exchangeCount_27_Mileage, 0 },
         { exchangeCount_28_Mileage, 0 },
         { exchangeCount_29_Mileage, 0 },
+        { exchangeCount_30_Mileage, 0 },
+        { exchangeCount_31_Mileage, 0 },
 
         { ny_ex_0, 0 },
         { ny_ex_1, 0 },
@@ -802,8 +808,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 59);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(59));
+                            defultValues.Add(e.Current.Key, 61);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(61));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1342,6 +1348,10 @@ public class UserInfoTable
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.blacksoulpension).Value++;
             }
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.studentspotpension].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.studentspotpension).Value++;
+            }
 
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
@@ -1409,6 +1419,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.meditationpension, ServerData.userInfoTable.GetTableData(UserInfoTable.meditationpension).Value);
         userInfoParam.Add(UserInfoTable.taeguekpension, ServerData.userInfoTable.GetTableData(UserInfoTable.taeguekpension).Value);
         userInfoParam.Add(UserInfoTable.blacksoulpension, ServerData.userInfoTable.GetTableData(UserInfoTable.blacksoulpension).Value);
+        userInfoParam.Add(UserInfoTable.studentspotpension, ServerData.userInfoTable.GetTableData(UserInfoTable.studentspotpension).Value);
 
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
@@ -1522,6 +1533,8 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_27_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_28_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_29_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_30_Mileage).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_31_Mileage).Value = 0;
 
             userInfoParam.Add(UserInfoTable.exchangeCount_0_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_1_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value);
@@ -1554,6 +1567,8 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.exchangeCount_27_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_27_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_28_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_28_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_29_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_29_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_30_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_30_Mileage).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_31_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_31_Mileage).Value);
         }
 
         Param iapParam = null;
@@ -1646,6 +1661,8 @@ public class UserInfoTable
         
         ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += GameBalance.SinsuClearDailyGetAmount;
         
+        ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += GameBalance.HyulClearDailyGetAmount;
+        
 
         //도술
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulStart].Value != 0)
@@ -1685,6 +1702,7 @@ public class UserInfoTable
         goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
         goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
         goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
+        goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
         // List<Item_Type> itemTypes=new List<Item_Type>();
         // for (int i = 0; i < rewardData.Length; i++)
         // {

@@ -82,7 +82,7 @@ public class KingBossMoveController : MonoBehaviour
 
     public void InitializePattern()
     {
-        if (_bossId == 109)
+        if (_bossId == 109||_bossId == 272)
         {
             isMoving = true;
             var transform1 = transform;
@@ -95,7 +95,7 @@ public class KingBossMoveController : MonoBehaviour
                 initialized = true;
             }
         }
-        else if (_bossId == 110)
+        else if (_bossId == 110||_bossId == 273)
         {
             isMoving = true;
 
@@ -161,7 +161,7 @@ public class KingBossMoveController : MonoBehaviour
     private void Update()
     {
         //측천무후
-         if (_bossId == 109)
+         if (_bossId == 109||_bossId == 272)
         {
             if (isMoving)
             {
@@ -170,7 +170,7 @@ public class KingBossMoveController : MonoBehaviour
         }
 
           //항우
-        else if (_bossId == 110)
+        else if (_bossId == 110||_bossId == 273)
         {
             if (isMoving)
             {

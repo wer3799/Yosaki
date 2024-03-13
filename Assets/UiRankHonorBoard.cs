@@ -92,7 +92,7 @@ public class UiRankHonorBoard : SingletonMono<UiRankHonorBoard>
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
+            using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType), ServerData.goodsTable.GetTableData(e.Current.itemType).Value);

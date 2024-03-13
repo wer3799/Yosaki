@@ -860,6 +860,7 @@ public class UiMileageRefund : MonoBehaviour
 
              ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value =0;
              ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value =0;
+             ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value =GameBalance.HyulClearDailyGetAmount;
              ServerData.goodsTable.GetTableData(GoodsTable.WT).Value = GameBalance.WeeklyTicketWeeklyGetAmount;
              
              List<TransactionValue> transactions = new List<TransactionValue>();
@@ -891,6 +892,7 @@ public class UiMileageRefund : MonoBehaviour
              goodsParam.Add(GoodsTable.WT, ServerData.goodsTable.GetTableData(GoodsTable.WT).Value);
              goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
              goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
+             goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
 
              transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
              
@@ -1291,8 +1293,6 @@ public class UiMileageRefund : MonoBehaviour
             
             });
         }
-        #endregion
-
         //2/27
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 59)
         {
@@ -1410,6 +1410,92 @@ public class UiMileageRefund : MonoBehaviour
                 if (reward.Contains(rewardString))
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"용왕 오류 수정으로 인해 거북 문양 14개 소급!", null);
+                }
+            });
+        }
+        #endregion
+
+        
+        //3/14  업데이트
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 61)
+        {
+            Param userInfoParam = new Param();
+            Param goodsParam = new Param();
+            Param etcParam = new Param();
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 61;
+            
+            //핫타임 상점 교환횟수 초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value = 0;
+            
+            //핫타임 재화 초기화
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value = 0;
+            
+            //빙고 재화 초기화
+            ServerData.goodsTable.GetTableData(GoodsTable.GT).Value = 10;
+
+            //빙고 초기화
+            ServerData.etcServerTable.TableDatas[EtcServerTable.gachaEventReward].Value = string.Empty;
+            
+            var stringId = "b215";
+            
+            var reward = ServerData.bossServerTable.TableDatas[stringId].rewardedId.Value;
+
+            var rewardString = "#20";
+
+            if (reward.Contains(rewardString))
+            {
+                ServerData.goodsTable.GetTableData(GoodsTable.MRT).Value += 1;
+                goodsParam.Add(GoodsTable.MRT, ServerData.goodsTable.GetTableData(GoodsTable.MRT).Value);
+            }
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            
+            
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+
+            userInfoParam.Add(UserInfoTable.eventMission1_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_9).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_10, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_10).Value);
+            userInfoParam.Add(UserInfoTable.eventMission1_11, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_11).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+    
+            
+            goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
+            goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
+            goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            etcParam.Add(EtcServerTable.gachaEventReward, ServerData.etcServerTable.TableDatas[EtcServerTable.gachaEventReward].Value);
+            transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, etcParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                if (reward.Contains(rewardString))
+                {
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"극락 보상 오류 수정으로 인해 {CommonString.GetItemName(Item_Type.MRT)} 1개 소급!!",null);
                 }
             });
         }

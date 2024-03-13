@@ -303,6 +303,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             return Item_Type.BlackFoxClear;
         }
+        else if (key == "studentspotpension")
+        {
+            return Item_Type.HYC;
+        }
         else
         {
             return Item_Type.SmithFire;

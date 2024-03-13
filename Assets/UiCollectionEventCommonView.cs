@@ -217,9 +217,12 @@ public class UiCollectionEventCommonView : MonoBehaviour
         }
 
         PopupManager.Instance.ShowAlarmMessage("교환 완료");
+        var log = string.Empty;
 
+        log += $"before = {ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value}/";
         //로컬
         ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value -= 1;
+        log += $"after = {ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value}/";
 
         if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
         {
@@ -228,12 +231,82 @@ public class UiCollectionEventCommonView : MonoBehaviour
 
         ServerData.AddLocalValue((Item_Type)tableData.Itemtype, tableData.Itemvalue);
 
-        if (syncRoutine != null)
+         List<TransactionValue> transactions = new List<TransactionValue>();
+
+        if (IsCostumeItem())
         {
-            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+            Param costumeParam = new Param();
+
+            string costumeKey = ((Item_Type)tableData.Itemtype).ToString();
+
+            costumeParam.Add(costumeKey.ToString(), ServerData.costumeServerTable.TableDatas[costumeKey].ConvertToString());
+            log += $"costume = {costumeKey}";
+
+            Param goodsParam = new Param();
+
+            goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
+
+            goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+        }
+        else
+        {
+            string itemKey = ((Item_Type)tableData.Itemtype).ToString();
+
+            if ((Item_Type)tableData.Itemtype == Item_Type.NewGachaEnergy)
+            {
+                itemKey = GoodsTable.NewGachaEnergy;
+            }
+
+
+            Param goodsParam = new Param();
+
+            goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
+
+            goodsParam.Add(GoodsTable.Event_Fall_Gold, ServerData.goodsTable.GetTableData(GoodsTable.Event_Fall_Gold).Value);
+
+            goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Itemtype), ServerData.goodsTable.GetTableData((Item_Type)tableData.Itemtype).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         }
 
-        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+
+        Param userInfoParam = new Param();
+
+        if (string.IsNullOrEmpty(tableData.Exchangekey) == false)
+        {
+            userInfoParam.Add(tableData.Exchangekey, ServerData.userInfoTable.TableDatas[tableData.Exchangekey].Value);
+
+        }
+
+        userInfoParam.Add(UserInfoTable.usedSnowManCollectionCount, ServerData.userInfoTable.TableDatas[UserInfoTable.usedSnowManCollectionCount].Value);
+
+        transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+        ServerData.SendTransaction(transactions, successCallBack: () =>
+        {
+            if (IsCostumeItem())
+            {
+                LogManager.Instance.SendLogType("황금 곶감","이벤트",log);
+
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 획득!!", null);
+            }
+            else
+            {
+
+            }
+
+            //   LogManager.Instance.SendLogType("chuseokExchange", "Costume", ((Item_Type)tableData.Itemtype).ToString());
+        });
+
+        if (tableData.COMMONTABLEEVENTTYPE == CommonTableEventType.SnowMan)
+        {
+            ServerData.userInfoTable.UpdateSnowCollectionComplete();
+        }
 
     }
     public void OnClickExchangeButton()

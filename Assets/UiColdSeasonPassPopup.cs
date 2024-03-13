@@ -10,7 +10,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     [SerializeField]
     private List<UiBuffPopupView> uiBuffPopupViews;
     
-    string costumeKey = "costume174";
+    string costumeKey = "costume210";
 
     [SerializeField] private GameObject getCostumeButton;
 
@@ -20,11 +20,17 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     private TextMeshProUGUI descText1;
     [SerializeField]
     private TextMeshProUGUI descText2;
-    
+    [SerializeField] private TextMeshProUGUI costumeDesc;
+    [SerializeField] private TextMeshProUGUI getCostumeDesc;
+
     void Start()
     {
         Initialize();
         Subscribe();
+        
+        costumeDesc.SetText($"한정 외형\n{CommonString.GetItemName(ServerData.goodsTable.ServerStringToItemType(costumeKey))}");
+        getCostumeDesc.SetText($"{CommonString.GetItemName(ServerData.goodsTable.ServerStringToItemType(costumeKey))} 획득 가능!");
+
     }
     private void Subscribe()
     {

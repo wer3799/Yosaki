@@ -57,6 +57,8 @@ public class UiContentsPopup2 : MonoBehaviour
         ChunBoard_Hard,
         DokebiBoard_Hard,
         SumiBoard_Hard,
+        ThiefBoard_Hard,
+        DarkBoard_Hard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -449,6 +451,7 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 216:
                     case 217:
                     case 261:
+                    case 292:
                         lastBoards[(int)ContentsBoard.MurimBoard].SetActive(true);
                         break;
                     case 218:
@@ -457,6 +460,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 262:
                     case 263:
                     case 264:
+                    case 293:
+                    case 294:
+                    case 295:
                         lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                     case 221:
@@ -506,6 +512,37 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 259:
                     case 260:
                         lastBoards[(int)ContentsBoard.SumiBoard_Hard].SetActive(true);
+                        break;
+                    case 265:
+                    case 266:
+                    case 267:
+                    case 268:
+                    case 269:
+                    case 270:
+                    case 271:
+                    case 272:
+                    case 273:
+                    case 274:
+                    case 275:
+                        lastBoards[(int)ContentsBoard.ThiefBoard_Hard].SetActive(true);
+                        break;
+                    case 276:
+                    case 277:
+                    case 278:
+                    case 279:
+                    case 280:
+                    case 281:
+                    case 282:
+                    case 283:
+                    case 284:
+                    case 285:
+                    case 286:
+                    case 287:
+                    case 288:
+                    case 289:
+                    case 290:
+                    case 291:
+                        lastBoards[(int)ContentsBoard.DarkBoard_Hard].SetActive(true);
                         break;
                         
                 }

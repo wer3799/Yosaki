@@ -304,6 +304,8 @@ public class GoodsTable
     public static string SG = "SG";
     public static string SC = "SC";
     public static string SB = "SB";
+    public static string HYG = "HYG";
+    public static string HYC = "HYC";
     public static string MRT = "MRT";
     public static string DBT = "DBT";
 
@@ -587,6 +589,8 @@ public class GoodsTable
         { SG, 0f },
         { SC, GameBalance.SinsuClearDailyGetAmount },
         { SB, 0f},
+        { HYG, 0f},
+        { HYC, 0f},
         { MRT, 0f},
         { DBT, 0f},
     };

@@ -126,14 +126,6 @@ public class TwelveDungeonManager : ContentsManagerBase
     {
         int id = GameManager.Instance.bossId;
 
-        if (id >= 30 && id <= 38)
-        {
-            id = 30;
-        }
-        else if (id > 38)
-        {
-            id -= 8;
-        }
 
 #if UNITY_EDITOR
         Debug.LogError($"Map id {id}");
@@ -499,10 +491,65 @@ public class TwelveDungeonManager : ContentsManagerBase
         ////데이터 적용(서버)
         //ServerData.SendTransaction(rewardDatas);
 
-        //결과 UI
-        uiBossResultPopup.gameObject.SetActive(true);
-        statusUi.SetActive(false);
-        uiBossResultPopup.Initialize(damageAmount.Value, damageAmount.Value / twelveBossTable.Hp);
+        //혈자리 타워
+        if (GameManager.Instance.bossId == 296)
+        {
+            var cur = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.hyulTowerRewardIndex).Value;
+
+            var damage = damageAmount.Value;
+            var tableData = TableManager.Instance.StudentSpotTower.dataArray;
+
+            UiRewardResultPopUp.Instance.Clear();
+            var rewardIdx = -1;
+            //현재 등급+1부터 끝까지 받을 것이 있는가.
+            for (int i = cur+1; i < tableData.Length; i++)
+            {
+                if (tableData[i].Rewrardcut > damage)
+                {
+                    break;
+                }
+                else
+                {
+                    UiRewardResultPopUp.Instance.AddOrUpdateReward((Item_Type)(int)tableData[i].Rewardtype, (float)tableData[i].Rewardvalue);
+                    rewardIdx = i;
+
+                }
+            }
+
+            if (cur < rewardIdx)
+            {            
+
+                List<TransactionValue> transactionList = new List<TransactionValue>();
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.hyulTowerRewardIndex).Value = rewardIdx;
+
+                using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
+            
+                Param goodsParam = new Param();
+                while (e.MoveNext())
+                {
+                    ServerData.AddLocalValue(e.Current.itemType, e.Current.amount);
+                    goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType), ServerData.goodsTable.GetTableData(e.Current.itemType).Value);
+                }
+                Param userinfo2Param = new Param();
+
+                userinfo2Param.Add(UserInfoTable_2.hyulTowerRewardIndex, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.hyulTowerRewardIndex].Value);
+                transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userinfo2Param));
+
+
+                ServerData.SendTransactionV2(transactionList, successCallBack: () =>
+                {
+                    UiRewardResultPopUp.Instance.Show().Clear();
+                });            
+            }
+
+        }
+        
+            //결과 UI
+            uiBossResultPopup.gameObject.SetActive(true);
+            statusUi.SetActive(false);
+            uiBossResultPopup.Initialize(damageAmount.Value, damageAmount.Value / twelveBossTable.Hp);
+        
+
     }
 
     protected override IEnumerator ModeTimer()

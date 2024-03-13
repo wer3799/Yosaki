@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,11 @@ public class UiVisionTowerDescription : MonoBehaviour
     [SerializeField]
     private GameObject equipFrame;
 
+    [SerializeField] private GameObject transBeforeObject;
+    [SerializeField] private GameObject transAfterObject;
+
+    [SerializeField]
+    private TextMeshProUGUI awakeDescText;
 
     private int currentIdx;
 
@@ -26,8 +32,19 @@ public class UiVisionTowerDescription : MonoBehaviour
         currentIdx = PlayerStats.GetVisionTowerGrade();
 
         Initialize(currentIdx);
+        
+        Subscribe();
     }
 
+    private void Subscribe()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateVisionTower).AsObservable().Subscribe(e =>
+        {
+            transBeforeObject.SetActive(e < 1);
+            transAfterObject.SetActive(e >= 1);
+            Initialize(PlayerStats.GetVisionTowerGrade());
+        }).AddTo(this);
+    }
     public void Initialize(int idx)
     {
         if (idx == -1) idx = 0;
@@ -41,6 +58,8 @@ public class UiVisionTowerDescription : MonoBehaviour
         
         abilDescription.SetText($"{CommonString.GetStatusName(StatusType.EnhanceVisionSkill)} {Utils.ConvertNum(tableData.Abilvalue0 * 100f)}");
 
+        awakeDescText.SetText($"각성 효과로 강화됩니다.\n" +
+                              $"능력치 {GameBalance.VisionTowerGraduatePlusValue}배 증가");
     }
 
     public void OnClickLeftButton()

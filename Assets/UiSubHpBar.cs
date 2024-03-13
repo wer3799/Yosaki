@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CodeStage.AntiCheat.ObscuredTypes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,13 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
     private float fixedLerpSpeed = 5f;
 
     private TextMeshProUGUI remainDescription;
+
+    [Header("Ui")]
+    [SerializeField]
+    private TextMeshProUGUI damageIndicator;
+    [SerializeField]
+    private Animator damagedAnim;
+    private string DamageAnimName = "Play";
 
     private void OnEnable()
     {
@@ -47,7 +55,17 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
         }
     }
 
-
+    private void whenDamageAmountChanged(ObscuredDouble hp)
+    {
+        if (damageIndicator != null)
+        {
+            damageIndicator.SetText(Utils.ConvertBigNum(hp));
+        }
+        if (damagedAnim != null)
+        {
+            damagedAnim.SetTrigger(DamageAnimName);
+        }
+    }
     private void ResetGauge()
     {
         greenRenderer.fillAmount = 1f;
@@ -66,6 +84,7 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
         }
     }
 
+    [SerializeField] private bool isDamageText = false;
     public void UpdateGauge(double currentHp, double maxHp)
     {
         if (maxHp == 0f) return;
@@ -82,7 +101,11 @@ public class UiSubHpBar : SingletonMono<UiSubHpBar>
             {
                 remainDescription.SetText("클리어!");
             }
-         
+        }
+
+        if (isDamageText)
+        {
+            whenDamageAmountChanged(maxHp - currentHp);
         }
     }
 }

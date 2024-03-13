@@ -56,5 +56,38 @@ public class UiVisionTowerBoard : MonoBehaviour
             GameManager.Instance.LoadContents(GameManager.ContentsType.VisionTower);
         }, () => { });
     }
+    public void OnClickTransButton()
+    {
+        if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.visionTowerScore].Value < GameBalance.VisionTowerGraduateScore)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"최고 등급 {GameBalance.VisionTowerGraduateScore} 이상일때 각성 가능!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                $"비전 전수 각성시 최고 등급이 {GameBalance.VisionTowerFixedScore}로 고정 됩니다. \n" +
+                $"그리고 비전전수 효과가 {GameBalance.VisionTowerGraduatePlusValue}배 강화 됩니다.\n" +
+                "각성 하시겠습니까??", () =>
+                {
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.visionTowerScore].Value = GameBalance.VisionTowerFixedScore;
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateVisionTower].Value = 1;
+                    
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+                    
+                    Param userinfo2Param = new Param();
+                    userinfo2Param.Add(UserInfoTable_2.visionTowerScore, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.visionTowerScore].Value);
+                    userinfo2Param.Add(UserInfoTable_2.graduateVisionTower, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateVisionTower].Value);
 
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName,UserInfoTable_2.Indate,userinfo2Param));
+                    
+                    ServerData.SendTransaction(transactions,successCallBack: () =>
+                    {
+                        
+                    });
+                    
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+              
+                }, null);
+        }
+    }
 }

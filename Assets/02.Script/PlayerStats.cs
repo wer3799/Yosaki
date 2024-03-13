@@ -134,6 +134,11 @@ public enum StatusType
     SasinsuGoodsGainPer,
     SuperCritical33DamPer,//극혈 피해(%)
     SuperCritical34DamPer,//보스 피해(%)
+    MurimHasValueUpgrade,//극락 재화당 개수증가
+    EnhanceGwisalCritical,//귀살증폭
+    EnhanceSealSword,//요도증폭
+    EnhanceDosul,//도술증폭
+    EnhanceVision,//궁극증폭
 
 }
 
@@ -2143,8 +2148,8 @@ public static class PlayerStats
         ret += GetWeaponEquipPercentValue(StatusType.SuperCritical22DamPer);
 
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical22DamPer);
-        
-        return ret;
+
+        return ret * (1 + GetEnhanceGwisalCritical());
     }
     //심상베기
     public static float GetSuperCritical23DamPer()
@@ -2264,11 +2269,13 @@ public static class PlayerStats
         ret += GetMunhaTower2Ability(StatusType.SuperCritical31DamPer);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical31DamPer);
+        
+        ret += GetMunhaHyulAbilValue(StatusType.SuperCritical31DamPer);
 
         return ret;
     }
 
-    //무림피해
+    //극락베기
     public static float GetSuperCritical32DamPer()
     {
         float ret = 0f;
@@ -2276,7 +2283,12 @@ public static class PlayerStats
         ret += GetMurimTreasureAbilHasEffect();
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical32DamPer);
+        
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical32DamPer);
 
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Murim_memory);
+
+        
         return ret;
     }
     //극혈 피해
@@ -2294,7 +2306,7 @@ public static class PlayerStats
 
         return ret;
     }
-    //?? 피해
+    //무림 베기
     public static float GetSuperCritical34DamPer()
     {
         float ret = 0f;
@@ -2374,6 +2386,43 @@ public static class PlayerStats
 
         ret += GetBlackFoxEffect(StatusType.EnhanceTransCritical);
 
+        return ret;
+    }
+    //귀살증폭
+    public static float GetEnhanceGwisalCritical()
+    {
+        float ret = 0f;
+
+        ret += GetBlackFoxEffect(StatusType.EnhanceGwisalCritical);
+
+        return ret;
+    }
+    //요도 증폭
+    public static float GetEnhanceSealSword()
+    {
+        float ret = 0f;
+
+        ret += GetMunhaHyulAbilValue(StatusType.EnhanceSealSword);
+        
+        
+        return ret;
+    }
+    //도술 증폭
+    public static float GetEnhanceDosul()
+    {
+        float ret = 0f;
+
+        ret += GetMunhaHyulAbilValue(StatusType.EnhanceDosul);
+        
+        return ret;
+    }
+    //궁극기 증폭
+    public static float GetEnhanceVision()
+    {
+        float ret = 0f;
+
+        ret += GetMunhaHyulAbilValue(StatusType.EnhanceVision);
+        
         return ret;
     }
     //검기 능력치 효과 증가(%)
@@ -3096,11 +3145,13 @@ public static class PlayerStats
     private static Dictionary<StatusType, float> guimoonValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> blackFoxValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> meditationDictionary = new Dictionary<StatusType, float>();
+    private static Dictionary<StatusType, float> munhaHyulDictionary = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> magicBookHasValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> titleHasValue = new Dictionary<StatusType, float>();
     private static Dictionary<StatusType, float> sinsuHasValue = new Dictionary<StatusType, float>();
 
     private static bool meditationInitialize = false;
+    private static bool munhaHyulInitialize = false;
 
     private static void ResetStageRelicHas()
     {
@@ -3509,7 +3560,7 @@ public static class PlayerStats
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value < 21399-2) return 0f;
 
-        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.MRT).Value * (GameBalance.murimTreasureAbilValue));
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.MRT).Value * (GameBalance.murimTreasureAbilValue + GetMurimHasValueUpgrade()));
     }
 
     public static float GetDifficultyBossTreasureAbilHasEffect()
@@ -4131,6 +4182,7 @@ public static class PlayerStats
         PlayerStats.ResetBlackFoxHas();
         PlayerStats.ResetMeditationDictionary();
         PlayerStats.ResetSuperCritical11CalculatedValue();
+        PlayerStats.ResetMunhaHyulDictionary();
     }
 
     public static int GetSusanoGrade()
@@ -4231,6 +4283,11 @@ public static class PlayerStats
         if (grade > -1)
         {
             var data = TableManager.Instance.visionTowerTable.dataArray[grade];
+
+            if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateVisionTower).Value > 0)
+            {
+                return data.Abilvalue0 * GameBalance.VisionTowerGraduatePlusValue;
+            }
             return data.Abilvalue0;
         } 
         else
@@ -4366,8 +4423,30 @@ public static class PlayerStats
                 grade = i;
             }
         }
+        
+        return grade;
+    }
+    //특훈
+    public static int GetMunhaHyulTowerGrade()
+    {
+        int grade = -1;
 
-
+        var tableData = TableManager.Instance.StudentSpotTower.dataArray;
+        var scoreValue = ServerData.bossServerTable.TableDatas["b296"].score.Value;
+        var score = -1d;
+        if (string.IsNullOrEmpty(scoreValue) == false)
+        {
+            score = double.Parse(scoreValue);
+        }
+        
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (score >= tableData[i].Rewrardcut)
+            {
+                grade = i;
+            }
+        }
+        
         return grade;
     }
 
@@ -6255,7 +6334,6 @@ public static class PlayerStats
 
         return ret;
     }
-
     public static Dictionary<StatusType, float> GetMeditationDictionary()
     {
         return meditationDictionary;
@@ -6282,6 +6360,36 @@ public static class PlayerStats
         }
 
         meditationInitialize = true;
+
+    }
+    public static Dictionary<StatusType, float> GetMunhaHyulDictionary()
+    {
+        ResetMunhaHyulDictionary();
+        CreateMunhaHyulDictionary();
+        
+        return munhaHyulDictionary;
+    }
+    public static void ResetMunhaHyulDictionary()
+    {
+        munhaHyulInitialize = false;
+    }
+    public static void CreateMunhaHyulDictionary()
+    {
+        if (munhaHyulInitialize == true) return;
+        
+        munhaHyulDictionary.Clear();
+        var tableData = TableManager.Instance.StudentSpot.dataArray;
+
+        var idx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.studentSpotGrade).Value;
+        
+        
+        for (int i = 0; i <= idx; i++)
+        {
+            AddOrUpdateValue(munhaHyulDictionary, (StatusType)tableData[i].Abil_Type, tableData[i].Abil_Value);
+        }
+
+
+        munhaHyulInitialize = true;
 
     }
     public static float GetSamchunAbility(StatusType type)
@@ -6415,6 +6523,26 @@ public static class PlayerStats
         
         
         if(meditationDictionary.TryGetValue(statusType, out float value))
+        {
+            return value;
+        }
+
+        return 0f;
+        
+    }
+    public static float GetMunhaHyulAbilValue(StatusType statusType)
+    {
+        int currentGrade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.studentSpotGrade).Value;
+
+        if (currentGrade == -1) return 0f;
+
+        if (munhaHyulInitialize == false)
+        {
+            CreateMunhaHyulDictionary();
+        }
+        
+        
+        if(munhaHyulDictionary.TryGetValue(statusType, out float value))
         {
             return value;
         }
@@ -6592,6 +6720,9 @@ public static class PlayerStats
 
         ret += GetSpecialTypeAbility(StatusType.TreasureHasValueUpgrade);
 
+        ret += GetSamchunAbility(StatusType.TreasureHasValueUpgrade);
+
+        
         return ret;
     }
 
@@ -6608,6 +6739,8 @@ public static class PlayerStats
         ret += GetCostumeSpecialAbilityValue(StatusType.DarkHasValueUpgrade);
 
         ret += GetSpecialTypeAbility(StatusType.DarkHasValueUpgrade);
+        
+        ret += GetSamchunAbility(StatusType.DarkHasValueUpgrade);
 
         return ret;
     }
@@ -6670,6 +6803,15 @@ public static class PlayerStats
 
         ret += GetSpecialTypeAbility(StatusType.DragonPalaceHasValueUpgrade);
 
+        return ret;
+    }
+    //극락재화
+    public static float GetMurimHasValueUpgrade()
+    {
+        float ret = 0f;
+        
+        ret += GetPassiveSkill2Value(StatusType.MurimHasValueUpgrade);
+        
         return ret;
     }
     public static float GetPeachAbilValue()

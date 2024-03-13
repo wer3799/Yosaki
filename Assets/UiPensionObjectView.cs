@@ -241,6 +241,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.BlackFoxClear;
         }
+        else if (pensionKey == "studentspotpension")
+        {
+            itemType = Item_Type.HYC;
+        }
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 
