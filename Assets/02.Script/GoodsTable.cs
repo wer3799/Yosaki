@@ -590,7 +590,7 @@ public class GoodsTable
         { SC, GameBalance.SinsuClearDailyGetAmount },
         { SB, 0f},
         { HYG, 0f},
-        { HYC, 0f},
+        { HYC, GameBalance.HyulClearDailyGetAmount},
         { MRT, 0f},
         { DBT, 0f},
     };

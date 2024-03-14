@@ -808,8 +808,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 61);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(61));
+                            defultValues.Add(e.Current.Key, 62);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(62));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1658,11 +1658,15 @@ public class UserInfoTable
         }
         
         ServerData.goodsTable.GetTableData(GoodsTable.GT).Value += GameBalance.GachaTicketDailyGetAmount;
-        
-        ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += GameBalance.SinsuClearDailyGetAmount;
-        
-        ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += GameBalance.HyulClearDailyGetAmount;
-        
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value >= 18998)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.SC).Value += GameBalance.SinsuClearDailyGetAmount;
+        }
+
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3000000)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += GameBalance.HyulClearDailyGetAmount;
+        }
 
         //도술
         if (ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dosulStart].Value != 0)

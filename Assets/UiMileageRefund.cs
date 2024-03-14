@@ -1423,7 +1423,7 @@ public class UiMileageRefund : MonoBehaviour
             Param goodsParam = new Param();
             Param etcParam = new Param();
             
-            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 61;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 62;
             
             //핫타임 상점 교환횟수 초기화
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission1_0).Value = 0;
@@ -1442,7 +1442,8 @@ public class UiMileageRefund : MonoBehaviour
             //핫타임 재화 초기화
             ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value = 0;
             ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value = 0;
-            
+            ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value = 2;
+
             //빙고 재화 초기화
             ServerData.goodsTable.GetTableData(GoodsTable.GT).Value = 10;
 
@@ -1486,6 +1487,7 @@ public class UiMileageRefund : MonoBehaviour
             goodsParam.Add(GoodsTable.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime).Value);
             goodsParam.Add(GoodsTable.Event_HotTime_Saved, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
             goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+            goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             etcParam.Add(EtcServerTable.gachaEventReward, ServerData.etcServerTable.TableDatas[EtcServerTable.gachaEventReward].Value);
@@ -1497,6 +1499,35 @@ public class UiMileageRefund : MonoBehaviour
                 {
                     PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,$"극락 보상 오류 수정으로 인해 {CommonString.GetItemName(Item_Type.MRT)} 1개 소급!!",null);
                 }
+            });
+        }
+        if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value == 61)
+        {
+            Param userInfoParam = new Param();
+            Param goodsParam = new Param();
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 62;
+            
+            
+            //핫타임 재화 초기화
+            ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += 2;
+            
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
+                    $"{CommonString.GetItemName(Item_Type.HYC)} 2개 소급!", null);
             });
         }
     }
