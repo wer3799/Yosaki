@@ -43,6 +43,7 @@ public class UiSusanoBuff : SingletonMono<UiSusanoBuff>
         if (GameManager.contentsType == GameManager.ContentsType.BattleContest) return;
         if (GameManager.contentsType == GameManager.ContentsType.WeeklyBoss) return;
         if (GameManager.contentsType == GameManager.ContentsType.OffLine_Tower) return;
+        if (GameManager.contentsType == GameManager.ContentsType.SpecialRequestBoss) return;
         //산신령
 
         if (GameManager.contentsType == GameManager.ContentsType.TwelveDungeon)

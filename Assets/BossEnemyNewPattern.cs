@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using UniRx;
 using UnityEngine;
 using System.Linq;
@@ -81,13 +80,23 @@ public class BossEnemyNewPattern : BossEnemyBase
 
     private void Initialize()
     {
-        //enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.SpecialRequestBoss:
+                break;
+            case GameManager.ContentsType.TwelveDungeon:
+                if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+                {
+                    
+                }
+                else
+                {
+                    agentHpController.SetHp(float.MaxValue);
+                }
 
-        agentHpController.SetHp(float.MaxValue);
-
-        agentHpController.SetDefense(0);
-
-        //enemyHitObjects.ForEach(e => e.SetDamage(1f));
+                agentHpController.SetDefense(0);
+                break;
+        }
 
         StartAttackRoutine();
     }

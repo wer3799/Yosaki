@@ -1530,6 +1530,37 @@ public class UiMileageRefund : MonoBehaviour
                     $"{CommonString.GetItemName(Item_Type.HYC)} 2개 소급!", null);
             });
         }
+        //2/16
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 63)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            Param passParam = new Param();
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 63;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+
+            
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";
+            
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            
+            passParam.Add(ChildPassServerTable.childFree, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+            passParam.Add(ChildPassServerTable.childAd, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            
+            });
+        }
     }
     
     private void ShopItemRefundRoutine()

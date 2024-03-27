@@ -19,6 +19,7 @@ public static class ServerData
     public static EventMissionTable eventMissionTable { get; private set; } = new EventMissionTable();
     
     public static YorinMissionServerTable yorinMissionServerTable { get; private set; } = new YorinMissionServerTable();
+    public static YorinSpecialMissionServerTable yorinSpecialMissionServerTable { get; private set; } = new YorinSpecialMissionServerTable();
     public static CollectionTable collectionTable { get; private set; } = new CollectionTable();
     public static EquipmentTable equipmentTable { get; private set; } = new EquipmentTable();
     public static MagicBookTable magicBookTable { get; private set; } = new MagicBookTable();
@@ -41,6 +42,7 @@ public static class ServerData
     public static IAPServerTable iapServerTable { get; private set; } = new IAPServerTable();
 
     public static BossServerTable bossServerTable { get; private set; } = new BossServerTable();
+    public static SpecialRequestBossServerTable specialRequestBossServerTable { get; private set; } = new SpecialRequestBossServerTable();
     public static SasinsuTable sasinsuServerTable { get; private set; } = new SasinsuTable();
     public static AttendanceServerTable attendanceServerTable { get; private set; } = new AttendanceServerTable();
 
@@ -119,6 +121,7 @@ public static class ServerData
         //dailyMissionTable.Initialize();
         eventMissionTable.Initialize();
         yorinMissionServerTable.Initialize();
+        yorinSpecialMissionServerTable.Initialize();
         //collectionTable.Initialize();
         equipmentTable.Initialize();
         magicBookTable.Initialize();
@@ -199,10 +202,6 @@ public static class ServerData
         samchunTitleServerTable.Initialize();
     }
 
-    public static void BossTableInitialized()
-    {
-        bossScoreTable.Initialize();
-    }
 
     public static void SecondLoadTable()
     {
@@ -221,7 +220,9 @@ public static class ServerData
     
     public static void ThirdLoadTable()
     {
-        BossTableInitialized();
+        bossScoreTable.Initialize();
+        
+        specialRequestBossServerTable.Initialize();    
     }
     
     
@@ -990,6 +991,9 @@ public static class ServerData
 
             case Item_Type.GuildReward:
                 ServerData.goodsTable.GetTableData(GoodsTable.GuildReward).Value += rewardValue;
+                break;
+            case Item_Type.Exp:
+                ServerData.growthTable.GetTableData(GrowthTable.Exp).Value += rewardValue;
                 break;
             default:
             {

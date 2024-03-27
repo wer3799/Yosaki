@@ -19,7 +19,7 @@ public class PartyTowerStageView : MonoBehaviour
 
         gradeDescription.SetText($"{tableData.Id + 1}단계");
 
-        description.SetText($"관문체력 : {Utils.ConvertBigNum(this.tableData.Firstbosshp)}\n보스체력 : {Utils.ConvertBigNum(this.tableData.Lastbosshp)}");
+        description.SetText($"관문체력 : {Utils.ConvertNum(this.tableData.Firstbosshp)}\n보스체력 : {Utils.ConvertNum(this.tableData.Lastbosshp)}");
     
     }
 

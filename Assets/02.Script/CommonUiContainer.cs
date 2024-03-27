@@ -39,7 +39,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
         string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill,
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
-        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill
+        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill,CommonString.ItemGrade_19_Skill
         
     };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
@@ -197,6 +197,10 @@ public Sprite weapon164;
 public Sprite weapon165;
 public Sprite weapon166;
 public Sprite weapon167;
+public Sprite weapon168;
+public Sprite weapon169;
+public Sprite weapon170;
+public Sprite weapon171;
     
 [Header ("Weapon_View")]
 
@@ -362,6 +366,9 @@ public Sprite RecommendWeapon22;
     public Sprite magicBook133;
     public Sprite magicBook134;
     public Sprite magicBook135;
+    public Sprite magicBook136;
+    public Sprite magicBook137;
+    public Sprite magicBook138;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -526,6 +533,13 @@ public Sprite RecommendWeapon22;
     public Sprite DPSkill4;
 
     
+    public Sprite GRSkill0;
+    public Sprite GRSkill1;
+    public Sprite GRSkill2;
+    public Sprite GRSkill3;
+    public Sprite GRSkill4;
+
+    
     [Header ("Goods")]
     
     public Sprite magicStone;
@@ -598,6 +612,7 @@ public Sprite RecommendWeapon22;
     public Sprite BattleClear;
     public Sprite BattleScore;
     public Sprite DragonPalaceTreasure;
+    public Sprite Exp;
     public Sprite GT;
     public Sprite WT;
     public Sprite SG;
@@ -605,6 +620,7 @@ public Sprite RecommendWeapon22;
     public Sprite SB;
     public Sprite HYG;
     public Sprite HYC;
+    public Sprite SRG;
     [FormerlySerializedAs("BossTreasure")] 
     public Sprite GwiSalTreasure;
     public Sprite ChunguTreasure;
@@ -1266,8 +1282,12 @@ public Sprite RecommendWeapon22;
                 return HYG;   
             case Item_Type.HYC:
                 return HYC;   
+            case Item_Type.SRG:
+                return SRG;   
             case Item_Type.DPT:
                 return DragonPalaceTreasure;   
+            case Item_Type.Exp:
+                return Exp;   
             
             case Item_Type.GuildTowerClearTicket:
                 return GuildTowerClearTicket;  
@@ -1609,6 +1629,12 @@ public Sprite RecommendWeapon22;
                 return magicBook134;
             case Item_Type.magicBook135:
                 return magicBook135;
+            case Item_Type.magicBook136:
+                return magicBook136;
+            case Item_Type.magicBook137:
+                return magicBook137;
+            case Item_Type.magicBook138:
+                return magicBook138;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2152,6 +2178,18 @@ public Sprite RecommendWeapon22;
             case Item_Type.DPSkill4:
                 return DPSkill4;
             //
+            //
+            case Item_Type.GRSkill0:
+                return GRSkill0;
+            case Item_Type.GRSkill1:
+                return GRSkill1;
+            case Item_Type.GRSkill2:
+                return GRSkill2;
+            case Item_Type.GRSkill3:
+                return GRSkill3;
+            case Item_Type.GRSkill4:
+                return GRSkill4;
+            //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;
 
@@ -2410,6 +2448,14 @@ public Sprite RecommendWeapon22;
                 return weapon166;
             case Item_Type.weapon167:
                 return weapon167;
+            case Item_Type.weapon168:
+                return weapon168;
+            case Item_Type.weapon169:
+                return weapon169;
+            case Item_Type.weapon170:
+                return weapon170;
+            case Item_Type.weapon171:
+                return weapon171;
             
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;

@@ -21,6 +21,10 @@ public class AlarmHitObjectV2 : AlarmHitObject
 {
 
     
+    
+
+
+    [Header ("V2")]
     [SerializeField] private float startScale = 1f;
     [SerializeField] private float endScale = 2f;
     
@@ -346,17 +350,20 @@ public class AlarmHitObjectV2 : AlarmHitObject
         //추적
         isMove = true;
         PlayScaleAnimation();
-        int chaseCount = 7;
-        for (int i = 0; i < chaseCount; i++)
+        var divideNum = 0.1f;
+        var chaseCount = (int)(predictTime / divideNum);
+        for (var i = 0; i < chaseCount; i++)
         {
             SetDirToPlayer();
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(divideNum);
         }
 
         isMove = false;
-        //추적끝 이펙트시작
-
+        
+        //추적끝 터지기까지 추가 딜레이
+        yield return new WaitForSeconds(delay);
+        //이펙트시작
         animator.SetTrigger(AnimationAttackKey);
 
         alarmObject.SetActive(false);

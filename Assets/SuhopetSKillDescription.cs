@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Management.Instrumentation;
+//using System.Management.Instrumentation;
 using UnityEngine;
 
 public class SuhopetSKillDescription : MonoBehaviour

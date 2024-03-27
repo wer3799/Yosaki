@@ -103,6 +103,7 @@ public class GameManager : SingletonMono<GameManager>
         MurimTower,
         GyungRockTower7,
         OffLine_Tower,//십만동굴 솔플
+        SpecialRequestBoss,
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -119,6 +120,7 @@ public class GameManager : SingletonMono<GameManager>
     public ReactiveCommand whenSceneChanged = new ReactiveCommand();
 
     public ObscuredInt bossId { get; private set; }
+    public ObscuredInt specialRequestBossId { get; private set; }
     public ObscuredInt suhoAnimalId { get; private set; }
     public ObscuredInt currentTowerId { get; private set; }
 
@@ -143,6 +145,12 @@ public class GameManager : SingletonMono<GameManager>
     public void SetBossId(int bossId)
     {
         this.bossId = bossId;
+
+        RandomizeKey();
+    }
+    public void SetSpecialRequestBossId(int bossId)
+    {
+        this.specialRequestBossId = bossId;
 
         RandomizeKey();
     }

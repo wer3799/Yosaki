@@ -74,7 +74,7 @@ public class Enemy : PoolItem
                 flyMove_normal = GetComponent<FlyMove_Normal>();
             }
         }
-
+        
         enemyHitObject = GetComponentInChildren<EnemyHitObject>();
     }
 
@@ -253,7 +253,7 @@ public class Enemy : PoolItem
     {
         if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateSumiFire).Value == 0) return;
 
-        ServerData.goodsTable.GetDokebiItem(GameManager.Instance.CurrentStageData.Sumifloweramount);
+        ServerData.goodsTable.GetSumiItem(GameManager.Instance.CurrentStageData.Sumifloweramount);
     }
 
     private void GetYoPowerItem()

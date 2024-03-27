@@ -908,7 +908,28 @@ public class TableManager : SingletonMono<TableManager>
             sealSwordData.Add(sealSwordTable.dataArray[i].Id, sealSwordTable.dataArray[i]);
         }
     }
+    [SerializeField] private YorinSpecialMission yorinSpecialMission;
+
+    public YorinSpecialMission YorinSpecialMission => yorinSpecialMission;
+    private Dictionary<int, YorinSpecialMissionData> yorinSpecialMissionDatas;
     
+    public Dictionary<int, YorinSpecialMissionData> YorinSpecialMissionDatas
+    {
+        get
+        {
+            if (yorinSpecialMissionDatas == null)
+            {
+                yorinSpecialMissionDatas = new Dictionary<int, YorinSpecialMissionData>();
+
+                for (int i = 0; i < YorinSpecialMission.dataArray.Length; i++)
+                {
+                    yorinSpecialMissionDatas.Add(yorinSpecialMission.dataArray[i].Id, yorinSpecialMission.dataArray[i]);
+                }
+            }
+
+            return yorinSpecialMissionDatas;
+        }
+    }
     public TowerTable9 SealTowerTable;
     public SealSwordAwakeTable SealSwordAwakeTable;
     public DosulAwakeTable DosulAwakeTable;
@@ -966,6 +987,13 @@ public class TableManager : SingletonMono<TableManager>
     public Title_Samcheon Title_Samcheon;
     public StudentSpotTower StudentSpotTower;
     public StudentSpot StudentSpot;
+    public StudentSpotPass StudentSpotPass;
+    
+    public SpecialRequestStarRewardTable SpecialRequestStarRewardTable;
+    public SpecialRequestExchangeTable SpecialRequestExchangeTable;
+    public SpecialRequestBossTable SpecialRequestBossTable;
+    public SpecialRequestTable SpecialRequestTable;
+    public SpecialRequestRewardTable SpecialRequestRewardTable;
 }
 
 

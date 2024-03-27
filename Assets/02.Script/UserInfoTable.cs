@@ -6,6 +6,7 @@ using LitJson;
 using System;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
+using GoogleMobileAds.Api;
 
 public class UserInfoTable
 {
@@ -808,8 +809,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 62);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(62));
+                            defultValues.Add(e.Current.Key, 63);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(63));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1768,6 +1769,57 @@ public class UserInfoTable
         ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value = string.Empty;
         yoguiSogulParam.Add(EtcServerTable.guildAttenReward, ServerData.etcServerTable.TableDatas[EtcServerTable.guildAttenReward].Value);
 
+
+        var curSeason = Utils.GetCurrentSeasonSpecialRequestData();
+
+        var userSeasonData= (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.currentSeasonIdx).Value;
+        //특별의뢰 시즌 변화!!
+        if(curSeason.Id!=userSeasonData)
+        {
+            Param specialRequestParam = new Param();
+            
+            for (int i = 0; i < curSeason.Stringid.Length; i++)
+            {
+                ServerData.specialRequestBossServerTable.TableDatas[curSeason.Stringid[i]].score.Value = -1;
+                ServerData.specialRequestBossServerTable.TableDatas[curSeason.Stringid[i]].isRewarded.Value = 0;
+                specialRequestParam.Add(curSeason.Stringid[i], ServerData.specialRequestBossServerTable.TableDatas[curSeason.Stringid[i]].ConvertToString());
+            }
+            transactionList.Add(TransactionValue.SetUpdate(SpecialRequestBossServerTable.tableName, SpecialRequestBossServerTable.Indate, specialRequestParam));
+
+            var exchangeData = TableManager.Instance.SpecialRequestExchangeTable.dataArray;
+
+            List<string> keys =  new List<string>();
+            for (int i = 0; i < exchangeData.Length; i++)
+            {
+                if (string.IsNullOrEmpty(exchangeData[i].Exchangekey)) continue;
+                if (keys.Contains(exchangeData[i].Exchangekey) == false)
+                {
+                    keys.Add(exchangeData[i].Exchangekey);
+                }
+            }
+
+            using var e = keys.GetEnumerator();
+
+            while (e.MoveNext())
+            {
+                if (e.Current != null)
+                {
+                    ServerData.userInfoTable_2.GetTableData(e.Current).Value = 0;
+                    userInfo2Param.Add(e.Current, ServerData.userInfoTable_2.TableDatas[e.Current].Value);
+                }
+            }
+
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestTotalRewardIdx).Value = -1;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestSpecialRewardIdx).Value = -1;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.currentSeasonIdx).Value = curSeason.Id;
+            
+            userInfo2Param.Add(UserInfoTable_2.specialRequestTotalRewardIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.specialRequestTotalRewardIdx].Value);
+            userInfo2Param.Add(UserInfoTable_2.specialRequestSpecialRewardIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.specialRequestSpecialRewardIdx].Value);
+            userInfo2Param.Add(UserInfoTable_2.currentSeasonIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.currentSeasonIdx].Value);
+
+            Debug.LogError("특별의뢰 시즌 변화@@@@@@");
+        }
+        
 
         //주간초기화
         if (weekChanged)

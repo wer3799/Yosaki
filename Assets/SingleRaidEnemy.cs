@@ -106,8 +106,22 @@ public class SingleRaidEnemy : BossEnemyBase
     {
         enemyHitObjects = GetComponentsInChildren<AlarmHitObject>().ToList();
 
-        agentHpController.SetHp(float.MaxValue);
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.SpecialRequestBoss:
+                break;
+            case GameManager.ContentsType.TwelveDungeon:
+                if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+                {
+                    
+                }
+                else
+                {
+                    agentHpController.SetHp(float.MaxValue);
+                }
 
+                break;
+        }
         var bossTableData = TableManager.Instance.BossTableData[GameManager.Instance.bossId];
         agentHpController.SetDefense(bossTableData.Defense);
 

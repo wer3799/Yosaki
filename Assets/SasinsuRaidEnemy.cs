@@ -180,11 +180,23 @@ public class SasinsuRaidEnemy : BossEnemyBase
     private void Initialize()
     {
         enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.SpecialRequestBoss:
+                break;
+            case GameManager.ContentsType.TwelveDungeon:
+                if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+                {
+                    
+                }
+                else
+                {
+                    agentHpController.SetHp(float.MaxValue);
+                }
 
-        agentHpController.SetHp(float.MaxValue);
-
-        agentHpController.SetDefense(0);
-
+                agentHpController.SetDefense(0);
+                break;
+        }
         enemyHitObjects.ForEach(e => e.SetDamage(1f));
 
         StartCoroutine(BossAttackPowerUpdateRoutine());

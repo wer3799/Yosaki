@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -19,6 +20,18 @@ public class UiDokebiTowerBoard : MonoBehaviour
 
     [SerializeField]
     private GameObject allClearRoot;
+
+    [SerializeField]
+    private Toggle towerAutoMode;
+    private bool initialized = false;
+
+    private void Start()
+    {
+        towerAutoMode.isOn = PlayerPrefs.GetInt(SettingKey.towerAutoMode) == 1;
+
+        initialized = true;
+
+    }
 
     void OnEnable()
     {
@@ -87,5 +100,17 @@ public class UiDokebiTowerBoard : MonoBehaviour
             GameManager.Instance.LoadContents(GameManager.ContentsType.DokebiTower);
 
         }, () => { });
+    }
+    
+    public void AutoModeOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.towerAutoMode.Value = on ? 1 : 0;
     }
 }

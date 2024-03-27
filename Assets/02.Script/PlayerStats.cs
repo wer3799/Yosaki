@@ -69,7 +69,7 @@ public enum StatusType
     SuperCritical14DamPer, //여우베기 
     SuperCritical15DamPer, //신선베기 
     SuperCritical16DamPer, //태극베기 
-    DarkHasValueUpgrade, //심연보물당 암흑베기
+    DarkHasValueUpgrade=56, //심연보물당 암흑베기
     GoldBarGainPer, //금괴 획득량 증가
     SuperCritical17DamPer, //영혼베기
     SuperCritical18DamPer, //상단전
@@ -89,7 +89,7 @@ public enum StatusType
     DosulGainPer, //도술꽃 소탕량 증가ㅋ
     AddSummonYogui, //요괴 추가소환
     PeachAbilUpgradePer, //복숭아 효과 강화
-    SinsunHasValueUpgrade, //신선보옥당 신선베기
+    SinsunHasValueUpgrade=74, //신선보옥당 신선베기
     HyunsangHasValueUpgrade=75, //귀멸증표당 귀멸베기
     
     SuperCritical21DamPer, //초월베기
@@ -139,6 +139,7 @@ public enum StatusType
     EnhanceSealSword,//요도증폭
     EnhanceDosul,//도술증폭
     EnhanceVision,//궁극증폭
+    DBTHasValueUpgrade,//무림구슬
 
 }
 
@@ -1108,12 +1109,12 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.GoldGainPer);
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
 
-        //ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetMonthBuffEffect(StatusType.GoldGainPer);
         ret += GetMonth2BuffEffect(StatusType.GoldGainPer);
         ret += GetGuildPetEffect(StatusType.GoldGainPer);
+        
         ret += GetGuimoonHasEffect2(StatusType.GoldGainPer);
         return ret;
     }
@@ -1127,7 +1128,6 @@ public static class PlayerStats
         ret += GetMarbleValue(StatusType.GoldGainPer);
         ret += GetMagicBookHasPercentValue(StatusType.GoldGainPer);
 
-        //ret += GetTitleAbilValue(StatusType.GoldGainPer);
         ret += GetHotTimeBuffEffect(StatusType.GoldGainPer);
         ret += GetHotTimeEventBuffEffect(StatusType.GoldGainPer);
         ret += GetMonthBuffEffect(StatusType.GoldGainPer);
@@ -2288,7 +2288,8 @@ public static class PlayerStats
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Murim_memory);
 
-        
+        ret += GetRelicHasEffect(StatusType.SuperCritical32DamPer);
+
         return ret;
     }
     //극혈 피해
@@ -3565,7 +3566,8 @@ public static class PlayerStats
 
     public static float GetDifficultyBossTreasureAbilHasEffect()
     {
-        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DBT).Value * (GameBalance.difficultyBossTreasureAbilValue));
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.DBT).Value *
+                (GameBalance.difficultyBossTreasureAbilValue + GetDBTHasValueUpgrade()));
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -6758,7 +6760,8 @@ public static class PlayerStats
 
         ret += GetSpecialTypeAbility(StatusType.SinsunHasValueUpgrade);
 
-        
+        ret += GetSamchunAbility(StatusType.SinsunHasValueUpgrade);
+
         return ret;
     }
     public static float GetGwisalTreasureHasAddValue()
@@ -6811,6 +6814,17 @@ public static class PlayerStats
         float ret = 0f;
         
         ret += GetPassiveSkill2Value(StatusType.MurimHasValueUpgrade);
+        
+        ret += GetSkillHasValue(StatusType.MurimHasValueUpgrade);
+
+        return ret;
+    }
+    //난이도보스
+    public static float GetDBTHasValueUpgrade()
+    {
+        float ret = 0f;
+        
+        ret += GetSpecialTypeAbility(StatusType.DBTHasValueUpgrade);
         
         return ret;
     }
@@ -7368,5 +7382,18 @@ public static class PlayerStats
         ret += GetDanjeonAbilValue(StatusType.SuperCritical18AddDam);
         
         return ret;
+    }
+
+    public static int GetStudentSpotLevel(int grade)
+    {
+
+        if (grade < 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return TableManager.Instance.StudentSpot.dataArray[grade].Level;
+        }
     }
 }

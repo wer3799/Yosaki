@@ -47,7 +47,7 @@ public class GrowthManager : SingletonMono<GrowthManager>
     {
         ServerData.growthTable.GetTableData(GrowthTable.Exp).Value += exp;
 
-        var maxLevelUpCount = 100000;
+        var maxLevelUpCount = 500000;
 
         this.useEffect = false;
 

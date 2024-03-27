@@ -59,6 +59,7 @@ public class UiContentsPopup2 : MonoBehaviour
         SumiBoard_Hard,
         ThiefBoard_Hard,
         DarkBoard_Hard,
+        SinsunBoard_Hard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -452,6 +453,7 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 217:
                     case 261:
                     case 292:
+                    case 306:
                         lastBoards[(int)ContentsBoard.MurimBoard].SetActive(true);
                         break;
                     case 218:
@@ -463,6 +465,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 293:
                     case 294:
                     case 295:
+                    case 307:
+                    case 308:
+                    case 309:
                         lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                     case 221:
@@ -543,6 +548,17 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 290:
                     case 291:
                         lastBoards[(int)ContentsBoard.DarkBoard_Hard].SetActive(true);
+                        break;
+                    case 297:
+                    case 298:
+                    case 299:
+                    case 300:
+                    case 301:
+                    case 302:
+                    case 303:
+                    case 304:
+                    case 305:
+                        lastBoards[(int)ContentsBoard.SinsunBoard_Hard].SetActive(true);
                         break;
                         
                 }

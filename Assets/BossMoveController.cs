@@ -36,110 +36,182 @@ public class BossMoveController : MonoBehaviour
     private Vector3 dummyPosition;
     [SerializeField]
     protected SkeletonAnimation skeletonAnimation;
+
+    private int SpecialPatternCount = 1;
+
+    [SerializeField] private int minPatternCount = 1;
+    [SerializeField] private int maxPatternCount = 3;
+    [SerializeField] private float minSecond = 1;
+    [SerializeField] private float maxSecond = 2;
+    [SerializeField] private moveType type;
+    enum moveType
+    {
+        None,
+        SparkMove,
+    }
     private void Start()
     {
-        _bossId = GameManager.Instance.bossId;
-        playerTr = PlayerMoveController.Instance.transform;
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.TwelveDungeon: 
+                
+                _bossId = GameManager.Instance.bossId;
+                playerTr = PlayerMoveController.Instance.transform;
+                InitializePattern();
 
-        InitializePattern();
+                break;
+            case GameManager.ContentsType.SpecialRequestBoss:
+
+                break;
+        }
+
     }
 
 
     public void InitializePattern()
     {
-        if (_bossId == 109)
+        switch (GameManager.contentsType)
         {
-            isMoving.Value = true;
+            case GameManager.ContentsType.TwelveDungeon: 
+                if (_bossId == 109)
+                {
+                    isMoving.Value = true;
 
-            SetMoveDir(playerTr.position - (transform.position = targetTransform.position));
+                    SetMoveDir(playerTr.position - (transform.position = targetTransform.position));
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 110)
-        {
-            isMoving.Value = true;
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 110)
+                {
+                    isMoving.Value = true;
 
-            SetMoveDir(playerTr.position - transform.position);
+                    SetMoveDir(playerTr.position - transform.position);
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 114)
-        {
-            isMoving.Value = true;
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 114)
+                {
+                    isMoving.Value = true;
 
-            dummyPosition = playerTr.position;
+                    dummyPosition = playerTr.position;
             
-            SetMoveDir(new Vector3(0,dummyPosition.y - secondTransform.position.y));
+                    SetMoveDir(new Vector3(0,dummyPosition.y - secondTransform.position.y));
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 115)
-        {
-            isMoving.Value = true;
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 115)
+                {
+                    isMoving.Value = true;
 
-            dummyPosition = playerTr.position;
+                    dummyPosition = playerTr.position;
             
-            SetMoveDir(new Vector3(dummyPosition.x - secondTransform.position.x,0));
+                    SetMoveDir(new Vector3(dummyPosition.x - secondTransform.position.x,0));
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 116)
-        {
-            isMoving.Value = true;
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 116)
+                {
+                    isMoving.Value = true;
 
-            dummyPosition = playerTr.position;
+                    dummyPosition = playerTr.position;
             
-            SetMoveDir(new Vector3(0,dummyPosition.y - secondTransform.position.y));
+                    SetMoveDir(new Vector3(0,dummyPosition.y - secondTransform.position.y));
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 180||_bossId == 182||_bossId == 184)
-        {
-            StartCoroutine(EnemyMovementRoutine());
-            if (initialized == false)
-            {
-                initialized = true;
-            }
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 180||_bossId == 182||_bossId == 184)
+                {
+                    StartCoroutine(EnemyMovementRoutine());
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                break;
+            
+            case GameManager.ContentsType.SpecialRequestBoss:
+                playerTr = PlayerMoveController.Instance.transform;
+
+                switch (type)
+                {
+                    case moveType.None:
+                        break;
+                    case moveType.SparkMove:
+                        StartCoroutine(EnemyMovementRoutine());
+                        if (initialized == false)
+                        {
+                            initialized = true;
+                        }
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                break;
         }
 
     }
-
-    private int SpecialPatternCount = 1;
     //유사 벽력일섬
     private IEnumerator EnemyMovementRoutine()
     {
         while (true)
         {
-            float blinkSecond=1f;    
-            if (_bossId == 180)
+            float blinkSecond=1f;
+            switch (GameManager.contentsType)
             {
-                SpecialPatternCount = (int)Random.Range(1,3);
-                blinkSecond = 1f;
-            }
-            if (_bossId == 182)
-            {
-                SpecialPatternCount = (int)Random.Range(3,6);
-                blinkSecond = Random.Range(1,2);
-            }
-            if (_bossId == 184)
-            {
-                SpecialPatternCount = (int)Random.Range(6,9);
-                blinkSecond = Random.Range(0.8f,1.5f);
+                case GameManager.ContentsType.TwelveDungeon:
+                    if (_bossId == 180)
+                    {
+                        SpecialPatternCount = (int)Random.Range(1,3);
+                        blinkSecond = 1f;
+                    }
+                    if (_bossId == 182)
+                    {
+                        SpecialPatternCount = (int)Random.Range(3,6);
+                        blinkSecond = Random.Range(1,2);
+                    }
+                    if (_bossId == 184)
+                    {
+                        SpecialPatternCount = (int)Random.Range(6,9);
+                        blinkSecond = Random.Range(0.8f,1.5f);
+                    }
+                    break;
+                case GameManager.ContentsType.SpecialRequestBoss:
+                    switch (type)
+                    {
+                        case moveType.None:
+                            break;
+                        case moveType.SparkMove:
+                            if (maxSecond - minSecond < 0.1)
+                            {
+                                blinkSecond = minSecond;
+                            }
+                            else
+                            {
+                                blinkSecond = Random.Range(minSecond,maxSecond);
+                            }
+                            SpecialPatternCount = (int)Random.Range(minPatternCount,maxPatternCount);
+                                
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                
             }
             float max = 6;
             float exclude = 4;
@@ -171,80 +243,107 @@ public class BossMoveController : MonoBehaviour
     }
     private void Update()
     {
-        //측천무후
-         if (_bossId == 109)
+        switch (GameManager.contentsType)
         {
-            if (isMoving.Value)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
-            }
-        }
-
-          //항우
-        else if (_bossId == 110)
-        {
-            if (isMoving.Value)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
-            }
-        }
-         //화룡
-        else if (_bossId == 114)
-        {
-            if (isMoving.Value)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
-
-                if ( Mathf.Abs(dummyPosition.y-secondTransform.position.y) <stoppingDistance)
+            case GameManager.ContentsType.TwelveDungeon:
+                //측천무후
+                if (_bossId == 109)
                 {
-                    StopMove();
+                    if (isMoving.Value)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+                    }
                 }
-            }
-        }
-         //전룡
-        else if (_bossId == 115)
-        {
-            if (isMoving.Value)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
 
-                if ( Mathf.Abs(dummyPosition.x-secondTransform.position.x) <stoppingDistance)
+                //항우
+                else if (_bossId == 110)
                 {
-                    StopMove();
+                    if (isMoving.Value)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+                    }
                 }
-            }
-        }
-         //흑룡
-        else if (_bossId == 116)
-        {
-            if (isMoving.Value)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
-
-                if ( Mathf.Abs(dummyPosition.y-secondTransform.position.y) <stoppingDistance)
+                //화룡
+                else if (_bossId == 114)
                 {
-                    StopMove();
+                    if (isMoving.Value)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+
+                        if ( Mathf.Abs(dummyPosition.y-secondTransform.position.y) <stoppingDistance)
+                        {
+                            StopMove();
+                        }
+                    }
                 }
-            }
+                //전룡
+                else if (_bossId == 115)
+                {
+                    if (isMoving.Value)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+
+                        if ( Mathf.Abs(dummyPosition.x-secondTransform.position.x) <stoppingDistance)
+                        {
+                            StopMove();
+                        }
+                    }
+                }
+                //흑룡
+                else if (_bossId == 116)
+                {
+                    if (isMoving.Value)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+
+                        if ( Mathf.Abs(dummyPosition.y-secondTransform.position.y) <stoppingDistance)
+                        {
+                            StopMove();
+                        }
+                    }
+                }
+
+                if (_bossId == 109 || _bossId == 110)
+                {
+                    viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
+                }
+                if (_bossId == 180 || _bossId == 182|| _bossId == 184)
+                {
+                    if (isMoving.Value)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+                        viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
+                    }
+                    else
+                    {
+                        rb.velocity = Vector2.zero;
+                    }
+
+                }
+                break;
+            case GameManager.ContentsType.SpecialRequestBoss:
+                switch (type)
+                {
+                    case moveType.None:
+                        break;
+                    case moveType.SparkMove:
+                        if (isMoving.Value)
+                        {
+                            rb.velocity = moveDir.normalized * moveSpeed;
+                            viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
+                        }
+                        else
+                        {
+                            rb.velocity = Vector2.zero;
+                        }
+
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                break;
         }
-
-         if (_bossId == 109 || _bossId == 110)
-         {
-             viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
-         }
-         if (_bossId == 180 || _bossId == 182|| _bossId == 184)
-         {
-             if (isMoving.Value)
-             {
-                 rb.velocity = moveDir.normalized * moveSpeed;
-                 viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
-             }
-             else
-             {
-                 rb.velocity = Vector2.zero;
-             }
-
-         }
+        
     }
 
     public void StopMove()

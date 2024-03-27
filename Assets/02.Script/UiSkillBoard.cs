@@ -45,6 +45,8 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
     [SerializeField]
     private Transform skillCellParent_DP;
 
+    [SerializeField] private List<Transform> cellParents;
+
     [SerializeField]
     private UiPassiveSkillCell passiveSkillCellPrefab;
 
@@ -101,10 +103,25 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             }
 
             //신선검술
-            if (skillList[i].Skilltype == 15)
+            if (skillList[i].Skilltype == -1)
+            {
+                
+            }
+            else if (skillList[i].Skilltype == 16)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_DP);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[12]);
+
+                cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+                skillCells.Add(cell);
+                 
+            }    
+            //신선검술
+            else if (skillList[i].Skilltype == 15)
+            {
+
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[11]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -116,7 +133,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 14)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Dragon);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[10]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -128,7 +145,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 13)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sinsun);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[9]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -140,7 +157,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 12)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Dark);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[8]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -152,7 +169,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 11)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Thief);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[7]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -163,7 +180,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 10)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Four);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[6]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -174,7 +191,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 8)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Dokebi);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[5]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -185,7 +202,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             else if (skillList[i].Skilltype == 7)
             {
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Chun);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[4]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -197,7 +214,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             {
                 //나타
 
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sun);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[3]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -209,7 +226,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
                 //나타
                 if (skillList[i].Id == 20 || skillList[i].Id == 21 || skillList[i].Id == 22)
                 {
-                    var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Nata);
+                    var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[2]);
 
                     cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -218,7 +235,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             }
             else if (skillList[i].Skilltype == 4 && skillList[i].Id != 18 && skillList[i].Id != 19)
             {
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, skillCellParent_Sin);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[1]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 
@@ -226,7 +243,7 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             }
             else
             {
-                var cell = Instantiate<UiSkillCell>(skillCellPrefab, skillCellParent);
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab, cellParents[0]);
 
                 cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
 

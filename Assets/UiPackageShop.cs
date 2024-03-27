@@ -225,5 +225,14 @@ public class UiPackageShop : MonoBehaviour
             var cell = Instantiate<UiLimitedCostumePackageCell>(costumeCellPrefab, costumePetWeapon[3]);
             cell.Initialize(costumeTableData[i]);
         }
+        var petTableData = TableManager.Instance.PetTable.dataArray;
+
+        for (int i = 0; i < petTableData.Length; i++)
+        {
+            if(petTableData[i].Shopprice<0) continue;
+            
+            var cell = Instantiate<UiLimitedCostumePackageCell>(costumeCellPrefab, costumePetWeapon[4]);
+            cell.Initialize(petTableData[i]);
+        }
     }
 }

@@ -30,6 +30,8 @@ public class SaveManager : SingletonMono<SaveManager>
     {
         while (true)
         {
+            ServerData.goodsTable.RefreshGetItemAmount();
+
             yield return tenMinuteDelay;
 
             Debug.LogError("10분에 한번");

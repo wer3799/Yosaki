@@ -344,6 +344,11 @@ public enum Item_Type
     weapon165 = 1051, //극락
     weapon166 = 1052, //무림
     weapon167 = 1053, //무림
+    
+    weapon168 = 1054, //극락
+    weapon169 = 1055, //무림
+    weapon170 = 1056, //무림
+    weapon171 = 1057, //나선
 
     weapon_end = 1200,
     //
@@ -617,6 +622,12 @@ public enum Item_Type
     costume208 = 1508, //
     costume209 = 1509, //
     costume210 = 1510, //이벤트
+    
+    costume211 = 1511, //극락
+    costume212 = 1512, //무림
+    costume213 = 1513, //무림
+    costume214 = 1514, //월간
+    costume215 = 1515, //나선
 
     costume_end=1999,
 
@@ -641,6 +652,10 @@ public enum Item_Type
     
     magicBook134 = 2016,//극락
     magicBook135 = 2017,//극락
+    
+    magicBook136 = 2018,//극락
+    magicBook137 = 2019,//나선
+    magicBook138 = 2020,//월간
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -1176,6 +1191,7 @@ public enum Item_Type
     SB = 9064,
     HYG = 9065,
     HYC = 9066,
+    SRG = 9067,
     Goods_End=10000,
     //Treasure=10001~10100
     MRT=10001, //무림유물
@@ -1187,6 +1203,16 @@ public enum Item_Type
     VisionSkill18=10102,
     VisionSkill19=10103,
     VisionSkill_End=10200,
+    
+    GRSkill0 = 10201, //극락 스킬
+    GRSkill1 = 10202, //극락 스킬
+    GRSkill2 = 10203, //극락 스킬
+    GRSkill3 = 10204, //극락 스킬
+    GRSkill4 = 10205, //극락 스킬
+    
+    Skill_End= 10400,
+    
+    Exp = 20000,
 }
 //
 public class DropItem : PoolItem

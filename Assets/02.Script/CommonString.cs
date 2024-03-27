@@ -94,6 +94,7 @@ public static class CommonString
     public static string ItemGrade_16_Skill = "신선검";
     public static string ItemGrade_17_Skill = "용인검";
     public static string ItemGrade_18_Skill = "용궁검";
+    public static string ItemGrade_19_Skill = "극락검";
 
     public static string GoldItemName = "금화";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -132,6 +133,8 @@ public static class CommonString
     public static string Reward_Before = "이전 보상을 받아주세요!";
     public static string Reward_Can = "조건을 만족하지 못하였습니다.";
     public static string Reward_Has = "이미 보상을 받았습니다.";
+    public static string Reward_Get = "보상을 획득하였습니다!";
+    public static string Reward_Nothing = "받을 수 있는 보상이 없습니다!";
     public static string YorinMission_Help = "ChoboBoard";
 
 
@@ -351,6 +354,13 @@ public static class CommonString
             case Item_Type.DPSkill3: return "용궁 검술4";
             case Item_Type.DPSkill4: return "용궁 검술5";
             //
+            //
+            case Item_Type.GRSkill0: return "극락 검술1";
+            case Item_Type.GRSkill1: return "극락 검술2";
+            case Item_Type.GRSkill2: return "극락 검술3";
+            case Item_Type.GRSkill3: return "극락 검술4";
+            case Item_Type.GRSkill4: return "극락 검술5";
+            //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
 
@@ -513,6 +523,8 @@ public static class CommonString
             case Item_Type.SB: return "수련서";
             case Item_Type.HYG: return "혈의 기운";
             case Item_Type.HYC: return "혈자리 전수권";
+            case Item_Type.Exp: return "경험치";
+            case Item_Type.SRG: return "임무 증표";
         
     }
 
@@ -692,6 +704,8 @@ public static class CommonString
                 return "거북 문양 개수당 효과 증가(%)";
             case StatusType.MurimHasValueUpgrade:
                 return "극락의 정수 개수당 효과 증가(%)";
+            case StatusType.DBTHasValueUpgrade:
+                return "무림 구슬 개수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:

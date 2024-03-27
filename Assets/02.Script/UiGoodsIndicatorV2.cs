@@ -18,14 +18,18 @@ public class UiGoodsIndicatorV2 : MonoBehaviour
     [SerializeField] private Image goodsImage;
 
     [SerializeField] private Color textColor=Color.white;
+    [SerializeField] private bool initializeByInspector = true;
     private int itemIdx = -1;
     void Start()
     {
-        Subscribe();
-
-        //AddDescription();
-
-        Initialize();
+        if (initializeByInspector)
+        {
+            Initialize();
+        }
+        else
+        {
+            
+        }
     }
 
     private void Initialize()
@@ -36,6 +40,20 @@ public class UiGoodsIndicatorV2 : MonoBehaviour
             goodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(type);
             goodsText.color = textColor;
         }
+        Subscribe();
+    }
+    public void Initialize(string key)
+    {
+        goodsKey = key;
+        
+        if (goodsImage != null)
+        {
+            var type = ServerData.goodsTable.ServerStringToItemType(goodsKey);
+            goodsImage.sprite = CommonUiContainer.Instance.GetItemIcon(type);
+            goodsText.color = textColor;
+        }
+        
+        Subscribe();
     }
     
     private void AddDescription()

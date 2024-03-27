@@ -22,6 +22,7 @@ public class PassBuyButton : MonoBehaviour
     public static readonly string dosullevelPassKey = "dosullevelpass0";
     public static readonly string bimuPassKey = "bimupass0";
     public static readonly string studentPassKey = "studentpass0";
+    public static readonly string studentSpotPassKey = "studentspotpass0";
 
     
     private enum PassKey 
@@ -35,7 +36,8 @@ public class PassBuyButton : MonoBehaviour
         BlackFox,
         DosulLevel,
         Bimu,
-        Student
+        Student,
+        StudentSpot,
     }
 
     [SerializeField] private PassKey passKey = PassKey.None;
@@ -76,6 +78,9 @@ public class PassBuyButton : MonoBehaviour
                     break;
                 case PassKey.Student:
                     key = studentPassKey;
+                    break;
+                case PassKey.StudentSpot:
+                    key = studentSpotPassKey;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -22,6 +22,16 @@ public class AlarmHitObject : MonoBehaviour
     protected bool isMove = false;
     private Coroutine movementCoroutine;
     public float movementSpeed = 20f; // 이동 속
+
+    [SerializeField]
+    private Type type = Type.None;
+    enum Type
+    {
+        None,
+        NearByPlayer,
+    } 
+    
+    [SerializeField] 
     public virtual void AttackStart()
     {
         if (GameManager.Instance.bossId < 190||this.gameObject.activeSelf==false)
@@ -71,27 +81,46 @@ public class AlarmHitObject : MonoBehaviour
 
     public void MoveToPlayer()
     {
-        int bossId = GameManager.Instance.bossId;
-        if (bossId == 146||bossId == 147||bossId == 148||bossId == 149||bossId == 162||bossId == 163||bossId == 164||bossId == 165||bossId == 174||bossId == 175||bossId == 178||bossId == 179||bossId == 181||bossId == 183)
+        switch (GameManager.contentsType)
         {
-            transform.Rotate(0, 0, 90);
-            transform.position = PlayerMoveController.Instance.transform.position;
+            case GameManager.ContentsType.TwelveDungeon:
+                int bossId = GameManager.Instance.bossId;
+                if (bossId == 146||bossId == 147||bossId == 148||bossId == 149||bossId == 162||bossId == 163||bossId == 164||bossId == 165||bossId == 174||bossId == 175||bossId == 178||bossId == 179||bossId == 181||bossId == 183)
+                {
+                    transform.Rotate(0, 0, 90);
+                    transform.position = PlayerMoveController.Instance.transform.position;
+                }
+                else if (bossId == 185)
+                {
+                    transform.position = PlayerMoveController.Instance.transform.position;
+                }
+                else if (bossId == 167||bossId==168)
+                {
+                    var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
+                    transform.position = PlayerMoveController.Instance.transform.position + addPostion;
+                }
+                else if (bossId == 166)
+                {
+                    var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
+                    transform.position = PlayerMoveController.Instance.transform.position + addPostion;
+                    transform.Rotate(0, 0, 90);
+                }
+                break;
+            case GameManager.ContentsType.SpecialRequestBoss:
+                switch (type)
+                {
+                    case Type.None:
+                        break;
+                    case Type.NearByPlayer:
+                        var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
+                        transform.position = PlayerMoveController.Instance.transform.position + addPostion;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                break;
         }
-        else if (bossId == 185)
-        {
-            transform.position = PlayerMoveController.Instance.transform.position;
-        }
-        else if (bossId == 167||bossId==168)
-        {
-            var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
-            transform.position = PlayerMoveController.Instance.transform.position + addPostion;
-        }
-        else if (bossId == 166)
-        {
-            var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
-            transform.position = PlayerMoveController.Instance.transform.position + addPostion;
-            transform.Rotate(0, 0, 90);
-        }
+
     }
 
 

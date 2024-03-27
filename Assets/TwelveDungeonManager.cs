@@ -2,6 +2,7 @@ using System;
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UniRx;
 using TMPro;
@@ -17,6 +18,7 @@ public class TwelveDungeonManager : ContentsManagerBase
     private AgentHpController bossHpController;
 
     private TwelveBossTableData twelveBossTable;
+    private double hpCut=0d;
     private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
 
 
@@ -165,7 +167,15 @@ public class TwelveDungeonManager : ContentsManagerBase
     private void SetBossHp()
     {
         twelveBossTable = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
-       
+
+        if (twelveBossTable.Skipboss == true)
+        {
+            hpCut = twelveBossTable.Rewardcut.Last();
+        }
+        else
+        {
+            hpCut = 1E+308;
+        }
         var prefab = Resources.Load<BossEnemyBase>($"TwelveBoss/{GameManager.Instance.bossId}");
 
         //아수라,인드라,구미호
@@ -187,12 +197,22 @@ public class TwelveDungeonManager : ContentsManagerBase
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
         bossHpController.SetRaidEnemy();
+
+        bossHpController.InitializeTwelveBoss(twelveBossTable.Skipboss);
+        
+
     }
 
     private void whenDamageAmountChanged(ObscuredDouble hp)
     {
         damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
+
+
+        if (hp >= hpCut)
+        {
+            TimerEnd();
+        }
     }
 
 

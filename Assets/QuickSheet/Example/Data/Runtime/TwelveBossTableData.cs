@@ -37,8 +37,8 @@ public class TwelveBossTableData
   public float Rewardminhp { get {return rewardminhp; } set { this.rewardminhp = value;} }
   
   [SerializeField]
-  float rewardmaxhp;
-  public float Rewardmaxhp { get {return rewardmaxhp; } set { this.rewardmaxhp = value;} }
+  double rewardmaxhp;
+  public double Rewardmaxhp { get {return rewardmaxhp; } set { this.rewardmaxhp = value;} }
   
   [SerializeField]
   float attackpowermin;
@@ -91,5 +91,9 @@ public class TwelveBossTableData
   [SerializeField]
   RewardColor rewardcolor;
   public RewardColor REWARDCOLOR { get {return rewardcolor; } set { this.rewardcolor = value;} }
+  
+  [SerializeField]
+  bool skipboss;
+  public bool Skipboss { get {return skipboss; } set { this.skipboss = value;} }
   
 }

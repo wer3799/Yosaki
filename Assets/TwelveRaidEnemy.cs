@@ -285,9 +285,16 @@ public class TwelveRaidEnemy : BossEnemyBase
     {
         enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
 
-        agentHpController.SetHp(float.MaxValue);
-
+        if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+        {
+            
+        }
+        else
+        {
+            agentHpController.SetHp(float.MaxValue);
+        }
         agentHpController.SetDefense(0);
+
 
         enemyHitObjects.ForEach(e => e.SetDamage(1f));
 

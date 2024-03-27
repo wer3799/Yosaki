@@ -2,6 +2,7 @@
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
 using System.Collections.Generic;
+using Spine;
 using Spine.Unity;
 using UniRx;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class BossEnemyMoveController : MonoBehaviour
     [SerializeField] private List<AlarmHitObject> _alarmHitObjects2;
     [SerializeField] private List<AlarmHitObject> _alarmHitObjects3;
     [SerializeField] private Rigidbody2D rb;
+    
+    
     private enum State
     {
         Stop,
@@ -44,6 +47,8 @@ public class BossEnemyMoveController : MonoBehaviour
     private Transform playerTr;
     private new void Start()
     {
+        skeletonAnimation.AnimationState.Complete += OnAnimationComplete;
+
         playerTr = PlayerMoveController.Instance.transform;
         
         SetDifficulty();
@@ -195,6 +200,25 @@ public class BossEnemyMoveController : MonoBehaviour
                 moveDelay = 0.3f; // 이동
                 attack1Delay = 1.9f; // 공격
                 break;
+            case 306:
+                moveSpeed = 25f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1.9f; // 공격
+                break;
+            case 307:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1.3f; // 공격
+                break;
+            case 308:
+            case 309:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1.55f; // 공격
+                break;
             default:
                 moveSpeed = 20f; //이동속도
                 idleDelay = 0.5f; // 정지 
@@ -328,6 +352,13 @@ public class BossEnemyMoveController : MonoBehaviour
             }
         }).AddTo(this);
 
+    }
+    void OnAnimationComplete(TrackEntry trackEntry)
+    {
+        if (trackEntry.Animation.Name == "attack1")
+        {
+            skeletonAnimation.AnimationState.SetAnimation(0, "idle", true);
+        }
     }
 
     private void Attack1Pattern()

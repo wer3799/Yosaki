@@ -1693,6 +1693,9 @@ public class UiRewardCollection : MonoBehaviour
         OnClickDokebiReward(false);
         OnClickSumiReward(false);
         //OnClickOldDokebi2ReceiveButton(false);
+        
+        YorinSpecialMissionManager.UpdateMissionClear(YorinSpecialMissionKey.YSMission2_2, 1);
+
         PopupManager.Instance.ShowAlarmMessage("받을 수 있는 보상을 전부 받았습니다!");
     }
 }

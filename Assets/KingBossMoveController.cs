@@ -37,10 +37,27 @@ public class KingBossMoveController : MonoBehaviour
     private int _bossId;
     public bool isMoving;
 
+    [SerializeField]private MoveType moveType = MoveType.None;
+    private enum MoveType
+    {
+        None,
+        ChaseToPlayer,
+        BlinkToPlayer,
+    }
+    
+    
     private void Start()
     {
-        _bossId = GameManager.Instance.bossId;
-        playerTr = PlayerMoveController.Instance.transform;
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.TwelveDungeon:
+                _bossId = GameManager.Instance.bossId;
+                playerTr = PlayerMoveController.Instance.transform;
+                break;
+            case GameManager.ContentsType.SpecialRequestBoss:
+                break;
+        }
+        
 
         InitializePattern();
     }
@@ -82,77 +99,109 @@ public class KingBossMoveController : MonoBehaviour
 
     public void InitializePattern()
     {
-        if (_bossId == 109||_bossId == 272)
+        switch (GameManager.contentsType)
         {
-            isMoving = true;
-            var transform1 = transform;
-            transform1.localPosition = targetTransform.localPosition;
+            case GameManager.ContentsType.TwelveDungeon:
+                if (_bossId == 109 || _bossId == 272)
+                {
+                    isMoving = true;
+                    var transform1 = transform;
+                    transform1.localPosition = targetTransform.localPosition;
 
-            SetMoveDir(playerTr.position  - (transform1.position));
+                    SetMoveDir(playerTr.position - (transform1.position));
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 110||_bossId == 273)
-        {
-            isMoving = true;
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 110 || _bossId == 273)
+                {
+                    isMoving = true;
 
-            SetMoveDir(playerTr.position - transform.position);
+                    SetMoveDir(playerTr.position - transform.position);
 
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 154||_bossId == 155||_bossId == 157)
-        {
-            isMoving = true;
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 154 || _bossId == 155 || _bossId == 157)
+                {
+                    isMoving = true;
 
-            SetMoveDir(playerTr.position - transform.position);
-            _skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        //펫기반보스
-        else if (_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165)
-        {
-            isMoving = true;
+                    SetMoveDir(playerTr.position - transform.position);
+                    _skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                //펫기반보스
+                else if (_bossId == 162 || _bossId == 163 || _bossId == 164 || _bossId == 165)
+                {
+                    isMoving = true;
 
-            SetMoveDir(playerTr.position - transform.position);
-            _skeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        //인간형기반보스(수인전)
-        else if (_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179)
-        {
-            isMoving = true;
+                    SetMoveDir(playerTr.position - transform.position);
+                    _skeletonAnimation.AnimationState.SetAnimation(0, "walk", true);
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                //인간형기반보스(수인전)
+                else if (_bossId == 174 || _bossId == 175 || _bossId == 178 || _bossId == 179)
+                {
+                    isMoving = true;
 
-            SetMoveDir(playerTr.position - transform.position);
-            if (initialized == false)
-            {
-                initialized = true;
-            }
+                    SetMoveDir(playerTr.position - transform.position);
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                //인간형기반보스(수인전)
+                else if (_bossId == 181 || _bossId == 183)
+                {
+                    SetMoveDir(playerTr.position - transform.position);
+                    if (initialized == false)
+                    {
+                        initialized = true;
+                    }
+                }
+                else if (_bossId == 158 || _bossId == 159 || _bossId == 160 || _bossId == 161 || _bossId == 186)
+                {
+                    MoveToPlayerVer2();
+                }
+
+                break;
+            case GameManager.ContentsType.SpecialRequestBoss:
+                
+                playerTr = PlayerMoveController.Instance.transform;
+                
+                switch (moveType)
+                {
+                    case MoveType.None:
+                        break;
+                    case MoveType.ChaseToPlayer:
+                        isMoving = true;
+
+                        SetMoveDir(playerTr.position - transform.position);
+                        _skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
+                        if (initialized == false)
+                        {
+                            initialized = true;
+                        }
+                        break;
+                    case MoveType.BlinkToPlayer:
+                        MoveToPlayerVer2();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                break;
         }
-        //인간형기반보스(수인전)
-        else if (_bossId == 181||_bossId == 183)
-        {
-            SetMoveDir(playerTr.position - transform.position);
-            if (initialized == false)
-            {
-                initialized = true;
-            }
-        }
-        else if (_bossId == 158||_bossId == 159||_bossId == 160||_bossId == 161||_bossId == 186)
-        {
-            MoveToPlayerVer2();
-        }
+      
 
     }
 
@@ -160,57 +209,73 @@ public class KingBossMoveController : MonoBehaviour
 
     private void Update()
     {
-        //측천무후
-         if (_bossId == 109||_bossId == 272)
+        switch (GameManager.contentsType)
         {
-            if (isMoving)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
-            }
+            case GameManager.ContentsType.TwelveDungeon:
+                //측천무후
+                if (_bossId == 109||_bossId == 272)
+                {
+                    if (isMoving)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+                    }
+                }
+
+                //항우
+                else if (_bossId == 110||_bossId == 273)
+                {
+                    if (isMoving)
+                    {
+                        rb.velocity = moveDir.normalized * moveSpeed;
+                    }
+                }
+
+                else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
+                {
+                    if (isMoving)
+                    {
+                        rb.velocity = (playerTr.position - transform.position).normalized * moveSpeed;
+                    }
+                }
+
+                if (_bossId == 154||_bossId == 155||_bossId == 157)
+                {
+                    viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);   
+                }
+                else if(_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165)
+                {
+                    viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 3 : -3, 3, 1);   
+                }
+                else if(_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
+                {
+                    viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 1 : -1, 1, 1);   
+                }
+                else
+                {
+                    viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
+                }
+                break;
+            case GameManager.ContentsType.SpecialRequestBoss:
+                switch (moveType)
+                {
+                    case MoveType.None:
+                        break;
+                    case MoveType.ChaseToPlayer:
+                        if (isMoving)
+                        {
+                            rb.velocity = (playerTr.position - transform.position).normalized * moveSpeed;
+                        }
+                        viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
+
+                       break;
+                    case MoveType.BlinkToPlayer:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                break;
         }
-
-          //항우
-        else if (_bossId == 110||_bossId == 273)
-        {
-            if (isMoving)
-            {
-                rb.velocity = moveDir.normalized * moveSpeed;
-            }
-        }
-
-        else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
-        {
-             if (isMoving)
-             {
-                 rb.velocity = (playerTr.position - transform.position).normalized * moveSpeed;
-             }
-        }
-
-        // float playerDist = Vector3.Distance(playerTr.position, this.transform.position);
-            //
-            // if (playerDist >= 0.1f) 
-            // {
-            //     Vector3 moveDir = playerTr.position - this.transform.position;
-            //     rb.velocity = moveDir.normalized * moveSpeed * 1.5f;
-            // }
-
-
-            if (_bossId == 154||_bossId == 155||_bossId == 157)
-            {
-                viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);   
-            }
-            else if(_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165)
-            {
-                viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 3 : -3, 3, 1);   
-            }
-            else if(_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
-            {
-                viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? 1 : -1, 1, 1);   
-            }
-            else
-            {
-                viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
-            }
+        
 
     }
 

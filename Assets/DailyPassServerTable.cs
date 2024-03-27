@@ -867,6 +867,8 @@ public class ColdSeasonPassServerTable
     public static string sasinsuAd = "a22";
     public static string studentFree = "f23";
     public static string studentAd = "a23";
+    public static string studentSpotFree = "f24";
+    public static string studentSpotAd = "a24";
 
     public static string coldseasonFree_Atten = "fa2";
 
@@ -913,6 +915,8 @@ public class ColdSeasonPassServerTable
         { sasinsuAd, "-1" },
         { studentFree, "-1" },
         { studentAd, "-1" },
+        { studentSpotFree, "-1" },
+        { studentSpotAd, "-1" },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

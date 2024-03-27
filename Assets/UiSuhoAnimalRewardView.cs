@@ -54,9 +54,9 @@ public class UiSuhoAnimalRewardView : MonoBehaviour
 
         itemDescription.SetText($"{CommonString.GetItemName((Item_Type)rewardInfo.rewardType)}");
 
-        rewardAmount.SetText($"{Utils.ConvertBigNum(rewardInfo.rewardAmount)}개");
+        rewardAmount.SetText($"{Utils.ConvertNum(rewardInfo.rewardAmount)}개");
 #if UNITY_EDITOR
-        lockDescription.SetText($"{Utils.ConvertBigNum(rewardInfo.damageCut)}에 해금");
+        lockDescription.SetText($"{Utils.ConvertNum(rewardInfo.damageCut)}에 해금");
 #else
         lockDescription.SetText($"{rewardInfo.rewardCutString}에 해금");
 #endif

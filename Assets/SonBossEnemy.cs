@@ -80,9 +80,23 @@ public class SonBossEnemy : BossEnemyBase
 
     private void Initialize()
     {
-        agentHpController.SetHp(float.MaxValue);
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.SpecialRequestBoss:
+                break;
+            case GameManager.ContentsType.TwelveDungeon:
+                if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+                {
+                    
+                }
+                else
+                {
+                    agentHpController.SetHp(float.MaxValue);
+                }
 
-        agentHpController.SetDefense(10);
+                agentHpController.SetDefense(10);
+                break;
+        }
 
         StartCoroutine(BossAttackPowerUpdateRoutine());
 

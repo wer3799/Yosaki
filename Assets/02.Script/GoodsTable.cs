@@ -7,6 +7,7 @@ using LitJson;
 using System;
 using System.Linq;
 using GooglePlayGames.BasicApi;
+using Spine;
 using UniRx;
 
 
@@ -211,6 +212,12 @@ public class GoodsTable
     public static string DPSkill3 = "DPSkill3";
     public static string DPSkill4 = "DPSkill4";
 
+    public static string GRSkill0 = "GRSkill0";
+    public static string GRSkill1 = "GRSkill1";
+    public static string GRSkill2 = "GRSkill2";
+    public static string GRSkill3 = "GRSkill3";
+    public static string GRSkill4 = "GRSkill4";
+
     public static string Fw = "Fw";
     public const string Cw = "Cw"; //천계꽃
 
@@ -308,6 +315,7 @@ public class GoodsTable
     public static string HYC = "HYC";
     public static string MRT = "MRT";
     public static string DBT = "DBT";
+    public static string SRG = "SRG";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -500,6 +508,12 @@ public class GoodsTable
         { DPSkill3, 0f },
         { DPSkill4, 0f },
 
+        { GRSkill0, 0f },
+        { GRSkill1, 0f },
+        { GRSkill2, 0f },
+        { GRSkill3, 0f },
+        { GRSkill4, 0f },
+
         { Fw, 0f },
         { Cw, 0f },
         //
@@ -593,6 +607,7 @@ public class GoodsTable
         { HYC, GameBalance.HyulClearDailyGetAmount},
         { MRT, 0f},
         { DBT, 0f},
+        { SRG, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();
@@ -628,9 +643,21 @@ public class GoodsTable
     {
         tableDatas[Gold].Value += amount;
     }
+
+    private float goldBarItemAddNum = 0;
     public void GetGoldBar(float amount)
     {
-        tableDatas[GoldBar].Value += amount;
+        goldBarItemAddNum += amount;
+
+        //100킬마다 얻게하기 위해서
+        if (goldBarItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Goldbar , goldBarGetAmountMin))
+        {
+        }
+        else
+        {
+            tableDatas[GoldBar].Value += (int)goldBarItemAddNum;
+            goldBarItemAddNum -= (int)goldBarItemAddNum;
+        }
     }
 
     static int growThStoneAddAmount = 0;
@@ -639,6 +666,42 @@ public class GoodsTable
     static float updateRequireNum_GrowthStone_2 = 1000000; //조 이상
     static float updateRequireNum_GrowthStone_3 = 10000000; // 10조이상
 
+    private static float stageRelicGetAmountMin = 1;
+    private static float goldBarGetAmountMin = 1;
+    private static float peachGetAmountMin = 100;
+    private static float helGetAmountMin = 100;
+    private static float chunGetAmountMin = 100;
+    private static float dokebiGetAmountMin = 100;
+    private static float yoPowerGetAmountMin = 100;
+    private static float taeguekGetAmountMin = 100;
+    private static float sgGetAmountMin = 100;
+    private static float sumiGetAmountMin = 100;
+    
+    public void RefreshGetItemAmount()
+    {
+        stageRelicGetAmountMin = AddGetItemAmount(tableDatas[StageRelic].Value);
+        goldBarGetAmountMin = AddGetItemAmount(tableDatas[GoldBar].Value);
+        peachGetAmountMin = AddGetItemAmount(tableDatas[Peach].Value);
+        helGetAmountMin = AddGetItemAmount(tableDatas[Hel].Value);
+        chunGetAmountMin = AddGetItemAmount(tableDatas[Cw].Value);
+        dokebiGetAmountMin = AddGetItemAmount(tableDatas[DokebiFire].Value);
+        yoPowerGetAmountMin = AddGetItemAmount(tableDatas[YoPowerGoods].Value);
+        dokebiGetAmountMin = AddGetItemAmount(tableDatas[DokebiFire].Value);
+        taeguekGetAmountMin = AddGetItemAmount(tableDatas[TaeguekGoods].Value);
+        sgGetAmountMin = AddGetItemAmount(tableDatas[SG].Value);
+        sumiGetAmountMin = AddGetItemAmount(tableDatas[SG].Value);
+    }
+    
+    private int AddGetItemAmount(float amount)
+    {
+        float result = Mathf.Log10(amount);
+        int powerOfTen = Mathf.RoundToInt(result);
+        var min = powerOfTen - 6;
+
+        var getItemValue = (int)Mathf.Max(Mathf.Pow(10, min),1);
+        
+        return getItemValue;
+    }
     public float FloatGetUpdateRequireGrowthStone()
     {
         //10조이상
@@ -760,7 +823,7 @@ public class GoodsTable
         peachItemAddNum += amount * (1 + PlayerStats.GetPeachGainValue());
 
         //100킬마다 얻게하기 위해서
-        if (peachItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Peachamount, 1))
+        if (peachItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Peachamount, peachGetAmountMin))
         {
         }
         else
@@ -778,7 +841,7 @@ public class GoodsTable
         helItemAddNum += amount * (1 + PlayerStats.GetHellGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (helItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Helamount, 1))
+        if (helItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Helamount, helGetAmountMin))
         {
         }
         else
@@ -797,7 +860,7 @@ public class GoodsTable
         chunItemAddNum += amount * (1 + PlayerStats.GetChunGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (chunItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Chunfloweramount, 1))
+        if (chunItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Chunfloweramount, chunGetAmountMin))
         {
         }
         else
@@ -813,7 +876,7 @@ public class GoodsTable
         dokebiItemAddNum += amount * (1 + PlayerStats.GetDokebiFireGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (dokebiItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Dokebifireamount, 1))
+        if (dokebiItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Dokebifireamount, dokebiGetAmountMin))
         {
         }
         else
@@ -828,7 +891,7 @@ public class GoodsTable
         yoPowerItemAddNum += amount * (1 + PlayerStats.GetYoPowerGoodsGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (yoPowerItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Yokaiessence, 1))
+        if (yoPowerItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Yokaiessence, yoPowerGetAmountMin))
         {
         }
         else
@@ -843,7 +906,7 @@ public class GoodsTable
         taeguekItemAddNum += amount * (1 + PlayerStats.GetTaegeukGoodsGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (taeguekItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Taegeuk, 1))
+        if (taeguekItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Taegeuk, taeguekGetAmountMin))
         {
         }
         else
@@ -858,7 +921,7 @@ public class GoodsTable
         sgItemAddNum += amount * (1 + PlayerStats.GetSasinsuGoodsGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (sgItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Sinsu, 1))
+        if (sgItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Sinsu, sgGetAmountMin))
         {
         }
         else
@@ -875,7 +938,7 @@ public class GoodsTable
         sumiItemAddNum += amount * (1 + PlayerStats.GetSumiFireGainValue());
 
         //1개 획득할때마다 얻게하기 위해서
-        if (sumiItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Dokebifireamount, 1))
+        if (sumiItemAddNum < Mathf.Max(updateRequireNum * GameManager.Instance.CurrentStageData.Sumifloweramount, sumiGetAmountMin))
         {
         }
         else
@@ -983,22 +1046,22 @@ public class GoodsTable
         }
     }
 
-    static int stageRelicAddNum = 0;
+    static float stageRelicAddNum = 0;
 
     public void GetStageRelic(float amount)
     {
         if (SystemMessage.IsMessageQueueFull() == false)
             SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.StageRelic)} 획득(+{(int)amount})");
 
-        stageRelicAddNum += (int)amount;
+        stageRelicAddNum += amount;
 
-        if (stageRelicAddNum < updateRequireNum)
+        if (stageRelicAddNum < Mathf.Max(updateRequireNum , stageRelicGetAmountMin))
         {
         }
         else
         {
-            tableDatas[StageRelic].Value += stageRelicAddNum;
-            stageRelicAddNum = 0;
+            tableDatas[StageRelic].Value += (int)stageRelicAddNum;
+            stageRelicAddNum -= (int)stageRelicAddNum;
         }
     }
 
@@ -2245,7 +2308,10 @@ public class GoodsTable
         {
             return Item_Type.RelicTicket;
         }
-
+        else if (GoodsTable.Relic == type)
+        {
+            return Item_Type.Relic;
+        }
         else if (GoodsTable.Event_Item_0 == type)
         {
             return Item_Type.Event_Item_0;
@@ -2958,6 +3024,11 @@ public class GoodsTable
         else if (GoodsTable.Event_Fall_Gold == type)
         {
             return Item_Type.Event_Fall_Gold;
+        }
+        
+        else if (GoodsTable.Relic == type)
+        {
+            return Item_Type.Relic;
         }
         
         else

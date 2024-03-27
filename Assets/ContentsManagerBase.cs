@@ -63,6 +63,8 @@ public class ContentsManagerBase : SingletonMono<ContentsManagerBase>
     {
         SetCameraCollider();
 
+        remainSec = 30;
+        
         timerRoutine = StartCoroutine(ModeTimer());
 
         UiSubMenues.Instance.gameObject.SetActive(false);

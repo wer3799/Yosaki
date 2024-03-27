@@ -57,7 +57,7 @@ public class UiSasinsuBoard : MonoBehaviour
 
     private void UpdateToalAbilAddValue()
     {
-        totalAbilAddValue.SetText($"총 :{Utils.ConvertBigNum(PlayerStats.GetSasinsuStarAddValue() * 100f)}% 적용됨");
+        totalAbilAddValue.SetText($"총 :{Utils.ConvertNum(PlayerStats.GetSasinsuStarAddValue() * 100f)}% 적용됨");
     }
     //
 
@@ -157,22 +157,22 @@ public class UiSasinsuBoard : MonoBehaviour
         switch (sasinIndex)
         {
             case 0:
-                scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b0"].score.Value)}");
+                scoreText.SetText($"최고 점수 : {Utils.ConvertNum(ServerData.sasinsuServerTable.TableDatas["b0"].score.Value)}");
                 sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[67], null);
                 break;
             case 1:
-                scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b1"].score.Value)}");
+                scoreText.SetText($"최고 점수 : {Utils.ConvertNum(ServerData.sasinsuServerTable.TableDatas["b1"].score.Value)}");
                 sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[68], null);
                 break;
             case 2:
-                scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b2"].score.Value)}");
+                scoreText.SetText($"최고 점수 : {Utils.ConvertNum(ServerData.sasinsuServerTable.TableDatas["b2"].score.Value)}");
                 sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[69], null);
                 break;
             case 3:
-                scoreText.SetText($"최고 점수 : {Utils.ConvertBigNum(ServerData.sasinsuServerTable.TableDatas["b3"].score.Value)}");
+                scoreText.SetText($"최고 점수 : {Utils.ConvertNum(ServerData.sasinsuServerTable.TableDatas["b3"].score.Value)}");
                 sasinsuDescription.SetText($"보스를 공략해 점수를 등록하세요!\n단계별 효과가 누적되어 적용 됩니다!");
                 weaponView.Initialize(TableManager.Instance.WeaponData[70], null);
                 break;

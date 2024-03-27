@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+//using System.Data.SqlClient;
 using UniRx;
 using UnityEngine;
 using System.Linq;
@@ -9,6 +9,8 @@ using UnityEngine.Serialization;
 
 public class BossEnemyPattern : BossEnemyBase
 {
+    [Header("BossEnemyPattern")]
+
     [SerializeField]
     private List<AlarmHitObject> enemyHitObjects;
 
@@ -37,14 +39,22 @@ public class BossEnemyPattern : BossEnemyBase
     [SerializeField] private Transform _targetTransform;
     private void Start()
     {
-        if (GameManager.Instance.bossId != 185)
+        switch (GameManager.contentsType)
         {
-            Initialize();
-        }
+        case GameManager.ContentsType.TwelveDungeon:
+            
+            if (GameManager.Instance.bossId != 185)
+            {
+                Initialize();
+            }
 
-        if (GameManager.Instance.bossId >= 200)
-        {
-            UpdateBossDamage();
+            if (GameManager.Instance.bossId >= 200)
+            {
+                UpdateBossDamage();
+            }
+            break;
+        case GameManager.ContentsType.SpecialRequestBoss:
+            break;
         }
     }
     [SerializeField]
@@ -183,17 +193,25 @@ public class BossEnemyPattern : BossEnemyBase
 
     private void Initialize()
     {
+        var data = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
+        if (data.Skipboss)
+        {
+            
+        }
+        else
+        {
+
+            agentHpController.SetHp(float.MaxValue);
+            
+            agentHpController.SetDefense(0);
+          
+        }
         enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
-
-        agentHpController.SetHp(float.MaxValue);
-
-        agentHpController.SetDefense(0);
-
+        
         if (GameManager.Instance.bossId < 188)
         {
             StartAttackRoutine();
         }
-        
     }
 
     public void StartAttackRoutine()

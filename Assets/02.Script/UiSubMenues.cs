@@ -13,6 +13,7 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
     [SerializeField] private MainTabButtons _BattleContestButton;
     [SerializeField] private MainTabButtons _WeeklyBossButton;
     [SerializeField] private MainTabButtons _MunhaButton;
+    [SerializeField] private MainTabButtons _SpecialRequestButton;
 
     private void Start()
     {
@@ -114,6 +115,12 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                 {
                     GameManager.Instance.ResetLastContents2();
                     _MunhaButton.OnClickButton();
+                    return;
+                }
+                case GameManager.ContentsType.SpecialRequestBoss:
+                {
+                    GameManager.Instance.ResetLastContents2();
+                    _SpecialRequestButton.OnClickButton();
                     return;
                 }
             }

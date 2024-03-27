@@ -32,11 +32,11 @@ public class UiSasinsuDescription : MonoBehaviour
 
         sasinType = sasinIdx;
 
-        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype0[starIdx])}{Utils.ConvertBigNum(tableData.Abilvalue0[starIdx] * 100f)}");
+        abilDescription.SetText($"{CommonString.GetStatusName((StatusType)tableData.Abiltype0[starIdx])}{Utils.ConvertNum(tableData.Abilvalue0[starIdx] * 100f)}");
 
         gradeDescription.SetText($"{tableData.Name} {starIdx+1}단계");
 #if UNITY_EDITOR
-        damageCutDescription.SetText($"{Utils.ConvertBigNum(tableData.Score[starIdx])} 이상 기록시");
+        damageCutDescription.SetText($"{Utils.ConvertNum(tableData.Score[starIdx])} 이상 기록시");
 #else
         damageCutDescription.SetText($"{tableData.Scoredescription[starIdx]} 이상 기록시");
 #endif

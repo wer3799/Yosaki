@@ -395,7 +395,8 @@ public static class Utils
                type == Item_Type.GuimoonRelicClearTicket ||
                IsTreasureItem(type)||
                IsVisionSkill(type)||
-               IsGoods(type)
+               IsGoods(type)||
+               IsSkillItem(type)
             ;
     }
 
@@ -410,7 +411,9 @@ public static class Utils
 
     public static bool IsSkillItem(this Item_Type type)
     {
-        return type >= Item_Type.skill0 && type <= Item_Type.skill8;
+        return
+            (type >= Item_Type.skill0 && type <= Item_Type.skill8) ||
+            (type >= Item_Type.GRSkill0 && type <= Item_Type.Skill_End);
     }
 
     public static bool IsPercentStat(this StatusType type)
@@ -739,7 +742,10 @@ public static class Utils
             {
                 if (numList[i] == 0) continue;
 
-                numStringList.Add(Math.Truncate(numList[i]) + goldUnitArr[i]);
+                if (Math.Truncate(numList[i]) == 0) continue;
+                var item = Math.Truncate(numList[i]) + goldUnitArr[i];
+                numStringList.Add(item);
+
             }
 
             for (int i = 0; i < numStringList.Count; i++)
@@ -789,7 +795,7 @@ public static class Utils
     {
         if (data > 10000)
         {
-            return ConvertBigNum(data);
+            return ConvertBigNumForRewardCell(data);
         }
         else
         {
@@ -837,7 +843,9 @@ public static class Utils
             {
                 if (numList[i] == 0) continue;
                 if(numList[i]<1) continue;
-                numStringList.Add(Math.Truncate(numList[i]) + goldUnitArr[i]);
+                if (Math.Truncate(numList[i]) == 0) continue;
+                var item = Math.Truncate(numList[i]) + goldUnitArr[i];
+                numStringList.Add(item);
             }
 
             for (int i = 0; i < numStringList.Count; i++)
@@ -1052,5 +1060,35 @@ public static class Utils
     {
         var timeRemaining = targetTime - DateTime.Now;
         return timeRemaining.Add(Utils.GetTimeDifferenceFromKorea());
+    }
+    
+    public static SpecialRequestTableData GetCurrentSeasonSpecialRequestData()
+    {
+        
+        var tableData = TableManager.Instance.SpecialRequestTable.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            var endData = tableData[i].Enddate.Split('-');
+            DateTime endDate = new DateTime(int.Parse(endData[0]), int.Parse(endData[1]), int.Parse(endData[2]));
+            endDate = endDate.AddDays(1);//5월5일을 넣으면 5월6일00시에끝나야함.
+            var result = DateTime.Compare(ServerData.userInfoTable.currentServerTime, endDate);
+            
+            switch (result)
+            {
+                //아직 안지남
+                case -1 :
+                case 0:
+                    return tableData[i];
+                //지남
+                case 1:
+                    continue;
+                default:
+                    continue;
+            }    
+        }
+
+        return null;
+
     }
 }

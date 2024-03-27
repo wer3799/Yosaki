@@ -110,6 +110,74 @@ public class UiBlackFoxCell : MonoBehaviour
         syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
 
     }
+    public void OnClickUpgrade100Button()
+    {
+        if (IsMaxLevel())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다!");
+            return;
+        }
+
+        float currentNum = ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value;
+
+        if (currentNum < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlackFoxGoods)}이 부족합니다!");
+            return;
+        }
+
+        float upgradeableNum = blackFoxLocalData.Maxlevel - blackFoxServerData.level.Value;
+
+        upgradeableNum = Mathf.Min(upgradeableNum, 100);
+
+        upgradeableNum = Mathf.Min(upgradeableNum, currentNum);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value -= upgradeableNum;
+
+        blackFoxServerData.level.Value += upgradeableNum;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
+    public void OnClickUpgrade1000Button()
+    {
+        if (IsMaxLevel())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다!");
+            return;
+        }
+
+        float currentNum = ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value;
+
+        if (currentNum < 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.BlackFoxGoods)}이 부족합니다!");
+            return;
+        }
+
+        float upgradeableNum = blackFoxLocalData.Maxlevel - blackFoxServerData.level.Value;
+
+        upgradeableNum = Mathf.Min(upgradeableNum, 1000);
+
+        upgradeableNum = Mathf.Min(upgradeableNum, currentNum);
+
+        ServerData.goodsTable.GetTableData(GoodsTable.BlackFoxGoods).Value -= upgradeableNum;
+
+        blackFoxServerData.level.Value += upgradeableNum;
+
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
 
     public void OnClickUpgradeAllButton()
     {

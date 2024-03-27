@@ -157,6 +157,16 @@ public class UserInfoTable_2
 
     public const string studentSpotGrade = "ssg";//제자 혈자리
     public const string hyulTowerRewardIndex = "htri"; //명상 타워 보상 단계
+    
+    public const string specialRequestTotalRewardIdx = "srtri"; //누적보상
+    public const string specialRequestSpecialRewardIdx = "srsri"; //특별보상
+    public const string currentSeasonIdx = "csi"; //현재시즌
+    
+    public const string specialRequestExchangeKey_0 = "sre_0"; //특별의뢰보상교환키
+    public const string specialRequestExchangeKey_1 = "sre_1"; //특별의뢰보상교환키
+    public const string specialRequestExchangeKey_2 = "sre_2"; //특별의뢰보상교환키
+    public const string specialRequestExchangeKey_3 = "sre_3"; //특별의뢰보상교환키
+    public const string specialRequestExchangeKey_4 = "sre_4"; //특별의뢰보상교환키
 
     
     
@@ -222,6 +232,9 @@ public class UserInfoTable_2
         { meditationIndex, -1f },
         { meditationTowerRewardIndex, -1f },
         { hyulTowerRewardIndex, -1f },
+        { specialRequestTotalRewardIdx, -1f },
+        { specialRequestSpecialRewardIdx, -1f },
+        { currentSeasonIdx, 0f },
         { meditationTowerScore, 0f },
         { usedGuimoonRelicTicket, 0f },
         { getRelicUpgrade, 0f },
@@ -281,6 +294,11 @@ public class UserInfoTable_2
         { graduateGumgi, 0f },
         { graduateVisionTower, 0f },
         { studentSpotGrade, -1f },
+        { specialRequestExchangeKey_0, 0f },
+        { specialRequestExchangeKey_1, 0f },
+        { specialRequestExchangeKey_2, 0f },
+        { specialRequestExchangeKey_3, 0f },
+        { specialRequestExchangeKey_4, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

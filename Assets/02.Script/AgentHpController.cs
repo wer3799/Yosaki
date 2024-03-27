@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -82,6 +83,7 @@ public class AgentHpController : MonoBehaviour
 
             if (updateSubHpBar)
             {
+       
                 UiSubHpBar.Instance.UpdateGauge(e, maxHp);
             }
         }).AddTo(this);
@@ -138,6 +140,46 @@ public class AgentHpController : MonoBehaviour
 
             SetHp(bossHp);
         }
+    }
+    public void InitializeSpecialRequestBoss()
+    {
+        fieldBossTimerStarted = false;
+
+        this.isFieldBossEnemy = false;
+        
+
+        gainGoldFromStage = 1;
+
+        this.updateSubHpBar = true;
+
+        var tableData = TableManager.Instance.SpecialRequestBossTable.dataArray[GameManager.Instance.specialRequestBossId];
+
+        var seasonData = Utils.GetCurrentSeasonSpecialRequestData();
+            
+        SetDefense(tableData.Defense);
+
+        SetHp(seasonData.Specialrequestbosshp[tableData.Id]);
+
+    }
+    public void InitializeTwelveBoss(bool skipBoss = false)
+    {
+        fieldBossTimerStarted = false;
+
+        this.isFieldBossEnemy = false;
+        
+
+        gainGoldFromStage = 1;
+        this.updateSubHpBar = skipBoss;
+
+        var tableData = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId];
+
+        
+        UiSubHpBar.Instance.gameObject.SetActive(skipBoss);
+        
+        SetDefense(tableData.Defense);
+
+        SetHp(tableData.Rewardcut.Last());
+
     }
 
     public void SetHp(double hp)
@@ -458,16 +500,16 @@ public class AgentHpController : MonoBehaviour
 
     private void GetGoldByEnemy(float gold)
     {
-        gold += gold * PlayerStats.GetGoldPlusValue();
+        var sum = gold * (1 + PlayerStats.GetGoldPlusValue());
 
-        ServerData.goodsTable.GetGold(gold);
+        ServerData.goodsTable.GetGold(sum);
     }
 
     private void GetGoldBarByEnemy(float goldbar)
     {
-        goldbar += goldbar *= PlayerStats.GetGoldBarPlusValue();
+        var sum  = goldbar * (1+ PlayerStats.GetGoldBarPlusValue());
 
-        ServerData.goodsTable.GetGoldBar(goldbar);
+        ServerData.goodsTable.GetGoldBar(sum);
     }
 
     private void OnDisable()

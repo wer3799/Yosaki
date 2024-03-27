@@ -132,4 +132,8 @@ public class PetTableData
   int dispatchscore;
   public int Dispatchscore { get {return dispatchscore; } set { this.dispatchscore = value;} }
   
+  [SerializeField]
+  int shopprice;
+  public int Shopprice { get {return shopprice; } set { this.shopprice = value;} }
+  
 }
