@@ -1561,6 +1561,160 @@ public class UiMileageRefund : MonoBehaviour
             
             });
         }
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 64)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            Param userInfo2Param = new Param();
+            Param bossParam = new Param();
+            Param goodsParam = new Param();
+            Param costumeParam = new Param();
+            Param weaponParam = new Param();
+            Param magicBookParam = new Param();
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 64;
+            var beforeStar = ServerData.specialRequestBossServerTable.GetTotalStar();
+            var beforeReward = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestTotalRewardIdx).Value;
+
+            //Debug.LogError($"beforeStar : {beforeStar}");
+            
+            var data = Utils.GetCurrentSeasonSpecialRequestData();
+
+            for (int i = 0; i < data.Stringid.Length; i++)
+            {
+                if (ServerData.specialRequestBossServerTable.TableDatas[data.Stringid[i]].score.Value > 2)
+                {
+                    ServerData.specialRequestBossServerTable.TableDatas[data.Stringid[i]].score.Value = 2;
+                    bossParam.Add(data.Stringid[i], ServerData.specialRequestBossServerTable.TableDatas[data.Stringid[i]].ConvertToString());
+
+                }
+            }
+            var afterStar = ServerData.specialRequestBossServerTable.GetTotalStar();
+            //Debug.LogError($"afterStar : {afterStar}");
+            var realIdx = -1;
+            
+            //회수해야함
+            if (beforeStar > afterStar)
+            {
+                UiRewardResultPopUp.Instance.Clear();
+                
+                var tableData = TableManager.Instance.SpecialRequestStarRewardTable.dataArray;
+                for (int i = 0; i < tableData.Length; i++)
+                {
+                    //continue에 걸리지 않으면 내가 못받는 보상
+                    if (afterStar >= tableData[i].Starcondition)
+                    {
+                        realIdx = i;
+                        continue;
+                    }
+                    //내가 못받는 보상중에 받은게 있다면 추가
+                    if (beforeReward >= i)
+                    {
+                        for (int j = 0; j < tableData[i].Rewardtype.Length; j++)
+                        {
+                            UiRewardResultPopUp.Instance.AddOrUpdateReward((Item_Type)tableData[i].Rewardtype[j], tableData[i].Rewardvalue[j]);
+                        }
+                        //Debug.LogError($"{i}번째 보상 회수!");
+                    }
+                }
+
+                using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
+                while (e.MoveNext())
+                {
+                    ServerData.goodsTable.GetTableData(e.Current.itemType).Value -= e.Current.amount;
+                    ServerData.goodsTable.GetTableData(e.Current.itemType).Value = Mathf.Max(ServerData.goodsTable.GetTableData(e.Current.itemType).Value, 0);
+                    var stringId = ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType);
+                    goodsParam.Add(stringId, ServerData.goodsTable.GetTableData(stringId).Value);
+
+                    //Debug.LogError($"{CommonString.GetItemName(e.Current.itemType)} {e.Current.amount}개 보상 회수!");
+
+                }
+
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestTotalRewardIdx).Value = realIdx;
+
+                UiRewardResultPopUp.Instance.Clear();
+
+                realIdx = -1;
+                var rewardData = TableManager.Instance.SpecialRequestRewardTable.dataArray;
+                var seasonValue = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.currentSeasonIdx).Value;
+                for (int i = 0; i < rewardData.Length; i++)
+                {
+                    if (seasonValue != rewardData[i].Seasonid) continue;
+                    if (afterStar < rewardData[i].Starcondition)
+                    {
+                        var rewardType = (Item_Type)rewardData[i].Rewardtype;
+                        if (rewardType.IsCostumeItem())
+                        {
+                            var costumeKey = rewardType.ToString();
+                            var costumeServerData = ServerData.costumeServerTable.TableDatas[costumeKey];
+
+                            costumeServerData.hasCostume.Value = false;
+
+                            costumeParam.Add(costumeKey, costumeServerData.ConvertToString());
+                            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+                            
+                            ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value = 0;
+
+                            //서버 저장
+                            ServerData.equipmentTable.SyncData(EquipmentTable.CostumeLook);
+                            
+                           // Debug.LogError($"코스튬 보상 회수!");
+                        }
+                        else if (rewardType.IsNorigaeItem())
+                        {
+                            var key = rewardType.ToString();
+                            var serverData = ServerData.magicBookTable.TableDatas[key];
+
+                            serverData.hasItem.Value = 0;
+
+                            magicBookParam.Add(key, serverData.ConvertToString());
+                            transactions.Add(TransactionValue.SetUpdate(MagicBookTable.tableName, MagicBookTable.Indate, magicBookParam));
+                            //Debug.LogError($"노리개 보상 회수!");
+                        }
+                        else if (rewardType.IsWeaponItem())
+                        {
+                            var key = rewardType.ToString();
+                            var serverData = ServerData.weaponTable.TableDatas[key];
+
+                            serverData.hasItem.Value = 0;
+
+                            weaponParam.Add(key, serverData.ConvertToString());
+                            transactions.Add(TransactionValue.SetUpdate(WeaponTable.tableName, WeaponTable.Indate, weaponParam));
+                            //Debug.LogError($"무기  보상 회수!");
+                        }
+                    }
+                    else
+                    {
+                        realIdx = rewardData[i].Rewardidx;
+                    }
+                } 
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestSpecialRewardIdx).Value = realIdx;
+            }
+
+            if (goodsParam.Count > 0)
+            {
+                transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            }
+            
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            userInfo2Param.Add(UserInfoTable_2.specialRequestTotalRewardIdx, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestTotalRewardIdx).Value);
+            userInfo2Param.Add(UserInfoTable_2.specialRequestSpecialRewardIdx, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.specialRequestSpecialRewardIdx).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+
+            if (bossParam.Count > 0)
+            {
+                transactions.Add(TransactionValue.SetUpdate(SpecialRequestBossServerTable.tableName, SpecialRequestBossServerTable.Indate, bossParam));
+            }
+
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            
+            });
+        }
     }
     
     private void ShopItemRefundRoutine()

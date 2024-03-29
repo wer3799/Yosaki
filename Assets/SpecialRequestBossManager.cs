@@ -269,8 +269,10 @@ public class SpecialRequestBossManager : ContentsManagerBase
 
         
         var score = (int)(remainSec / 10);
+
+        score = Mathf.Max(score, 2);
         
-         List<TransactionValue> transactionList = new List<TransactionValue>();
+        List<TransactionValue> transactionList = new List<TransactionValue>();
          Param bossParam = new Param();
         //
 

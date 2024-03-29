@@ -249,7 +249,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         if (magicBookServerData.hasItem.Value != 1)
         {
-            PopupManager.Instance.ShowAlarmMessage("마도서가 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{magicBookData.Name} 노리개가 없습니다.");
             return;
         }
 
@@ -284,7 +284,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         if (magicBookServerData.hasItem.Value != 1)
         {
-            PopupManager.Instance.ShowAlarmMessage("마도서가 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{magicBookData.Name} 노리개가 없습니다.");
             return;
         }
 
@@ -327,7 +327,7 @@ public class UiPassiveSkillCell : MonoBehaviour
 
         if (magicBookServerData.hasItem.Value != 1)
         {
-            PopupManager.Instance.ShowAlarmMessage("마도서가 없습니다.");
+            PopupManager.Instance.ShowAlarmMessage($"{magicBookData.Name} 노리개가 없습니다.");
             return;
         }
 
