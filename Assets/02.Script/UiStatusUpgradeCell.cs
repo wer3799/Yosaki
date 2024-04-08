@@ -743,6 +743,8 @@ public class UiStatusUpgradeCell : MonoBehaviour
             
             ServerData.goodsTable.GetTableData(Item_Type.Gold).Value -= price;
             ServerData.statusTable.GetTableData(statusData.Key).Value += upgradeCount;
+            UiTutorialManager.Instance.SetClear(TutorialStep.UpgradeGoldStat);
+
         }
         else if (statusData.STATUSWHERE == StatusWhere.memory)
         {

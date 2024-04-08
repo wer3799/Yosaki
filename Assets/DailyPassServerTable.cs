@@ -18,8 +18,8 @@ public class DailyPassServerTable
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
-        { DailypassFreeReward, string.Empty },
-        { DailypassAdReward, string.Empty }
+        { DailypassFreeReward, "-1" },
+        { DailypassAdReward, "-1" }
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -31,7 +31,7 @@ public class DailyPassServerTable
         var e = tableDatas.GetEnumerator();
         while (e.MoveNext())
         {
-            e.Current.Value.Value = string.Empty;
+            e.Current.Value.Value = "-1";
         }
     }
 

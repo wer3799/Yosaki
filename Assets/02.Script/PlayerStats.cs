@@ -140,6 +140,7 @@ public enum StatusType
     EnhanceDosul,//도술증폭
     EnhanceVision,//궁극증폭
     DBTHasValueUpgrade,//무림구슬
+    DokChimHasValueUpgrade=120,//극락 재화당 개수증가
 
 }
 
@@ -425,7 +426,16 @@ public static class PlayerStats
 
         float gap = floor / sogulGab;
 
-        return gap * sogulValuePerGab;
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateBackGui).Value > 0)
+        {
+            return gap * sogulValuePerGab * GameBalance.BackguiGraduatePlusValue;
+        }
+        else
+        {
+            return gap * sogulValuePerGab;
+            
+        }
+        
     }
 
     #region AttackPower
@@ -1387,14 +1397,7 @@ public static class PlayerStats
         ret += GetMonthBuffEffect(StatusType.MagicStoneAddPer);
         ret += GetMonth2BuffEffect(StatusType.MagicStoneAddPer);
         ret += GetBuffValue(StatusType.MagicStoneAddPer);
-        //ret += GetOneYearBuffValue(StatusType.MagicStoneAddPer);
-        //ret += GetChuSeokBuffValue(StatusType.MagicStoneAddPer);
-        //ret += GetChuSeokBuffValue2(StatusType.MagicStoneAddPer);
-
-
-        //  ret += GetMonthlyFreeBuffValue(StatusType.MagicStoneAddPer);
-        //  ret += GetMonthlyAdBuffValue(StatusType.MagicStoneAddPer);
-
+        ret += GetGuildPetEffect(StatusType.MagicStoneAddPer);
         return ret;
     }
 
@@ -2061,6 +2064,8 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special6_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special7_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special8_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special9_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special10_GoldBar);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical17DamPer);
 
@@ -3990,17 +3995,22 @@ public static class PlayerStats
         {
             case StatusType.AttackAddPer:
             {
-                return petLevel * 0.1f;
+                return petLevel *GameBalance.guildPet_attack;
             }
                 break;
             case StatusType.ExpGainPer:
             {
-                return petLevel * 0.01f;
+                return petLevel * GameBalance.guildPet_exp;
             }
                 break;
             case StatusType.GoldGainPer:
             {
-                return petLevel * 0.01f;
+                return petLevel * GameBalance.guildPet_gold;
+            }
+                break;
+            case StatusType.MagicStoneAddPer:
+            {
+                return petLevel * GameBalance.guildPet_getGrowthStone;
             }
                 break;
         }
@@ -6792,6 +6802,8 @@ public static class PlayerStats
         
         ret += GetSpecialTypeAbility(StatusType.DragonHasValueUpgrade);
         
+        ret += GetSamchunAbility(StatusType.DragonHasValueUpgrade);
+        
         return ret;
     }
     public static float GetDragonPalaceHasValueUpgrade()
@@ -6816,6 +6828,10 @@ public static class PlayerStats
         ret += GetPassiveSkill2Value(StatusType.MurimHasValueUpgrade);
         
         ret += GetSkillHasValue(StatusType.MurimHasValueUpgrade);
+        
+        ret += GetSpecialTypeAbility(StatusType.MurimHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.MurimHasValueUpgrade);
 
         return ret;
     }
@@ -6825,6 +6841,15 @@ public static class PlayerStats
         float ret = 0f;
         
         ret += GetSpecialTypeAbility(StatusType.DBTHasValueUpgrade);
+        
+        return ret;
+    }
+    //독침
+    public static float GetDokChimHasValueUpgrade()
+    {
+        float ret = 0f;
+        
+        ret += GetGuildTower2TotalAbility(StatusType.DokChimHasValueUpgrade);
         
         return ret;
     }
@@ -7029,7 +7054,8 @@ public static class PlayerStats
     }
     public static float GetGuildTowerChimUpgradeValue()
     {
-        return ServerData.goodsTable.TableDatas[GoodsTable.GuildTowerHorn].Value * GameBalance.GuildTowerChimAbilUpValue;
+        return ServerData.goodsTable.TableDatas[GoodsTable.GuildTowerHorn].Value *
+               GameBalance.GuildTowerChimAbilUpValue * (1 + GetDokChimHasValueUpgrade());
     }
 
 
@@ -7395,5 +7421,27 @@ public static class PlayerStats
         {
             return TableManager.Instance.StudentSpot.dataArray[grade].Level;
         }
+    }
+    public static float GetGuildTower2TotalAbility(StatusType type)
+    {
+        var grade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value-1;
+
+        var tableData = TableManager.Instance.GuildTowerTable2.dataArray;
+
+        var sum = 0f;
+        if (grade < 0)
+        {
+            return sum;
+        }
+        
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (grade < i) break;
+            if ((StatusType)tableData[i].Abiltype != type) continue;
+            sum += tableData[i].Abilvalue;
+        }
+
+        return sum;
+
     }
 }

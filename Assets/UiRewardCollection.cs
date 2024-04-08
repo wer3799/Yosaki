@@ -58,6 +58,8 @@ public class UiRewardCollection : MonoBehaviour
     private GameObject DokebiObject;
     [SerializeField]
     private GameObject SumiObject;
+    [SerializeField]
+    private List<GameObject> Objects = new List<GameObject>();
 
     private void Start()
     {
@@ -116,180 +118,16 @@ public class UiRewardCollection : MonoBehaviour
         {
             SumiObject.SetActive(e == 0);
         }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateBackGui).AsObservable().Subscribe(e =>
+        {
+            Objects[0].SetActive(e == 0);
+        }).AddTo(this);
     }
 
     public void OnClickBanditReward(bool isPopup = true)
     {
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value >=
-            GameBalance.bonusDungeonEnterCount)
-        {
-            if (isPopup)
-            {
-                PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 소탕할 수 없습니다.");
-            }
-
-            return;
-        }
-
-        int killCount = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonMaxKillCount).Value;
-
-        if (killCount == 0)
-        {
-            if (isPopup)
-            {
-                PopupManager.Instance.ShowAlarmMessage("기록이 없습니다.");
-            }
-
-            return;
-        }
-
-        int clearCount = GameBalance.bonusDungeonEnterCount -
-                         (int)ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value;
-
-        if (isPopup)
-        {
-            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-                $"처치 <color=yellow>{killCount}</color>로 <color=yellow>{clearCount}회</color> 소탕 합니까?\n{CommonString.GetItemName(Item_Type.Jade)} {killCount * GameBalance.bonusDungeonGemPerEnemy * (GameBalance.bandiPlusStageJadeValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개\n{CommonString.GetItemName(Item_Type.Marble)} {killCount * GameBalance.bonusDungeonMarblePerEnemy * (GameBalance.bandiPlusStageMarbleValue * (int)Mathf.Floor(Mathf.Max(1000f, (float)ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value) + 2) / GameBalance.bandiPlusStageDevideValue) * clearCount}개",
-                () =>
-                {
-                    // enterButton.interactable = false;
-                    if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value >= GameBalance.bonusDungeonEnterCount)
-                    {
-                        PopupManager.Instance.ShowAlarmMessage("오늘은 더이상 소탕할 수 없습니다.");
-                        return;
-                    }
-
-                    int rewardNumJade = (killCount * GameBalance.bonusDungeonGemPerEnemy) *
-                                        (GameBalance.bandiPlusStageJadeValue *
-                                         (int)Mathf.Floor(Mathf.Max(1000f,
-                                             (float)ServerData.userInfoTable
-                                                 .GetTableData(UserInfoTable.topClearStageId).Value) + 2) /
-                                         GameBalance.bandiPlusStageDevideValue) * clearCount;
-                    int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy *
-                                          (GameBalance.bandiPlusStageMarbleValue *
-                                           (int)Mathf.Floor(Mathf.Max(1000f,
-                                               (float)ServerData.userInfoTable
-                                                   .GetTableData(UserInfoTable.topClearStageId).Value) + 2) /
-                                           GameBalance.bandiPlusStageDevideValue) * clearCount;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
-
-                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
-                    ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
-
-                    //데이터 싱크
-                    List<TransactionValue> transactionList = new List<TransactionValue>();
-
-                    Param goodsParam = new Param();
-                    goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-                    goodsParam.Add(GoodsTable.MarbleKey,
-                        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-                    transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate,
-                        goodsParam));
-
-                    Param userInfoParam = new Param();
-                    userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount,
-                        ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
-                    transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate,
-                        userInfoParam));
-
-                    ServerData.SendTransaction(transactionList,
-                        successCallBack: () =>
-                        {
-                            DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
-                        },
-                        completeCallBack: () =>
-                        {
-                            // enterButton.interactable = true;
-                        });
-
-                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, clearCount);
-
-                    if (ServerData.userInfoTable.IsMonthlyPass2() == false)
-                    {
-                        EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearBandit, clearCount);
-                    }
-                    else
-                    {
-                        EventMissionManager.UpdateEventMissionClear(MonthMission2Key.ClearBandit, clearCount);
-                    }
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                        $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!",
-                        null);
-                    SoundManager.Instance.PlaySound("GoldUse");
-
-
-                }, null);
-        }
-        else
-        {
-                
-                    if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value >= GameBalance.bonusDungeonEnterCount)
-                    {
-                        return;
-                    }
-
-                    int rewardNumJade = (killCount * GameBalance.bonusDungeonGemPerEnemy) *
-                                        (GameBalance.bandiPlusStageJadeValue *
-                                         (int)Mathf.Floor(Mathf.Max(1000f,
-                                             (float)ServerData.userInfoTable
-                                                 .GetTableData(UserInfoTable.topClearStageId).Value) + 2) /
-                                         GameBalance.bandiPlusStageDevideValue) * clearCount;
-                    int rewardNumMarble = killCount * GameBalance.bonusDungeonMarblePerEnemy *
-                                          (GameBalance.bandiPlusStageMarbleValue *
-                                           (int)Mathf.Floor(Mathf.Max(1000f,
-                                               (float)ServerData.userInfoTable
-                                                   .GetTableData(UserInfoTable.topClearStageId).Value) + 2) /
-                                           GameBalance.bandiPlusStageDevideValue) * clearCount;
-                    ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value += clearCount;
-
-                    ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value += rewardNumJade;
-                    ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += rewardNumMarble;
-
-                    //데이터 싱크
-                    List<TransactionValue> transactionList = new List<TransactionValue>();
-
-                    Param goodsParam = new Param();
-                    goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-                    goodsParam.Add(GoodsTable.MarbleKey,
-                        ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-                    transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate,
-                        goodsParam));
-
-                    Param userInfoParam = new Param();
-                    userInfoParam.Add(UserInfoTable.bonusDungeonEnterCount,
-                        ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value);
-                    transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate,
-                        userInfoParam));
-
-                    ServerData.SendTransaction(transactionList,
-                        successCallBack: () =>
-                        {
-                            DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
-                        },
-                        completeCallBack: () =>
-                        {
-                            // enterButton.interactable = true;
-                        });
-
-                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, clearCount);
-
-                    if (ServerData.userInfoTable.IsMonthlyPass2() == false)
-                    {
-                        EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearBandit, clearCount);
-                    }
-                    else
-                    {
-                        EventMissionManager.UpdateEventMissionClear(MonthMission2Key.ClearBandit, clearCount);
-                    }
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
-                        $"{clearCount}회 소탕 완료!\n{CommonString.GetItemName(Item_Type.Jade)} {rewardNumJade}개\n{CommonString.GetItemName(Item_Type.Marble)} {rewardNumMarble}개 획득!",
-                        null);
-                    SoundManager.Instance.PlaySound("GoldUse");
-
- 
-        }
-    
-}//★
+        ContentsRewardManager.Instance.OnClickBanditReward(isPopup);
+    }//★
 
     public void OnClickDayofWeekReward(bool isPopUp=true)
     {
@@ -1304,6 +1142,15 @@ public class UiRewardCollection : MonoBehaviour
 
     public void OnClickBackGuiReceiveButton(bool isPopUp=true)
     {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateBackGui).Value > 0)
+        {
+            if (isPopUp)
+            {
+                PopupManager.Instance.ShowAlarmMessage("백귀야행을 각성하여 받을 수 없습니다.");
+            }
+            return;
+        }
+        
         GuideMissionManager.UpdateGuideMissionClear(GuideMissionKey.ClearBackgui);
 
         int lastClearStageId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value;

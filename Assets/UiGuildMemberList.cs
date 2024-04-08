@@ -49,7 +49,12 @@ public class UiGuildMemberList : SingletonMono<UiGuildMemberList>
     [FormerlySerializedAs("nowWorkPlayerDescription")] [SerializeField]
     private TextMeshProUGUI notWorkPlayerDescription;
 
-
+    public int GetGuildTowerTotalScore()
+    {
+        return currentGuildTowerTotalScore.Value;
+    }
+    
+    
     public UiGuildMemberCell GetMemberCell(string nickName)
     {
         nickName = nickName.Replace(CommonString.IOS_nick, "");

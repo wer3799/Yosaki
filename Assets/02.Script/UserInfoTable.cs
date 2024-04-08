@@ -809,8 +809,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 64);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(64));
+                            defultValues.Add(e.Current.Key, 69);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(69));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1537,6 +1537,7 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_30_Mileage).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_31_Mileage).Value = 0;
 
+                
             userInfoParam.Add(UserInfoTable.exchangeCount_0_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_1_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_2_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2_Mileage).Value);
@@ -1570,6 +1571,8 @@ public class UserInfoTable
             userInfoParam.Add(UserInfoTable.exchangeCount_29_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_29_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_30_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_30_Mileage).Value);
             userInfoParam.Add(UserInfoTable.exchangeCount_31_Mileage, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_31_Mileage).Value);
+            
+            
         }
 
         Param iapParam = null;
@@ -1601,6 +1604,11 @@ public class UserInfoTable
 
         //티켓
         ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.DailyRelicTicketGetCount;
+
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateBackGui).Value > 0)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value += GameBalance.BackguiGraduateGainSoulKey;
+        }
 
 
         //주사위
@@ -1884,6 +1892,9 @@ public class UserInfoTable
             userInfo2Param.Add(UserInfoTable_2.exchage_Guild4, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild4].Value);
             userInfo2Param.Add(UserInfoTable_2.exchage_Guild5, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Guild5].Value);
             
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildPetWeeklyRewardIndex).Value = -1;
+            userInfo2Param.Add(UserInfoTable_2.guildPetWeeklyRewardIndex, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.guildPetWeeklyRewardIndex].Value);
+
             //비무대회 주간 교환 횟수 초기화
             ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_0].Value = 0;
             ServerData.userInfoTable.TableDatas[UserInfoTable.eventMission4_1].Value = 0;
@@ -1939,10 +1950,10 @@ public class UserInfoTable
         return currentServerTime <= targetDate.AddDays(1);
     }
 
-    //만두 이벤트
+    //벌꿀 이벤트
     public bool CanSpawnSpringEventItem()
     {
-        DateTime targetDate = new DateTime(2024, 2, 27);
+        DateTime targetDate = new DateTime(2024, 5, 21);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

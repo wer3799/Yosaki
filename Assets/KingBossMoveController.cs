@@ -173,6 +173,35 @@ public class KingBossMoveController : MonoBehaviour
                 {
                     MoveToPlayerVer2();
                 }
+                else
+                {
+                
+                    switch (moveType)
+                    {
+                        case MoveType.None:
+                            break;
+                        case MoveType.ChaseToPlayer:
+                            playerTr = PlayerMoveController.Instance.transform;
+
+                            isMoving = true;
+
+                            SetMoveDir(playerTr.position - transform.position);
+                            _skeletonAnimation.AnimationState.SetAnimation(0, "run", true);
+                            if (initialized == false)
+                            {
+                                initialized = true;
+                            }
+                            break;
+                        case MoveType.BlinkToPlayer:
+                            playerTr = PlayerMoveController.Instance.transform;
+
+                            MoveToPlayerVer2();
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    break;
+                }
 
                 break;
             case GameManager.ContentsType.SpecialRequestBoss:

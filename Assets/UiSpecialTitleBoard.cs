@@ -27,10 +27,19 @@ public class UiSpecialTitleBoard : MonoBehaviour
     {
         var tableDatas = TableManager.Instance.Title_Special.dataArray;
 
+        List<UiSpecialTitleCell> cells = new List<UiSpecialTitleCell>();
         for (int i = 0; i < tableDatas.Length; i++)
         {
             var cell = Instantiate<UiSpecialTitleCell>(prefab, cellParent);
             cell.Initialize(tableDatas[i]);
+            cells.Add(cell);
+        }
+
+        using var e = cells.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            e.Current.gameObject.transform.SetSiblingIndex(e.Current.GetTransformIdx());
         }
     }
 

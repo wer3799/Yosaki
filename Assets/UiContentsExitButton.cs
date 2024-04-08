@@ -116,6 +116,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.OffLine_Tower:
                         return false;
+                    case GameManager.ContentsType.GuildTower2 when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value <
+                                                                   (TableManager.Instance.GuildTowerTable2.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.GuildTower2:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)
@@ -351,6 +356,28 @@ public class UiContentsExitButton : MonoBehaviour
                 (TableManager.Instance.SealTowerTable.dataArray.Length))
             {
                 GameManager.Instance.LoadContents(GameManager.ContentsType.SealSwordTower);
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("최종 단계 입니다.");
+            }
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.GuildTower2)
+        {
+            if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value <
+                (TableManager.Instance.GuildTowerTable2.dataArray.Length))
+            {
+                var score = GameManager.Instance.currentTowerScore;
+                var unlockScore = TableManager.Instance.GuildTowerTable2
+                    .dataArray[(int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value]
+                    .Unlockscore;
+                if (unlockScore > score)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("문파 총점이 부족하여 입장할 수 없습니다.");
+                    return;
+                }
+                
+                GameManager.Instance.LoadContents(GameManager.contentsType);
             }
             else
             {

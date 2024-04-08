@@ -20,7 +20,7 @@ public class UiEventMission1 : MonoBehaviour
 
     [SerializeField] private GameObject getCostumeButton;
     
-    string costumeKey = "costume194";
+    string costumeKey = "costume218";
 
     [SerializeField] private TextMeshProUGUI costumeDescText;
     

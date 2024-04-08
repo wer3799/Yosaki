@@ -349,6 +349,10 @@ public enum Item_Type
     weapon169 = 1055, //무림
     weapon170 = 1056, //무림
     weapon171 = 1057, //나선
+    
+    weapon172 = 1058, //무림
+    weapon173 = 1059, //무림
+    weapon174 = 1060, //나선
 
     weapon_end = 1200,
     //
@@ -628,6 +632,11 @@ public enum Item_Type
     costume213 = 1513, //무림
     costume214 = 1514, //월간
     costume215 = 1515, //나선
+    
+    costume216 = 1516, //무림
+    costume217 = 1517, //무림
+    costume218 = 1518, //이벤트
+    costume219 = 1519, //나선
 
     costume_end=1999,
 
@@ -656,6 +665,8 @@ public enum Item_Type
     magicBook136 = 2018,//극락
     magicBook137 = 2019,//나선
     magicBook138 = 2020,//월간
+    
+    magicBook139 = 2021,//나선
 
     magicBook_End=2999,
     //3000~3100스킬

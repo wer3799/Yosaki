@@ -182,6 +182,47 @@ public class AgentHpController : MonoBehaviour
 
     }
 
+    public void InitializeSuhoBoss()
+    {
+        fieldBossTimerStarted = false;
+
+        this.isFieldBossEnemy = false;
+        
+
+        gainGoldFromStage = 1;
+        this.updateSubHpBar = true;
+
+        var tableData = TableManager.Instance.suhoPetTable.dataArray[GameManager.Instance.suhoAnimalId];
+
+        
+        UiSubHpBar.Instance.gameObject.SetActive(true);
+        
+        SetDefense(0);
+
+        SetHp(tableData.Rewardcut.Last());
+
+    }
+    public void InitializeSasinsuBoss()
+    {
+        fieldBossTimerStarted = false;
+
+        this.isFieldBossEnemy = false;
+        
+
+        gainGoldFromStage = 1;
+        this.updateSubHpBar = true;
+
+        var tableData = TableManager.Instance.sasinsuTable.dataArray[GameManager.Instance.bossId];
+
+        
+        UiSubHpBar.Instance.gameObject.SetActive(true);
+        
+        SetDefense(0);
+
+        SetHp(tableData.Score.Last());
+
+    }
+
     public void SetHp(double hp)
     {
         this.maxHp = hp;

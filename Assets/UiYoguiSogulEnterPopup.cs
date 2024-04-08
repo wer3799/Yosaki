@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UiYoguiSogulEnterPopup : MonoBehaviour
 {
@@ -20,11 +22,26 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI passiveDescription;
 
+     [SerializeField] private GameObject TransBeforeObject;
+     [SerializeField] private GameObject TransAfterObject;
+    
     private void Start()
     {
         Initialize();
+        Subscribe();
     }
 
+    private void Subscribe()
+    {
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.graduateBackGui)
+            .AsObservable()
+            .Subscribe(e =>
+            {
+                TransBeforeObject.SetActive(e < 1);
+                TransAfterObject.SetActive(e > 0);
+            })
+            .AddTo(this);
+    }
     private void Initialize()
     {
         var tableDatas = TableManager.Instance.YoguisogulTable.dataArray;
@@ -112,7 +129,45 @@ public class UiYoguiSogulEnterPopup : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("받을 수 있는 보상이 없습니다.");
         }
     }
+    public void OnClickTransButton()
+    {
+        if (ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value < GameBalance.BackguiGraduateScore)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"백귀 야행을 각성하려면 최고 등급 {GameBalance.BackguiGraduateScore} 이상이어야 합니다!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                $"백귀 야행 각성시 최고 등급이 {GameBalance.BackguiFixedScore}로 고정 됩니다. \n" +
+                $"각성 후 매일 접속 시  {CommonString.GetItemName(Item_Type.RelicTicket)}가 {GameBalance.BackguiGraduateGainSoulKey}개 지급됩니다.\n" +
+                "각성 하시겠습니까??" +
+                "\n\n<color=red><size=35>*각성전에 보상을 획득해 주세요.</color></size>", () =>
+                {
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+                    Param userinfoParam = new Param();
+                    Param userinfo2Param = new Param();
+                    
+                    ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value = GameBalance.BackguiFixedScore;
+                    userinfoParam.Add(UserInfoTable.yoguiSogulLastClear, ServerData.userInfoTable.TableDatas[UserInfoTable.yoguiSogulLastClear].Value);
+                    
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateBackGui].Value = 1;
+                    userinfo2Param.Add(UserInfoTable_2.graduateBackGui, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.graduateBackGui].Value);
+                    
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName,UserInfoTable.Indate,userinfoParam));
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName,UserInfoTable_2.Indate,userinfo2Param));
+                    
 
+                    
+                    ServerData.SendTransaction(transactions,successCallBack: () =>
+                    {
+                        
+                    });
+                    
+                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+              
+                }, null);
+        }
+    }
 #if UNITY_EDITOR
     private void Update()
     {

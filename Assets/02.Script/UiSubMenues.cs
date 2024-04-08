@@ -123,6 +123,11 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                     _SpecialRequestButton.OnClickButton();
                     return;
                 }
+                case GameManager.ContentsType.GuildTower2:
+                {
+                    GameManager.Instance.ResetLastContents2();
+                    return;
+                }
             }
 
             _mainTabButtons.OnClickButton();

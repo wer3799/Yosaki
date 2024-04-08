@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UniRx;
 using TMPro;
@@ -18,6 +19,7 @@ public class SasinsuManager : ContentsManagerBase
     private SasinsuTableData sasinsuTable;
     private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
     private ReactiveProperty<ObscuredDouble> bossRemainHp = new ReactiveProperty<ObscuredDouble>();
+    private double hpCut=0d;
 
     public override Transform GetMainEnemyObjectTransform()
     {
@@ -156,6 +158,8 @@ public class SasinsuManager : ContentsManagerBase
         sasinsuTable = TableManager.Instance.sasinsuTable.dataArray[GameManager.Instance.bossId];
         bossRemainHp.Value = double.MaxValue;
 
+        hpCut = sasinsuTable.Score.Last();
+        
         var prefab = Resources.Load<BossEnemyBase>($"Sasinsu/{GameManager.Instance.bossId}");
 
         singleRaidEnemy = Instantiate<BossEnemyBase>(prefab, bossSpawnParent);
@@ -165,12 +169,18 @@ public class SasinsuManager : ContentsManagerBase
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
         bossHpController.SetRaidEnemy();
+        bossHpController.InitializeSasinsuBoss();
     }
 
     private void whenDamageAmountChanged(ObscuredDouble hp)
     {
         damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
+        
+        if (hp >= hpCut)
+        {
+            TimerEnd();
+        }
     }
 
     private void WhenBossDamaged(ObscuredDouble hp)

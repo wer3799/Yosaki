@@ -24,13 +24,76 @@ public class UiGuildPetBoard : MonoBehaviour
 
     [SerializeField]
     private Button recordButton;
+    [SerializeField]
+    private UiGuildPetWeeklyRewardView prefab;
 
+    [SerializeField] private Transform parent;
     private void Start()
     {
         Subscribe();
         SetDescriptionText("1");
+        MakeCell();
     }
 
+    private void MakeCell()
+    {
+        var tableData= TableManager.Instance.GuildPet.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            var cell = Instantiate(prefab, parent);
+            cell.Initialize(tableData[i]);
+        }
+    }
+
+    public void OnClickAllReceiveButton()
+    {
+        var tableData= TableManager.Instance.GuildPet.dataArray;
+
+        var currentIdx = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildPetWeeklyRewardIndex).Value;
+
+        var rewardIdx = -1;
+
+        UiRewardResultPopUp.Instance.Clear();
+        
+        for (int i = currentIdx+1; i < tableData.Length; i++)
+        {
+            if (tableData[i].Requirelevel > GuildManager.Instance.guildPetExp.Value) break;
+            UiRewardResultPopUp.Instance.AddOrUpdateReward((Item_Type)tableData[i].Rewardtype, tableData[i].Rewardvalue);
+            rewardIdx = i;
+        }
+
+        if (rewardIdx > -1)
+        {
+            //데이터 싱크
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+            Param goodsParam = new Param();
+            Param userInfo2Param = new Param();
+
+            using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
+
+            while (e.MoveNext())
+            {
+                var stringId = ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType);
+                ServerData.goodsTable.GetTableData(stringId).Value += e.Current.amount;
+                goodsParam.Add(stringId, ServerData.goodsTable.GetTableData(stringId).Value);
+            }
+            
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildPetWeeklyRewardIndex).Value = rewardIdx;
+            userInfo2Param.Add(UserInfoTable_2.guildPetWeeklyRewardIndex, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildPetWeeklyRewardIndex).Value);
+            
+            
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+
+            ServerData.SendTransaction(transactionList,successCallBack: () =>
+            {
+                UiRewardResultPopUp.Instance.Show().Clear();
+            });
+        }
+
+   
+    }
     private void OnEnable()
     {
         GuildManager.Instance.LoadGuildLevelGoods();
@@ -38,7 +101,7 @@ public class UiGuildPetBoard : MonoBehaviour
 
     public void SetDescriptionText(string goodsNum)
     {
-        sendAmountText.SetText($"먹이 1회당 \n레벨 1상승\n<color=#ff00ffff>{CommonString.GetItemName(Item_Type.GrowthStone)} {Utils.ConvertBigNum(eachGrowthStoneNum)}개</color> 획득");
+        sendAmountText.SetText($"먹이 1회당 \n레벨 1상승\n<color=#ff00ffff>{CommonString.GetItemName(Item_Type.GrowthStone)} {Utils.ConvertNum(eachGrowthStoneNum)}개</color> 획득");
     }
 
     private void Subscribe()
@@ -47,7 +110,10 @@ public class UiGuildPetBoard : MonoBehaviour
         {
             petExpText.SetText($"LV : {e}");
 
-            petDescription.SetText($"{CommonString.GetStatusName(StatusType.ExpGainPer)} {PlayerStats.GetGuildPetEffect(StatusType.ExpGainPer) * 100f}\n{CommonString.GetStatusName(StatusType.GoldGainPer)} {PlayerStats.GetGuildPetEffect(StatusType.GoldGainPer) * 100f}\n{CommonString.GetStatusName(StatusType.AttackAddPer)} {PlayerStats.GetGuildPetEffect(StatusType.AttackAddPer) * 100f}\n");
+            petDescription.SetText($"{CommonString.GetStatusName(StatusType.ExpGainPer)} {Utils.ConvertNum(PlayerStats.GetGuildPetEffect(StatusType.ExpGainPer) * 100f)}" +
+                                   $"\n{CommonString.GetStatusName(StatusType.GoldGainPer)} {Utils.ConvertNum(PlayerStats.GetGuildPetEffect(StatusType.GoldGainPer) * 100f)}" +
+                                   $"\n{CommonString.GetStatusName(StatusType.AttackAddPer)} {Utils.ConvertNum(PlayerStats.GetGuildPetEffect(StatusType.AttackAddPer) * 100f)}" +
+                                   $"\n{CommonString.GetStatusName(StatusType.MagicStoneAddPer)} {Utils.ConvertNum(PlayerStats.GetGuildPetEffect(StatusType.MagicStoneAddPer) * 100f,3)}");
         }).AddTo(this);
     }
 

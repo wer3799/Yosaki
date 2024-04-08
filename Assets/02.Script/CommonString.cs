@@ -407,13 +407,13 @@ public static class CommonString
             case Item_Type.du: return "저승 명부";
             case Item_Type.Fw: return "분홍 꽃";
             case Item_Type.Cw: return "천계 꽃";
-            case Item_Type.Event_Kill1_Item: return "만두"; //봄나물
-            case Item_Type.Event_Collection_All: return "만두 총 획득량";
+            case Item_Type.Event_Kill1_Item: return "벌꿀"; //봄나물
+            case Item_Type.Event_Collection_All: return "벌꿀 총 획득량";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
-            case Item_Type.Event_Mission1: return "설날 까치";
-            case Item_Type.Event_Mission1_All: return "설날 까치 총 획득량";
+            case Item_Type.Event_Mission1: return "봄소풍 바구니";
+            case Item_Type.Event_Mission1_All: return "봄소풍 바구니 총 획득량";
             case Item_Type.Event_Mission2: return "봄바람";
             case Item_Type.Event_Mission2_All: return "봄바람 총 획득량";
             case Item_Type.Event_Mission3: return "보름달";
@@ -706,6 +706,8 @@ public static class CommonString
                 return "극락의 정수 개수당 효과 증가(%)";
             case StatusType.DBTHasValueUpgrade:
                 return "무림 구슬 개수당 효과 증가(%)";
+            case StatusType.DokChimHasValueUpgrade:
+                return "독침 개수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:

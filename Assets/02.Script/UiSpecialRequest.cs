@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiSpecialRequest : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class UiSpecialRequest : MonoBehaviour
     [SerializeField] private UiSpecialRequestBossCell cell;
     [SerializeField] private Transform parent;
 
+    [SerializeField] private Image bgImage;
+    [SerializeField] private Sprite oddSeason;  
+    [SerializeField] private Sprite evenSeason;  
+    
     private List<UiSpecialRequestBossCell> cellContainer =new List<UiSpecialRequestBossCell>();
 
     private SpecialRequestTableData currentSeasonData;
@@ -21,8 +26,17 @@ public class UiSpecialRequest : MonoBehaviour
         MakeCells();
 
         SetPeriod();
+
+        SetBgImage();
+        
     }
 
+    private void SetBgImage()
+    {
+        var isOdd = currentSeasonData.Id % 2 == 1;
+        bgImage.sprite = isOdd ? oddSeason : evenSeason;
+    }
+    
     private void SetPeriod()
     {
         

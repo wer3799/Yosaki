@@ -14,8 +14,6 @@ public class UiDailyPassSystem : MonoBehaviour
 
     private List<UiDailyPassCell> uiPassCellContainer = new List<UiDailyPassCell>();
 
-    private List<int> splitData_Free;
-    private List<int> splitData_Ad;
 
     private void Start()
     {
@@ -64,35 +62,42 @@ public class UiDailyPassSystem : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
-        splitData_Free = GetSplitData(DailyPassServerTable.DailypassFreeReward);
-        splitData_Ad = GetSplitData(DailyPassServerTable.DailypassAdReward);
 
         var tableData = TableManager.Instance.DailyPass.dataArray;
 
         int rewardedNum = 0;
 
-        string free = ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassFreeReward].Value;
-        string ad = ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value;
+        var freeKey = DailyPassServerTable.DailypassFreeReward;
+        var adKey = DailyPassServerTable.DailypassAdReward;
 
 
-        for (int i = 0; i < tableData.Length; i++)
+        var free = int.Parse(ServerData.dailyPassServerTable.TableDatas[freeKey]
+            .Value);
+        var ad = int.Parse(ServerData.dailyPassServerTable.TableDatas[adKey].Value);
+
+
+        for (int i = free+1; i < tableData.Length; i++)
         {
-            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
-
-            if (canGetReward == false) break;
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
 
             //무료보상
-            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            if (HasReward(freeKey, tableData[i].Id) == false)
             {
-                free += $",{tableData[i].Id}";
+                free =tableData[i].Id;
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
                 rewardedNum++;
             }
 
+        }
+        for (int i = ad+1; i < tableData.Length; i++)
+        {
+            if (CanGetReward(tableData[i].Unlockamount) == false) break;
+
+
             //유로보상
-            if (HasRemoveAdProduct() && HasReward(splitData_Ad, tableData[i].Id) == false)
+            if (HasRemoveAdProduct() && HasReward(adKey, tableData[i].Id) == false)
             {
-                ad += $",{tableData[i].Id}";
+                ad = tableData[i].Id;
                 ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
                 rewardedNum++;
             }
@@ -100,8 +105,9 @@ public class UiDailyPassSystem : MonoBehaviour
 
         if (rewardedNum > 0)
         {
-            ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassFreeReward].Value = free;
-            ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value = ad;
+            
+            ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassFreeReward].Value = free.ToString();
+            ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value = ad.ToString();
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -136,9 +142,9 @@ public class UiDailyPassSystem : MonoBehaviour
         return dailyMobKillCount >= require;
     }
 
-    private bool HasReward(List<int> splitData, int id)
+    private bool HasReward(string key, int id)
     {
-        return splitData.Contains(id);
+        return int.Parse(ServerData.dailyPassServerTable.TableDatas[key].Value) >= id;
     }
 
     public List<int> GetSplitData(string key)

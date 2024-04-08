@@ -104,6 +104,7 @@ public class GameManager : SingletonMono<GameManager>
         GyungRockTower7,
         OffLine_Tower,//십만동굴 솔플
         SpecialRequestBoss,
+        GuildTower2, //황금전갈굴
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -122,7 +123,7 @@ public class GameManager : SingletonMono<GameManager>
     public ObscuredInt bossId { get; private set; }
     public ObscuredInt specialRequestBossId { get; private set; }
     public ObscuredInt suhoAnimalId { get; private set; }
-    public ObscuredInt currentTowerId { get; private set; }
+    public ObscuredInt currentTowerScore { get; private set; }
 
     public ObscuredInt dokebiIdx { get; private set; }
 
@@ -165,6 +166,10 @@ public class GameManager : SingletonMono<GameManager>
     public void SetDokebiId(int dokebiId)
     {
         this.dokebiIdx = dokebiId;
+    }
+    public void SetTowerScore(int count)
+    {
+        this.currentTowerScore = count;
     }
 
     private new void Awake()

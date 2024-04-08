@@ -60,7 +60,7 @@ public static class GameBalance
 
     #endregion
     
-    public static List<string> samchunTitle = new List<string>() { "요괴지옥", "천상계","도깨비나라","수미산", "도적단", "심연","신선계"  };
+    public static List<string> samchunTitle = new List<string>() { "요괴지옥", "천상계","도깨비나라","수미산", "도적단", "심연","신선계","용인계"  };
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
     public readonly static List<ObscuredFloat> potion_Option = new List<ObscuredFloat>() { 0.3f, 0.6f, 0.9f };
 
@@ -636,6 +636,11 @@ public static class GameBalance
     public static ObscuredDouble VisionTowerGraduateScore = 201; // 졸업하는 수치
     public static ObscuredDouble VisionTowerFixedScore = 295; //  졸업시 고정되는 수치.
     public static ObscuredFloat VisionTowerGraduatePlusValue = 3f; 
+    
+    public static ObscuredDouble BackguiGraduateScore = 1200; // 졸업하는 수치
+    public static ObscuredDouble BackguiFixedScore = 1500; //  졸업시 고정되는 수치.
+    public static ObscuredFloat BackguiGraduatePlusValue = 1.5f; 
+    public static ObscuredFloat BackguiGraduateGainSoulKey = 2000; 
 
     #endregion
 
@@ -656,6 +661,8 @@ public static class GameBalance
     public static ObscuredFloat Special6_GoldBar = 0.00000003f;
     public static ObscuredFloat Special7_GoldBar = 0.000000045f;
     public static ObscuredFloat Special8_GoldBar = 0.00000006f;
+    public static ObscuredFloat Special9_GoldBar = 0.00000008f;
+    public static ObscuredFloat Special10_GoldBar = 0.0000001f;
     
     #endregion
 
@@ -749,7 +756,16 @@ public static class GameBalance
 
     #endregion
 
+    #region GuildPetEffect
 
+    public readonly static ObscuredFloat guildPet_attack = 1000f;
+    public readonly static ObscuredFloat guildPet_exp = 0.02f;
+    public readonly static ObscuredFloat guildPet_gold = 0.02f;
+    public readonly static ObscuredFloat guildPet_getGrowthStone = 0.00005f;
+
+    
+
+    #endregion
 
 
 

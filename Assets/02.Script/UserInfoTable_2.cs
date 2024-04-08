@@ -154,6 +154,7 @@ public class UserInfoTable_2
     public const string graduateSumiFire = "gsf";//수미산졸업
     public const string graduateGumgi = "ggg";//검의산졸업
     public const string graduateVisionTower = "gvt";//검의산졸업
+    public const string graduateBackGui = "gbg";//백귀야행졸업
 
     public const string studentSpotGrade = "ssg";//제자 혈자리
     public const string hyulTowerRewardIndex = "htri"; //명상 타워 보상 단계
@@ -168,6 +169,9 @@ public class UserInfoTable_2
     public const string specialRequestExchangeKey_3 = "sre_3"; //특별의뢰보상교환키
     public const string specialRequestExchangeKey_4 = "sre_4"; //특별의뢰보상교환키
 
+    public const string guildTower2ClearIndex = "gtci"; //길드타워2 황금 전갈굴 단계
+    
+    public const string guildPetWeeklyRewardIndex = "gpwri"; //길드타워2 황금 전갈굴 단계
     
     
     public bool isInitialize = false;
@@ -293,12 +297,16 @@ public class UserInfoTable_2
         { graduateSumiFire, 0f },
         { graduateGumgi, 0f },
         { graduateVisionTower, 0f },
+        { graduateBackGui, 0f },
         { studentSpotGrade, -1f },
         { specialRequestExchangeKey_0, 0f },
         { specialRequestExchangeKey_1, 0f },
         { specialRequestExchangeKey_2, 0f },
         { specialRequestExchangeKey_3, 0f },
         { specialRequestExchangeKey_4, 0f },
+        
+        { guildTower2ClearIndex, 0f },
+        { guildPetWeeklyRewardIndex, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

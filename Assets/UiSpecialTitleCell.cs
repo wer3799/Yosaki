@@ -17,6 +17,11 @@ public class UiSpecialTitleCell : MonoBehaviour
 
     private SpecialTitleServerData _serverData;
     private Title_SpecialData _tableData;
+
+    public int GetTransformIdx()
+    {
+        return _tableData.Displayorder;
+    }
     public void Initialize(Title_SpecialData tableData)
     {
         _tableData = tableData;

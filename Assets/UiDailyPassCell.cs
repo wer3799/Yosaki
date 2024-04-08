@@ -123,8 +123,14 @@ public class UiDailyPassCell : MonoBehaviour
 
     public bool HasReward(string key, int data)
     {
-        var splitData = GetSplitData(key);
-        return splitData.Contains(data.ToString());
+        var idx = int.Parse(ServerData.dailyPassServerTable.TableDatas[key].Value);
+        return idx >= data;
+    }
+
+    private bool IsBeforeRewarded(string key)
+    {
+        //0일때 1
+        return int.Parse(ServerData.dailyPassServerTable.TableDatas[key].Value) + 1 == passInfo.id;
     }
 
     public void OnClickFreeRewardButton()
@@ -138,6 +144,11 @@ public class UiDailyPassCell : MonoBehaviour
         if (HasReward(passInfo.rewardType_Free_Key, passInfo.id))
         {
             PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            return;
+        }
+        if (IsBeforeRewarded(passInfo.rewardType_Free_Key)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Before);
             return;
         }
 
@@ -162,6 +173,11 @@ public class UiDailyPassCell : MonoBehaviour
             return;
         }
 
+        if (IsBeforeRewarded(passInfo.rewardType_IAP_Key)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Before);
+            return;
+        }
         if (HasRemoveAdProduct())
         {
             GetAdReward();
@@ -190,7 +206,7 @@ public class UiDailyPassCell : MonoBehaviour
     private void GetFreeReward()
     {
         //로컬
-        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
+        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_Free_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -213,7 +229,7 @@ public class UiDailyPassCell : MonoBehaviour
     private void GetAdReward()
     {
         //로컬
-        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+        ServerData.dailyPassServerTable.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
         ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
         List<TransactionValue> transactionList = new List<TransactionValue>();

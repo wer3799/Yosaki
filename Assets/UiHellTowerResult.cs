@@ -17,6 +17,8 @@ public class UiHellTowerResult : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI stageChangeText;
     [SerializeField]
+    private TextMeshProUGUI clearText;
+    [SerializeField]
     private GameObject stageChangeButton;
     [SerializeField]
     private GameObject successObject;
@@ -34,6 +36,15 @@ public class UiHellTowerResult : MonoBehaviour
         {
             dungeonRewardView.Initalize(rewardDatas);
         }
+
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.GuildTower2:
+                
+                clearText.SetText($"{TableManager.Instance.GuildTowerTable2.dataArray[(int)(ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value)-1].Description}\n클리어!");
+                break;
+        }
+        
     }
 
     private string GetTitleText(ContentsState contentsState) 
@@ -125,6 +136,12 @@ public class UiHellTowerResult : MonoBehaviour
                         stageChangeText.SetText("다음 스테이지");
                         break;
                     case GameManager.ContentsType.MurimTower:
+                        stageChangeButton.SetActive(false);
+                        break;
+                    case GameManager.ContentsType.GuildTower2 when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value < (TableManager.Instance.GuildTowerTable2.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.GuildTower2:
                         stageChangeButton.SetActive(false);
                         break;
                 }

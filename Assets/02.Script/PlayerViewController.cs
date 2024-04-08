@@ -91,6 +91,12 @@ public class PlayerViewController : SingletonMono<PlayerViewController>
                     ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value = 0;
                     ServerData.equipmentTable.SyncData(EquipmentTable.CostumeLook);
                 }
+
+                if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value > 0)
+                {
+                    ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.guildTower2ClearIndex).Value = 0;
+                    ServerData.userInfoTable_2.UpDataV2(UserInfoTable_2.guildTower2ClearIndex,false);
+                }
             }
         }).AddTo(this);
     }

@@ -994,6 +994,8 @@ public class TableManager : SingletonMono<TableManager>
     public SpecialRequestBossTable SpecialRequestBossTable;
     public SpecialRequestTable SpecialRequestTable;
     public SpecialRequestRewardTable SpecialRequestRewardTable;
+    public GuildTowerTable2 GuildTowerTable2;
+    public GuildPet GuildPet;
 }
 
 

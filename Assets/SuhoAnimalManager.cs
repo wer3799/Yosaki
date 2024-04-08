@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UniRx;
 using TMPro;
@@ -17,6 +18,7 @@ public class SuhoAnimalManager : ContentsManagerBase
 
     private SuhopetTableData suhopetTableData;
     private ReactiveProperty<ObscuredDouble> damageAmount = new ReactiveProperty<ObscuredDouble>();
+    private double hpCut=0d;
 
 
     [SerializeField]
@@ -134,6 +136,9 @@ public class SuhoAnimalManager : ContentsManagerBase
     {
         suhopetTableData = TableManager.Instance.suhoPetTable.dataArray[GameManager.Instance.suhoAnimalId];
 
+         hpCut= suhopetTableData.Rewardcut.Last();
+
+        
         var prefab = Resources.Load<GameObject>($"SuhoAnimal/0");
 
 
@@ -143,12 +148,20 @@ public class SuhoAnimalManager : ContentsManagerBase
         singleRaidEnemy.gameObject.SetActive(false);
         bossHpController = singleRaidEnemy.GetComponent<AgentHpController>();
         bossHpController.SetRaidEnemy();
+        
+        bossHpController.InitializeSuhoBoss();
+
     }
 
     private void whenDamageAmountChanged(ObscuredDouble hp)
     {
         damageIndicator.SetText(Utils.ConvertBigNum(hp));
         damagedAnim.SetTrigger(DamageAnimName);
+        
+        if (hp >= hpCut)
+        {
+            TimerEnd();
+        }
     }
 
 

@@ -537,7 +537,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &274605056
 MonoBehaviour:
@@ -2132,6 +2132,8 @@ MonoBehaviour:
     type: 2}
   SpecialRequestRewardTable: {fileID: 11400000, guid: 36c333153577aae468675b88d8b62f7a,
     type: 2}
+  GuildTowerTable2: {fileID: 11400000, guid: 6dcd406c5d2d5654a94a1f1e63d2fd9d, type: 2}
+  GuildPet: {fileID: 11400000, guid: 3e0e7defe22a0744fb423f374dfa7898, type: 2}
 --- !u!224 &1672999882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3778453797765526293, guid: 341961fb75a51fb4c844909972cb6b1a,
@@ -2547,6 +2549,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2cbe9bfb8ab68074e9690dfb02644a19, type: 3}
   - {fileID: 21300000, guid: 89c473e3191566f4cbcb978a39c11dc3, type: 3}
   - {fileID: 21300000, guid: d32eab317eae2524298707a56cb1c590, type: 3}
+  - {fileID: 21300000, guid: 8a26d96fb1efe864094768135531aae6, type: 3}
+  - {fileID: 21300000, guid: 1151f6e8a6242034dad0930378fb995b, type: 3}
+  - {fileID: 21300000, guid: 26c86e635991a2847a91f9abc8017690, type: 3}
+  - {fileID: 21300000, guid: b9b5b13b351bda844b03630f588466f5, type: 3}
   rankFrame:
   - {fileID: 21300000, guid: 180b014bbd854ff4c8d26a3bc3108a29, type: 3}
   - {fileID: 21300000, guid: 045aff0737bd68d449d44a4a9bb5b849, type: 3}
@@ -2711,6 +2717,9 @@ MonoBehaviour:
   weapon169: {fileID: 21300000, guid: fd1a329b134e8e54b842955abb24ca33, type: 3}
   weapon170: {fileID: 21300000, guid: 46cd365d779975c4cb634bb058f3cf69, type: 3}
   weapon171: {fileID: 21300000, guid: 28aaba38415045440b4d7c603c31d71d, type: 3}
+  weapon172: {fileID: 21300000, guid: 59825e87a64d8044494d1591ad2c2297, type: 3}
+  weapon173: {fileID: 21300000, guid: bb585aba9f0a6c440bd3312454fd74fb, type: 3}
+  weapon174: {fileID: 21300000, guid: 8745397e668c8894594a8b29b8276207, type: 3}
   ChunSun0: {fileID: 21300000, guid: 4f63300c771529e49801fd1615d788fa, type: 3}
   ChunSun1: {fileID: 21300000, guid: e785d28ef5135714bbc245dafaa158e3, type: 3}
   ChunSun2: {fileID: 21300000, guid: 52ad30337e6bb1f4fb00a32d5bb21019, type: 3}
@@ -2854,6 +2863,7 @@ MonoBehaviour:
   magicBook136: {fileID: 21300000, guid: eeed11e2e2bf020489a4218323b43dd0, type: 3}
   magicBook137: {fileID: 21300000, guid: e22cf7b416ac37c438e933c3b96b1aa1, type: 3}
   magicBook138: {fileID: 21300000, guid: be8315ba9f8a9de4e9daebe20ef6455c, type: 3}
+  magicBook139: {fileID: 21300000, guid: e1ac1f5e79d2ad84f90de3a007256263, type: 3}
   DokebiHorn0: {fileID: 21300000, guid: 92f9f58d12795c74ba90cc7fbf939313, type: 3}
   DokebiHorn1: {fileID: 21300000, guid: 6b45cec8b763a8a4dbe42106090790b3, type: 3}
   DokebiHorn2: {fileID: 21300000, guid: b9a7ada2415dc2c41af80d8e59d7a05c, type: 3}
@@ -3569,6 +3579,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 427f8b96e999a2f47991a6d7d2b7050f, type: 2}
   - {fileID: 11400000, guid: c8e1441a3e1d3e645a44b42fa1ff8f68, type: 2}
   - {fileID: 11400000, guid: 7ec11e7123e3e3640885bd6b13e62a01, type: 2}
+  - {fileID: 11400000, guid: f3484dfbc4cc36c459176cda04ad68d6, type: 2}
+  - {fileID: 11400000, guid: 7d8b5019a5c54bf41908df8da2e0402b, type: 2}
+  - {fileID: 11400000, guid: 479b4e168f7e4f649997bfa2c6d464a5, type: 2}
+  - {fileID: 11400000, guid: 1e2db8fb473d73c46b01abe27333ab6b, type: 2}
   petCostumeList:
   - {fileID: 11400000, guid: 3d9145f3f8361c944acb6cd70679d6e2, type: 2}
   - {fileID: 11400000, guid: 206e7bbe5e49e2f4bb8859c83698d1d7, type: 2}
@@ -4499,7 +4513,7 @@ RectTransform:
   m_Children:
   - {fileID: 464004352}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4690,7 +4704,7 @@ PrefabInstance:
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}
       propertyPath: editorLoginId
-      value: T:_c972efc7194512b815fd9d4eea82c0d6
+      value: clone8
       objectReference: {fileID: 0}
     - target: {fileID: 1330659541251243652, guid: c80780283cb97bf45b4a3f8e82d68fcc,
         type: 3}
@@ -5849,7 +5863,7 @@ PrefabInstance:
     - target: {fileID: 5530244990468317572, guid: e9e39df58ca955644902e8c58c2df5d8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5530244990468317572, guid: e9e39df58ca955644902e8c58c2df5d8,
         type: 3}
@@ -6434,7 +6448,7 @@ RectTransform:
   - {fileID: 453881577}
   - {fileID: 1090513114}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
