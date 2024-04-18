@@ -151,7 +151,6 @@ public static class ServerData
         marbleServerTable.Initialize();
         etcServerTable.Initialize();
 
-        iAPServerTableTotal.Initialize();
 
         pensionServerTable.Initialize();
 
@@ -216,6 +215,8 @@ public static class ServerData
         {
             passServerTable.Initialize();
         }
+        iAPServerTableTotal.Initialize();
+
     }
     
     public static void ThirdLoadTable()

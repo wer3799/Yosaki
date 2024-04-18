@@ -60,7 +60,7 @@ public class UiGyungRockMassgeBoard7 : MonoBehaviour
     {
         int currentFloor = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower7).Value;
 
-        if (currentFloor < 0 || currentFloor >= TableManager.Instance.gyungRockTowerTable6.dataArray.Length)
+        if (currentFloor < 0 || currentFloor >= TableManager.Instance.gyungRockTowerTable7.dataArray.Length)
         {
             PopupManager.Instance.ShowAlarmMessage(("최고 단계 입니다!"));
             return;

@@ -96,4 +96,8 @@ public class TwelveBossTableData
   bool skipboss;
   public bool Skipboss { get {return skipboss; } set { this.skipboss = value;} }
   
+  [SerializeField]
+  int selectabletab;
+  public int Selectabletab { get {return selectabletab; } set { this.selectabletab = value;} }
+  
 }

@@ -100,6 +100,8 @@ public class UiEditiorBoard : MonoBehaviour
 
     [SerializeField]
     private Toggle showMurimToggle;
+    [SerializeField]
+    private Toggle showYeonOkToggle;
 
 
     private void Awake()
@@ -203,6 +205,8 @@ public class UiEditiorBoard : MonoBehaviour
         showDragonPalaceToggle.isOn = PlayerPrefs.GetInt(SettingKey.showDragonPalaceUi) == 1;
 
         showMurimToggle.isOn = PlayerPrefs.GetInt(SettingKey.showMurimUi) == 1;
+
+        showYeonOkToggle.isOn = PlayerPrefs.GetInt(SettingKey.showYeonOkUi) == 1;
 
 
         initialized = true;
@@ -707,6 +711,18 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showMurimUi.Value = on ? 1 : 0;
+    }
+
+    public void YeonOkUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showYeonOkUi.Value = on ? 1 : 0;
     }
 
 }

@@ -1313,6 +1313,7 @@ MonoBehaviour:
   useButtonColor: 0
   initDefaultSetting: 1
   initOnlyUISetting: 0
+  contentsExitNavi: 0
 --- !u!1 &2811928370820773255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8781932557917581951}
+  - component: {fileID: 5509597807897879351}
   m_Layer: 5
   m_Name: UiGangChulBoard
   m_TagString: Untagged
@@ -1349,6 +1351,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5509597807897879351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811928370820773255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939f6aa4a7d25cb48a5f56f0c4ae3928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3023276846705736777
 GameObject:
   m_ObjectHideFlags: 0
@@ -7438,6 +7452,8 @@ MonoBehaviour:
   image0: {fileID: 0}
   image1: {fileID: 0}
   allClearMark: {fileID: 0}
+  uiiSinRewardPopup_0: {fileID: 0}
+  uiTwelveRewardPopupV2: {fileID: 0}
 --- !u!1 &8207397910921283017
 GameObject:
   m_ObjectHideFlags: 0

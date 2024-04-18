@@ -13,6 +13,7 @@ public class UiGyungRockFloorInfoBoard5 : MonoBehaviour
         GyungRock5,
         GyungRock6,
         GyungRock7,
+        GyungRock8,
     }
     [SerializeField] private TextMeshProUGUI abilDescriptionBoard;
 
@@ -61,6 +62,18 @@ public class UiGyungRockFloorInfoBoard5 : MonoBehaviour
                     description += $"{tableData3[i].Id+1}단계 {tableData3[i].Fruitname}({tableData3[i].Chimname}):{CommonString.GetStatusName((StatusType)(tableData3[i].Rewardtype))} {tableData3[i].Rewardvalue*100f}%";
 
                     if (i != tableData3.Length - 1)
+                    {
+                        description += "\n";
+                    }
+                }
+                break;
+            case gyungRockIdx.GyungRock8:
+                var tableData4 = TableManager.Instance.gyungRockTowerTable8.dataArray;
+                for (int i = 0; i < tableData4.Length; i++)
+                {
+                    description += $"{tableData4[i].Id+1}단계 {tableData4[i].Fruitname}({tableData4[i].Chimname}):{CommonString.GetStatusName((StatusType)(tableData4[i].Rewardtype))} {tableData4[i].Rewardvalue*100f}%";
+
+                    if (i != tableData4.Length - 1)
                     {
                         description += "\n";
                     }

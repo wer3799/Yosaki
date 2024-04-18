@@ -258,7 +258,6 @@ public class KingBossMoveController : MonoBehaviour
                         rb.velocity = moveDir.normalized * moveSpeed;
                     }
                 }
-
                 else if (_bossId == 154||_bossId == 155||_bossId == 157||_bossId == 162||_bossId == 163||_bossId == 164||_bossId == 165||_bossId == 174||_bossId == 175||_bossId == 178||_bossId == 179||_bossId == 181||_bossId == 183)
                 {
                     if (isMoving)
@@ -266,7 +265,26 @@ public class KingBossMoveController : MonoBehaviour
                         rb.velocity = (playerTr.position - transform.position).normalized * moveSpeed;
                     }
                 }
+                else
+                {
+                    switch (moveType)
+                    {
+                        case MoveType.None:
+                            break;
+                        case MoveType.ChaseToPlayer:
+                            if (isMoving)
+                            {
+                                rb.velocity = (playerTr.position - transform.position).normalized * moveSpeed;
+                            }
+                            viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
 
+                            break;
+                        case MoveType.BlinkToPlayer:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
                 if (_bossId == 154||_bossId == 155||_bossId == 157)
                 {
                     viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);   

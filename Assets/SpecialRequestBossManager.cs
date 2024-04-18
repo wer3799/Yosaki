@@ -270,7 +270,7 @@ public class SpecialRequestBossManager : ContentsManagerBase
         
         var score = (int)(remainSec / 10);
 
-        score = Mathf.Max(score, 2);
+        score = Mathf.Min(score, 2);
         
         List<TransactionValue> transactionList = new List<TransactionValue>();
          Param bossParam = new Param();

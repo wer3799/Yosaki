@@ -121,6 +121,16 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.GuildTower2:
                         return false;
+                    case GameManager.ContentsType.YeonOkTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.yeonokTowerIdx).Value <
+                                                                   (TableManager.Instance.YeonokTowerTable.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.YeonOkTower:
+                        return false;
+                    case GameManager.ContentsType.ChunguTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.chunguTowerIdx).Value <
+                                                                   (TableManager.Instance.TowerTable16.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.ChunguTower:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)
@@ -143,6 +153,7 @@ public class UiContentsExitButton : MonoBehaviour
             case GameManager.ContentsType.GyungRockTower5:
             case GameManager.ContentsType.GyungRockTower6:
             case GameManager.ContentsType.GyungRockTower7:
+            case GameManager.ContentsType.GyungRockTower8:
             case GameManager.ContentsType.TestSword:
             case GameManager.ContentsType.TestMonkey:
             case GameManager.ContentsType.TestHell:
@@ -308,6 +319,18 @@ public class UiContentsExitButton : MonoBehaviour
                 (TableManager.Instance.sinsuTower.dataArray.Length))
             {
                 GameManager.Instance.LoadContents(GameManager.ContentsType.SinsuTower);
+            }
+            else
+            {
+                PopupManager.Instance.ShowAlarmMessage("최종 단계 입니다.");
+            }
+        }
+        else if (GameManager.contentsType == GameManager.ContentsType.ChunguTower)
+        {
+            if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.chunguTowerIdx).Value <
+                (TableManager.Instance.TowerTable16.dataArray.Length))
+            {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.ChunguTower);
             }
             else
             {

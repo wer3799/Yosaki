@@ -11,7 +11,7 @@ public class UiPurchaseRefund : MonoBehaviour
 
     private void Start()
     {
-        Check();
+        //Check();
     }
 
     private void Check()

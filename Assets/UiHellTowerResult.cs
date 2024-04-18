@@ -144,6 +144,18 @@ public class UiHellTowerResult : MonoBehaviour
                     case GameManager.ContentsType.GuildTower2:
                         stageChangeButton.SetActive(false);
                         break;
+                    case GameManager.ContentsType.YeonOkTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.yeonokTowerIdx).Value < (TableManager.Instance.YeonokTowerTable.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.YeonOkTower:
+                        stageChangeButton.SetActive(false);
+                        break;
+                    case GameManager.ContentsType.ChunguTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.chunguTowerIdx).Value < (TableManager.Instance.TowerTable16.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.ChunguTower:
+                        stageChangeButton.SetActive(false);
+                        break;
                 }
                 
                 return "클리어!!";

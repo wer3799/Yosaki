@@ -353,6 +353,11 @@ public enum Item_Type
     weapon172 = 1058, //무림
     weapon173 = 1059, //무림
     weapon174 = 1060, //나선
+    
+    weapon175 = 1061, //삼천
+    weapon176 = 1062, //무림
+    weapon177 = 1063, //무림
+    weapon178 = 1064, //나선
 
     weapon_end = 1200,
     //
@@ -638,6 +643,12 @@ public enum Item_Type
     costume218 = 1518, //이벤트
     costume219 = 1519, //나선
 
+    costume220 = 1520, //삼천
+    costume221 = 1521, //무림
+    costume222 = 1522, //무림
+    costume223 = 1523, //특별
+    costume224 = 1524, //월간
+
     costume_end=1999,
 
     //2000~2999 마도서
@@ -667,6 +678,10 @@ public enum Item_Type
     magicBook138 = 2020,//월간
     
     magicBook139 = 2021,//나선
+    
+    magicBook140 = 2022,//삼천
+    magicBook141 = 2023,//특별
+    magicBook142 = 2024,//월간
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -1206,13 +1221,15 @@ public enum Item_Type
     Goods_End=10000,
     //Treasure=10001~10100
     MRT=10001, //무림유물
-    DBT=10002, //무림유물
+    DBT=10002, //난이도유물
+    YOT=10003, //연옥유물
     Treasure_End=10100,
     
     //VisionSkill=10001~10100
     VisionSkill17=10101,
     VisionSkill18=10102,
     VisionSkill19=10103,
+    VisionSkill20=10104,
     VisionSkill_End=10200,
     
     GRSkill0 = 10201, //극락 스킬

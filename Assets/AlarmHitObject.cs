@@ -105,6 +105,20 @@ public class AlarmHitObject : MonoBehaviour
                     transform.position = PlayerMoveController.Instance.transform.position + addPostion;
                     transform.Rotate(0, 0, 90);
                 }
+                else
+                {
+                    switch (type)
+                    {
+                        case Type.None:
+                            break;
+                        case Type.NearByPlayer:
+                            var addPostion = new Vector3(Random.Range(-3, 4), Random.Range(-3, 4), 0);
+                            transform.position = PlayerMoveController.Instance.transform.position + addPostion;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
                 break;
             case GameManager.ContentsType.SpecialRequestBoss:
                 switch (type)

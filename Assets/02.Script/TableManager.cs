@@ -996,6 +996,12 @@ public class TableManager : SingletonMono<TableManager>
     public SpecialRequestRewardTable SpecialRequestRewardTable;
     public GuildTowerTable2 GuildTowerTable2;
     public GuildPet GuildPet;
+    public TowerTable15 gyungRockTowerTable8;
+    public TowerTable16 TowerTable16;
+    public YeonokTowerTable YeonokTowerTable;
+    public HaetalTable HaetalTable;
+    public HaetalPass HaetalPass;
+    
 }
 
 

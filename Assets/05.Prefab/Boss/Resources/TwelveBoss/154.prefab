@@ -55,6 +55,7 @@ MonoBehaviour:
   _moveSpeed: 25
   isMove: 0
   projectileTr: {fileID: 4629058155704223027}
+  projectileType: 2
 --- !u!95 &3480471619443296425
 Animator:
   serializedVersion: 3
@@ -120,8 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7c9591ac178784486f300d5764d740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startDelay: 0
+  delay: 0
   animator: {fileID: 4400506546880934314}
   movementSpeed: 20
+  type: 0
 --- !u!95 &4400506546880934314
 Animator:
   serializedVersion: 3
@@ -359,6 +363,7 @@ MonoBehaviour:
   _moveSpeed: 25
   isMove: 0
   projectileTr: {fileID: 5120125197194030784}
+  projectileType: 2
 --- !u!95 &2962564767257257827
 Animator:
   serializedVersion: 3
@@ -497,6 +502,7 @@ MonoBehaviour:
   _moveSpeed: 25
   isMove: 0
   projectileTr: {fileID: 8397043249880820212}
+  projectileType: 2
 --- !u!95 &3576020826497189240
 Animator:
   serializedVersion: 3
@@ -20460,6 +20466,7 @@ MonoBehaviour:
   _capsuleCollider2D: {fileID: 0}
   _moveSpeed: 10
   isMoving: 0
+  moveType: 0
   idleDelay: 1.2
   continuelAttackDelay: 0.2
   attack1Delay: 0
@@ -26000,6 +26007,7 @@ MonoBehaviour:
   _moveSpeed: 25
   isMove: 0
   projectileTr: {fileID: 195642241613535473}
+  projectileType: 2
 --- !u!95 &5845894597924880357
 Animator:
   serializedVersion: 3
@@ -31295,6 +31303,7 @@ MonoBehaviour:
   _moveSpeed: 25
   isMove: 0
   projectileTr: {fileID: 9040842009471061783}
+  projectileType: 2
 --- !u!95 &7459148929196705937
 Animator:
   serializedVersion: 3
@@ -41483,8 +41492,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7c9591ac178784486f300d5764d740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startDelay: 0
+  delay: 0
   animator: {fileID: 7707593879530412433}
   movementSpeed: 20
+  type: 0
 --- !u!95 &7707593879530412433
 Animator:
   serializedVersion: 3

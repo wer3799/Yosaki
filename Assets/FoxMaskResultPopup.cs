@@ -72,7 +72,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.TaeguekTower)
+                else  if (GameManager.contentsType == GameManager.ContentsType.TaeguekTower)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.taeguekTower).Value >= (TableManager.Instance.taegeukTitle.dataArray.Length))
                     {
@@ -83,7 +83,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower)
                 {
                     if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx5).Value >= (TableManager.Instance.gyungRockTowerTable.dataArray.Length))
                     {
@@ -93,7 +93,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                         }
                     }
                 }  
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower2)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower2)
                 {
                     if ((int)ServerData.userInfoTable.GetTableData(UserInfoTable.currentFloorIdx7).Value >= (TableManager.Instance.gyungRockTowerTable2.dataArray.Length))
                     {
@@ -104,7 +104,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower3)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower3)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower3).Value >= (TableManager.Instance.gyungRockTowerTable3.dataArray.Length))
                     {
@@ -115,7 +115,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                     }
                 }  
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower4)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower4)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower4).Value >= (TableManager.Instance.gyungRockTowerTable4.dataArray.Length))
                     {
@@ -125,7 +125,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                         }
                     }
                 }
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower5)
+                else  if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower5)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower5).Value >= (TableManager.Instance.gyungRockTowerTable5.dataArray.Length))
                     {
@@ -136,7 +136,7 @@ public class FoxMaskResultPopup : MonoBehaviour
                     }
                 }
                 
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower6)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower6)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower6).Value >= (TableManager.Instance.gyungRockTowerTable6.dataArray.Length))
                     {
@@ -146,9 +146,19 @@ public class FoxMaskResultPopup : MonoBehaviour
                         }
                     }
                 }
-                if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower7)
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower7)
                 {
                     if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower7).Value >= (TableManager.Instance.gyungRockTowerTable7.dataArray.Length))
+                    {
+                        if (stageChangeButton != null)
+                        {
+                            stageChangeButton.SetActive(false);
+                        }
+                    }
+                }
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower8)
+                {
+                    if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower8).Value >= (TableManager.Instance.gyungRockTowerTable8.dataArray.Length))
                     {
                         if (stageChangeButton != null)
                         {

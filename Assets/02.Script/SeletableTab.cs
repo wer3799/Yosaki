@@ -32,7 +32,8 @@ public class SeletableTab : MonoBehaviour
 
     [SerializeField] private bool initDefaultSetting = true;
     [SerializeField] private bool initOnlyUISetting = false;
-
+    [SerializeField] private bool contentsExitNavi = false;
+    
     private void Awake()
     {
         if (initDefaultSetting)
@@ -42,6 +43,19 @@ public class SeletableTab : MonoBehaviour
         if (initOnlyUISetting)
         {
             SetDefaultUi();
+        }
+
+        if (contentsExitNavi)
+        {
+            
+            switch (GameManager.Instance.lastContentsType2)
+            {
+                case GameManager.ContentsType.TwelveDungeon:
+                    var idx = TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Selectabletab;
+                    if (idx < 0) return;
+                    OnSelect(idx);
+                    break;
+            }
         }
     }
 

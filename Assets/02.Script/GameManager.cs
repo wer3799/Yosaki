@@ -38,7 +38,7 @@ public class GameManager : SingletonMono<GameManager>
         PartyRaid,
         ChunFlower,
         PartyRaid_Guild,
-        DokebiFire,
+        DokebiFire=20,
         DokebiTower,
         Yum,
         Ok,
@@ -57,7 +57,7 @@ public class GameManager : SingletonMono<GameManager>
         GyungRockTower,
         NorigaeSoul,
         RoyalTombTower,
-        SuhoAnimal,
+        SuhoAnimal=40,
         SinsuTower,
         GuildTower,
         Thief,
@@ -105,6 +105,10 @@ public class GameManager : SingletonMono<GameManager>
         OffLine_Tower,//십만동굴 솔플
         SpecialRequestBoss,
         GuildTower2, //황금전갈굴
+        GyungRockTower8, //황금전갈굴
+        YeonOkTower, //연옥타워
+        ChunguTower, 
+        Haetal, 
     }
     
     public bool SpawnMagicStone => IsNormalField;

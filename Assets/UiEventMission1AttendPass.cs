@@ -1,3 +1,4 @@
+using System;
 using BackEnd;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System.Collections;
@@ -27,7 +28,14 @@ public class UiEventMission1AttendPass : FancyScrollView<PassData_Fancy>
     }
 #endif
 
-
+    private void OnEnable()
+    {
+        if (ServerData.userInfoTable.IsMissionEventPeriod() == false)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+    }
 
     public void OnClickAllReceiveButton()
     {

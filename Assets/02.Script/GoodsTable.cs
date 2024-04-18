@@ -181,6 +181,7 @@ public class GoodsTable
     public static string VisionSkill17 = "VisionSkill17";
     public static string VisionSkill18 = "VisionSkill18";
     public static string VisionSkill19 = "VisionSkill19";
+    public static string VisionSkill20 = "VisionSkill20";
     
     public static string ThiefSkill0 = "ThiefSkill0";
     public static string ThiefSkill1 = "ThiefSkill1";
@@ -316,6 +317,7 @@ public class GoodsTable
     public static string MRT = "MRT";
     public static string DBT = "DBT";
     public static string SRG = "SRG";
+    public static string YOT = "YOT";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -477,6 +479,7 @@ public class GoodsTable
         { VisionSkill17, 0f },
         { VisionSkill18, 0f },
         { VisionSkill19, 0f },
+        { VisionSkill20, 0f },
 
         { ThiefSkill0, 0f },
         { ThiefSkill1, 0f },
@@ -608,6 +611,7 @@ public class GoodsTable
         { MRT, 0f},
         { DBT, 0f},
         { SRG, 0f},
+        { YOT, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

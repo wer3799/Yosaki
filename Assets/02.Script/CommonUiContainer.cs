@@ -17,7 +17,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_16, CommonString.ItemGrade_17, CommonString.ItemGrade_18, CommonString.ItemGrade_19, CommonString.ItemGrade_20 ,
         CommonString.ItemGrade_21 , CommonString.ItemGrade_22 , CommonString.ItemGrade_23 , CommonString.ItemGrade_24, CommonString.ItemGrade_25,
         CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29, CommonString.ItemGrade_30,
-        CommonString.ItemGrade_31,CommonString.ItemGrade_32,CommonString.ItemGrade_33,CommonString.ItemGrade_34,CommonString.ItemGrade_35, };
+        CommonString.ItemGrade_31,CommonString.ItemGrade_32,CommonString.ItemGrade_33,CommonString.ItemGrade_34,CommonString.ItemGrade_35,
+        CommonString.ItemGrade_36,CommonString.ItemGrade_37, };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
@@ -27,7 +28,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_11_Norigae, CommonString.ItemGrade_12_Norigae, CommonString.ItemGrade_13_Norigae, string.Empty, string.Empty,//16~20
         string.Empty, CommonString.ItemGrade_22_Norigae, string.Empty,CommonString.ItemGrade_24_Norigae ,string.Empty, //21~25,
         CommonString.ItemGrade_26_Norigae, CommonString.ItemGrade_27_Norigae,CommonString.ItemGrade_28_Norigae,CommonString.ItemGrade_29_Norigae,CommonString.ItemGrade_30_Norigae,
-        CommonString.ItemGrade_31_Norigae, string.Empty,string.Empty,CommonString.ItemGrade_34_Norigae,CommonString.ItemGrade_35_Norigae,
+        CommonString.ItemGrade_31_Norigae, string.Empty,string.Empty,CommonString.ItemGrade_34_Norigae,CommonString.ItemGrade_35_Norigae
+        , string.Empty,CommonString.ItemGrade_37_Norigae,
     }; 
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
@@ -204,6 +206,10 @@ public Sprite weapon171;
 public Sprite weapon172;
 public Sprite weapon173;
 public Sprite weapon174;
+public Sprite weapon175;
+public Sprite weapon176;
+public Sprite weapon177;
+public Sprite weapon178;
     
 [Header ("Weapon_View")]
 
@@ -373,6 +379,9 @@ public Sprite RecommendWeapon22;
     public Sprite magicBook137;
     public Sprite magicBook138;
     public Sprite magicBook139;
+    public Sprite magicBook140;
+    public Sprite magicBook141;
+    public Sprite magicBook142;
 
     [Header ("DokebiHorn")]
     public Sprite DokebiHorn0;
@@ -503,6 +512,7 @@ public Sprite RecommendWeapon22;
     public Sprite VisionSkill17;
     public Sprite VisionSkill18;
     public Sprite VisionSkill19;
+    public Sprite VisionSkill20;
     
     public Sprite ThiefSkill0;
     public Sprite ThiefSkill1;
@@ -630,6 +640,7 @@ public Sprite RecommendWeapon22;
     public Sprite ChunguTreasure;
     [FormerlySerializedAs("MurimTreasure")] public Sprite MRT;
     public Sprite DBT;
+    public Sprite YOT;
     public Sprite GuildTowerClearTicket;
     public Sprite GuildTowerHorn;
     public Sprite SinsuMarble;
@@ -1251,6 +1262,8 @@ public Sprite RecommendWeapon22;
                 return MRT;   
             case Item_Type.DBT:
                 return DBT;   
+            case Item_Type.YOT:
+                return YOT;   
             case Item_Type.DosulGoods:
                 return DosulGoods;   
             case Item_Type.TransGoods:
@@ -1641,6 +1654,12 @@ public Sprite RecommendWeapon22;
                 return magicBook138;
             case Item_Type.magicBook139:
                 return magicBook139;
+            case Item_Type.magicBook140:
+                return magicBook140;
+            case Item_Type.magicBook141:
+                return magicBook141;
+            case Item_Type.magicBook142:
+                return magicBook142;
             //
             case Item_Type.MonthNorigae0:
                 return MonthNorigae0;
@@ -2125,6 +2144,8 @@ public Sprite RecommendWeapon22;
                 return VisionSkill18;
             case Item_Type.VisionSkill19:
                 return VisionSkill19;
+            case Item_Type.VisionSkill20:
+                return VisionSkill20;
             //
             //
             case Item_Type.ThiefSkill0:
@@ -2468,24 +2489,22 @@ public Sprite RecommendWeapon22;
                 return weapon173;
             case Item_Type.weapon174:
                 return weapon174;
-            
+            case Item_Type.weapon175:
+                return weapon175;
+            case Item_Type.weapon176:
+                return weapon176;
+            case Item_Type.weapon177:
+                return weapon177;
+            case Item_Type.weapon178:
+                return weapon178;
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
-
-
             case Item_Type.SasinsuWeapon1:
                 return SasinsuWeapon1;
-
-
             case Item_Type.SasinsuWeapon2:
                 return SasinsuWeapon2;
-
-
             case Item_Type.SasinsuWeapon3:
                 return SasinsuWeapon3;
-
-
-                
             case Item_Type.SahyungWeapon0:
                 return SahyungWeapon0;
             case Item_Type.SahyungWeapon1:
@@ -2494,121 +2513,64 @@ public Sprite RecommendWeapon22;
                 return SahyungWeapon2;
             case Item_Type.SahyungWeapon3:
                 return SahyungWeapon3;
-
             case Item_Type.MihoNorigae:
                 return MihoNorigae;
-
-
-
             case Item_Type.ChunMaNorigae:
                 return ChunMaNorigae;
-
-
-
             case Item_Type.RecommendWeapon0:
                 return RecommendWeapon0;
-
-
             case Item_Type.RecommendWeapon1:
                 return RecommendWeapon1;
-
-
             case Item_Type.RecommendWeapon2:
                 return RecommendWeapon2;
-
-
             case Item_Type.RecommendWeapon3:
                 return RecommendWeapon3;
-
-
             case Item_Type.RecommendWeapon4:
                 return RecommendWeapon4;
-
-
             case Item_Type.RecommendWeapon5:
                 return RecommendWeapon5;
-
-
             case Item_Type.RecommendWeapon6:
                 return RecommendWeapon6;
-
-
             case Item_Type.RecommendWeapon7:
                 return RecommendWeapon7;
-
-
             case Item_Type.RecommendWeapon8:
                 return RecommendWeapon8;
-
-
             case Item_Type.RecommendWeapon9:
                 return RecommendWeapon9;
-
-
             case Item_Type.RecommendWeapon10:
                 return RecommendWeapon10;
-
-
             case Item_Type.RecommendWeapon11:
                 return RecommendWeapon11;
-
-
             case Item_Type.RecommendWeapon12:
                 return RecommendWeapon12;
-
-   
             case Item_Type.RecommendWeapon13:
                 return RecommendWeapon13;
-
-
             case Item_Type.RecommendWeapon14:
                 return RecommendWeapon14;
-
-
             case Item_Type.RecommendWeapon15:
                 return RecommendWeapon15;
-
-
             case Item_Type.RecommendWeapon16:
                 return RecommendWeapon16;
-
-
             case Item_Type.RecommendWeapon17:
                 return RecommendWeapon17;
-
-
             case Item_Type.RecommendWeapon18:
                 return RecommendWeapon18;
-
-
             case Item_Type.RecommendWeapon19:
                 return RecommendWeapon19;
-
-
             case Item_Type.RecommendWeapon20:
                 return RecommendWeapon20;
             case Item_Type.RecommendWeapon21:
                 return RecommendWeapon21;
-
-
             case Item_Type.RecommendWeapon22:
                 return RecommendWeapon22;
             case Item_Type.weapon146:
                 return weapon146;
-
-
             case Item_Type.weapon81:
                 return weapon81;
-
-
-                
             case Item_Type.weapon90:
                 return weapon90;
             case Item_Type.weapon131:
                 return weapon131;
-
-
-
             case Item_Type.gumiho0:
             case Item_Type.gumiho1:
             case Item_Type.gumiho2:
@@ -2619,9 +2581,6 @@ public Sprite RecommendWeapon22;
             case Item_Type.gumiho7:
             case Item_Type.gumiho8:
                 return MihoTail;
-
-
-
             case Item_Type.h0: return CommonResourceContainer.GetHellIconSprite(0);
             case Item_Type.h1: return CommonResourceContainer.GetHellIconSprite(1);
             case Item_Type.h2: return CommonResourceContainer.GetHellIconSprite(2);
@@ -2632,8 +2591,6 @@ public Sprite RecommendWeapon22;
             case Item_Type.h7: return CommonResourceContainer.GetHellIconSprite(7);
             case Item_Type.h8: return CommonResourceContainer.GetHellIconSprite(8);
             case Item_Type.h9: return CommonResourceContainer.GetHellIconSprite(9);
-
-
 
             case Item_Type.d0: return CommonResourceContainer.GetDarkIconSprite(0);
             case Item_Type.d1: return CommonResourceContainer.GetDarkIconSprite(1);
@@ -2650,11 +2607,7 @@ public Sprite RecommendWeapon22;
             case Item_Type.c3: return CommonResourceContainer.GetChunIconSprite(3);
             case Item_Type.c4: return CommonResourceContainer.GetChunIconSprite(4);
             case Item_Type.c5: return CommonResourceContainer.GetChunIconSprite(5);
-            case Item_Type.c6:
-                return CommonResourceContainer.GetChunIconSprite(6);
-
-
-
+            case Item_Type.c6: return CommonResourceContainer.GetChunIconSprite(6);
         }
         if (type.IsCostumeItem())
         {

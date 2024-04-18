@@ -63,7 +63,7 @@ public class SetRandomPosition : MonoBehaviour
                     SetCoroutine();
                 }
                 break;
-            case GameManager.ContentsType.SpecialRequestBoss:
+            default: 
 
                 playerTr = PlayerMoveController.Instance.transform;
 
@@ -128,15 +128,40 @@ public class SetRandomPosition : MonoBehaviour
                         rb.velocity = Vector2.zero;
                     }
                 }
+                else
+                { 
+                    switch (projectileType)
+                    {
+                        case ProjectileType.Boss:
+                        case ProjectileType.Projectile:
+                        case ProjectileType.TargetingPlayerDir:
+                        case ProjectileType.InfinityDuration:
+                        case ProjectileType.InfinityDurationAroundPlayer:
+                            if (isMove)
+                            {
+                                rb.velocity = moveDir.normalized * _moveSpeed;
+                            }
+                            else
+                            {
+                                rb.velocity = Vector2.zero;
+                            }
+
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                }
                 break;
-            case GameManager.ContentsType.SpecialRequestBoss:
+            default:
                 switch (projectileType)
                 {
+                    case ProjectileType.TargetingPlayerDir:
                     case ProjectileType.Boss:
                     case ProjectileType.Projectile:
-                    case ProjectileType.TargetingPlayerDir:
                     case ProjectileType.InfinityDuration:
                     case ProjectileType.InfinityDurationAroundPlayer:
+                        
                         if (isMove)
                         {
                             rb.velocity = moveDir.normalized * _moveSpeed;
@@ -179,7 +204,6 @@ public class SetRandomPosition : MonoBehaviour
                 {
                     //직접이동
                     if (_bossId == 109 || _bossId == 110 ||
-                        _bossId == 154 ||
                         _bossId == 272 || _bossId == 273
                        )
                     {
@@ -187,7 +211,7 @@ public class SetRandomPosition : MonoBehaviour
                     }
 
                     //투사체 날아감.
-                    if (_bossId == 111 || _bossId == 112 ||
+                    else if (_bossId == 111 || _bossId == 112 ||
                         _bossId == 123 ||
                         _bossId == 133 || _bossId == 134 || _bossId == 135 ||
                         _bossId == 154 || _bossId == 155 || _bossId == 156 ||
@@ -204,7 +228,7 @@ public class SetRandomPosition : MonoBehaviour
                     }
 
                     //방향전환
-                    if (_bossId == 119 ||
+                    else if (_bossId == 119 ||
                         _bossId == 120 || _bossId == 121 || _bossId == 122 ||
                         _bossId == 136 || _bossId == 137 || _bossId == 138 || _bossId == 139 ||
                         _bossId == 276 || _bossId == 277 || _bossId == 278 || _bossId == 279)
@@ -215,7 +239,7 @@ public class SetRandomPosition : MonoBehaviour
                     }
 
                     //방향전환
-                    if (_bossId == 169 || _bossId == 170 || _bossId == 171 || _bossId == 172 || _bossId == 173)
+                    else if (_bossId == 169 || _bossId == 170 || _bossId == 171 || _bossId == 172 || _bossId == 173)
                     {
                         SetDirFromRb();
                         float angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
@@ -223,7 +247,7 @@ public class SetRandomPosition : MonoBehaviour
                     }
 
                     //플레이어 중심기준
-                    if (_bossId == 177)
+                    else if (_bossId == 177)
                     {
                         float distance = GenerateValueExcludingRange(_minX, _maxX, -1f, 1f);
                         transform.localPosition = new Vector3(playerTr.position.x + distance,
@@ -232,17 +256,58 @@ public class SetRandomPosition : MonoBehaviour
                         float angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
                         projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
                     }
+                    else
+                    {
+                        float angle = 0f;
+                        switch (projectileType)
+                        {
+                                
+                            case ProjectileType.None:
+                                break;
+                            case ProjectileType.Boss:
+                                transform.localPosition = new Vector3(x, y, 0);
+                                break;
+                            case ProjectileType.Projectile:
+                                transform.localPosition = new Vector3(x, y, 0);
+                                SetDir();
+                                angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
+                                projectileTr.transform.localPosition = Vector3.zero;
+                                projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                                break;
+                            case ProjectileType.TargetingPlayerDir:
+                                SetDir();
+                                angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
+                                projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                                break;
+                            case ProjectileType.InfinityDuration:
+                                SetDirFromRb();
+                                angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
+                                projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                                break;
+                            case ProjectileType.InfinityDurationAroundPlayer:
+                                float distance = GenerateValueExcludingRange(_minX, _maxX, -1f, 1f);
+                                transform.localPosition = new Vector3(playerTr.position.x + distance,
+                                    playerTr.position.y + distance, 0);
+                                SetDirFromRb();
+                                angle = Mathf.Atan2(moveDir.normalized.y, moveDir.normalized.x) * Mathf.Rad2Deg;
+                                projectileTr.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+                        
+
+                    }
 
                     yield return new WaitForSeconds(_delay + _startDelay);
                     _startDelay = 0;
                 }
-
                 break;
-            case GameManager.ContentsType.SpecialRequestBoss:
+            default:
                 while (true)
                 {
                     //직접이동
-                    if (projectileType==ProjectileType.Projectile)
+                    if (projectileType==ProjectileType.Boss)
                     {
                         transform.localPosition = new Vector3(x, y, 0);
                     }

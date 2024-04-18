@@ -30,6 +30,8 @@ public class UiEventMission1 : MonoBehaviour
         
         costumeDescText.SetText($"한정 외형\n{CommonString.GetItemName(ServerData.goodsTable.ServerStringToItemType(costumeKey))}");
     }
+    
+    
 
     private void Subscribe()
     {
@@ -40,6 +42,11 @@ public class UiEventMission1 : MonoBehaviour
     }
     private void OnEnable()
     {
+        if (ServerData.userInfoTable.IsMissionEventPeriod() == false)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
         {
             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.FMISSION5].Stringid;

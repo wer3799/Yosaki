@@ -774,6 +774,7 @@ GameObject:
   - component: {fileID: 3549413968547973695}
   - component: {fileID: 8910500996037520736}
   - component: {fileID: 4778270536525382125}
+  - component: {fileID: 7582918570244406327}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -846,7 +847,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7836009564876223231}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -895,6 +896,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7582918570244406327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836009564876223231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ab13a60508f52448fd8995679b984e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickDelay: 0.08
+  OnEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8789424681885288547}
+        m_TargetAssemblyTypeName: UiBattleContestSpecialShopCell, Assembly-CSharp
+        m_MethodName: OnClickExchangeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buttonGraphic: {fileID: 0}
+  pressedColor: {r: 0, g: 0, b: 0, a: 0}
+  canExecute: 1
 --- !u!1 &8379887612916199985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1057,7 @@ MonoBehaviour:
   itemIcon: {fileID: 2523263663260991417}
   titleText: {fileID: 2503582589707378717}
   requireText: {fileID: 6021707261613525598}
+  skeletonGraphic: {fileID: 0}
 --- !u!1 &9066211636340520948
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class UiTowerResultPopup : MonoBehaviour
         amountText.SetText($"{Utils.ConvertNum(GoodsAmount)}개 획득!");
 
         amountObject.SetActive(GoodsAmount > 0);
-    
+    }
+    public void Initialize(string str)
+    {
+        scoreText.SetText(str);
     }
 }

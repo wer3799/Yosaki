@@ -128,6 +128,17 @@ public class UiGyungRockTowerResult : MonoBehaviour
                         stageChangeButton.SetActive(false);
                     }
                 }
+                else if (GameManager.contentsType == GameManager.ContentsType.GyungRockTower8)
+                {
+                    if ((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower8).Value < (TableManager.Instance.gyungRockTowerTable8.dataArray.Length))
+                    {
+                        stageChangeText.SetText("다음 스테이지");
+                    }
+                    else
+                    {
+                        stageChangeButton.SetActive(false);
+                    }
+                }
                 
        
                 return "클리어!!";

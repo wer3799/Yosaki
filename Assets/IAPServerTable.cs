@@ -114,14 +114,22 @@ public class IAPServerTable
                     }
                     else
                     {
-                        defultValues.Add(table[i].Productid, $"{table[i].Id},0");
+                        if (paramCount < 200)
+                        {
+                            defultValues.Add(table[i].Productid, $"{table[i].Id},0");
 
-                        var iapData = new IAPServerData();
-                        iapData.id = table[i].Id;
-                        iapData.buyCount = new ReactiveProperty<int>(0);
+                            var iapData = new IAPServerData();
+                            iapData.id = table[i].Id;
+                            iapData.buyCount = new ReactiveProperty<int>(0);
 
-                        tableDatas.Add(table[i].Productid, iapData);
-                        paramCount++;
+                            tableDatas.Add(table[i].Productid, iapData);
+                            paramCount++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+          
                     }
                 }
 
@@ -133,6 +141,10 @@ public class IAPServerTable
                     {
                         ServerData.ShowCommonErrorPopup(bro, Initialize);
                         return;
+                    }
+                    else if(bro.IsSuccess()==true && paramCount==200)
+                    {
+                        Initialize();
                     }
                 }
 
@@ -250,14 +262,23 @@ public class IAPServerTableTotal
                     }
                     else
                     {
-                        defultValues.Add(table[i].Productid, $"{table[i].Id},{ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value}");
+                        if (paramCount < 200)
+                        {
+                            defultValues.Add(table[i].Productid,
+                                $"{table[i].Id},{ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value}");
 
-                        var iapData = new IAPServerData();
-                        iapData.id = table[i].Id;
-                        iapData.buyCount = new ReactiveProperty<int>(ServerData.iapServerTable.TableDatas[table[i].Productid].buyCount.Value);
+                            var iapData = new IAPServerData();
+                            iapData.id = table[i].Id;
+                            iapData.buyCount = new ReactiveProperty<int>(ServerData.iapServerTable
+                                .TableDatas[table[i].Productid].buyCount.Value);
 
-                        tableDatas.Add(table[i].Productid, iapData);
-                        paramCount++;
+                            tableDatas.Add(table[i].Productid, iapData);
+                            paramCount++;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
 
@@ -269,6 +290,10 @@ public class IAPServerTableTotal
                     {
                         ServerData.ShowCommonErrorPopup(bro, Initialize);
                         return;
+                    }
+                    else if(bro.IsSuccess()==true && paramCount==200)
+                    {
+                        Initialize();
                     }
                 }
 

@@ -9,7 +9,7 @@ public class UiMarbleRelicRefund : MonoBehaviour
     private void Start()
     {
         RefundGrowthStone();
-        Check();
+        //Check();
     }
 
     private void Check()

@@ -2070,6 +2070,8 @@ MonoBehaviour:
   disableColor_text: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   useButtonColor: 1
   initDefaultSetting: 1
+  initOnlyUISetting: 0
+  contentsExitNavi: 0
 --- !u!1 &5189570120843528248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,6 +3415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2136751492598765833}
   - component: {fileID: 7666073276678543874}
+  - component: {fileID: 6508415127925854711}
   m_Layer: 5
   m_Name: ChoboBoard
   m_TagString: Untagged
@@ -3464,6 +3467,18 @@ MonoBehaviour:
   leftButton: {fileID: 4127407395200991889}
   rightButton: {fileID: 973036284322772139}
   DescriptionText: {fileID: 3540003822025365323}
+--- !u!114 &6508415127925854711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044213533112732660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 939f6aa4a7d25cb48a5f56f0c4ae3928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8062992140175549727
 GameObject:
   m_ObjectHideFlags: 0

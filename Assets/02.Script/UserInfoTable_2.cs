@@ -63,6 +63,7 @@ public class UserInfoTable_2
     public const string gyungRockTower5 = "grt5";
     public const string gyungRockTower6 = "grt6";
     public const string gyungRockTower7 = "grt7";
+    public const string gyungRockTower8 = "grt8";
     public const string graduateSeolEvent = "gse";
     public const string hyunsangTowerScore = "hts";
     
@@ -173,7 +174,10 @@ public class UserInfoTable_2
     
     public const string guildPetWeeklyRewardIndex = "gpwri"; //길드타워2 황금 전갈굴 단계
     
-    
+    public const string yeonokTowerIdx = "yoti";
+    public const string chunguTowerIdx = "cgti";
+    public const string haetalGradeIdx = "hgi";
+
     public bool isInitialize = false;
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
     {
@@ -211,6 +215,8 @@ public class UserInfoTable_2
         { DragonTowerIdx, 0f },
         { DragonPalaceTowerIdx, 0f },
         { MurimTowerIdx, 0f },
+        { yeonokTowerIdx, 0f },
+        { chunguTowerIdx, 0f },
         { KingTrialGraduateIdx, 0f },
         { GodTrialGraduateIdx, 0f },
         { darkScore, 0f },
@@ -221,6 +227,7 @@ public class UserInfoTable_2
         { gyungRockTower5, 0f },
         { gyungRockTower6, 0f },
         { gyungRockTower7, 0f },
+        { gyungRockTower8, 0f },
         { hyunsangTowerScore, 0f },
         { graduateSeolEvent, 0f },
         { towerFloorAdjust, 0f },
@@ -307,6 +314,7 @@ public class UserInfoTable_2
         
         { guildTower2ClearIndex, 0f },
         { guildPetWeeklyRewardIndex, -1f },
+        { haetalGradeIdx, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
@@ -567,5 +575,10 @@ public class UserInfoTable_2
                 }
             });
         }
+    }
+    
+    public bool IsLastFloor4()
+    {
+        return tableDatas[chunguTowerIdx].Value >= TableManager.Instance.TowerTable16.dataArray.Length;
     }
 }

@@ -142,6 +142,25 @@ public class BossMoveController : MonoBehaviour
                         initialized = true;
                     }
                 }
+                else if(_bossId>=335)
+                {
+                    playerTr = PlayerMoveController.Instance.transform;
+
+                    switch (type)
+                    {
+                        case moveType.None:
+                            break;
+                        case moveType.SparkMove:
+                            StartCoroutine(EnemyMovementRoutine());
+                            if (initialized == false)
+                            {
+                                initialized = true;
+                            }
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
                 break;
             
             case GameManager.ContentsType.SpecialRequestBoss:
@@ -179,15 +198,37 @@ public class BossMoveController : MonoBehaviour
                         SpecialPatternCount = (int)Random.Range(1,3);
                         blinkSecond = 1f;
                     }
-                    if (_bossId == 182)
+                    else if (_bossId == 182)
                     {
                         SpecialPatternCount = (int)Random.Range(3,6);
                         blinkSecond = Random.Range(1,2);
                     }
-                    if (_bossId == 184)
+                    else if (_bossId == 184)
                     {
                         SpecialPatternCount = (int)Random.Range(6,9);
                         blinkSecond = Random.Range(0.8f,1.5f);
+                    }
+                    else
+                    {
+                        switch (type)
+                        {
+                            case moveType.None:
+                                break;
+                            case moveType.SparkMove:
+                                if (maxSecond - minSecond < 0.1)
+                                {
+                                    blinkSecond = minSecond;
+                                }
+                                else
+                                {
+                                    blinkSecond = Random.Range(minSecond,maxSecond);
+                                }
+                                SpecialPatternCount = (int)Random.Range(minPatternCount,maxPatternCount);
+                                
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
                     }
                     break;
                 case GameManager.ContentsType.SpecialRequestBoss:
@@ -302,6 +343,28 @@ public class BossMoveController : MonoBehaviour
                         }
                     }
                 }
+                else
+                {
+                    switch (type)
+                    {
+                        case moveType.None:
+                            break;
+                        case moveType.SparkMove:
+                            if (isMoving.Value)
+                            {
+                                rb.velocity = moveDir.normalized * moveSpeed;
+                                viewTr.transform.localScale = new Vector3(rb.velocity.x < 0 ? -1 : 1, 1, 1);
+                            }
+                            else
+                            {
+                                rb.velocity = Vector2.zero;
+                            }
+
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
 
                 if (_bossId == 109 || _bossId == 110)
                 {
@@ -318,6 +381,10 @@ public class BossMoveController : MonoBehaviour
                     {
                         rb.velocity = Vector2.zero;
                     }
+                }
+                else
+                {
+                    viewTr.transform.localScale = new Vector3(rb.velocity.x > 0 ? -1 : 1, 1, 1);
 
                 }
                 break;

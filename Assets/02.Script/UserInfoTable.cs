@@ -809,8 +809,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 69);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(69));
+                            defultValues.Add(e.Current.Key, 70);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(70));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1953,7 +1953,15 @@ public class UserInfoTable
     //벌꿀 이벤트
     public bool CanSpawnSpringEventItem()
     {
-        DateTime targetDate = new DateTime(2024, 5, 21);
+        DateTime targetDate = new DateTime(2024, 5, 28);
+
+        return currentServerTime <= targetDate.AddDays(1);
+    }
+
+    //봄소풍 이벤트
+    public bool IsMissionEventPeriod()
+    {
+        DateTime targetDate = new DateTime(2024, 5, 28);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

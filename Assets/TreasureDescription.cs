@@ -25,13 +25,13 @@ public class TreasureDescription : MonoBehaviour
         {
             if (useSpace)
             {
-            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.ChunguTreasure)} 1개당\n {CommonString.GetStatusName(StatusType.SuperCritical20DamPer)} 효과 {GameBalance.chunguAbil * 100f}% 강화");
+                marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.ChunguTreasure)} 1개당\n {CommonString.GetStatusName(StatusType.SuperCritical20DamPer)} 효과 {Utils.ConvertNum(GameBalance.chunguAbil * 100f,2)}% 강화");
                 
             }
             else
             {
                 
-            marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.ChunguTreasure)} 1개당 {CommonString.GetStatusName(StatusType.SuperCritical20DamPer)} 효과 {GameBalance.chunguAbil * 100f}% 강화");
+                marbleDescription.SetText($"{CommonString.GetItemName(Item_Type.ChunguTreasure)} 1개당 {CommonString.GetStatusName(StatusType.SuperCritical20DamPer)} 효과 {Utils.ConvertNum(GameBalance.chunguAbil * 100f,2)}% 강화");
             }
         }).AddTo(this);
 

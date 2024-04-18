@@ -55,6 +55,9 @@ public class BossEnemyPattern : BossEnemyBase
             break;
         case GameManager.ContentsType.SpecialRequestBoss:
             break;
+        default:
+            UpdateBossDamage();
+            break;
         }
     }
     [SerializeField]

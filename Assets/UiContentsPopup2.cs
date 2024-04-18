@@ -30,7 +30,7 @@ public class UiContentsPopup2 : MonoBehaviour
         UiThiefBoard,
         SmithBoard,
         SuhoAnimal,
-        SinsuTower,
+        SinsuTower=20,
         VisionBoard,
         DarkBoard,
         FoxTowerBoard,
@@ -60,7 +60,9 @@ public class UiContentsPopup2 : MonoBehaviour
         ThiefBoard_Hard,
         DarkBoard_Hard,
         SinsunBoard_Hard,
-        DragonBoard_Hard,
+        DragonBoard_Hard=50,
+        YeonOkBoard,
+        ChunguBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -88,6 +90,7 @@ public class UiContentsPopup2 : MonoBehaviour
         DanjeonBoard,
         ClosedTrainingBoard,
         BlackFoxBoard,
+        ChunguTower,
         
         
     }
@@ -124,6 +127,7 @@ public class UiContentsPopup2 : MonoBehaviour
         Dragon,
         DragonPalace,
         Murim,
+        YeonOk,
 
     }
     
@@ -396,6 +400,25 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 180:
                     case 182:
                     case 184:
+                    case 319:
+                    case 320:
+                    case 321:
+                    case 322:
+                    case 323:
+                    case 324:
+                    case 325:
+                    case 326:
+                    case 327:
+                    case 328:
+                    case 329:
+                    case 330:
+                    case 331:
+                    case 332:
+                    case 333:
+                    case 334:
+                    case 335:
+                    case 336:
+                    case 337:
                         lastBoards[(int)ContentsBoard.HyunSangBoard].SetActive(true);
                         break;
                     
@@ -472,6 +495,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 316:
                     case 317:
                     case 318:
+                    case 338:
+                    case 339:
+                    case 340:
                         lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                     case 221:
@@ -571,6 +597,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 314:
                     case 315:
                         lastBoards[(int)ContentsBoard.DragonBoard_Hard].SetActive(true);
+                        break;
+                    case 341:
+                        lastBoards[(int)ContentsBoard.YeonOkBoard].SetActive(true);
                         break;
                         
                 }
@@ -686,6 +715,12 @@ public class UiContentsPopup2 : MonoBehaviour
             case GameManager.ContentsType.MurimTower :
                 lastBoards[(int)ContentsBoard.MurimBoard].SetActive(true);
                 break;
+            case GameManager.ContentsType.YeonOkTower :
+                lastBoards[(int)ContentsBoard.YeonOkBoard].SetActive(true);
+                break;
+            case GameManager.ContentsType.ChunguTower :
+                lastBoards[(int)ContentsBoard.ChunguBoard].SetActive(true);
+                break;
 
         }
         
@@ -726,8 +761,8 @@ public class UiContentsPopup2 : MonoBehaviour
             }
             else
             {
-                newGrowthDoors[(int)GrowthContentsDoor.SinsuTower].SetActive(e == 1);
-                oldGrowthDoors[(int)GrowthContentsDoor.SinsuTower].SetActive(e == 1);
+                newGrowthDoors[(int)GrowthContentsDoor.ChunguTower].SetActive(e == 1);
+                oldGrowthDoors[(int)GrowthContentsDoor.ChunguTower].SetActive(e == 1);
             }
         }).AddTo(this);
         SettingData.showSmithUi.AsObservable().Subscribe(e =>
@@ -950,6 +985,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newAdventureDoors[(int)AdventureDoor.Murim].SetActive(e == 1);
             oldAdventureDoors[(int)AdventureDoor.Murim].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showYeonOkUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.YeonOk].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.YeonOk].SetActive(e == 1);
         }).AddTo(this);
     }
     void Start()

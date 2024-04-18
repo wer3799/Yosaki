@@ -18,7 +18,6 @@ public class UiPlayerDescription : MonoBehaviour
     [SerializeField]
     private TextMeshPro guildName;
 
-
     private void Start()
     {
         Subscribe();

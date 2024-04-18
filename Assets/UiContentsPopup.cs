@@ -24,6 +24,8 @@ public class UiContentsPopup : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> tower3;
+    [SerializeField]
+    private List<GameObject> tower4;
 
     [SerializeField]
     private List<TextMeshProUGUI> banditDescription;
@@ -41,11 +43,7 @@ public class UiContentsPopup : MonoBehaviour
 
     private void Awake()
     {
-        tower1.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() == false));
-        tower2.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() && ServerData.userInfoTable.IsLastFloor2() == false));
-        tower3.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor2()));
-        
-        RefreshBandit();
+
     }
 
     [SerializeField]
@@ -67,7 +65,12 @@ public class UiContentsPopup : MonoBehaviour
 
     private void OnEnable()
     {
-        //RefreshBandit();
+        tower1.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() == false));
+        tower2.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor() && ServerData.userInfoTable.IsLastFloor2() == false));
+        tower3.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor2()&&ServerData.userInfoTable.IsLastFloor3()==false));
+        tower4.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor3()));
+        
+        RefreshBandit();    
     }
 
     private void RefreshBandit()

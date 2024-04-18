@@ -504,7 +504,7 @@ public static class GameBalance
         public readonly static ObscuredFloat HotTimeEvent_Ad_TaegeukGoods = 0.4f;
         public readonly static ObscuredFloat HotTimeEvent_Ad_SasinsuGoods = 0.4f;
     
-        public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 4, 23);
+        public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 4, 30);
 
     #endregion
 
@@ -708,13 +708,14 @@ public static class GameBalance
     //사신수구슬
     public static ObscuredFloat sinsuUpgradeValue = 0.15f;
     //천구재화
-    public static ObscuredFloat chunguAbil = 0.01f;
+    public static ObscuredFloat chunguAbil = 0.1f;
     //수호구슬
     public static ObscuredFloat suhoTreasureAbil = 0.05f;
     public static ObscuredFloat dragonScaleAbilValue = 0.04f;//용인비늘베기 
     public static ObscuredFloat dragonPalaceTreasureAbilValue = 0.02f;//심해의보물 파도베기 
     public static ObscuredFloat murimTreasureAbilValue = 0.02f; 
     public static ObscuredFloat difficultyBossTreasureAbilValue = 0.01f; 
+    public static ObscuredFloat yeonOkBossTreasureAbilValue = 0.01f; //연옥보물당
     public static ObscuredFloat VisionTreasurePerDamage = 1; // 비전보물 1개당 스킬 데미지 증가량
 
     #endregion
@@ -725,6 +726,7 @@ public static class GameBalance
     public static ObscuredFloat newMiddleGyungRockAwakeValue = 1f;
     public static ObscuredFloat newTopGyungRockAwakeValue = 1f;
     public static ObscuredFloat newGeukGyungRockAwakeValue = 0.5f;
+    public static ObscuredFloat newGeukGyungRock2AwakeValue = 1f;
     
 
     #endregion
