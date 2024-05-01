@@ -30,6 +30,7 @@ public static class ServerData
     public static RankTable_Real_Boss rankTables_Real_Boss { get; private set; } = new RankTable_Real_Boss();
 
     public static RankTable_ChunmaV2 rankTables_ChunmaV2 { get; private set; } = new RankTable_ChunmaV2();
+    public static RankTable_Dimension rankTables_Dimension { get; private set; } = new RankTable_Dimension();
 
     public static RankTable_Real_Boss_GangChul rankTables_Real_Boss_gangChul { get; private set; } =
         new RankTable_Real_Boss_GangChul();
@@ -91,6 +92,8 @@ public static class ServerData
     public static BossScoreTable bossScoreTable { get; private set; } = new BossScoreTable();
     public static SpecialTitleServerTable specialTitleServerTable { get; private set; } = new SpecialTitleServerTable();
     public static SamchunTitleServerTable samchunTitleServerTable { get; private set; } = new SamchunTitleServerTable();
+    public static YorinPassServerTable yorinPassServerTable { get; private set; } = new YorinPassServerTable();
+    public static DimensionStatusTable dimensionStatusTable { get; private set; } = new DimensionStatusTable();
 
     #region string
 
@@ -133,6 +136,7 @@ public static class ServerData
         rankTables_Boss.Initialize();
         //rankTables_Real_Boss.Initialize();
         rankTables_ChunmaV2.Initialize();
+        rankTables_Dimension.Initialize();
         rankTables_Real_Boss_gangChul.Initialize();
         
         costumeServerTable.Initialize();
@@ -199,6 +203,12 @@ public static class ServerData
         specialTitleServerTable.Initialize();
         
         samchunTitleServerTable.Initialize();
+        
+        yorinPassServerTable.Initialize();
+        
+        dimensionStatusTable.Initialize();
+        
+        
     }
 
 

@@ -15,11 +15,22 @@ public abstract class SkillBase
         this.skillInfo = skillInfo;
         this.playerSkillCaster = playerSkillCaster;
     }
+    
+    public void InitializeDimensionSkill(Transform playerTr, PlayerSkillCaster playerSkillCaster)
+    {
+        this.playerTr = playerTr;
+        this.playerSkillCaster = playerSkillCaster;
+    }
 
     public bool CanUseSkill()
     {
         //mp계산 뒤에서해야됨.실제 엠피 차감해서
         return !SkillCoolTimeManager.HasSkillCooltime(skillInfo.Id) && PlayerStatusController.Instance.IsPlayerDead() == false;
+    }
+    public bool CanUseDimensionSkill()
+    {
+        //mp계산 뒤에서해야됨.실제 엠피 차감해서
+        return !SkillCoolTimeManager.HasDimensionSkillCooltime(0) && PlayerStatusController.Instance.IsPlayerDead() == false;
     }
 
     protected virtual double GetSkillDamage(SkillTableData skillInfo)
@@ -29,6 +40,12 @@ public abstract class SkillBase
         double skillDamagePer = ServerData.skillServerTable.GetSkillDamagePer(skillInfo.Id);
 
         return apDamage * skillDamagePer;
+    }
+    protected virtual double GetDimensionSkillDamage()
+    {
+        double apDamage = GameBalance.dimensionBaseSkillDamage;
+
+        return apDamage * (1 + PlayerStats.GetDimensionAddSkillDamPer());
     }
 
     public virtual void UseSkill()
@@ -48,6 +65,18 @@ public abstract class SkillBase
         SpawnActiveEffect();
 
         PlaySoundEfx(skillInfo.Soundname);
+    }
+
+    public virtual void UseDimensionSkill()
+    {
+  
+        playerSkillCaster.PlayAttackAnim();
+
+        SkillCoolTimeManager.SetActiveDimensionSkillCool(0, GameBalance.dimensionBaseAttackCoolTime);
+
+        SpawnActiveDimensionEffect();
+
+        PlaySoundEfx("1-4");
     }
 
     private void PlaySoundEfx(string soundKey)
@@ -127,6 +156,36 @@ public abstract class SkillBase
                 {
                     effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
                 }
+            }
+        }
+    }
+    private void SpawnActiveDimensionEffect()
+    {
+        Transform targetTr = null;
+
+
+        targetTr = PlayerMoveController.Instance.transform;
+
+
+        if (targetTr == null) return;
+
+        MoveDirection moveDirection = PlayerMoveController.Instance.MoveDirection;
+
+        bool showFirstSlotEffect = SettingData.ShowEffect.Value == 0 &&
+                                   SettingData.showOneSkillEffect.Value == 1;
+
+        Vector3 activeEffectSpawnPos2 = targetTr.position + Vector3.up * 0.5f - Vector3.forward * 5f;
+
+        var effectName = "DimensionSkill0";
+        if (string.IsNullOrEmpty(effectName) == false)
+        {
+
+            var effect = EffectManager.SpawnEffectAllTime(effectName, activeEffectSpawnPos2, targetTr, showFirstSlotEffect: showFirstSlotEffect);
+
+            if (effect != null)
+            {
+                effect.transform.localScale = new Vector3(Mathf.Abs(effect.transform.localScale.x) * (moveDirection == MoveDirection.Right ? 1f : -1f), effect.transform.localScale.y, effect.transform.localScale.z);
+                
             }
         }
     }

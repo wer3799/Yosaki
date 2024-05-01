@@ -10,6 +10,9 @@ public class UiTopRankerView : SingletonMono<UiTopRankerView>
 
     public void DisableAllCell()
     {
-        rankerCellList.ForEach(e => e.gameObject.SetActive(false));
+        if (rankerCellList.Count > 0)
+        {
+            rankerCellList.ForEach(e => e.gameObject.SetActive(false));
+        }
     }
 }

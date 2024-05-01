@@ -318,6 +318,13 @@ public class GoodsTable
     public static string DBT = "DBT";
     public static string SRG = "SRG";
     public static string YOT = "YOT";
+    public static string TJCT = "TJCT";
+    public static string RJ = "RJ";
+    public static string YJ = "YJ";
+    public static string BJ = "BJ";
+    public static string DC = "DC";
+    public static string DE = "DE";
+    public static string DCT = "DCT";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -612,6 +619,13 @@ public class GoodsTable
         { DBT, 0f},
         { SRG, 0f},
         { YOT, 0f},
+        { TJCT, 1f},
+        { RJ, 0f},
+        { YJ, 0f},
+        { BJ, 0f},
+        { DC, 0f},
+        { DE, 0f},
+        { DCT, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

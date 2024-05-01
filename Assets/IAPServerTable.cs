@@ -163,6 +163,23 @@ public class IAPServerTable
 
         ServerData.SendTransaction(transactions);
     }
+
+    public List<string> GetBuyYorinPassProductIdList()
+    {
+        var tableData = TableManager.Instance.InAppPurchase.dataArray;
+
+        List<string> list =new List<string>();
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if(tableData[i].PASSPRODUCTTYPE!=PassProductType.YorinPass) continue;
+            if (tableDatas[tableData[i].Productid].buyCount.Value > 0)
+            {
+                list.Add(tableData[i].Productid);
+            }
+        }
+
+        return list;
+    } 
 }
 
 public class IAPServerTableTotal

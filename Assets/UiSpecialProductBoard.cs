@@ -52,9 +52,9 @@ public class UiSpecialProductBoard : MonoBehaviour
     private int GetEventPackageBuyCount()
     {
         var sum = 0;
-        sum += (int)ServerData.iapServerTable.TableDatas["seolpackage0"].buyCount.Value;
-        sum += (int)ServerData.iapServerTable.TableDatas["seolpackage1"].buyCount.Value;
-        sum += (int)ServerData.iapServerTable.TableDatas["seolpackage2"].buyCount.Value;
+        sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[0]].buyCount.Value;
+        sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[1]].buyCount.Value;
+        sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[2]].buyCount.Value;
         
         return sum;
     }

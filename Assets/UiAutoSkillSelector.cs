@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -18,6 +19,30 @@ public class UiAutoSkillSelector : MonoBehaviour
     //private GameObject jumpToggleObject;
     [SerializeField] private List<GameObject> _visionSkills; //버튼과 토글
 
+    [SerializeField] private List<GameObject> keyPads =new List<GameObject>();
+
+    private void OnEnable()
+    {
+        using var e = keyPads.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            e.Current.gameObject.SetActive(false);
+        }
+
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            keyPads[1].SetActive(true);
+        }
+        else
+        {
+            keyPads[0].SetActive(true);
+
+        }
+
+        
+    }
+
     void Start()
     {
         SkillCoolTimeManager.LoadSelectedSkill();
@@ -33,7 +58,6 @@ public class UiAutoSkillSelector : MonoBehaviour
                 _visionSkills[i].SetActive(ServerData.goodsTable.GetVisionSkillIdx()>0);
             }
         }).AddTo(this);
-
 
     }
 

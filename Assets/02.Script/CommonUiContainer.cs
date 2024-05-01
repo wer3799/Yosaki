@@ -210,6 +210,10 @@ public Sprite weapon175;
 public Sprite weapon176;
 public Sprite weapon177;
 public Sprite weapon178;
+public Sprite weapon179;
+public Sprite weapon180;
+public Sprite weapon181;
+public Sprite weapon182;
     
 [Header ("Weapon_View")]
 
@@ -626,6 +630,7 @@ public Sprite RecommendWeapon22;
     public Sprite BattleClear;
     public Sprite BattleScore;
     public Sprite DragonPalaceTreasure;
+    public Sprite TJCT;
     public Sprite Exp;
     public Sprite GT;
     public Sprite WT;
@@ -641,6 +646,12 @@ public Sprite RecommendWeapon22;
     [FormerlySerializedAs("MurimTreasure")] public Sprite MRT;
     public Sprite DBT;
     public Sprite YOT;
+    public Sprite RJ;
+    public Sprite YJ;
+    public Sprite BJ;
+    public Sprite DC;
+    public Sprite DE;
+    public Sprite DCT;
     public Sprite GuildTowerClearTicket;
     public Sprite GuildTowerHorn;
     public Sprite SinsuMarble;
@@ -1264,6 +1275,18 @@ public Sprite RecommendWeapon22;
                 return DBT;   
             case Item_Type.YOT:
                 return YOT;   
+            case Item_Type.RJ:
+                return RJ;    
+            case Item_Type.YJ:
+                return YJ;   
+            case Item_Type.BJ:
+                return BJ;   
+            case Item_Type.DC:
+                return DC;   
+            case Item_Type.DE:
+                return DE;   
+            case Item_Type.DCT:
+                return DCT;   
             case Item_Type.DosulGoods:
                 return DosulGoods;   
             case Item_Type.TransGoods:
@@ -1305,6 +1328,8 @@ public Sprite RecommendWeapon22;
                 return DragonPalaceTreasure;   
             case Item_Type.Exp:
                 return Exp;   
+            case Item_Type.TJCT:
+                return TJCT;   
             
             case Item_Type.GuildTowerClearTicket:
                 return GuildTowerClearTicket;  
@@ -2497,6 +2522,14 @@ public Sprite RecommendWeapon22;
                 return weapon177;
             case Item_Type.weapon178:
                 return weapon178;
+            case Item_Type.weapon179:
+                return weapon179;
+            case Item_Type.weapon180:
+                return weapon180;
+            case Item_Type.weapon181:
+                return weapon181;
+            case Item_Type.weapon182:
+                return weapon182;
             case Item_Type.SasinsuWeapon0:
                 return SasinsuWeapon0;
             case Item_Type.SasinsuWeapon1:
@@ -2615,10 +2648,22 @@ public Sprite RecommendWeapon22;
             return costumeThumbnail[idx];
 
         }
+        if (type.IsWeaponItem())
+        {
+            var idx= int.Parse(type.ToString().Substring("weapon".Length));
+            return CommonResourceContainer.GetWeaponSprite(idx);
+        }
+        if (type.IsNorigaeItem())
+        {
+            var idx= int.Parse(type.ToString().Substring("magicBook".Length));
+            return CommonResourceContainer.GetMagicBookSprite(idx);
+        }
         return null;
     }
 
     public List<Sprite> statusIcon;
+
+    public List<Sprite> dimensionStatusIcon;
 
     public List<Sprite> loadingTipIcon;
 

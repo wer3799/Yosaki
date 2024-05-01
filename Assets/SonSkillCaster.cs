@@ -13,7 +13,14 @@ public class SonSkillCaster : SingletonMono<SonSkillCaster>
 
     void Start()
     {
-        Subscribe();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            Subscribe();
+        }
     }
 
     private void Subscribe()

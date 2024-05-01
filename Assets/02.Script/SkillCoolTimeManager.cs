@@ -7,6 +7,7 @@ using UniRx;
 public static class SkillCoolTimeManager
 {
     public static Dictionary<int, ReactiveProperty<float>> remainCool { get; private set; } = new Dictionary<int, ReactiveProperty<float>>();
+    public static Dictionary<int, ReactiveProperty<float>> remainDimensionCool { get; private set; } = new Dictionary<int, ReactiveProperty<float>>();
     public static Dictionary<int, Coroutine> remainCoolRoutine { get; private set; } = new Dictionary<int, Coroutine>();
 
     private const float updateTick = 0.01f;
@@ -72,6 +73,12 @@ public static class SkillCoolTimeManager
 
         return remainCool[idx].Value > 0f;
     }
+    public static bool HasDimensionSkillCooltime(int idx)
+    {
+        if (remainDimensionCool.ContainsKey(idx) == false) return false;
+
+        return remainDimensionCool[idx].Value > 0f;
+    }
 
     public static void SetActiveSkillCool(int idx, float coolTime)
     {
@@ -109,6 +116,34 @@ public static class SkillCoolTimeManager
         remainCool[idx].Value = calculatedCoolTime;
 
         remainCoolRoutine[idx] = CoroutineExecuter.Instance.StartCoroutine(CooltimeRoutine(remainCool[idx]));
+    }
+    public static void SetActiveDimensionSkillCool(int idx, float coolTime)
+    {
+        float skillCoolTimeDecValue = PlayerStats.GetDimensionReduceSkillCoolTime();
+
+        
+        float calculatedCoolTime = coolTime - (coolTime * skillCoolTimeDecValue);
+        
+        calculatedCoolTime = Mathf.Max(minimumCoolValue, calculatedCoolTime);
+
+        if (remainDimensionCool.ContainsKey(idx) == false)
+        {
+            remainDimensionCool.Add(idx, new ReactiveProperty<float>());
+        }
+
+        if (remainCoolRoutine.ContainsKey(idx) == false)
+        {
+            remainCoolRoutine.Add(idx, null);
+        }
+
+        if (remainCoolRoutine[idx] != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(remainCoolRoutine[idx]);
+        }
+
+        remainDimensionCool[idx].Value = calculatedCoolTime;
+
+        remainCoolRoutine[idx] = CoroutineExecuter.Instance.StartCoroutine(CooltimeRoutine(remainDimensionCool[idx]));
     }
 
     private static IEnumerator CooltimeRoutine(ReactiveProperty<float> data)

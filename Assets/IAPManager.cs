@@ -40,6 +40,8 @@ public enum PassProductType
     LevelPass,
     MonthPass,
     PetPass,
+    YorinPass,//요린이패스
+    
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener
 {
@@ -343,7 +345,6 @@ public class IAPManager : SingletonMono<IAPManager>, IStoreListener
     {
         Debug.Log(debug);
     }
-
 
 
 }

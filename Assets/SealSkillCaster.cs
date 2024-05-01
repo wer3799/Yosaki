@@ -33,16 +33,23 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
     
     void Start()
     {
-        currentHitCount.Value = 0;
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            currentHitCount.Value = 0;
 
-        StartCoroutine(UserFourSkillRoutine());
+            StartCoroutine(UserFourSkillRoutine());
 
-        StartCoroutine(SkillCountAnimRoutine());
+            StartCoroutine(SkillCountAnimRoutine());
 
-        Subscribe();
+            Subscribe();
 
 
-        count_Max = 100 - (int)PlayerStats.GetReduceSealSwordSkillRequireCount();
+            count_Max = 100 - (int)PlayerStats.GetReduceSealSwordSkillRequireCount();
+        }
     }
 
     private void Subscribe()

@@ -38,7 +38,15 @@ public class UiQuickButtons : MonoBehaviour
 
     private void Start()
     {
-        Subscribe();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            Subscribe();
+            
+        }
     }
 
     private void Subscribe()

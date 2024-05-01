@@ -125,6 +125,11 @@ public class UIByeolhoTowerBoard : MonoBehaviour
 
         if (int.TryParse(instantClearNum.text, out var inputNum))
         {
+            if (inputNum < 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage(CommonString.InstantClear_Minus);
+                return;
+            }
             if (inputNum == 0)
             {
                 PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
@@ -173,6 +178,11 @@ public class UIByeolhoTowerBoard : MonoBehaviour
 
                 if (int.TryParse(instantClearNum.text, out var inputNum))
                 {
+                    if (inputNum < 0)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage(CommonString.InstantClear_Minus);
+                        return;
+                    }
                     if (inputNum == 0)
                     {
                         PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");

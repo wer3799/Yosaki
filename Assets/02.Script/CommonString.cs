@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -139,6 +140,7 @@ public static class CommonString
     public static string Reward_Has = "이미 보상을 받았습니다.";
     public static string Reward_Get = "보상을 획득하였습니다!";
     public static string Reward_Nothing = "받을 수 있는 보상이 없습니다!";
+    public static string InstantClear_Minus = "음수는 입력할 수 없습니다!";
     public static string YorinMission_Help = "ChoboBoard";
 
 
@@ -496,6 +498,9 @@ public static class CommonString
             case Item_Type.MRT: return "극락의 정수";
             case Item_Type.DBT: return "무림 구슬";
             case Item_Type.YOT: return "업화";
+            case Item_Type.RJ: return "적색 보옥";
+            case Item_Type.YJ: return "황색 보옥";
+            case Item_Type.BJ: return "청색 보옥";
             case Item_Type.TransClearTicket: return "초월석 소탕권";
             case Item_Type.Event_SA: return "2주년 도토리";
             case Item_Type.EventDice: return "이벤트 주사위";
@@ -505,7 +510,7 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "벚꽃";
+            case Item_Type.Event_HotTime: return "어린이날 모자";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";
@@ -526,11 +531,17 @@ public static class CommonString
             case Item_Type.WT: return "적안 마수 소탕권";
             case Item_Type.SG: return "사신수 기운";
             case Item_Type.SC: return "사신수 영약";
-            case Item_Type.SB: return "수련서";
+            case Item_Type.SB: return "제자 수련서";
             case Item_Type.HYG: return "혈의 기운";
-            case Item_Type.HYC: return "혈자리 전수권";
+            case Item_Type.HYC: return "제자 혈자리 전수권";
             case Item_Type.Exp: return "경험치";
             case Item_Type.SRG: return "임무 증표";
+            case Item_Type.TJCT: return "초월 광산 소탕권";
+            
+            
+            case Item_Type.DC: return "차원 큐브";
+            case Item_Type.DE: return "차원 정수";
+            case Item_Type.DCT: return "차원 소탕권";
         
     }
 
@@ -552,7 +563,11 @@ public static class CommonString
         }
         return "미등록";
     }
-    
+
+    public static string GetItemName(string itemKey)
+    {
+        return GetItemName(ServerData.goodsTable.ServerStringToItemType(itemKey));
+    }
 
     public static string GetHellMarkAbilName(int grade)
     {
@@ -777,6 +792,10 @@ public static class CommonString
                 return "업화 베기(%)";
             case StatusType.SuperCritical36DamPer:
                 return "해탈 베기(%)";
+            case StatusType.SuperCritical37DamPer:
+                return "보옥 베기(%)";
+            case StatusType.SuperCritical38DamPer:
+                return "차원 베기(%)";
             case StatusType.BigiDamPer:
                 return "비기 추가 피해량 증가(%)";
             case StatusType.SealSwordDam:
@@ -853,6 +872,35 @@ public static class CommonString
                 return "궁극기 피해량 증폭(%)";
             case StatusType.EnhanceSP:
                 return "검기 능력치 효과 증가(%)";
+        }
+
+        return "등록필요";
+    }
+
+    public static string GetStatusName(DimensionStatusType type)
+    {
+        switch (type)
+        {
+
+            case DimensionStatusType.BaseAttackDam:
+                return "차원 공격력";
+            case DimensionStatusType.AttackAddPer:
+                return "차원 공격력(%)";
+            case DimensionStatusType.BaseSkillDam:
+                return "기본 기술 데미지";
+            case DimensionStatusType.AddSkillDamPer:
+                return "추가 기술 데미지(%)";
+            case DimensionStatusType.ReduceSkillCoolTimePer:
+                return "기술 시전 속도(%)";
+            case DimensionStatusType.AddHp:
+                return "추가 하트 수";
+            case DimensionStatusType.CubeGainPer:
+                return "차원 큐브 획득량 증가(%)";
+            case DimensionStatusType.EssenceGainPer:
+                return "차원 정수 획득량 증가(%)";
+            case DimensionStatusType.None:
+            default:
+                return "등록필요";
         }
 
         return "등록필요";

@@ -127,9 +127,9 @@ public class HaetalManager : ContentsManagerBase
         bossRemainHp.Value = float.MaxValue;
 
         var rand = Random.Range(0, 3);
-// #if UNITY_EDITOR
-//         rand = GameManager.Instance.bossId%3;
-// #endif
+#if UNITY_EDITOR
+        rand = GameManager.Instance.bossId%3;
+#endif
         
         
         var prefab = Resources.Load<BossEnemyBase>($"Enemy/Haetal/{rand}");

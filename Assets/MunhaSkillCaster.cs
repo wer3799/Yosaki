@@ -31,13 +31,20 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
     
     void Start()
     {
-        currentHitCount.Value = 0;
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            currentHitCount.Value = 0;
 
-        StartCoroutine(UserFourSkillRoutine());
+            StartCoroutine(UserFourSkillRoutine());
 
-        StartCoroutine(SkillCountAnimRoutine());
+            StartCoroutine(SkillCountAnimRoutine());
 
-        Subscribe();
+            Subscribe();
+        }
     }
 
     private void Subscribe()

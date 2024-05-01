@@ -8,7 +8,7 @@ using UniRx;
 
 public enum StatusWhere
 {
-    gold, statpoint, memory,goldbar
+    gold, statpoint, memory,goldbar,dimension,special
 }
 
 
@@ -94,6 +94,7 @@ public class StatusTable
     public const string SkillAdPoint = "Sk_AdPoint";
     public const string FeelMul = "FeelMul";
     public const string LeeMuGi = "LeeMuGi";
+
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()

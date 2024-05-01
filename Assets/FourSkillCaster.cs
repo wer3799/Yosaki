@@ -12,7 +12,14 @@ public class FourSkillCaster : SingletonMono<FourSkillCaster>
 
     void Start()
     {
-        Subscribe();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            Subscribe();
+        }
     }
 
     private void Subscribe()

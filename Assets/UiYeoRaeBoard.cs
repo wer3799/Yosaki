@@ -15,7 +15,7 @@ public class UiYeoRaeBoard : MonoBehaviour
 
     private void Initialize()
     {
-        bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[50]);
+        bossContentsView.Initialize(TableManager.Instance.TwelveBossTable.dataArray[51]);
 
     }
 }

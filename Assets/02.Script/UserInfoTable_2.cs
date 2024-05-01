@@ -91,6 +91,7 @@ public class UserInfoTable_2
     public const string usedGuimoonRelicTicket = "ugrt";
 
     public const string transTowerIdx = "tti";
+
     public const string transTowerStart = "tts";
     public const string eventMiniGameScore_TopRate = "emgstr";
     public const string eventMiniGameScore_Total = "emgst";
@@ -147,7 +148,7 @@ public class UserInfoTable_2
     public const string munhaDispatchStartTime = "mdst";
     public const string munhaTower = "mt";//문하타워2
     
-    public const string eventPackageRewardIdx = "epri";//설날패키지
+    public const string eventPackageRewardIdx = "epri";//어린이날패키지
     
     public const string rankHonorRewardIdx = "rhri";//랭크명예보상
 
@@ -177,6 +178,8 @@ public class UserInfoTable_2
     public const string yeonokTowerIdx = "yoti";
     public const string chunguTowerIdx = "cgti";
     public const string haetalGradeIdx = "hgi";
+    
+    public const string demnsionSpecialRewardIdx= "dsri";
 
     public bool isInitialize = false;
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
@@ -315,6 +318,7 @@ public class UserInfoTable_2
         { guildTower2ClearIndex, 0f },
         { guildPetWeeklyRewardIndex, -1f },
         { haetalGradeIdx, -1f },
+        { demnsionSpecialRewardIdx, -1f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

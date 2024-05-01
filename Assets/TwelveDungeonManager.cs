@@ -470,10 +470,10 @@ public class TwelveDungeonManager : ContentsManagerBase
         }
 
         //여래 예외처리
-        if (twelveBossTable.Stringid == "b50")
+        if (twelveBossTable.Stringid == "b51")
         {
 
-            var yeoraeData = ServerData.bossServerTable.TableDatas["b51"];
+            var yeoraeData = ServerData.bossServerTable.TableDatas["b50"];
 
             if (string.IsNullOrEmpty(yeoraeData.score.Value) == false)
             {
@@ -485,14 +485,14 @@ public class TwelveDungeonManager : ContentsManagerBase
                 {
                     yeoraeData.score.Value = damageAmount.Value.ToString();
 
-                    ServerData.bossServerTable.UpdateData("b51");
+                    ServerData.bossServerTable.UpdateData("b50");
                 }
             }
             else
             {
                 yeoraeData.score.Value = damageAmount.Value.ToString();
 
-                ServerData.bossServerTable.UpdateData("b51");
+                ServerData.bossServerTable.UpdateData("b50");
             }
 
         }

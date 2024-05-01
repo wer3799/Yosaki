@@ -12,7 +12,14 @@ public class SuhoAnimalSkillCaster : SingletonMono<SuhoAnimalSkillCaster>
 
     void Start()
     {
-        Subscribe();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            Subscribe();
+        }
     }
 
     private void Subscribe()

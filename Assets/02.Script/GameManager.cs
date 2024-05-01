@@ -38,7 +38,7 @@ public class GameManager : SingletonMono<GameManager>
         PartyRaid,
         ChunFlower,
         PartyRaid_Guild,
-        DokebiFire=20,
+        DokebiFire,
         DokebiTower,
         Yum,
         Ok,
@@ -57,7 +57,7 @@ public class GameManager : SingletonMono<GameManager>
         GyungRockTower,
         NorigaeSoul,
         RoyalTombTower,
-        SuhoAnimal=40,
+        SuhoAnimal,
         SinsuTower,
         GuildTower,
         Thief,
@@ -109,6 +109,8 @@ public class GameManager : SingletonMono<GameManager>
         YeonOkTower, //연옥타워
         ChunguTower, 
         Haetal, 
+        Dimension, 
+        TransJewelTower,
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -135,7 +137,9 @@ public class GameManager : SingletonMono<GameManager>
     public ContentsType lastContentsType2 { get; private set; } = ContentsType.NormalField;
 
     private bool firstInit = true;
+    
 
+    
     public void ResetLastContents()
     {
         lastContentsType = ContentsType.NormalField;

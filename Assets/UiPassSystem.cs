@@ -72,6 +72,11 @@ public enum PassType
 {
     Level, Daily
 }
+public enum YorinPassType
+{
+    SealSword,
+    NewGacha
+}
 public enum RewardItemType
 {
     GoodsItem,

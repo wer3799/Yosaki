@@ -320,6 +320,27 @@ public class TableManager : SingletonMono<TableManager>
         }
     }
 
+
+    private Dictionary<string, DimensionStatusData> dimensionStatusDatas;
+
+    public Dictionary<string, DimensionStatusData> DimensionStatusDatas
+    {
+        get
+        {
+            if (dimensionStatusDatas == null)
+            {
+                dimensionStatusDatas = new Dictionary<string, DimensionStatusData>();
+
+                for (int i = 0; i < DimensionStatus.dataArray.Length; i++)
+                {
+                    dimensionStatusDatas.Add(statusTable.dataArray[i].Key, DimensionStatus.dataArray[i]);
+                }
+            }
+
+            return dimensionStatusDatas;
+        }
+    }
+
     [SerializeField] private WeaponEffect weaponEffectTable;
 
     private Dictionary<int, WeaponEffectData> weaponEffectDatas;
@@ -1001,6 +1022,24 @@ public class TableManager : SingletonMono<TableManager>
     public YeonokTowerTable YeonokTowerTable;
     public HaetalTable HaetalTable;
     public HaetalPass HaetalPass;
+    public YorinSealSwordPass YorinSealSwordPass;
+    public YorinNewGachaPass YorinNewGachaPass;
+    public YorinPass YorinPass;
+    
+    public DimensionDungeon DimensionDungeon;
+    public DimensionEquip DimensionEquip;
+    public DimensionLevel DimensionLevel;
+    public DimensionStatus DimensionStatus;
+    public DimensionReward DimensionReward;
+    public DimensionBuff DimensionBuff;
+    public DimensionSeason DimensionSeason;
+    
+    
+    
+    
+    public TransJewelAbil TransJewelAbil;
+    public TransJewelTower TransJewelTower;
+    public TransJewelLevel TransJewelLevel;
     
 }
 

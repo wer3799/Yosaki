@@ -25,7 +25,14 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     {
         Initialize();
         Subscribe();
-        StartCoroutine(RecoverRoutine());
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            StartCoroutine(RecoverRoutine());
+        }
     }
 
     public bool IsPlayerDead()
@@ -60,7 +67,16 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
     private void UpdateHpMax()
     {
-        maxHp.Value = PlayerStats.GetMaxHp();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            maxHp.Value = PlayerStats.GetMaxHpDimension();
+
+        }
+        else
+        {
+            maxHp.Value = PlayerStats.GetMaxHp();
+
+        }
     }
     private void UpdateMpMax()
     {
@@ -69,25 +85,140 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
     private void Subscribe()
     {
-        ServerData.statusTable.GetTableData(StatusTable.HpLevel_Gold).Subscribe(e =>
+        if (GameManager.contentsType.IsDimensionContents())
         {
-            UpdateHpMax();
-        }).AddTo(this);
+            
+        }
+        else
+        {
+            ServerData.statusTable.GetTableData(StatusTable.HpLevel_Gold).Subscribe(e => { UpdateHpMax(); })
+                .AddTo(this);
 
-        ServerData.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Subscribe(e =>
-        {
-            UpdateHpMax();
-        }).AddTo(this);
+            ServerData.statusTable.GetTableData(StatusTable.HpPer_StatPoint).Subscribe(e => { UpdateHpMax(); })
+                .AddTo(this);
 
-        ServerData.statusTable.GetTableData(StatusTable.MpLevel_Gold).Subscribe(e =>
-        {
-            UpdateMpMax();
-        }).AddTo(this);
+            ServerData.statusTable.GetTableData(StatusTable.MpLevel_Gold).Subscribe(e => { UpdateMpMax(); })
+                .AddTo(this);
 
-        ServerData.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Subscribe(e =>
-        {
-            UpdateMpMax();
-        }).AddTo(this);
+            ServerData.statusTable.GetTableData(StatusTable.MpPer_StatPoint).Subscribe(e => { UpdateMpMax(); })
+                .AddTo(this);
+            //레벨업때
+            ServerData.statusTable.GetTableData(StatusTable.Level).Subscribe(e => { SetHpMpFull(); }).AddTo(this);
+
+            //코스튬 인덱스 바뀔때
+            ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            //노리개 바뀔때
+            ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            //
+            ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+            //
+
+            ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
+            {
+                StartCoroutine(LateUpdateHp());
+            }).AddTo(this);
+
+            //코스튬 새로운 능력치 뽑기 했을때
+            ServerData.costumeServerTable.WhenCostumeOptionChanged.AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            //펫 획득 했을때
+
+            var iter = ServerData.petTable.TableDatas.GetEnumerator();
+            while (iter.MoveNext())
+            {
+                iter.Current.Value.hasItem.AsObservable().Subscribe(e =>
+                {
+                    UpdateHpMax();
+                    UpdateMpMax();
+                }).AddTo(this);
+
+                iter.Current.Value.level.AsObservable().Subscribe(e =>
+                {
+                    UpdateHpMax();
+                    UpdateMpMax();
+                }).AddTo(this);
+            }
+
+            //날개 렙업
+            ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            ServerData.petEquipmentServerTable.TableDatas["petequip0"].hasAbil.AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            ServerData.petEquipmentServerTable.TableDatas["petequip0"].level.AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+            //패시브스킬
+            var tableData = TableManager.Instance.PassiveSkill.dataArray;
+
+            for (int i = 0; i < tableData.Length; i++)
+            {
+                if (tableData[i].Abilitytype != (int)StatusType.HpAddPer) continue;
+
+                var serverData = ServerData.passiveServerTable.TableDatas[tableData[i].Stringid];
+
+                serverData.level.AsObservable().Subscribe(e => { UpdateHpMax(); }).AddTo(this);
+            }
+
+            //유물
+            ServerData.relicServerTable.TableDatas["relic1"].level.AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            ServerData.relicServerTable.TableDatas["relic3"].level.AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+
+            ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).AsObservable().Subscribe(e =>
+            {
+                UpdateHpMax();
+                UpdateMpMax();
+            }).AddTo(this);
+        }
+
 
         hp.AsObservable().Subscribe(e =>
         {
@@ -99,128 +230,9 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
             ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value = e;
         }).AddTo(this);
 
-        //레벨업때
-        ServerData.statusTable.GetTableData(StatusTable.Level).Subscribe(e =>
-        {
-            SetHpMpFull();
-        }).AddTo(this);
+        
 
-        //코스튬 인덱스 바뀔때
-        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeSlot].AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        //노리개 바뀔때
-        ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        //
-        ServerData.equipmentTable.TableDatas[EquipmentTable.TitleSelectId].AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-        //
-
-        ServerData.equipmentTable.TableDatas[EquipmentTable.CostumePresetId].AsObservable().Subscribe(e =>
-        {
-            StartCoroutine(LateUpdateHp());
-        }).AddTo(this);
-
-        //코스튬 새로운 능력치 뽑기 했을때
-        ServerData.costumeServerTable.WhenCostumeOptionChanged.AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        //펫 획득 했을때
-
-        var iter = ServerData.petTable.TableDatas.GetEnumerator();
-        while (iter.MoveNext())
-        {
-            iter.Current.Value.hasItem.AsObservable().Subscribe(e =>
-            {
-                UpdateHpMax();
-                UpdateMpMax();
-            }).AddTo(this);
-
-            iter.Current.Value.level.AsObservable().Subscribe(e =>
-            {
-                UpdateHpMax();
-                UpdateMpMax();
-            }).AddTo(this);
-        }
-
-        //날개 렙업
-        ServerData.userInfoTable.GetTableData(UserInfoTable.marbleAwake).AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        ServerData.petEquipmentServerTable.TableDatas["petequip0"].hasAbil.AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        ServerData.petEquipmentServerTable.TableDatas["petequip0"].level.AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        //패시브스킬
-        var tableData = TableManager.Instance.PassiveSkill.dataArray;
-
-        for (int i = 0; i < tableData.Length; i++)
-        {
-            if (tableData[i].Abilitytype != (int)StatusType.HpAddPer) continue;
-
-            var serverData = ServerData.passiveServerTable.TableDatas[tableData[i].Stringid];
-
-            serverData.level.AsObservable().Subscribe(e =>
-            {
-                UpdateHpMax();
-            }).AddTo(this);
-        }
-
-        //유물
-        ServerData.relicServerTable.TableDatas["relic1"].level.AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        ServerData.relicServerTable.TableDatas["relic3"].level.AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        ServerData.statusTable.GetTableData(StatusTable.PetEquip_Level).AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
-
-        ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).AsObservable().Subscribe(e =>
-        {
-            UpdateHpMax();
-            UpdateMpMax();
-        }).AddTo(this);
+    
     }
 
     private IEnumerator LateUpdateHp()
@@ -271,44 +283,74 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
     public void UpdateHp(double value, float percentDamage = 0)
     {
-        //데미지입음
-        if (value < 0)
+        if (GameManager.contentsType.IsDimensionContents())
         {
-            if (canHit == false || IsPlayerDead() || UiSusanoBuff.isImmune.Value) return;
+            //데미지입음
+            if (value < 0)
+            {
+                if (canHit == false || IsPlayerDead()) return;
 
-            float damDecreaseValue = PlayerStats.GetDamDecreaseValue();
+                value = -1;
 
-            value -= value * damDecreaseValue;
-
-            StartCoroutine(HitDelayRoutine());
-        }
-        //회복함
-        else
-        {
-            if (IsPlayerDead()) return;
-        }
+                StartCoroutine(HitDelayRoutine());
+            }
+            //회복함
+            else
+            {
+                if (IsPlayerDead()) return;
+            }
 
 
 #if UNITY_EDITOR
-        // Debug.Log($"Player damaged {value}");
+            // Debug.Log($"Player damaged {value}");
 #endif
-        if (percentDamage == 0)
-        {
             SpawnDamText(value);
             hp.Value += value;
+             
+            hp.Value = Mathf.Clamp((float)hp.Value, 0f, (float)maxHp.Value);
+
+            CheckDead();      
         }
         else
         {
-            value = maxHp.Value * -percentDamage;
+            //데미지입음
+            if (value < 0)
+            {
+                if (canHit == false || IsPlayerDead() || UiSusanoBuff.isImmune.Value) return;
 
-            SpawnDamText(value);
-            hp.Value += value;
+                float damDecreaseValue = PlayerStats.GetDamDecreaseValue();
+
+                value -= value * damDecreaseValue;
+
+                StartCoroutine(HitDelayRoutine());
+            }
+            //회복함
+            else
+            {
+                if (IsPlayerDead()) return;
+            }
+
+
+#if UNITY_EDITOR
+            // Debug.Log($"Player damaged {value}");
+#endif
+            if (percentDamage == 0)
+            {
+                SpawnDamText(value);
+                hp.Value += value;
+            }
+            else
+            {
+                value = maxHp.Value * -percentDamage;
+
+                SpawnDamText(value);
+                hp.Value += value;
+            }
+             
+            hp.Value = Mathf.Clamp((float)hp.Value, 0f, (float)maxHp.Value);
+
+            CheckDead();      
         }
-
-
-        hp.Value = Mathf.Clamp((float)hp.Value, 0f, (float)maxHp.Value);
-
-        CheckDead();
     }
 
     public void UpdateMp(float value)
@@ -322,22 +364,31 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
     {
         if (hp.Value <= 0)
         {
-            if(GameManager.Instance.IsNormalField ==false &&UiDokebiBuff.isImmune.Value==false)
+            if (GameManager.contentsType.IsDimensionContents())
             {
-                UiDokebiBuff.Instance.ActiveDokebiImmune();
-            }
-
-            if (GameManager.Instance.IsNormalField == false && UiSusanoBuff.isImmune.Value == false &&UiDokebiBuff.isImmune.Value==false)
-            {
-                UiSusanoBuff.Instance.ActiveSusanoImmune();
-            }
-
-            if (UiSusanoBuff.isImmune.Value == false && UiDokebiBuff.isImmune.Value==false)
-            {
-                
                 whenPlayerDead.Execute();
                 UiAutoBoss.Instance.WhenToggleChanged(false);
             }
+            else
+            {
+                if(GameManager.Instance.IsNormalField ==false &&UiDokebiBuff.isImmune.Value==false)
+                {
+                    UiDokebiBuff.Instance.ActiveDokebiImmune();
+                }
+
+                if (GameManager.Instance.IsNormalField == false && UiSusanoBuff.isImmune.Value == false &&UiDokebiBuff.isImmune.Value==false)
+                {
+                    UiSusanoBuff.Instance.ActiveSusanoImmune();
+                }
+
+                if (UiSusanoBuff.isImmune.Value == false && UiDokebiBuff.isImmune.Value==false)
+                {
+                
+                    whenPlayerDead.Execute();
+                    UiAutoBoss.Instance.WhenToggleChanged(false);
+                }
+            }
+          
         }
     }
 

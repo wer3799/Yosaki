@@ -134,6 +134,7 @@ public class UserInfoTable
     public const string taeguekpension = "taeguekpension";
     public const string blacksoulpension = "blacksoulpension";
     public const string studentspotpension = "studentspotpension";
+    public const string transjeweltpension = "transjeweltpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -495,6 +496,7 @@ public class UserInfoTable
         { taeguekpension, 0f },
         { blacksoulpension, 0f },
         { studentspotpension, 0f },
+        { transjeweltpension, 0f },
 
         { marblePackChange, 0f },
         { yoguiSogulLastClear, 0f },
@@ -809,8 +811,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 70);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(70));
+                            defultValues.Add(e.Current.Key, 75);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(75));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1354,6 +1356,11 @@ public class UserInfoTable
                 ServerData.userInfoTable.GetTableData(UserInfoTable.studentspotpension).Value++;
             }
 
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.transjeweltpension].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.transjeweltpension).Value++;
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value++;
@@ -1421,6 +1428,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.taeguekpension, ServerData.userInfoTable.GetTableData(UserInfoTable.taeguekpension).Value);
         userInfoParam.Add(UserInfoTable.blacksoulpension, ServerData.userInfoTable.GetTableData(UserInfoTable.blacksoulpension).Value);
         userInfoParam.Add(UserInfoTable.studentspotpension, ServerData.userInfoTable.GetTableData(UserInfoTable.studentspotpension).Value);
+        userInfoParam.Add(UserInfoTable.transjeweltpension, ServerData.userInfoTable.GetTableData(UserInfoTable.transjeweltpension).Value);
 
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
@@ -1675,6 +1683,11 @@ public class UserInfoTable
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3000000)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += GameBalance.HyulClearDailyGetAmount;
+        }
+
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3500000)
+        {
+            ServerData.goodsTable.GetTableData(GoodsTable.TJCT).Value += GameBalance.TJCTDailyGetAmount;
         }
 
         //도술

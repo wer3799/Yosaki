@@ -358,6 +358,11 @@ public enum Item_Type
     weapon176 = 1062, //무림
     weapon177 = 1063, //무림
     weapon178 = 1064, //나선
+    
+    weapon179 = 1065, //삼천
+    weapon180 = 1066, //무림
+    weapon181 = 1067, //무림
+    weapon182 = 1068, //특별
 
     weapon_end = 1200,
     //
@@ -648,6 +653,13 @@ public enum Item_Type
     costume222 = 1522, //무림
     costume223 = 1523, //특별
     costume224 = 1524, //월간
+    
+    costume225 = 1525, //삼천
+    costume226 = 1526, //무림0
+    costume227 = 1527, //무림1
+    costume228 = 1528, //특별
+    costume229 = 1529, //이벤트0
+    costume230 = 1530, //이벤트1
 
     costume_end=1999,
 
@@ -682,6 +694,9 @@ public enum Item_Type
     magicBook140 = 2022,//삼천
     magicBook141 = 2023,//특별
     magicBook142 = 2024,//월간
+    
+    magicBook143 = 2025,//특별의뢰
+    magicBook144 = 2026,//삼천
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -1218,6 +1233,11 @@ public enum Item_Type
     HYG = 9065,
     HYC = 9066,
     SRG = 9067,
+    TJCT = 9068,//초월유적소탕권
+    RJ=9069, //빨
+    YJ=9070, //노
+    BJ=9071, //파
+    
     Goods_End=10000,
     //Treasure=10001~10100
     MRT=10001, //무림유물
@@ -1239,8 +1259,19 @@ public enum Item_Type
     GRSkill4 = 10205, //극락 스킬
     
     Skill_End= 10400,
+
+    //차원의 균열
+    #region dimension
+
+    DC = 15000, //큐브
+    DE = 15001, //정수
+    DCT = 15002, //소탕권
+    Dimension_End = 19999,
+
+    #endregion
     
     Exp = 20000,
+    
 }
 //
 public class DropItem : PoolItem

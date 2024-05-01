@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 public class UiStatus : SingletonMono<UiStatus>
 {
     [SerializeField]
-    private TextMeshProUGUI nameText;
+    private List<TextMeshProUGUI> nameText =new List<TextMeshProUGUI>();
 
     [SerializeField]
     private Image costumeIcon;
@@ -19,18 +20,47 @@ public class UiStatus : SingletonMono<UiStatus>
     private int loadedMyRank = -1;
 
     private static bool LevelInit = false;
+    [SerializeField] private List<GameObject> keyPads =new List<GameObject>();
 
     void Start()
     {
-        if (LevelInit == false) 
+        if (GameManager.contentsType.IsDimensionContents())
         {
-            LevelInit = true;
-            RankManager.Instance.RequestMyLevelRank();
+            nameText[1].SetText($"Test:{Utils.ConvertNum(0)} {PlayerData.Instance.NickName} ({loadedMyRank}등)");
+
+        }
+        else
+        {
+            if (LevelInit == false) 
+            {
+                LevelInit = true;
+                RankManager.Instance.RequestMyLevelRank();
+            }
+
+            Subscribe();
         }
 
-        Subscribe();
     }
 
+    private void OnEnable()
+    {
+        using var e1 = keyPads.GetEnumerator();
+
+        while (e1.MoveNext())
+        {
+            e1.Current.gameObject.SetActive(false);
+        }
+
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            keyPads[1].SetActive(true);
+
+        }
+        else
+        {
+            keyPads[0].SetActive(true);
+        }
+    }
 
     private void Subscribe()
     {
@@ -63,11 +93,11 @@ public class UiStatus : SingletonMono<UiStatus>
     {
         if (loadedMyRank == -1)
         {
-            nameText.SetText($"Lv:{Utils.ConvertNum(level)} {PlayerData.Instance.NickName}");
+            nameText[0].SetText($"Lv:{Utils.ConvertNum(level)} {PlayerData.Instance.NickName}");
         }
         else
         {
-            nameText.SetText($"Lv:{Utils.ConvertNum(level)} {PlayerData.Instance.NickName} ({loadedMyRank}등)");
+            nameText[0].SetText($"Lv:{Utils.ConvertNum(level)} {PlayerData.Instance.NickName} ({loadedMyRank}등)");
         }
     }
 }

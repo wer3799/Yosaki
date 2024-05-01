@@ -32,6 +32,8 @@ public class UiPensionObjectView : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI buyButtonDesc;
+    [SerializeField]
+    private TextMeshProUGUI productDesc;
 
     [SerializeField]
     private GameObject buyButton;
@@ -47,6 +49,8 @@ public class UiPensionObjectView : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI attendanceCount;
 
+    [SerializeField] private Image itemImage;
+    
     void Start()
     {
         Initialize();
@@ -55,6 +59,16 @@ public class UiPensionObjectView : MonoBehaviour
 
     private void Initialize()
     {
+        if (itemImage != null)
+        {
+            itemImage.sprite = CommonUiContainer.Instance.GetItemIcon(SetItemType());
+        }
+
+        if (productDesc != null)
+        {
+            productDesc.SetText($"{CommonString.GetItemName(SetItemType())} 연금");
+        }
+
         for (int i = 0; i < dayCountMax; i++)
         {
             var cell = Instantiate<UiPensionItemCell>(cellPrefab, cellParents);
@@ -141,26 +155,11 @@ public class UiPensionObjectView : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("받을 보상이 없습니다!");
         }
     }
-    
-    public void GetPackageItem(string productId)
+
+    private Item_Type SetItemType()
     {
-        if (productId.Equals("removeadios"))
-        {
-            productId = "removead";
-        }
-
-        if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
-            return;
-        }
-
-        if (tableData.Productid != pensionKey) return;
-
-        ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
-
         Item_Type itemType = Item_Type.Gold;
-
+        
         if (pensionKey == "oakpension")
         {
             itemType = Item_Type.Jade;
@@ -245,6 +244,34 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.HYC;
         }
+        else if (pensionKey == "transjeweltpension")
+        {
+            itemType = Item_Type.TJCT;
+        }
+
+        return itemType;
+    }
+    
+    public void GetPackageItem(string productId)
+    {
+        if (productId.Equals("removeadios"))
+        {
+            productId = "removead";
+        }
+
+        if (TableManager.Instance.InAppPurchaseData.TryGetValue(productId, out var tableData) == false)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"등록되지 않은 상품 id {productId}", null);
+            return;
+        }
+
+        if (tableData.Productid != pensionKey) return;
+
+        ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
+
+        Item_Type itemType = SetItemType();
+
+   
 
         List<TransactionValue> transactions = new List<TransactionValue>();
 

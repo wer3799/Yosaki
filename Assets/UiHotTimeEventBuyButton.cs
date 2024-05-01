@@ -14,7 +14,7 @@ public class UiHotTimeEventBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string seasonPassKey = "hottimepass4";
+    public static readonly string seasonPassKey = "hottimepass5";
     
     private Button buyButton;
 
@@ -101,7 +101,7 @@ public class UiHotTimeEventBuyButton : MonoBehaviour
         ServerData.AddLocalValue(Item_Type.Event_HotTime, ServerData.goodsTable.GetTableData(GoodsTable.Event_HotTime_Saved).Value);
 
         
-        ServerData.iapServerTable.UpData(tableData.Productid);
+        //ServerData.iapServerTable.UpData(tableData.Productid);
         
         List<TransactionValue> transactionList = new List<TransactionValue>();
 

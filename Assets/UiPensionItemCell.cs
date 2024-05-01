@@ -307,6 +307,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             return Item_Type.HYC;
         }
+        else if (key == "transjeweltpension")
+        {
+            return Item_Type.TJCT;
+        }
         else
         {
             return Item_Type.SmithFire;

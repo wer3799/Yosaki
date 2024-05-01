@@ -28,6 +28,7 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     public PlayerMoveController PlayerMoveController => playerMoveController;
 
     public Dictionary<int, SkillBase> UserSkills { get; private set; } = new Dictionary<int, SkillBase>();
+    public Dictionary<int, SkillBase> UserDimensionSkills { get; private set; } = new Dictionary<int, SkillBase>();
 
     public bool isSkillMoveRestriction = false;
 
@@ -131,7 +132,17 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
 
         return canUserSkill;
     }
+    public bool UseDimensionSkill()
+    {
+        bool canUserSkill = UserDimensionSkills[0].CanUseDimensionSkill();
+        
+        if (canUserSkill)
+        {
+            UserDimensionSkills[0].UseDimensionSkill();
+        }
 
+        return canUserSkill;
+    }
     public void InitializeVisionSkill()
     {
         int visionIdx = ServerData.goodsTable.GetVisionSkillIdx();
@@ -163,19 +174,35 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
     protected virtual void Awake()
     {
         base.Awake();
-        InitializeVisionSkillIdxList();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            InitializeVisionSkillIdxList();
+        }
     }
 
     private void Start()
     {
-        visionChargeCount.Value = 0;
-        visionSkillUseCount.Value = 1 + PlayerStats.GetAddVisionSkillUseCount();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            InitDimensionSkill();
+        }
+        else
+        {
+            Debug.LogError("SkillStart");
+            visionChargeCount.Value = 0;
+            visionSkillUseCount.Value = 1 + PlayerStats.GetAddVisionSkillUseCount();
 
-        InitSkill();
-        ignoreDamDecrease = ServerData.userInfoTable.TableDatas[UserInfoTable.IgnoreDamDec].Value == 1;
-        InitializeVisionSkill();
-        InitializeMunhaSkill();
-        Subscribe();
+            InitSkill();
+            ignoreDamDecrease = ServerData.userInfoTable.TableDatas[UserInfoTable.IgnoreDamDec].Value == 1;
+            InitializeVisionSkill();
+            InitializeMunhaSkill();
+            Subscribe();
+        }
+
     }
 
     private void Subscribe()
@@ -269,6 +296,22 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 UserSkills.Add(SkillTableData.Id, skillBase);
             }
         }
+    }
+    private void InitDimensionSkill()
+    {
+ 
+            
+            Type elementType = Type.GetType("DimensionSkill0");
+
+            object classType = Activator.CreateInstance(elementType);
+
+            var skillBase = classType as SkillBase;
+
+            skillBase.InitializeDimensionSkill(this.transform,  this);
+
+            UserDimensionSkills.Add(0, skillBase);
+            
+        
     }
 
     public Collider2D[] GetEnemiesInCircle(Vector2 origin, float radius)
@@ -477,6 +520,89 @@ public class PlayerSkillCaster : SingletonMono<PlayerSkillCaster>
                 spawnPos += (Vector3)UnityEngine.Random.insideUnitCircle * 0.5f;
                 spawnPos += (Vector3)Vector3.back;
                 EffectManager.SpawnEffectAllTime(skillInfo.Hiteffectname, spawnPos, limitSpawnSize: true);
+            }
+
+            float tick = 0f;
+
+            while (tick < 0.05f)
+            {
+                tick += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        if (calculatedDamage.Count > 1000)
+        {
+            calculatedDamage.Clear();
+        }
+
+        if (calculatedDamage_critical.Count > 1000)
+        {
+            calculatedDamage_critical.Clear();
+        }
+
+        if (calculatedDamage_superCritical.Count > 1000)
+        {
+            calculatedDamage_superCritical.Clear();
+        }
+    }    
+    public IEnumerator ApplyDimensionDamage(Collider2D hitEnemie, double damage, bool playSound)
+    {
+        AgentHpController agentHpController;
+
+        int instanceId = hitEnemie.GetInstanceID();
+
+        if (agentHpControllers.ContainsKey(instanceId) == false)
+        {
+            agentHpControllers.Add(instanceId, hitEnemie.gameObject.GetComponent<AgentHpController>());
+
+            agentHpController = agentHpControllers[instanceId];
+        }
+        else
+        {
+            agentHpController = agentHpControllers[instanceId];
+        }
+
+        int hitCount = 1;
+
+
+        double defense = 0;
+    
+        double key = damage * defense;
+
+        double calculatedDam = 0;
+
+        agentHpController.ApplyDimensionPlusDamage(ref damage);
+
+        if (calculatedDamage.ContainsKey(key) == false)
+        {
+            calculatedDamage.Add(key, damage);
+        }
+
+        calculatedDam = calculatedDamage[key];
+    
+
+        bool spawnDamText = SettingData.ShowDamageFont.Value == 1;
+
+        double totalDamage = calculatedDam;
+
+        //데미지는 한프레임에 적용
+        if (agentHpController.gameObject == null || agentHpController.gameObject.activeInHierarchy == false)
+        {
+            yield break;
+        }
+        else
+        {
+            agentHpController.UpdateHp(-totalDamage);
+        }
+
+
+        //이펙트는 최대 10개까지만 출력
+        for (int hit = 0; hit < hitCount && hit < 10; hit++)
+        {
+            if (spawnDamText)
+            {
+                agentHpController.SpawnDamText(false, false, calculatedDam);
             }
 
             float tick = 0f;

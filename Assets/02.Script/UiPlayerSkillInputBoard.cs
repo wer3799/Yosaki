@@ -8,6 +8,8 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 {
     [SerializeField]
     private List<Image> skillIcons;
+    [SerializeField]
+    private List<Image> dimensionSkillIcons;
 
     [SerializeField]
     private List<GameObject> maskObjects;
@@ -165,18 +167,37 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
 
     private void SubscribeCoolTimeMask(ReactiveProperty<int> skillId, int idx)
     {
-        if (SkillCoolTimeManager.remainCool.ContainsKey(skillId.Value) == false)
+        if (GameManager.contentsType.IsDimensionContents())
         {
-            SkillCoolTimeManager.SetActiveSkillCool(skillId.Value, 0f);
+            if (SkillCoolTimeManager.remainDimensionCool.ContainsKey(0) == false)
+            {
+                SkillCoolTimeManager.SetActiveDimensionSkillCool(0, 1f);
+            }
+
+            SkillCoolTimeManager.remainDimensionCool[0].AsObservable().Subscribe(remainTime =>
+            {
+                float coolTimeMax = 1;
+
+                dimensionSkillIcons[0].fillAmount = 1f - (remainTime / coolTimeMax);
+
+            }).AddTo(disposables);
+        }
+        else
+        {
+            if (SkillCoolTimeManager.remainCool.ContainsKey(skillId.Value) == false)
+            {
+                SkillCoolTimeManager.SetActiveSkillCool(skillId.Value, 0f);
+            }
+
+            SkillCoolTimeManager.remainCool[skillId.Value].AsObservable().Subscribe(remainTime =>
+            {
+                float coolTimeMax = SkillCoolTimeManager.GetSkillCoolTimeMax(skillId.Value);
+
+                skillIcons[idx].fillAmount = 1f - (remainTime / coolTimeMax);
+
+            }).AddTo(disposables);
         }
 
-        SkillCoolTimeManager.remainCool[skillId.Value].AsObservable().Subscribe(remainTime =>
-        {
-            float coolTimeMax = SkillCoolTimeManager.GetSkillCoolTimeMax(skillId.Value);
-
-            skillIcons[idx].fillAmount = 1f - (remainTime / coolTimeMax);
-
-        }).AddTo(disposables);
     }
 
     public void OnClickSKillToggle(int idx)
@@ -210,6 +231,11 @@ public class UiPlayerSkillInputBoard : SingletonMono<UiPlayerSkillInputBoard>
         }
 
         PlayerSkillCaster.Instance.UseSkill(selectedSkillIdxList[idx].Value);
+
+    }
+    public void OnClickDimensionSkillSlot()
+    {
+        PlayerSkillCaster.Instance.UseDimensionSkill();
 
     }
     public void OnClickVisionSkillSlot()

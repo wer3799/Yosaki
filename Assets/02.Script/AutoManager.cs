@@ -41,23 +41,38 @@ public class AutoManager : Singleton<AutoManager>
     {
         if (skillQueue.Count != 0) return;
 
-        int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
-
-        var selectedSkill =
-            ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
-
-        for (int i = 0; i < selectedSkill.Count; i++)
+        if (GameManager.contentsType.IsDimensionContents())
         {
-            int skillIdx = selectedSkill[i].Value;
 
-            if (skillIdx != -1 &&
-                SkillCoolTimeManager.HasSkillCooltime(skillIdx) == false &&
-                SkillCoolTimeManager.registeredSkillIdx[i].Value == 1
-               )
+                int skillIdx = 0;
+
+                if (SkillCoolTimeManager.HasDimensionSkillCooltime(skillIdx) == false)
+                {
+                    skillQueue.Add(0);
+                }
+            
+        }
+        else
+        {
+            int currentSelectedGroupId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
+
+            var selectedSkill =
+                ServerData.skillServerTable.TableDatas[SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
+
+            for (int i = 0; i < selectedSkill.Count; i++)
             {
-                skillQueue.Add(skillIdx);
+                int skillIdx = selectedSkill[i].Value;
+
+                if (skillIdx != -1 &&
+                    SkillCoolTimeManager.HasSkillCooltime(skillIdx) == false &&
+                    SkillCoolTimeManager.registeredSkillIdx[i].Value == 1
+                   )
+                {
+                    skillQueue.Add(skillIdx);
+                }
             }
         }
+  
     }
 
     public void SetAuto(bool auto)
@@ -126,31 +141,63 @@ public class AutoManager : Singleton<AutoManager>
                 //허공에 스킬
                 else if (UiMoveStick.Instance.nowTouching == false)
                 {
-                    if (skillQueue.Count == 0)
+                    if (GameManager.contentsType.IsDimensionContents())
                     {
-                        SetSkillQueue();
-                    }
-
-                    SetFrontType2Skill();
-
-                    if (skillQueue.Count > 0)
-                    {
-                        int useSkillIdx = skillQueue[0];
-
-                        bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
-
-                        skillQueue.RemoveAt(0);
-
-                        if (skillCast)
+                        if (skillQueue.Count == 0)
                         {
-                            yield return null;
+                            SetSkillQueue();
+                        }
+
+                        //SetFrontType2Skill();
+
+                        if (skillQueue.Count > 0)
+                        {
+
+                            bool skillCast = PlayerSkillCaster.Instance.UseDimensionSkill();
+
+                            skillQueue.RemoveAt(0);
+
+                            if (skillCast)
+                            {
+                                yield return null;
+                            }
                         }
                     }
+                    else
+                    {
+                        if (skillQueue.Count == 0)
+                        {
+                            SetSkillQueue();
+                        }
+
+                        SetFrontType2Skill();
+
+                        if (skillQueue.Count > 0)
+                        {
+                            int useSkillIdx = skillQueue[0];
+
+                            bool skillCast = PlayerSkillCaster.Instance.UseSkill(useSkillIdx);
+
+                            skillQueue.RemoveAt(0);
+
+                            if (skillCast)
+                            {
+                                yield return null;
+                            }
+                        }
+                    }
+                
                 }
             }
             else if (UiMoveStick.Instance.nowTouching == false)
             {
-                //타겟이랑 거리가 멀때 이동
+                if (GameManager.contentsType.IsDimensionContents())
+                {
+             
+                }
+                else
+                {
+                              //타겟이랑 거리가 멀때 이동
                 if (Vector3.Distance(playerTr.transform.position, currentTarget.transform.position) > moveDistMax &&
                     (SkillCoolTimeManager.moveAutoValue.Value == 1))
                 {
@@ -265,30 +312,40 @@ public class AutoManager : Singleton<AutoManager>
 
                     yield return null;
                 }
+                }
+      
             }
             //무빙공격
             else
             {
-                if (ServerData.userInfoTable.TableDatas[UserInfoTable.currentFloorIdx5].Value >= 10)
+                if (GameManager.contentsType.IsDimensionContents())
                 {
-                    canAttack = true;
-
-                    int currentSelectedGroupId =
-                        (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
-
-                    var selectedSkill =
-                        ServerData.skillServerTable.TableDatas[
-                            SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
-
-                    for (int i = 0; i < selectedSkill.Count; i++)
+            
+                }
+                else
+                {
+                    if (ServerData.userInfoTable.TableDatas[UserInfoTable.currentFloorIdx5].Value >= 10)
                     {
-                        int skillIdx = selectedSkill[i].Value;
+                        canAttack = true;
 
-                        if (skillIdx == -1) continue;
+                        int currentSelectedGroupId =
+                            (int)ServerData.userInfoTable.TableDatas[UserInfoTable.selectedSkillGroupId].Value;
 
-                        PlayerSkillCaster.Instance.UseSkill(skillIdx);
+                        var selectedSkill =
+                            ServerData.skillServerTable.TableDatas[
+                                SkillServerTable.GetSkillGroupKey(currentSelectedGroupId)];
+
+                        for (int i = 0; i < selectedSkill.Count; i++)
+                        {
+                            int skillIdx = selectedSkill[i].Value;
+
+                            if (skillIdx == -1) continue;
+
+                            PlayerSkillCaster.Instance.UseSkill(skillIdx);
+                        }
                     }
                 }
+        
 
                 yield return null;
             }

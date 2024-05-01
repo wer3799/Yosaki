@@ -50,6 +50,9 @@ public class UiEditiorBoard : MonoBehaviour
     [SerializeField]
     private Toggle showBlackFoxUiToggle;
     [SerializeField]
+    private Toggle showTransJewelTowerUiToggle;
+    
+    [SerializeField]
     private Toggle showCatToggle;
     [SerializeField]
     private Toggle showTwelveToggle;
@@ -155,6 +158,8 @@ public class UiEditiorBoard : MonoBehaviour
         showClosedUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showClosed) == 1;
         
         showBlackFoxUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showBlackFox) == 1;
+        
+        showTransJewelTowerUiToggle.isOn = PlayerPrefs.GetInt(SettingKey.showTransJewelTowerUi) == 1;
         
         showCatToggle.isOn = PlayerPrefs.GetInt(SettingKey.showCatUi) == 1;
         
@@ -435,6 +440,17 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showBlackFox.Value = on ? 1 : 0;
+    }
+    public void TransJewelTowerUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showTransJewelTowerUi.Value = on ? 1 : 0;
     }
     
     public void CatUiOnOff(bool on)

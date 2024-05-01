@@ -10,8 +10,15 @@ public class IndraSkillCaster : SingletonMono<IndraSkillCaster>
     private Coroutine skillRoutine;
 
     void Start()
-    {
-        Subscribe();
+    { 
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            Subscribe();
+        }
     }
 
     private void Subscribe()

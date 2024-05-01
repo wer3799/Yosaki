@@ -143,9 +143,23 @@ public enum StatusType
     DokChimHasValueUpgrade=120,//극락 재화당 개수증가
     SuperCritical35DamPer=121,
     SuperCritical36DamPer=122,//해탈피해
+    SuperCritical37DamPer,//보옥
+    SuperCritical38DamPer,//차원 신규 베기
 
 }
 
+public enum DimensionStatusType
+{
+    None = -1,
+    BaseAttackDam=0,
+    AttackAddPer,
+    BaseSkillDam,
+    AddSkillDamPer,
+    ReduceSkillCoolTimePer,
+    AddHp,
+    CubeGainPer,
+    EssenceGainPer,
+}
 
 public static class PlayerStats
 {
@@ -206,6 +220,7 @@ public static class PlayerStats
         double df = GetSuperCritical34DamPer();
         double yo = GetSuperCritical35DamPer();
         double haetal = GetSuperCritical36DamPer();
+        double bo = GetSuperCritical37DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -257,6 +272,7 @@ public static class PlayerStats
         totalPower += (totalPower * df);
         totalPower += (totalPower * yo);
         totalPower += (totalPower * haetal);
+        totalPower += (totalPower * bo);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -268,6 +284,18 @@ public static class PlayerStats
         return totalPower * 0.01f;
     }
 
+    public static double GetDimensionTotalPower()
+    {
+        double baseAttack = GetDimensionBaseAttackDam();
+        double baseAttackPer = GetDimensionAttackAddPer();
+        double addSkillDamPer = GetDimensionAddSkillDamPer();
+        double reduceSkillCoolTime = GetDimensionReduceSkillCoolTime();
+
+        double totalPower = baseAttack * (1 + baseAttackPer) * (1 + addSkillDamPer) / (1 - reduceSkillCoolTime);
+
+
+        return totalPower * 100f;
+    }
     public static float GetMoveSpeedValue()
     {
         float ret = 0f;
@@ -681,6 +709,43 @@ public static class PlayerStats
             }
         }
 
+        return ret;
+    }
+
+    public static int GetTransEquipmentCount()
+    {
+        int ret = 0;
+
+        var weaponData = TableManager.Instance.WeaponTable.dataArray;
+
+        var weaponServerData = ServerData.weaponTable.TableDatas;
+        
+        for (int i = 0; i < weaponData.Length; i++)
+        {
+            if (weaponData[i].WEAPONTYPE != WeaponType.Normal) continue;
+            if (weaponServerData[weaponData[i].Stringid].hasItem.Value == 0) continue;
+            if (weaponServerData[weaponData[i].Stringid].trans.Value > 0)
+            {
+                ret ++;
+            }
+        }
+        var magicBookData = TableManager.Instance.MagicBookTable.dataArray;
+
+        var magicBookServerData = ServerData.magicBookTable.TableDatas;
+
+
+        for (int i = 0; i < magicBookData.Length; i++)
+        {
+            if (magicBookData[i].MAGICBOOKTYPE != MagicBookType.Normal) continue;
+            if (magicBookServerData[magicBookData[i].Stringid].hasItem.Value == 0) continue;
+
+            
+            
+            if (magicBookServerData[magicBookData[i].Stringid].trans.Value > 0)
+            {
+                ret ++;
+            }
+        }
         return ret;
     }
     public static float GetWeaponTransHasValue(StatusType type)
@@ -1471,6 +1536,13 @@ public static class PlayerStats
 
     #region HP&MP
 
+    public static float GetMaxHpDimension()
+    {
+        float hp = GameBalance.dimensionHp;
+            
+        return hp;
+    }
+    
     public static float GetMaxHp()
     {
         float originHp = GetOriginHp();
@@ -2340,7 +2412,7 @@ public static class PlayerStats
         return ret;
     }
     
-    //연옥베기
+    //업화베기
     public static float GetSuperCritical35DamPer()
     {
         float ret = 0f;
@@ -2350,6 +2422,8 @@ public static class PlayerStats
         ret += GetWeaponHasPercentValue(StatusType.SuperCritical35DamPer);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical35DamPer);
+        
+        ret += GetStageRelicHasEffect(StatusType.SuperCritical35DamPer);
 
         return ret;
     }
@@ -2360,6 +2434,31 @@ public static class PlayerStats
         float ret = 0f;
         
         ret += GetHaetalValue(StatusType.SuperCritical36DamPer);
+        
+        return ret;
+    }
+    //보옥베기
+    public static float GetSuperCritical37DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetTransJewelAbility(StatusType.SuperCritical37DamPer, 0);
+        
+        ret += GetTransJewelAbility(StatusType.SuperCritical37DamPer, 1);
+        
+        ret += GetTransJewelAbility(StatusType.SuperCritical37DamPer, 2);
+        
+        ret += GetTransJewelAbility(StatusType.SuperCritical37DamPer, 3);
+        
+        return ret;
+    }
+    
+    //차원베기
+    public static float GetSuperCritical38DamPer()
+    {
+        float ret = 0f;
+        
+        ret += GetHaetalValue(StatusType.SuperCritical38DamPer);
         
         return ret;
     }
@@ -3216,6 +3315,7 @@ public static class PlayerStats
     public const float divideNum = 500f;
     public const float divideAbilValue = 0.5f;
 
+    //유물복원
     public static float GetStageRelicHasEffect(StatusType statusType)
     {
         float ret = 0f;
@@ -4487,6 +4587,30 @@ public static class PlayerStats
         for (int i = 0; i < tableData.Length; i++)
         {
             if (score >= tableData[i].Rewrardcut)
+            {
+                grade = i;
+            }
+        }
+
+
+        return grade;
+    }
+    public static int GetTransJewelTowerGrade()
+    {
+        int grade = -1;
+
+        var tableData = TableManager.Instance.TransJewelTower.dataArray;
+
+        var score = ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.transJewelScore].Value *
+                    GameBalance.BossScoreConvertToOrigin;
+
+        var equipmentCount = PlayerStats.GetTransEquipmentCount();
+        
+        for (int i = 0; i < tableData[0].Rewardcut.Length; i++)
+        {
+            //초월수가 부족하면 break
+            if (tableData[0].Unlocktranscount[i] > equipmentCount) break;
+            if (score >= tableData[0].Rewardcut[i])
             {
                 grade = i;
             }
@@ -6784,6 +6908,8 @@ public static class PlayerStats
         ret += GetCostumeSpecialAbilityValue(StatusType.DragonPalaceHasValueUpgrade);
 
         ret += GetSpecialTypeAbility(StatusType.DragonPalaceHasValueUpgrade);
+        
+        ret += GetSamchunAbility(StatusType.DragonPalaceHasValueUpgrade);
 
         return ret;
     }
@@ -6799,6 +6925,8 @@ public static class PlayerStats
         ret += GetSpecialTypeAbility(StatusType.MurimHasValueUpgrade);
         
         ret += GetCostumeSpecialAbilityValue(StatusType.MurimHasValueUpgrade);
+
+        ret += GetSamchunAbility(StatusType.MurimHasValueUpgrade);
 
         return ret;
     }
@@ -7280,6 +7408,23 @@ public static class PlayerStats
 
         return sum;
     }
+//0현무 1청룡 2주작 3백호
+    public static float GetTransJewelAbility(StatusType statusType,int idx)
+    {
+        var sum = 0f;
+        
+        var level = ServerData.etcServerTable.GetTransJewelLevel(idx);
+
+        if (level < 0) return 0f;
+        
+        var tableData = TableManager.Instance.TransJewelAbil.dataArray[idx];
+
+        if ((StatusType)tableData.Abiltype != statusType) return 0f;
+
+        sum = tableData.Abiladdvalue * (level + 1);
+
+        return sum;
+    }
 //신수 각성
     public static float GetSasinsuAwakePowerAbility(StatusType statusType)
     {
@@ -7510,5 +7655,62 @@ public static class PlayerStats
         return sum;
 
     }
+
+    #region Dimension
+
     
+    public static float GetDimensionBaseAttackDam()
+    {
+        float ret = GameBalance.dimensionBaseAttackDamage;
+        
+        return ret;
+    }
+    
+    public static float GetDimensionAttackAddPer()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    public static float GetDimensionBaseSkillDam()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    
+    public static float GetDimensionAddSkillDamPer()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    
+    public static float GetDimensionReduceSkillCoolTime()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    public static float GetDimensionAddHp()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    public static float GetDimensionCubeGainPer()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    public static float GetDimensionEssenceGainPer()
+    {
+        float ret = 0f;
+        
+        return ret;
+    }
+    
+
+    #endregion
 }

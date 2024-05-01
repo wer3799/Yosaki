@@ -43,7 +43,7 @@ public class UiContentsPopup : MonoBehaviour
 
     private void Awake()
     {
-
+        RefreshBandit();
     }
 
     [SerializeField]
@@ -62,6 +62,7 @@ public class UiContentsPopup : MonoBehaviour
         }).AddTo(this);
     }
 
+    
 
     private void OnEnable()
     {
@@ -70,7 +71,6 @@ public class UiContentsPopup : MonoBehaviour
         tower3.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor2()&&ServerData.userInfoTable.IsLastFloor3()==false));
         tower4.ForEach(e => e.gameObject.SetActive(ServerData.userInfoTable.IsLastFloor3()));
         
-        RefreshBandit();    
     }
 
     private void RefreshBandit()

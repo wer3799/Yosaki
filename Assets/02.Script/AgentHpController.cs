@@ -161,6 +161,24 @@ public class AgentHpController : MonoBehaviour
         SetHp(seasonData.Specialrequestbosshp[tableData.Id]);
 
     }
+    public void InitializeDimensionBoss()
+    {
+        fieldBossTimerStarted = false;
+
+        this.isFieldBossEnemy = false;
+        
+
+        gainGoldFromStage = 1;
+
+        this.updateSubHpBar = true;
+
+        var tableData = TableManager.Instance.DimensionDungeon.dataArray[GameManager.Instance.bossId];
+
+        SetDefense(0);
+
+        SetHp(tableData.Hp);
+
+    }
     public void InitializeTwelveBoss(bool skipBoss = false)
     {
         fieldBossTimerStarted = false;
@@ -356,6 +374,33 @@ public class AgentHpController : MonoBehaviour
         value += value * PlayerStats.GetSuperCritical35DamPer();
         //??피해
         value += value * PlayerStats.GetSuperCritical36DamPer();
+        //??피해
+        value += value * PlayerStats.GetSuperCritical37DamPer();
+    }
+
+    public void ApplyDimensionPlusDamage(ref double value, bool isCritical=false, bool isSuperCritical=false)
+    {
+        SoundManager.Instance.PlaySound(hitSfxName);
+
+        var stat = PlayerStats.GetDimensionBaseAttackDam() * (1+PlayerStats.GetDimensionAttackAddPer());
+        
+        value *= stat;
+        
+        //크리티컬
+        if (isCritical)
+        {
+            //value += value * PlayerStats.CriticalDam();
+        }
+
+
+        if (isSuperCritical)
+        {
+            //30% 고정
+            //value += value * PlayerStats.GetSuperCriticalDamPer();
+        }
+
+        //??피해
+        value += value * (1+PlayerStats.GetSuperCritical38DamPer());
     }
 
     private Vector3 damTextspawnPos;
@@ -384,7 +429,7 @@ public class AgentHpController : MonoBehaviour
 
         if (damTextRoutine == null && isEnemyDead == false)
         {
-            damTextRoutine = StartCoroutine(DamTextRoutine());
+            damTextRoutine = CoroutineExecuter.Instance.StartCoroutine(DamTextRoutine());
         }
 
         damTextspawnPos = this.transform.position + Vector3.up * attackCount * 1f + Vector3.right * rightValue + Vector3.up * upValue;

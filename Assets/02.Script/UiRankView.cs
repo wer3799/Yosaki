@@ -9,7 +9,7 @@ public class UiRankView : MonoBehaviour
 {
     public enum RankType
     {
-        Normal, GangChul, ChunMa
+        Normal, GangChul, ChunMa,Dimension
     }
 
     [SerializeField]
@@ -29,7 +29,7 @@ public class UiRankView : MonoBehaviour
 
     public static int rank1Count = 0;
 
-    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx,int suhoAnimal,RankType rankType = RankType.Normal)
+    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx,int suhoAnimal,RankType rankType = RankType.Normal,bool costumeChange=true)
     {
         this.text1.SetText(text1);
         this.text2.SetText(text2);
@@ -295,6 +295,45 @@ public class UiRankView : MonoBehaviour
                 rankerCell = UiTopRankerView_Chunma.Instance.RankerCellList[14];
             }
 
+            if (rankerCell != null)
+            {
+                rankerCell.gameObject.SetActive(true);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal,-1);
+            }
+        }
+
+        else if (rankType == RankType.Dimension)
+        {
+            if (costumeChange == false)
+            {
+                return;
+            }
+            UiTopRankerCell rankerCell = null;
+
+            if (rank == 1)
+            {
+                if (rank1Count == 0)
+                {
+                    rankerCell = UiDimensionRankerView.Instance.RankerCellList[0];
+                }
+                else if (rank1Count == 1)
+                {
+                    rankerCell = UiDimensionRankerView.Instance.RankerCellList[1];
+                }
+                else if (rank1Count == 2)
+                {
+                    rankerCell = UiDimensionRankerView.Instance.RankerCellList[2];
+                }
+                rank1Count++;
+            }
+            else if (rank == 2)
+            {
+                rankerCell = UiDimensionRankerView.Instance.RankerCellList[1];
+            }
+            else if (rank == 3)
+            {
+                rankerCell = UiDimensionRankerView.Instance.RankerCellList[2];
+            }
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);

@@ -49,6 +49,28 @@ public class TraceSlash0 : SkillBase
             PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDamage(hitEnemies[i], skillInfo, damage, i == 0));
         }
     }
+    public override void UseDimensionSkill()
+    {
+        base.UseDimensionSkill();
+
+        //이동제한있을경우
+        playerSkillCaster.SetMoveRestriction(0f);
+
+        //파티클
+        CoroutineExecuter.Instance.StartCoroutine(SpawnLineEffect());
+
+
+        //데미지
+        double damage = GetDimensionSkillDamage();
+
+        var hitEnemies = playerSkillCaster.GetEnemiesInCircle(playerTr.position, 25);
+
+        //데미지적용
+        for (int i = 0; i < hitEnemies.Length && i < 500; i++)
+        {
+            PlayerSkillCaster.Instance.StartCoroutine(playerSkillCaster.ApplyDimensionDamage(hitEnemies[i],  damage, i == 0));
+        }
+    }
 
     private IEnumerator SpawnLineEffect()
     {

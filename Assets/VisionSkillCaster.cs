@@ -14,8 +14,15 @@ public class  VisionSkillCaster : SingletonMono<VisionSkillCaster>
     private int _visionSkillIdx = 0;
     void Start()
     {
-        Subscribe();
-        RefreshSkillData();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            Subscribe();
+            RefreshSkillData();
+        }
     }
 
     private void RefreshSkillData()

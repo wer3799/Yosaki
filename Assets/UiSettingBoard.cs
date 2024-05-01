@@ -832,6 +832,7 @@ public static class SettingKey
     public static string showDanjeon = "showDanjeon";
     public static string showClosed = "showClosed";
     public static string showBlackFox = "showBlackFox";
+    public static string showTransJewelTowerUi = "showTransJewelTowerUi";
 
     public static string showCatUi = "showCatUi";
     public static string showTwelveUi = "showTwelveUi";
@@ -941,6 +942,7 @@ public static class SettingData
     public static ReactiveProperty<int> showDanjeon = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showClosed = new ReactiveProperty<int>();
     public static ReactiveProperty<int> showBlackFox = new ReactiveProperty<int>();
+    public static ReactiveProperty<int> showTransJewelTowerUi = new ReactiveProperty<int>();
 
     //보스도전
     public static ReactiveProperty<int> showCatUi    = new ReactiveProperty<int>();
@@ -1181,6 +1183,9 @@ public static class SettingData
         if (PlayerPrefs.HasKey(SettingKey.showBlackFox) == false)
             PlayerPrefs.SetInt(SettingKey.showBlackFox, 1);
         
+        if (PlayerPrefs.HasKey(SettingKey.showTransJewelTowerUi) == false)
+            PlayerPrefs.SetInt(SettingKey.showTransJewelTowerUi, 1);
+        
         //
 
     }
@@ -1286,6 +1291,8 @@ public static class SettingData
         showClosed.Value = PlayerPrefs.GetInt(SettingKey.showClosed, 1);
         
         showBlackFox.Value = PlayerPrefs.GetInt(SettingKey.showBlackFox, 1);
+        
+        showTransJewelTowerUi.Value = PlayerPrefs.GetInt(SettingKey.showTransJewelTowerUi, 1);
         
         
         //보스도전
@@ -1621,6 +1628,10 @@ public static class SettingData
         showBlackFox.AsObservable().Subscribe(e =>
         {
             PlayerPrefs.SetInt(SettingKey.showBlackFox, e);
+        });
+        showTransJewelTowerUi.AsObservable().Subscribe(e =>
+        {
+            PlayerPrefs.SetInt(SettingKey.showTransJewelTowerUi, e);
         });
 //
         showCatUi.AsObservable().Subscribe(e =>

@@ -10,7 +10,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     [SerializeField]
     private List<UiBuffPopupView> uiBuffPopupViews;
     
-    string costumeKey = "costume210";
+    string costumeKey = "costume229";
 
     [SerializeField] private GameObject getCostumeButton;
 

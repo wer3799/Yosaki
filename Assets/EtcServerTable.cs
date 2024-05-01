@@ -34,6 +34,7 @@ public class EtcServerTable
     public const string gachaEventBingoReward = "gebr";
     public const string blueGangChulUnlock = "bgu";
     public const string sasinsuPowerLevel = "spl";    //0현무 1청룡 2주작 3백호 
+    public const string jewelLevel = "jl";    //0빨 1노 2파 3센터 
 
 
 
@@ -60,6 +61,7 @@ public class EtcServerTable
         {gachaEventBingoReward,new ReactiveProperty<string>(string.Empty)},
         {blueGangChulUnlock,new ReactiveProperty<string>(string.Empty)},
         {sasinsuPowerLevel,new ReactiveProperty<string>("#-1#-1#-1#-1")},
+        {jewelLevel,new ReactiveProperty<string>("#-1#-1#-1#-1")},
     };
 
     private Dictionary<string, ReactiveProperty<string>> tableDatas = new Dictionary<string, ReactiveProperty<string>>();
@@ -419,19 +421,37 @@ public class EtcServerTable
 
         return scoreList.Sum();
     }
-    public int GetSasinsuPowerBestLevel()
-    {
-        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.sasinsuPowerLevel].Value.Split(BossServerTable.rewardSplit);
-            
-        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
-
-        return scoreList.Max();
-    }
     public int GetSasinsuPowerLowestLevel()
     {
         var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.sasinsuPowerLevel].Value.Split(BossServerTable.rewardSplit);
             
         var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList.Min();
+    }
+    //빨노파센 
+    public int GetTransJewelLevel(int idx)
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.jewelLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList[idx];
+    }
+    public int GetTransJewelTotalLevel()
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.jewelLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).ToList();
+
+        return scoreList.Sum();
+    }
+    //마지막레벨은 제외
+    public int GetTransJewelLowestLevel()
+    {
+        var splitData = ServerData.etcServerTable.TableDatas[EtcServerTable.jewelLevel].Value.Split(BossServerTable.rewardSplit);
+            
+        var scoreList = splitData.Where(s => !string.IsNullOrEmpty(s)).Select(int.Parse).Take(3).ToList();
 
         return scoreList.Min();
     }

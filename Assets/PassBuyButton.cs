@@ -24,6 +24,17 @@ public class PassBuyButton : MonoBehaviour
     public static readonly string studentPassKey = "studentpass0";
     public static readonly string studentSpotPassKey = "studentspotpass0";
     public static readonly string haetalPassKey = "haetalpass0";
+    public static readonly string yorinsealswordpass0key = "yorinsealswordpass0";
+    public static readonly string yorinsealswordpass1key = "yorinsealswordpass1";
+    public static readonly string yorinsealswordpass2key = "yorinsealswordpass2";
+    public static readonly string yorinsealswordpass3key = "yorinsealswordpass3";
+    public static readonly string yorinsealswordpass4key = "yorinsealswordpass4";
+
+    public static readonly string yorinringpass0key = "yorinringpass0";
+    public static readonly string yorinringpass1key = "yorinringpass1";
+    public static readonly string yorinringpass2key = "yorinringpass2";
+    public static readonly string yorinringpass3key = "yorinringpass3";
+    public static readonly string yorinringpass4key = "yorinringpass4";
 
     
     private enum PassKey 
@@ -40,6 +51,16 @@ public class PassBuyButton : MonoBehaviour
         Student,
         StudentSpot,
         Haetal,
+        YorinSealSword0,
+        YorinSealSword1,
+        YorinSealSword2,
+        YorinSealSword3,
+        YorinSealSword4,
+        YorinRing0,
+        YorinRing1,
+        YorinRing2,
+        YorinRing3,
+        YorinRing4,
     }
 
     [SerializeField] private PassKey passKey = PassKey.None;
@@ -48,48 +69,32 @@ public class PassBuyButton : MonoBehaviour
     {
         if (passKey != PassKey.None)
         {
-            var key = string.Empty; 
-            switch (passKey)
+            var key = passKey switch
             {
-                case PassKey.None:
-                    key = sasinsuPassKey;
-                    break;
-                case PassKey.Sasinsu:
-                    key = sasinsuPassKey;
-                    break;
-                case PassKey.Suho:
-                    key = suhoPassKey;
-                    break;
-                case PassKey.FoxFire:
-                    key = foxfirePassKey;
-                    break;
-                case PassKey.SealSword:
-                    key = sealswordPassKey;
-                    break;
-                case PassKey.Dosul:
-                    key = dosulPassKey;
-                    break;
-                case PassKey.BlackFox:
-                    key = blackfoxPassKey;
-                    break;
-                case PassKey.DosulLevel:
-                    key = dosullevelPassKey;
-                    break;
-                case PassKey.Bimu:
-                    key = bimuPassKey;
-                    break;
-                case PassKey.Student:
-                    key = studentPassKey;
-                    break;
-                case PassKey.StudentSpot:
-                    key = studentSpotPassKey;
-                    break;
-                case PassKey.Haetal:
-                    key = haetalPassKey;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                PassKey.None => sasinsuPassKey,
+                PassKey.Sasinsu => sasinsuPassKey,
+                PassKey.Suho => suhoPassKey,
+                PassKey.FoxFire => foxfirePassKey,
+                PassKey.SealSword => sealswordPassKey,
+                PassKey.Dosul => dosulPassKey,
+                PassKey.BlackFox => blackfoxPassKey,
+                PassKey.DosulLevel => dosullevelPassKey,
+                PassKey.Bimu => bimuPassKey,
+                PassKey.Student => studentPassKey,
+                PassKey.StudentSpot => studentSpotPassKey,
+                PassKey.Haetal => haetalPassKey,
+                PassKey.YorinSealSword0 => yorinsealswordpass0key,
+                PassKey.YorinSealSword1 => yorinsealswordpass1key,
+                PassKey.YorinSealSword2 => yorinsealswordpass2key,
+                PassKey.YorinSealSword3 => yorinsealswordpass3key,
+                PassKey.YorinSealSword4 => yorinsealswordpass4key,
+                PassKey.YorinRing0 => yorinringpass0key,
+                PassKey.YorinRing1 => yorinringpass1key,
+                PassKey.YorinRing2 => yorinringpass2key,
+                PassKey.YorinRing3 => yorinringpass3key,
+                PassKey.YorinRing4 => yorinringpass4key,
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
             SetPassKey(key);
         }

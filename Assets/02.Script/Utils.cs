@@ -24,6 +24,11 @@ public static class Utils
     {
         return type == Item_Type.SleepRewardItem;
     }
+    public static int GetDayOfWeek()
+    {
+        var serverTime = ServerData.userInfoTable.currentServerTime;
+        return (int)serverTime.DayOfWeek;
+    }
     //지배 영향 안받는 능력치
     public static bool IsAbsoluteStatus(this StatusType type)
     {
@@ -182,6 +187,10 @@ public static class Utils
     {
         return type >= Item_Type.MRT && type <= Item_Type.Treasure_End;
     }
+    public static bool IsDimensionItem(this Item_Type type)
+    {
+        return type >= Item_Type.DC && type <= Item_Type.Dimension_End;
+    }
     public static bool IsVisionSkill(this Item_Type type)
     {
         return type >= Item_Type.VisionSkill17 && type <= Item_Type.VisionSkill_End;
@@ -190,7 +199,10 @@ public static class Utils
     {
         return type >= Item_Type.SB && type <= Item_Type.Goods_End;
     }
-
+    public static bool IsDimensionContents(this GameManager.ContentsType type)
+    {
+        return type == GameManager.ContentsType.Dimension;
+    }
     public static bool IsGoodsItem(this Item_Type type)
     {
         return type == Item_Type.Gold ||
@@ -394,6 +406,7 @@ public static class Utils
                type == Item_Type.GuimoonRelic ||
                type == Item_Type.GuimoonRelicClearTicket ||
                IsTreasureItem(type)||
+               IsDimensionItem(type)||
                IsVisionSkill(type)||
                IsGoods(type)||
                IsSkillItem(type)
@@ -1089,6 +1102,35 @@ public static class Utils
         }
 
         return null;
+
+    }
+    public static int GetCurrentDimensionSeasonIdx()
+    {
+        
+        var tableData = TableManager.Instance.DimensionSeason.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            var endData = tableData[i].Enddate.Split('-');
+            DateTime endDate = new DateTime(int.Parse(endData[0]), int.Parse(endData[1]), int.Parse(endData[2]));
+            endDate = endDate.AddDays(1);//5월5일을 넣으면 5월6일00시에끝나야함.
+            var result = DateTime.Compare(ServerData.userInfoTable.currentServerTime, endDate);
+            
+            switch (result)
+            {
+                //아직 안지남
+                case -1 :
+                case 0:
+                    return tableData[i].Id;
+                //지남
+                case 1:
+                    continue;
+                default:
+                    continue;
+            }    
+        }
+
+        return -1;
 
     }
 }

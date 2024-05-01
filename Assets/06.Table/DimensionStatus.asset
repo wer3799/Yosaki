@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec04e6056b2e384ab9c647b35665725, type: 3}
+  m_Name: DimensionStatus
+  m_EditorClassIdentifier: 
+  SheetName: Assets/06.Table/DimensionStatus.xlsx
+  WorksheetName: DimensionStatus
+  dataArray:
+  - key: A_DS
+    description: "\uCC28\uC6D0 \uACF5\uACA9\uB825"
+    statuswhere: 4
+    ispercent: 0
+    maxlv: 100
+    addvalue: 1
+    statustype: 0
+    needstatuskey: 
+    unlocklevel: 0
+    upgradeprice: 1
+  - key: AP_DS
+    description: "\uCC28\uC6D0 \uACF5\uACA9\uB825(%)"
+    statuswhere: 4
+    ispercent: 1
+    maxlv: 100
+    addvalue: 1
+    statustype: 1
+    needstatuskey: 
+    unlocklevel: 0
+    upgradeprice: 1
+  - key: SD_DS
+    description: "\uCD94\uAC00 \uAE30\uC220 \uB370\uBBF8\uC9C0(%)"
+    statuswhere: 4
+    ispercent: 1
+    maxlv: 100
+    addvalue: 1
+    statustype: 2
+    needstatuskey: 
+    unlocklevel: 0
+    upgradeprice: 1
+  - key: S0_DC
+    description: "\uC2E0\uADDC \uBCA0\uAE30(% )1"
+    statuswhere: 5
+    ispercent: 1
+    maxlv: 100
+    addvalue: 1
+    statustype: 3
+    needstatuskey: 
+    unlocklevel: 0
+    upgradeprice: 1
+  - key: S1_DC
+    description: "\uC2E0\uADDC \uBCA0\uAE30(%) 2"
+    statuswhere: 5
+    ispercent: 1
+    maxlv: 100
+    addvalue: 2
+    statustype: 4
+    needstatuskey: S0_DC
+    unlocklevel: 100
+    upgradeprice: 2
+  - key: S2_DC
+    description: "\uC2E0\uADDC \uBCA0\uAE30(%) 3"
+    statuswhere: 5
+    ispercent: 1
+    maxlv: 100
+    addvalue: 3
+    statustype: 5
+    needstatuskey: S1_DC
+    unlocklevel: 100
+    upgradeprice: 3

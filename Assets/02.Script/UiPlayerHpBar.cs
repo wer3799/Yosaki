@@ -17,6 +17,9 @@ public class UiPlayerHpBar : MonoBehaviour
 
     private static string PlayTrigger = "Play";
 
+    [SerializeField] private List<GameObject> maxHp;
+    [SerializeField] private List<GameObject> hp;
+    
     void Start()
     {
         Subscribe();
@@ -30,18 +33,40 @@ public class UiPlayerHpBar : MonoBehaviour
 
     private void WhenMaxHpChanged(double value)
     {
-        WhenHpChanged(value);
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            for (var i = 0; i < maxHp.Count; i++)
+            {
+                maxHp[i].SetActive(!(i >= value));
+            }
+        }
+        else
+        {
+            WhenHpChanged(value);
+        }
+        
     }
 
     private void WhenHpChanged(double value)
     {
-        animator.SetTrigger(PlayTrigger);
 
         double maxHp = PlayerStatusController.Instance.maxHp.Value;
         double currentHp = PlayerStatusController.Instance.hp.Value;
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            for (var i = 0; i < hp.Count; i++)
+            {
+                hp[i].SetActive(!(i >= value));
+            }
+        }
+        else
+        {
+            animator.SetTrigger(PlayTrigger);
 
-        hpText.SetText($"{Utils.ConvertBigNum(currentHp)}/{Utils.ConvertBigNum(maxHp)}");
-        barObject.transform.localScale = new Vector3((float)currentHp / (float)maxHp, barObject.transform.localScale.y, barObject.transform.localScale.z);
+            hpText.SetText($"{Utils.ConvertBigNum(currentHp)}/{Utils.ConvertBigNum(maxHp)}");
+            barObject.transform.localScale = new Vector3((float)currentHp / (float)maxHp, barObject.transform.localScale.y, barObject.transform.localScale.z);
+        }
+
     }
 
 }

@@ -20,9 +20,16 @@ public class DosulCaster : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(UseDosulSkillRoutine());
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            StartCoroutine(UseDosulSkillRoutine());
 
-        Subscribe();
+            Subscribe();
+        }
     }
 
     private void Subscribe()

@@ -60,7 +60,8 @@ public static class GameBalance
 
     #endregion
     
-    public static List<string> samchunTitle = new List<string>() { "요괴지옥", "천상계","도깨비나라","수미산", "도적단", "심연","신선계","용인계"  };
+    public static List<string> samchunTitle = new List<string>() { "요괴지옥", "천상계","도깨비나라","수미산", "도적단", "심연","신선계","용인계","용궁"  };
+    public static List<string> specialProductId = new List<string>() { "childpackage0", "childpackage1","childpackage2" };
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
     public readonly static List<ObscuredFloat> potion_Option = new List<ObscuredFloat>() { 0.3f, 0.6f, 0.9f };
 
@@ -477,6 +478,7 @@ public static class GameBalance
     public static ObscuredFloat MeditationTicketDailyGetAmount = 2; // 심득 
     public static ObscuredFloat SinsuClearDailyGetAmount = 1; // 신수소탕권 
     public static ObscuredFloat HyulClearDailyGetAmount = 2; // 혈자리소탕권 
+    public static ObscuredFloat TJCTDailyGetAmount = 1; // 혈자리소탕권 
     public static ObscuredInt GachaTicketDailyGetAmount = 10; // 
     public static ObscuredInt WeeklyTicketWeeklyGetAmount = 3; // 
     public static ObscuredInt TransTicketWeeklyGetAmount = 3; // 
@@ -504,7 +506,7 @@ public static class GameBalance
         public readonly static ObscuredFloat HotTimeEvent_Ad_TaegeukGoods = 0.4f;
         public readonly static ObscuredFloat HotTimeEvent_Ad_SasinsuGoods = 0.4f;
     
-        public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 4, 30);
+        public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 6, 11);
 
     #endregion
 
@@ -769,13 +771,29 @@ public static class GameBalance
 
     #endregion
 
+    #region dimension
+
+    public readonly static ObscuredFloat dimensionHp = 3;
+    public readonly static ObscuredFloat dimensionBaseSkillDamage = 1;
+    public readonly static ObscuredFloat dimensionBaseAttackDamage = 100;
+    public readonly static ObscuredFloat dimensionBaseAttackCoolTime = 1;
 
 
+    
+
+    #endregion
+
+    #region Event_YorinPass
+
+    public static ObscuredInt yorinPassLockStage = 17900;// 명상시간
+
+
+    #endregion
     public readonly static string[] damageUnit = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","미정26","미정27","미정28","미정29","미정30","미정31","미정32",
+        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","미정28","미정29","미정30","미정31","미정32",
 
     };
     public static int GetSonIdx()

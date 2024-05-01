@@ -63,6 +63,8 @@ public class UiContentsPopup2 : MonoBehaviour
         DragonBoard_Hard=50,
         YeonOkBoard,
         ChunguBoard,
+        DragonPalaceBoard_Hard,
+        TransJewelTowerBoard,
     }
     //한계돌파
     private enum GrowthContentsDoor
@@ -91,7 +93,7 @@ public class UiContentsPopup2 : MonoBehaviour
         ClosedTrainingBoard,
         BlackFoxBoard,
         ChunguTower,
-        
+        TransJewelTowerBoard,
         
     }
     //보스도전
@@ -498,6 +500,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 338:
                     case 339:
                     case 340:
+                    case 342:
+                    case 343:
+                    case 344:
                         lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                     case 221:
@@ -599,7 +604,18 @@ public class UiContentsPopup2 : MonoBehaviour
                         lastBoards[(int)ContentsBoard.DragonBoard_Hard].SetActive(true);
                         break;
                     case 341:
+                    case 345:
                         lastBoards[(int)ContentsBoard.YeonOkBoard].SetActive(true);
+                        break;
+                        
+                    case 346:
+                    case 347:
+                    case 348:
+                    case 349:
+                    case 350:
+                    case 351:
+                    case 352:
+                        lastBoards[(int)ContentsBoard.DragonPalaceBoard_Hard].SetActive(true);
                         break;
                         
                 }
@@ -720,6 +736,10 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.ChunguTower :
                 lastBoards[(int)ContentsBoard.ChunguBoard].SetActive(true);
+                break;
+
+            case GameManager.ContentsType.TransJewelTower :
+                lastBoards[(int)ContentsBoard.TransJewelTowerBoard].SetActive(true);
                 break;
 
         }
@@ -854,6 +874,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newGrowthDoors[(int)GrowthContentsDoor.BlackFoxBoard].SetActive(e == 1);
             oldGrowthDoors[(int)GrowthContentsDoor.BlackFoxBoard].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showTransJewelTowerUi.AsObservable().Subscribe(e =>
+        {
+            newGrowthDoors[(int)GrowthContentsDoor.TransJewelTowerBoard].SetActive(e == 1);
+            oldGrowthDoors[(int)GrowthContentsDoor.TransJewelTowerBoard].SetActive(e == 1);
         }).AddTo(this);
         
         ////////////보스도전
