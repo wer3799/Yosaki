@@ -102,7 +102,7 @@ public class UiHaetalBoard : SingletonMono<UiHaetalBoard>
 
     private bool CanEnter()
     {
-        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationIndex).Value >= currentData.Unlockscore;
+        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationIndex).Value >= currentData.Unlockscore-1;
     }
     
     public void OnClickEnterButton()
