@@ -262,6 +262,12 @@ public class UiIapItemCell : MonoBehaviour
             UiShop.Instance.GetPackageItem(productData.Productid);
             Debug.LogError("Get SeolFreePackage");
         }
+        //어린이날 무료
+        else if (productData.Productid.Equals("childpackage0"))
+        {
+            UiShop.Instance.GetPackageItem(productData.Productid);
+            Debug.LogError("Get SeolFreePackage");
+        }
         else if (productData.Needlevel == 0)
         {
 
