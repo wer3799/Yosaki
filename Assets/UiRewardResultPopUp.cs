@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using static UiRewardView;
 
 public class UiRewardResultPopUp : SingletonMono<UiRewardResultPopUp>
@@ -9,9 +11,11 @@ public class UiRewardResultPopUp : SingletonMono<UiRewardResultPopUp>
     private DungeonRewardView dungeonRewardView;
     [SerializeField]
     private GameObject rootObject;
+
+    [SerializeField] private Button button;
     
     private List<RewardData> rewardList = new List<RewardData>();
-
+    private UnityAction buttonClickAction;
     public List<RewardData> RewardList => rewardList;
     public UiRewardResultPopUp AddOrUpdateReward(Item_Type itemType, float itemValue)
     {
@@ -31,6 +35,31 @@ public class UiRewardResultPopUp : SingletonMono<UiRewardResultPopUp>
         return this;
     }
 
+    public UiRewardResultPopUp AddEvent(UnityAction action)
+    {
+        buttonClickAction = action;
+        
+        button.onClick.AddListener(action);
+
+        return this;
+    }
+
+    public UiRewardResultPopUp RemoveEvent()
+    {
+        button.onClick.RemoveListener(buttonClickAction);
+        return this;
+    }
+    public UiRewardResultPopUp RemoveAllEvent()
+    {
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(SetOff);
+        return this;
+    }
+
+    private void SetOff()
+    {
+        rootObject.SetActive(false);
+    }
     public UiRewardResultPopUp Clear()
     {
         rewardList.Clear();

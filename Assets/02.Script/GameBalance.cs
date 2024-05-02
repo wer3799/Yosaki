@@ -777,6 +777,7 @@ public static class GameBalance
     public readonly static ObscuredFloat dimensionBaseSkillDamage = 1;
     public readonly static ObscuredFloat dimensionBaseAttackDamage = 100;
     public readonly static ObscuredFloat dimensionBaseAttackCoolTime = 1;
+    public readonly static ObscuredFloat dimensionStatusGetPointByLevelUp = 3;
 
 
     

@@ -221,6 +221,7 @@ public static class PlayerStats
         double yo = GetSuperCritical35DamPer();
         double haetal = GetSuperCritical36DamPer();
         double bo = GetSuperCritical37DamPer();
+        double di = GetSuperCritical38DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer)
@@ -273,6 +274,7 @@ public static class PlayerStats
         totalPower += (totalPower * yo);
         totalPower += (totalPower * haetal);
         totalPower += (totalPower * bo);
+        totalPower += (totalPower * di);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -2458,7 +2460,12 @@ public static class PlayerStats
     {
         float ret = 0f;
         
-        ret += GetHaetalValue(StatusType.SuperCritical38DamPer);
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S0_DC);
+        
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S1_DC);
+        
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S2_DC);
+
         
         return ret;
     }
@@ -7662,6 +7669,8 @@ public static class PlayerStats
     public static float GetDimensionBaseAttackDam()
     {
         float ret = GameBalance.dimensionBaseAttackDamage;
+
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.A_DS);
         
         return ret;
     }
@@ -7670,11 +7679,13 @@ public static class PlayerStats
     {
         float ret = 0f;
         
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.AP_DS);
+
         return ret;
     }
     public static float GetDimensionBaseSkillDam()
     {
-        float ret = 0f;
+        float ret = GameBalance.dimensionBaseSkillDamage;
         
         return ret;
     }
@@ -7682,6 +7693,9 @@ public static class PlayerStats
     public static float GetDimensionAddSkillDamPer()
     {
         float ret = 0f;
+        
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.SD_DS);
+
         
         return ret;
     }

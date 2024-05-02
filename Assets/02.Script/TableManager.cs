@@ -333,7 +333,7 @@ public class TableManager : SingletonMono<TableManager>
 
                 for (int i = 0; i < DimensionStatus.dataArray.Length; i++)
                 {
-                    dimensionStatusDatas.Add(statusTable.dataArray[i].Key, DimensionStatus.dataArray[i]);
+                    dimensionStatusDatas.Add(DimensionStatus.dataArray[i].Key, DimensionStatus.dataArray[i]);
                 }
             }
 

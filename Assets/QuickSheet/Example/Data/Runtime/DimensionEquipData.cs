@@ -13,8 +13,8 @@ public class DimensionEquipData
   public int Id { get {return id; } set { this.id = value;} }
   
   [SerializeField]
-  string stringid;
-  public string Stringid { get {return stringid; } set { this.stringid = value;} }
+  int level;
+  public int Level { get {return level; } set { this.level = value;} }
   
   [SerializeField]
   int grade;
@@ -23,10 +23,6 @@ public class DimensionEquipData
   [SerializeField]
   string name;
   public string Name { get {return name; } set { this.name = value;} }
-  
-  [SerializeField]
-  int maxlevel;
-  public int Maxlevel { get {return maxlevel; } set { this.maxlevel = value;} }
   
   [SerializeField]
   int decompositiontype;

@@ -111,8 +111,8 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
     }
     private void RefreshStatusText()
     {
-        float currentStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel);
-        float nextStatusValue = ServerData.statusTable.GetStatusValue(statusData.Key, currentLevel + 1);
+        float currentStatusValue = ServerData.dimensionStatusTable.GetStatusValue(statusData.Key, currentLevel);
+        float nextStatusValue = ServerData.dimensionStatusTable.GetStatusValue(statusData.Key, currentLevel + 1);
 
         float price = 0f;
         if (statusData.STATUSWHERE == StatusWhere.dimension)
@@ -148,8 +148,7 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
             }
             else
             {
-     
-                    descriptionText.SetText($"{ Utils.ConvertNum(currentStatusValue*100,2)}%(MAX)");
+                descriptionText.SetText($"{ Utils.ConvertNum(currentStatusValue*100,2)}%(MAX)");
             }
         }
 
@@ -173,7 +172,7 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
 
         if (this.statusData.STATUSWHERE == StatusWhere.dimension)
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.DC).AsObservable().Subscribe(e =>
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).AsObservable().Subscribe(e =>
             {
                 SetUpgradeButtonState(CanUpgrade());
             }).AddTo(this);
@@ -181,7 +180,7 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
 
         else if (this.statusData.STATUSWHERE == StatusWhere.special)
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.DE).AsObservable().Subscribe(e =>
+            ServerData.goodsTable.GetTableData(GoodsTable.DC).AsObservable().Subscribe(e =>
             {
                 SetUpgradeButtonState(CanUpgrade());
             }).AddTo(this);
@@ -282,7 +281,7 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.special)
         {
-            ServerData.goodsTable.GetTableData(GoodsTable.DE).Value -= statusData.Upgradeprice;
+            ServerData.goodsTable.GetTableData(GoodsTable.DC).Value -= statusData.Upgradeprice;
         }
     }
 
@@ -305,18 +304,7 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
             return false;
         }
         
-        if (statusData.STATUSWHERE == StatusWhere.special)
-        {
-            bool ret = ServerData.goodsTable.GetTableData(GoodsTable.DE).Value >= statusData.Upgradeprice;
-
-            if (showPopup && ret == false)
-            {
-                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DE)}가 부족합니다.");
-            }
-
-            return ret;
-        }
-        else if (statusData.STATUSWHERE == StatusWhere.dimension)
+        if (statusData.STATUSWHERE == StatusWhere.dimension)
         {
             bool ret = ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value > 0;
 
@@ -327,6 +315,18 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
 
             return ret;
         }
+        else if (statusData.STATUSWHERE == StatusWhere.special)
+        {
+            bool ret = ServerData.goodsTable.GetTableData(GoodsTable.DC).Value >= statusData.Upgradeprice;
+
+            if (showPopup && ret == false)
+            {
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DC)}가 부족합니다.");
+            }
+
+            return ret;
+        }
+
 
         return true;
     }
@@ -393,9 +393,8 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
         
         else if (statusData.STATUSWHERE == StatusWhere.special)
         {
-          
             //return ret;
-            var currentGoldBar = ServerData.goodsTable.GetTableData(GoodsTable.DE).Value;
+            var currentGoldBar = ServerData.goodsTable.GetTableData(GoodsTable.DC).Value;
 
             if (IsMaxLevel())
             {
@@ -405,10 +404,9 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
 
             if (currentGoldBar < statusData.Upgradeprice)
             {
-                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DE)}가 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DC)}가 부족합니다.");
                 return;
             }
-
 
             var currentLevel = ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value;
             int maxLevel = statusData.Maxlv;
@@ -422,45 +420,13 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
             //맥스렙 가능
             if (currentGoldBar >= upgradableAmount * statusData.Upgradeprice)
             {
-                ServerData.goodsTable.GetTableData(GoodsTable.DE).Value -= upgradableAmount * statusData.Upgradeprice;
+                ServerData.goodsTable.GetTableData(GoodsTable.DC).Value -= upgradableAmount * statusData.Upgradeprice;
                 ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value += upgradableAmount;
             }
             else
             {
-                ServerData.goodsTable.GetTableData(GoodsTable.DE).Value -= upgradableGoldBar * statusData.Upgradeprice;
+                ServerData.goodsTable.GetTableData(GoodsTable.DC).Value -= upgradableGoldBar * statusData.Upgradeprice;
                 ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value += (int)upgradableGoldBar;
-            }
-        }
-        else if (statusData.STATUSWHERE == StatusWhere.memory)
-        {
-            var currentMemoryPoint = ServerData.dimensionStatusTable.GetTableData(StatusTable.Memory).Value;
-
-            if (currentMemoryPoint <= 0)
-            {
-                PopupManager.Instance.ShowAlarmMessage("무공비급이 부족합니다.");
-                return;
-            }
-
-            if (IsMaxLevel())
-            {
-                PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
-                return;
-            }
-
-            var currentLevel = ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value;
-            int maxLevel = statusData.Maxlv;
-            var upgradableAmount = maxLevel - currentLevel;
-
-            //맥스렙 가능
-            if (currentMemoryPoint >= upgradableAmount)
-            {
-                ServerData.dimensionStatusTable.GetTableData(StatusTable.Memory).Value -= (int)upgradableAmount;
-                ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value += (int)upgradableAmount;
-            }
-            else
-            {
-                ServerData.dimensionStatusTable.GetTableData(StatusTable.Memory).Value -= (int)currentMemoryPoint;
-                ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value += currentMemoryPoint;
             }
         }
 
@@ -510,11 +476,11 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.special)
         {
-            var currentGoldBar = (int)ServerData.goodsTable.GetTableData(Item_Type.DE).Value;
+            var currentGoldBar = (int)ServerData.goodsTable.GetTableData(Item_Type.DC).Value;
 
             if (currentGoldBar < statusData.Upgradeprice)
             {
-                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DE)}가 부족합니다.");
+                PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DC)}가 부족합니다.");
                 return;
             }
 
@@ -536,13 +502,13 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
             //맥스렙 가능
             if (currentGoldBar >= upgradableAmount)
             {
-                ServerData.goodsTable.GetTableData(Item_Type.DE).Value -= upgradableAmount;
+                ServerData.goodsTable.GetTableData(Item_Type.DC).Value -= upgradableAmount;
                 ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value += upgradableAmount;
             }
             else
             {
                 //current 20개
-                ServerData.goodsTable.GetTableData(Item_Type.DE).Value -= upgradableGoldBar*statusData.Upgradeprice;
+                ServerData.goodsTable.GetTableData(Item_Type.DC).Value -= upgradableGoldBar*statusData.Upgradeprice;
                 ServerData.dimensionStatusTable.GetTableData(statusData.Key).Value += (int)upgradableGoldBar;
             }
         }
@@ -577,14 +543,14 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
         }
         else if (statusData.STATUSWHERE == StatusWhere.special)
         {
-            goodesParam.Add(GoodsTable.DE, ServerData.goodsTable.GetTableData(GoodsTable.DE).Value);
+            goodesParam.Add(GoodsTable.DC, ServerData.goodsTable.GetTableData(GoodsTable.DC).Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodesParam));
         }
 
-        transactionList.Add(TransactionValue.SetUpdate(StatusTable.tableName, StatusTable.Indate, statusParam));
+        transactionList.Add(TransactionValue.SetUpdate(DimensionStatusTable.tableName, DimensionStatusTable.Indate, statusParam));
 
         ServerData.SendTransaction(transactionList);
 
-        UiPlayerStatBoard.Instance.Refresh();
+        UiDimensionBoard.Instance.Refresh();
     }
 }

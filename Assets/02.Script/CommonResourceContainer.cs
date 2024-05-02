@@ -19,6 +19,7 @@ public static class CommonResourceContainer
     private static List<Sprite> chunIcons;
     private static List<Sprite> SuhoAnimal;
     private static List<Sprite> DarkRoomIcon;
+    private static List<Sprite> dimensionSprites;
 
     public static Sprite GetRandomWeaponSprite()
     {
@@ -64,6 +65,33 @@ public static class CommonResourceContainer
         else
         {
             Debug.LogError($"Weapon icon {idx} is not exist");
+            return null;
+        }
+    }   
+    public static Sprite GetDimensionEquipmentSprite(int idx)
+    {
+        if (dimensionSprites == null)
+        {
+            var icons = Resources.LoadAll<Sprite>("Dimension/");
+            dimensionSprites = icons.ToList();
+
+
+            dimensionSprites.Sort((a, b) =>
+            {
+                if (int.Parse(a.name) < int.Parse(b.name)) return -1;
+
+                return 1;
+
+            });
+        }
+
+        if (idx < dimensionSprites.Count)
+        {
+            return dimensionSprites[idx];
+        }
+        else
+        {
+            Debug.LogError($"Dimension icon {idx} is not exist");
             return null;
         }
     }

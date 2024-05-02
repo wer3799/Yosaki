@@ -43,7 +43,7 @@ public abstract class SkillBase
     }
     protected virtual double GetDimensionSkillDamage()
     {
-        double apDamage = GameBalance.dimensionBaseSkillDamage;
+        double apDamage = PlayerStats.GetDimensionBaseSkillDam();
 
         return apDamage * (1 + PlayerStats.GetDimensionAddSkillDamPer());
     }

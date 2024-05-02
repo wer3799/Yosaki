@@ -447,6 +447,13 @@ public static class Utils
             type != StatusType.ReduceDosulSkillCoolTime&&
             type != StatusType.ReduceSealSwordSkillRequireCount;
     }
+    public static bool IsPercentStat(this DimensionStatusType type)
+    {
+        return
+            type != DimensionStatusType.BaseAttackDam &&
+            type != DimensionStatusType.BaseSkillDam &&
+            type != DimensionStatusType.AddHp;
+    }
 
     public static bool IsBossContents(this GameManager.ContentsType type)
     {

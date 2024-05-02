@@ -24,7 +24,7 @@ public class DimensionStatusTable
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
         { Level, 1 },
-        { DSP, 0 },
+        { DSP, GameBalance.dimensionStatusGetPointByLevelUp },
         { A_DS, 0 },
         { AP_DS, 0 },
         { SD_DS, 0 },
@@ -61,6 +61,66 @@ public class DimensionStatusTable
         return tableDatas[key];
     }
 
+    public float GetStatusValue(string key, float level)
+    {
+        if (TableManager.Instance.DimensionStatusDatas.TryGetValue(key, out var data))
+        {
+            switch (key)
+            {
+                case A_DS:
+                case AP_DS:
+                case SD_DS:
+                case S0_DC:
+                case S1_DC:
+                case S2_DC:
+                {
+                    return level * data.Addvalue;
+                }
+                default:
+                    {
+                        return 0f;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            return 0f;
+        }
+
+        return 0f;
+    }
+    public float GetStatusValue(string key)
+    {
+        if (TableManager.Instance.DimensionStatusDatas.TryGetValue(key, out var data))
+        {
+            switch (key)
+            {
+                case A_DS:
+                case AP_DS:
+                case SD_DS:
+                case S0_DC:
+                case S1_DC:
+                case S2_DC:
+                {
+                    var level = tableDatas[key].Value;
+                    
+                    return level * data.Addvalue;
+                }
+                default:
+                    {
+                        return 0f;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            return 0f;
+        }
+
+        return 0f;
+    }
 
     public void Initialize()
     {

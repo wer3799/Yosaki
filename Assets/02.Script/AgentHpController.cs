@@ -376,6 +376,8 @@ public class AgentHpController : MonoBehaviour
         value += value * PlayerStats.GetSuperCritical36DamPer();
         //??피해
         value += value * PlayerStats.GetSuperCritical37DamPer();
+        //??피해
+        value += value * PlayerStats.GetSuperCritical38DamPer();
     }
 
     public void ApplyDimensionPlusDamage(ref double value, bool isCritical=false, bool isSuperCritical=false)
@@ -400,7 +402,7 @@ public class AgentHpController : MonoBehaviour
         }
 
         //??피해
-        value += value * (1+PlayerStats.GetSuperCritical38DamPer());
+        value += value;
     }
 
     private Vector3 damTextspawnPos;

@@ -250,14 +250,49 @@ public class DimensionManager : ContentsManagerBase
     private void SendScore()
     {
         RankManager.Instance.UpdateDimension_Score(GameManager.Instance.bossId + 1);
+
+        var tableData= TableManager.Instance.DimensionDungeon.dataArray[GameManager.Instance.bossId];
+
+        UiRewardResultPopUp.Instance.Clear().AddEvent(() =>
+        {
+            GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField);
+            UiRewardResultPopUp.Instance.RemoveAllEvent();
+        });
+        
+        
+        
+        for (int i = 0; i < tableData.Rewardtype.Length; i++)
+        {
+            UiRewardResultPopUp.Instance.AddOrUpdateReward((Item_Type)tableData.Rewardtype[i], tableData.Rewardvalue[i]);
+        }
+        
+        List<TransactionValue> transactionList = new List<TransactionValue>();
+
+        Param goodsParam = new Param();
+
+        using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
+
+        while (e.MoveNext())
+        {
+            var str= ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType);
+            ServerData.goodsTable.GetTableData(e.Current.itemType).Value += e.Current.amount;
+            goodsParam.Add(str, ServerData.goodsTable.GetTableData(str).Value);
+        }
+
+        transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+        
+        ServerData.SendTransaction(transactionList,successCallBack: () =>
+        {
+            UiRewardResultPopUp.Instance.Show().Clear();
+        });    
     }
 
     private void RewardItem()
     {
         //결과 UI
-        uiBossResultPopup.gameObject.SetActive(true);
+        //uiBossResultPopup.gameObject.SetActive(true);
         statusUi.SetActive(false);
-        uiBossResultPopup.Initialize(damageAmount.Value, damageAmount.Value / hpCut);
+        //uiBossResultPopup.Initialize(damageAmount.Value, damageAmount.Value / hpCut);
     
 
     }

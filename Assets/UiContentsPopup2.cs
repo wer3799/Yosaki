@@ -8,6 +8,8 @@ using Debug = System.Diagnostics.Debug;
 
 public class UiContentsPopup2 : MonoBehaviour
 {
+    [SerializeField] private List<MainTabButtons> mainTabButtonsList =new List<MainTabButtons>();
+    
     private enum ContentsBoard
     {
         UiRelicBoard,
@@ -739,7 +741,7 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
 
             case GameManager.ContentsType.TransJewelTower :
-                lastBoards[(int)ContentsBoard.TransJewelTowerBoard].SetActive(true);
+                mainTabButtonsList[0].OnClickButton();
                 break;
 
         }

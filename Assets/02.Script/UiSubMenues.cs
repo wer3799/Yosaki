@@ -69,6 +69,7 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                 case GameManager.ContentsType.GyungRockTower8:
                 case GameManager.ContentsType.MeditationTower:
                 case GameManager.ContentsType.Haetal:
+                case GameManager.ContentsType.Dimension:
                     return;
                 case GameManager.ContentsType.SealSwordTower:
                 case GameManager.ContentsType.SealAwake:
