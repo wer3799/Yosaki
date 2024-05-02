@@ -1688,6 +1688,7 @@ public class UserInfoTable
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3500000)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.TJCT).Value += GameBalance.TJCTDailyGetAmount;
+            goodsParam.Add(GoodsTable.TJCT, ServerData.goodsTable.GetTableData(GoodsTable.TJCT).Value);
         }
 
         //도술
@@ -1729,6 +1730,7 @@ public class UserInfoTable
         goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
         goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
         goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
+
         // List<Item_Type> itemTypes=new List<Item_Type>();
         // for (int i = 0; i < rewardData.Length; i++)
         // {
