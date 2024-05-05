@@ -180,6 +180,7 @@ public class UserInfoTable_2
     public const string haetalGradeIdx = "hgi";
     
     public const string demnsionSpecialRewardIdx= "dsri";
+    public const string munhaRefund= "mrf";
 
     public bool isInitialize = false;
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
@@ -319,6 +320,7 @@ public class UserInfoTable_2
         { guildPetWeeklyRewardIndex, -1f },
         { haetalGradeIdx, -1f },
         { demnsionSpecialRewardIdx, -1f },
+        { munhaRefund, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();
