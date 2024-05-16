@@ -13,6 +13,7 @@ public class UiRewardResultPopUp : SingletonMono<UiRewardResultPopUp>
     private GameObject rootObject;
 
     [SerializeField] private Button button;
+    [SerializeField] private Button mask;
     
     private List<RewardData> rewardList = new List<RewardData>();
     private UnityAction buttonClickAction;
@@ -41,18 +42,23 @@ public class UiRewardResultPopUp : SingletonMono<UiRewardResultPopUp>
         
         button.onClick.AddListener(action);
 
+        mask.onClick.AddListener(action);
+
         return this;
     }
 
     public UiRewardResultPopUp RemoveEvent()
     {
         button.onClick.RemoveListener(buttonClickAction);
+        mask.onClick.RemoveListener(buttonClickAction);
         return this;
     }
     public UiRewardResultPopUp RemoveAllEvent()
     {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(SetOff);
+        mask.onClick.RemoveAllListeners();
+        mask.onClick.AddListener(SetOff);
         return this;
     }
 

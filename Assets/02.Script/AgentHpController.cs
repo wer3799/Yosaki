@@ -387,22 +387,7 @@ public class AgentHpController : MonoBehaviour
         var stat = PlayerStats.GetDimensionBaseAttackDam() * (1+PlayerStats.GetDimensionAttackAddPer());
         
         value *= stat;
-        
-        //크리티컬
-        if (isCritical)
-        {
-            //value += value * PlayerStats.CriticalDam();
-        }
-
-
-        if (isSuperCritical)
-        {
-            //30% 고정
-            //value += value * PlayerStats.GetSuperCriticalDamPer();
-        }
-
-        //??피해
-        value += value;
+     
     }
 
     private Vector3 damTextspawnPos;

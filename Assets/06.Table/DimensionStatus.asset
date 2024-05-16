@@ -16,21 +16,21 @@ MonoBehaviour:
   WorksheetName: DimensionStatus
   dataArray:
   - key: A_DS
-    description: "\uCC28\uC6D0 \uACF5\uACA9\uB825"
+    description: "\uC2DC\uAC04 \uACF5\uACA9\uB825"
     statuswhere: 4
     ispercent: 0
     maxlv: 100
-    addvalue: 1
+    addvalue: 100
     statustype: 0
     needstatuskey: 
     unlocklevel: 0
     upgradeprice: 1
   - key: AP_DS
-    description: "\uCC28\uC6D0 \uACF5\uACA9\uB825(%)"
+    description: "\uC2DC\uAC04 \uACF5\uACA9\uB825(%)"
     statuswhere: 4
     ispercent: 1
     maxlv: 100
-    addvalue: 1
+    addvalue: 0.05
     statustype: 1
     needstatuskey: 
     unlocklevel: 0
@@ -40,38 +40,38 @@ MonoBehaviour:
     statuswhere: 4
     ispercent: 1
     maxlv: 100
-    addvalue: 1
+    addvalue: 0.05
     statustype: 2
     needstatuskey: 
     unlocklevel: 0
     upgradeprice: 1
   - key: S0_DC
-    description: "\uC2E0\uADDC \uBCA0\uAE30(% )1"
+    description: "\uC2DC\uAC04 \uBCA0\uAE30(% )1"
     statuswhere: 5
     ispercent: 1
     maxlv: 100
-    addvalue: 1
+    addvalue: 0.01
     statustype: 3
     needstatuskey: 
     unlocklevel: 0
-    upgradeprice: 1
+    upgradeprice: 10
   - key: S1_DC
-    description: "\uC2E0\uADDC \uBCA0\uAE30(%) 2"
+    description: "\uC2DC\uAC04 \uBCA0\uAE30(%) 2"
     statuswhere: 5
     ispercent: 1
     maxlv: 100
-    addvalue: 2
+    addvalue: 0.04
     statustype: 4
     needstatuskey: S0_DC
     unlocklevel: 100
-    upgradeprice: 2
+    upgradeprice: 20
   - key: S2_DC
-    description: "\uC2E0\uADDC \uBCA0\uAE30(%) 3"
+    description: "\uC2DC\uAC04 \uBCA0\uAE30(%) 3"
     statuswhere: 5
     ispercent: 1
     maxlv: 100
-    addvalue: 3
+    addvalue: 0.1
     statustype: 5
     needstatuskey: S1_DC
     unlocklevel: 100
-    upgradeprice: 3
+    upgradeprice: 40

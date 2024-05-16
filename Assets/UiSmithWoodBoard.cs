@@ -48,7 +48,7 @@ public class UiSmithWoodBoard : MonoBehaviour
         else
         {
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-                $"손오공 분신을 각성하려면 {Utils.ConvertNum(GameBalance.smithTreeGraduateScore)} 이상 이어야 합니다.\n" +
+                $"도깨비 장작을 각성하려면 {Utils.ConvertNum(GameBalance.smithTreeGraduateScore)} 이상 이어야 합니다.\n" +
                 $"각성 시 점수가 {Utils.ConvertNum(GameBalance.smithTreeGraduateAfterScore)}점으로 고정됩니다.\n" +
                 $"각성하시겠습니까?", () =>
                 {

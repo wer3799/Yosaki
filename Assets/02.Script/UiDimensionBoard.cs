@@ -32,8 +32,12 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
     [SerializeField] private UiDimensionRankingSpecialReward reward;
     [SerializeField] private Transform rewardParent;
 
+    [SerializeField] private TextMeshProUGUI dateText;
     private int seasonIdx = -1;
-    
+
+    [SerializeField] private UiDimensionRankingRewardCell rankReward;
+    [SerializeField] private Transform rankRewardParent;
+    private bool loadRank = false;
     [Header("Growth")]
     
     [SerializeField]
@@ -53,11 +57,16 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
     [SerializeField] private TextMeshProUGUI attackStatusText;
     [SerializeField] private TextMeshProUGUI nonAttackStatusText;
     
+    
     [SerializeField] private DimensionEquiepmentCollectionCell equipmentCell0;
     [SerializeField] private Transform equipmentParent0;
-    
+    [SerializeField] private TextMeshProUGUI cubeGainPerText;
+
+    [SerializeField] private DimensionEquiepmentCollectionCell equipmentCell1
+        ;
     [Header("Dungeon")]
     [SerializeField] private TextMeshProUGUI dungeonLevelText; 
+    [SerializeField] private TextMeshProUGUI getClearText; 
     [SerializeField] private TextMeshProUGUI recommendPowerText; 
     [SerializeField] private TextMeshProUGUI enterText;
     [SerializeField] private List<ItemView> clearRewards = new List<ItemView>();
@@ -70,27 +79,52 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
     private int currentRank = 0;
     private int currentId = 0;
 
+    
+
     public int GetRank()
     {
         return currentRank;
     }
     private void OnEnable()
     {
-        UiDimensionRankerView.Instance.DisableAllCell();
-        LoadRankInfo();
-        
+        if (ServerData.userInfoTable.currentServerTime.Day == 1)
+        {
+            PopupManager.Instance.ShowAlarmMessage("시즌 준비중입니다!\n2일부터 신규 시즌이 시작됩니다.");
+            this.gameObject.SetActive(false);
+            return;
+        }
+
         UpdatePlayerView();
     }
 
+    public void OnLoadRank()
+    {
+        UiDimensionRankerView.Instance.DisableAllCell();
+        
+        LoadRankInfo();
+    }
 
     private void Start()
     {
+        GetFreePass();
+        
         Subscribe();
         
         Initialize();
 
         Refresh();
         
+        SetPeriod();
+    }
+
+    private void GetFreePass()
+    {
+        var freePassKey = "dimensionpass0";
+        if (ServerData.iapServerTable.TableDatas[freePassKey].buyCount.Value < 1)
+        {
+            ServerData.iapServerTable.TableDatas[freePassKey].buyCount.Value = 1;
+            ServerData.iapServerTable.UpData(freePassKey);
+        }
     }
 #if UNITY_EDITOR
     private void Update()
@@ -127,9 +161,35 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
         
         MakeEquipmentCell();
         
+        SetRankingReward();
+
+        if (Utils.IsBuyDimensionPass())
+        {
+            getClearText.SetText($"소탕권은 매일 {GameBalance.DCTDailyGetAmount}(+{GameBalance.DCTDailyPassGetAmount})개씩 자동으로 획득 됩니다!");
+        }
+        else
+        {
+            getClearText.SetText($"소탕권은 매일 {GameBalance.DCTDailyGetAmount}개씩 자동으로 획득 됩니다!");
+        }
     }
     
-    
+    public void OnClickStatResetButton()
+    {
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "시간 무공 능력치를 초기화 합니까?", () =>
+        {
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.A_DS).Value = 0;
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.AP_DS).Value = 0;
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.SD_DS).Value = 0;
+
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value = (int)(ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value) * GameBalance.dimensionStatusGetPointByLevelUp;
+            
+            ServerData.dimensionStatusTable.SyncAllData();
+            
+        }, null);
+
+
+    }
+
     private void MakeStatusCell()
     {
         var tableData = TableManager.Instance.DimensionStatus.dataArray;
@@ -163,6 +223,7 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
             var cell = Instantiate(equipmentCell0, equipmentParent0);
             cell.Initialize(tableData[i]);
         }
+        
     }
     private void SetSpecialReward()
     {
@@ -172,7 +233,18 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
         {
             if (tableData[i].Seasonid != seasonIdx) continue;
             var cell = Instantiate(reward, rewardParent);
-            cell.Initialize(tableData[i],currentRank);
+            cell.Initialize(tableData[i]);
+        }
+    }
+    private void SetRankingReward()
+    {
+        var startNum = (int)Item_Type.Dimension_Ranking_Reward_1-(int)Item_Type.Dimension_Ranking_Reward_1;
+        var endNum = (int)Item_Type.Dimension_Ranking_Reward_1001_10000-(int)Item_Type.Dimension_Ranking_Reward_1;
+        
+        for (int i = startNum; i <= endNum; i++)
+        {
+            var cell = Instantiate(rankReward, rankRewardParent);
+            cell.Initialize(GameBalance.Dimension_Ranking_Rewards_Range[i],(int)GameBalance.Dimension_Ranking_Rewards[i]);        
         }
     }
 
@@ -192,94 +264,189 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
         nonAttack += $"\n{CommonString.GetStatusName(DimensionStatusType.CubeGainPer)}:{Utils.ConvertNum(PlayerStats.GetDimensionCubeGainPer()*100)}";
         nonAttack += $"\n{CommonString.GetStatusName(DimensionStatusType.EssenceGainPer)}:{Utils.ConvertNum(PlayerStats.GetDimensionEssenceGainPer()*100)}";
         
+        cubeGainPerText.SetText($"{CommonString.GetStatusName(DimensionStatusType.CubeGainPer)}\n{PlayerStats.GetDimensionCubeGainPer()*100}% 적용중");
+
         nonAttackStatusText.SetText(nonAttack);
+        
+        var idx = Mathf.Min((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value, GetLength());
+
+        SetDungeonUI(idx);
     }
-    
+
+    private bool seasonEnd=false;
     private void Subscribe()
     {
+        ServerData.userInfoTable.whenServerTimeUpdated.AsObservable().Subscribe(e =>
+        {
+            
+            if (ServerData.userInfoTable.currentServerTime.Day == 1&&seasonEnd==false)
+            {
+                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,"시즌이 종료되었습니다.",null);
+                this.gameObject.SetActive(false);
+                seasonEnd = true;
+                return;
+            }
+        }).AddTo(this);
+
         RankManager.Instance.WhenMyDimensionRankLoadComplete.AsObservable().Subscribe(e =>
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx,e.suhoAnimal,rankType:UiRankView.RankType.Dimension,false);
-                currentRank = (int)e.Score;
-                currentId = currentRank;
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{e.Score}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx,e.suhoAnimal,e.dimensionIdx,rankType:UiRankView.RankType.Dimension,false);
+                
+                if ((int)e.Score != (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value)
+                {
+                    RankManager.Instance.UpdateDimension_Score((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value);
+                }
             }
             else
             {
-                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty,-1,-1,-1);
-                currentRank = 0;
-                currentId = currentRank;
+                myRankView.Initialize("나", "미등록", "미등록", 0, -1, -1, -1, -1, -1, string.Empty,-1,-1,-1,-1);
+                if (0 != (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value)
+                {
+                    RankManager.Instance.UpdateDimension_Score((int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value);
+                }
             }
-            SetDungeonUI(currentId);
-            enterText.SetText($"{currentRank+1}단계 입장");
+            currentRank = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value;
+
+            loadingMask.SetActive(false);
         }).AddTo(this);
 
         ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level)
             .AsObservable()
             .Subscribe(SetLevelText)
             .AddTo(this);
-    }
 
+        ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment]
+            .AsObservable()
+            .Subscribe(e =>
+            {
+                e = Mathf.Max(0, e);
+                equipmentCell1.Initialize(TableManager.Instance.DimensionEquip.dataArray[e]);
+                Refresh();
+            }).AddTo(this);
+        ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dimensionGrade]
+            .AsObservable()
+            .Subscribe(e =>
+            {
+                if ((int)e > GetLength())
+                {
+                    currentId =GetLength();
+                    enterText.SetText($"최고 단계");
+
+                }
+                else
+                {
+                    currentId = (int)e;
+
+                    enterText.SetText($"{e+1}단계 입장");
+                }
+                
+
+                var idx = Mathf.Min((int)e, GetLength());
+
+                SetDungeonUI(idx);
+            })
+            .AddTo(this);
+        
+        
+    }
+    private void SetPeriod()
+    {
+        var endData = Utils.GetCurrentDimensionSeasonData().Enddate.Split('-');
+        DateTime endDate = new DateTime(int.Parse(endData[0]), int.Parse(endData[1]), int.Parse(endData[2]));
+        endDate = endDate.AddDays(1);//5월5일을 넣으면 5월6일00시에끝나야함.
+        var date = endDate - ServerData.userInfoTable.currentServerTime;
+            
+        dateText.SetText($"{date.Days}일 {date.Hours}시간");
+        
+    }
     private void SetLevelText(float idx)
     {
         levelText.SetText($"LV : {Utils.ConvertNum(idx)}");
-        var tableData= TableManager.Instance.DimensionLevel.dataArray[(int)(idx-1)];
-        levelUpPriceText.SetText($"{tableData.Conditionvalue}");
+        if (idx >= TableManager.Instance.DimensionLevel.dataArray.Length)
+        {
+            levelUpPriceText.SetText($"최대레벨");
+        }
+        else
+        {
+            var tableData= TableManager.Instance.DimensionLevel.dataArray[(int)(idx)];
+            levelUpPriceText.SetText($"{tableData.Conditionvalue}");    
+        }
+        
     }
 
     public void OnClickLevelUpButton()
     {
         var tableData = TableManager.Instance.DimensionLevel.dataArray;
 
-        var requireLv = (int)ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value - 1;
+        var requireLv = (int)ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value ;
 
         if (requireLv > tableData.Length-1)
         {
             PopupManager.Instance.ShowAlarmMessage($"최대레벨입니다.");
             return;
         }
-        if (ServerData.goodsTable.GetTableData(GoodsTable.DE).Value < tableData[requireLv].Conditionvalue)
+        if (ServerData.goodsTable.GetTableData((Item_Type)tableData[requireLv].Conditiontype).Value < tableData[requireLv].Conditionvalue)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetJongsung(CommonString.GetItemName((Item_Type)tableData[requireLv].Conditiontype),JongsungType.Type_IGA)} 부족합니다.");
             return;
         }
         
+   
+        ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value++;
+        ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value += GameBalance.dimensionStatusGetPointByLevelUp;
+        ServerData.goodsTable.GetTableData((Item_Type)tableData[requireLv].Conditiontype).Value -= tableData[requireLv].Conditionvalue;
+
+        
+        if (syncRoutine != null)
+        {
+            CoroutineExecuter.Instance.StopCoroutine(syncRoutine);
+        }
+        
+        syncRoutine = CoroutineExecuter.Instance.StartCoroutine(SyncRoutine());
+
+    }
+    
+    private WaitForSeconds syncDelay = new WaitForSeconds(0.6f);
+
+    private Coroutine syncRoutine;
+    private IEnumerator SyncRoutine()
+    {
+        yield return syncDelay;
+
+        Debug.LogError($"@@@@@@@@@@@@@@@Dimension SyncComplete@@@@@@@@@@@@@@");
+
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         Param dimensionParam = new Param();
         Param goodsParam = new Param();
-        
-        ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value++;
-        ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value += GameBalance.dimensionStatusGetPointByLevelUp;
         
         dimensionParam.Add(DimensionStatusTable.Level, ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value);
         dimensionParam.Add(DimensionStatusTable.DSP, ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value);
         
         transactionList.Add(TransactionValue.SetUpdate(DimensionStatusTable.tableName, DimensionStatusTable.Indate, dimensionParam));
 
-        
-        ServerData.goodsTable.GetTableData(GoodsTable.DE).Value-=tableData[requireLv].Conditionvalue;
+            
         goodsParam.Add(GoodsTable.DE, ServerData.goodsTable.GetTableData(GoodsTable.DE).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransactionV2(transactionList, successCallBack: () =>
         {
         });
-        
-
     }
     
     private void LoadRankInfo()
     {
         rankViewParent.gameObject.SetActive(false);
         
-        //loadingMask.SetActive(false);
-        //failObject.SetActive(false);
-        
         LoadRank(RankType.Dimension);
-        
-        RankManager.Instance.RequestMyDimensionRank();
+
+        if (loadRank == false)
+        {
+            RankManager.Instance.RequestMyDimensionRank();
+            loadRank = true;
+        }
     }
 
     private void LoadRank(RankType type)
@@ -287,6 +454,7 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
         //리스트 없으면 Get
         if (RankManager.Instance.RankList.ContainsKey(type)==false)
         {
+            loadingMask.SetActive(true);
             RankManager.Instance.RankList[type] = new List<RankManager.RankInfo>();
             RankManager.Instance.GetRankerList(RankManager.Rank_Dimension_Uuid, 100, WhenAllRankerLoadComplete);
         }
@@ -314,7 +482,7 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
             {
                 rankViewContainer[i].gameObject.SetActive(true);
                 
-                rankViewContainer[i].Initialize($"{rankList[i].Rank}", $"{rankList[i].NickName}", $"{rankList[i].Score}단계", rankList[i].Rank, rankList[i].costumeIdx, rankList[i].petIddx, rankList[i].weaponIdx, rankList[i].magicbookIdx, rankList[i].gumgiIdx,rankList[i].GuildName, rankList[i].maskIdx,rankList[i].hornIdx,rankList[i].suhoAnimal,rankType:UiRankView.RankType.Dimension);
+                rankViewContainer[i].Initialize($"{rankList[i].Rank}", $"{rankList[i].NickName}", $"{rankList[i].Score}단계", rankList[i].Rank, rankList[i].costumeIdx, rankList[i].petIddx, rankList[i].weaponIdx, rankList[i].magicbookIdx, rankList[i].gumgiIdx,rankList[i].GuildName, rankList[i].maskIdx,rankList[i].hornIdx,rankList[i].suhoAnimal,rankList[i].dimensionIdx,rankType:UiRankView.RankType.Dimension);
             }
             else
             {
@@ -332,7 +500,9 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
             ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value, string.Empty,
             ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value,
             ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value,
-            ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value, -1);
+            ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value, 
+            -1,
+            ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment].Value);
     }
     
     private void WhenAllRankerLoadComplete(BackendReturnObject bro)
@@ -375,7 +545,12 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
                         int gumgiIdx = int.Parse(splitData[4]);
                         int maskIdx = int.Parse(splitData[6]);
                         int hornIdx = -1;
+                        int dimensionIdx = -1;
 
+                        if (splitData.Length >= 11)
+                        {
+                            dimensionIdx = int.Parse(splitData[10]);
+                        }
                         if (splitData.Length >= 9)
                         {
                             hornIdx = int.Parse(splitData[8]);
@@ -417,8 +592,8 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
                             guildName = splitData[7];
                         }
                         //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score}단계", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal,rankType:UiRankView.RankType.Dimension);
-                        RankManager.Instance.RankList[RankType.Dimension].Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: score, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{score}단계", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal,dimensionIdx:dimensionIdx,rankType:UiRankView.RankType.Dimension);
+                        RankManager.Instance.RankList[RankType.Dimension].Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: score, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal,dimensionIdx:dimensionIdx ));
 
                     }
                     else
@@ -443,7 +618,17 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
     {
         var tableData = TableManager.Instance.DimensionDungeon.dataArray[idx];
         dungeonLevelText.SetText($"{idx+1}단계");
-        recommendPowerText.SetText($"권장 무력 : {tableData.Requireforce}");
+
+        var power= PlayerStats.GetDimensionTotalPower();
+        if (power >= tableData.Requireforce)
+        {
+            recommendPowerText.color = Color.green;
+        }
+        else
+        {
+            recommendPowerText.color = Color.red;
+        }
+        recommendPowerText.SetText($"<color=white>무력 : {Utils.ConvertNum(power)}</color>\n권장 무력 : {Utils.ConvertNum(tableData.Requireforce)}");
         
         using var e = clearRewards.GetEnumerator();
         while (e.MoveNext())
@@ -487,11 +672,18 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
     }
     public void OnClickEnterButton()
     {
+        var grade = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value;
 
+        if (grade > GetLength())
+        {
+            PopupManager.Instance.ShowAlarmMessage("최고 단계입니다!");
+            return;
+        }
+        
         PopupManager.Instance.ShowYesNoPopup("알림", "도전 할까요?", () =>
         {
             GameManager.Instance.LoadContents(GameManager.ContentsType.Dimension);
-            GameManager.Instance.SetBossId(currentRank);
+            GameManager.Instance.SetBossId(grade);
         }, () => { });
     } 
 }

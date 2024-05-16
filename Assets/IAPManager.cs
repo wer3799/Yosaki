@@ -41,6 +41,7 @@ public enum PassProductType
     MonthPass,
     PetPass,
     YorinPass,//요린이패스
+    DimensionPass,//요린이패스
     
 }
 public class IAPManager : SingletonMono<IAPManager>, IStoreListener

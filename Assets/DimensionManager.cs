@@ -185,7 +185,7 @@ public class DimensionManager : ContentsManagerBase
         {
             SendScore();
             
-            TimerEnd();
+            WhenBossDead();
         }
     }
 
@@ -209,7 +209,10 @@ public class DimensionManager : ContentsManagerBase
 
         contentsState.Value = (int)ContentsState.Dead;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "플레이어가 사망했습니다.", null);
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "플레이어가 사망했습니다.",
+            () => { GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField); });
+        
+        
     }
 
     //클리어조건1 보스 처치 성공
@@ -225,6 +228,8 @@ public class DimensionManager : ContentsManagerBase
     protected override void TimerEnd()
     {
         base.TimerEnd();
+        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "실패!",
+            () => { GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField); });
         contentsState.Value = (int)ContentsState.TimerEnd;
     }
     #endregion
@@ -269,6 +274,7 @@ public class DimensionManager : ContentsManagerBase
         List<TransactionValue> transactionList = new List<TransactionValue>();
 
         Param goodsParam = new Param();
+        Param userInfo2Param = new Param();
 
         using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
 
@@ -278,10 +284,13 @@ public class DimensionManager : ContentsManagerBase
             ServerData.goodsTable.GetTableData(e.Current.itemType).Value += e.Current.amount;
             goodsParam.Add(str, ServerData.goodsTable.GetTableData(str).Value);
         }
-
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
         
-        ServerData.SendTransaction(transactionList,successCallBack: () =>
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value++;
+        userInfo2Param.Add(UserInfoTable_2.dimensionGrade, (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value);
+        transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+        
+        ServerData.SendTransactionV2(transactionList,successCallBack: () =>
         {
             UiRewardResultPopUp.Instance.Show().Clear();
         });    

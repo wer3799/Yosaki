@@ -63,7 +63,7 @@ public class TraceSlash0 : SkillBase
         //데미지
         double damage = GetDimensionSkillDamage();
 
-        var hitEnemies = playerSkillCaster.GetEnemiesInCircle(playerTr.position, 25);
+        var hitEnemies = playerSkillCaster.GetEnemiesInCircle(playerTr.position, GameBalance.dimensionAttackRange);
 
         //데미지적용
         for (int i = 0; i < hitEnemies.Length && i < 500; i++)

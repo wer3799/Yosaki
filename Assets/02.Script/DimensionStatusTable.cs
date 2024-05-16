@@ -23,8 +23,8 @@ public class DimensionStatusTable
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
     {
-        { Level, 1 },
-        { DSP, GameBalance.dimensionStatusGetPointByLevelUp },
+        { Level, 0 },
+        { DSP, 0 },
         { A_DS, 0 },
         { AP_DS, 0 },
         { SD_DS, 0 },

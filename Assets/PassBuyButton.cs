@@ -37,7 +37,7 @@ public class PassBuyButton : MonoBehaviour
     public static readonly string yorinringpass4key = "yorinringpass4";
 
     
-    private enum PassKey 
+    protected enum PassKey 
     {
         None=-1,
         Sasinsu,
@@ -61,9 +61,10 @@ public class PassBuyButton : MonoBehaviour
         YorinRing2,
         YorinRing3,
         YorinRing4,
+        Dimension,
     }
 
-    [SerializeField] private PassKey passKey = PassKey.None;
+    [SerializeField] protected PassKey passKey = PassKey.None;
 
     protected void Start()
     {
@@ -93,6 +94,7 @@ public class PassBuyButton : MonoBehaviour
                 PassKey.YorinRing2 => yorinringpass2key,
                 PassKey.YorinRing3 => yorinringpass3key,
                 PassKey.YorinRing4 => yorinringpass4key,
+                PassKey.Dimension => Utils.GetCurrentDimensionSeasonData().Productid,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
@@ -127,7 +129,11 @@ public class PassBuyButton : MonoBehaviour
                 str += $"패스 구매 시 {CommonString.GetItemName((Item_Type)tableData.Rewardtypes[i])} {tableData.Rewardvalues[i]}개 추가 획득!";
             }
         }
-        mileageText.SetText(str);
+
+        if (mileageText != null)
+        {
+            mileageText.SetText(str);
+        }
     }
     protected void GetPackageItem(string productId)
     {
@@ -158,7 +164,14 @@ public class PassBuyButton : MonoBehaviour
         
         iapParam.Add(tableData.Productid, ServerData.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
         transactionList.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
-        
+        if (passKey == PassKey.Dimension)
+        {
+            var dateTime = ServerData.userInfoTable.currentServerTime;
+
+            var refundCount = Mathf.Max(dateTime.Day - 1,1);
+
+            ServerData.goodsTable.GetTableData(Item_Type.DCT).Value += GameBalance.DCTDailyPassGetAmount * refundCount;
+        }
         Param goodsParam = new Param();
         for (int i = 0; i < tableData.Rewardtypes.Length; i++)
         {

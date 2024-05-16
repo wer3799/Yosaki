@@ -68,6 +68,10 @@ public class TwelveRaidEnemy : BossEnemyBase
 
     private void UpdateBossDamage()
     {
+        switch (GameManager.contentsType)
+        {
+            case GameManager.ContentsType.TwelveDungeon:
+                
         //삼족오 
         if (GameManager.Instance.bossId == 23 || GameManager.Instance.bossId == 24 || GameManager.Instance.bossId == 26
             || GameManager.Instance.bossId == 27 || GameManager.Instance.bossId == 28
@@ -173,6 +177,14 @@ public class TwelveRaidEnemy : BossEnemyBase
             hitObject.SetDamage(damage);
 
             enemyHitObjects.ForEach(e => e.SetDamage((float)damage));
+        }
+        break;
+            case GameManager.ContentsType.Dimension:
+
+                hitObject.SetDamage(1);
+
+                enemyHitObjects.ForEach(e => e.SetDamage((float)1));
+                break;
         }
     }
 
@@ -285,15 +297,26 @@ public class TwelveRaidEnemy : BossEnemyBase
     {
         enemyHitObjects = GetComponentsInChildren<AlarmHitObject>(true).ToList();
 
-        if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+        switch (GameManager.contentsType)
         {
+         case GameManager.ContentsType.TwelveDungeon: 
+             if (TableManager.Instance.TwelveBossTable.dataArray[GameManager.Instance.bossId].Skipboss)
+             {
             
+             }
+             else
+             {
+                 agentHpController.SetHp(float.MaxValue);
+             }
+             agentHpController.SetDefense(0);
+
+             break;
+         case GameManager.ContentsType.Dimension:
+             //agentHpController.SetHp(float.MaxValue);
+
+             break;
         }
-        else
-        {
-            agentHpController.SetHp(float.MaxValue);
-        }
-        agentHpController.SetDefense(0);
+
 
 
         enemyHitObjects.ForEach(e => e.SetDamage(1f));

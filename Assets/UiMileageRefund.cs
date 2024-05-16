@@ -44,9 +44,10 @@ public class UiMileageRefund : MonoBehaviour
     {
         if (checkServerTime == false)
         {
+            DateTime savedDate = Utils.ConvertFromUnixTimestamp(ServerData.userInfoTable.TableDatas[UserInfoTable.LastLogin].Value - 2f);
             checkServerTime = true;
             var time = ServerData.userInfoTable.currentServerTime; 
-            Debug.LogError("현재 서버 시간 : "+time.ToLongDateString()+ " " + time.ToLongTimeString());   
+            Debug.LogError("현재 서버 시간 : "+time.ToLongDateString()+ " " + time.ToLongTimeString()+"\nLastLogin : "+savedDate.ToLongDateString()+ " " + savedDate.ToLongTimeString());   
         }
     }
 
@@ -2054,8 +2055,6 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         }
-        #endregion
-
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 75)
         {
             Param userInfoParam = new Param();
@@ -2085,6 +2084,41 @@ public class UiMileageRefund : MonoBehaviour
             etcParam.Add(EtcServerTable.gachaEventReward, ServerData.etcServerTable.TableDatas[EtcServerTable.gachaEventReward].Value);
             transactions.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, etcParam));
             
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            });
+        } 
+        #endregion
+
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 77)
+        {
+            Param userInfoParam = new Param();
+            Param goodsParam = new Param();
+            Param passParam = new Param();
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 77;
+            
+            ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value = GameBalance.DCTDailyGetAmount;
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+
+            
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";
+            
+            passParam.Add(ChildPassServerTable.childFree, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+            passParam.Add(ChildPassServerTable.childAd, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+            
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+
+            goodsParam.Add(GoodsTable.DCT, ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
             });

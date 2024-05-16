@@ -604,6 +604,7 @@ public Sprite RecommendWeapon22;
     public Sprite SealWeaponClear;
     public Sprite Mileage;
     public Sprite ClearTicket;
+    public Sprite Acorn;
     public Sprite HellPower;
     public Sprite DokebiFireKey;
     public Sprite DokebiTreasure;
@@ -2648,15 +2649,23 @@ public Sprite RecommendWeapon22;
             return costumeThumbnail[idx];
 
         }
-        if (type.IsWeaponItem())
+        else if (type.IsWeaponItem())
         {
             var idx= int.Parse(type.ToString().Substring("weapon".Length));
             return CommonResourceContainer.GetWeaponSprite(idx);
         }
-        if (type.IsNorigaeItem())
+        else if (type.IsNorigaeItem())
         {
             var idx= int.Parse(type.ToString().Substring("magicBook".Length));
             return CommonResourceContainer.GetMagicBookSprite(idx);
+        }
+        else if (type.IsDimensionPostItem())
+        {
+            return ClearTicket;
+        }
+        else if (type.IsEventRewardPostItem())
+        {
+            return Acorn;
         }
         return null;
     }

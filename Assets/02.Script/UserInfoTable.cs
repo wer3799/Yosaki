@@ -811,8 +811,8 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 75);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(75));
+                            defultValues.Add(e.Current.Key, 77);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(77));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -1016,7 +1016,7 @@ public class UserInfoTable
                 currentServerTime = DateTime.Parse(time).ToUniversalTime().AddHours(9);
 
 #if UNITY_EDITOR
-                currentServerTime = currentServerTime.ToUniversalTime().AddDays(GameBalance.addDay);
+                currentServerTime = currentServerTime.ToUniversalTime().AddDays(GameBalance.addDay).AddMinutes(GameBalance.addMinutes);
                 //currentServerTime = currentServerTime.AddDays(15);
 #endif
 
@@ -1138,6 +1138,11 @@ public class UserInfoTable
         
         //일일초기화
         Param dailyPassParam = new Param();
+        Param userInfoParam = new Param();
+        Param userInfo2Param = new Param();
+        Param equipmentParam = new Param();
+        Param dimensionStatusParam = new Param();
+
         ServerData.dailyPassServerTable.ResetDailyPassLocal();
         dailyPassParam.Add(DailyPassServerTable.DailypassFreeReward, ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassFreeReward].Value);
         dailyPassParam.Add(DailyPassServerTable.DailypassAdReward, ServerData.dailyPassServerTable.TableDatas[DailyPassServerTable.DailypassAdReward].Value);
@@ -1145,7 +1150,6 @@ public class UserInfoTable
 
 
         //일일초기화
-        Param userInfoParam = new Param();
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyEnemyKillCount).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.dailyTicketBuyCount).Value = 0;
         ServerData.userInfoTable.GetTableData(UserInfoTable.receivedTicketReward).Value = 0;
@@ -1206,7 +1210,6 @@ public class UserInfoTable
 
         ServerData.userInfoTable.GetTableData(UserInfoTable.LastLogin).Value = (double)currentServerDate;
 
-        Param userInfo2Param = new Param();
         
         //월간 초기화
         if (monthChanged)
@@ -1214,6 +1217,40 @@ public class UserInfoTable
             ServerData.userInfoTable.GetTableData(UserInfoTable.nickNameChange).Value = 0;
             ServerData.userInfoTable.GetTableData(UserInfoTable.monthAttendCount).Value = 0;
 
+            #region DimensionMonthInit
+
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value = 0;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionSpecialRewardIdx).Value = -1;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.currentDimensionSeasonIdx).Value = Utils.GetCurrentDimensionSeasonData().Id;
+            
+            userInfo2Param.Add(UserInfoTable_2.dimensionGrade, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dimensionGrade].Value);
+            userInfo2Param.Add(UserInfoTable_2.dimensionSpecialRewardIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dimensionSpecialRewardIdx].Value);
+            userInfo2Param.Add(UserInfoTable_2.currentDimensionSeasonIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.currentDimensionSeasonIdx].Value);
+ 
+            ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment].Value = 0;
+            equipmentParam.Add(EquipmentTable.DimensionEquipment, ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment].Value);
+            transactionList.Add(TransactionValue.SetUpdate(EquipmentTable.tableName, EquipmentTable.Indate, equipmentParam));
+
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value = 0;
+            ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value = 0;
+            var dsData = TableManager.Instance.DimensionStatus.dataArray;
+
+            for (int i = 0; i < dsData.Length; i++)
+            {
+                if (dsData[i].STATUSWHERE == StatusWhere.dimension)
+                {
+                    ServerData.dimensionStatusTable.GetTableData(dsData[i].Key).Value = 0;
+                    dimensionStatusParam.Add(dsData[i].Key , ServerData.dimensionStatusTable.GetTableData(dsData[i].Key).Value);
+                }
+            }
+            
+            ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.DE).Value = 0;
+            dimensionStatusParam.Add(DimensionStatusTable.Level, ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value);
+            dimensionStatusParam.Add(DimensionStatusTable.DSP, ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.DSP).Value);
+            transactionList.Add(TransactionValue.SetUpdate(DimensionStatusTable.tableName, DimensionStatusTable.Indate, dimensionStatusParam));
+
+            #endregion
 
             //월간 훈련 보상
 
@@ -1683,6 +1720,18 @@ public class UserInfoTable
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3000000)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += GameBalance.HyulClearDailyGetAmount;
+            if (currentServerTime.Day!=1)
+            {
+                var amount = GameBalance.DCTDailyGetAmount;
+
+                if (ServerData.iapServerTable.TableDatas[Utils.GetCurrentDimensionSeasonData().Productid].buyCount.Value > 0)
+                {
+                    amount += GameBalance.DCTDailyPassGetAmount;
+                }
+                ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value += amount;
+
+            }
+
         }
 
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3500000)
@@ -1720,27 +1769,6 @@ public class UserInfoTable
         }
         #endregion
   
-
-        goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
-        goodsParam.Add(GoodsTable.SealWeaponClear, ServerData.goodsTable.GetTableData(GoodsTable.SealWeaponClear).Value);
-        goodsParam.Add(GoodsTable.DosulClear, ServerData.goodsTable.GetTableData(GoodsTable.DosulClear).Value);
-        goodsParam.Add(GoodsTable.SuhoPetFeedClear, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value);
-        goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
-        goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
-        goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
-        goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
-        goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
-
-        // List<Item_Type> itemTypes=new List<Item_Type>();
-        // for (int i = 0; i < rewardData.Length; i++)
-        // {
-        //     if (itemTypes.Contains((Item_Type)rewardData[i].Itemtype) == false)
-        //     {
-        //         goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString((Item_Type)rewardData[i].Itemtype)).Value);
-        //         itemTypes.Add((Item_Type)rewardData[i].Itemtype);
-        //     }
-        // }
-
 
 
         //문파 소탕권
@@ -1928,6 +1956,20 @@ public class UserInfoTable
             //ServerData.bossServerTable.TableDatas["b91"].rewardedId.Value = string.Empty;
             //bossParam.Add("b91", ServerData.bossServerTable.TableDatas["b91"].ConvertToString());
         }
+        
+        goodsParam.Add(GoodsTable.GuimoonRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.GuimoonRelicClearTicket).Value);
+        goodsParam.Add(GoodsTable.SealWeaponClear, ServerData.goodsTable.GetTableData(GoodsTable.SealWeaponClear).Value);
+        goodsParam.Add(GoodsTable.DosulClear, ServerData.goodsTable.GetTableData(GoodsTable.DosulClear).Value);
+        goodsParam.Add(GoodsTable.SuhoPetFeedClear, ServerData.goodsTable.GetTableData(GoodsTable.SuhoPetFeedClear).Value);
+        goodsParam.Add(GoodsTable.FoxRelicClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.FoxRelicClearTicket).Value);
+        goodsParam.Add(GoodsTable.MeditationClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.MeditationClearTicket).Value);
+        goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
+        goodsParam.Add(GoodsTable.SC, ServerData.goodsTable.GetTableData(GoodsTable.SC).Value);
+        goodsParam.Add(GoodsTable.HYC, ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value);
+        goodsParam.Add(GoodsTable.DCT, ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value);
+        goodsParam.Add(GoodsTable.DC, ServerData.goodsTable.GetTableData(GoodsTable.DC).Value);
+        goodsParam.Add(GoodsTable.DE, ServerData.goodsTable.GetTableData(GoodsTable.DE).Value);
+
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
         transactionList.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
         transactionList.Add(TransactionValue.SetUpdate(EtcServerTable.tableName, EtcServerTable.Indate, yoguiSogulParam));

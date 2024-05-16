@@ -363,6 +363,11 @@ public enum Item_Type
     weapon180 = 1066, //무림
     weapon181 = 1067, //무림
     weapon182 = 1068, //특별
+    
+    weapon183 = 1069, //삼천
+    weapon184 = 1070, //무림
+    weapon185 = 1071, //무림
+    weapon186 = 1072, //특별
 
     weapon_end = 1200,
     //
@@ -660,6 +665,12 @@ public enum Item_Type
     costume228 = 1528, //특별
     costume229 = 1529, //이벤트0
     costume230 = 1530, //이벤트1
+    
+    costume231 = 1531, //삼천
+    costume232 = 1532, //무림0
+    costume233 = 1533, //무림1
+    costume234 = 1534, //이벤트
+    costume235 = 1535, //특별
 
     costume_end=1999,
 
@@ -697,6 +708,9 @@ public enum Item_Type
     
     magicBook143 = 2025,//특별의뢰
     magicBook144 = 2026,//삼천
+    
+    magicBook145 = 2027,//삼천
+    magicBook146 = 2028,//특별
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -1271,7 +1285,25 @@ public enum Item_Type
     #endregion
     
     Exp = 20000,
+
+    #region Post
+
+    Dimension_Ranking_Reward_1          = 30000,
+    Dimension_Ranking_Reward_2          = 30001,
+    Dimension_Ranking_Reward_3          = 30002,
+    Dimension_Ranking_Reward_4          = 30003,
+    Dimension_Ranking_Reward_5          = 30004,
+    Dimension_Ranking_Reward_6_20       = 30005,
+    Dimension_Ranking_Reward_21_100     = 30006,
+    Dimension_Ranking_Reward_101_1000   = 30007,
+    Dimension_Ranking_Reward_1001_10000 = 30008,
     
+    Dimension_Ranking_Reward_End        = 30100,
+
+    EventReward_HotTime_0 = 30101,
+    
+    EventReward_Post_End=30200,
+    #endregion
 }
 //
 public class DropItem : PoolItem

@@ -625,7 +625,7 @@ public class GoodsTable
         { BJ, 0f},
         { DC, 0f},
         { DE, 0f},
-        { DCT, 0f},
+        { DCT, GameBalance.DCTDailyGetAmount},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

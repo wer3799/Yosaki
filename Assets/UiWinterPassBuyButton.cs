@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections;
 using System.Collections.Generic;
+using BackEnd;
 using TMPro;
 using UnityEngine;
 using UniRx;
@@ -14,7 +15,7 @@ public class UiWinterPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string productKey = "trainingpass2";
+    public static readonly string productKey = "trainingpass3";
 
     private Button buyButton;
 
@@ -91,11 +92,31 @@ public class UiWinterPassBuyButton : MonoBehaviour
         }
 
         if (tableData.Productid != productKey) return;
-
+        
         PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"구매 성공!", null);
+
+        List<TransactionValue> transactions = new List<TransactionValue>();
+        Param iapParam = new Param();
+        Param costumeParam = new Param();
+
 
         ServerData.iapServerTable.TableDatas[tableData.Productid].buyCount.Value++;
 
-        ServerData.iapServerTable.UpData(tableData.Productid);
+        if (productKey == "trainingpass3")
+        {
+            ServerData.costumeServerTable.TableDatas["costume234"].hasCostume.Value = true;
+            costumeParam.Add("costume234", ServerData.costumeServerTable.TableDatas["costume234"].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+
+        }
+        iapParam.Add(tableData.Productid, ServerData.iapServerTable.TableDatas[tableData.Productid].ConvertToString());
+        transactions.Add(TransactionValue.SetUpdate(IAPServerTable.tableName, IAPServerTable.Indate, iapParam));
+
+        //ServerData.iapServerTable.UpData(tableData.Productid);
+        ServerData.SendTransactionV2(transactions, successCallBack: () =>
+        {
+            //PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
+            //LogManager.Instance.SendLogType("ChildPass", "A", "A");
+        });
     }
 }

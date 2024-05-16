@@ -29,7 +29,7 @@ public class UiRankView : MonoBehaviour
 
     public static int rank1Count = 0;
 
-    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx,int suhoAnimal,RankType rankType = RankType.Normal,bool costumeChange=true)
+    public void Initialize(string text1, string text2, string text3, int rank, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx,int suhoAnimal,int dimensionIdx=-1,RankType rankType = RankType.Normal,bool costumeChange=true)
     {
         this.text1.SetText(text1);
         this.text2.SetText(text2);
@@ -337,7 +337,7 @@ public class UiRankView : MonoBehaviour
             if (rankerCell != null)
             {
                 rankerCell.gameObject.SetActive(true);
-                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal,-1);
+                rankerCell.Initialize(text2, text3, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal,-1,dimensionIdx);
             }
         }
 

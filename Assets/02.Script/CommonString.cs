@@ -539,9 +539,9 @@ public static class CommonString
             case Item_Type.TJCT: return "초월 광산 소탕권";
             
             
-            case Item_Type.DC: return "차원 큐브";
-            case Item_Type.DE: return "차원 정수";
-            case Item_Type.DCT: return "차원 소탕권";
+            case Item_Type.DC: return "시간 정수";
+            case Item_Type.DE: return "시간 조각";
+            case Item_Type.DCT: return "시간 소탕권";
         
     }
 
@@ -729,6 +729,8 @@ public static class CommonString
                 return "무림 구슬 개수당 효과 증가(%)";
             case StatusType.DokChimHasValueUpgrade:
                 return "독침 개수당 효과 증가(%)";
+            case StatusType.YOTHasValueUpgrade:
+                return "업화 개수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:
@@ -795,7 +797,7 @@ public static class CommonString
             case StatusType.SuperCritical37DamPer:
                 return "보옥 베기(%)";
             case StatusType.SuperCritical38DamPer:
-                return "차원 베기(%)";
+                return "시간 베기(%)";
             case StatusType.BigiDamPer:
                 return "비기 추가 피해량 증가(%)";
             case StatusType.SealSwordDam:
@@ -883,9 +885,9 @@ public static class CommonString
         {
 
             case DimensionStatusType.BaseAttackDam:
-                return "차원 공격력";
+                return "시간 공격력";
             case DimensionStatusType.AttackAddPer:
-                return "차원 공격력(%)";
+                return "시간 공격력(%)";
             case DimensionStatusType.BaseSkillDam:
                 return "기본 기술 데미지";
             case DimensionStatusType.AddSkillDamPer:
@@ -895,9 +897,9 @@ public static class CommonString
             case DimensionStatusType.AddHp:
                 return "추가 하트 수";
             case DimensionStatusType.CubeGainPer:
-                return "차원 큐브 획득량 증가(%)";
+                return "시간 정수 획득량 증가(%)";
             case DimensionStatusType.EssenceGainPer:
-                return "차원 정수 획득량 증가(%)";
+                return "시간 조각 획득량 증가(%)";
             case DimensionStatusType.None:
             default:
                 return "등록필요";

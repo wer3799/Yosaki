@@ -277,8 +277,14 @@ public class UiMoveStick : SingletonMono<UiMoveStick>
                 break;
         }
 
-
-        UiTutorialManager.Instance.SetClear(TutorialStep.UseTelePort);
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            
+        }
+        else
+        {
+            UiTutorialManager.Instance.SetClear(TutorialStep.UseTelePort);
+        }
         EffectManager.SpawnEffectAllTime(TeleportEfxName, playerTr.position + Vector3.down * 1f);
     }
 

@@ -70,12 +70,10 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         if (GameManager.contentsType.IsDimensionContents())
         {
             maxHp.Value = PlayerStats.GetMaxHpDimension();
-
         }
         else
         {
             maxHp.Value = PlayerStats.GetMaxHp();
-
         }
     }
     private void UpdateMpMax()
@@ -255,8 +253,15 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
         }
         else
         {
-            hp.Value = (float)ServerData.userInfoTable.GetTableData(UserInfoTable.Hp).Value;
-            mp.Value = (float)ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value;
+            if (GameManager.contentsType.IsDimensionContents())
+            {
+                hp.Value = PlayerStats.GetMaxHpDimension();
+            }
+            else
+            {
+                hp.Value = (float)ServerData.userInfoTable.GetTableData(UserInfoTable.Hp).Value;
+                mp.Value = (float)ServerData.userInfoTable.GetTableData(UserInfoTable.Mp).Value;
+            }
         }
     }
 

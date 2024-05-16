@@ -12,7 +12,17 @@ public class UiTutorialAlarmObject : MonoBehaviour
 
     private void Start()
     {
-        Subscribe();
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            if (rootObject != null)
+            {
+                rootObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Subscribe();
+        }
     }
 
     private void Subscribe()

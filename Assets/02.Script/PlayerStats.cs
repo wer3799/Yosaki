@@ -145,6 +145,7 @@ public enum StatusType
     SuperCritical36DamPer=122,//해탈피해
     SuperCritical37DamPer,//보옥
     SuperCritical38DamPer,//차원 신규 베기
+    YOTHasValueUpgrade,//업화 개수
 
 }
 
@@ -296,7 +297,7 @@ public static class PlayerStats
         double totalPower = baseAttack * (1 + baseAttackPer) * (1 + addSkillDamPer) / (1 - reduceSkillCoolTime);
 
 
-        return totalPower * 100f;
+        return totalPower;
     }
     public static float GetMoveSpeedValue()
     {
@@ -1541,7 +1542,9 @@ public static class PlayerStats
     public static float GetMaxHpDimension()
     {
         float hp = GameBalance.dimensionHp;
-            
+
+        hp += GetDimensionAddHp();
+        
         return hp;
     }
     
@@ -6951,6 +6954,8 @@ public static class PlayerStats
     {
         float ret = 0f;
         
+        ret += GetPassiveSkill2Value(StatusType.YOTHasValueUpgrade);
+
         return ret;
     }
 
@@ -7672,6 +7677,9 @@ public static class PlayerStats
 
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.A_DS);
         
+        ret += GetDimensionEquipmentAbility(DimensionStatusType.BaseAttackDam);
+
+        
         return ret;
     }
     
@@ -7704,11 +7712,15 @@ public static class PlayerStats
     {
         float ret = 0f;
         
+        ret += GetDimensionEquipmentAbility(DimensionStatusType.ReduceSkillCoolTimePer);
+        
         return ret;
     }
     public static float GetDimensionAddHp()
     {
         float ret = 0f;
+        
+        ret += GetDimensionEquipmentAbility(DimensionStatusType.AddHp);
         
         return ret;
     }
@@ -7716,15 +7728,68 @@ public static class PlayerStats
     {
         float ret = 0f;
         
+        ret += GetDimensionBuffAbility(DimensionStatusType.CubeGainPer);
+
         return ret;
     }
     public static float GetDimensionEssenceGainPer()
     {
         float ret = 0f;
         
+        ret += GetDimensionBuffAbility(DimensionStatusType.EssenceGainPer);
+
         return ret;
     }
-    
+
+    public static float GetDimensionEquipmentAbility(DimensionStatusType type)
+    {
+        float ret = 0f;
+
+        var grade = ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment].Value;
+
+        var tableData = TableManager.Instance.DimensionEquip.dataArray[grade];
+
+        if ((DimensionStatusType)tableData.Equipeffecttype1 == type)
+        {
+            ret += tableData.Equipeffectvalue1;
+        }
+        if ((DimensionStatusType)tableData.Equipeffecttype2 == type)
+        {
+            ret += tableData.Equipeffectvalue2;
+        }
+        if ((DimensionStatusType)tableData.Equipeffecttype3 == type)
+        {
+            ret += tableData.Equipeffectvalue3;
+        }
+
+        return ret;
+    }
+    public static float GetDimensionBuffAbility(DimensionStatusType type)
+    {
+        float ret = 0f;
+
+        var seasonData = Utils.GetCurrentDimensionSeasonData();
+        var seasonId = seasonData.Id;
+        
+        //패스 미구매
+        if (ServerData.iapServerTable.TableDatas[seasonData.Productid].buyCount.Value < 1)
+        {
+            return 0f;
+        }
+        
+        
+        var tableData = TableManager.Instance.DimensionBuff.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].Startseasonid > seasonId) continue;
+            if (tableData[i].Endseasonid < seasonId) continue;
+            if((DimensionStatusType)tableData[i].Statustype!=type) continue;
+            ret += tableData[i].Statusvalue;
+        }
+        
+        return ret;
+    }
 
     #endregion
 }

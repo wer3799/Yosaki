@@ -8,6 +8,7 @@ public class ParyRaidConnectingMask : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI connectingText;
 
+    [SerializeField] private string text;
     private void OnEnable()
     {
         StartCoroutine(TextingRoutine());
@@ -19,13 +20,13 @@ public class ParyRaidConnectingMask : MonoBehaviour
 
         while (true)
         {
-            connectingText.SetText($"십만대산으로 이동중.");
+            connectingText.SetText($"{text}.");
             yield return ws;
-            connectingText.SetText($"십만대산으로 이동중.");
+            connectingText.SetText($"{text}.");
             yield return ws;
-            connectingText.SetText($"십만대산으로 이동중..");
+            connectingText.SetText($"{text}..");
             yield return ws;
-            connectingText.SetText($"십만대산으로 이동중...");
+            connectingText.SetText($"{text}...");
             yield return ws;
 
         }

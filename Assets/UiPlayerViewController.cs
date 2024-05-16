@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 public class UiPlayerViewController : MonoBehaviour
 {
@@ -61,6 +62,8 @@ public class UiPlayerViewController : MonoBehaviour
     
     [SerializeField]
     private GameObject suhoAnimal;
+    [SerializeField]
+    private Image dimension;
     void Start()
     {
         Subscribe();
@@ -170,6 +173,21 @@ public class UiPlayerViewController : MonoBehaviour
         {
             suhoAnimal.gameObject.SetActive(e == 1);
         }).AddTo(this);
+        if (GameManager.contentsType.IsDimensionContents())
+        {
+            dimension.gameObject.SetActive(true);
+
+            ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment].AsObservable().Subscribe(e =>
+            {
+                dimension.sprite = CommonResourceContainer.GetDimensionEquipmentSprite(e);
+            }).AddTo(this);
+        }
+        else
+        {
+            dimension.gameObject.SetActive(false);
+
+        }
+
     }
 
 }

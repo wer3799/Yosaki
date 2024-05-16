@@ -53,6 +53,14 @@ public static class Utils
                type == Item_Type.pet3 ||
                type >= Item_Type.pet52 && type < Item_Type.pet_end;
     }
+    public static bool IsDimensionPostItem(this Item_Type type)
+    {
+        return type >= Item_Type.Dimension_Ranking_Reward_1  && type < Item_Type.Dimension_Ranking_Reward_End;
+    }
+    public static bool IsEventRewardPostItem(this Item_Type type)
+    {
+        return type >= Item_Type.EventReward_HotTime_0  && type < Item_Type.EventReward_Post_End;
+    }
 
     public static bool IsNorigaeItem(this Item_Type type)
     {
@@ -884,7 +892,7 @@ public static class Utils
         {
             for (int i = 0; i < numList.Count; i++)
             {
-                if (numList[i] == 0) continue;
+                if (Math.Truncate(numList[i]) == 0) continue;
                 retStr = Math.Truncate(numList[i]) + goldUnitArr[i] + retStr;
             }
 #if UNITY_EDITOR
@@ -1139,5 +1147,39 @@ public static class Utils
 
         return -1;
 
+    }
+    public static DimensionSeasonData GetCurrentDimensionSeasonData()
+    {
+        
+        var tableData = TableManager.Instance.DimensionSeason.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            var endData = tableData[i].Enddate.Split('-');
+            DateTime endDate = new DateTime(int.Parse(endData[0]), int.Parse(endData[1]), int.Parse(endData[2]));
+            endDate = endDate.AddDays(1);//5월5일을 넣으면 5월6일00시에끝나야함.
+            var result = DateTime.Compare(ServerData.userInfoTable.currentServerTime, endDate);
+            
+            switch (result)
+            {
+                //아직 안지남
+                case -1 :
+                case 0:
+                    return tableData[i];
+                //지남
+                case 1:
+                    continue;
+                default:
+                    continue;
+            }    
+        }
+
+        return null;
+
+    }
+
+    public static bool IsBuyDimensionPass()
+    {
+        return ServerData.iapServerTable.TableDatas[GetCurrentDimensionSeasonData().Productid].buyCount.Value > 0;
     }
 }

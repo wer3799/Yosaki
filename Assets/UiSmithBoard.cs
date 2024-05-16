@@ -20,6 +20,10 @@ public class UiSmithBoard : MonoBehaviour
     public TextMeshProUGUI abilDescription;
     public TextMeshProUGUI smithTreeAddLevel;
 
+    [Header("Trans")]
+    [SerializeField] private GameObject transObject;
+    [SerializeField] private GameObject transAfterObject;
+    
     private void Start()
     {
         Subscribe();
@@ -31,7 +35,12 @@ public class UiSmithBoard : MonoBehaviour
         {
 
             scoreDescription.SetText($"{e}");
-
+            
+            bool isTrans = GameBalance.smithGraduateAfterScore<= e;
+            
+            transObject.SetActive(!isTrans);
+            transAfterObject.SetActive(isTrans);
+            
         }).AddTo(this);
 
 
@@ -39,7 +48,7 @@ public class UiSmithBoard : MonoBehaviour
         {
             registerButton.interactable = e == 0;
 
-            getButtonDesc.SetText(e == 0 ? "획득" : "오늘 획득함");
+            getButtonDesc.SetText(e == 0 ? "획득" : "오늘획득");
         }).AddTo(this);
 
         ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).AsObservable().Subscribe(e =>
@@ -178,7 +187,36 @@ public class UiSmithBoard : MonoBehaviour
               LogManager.Instance.SendLogType("Smith", "OK", goodsAmount.ToString());
           });
     }
+    public void OnClickTransButton()
+    {
+        var score = ServerData.userInfoTable.TableDatas[UserInfoTable.smithClear].Value;
+        if (score < GameBalance.smithGraduateScore)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"최고 점수 {GameBalance.smithGraduateScore} 이상일때 각성 가능!");
+        }
+        else
+        {
+            PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+                $"도깨비 대장간을 각성하려면 {Utils.ConvertNum(GameBalance.smithGraduateScore)} 이상 이어야 합니다.\n" +
+                $"각성 시 점수가 {Utils.ConvertNum(GameBalance.smithGraduateAfterScore)}점으로 고정됩니다.\n" +
+                $"각성하시겠습니까?", () =>
+                {
 
+                    ServerData.userInfoTable.TableDatas[UserInfoTable.smithClear].Value = GameBalance.smithGraduateAfterScore;
+
+                    List<TransactionValue> transactions = new List<TransactionValue>();
+            
+                    Param userinfoParam = new Param();
+                    userinfoParam.Add(UserInfoTable.smithClear,ServerData.userInfoTable.GetTableData(UserInfoTable.smithClear).Value);
+                    transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userinfoParam));
+            
+                    ServerData.SendTransactionV2(transactions, successCallBack: () =>
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "각성 완료!!", null);
+                    });
+                }, null);
+        }
+    }
 #if UNITY_EDITOR
 
     private void Update()

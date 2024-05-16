@@ -181,6 +181,62 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if(type.IsDimensionPostItem())
+        {
+            switch (type)
+            {
+                case Item_Type.Dimension_Ranking_Reward_1:
+                    title.SetText("시간의 틈 개인 랭킹보상(1위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_1}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_2:
+                    title.SetText("시간의 틈 개인 랭킹보상(2위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_2}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_3:
+                    title.SetText("시간의 틈 개인 랭킹보상(3위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_3}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_4:
+                    title.SetText("시간의 틈 개인 랭킹보상(4위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_4}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_5:
+                    title.SetText("시간의 틈 개인 랭킹보상(5위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_5}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_6_20:
+                    title.SetText("시간의 틈 개인 랭킹보상(6~20위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_6_20}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_21_100:
+                    title.SetText("시간의 틈 개인 랭킹보상(21~100위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_21_100}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_101_1000:
+                    title.SetText("시간의 틈 개인 랭킹보상(101~1000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_101_1000}개");
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_1001_10000:
+                    title.SetText("시간의 틈 개인 랭킹보상(1001~10000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.Dimension_Ranking_Reward_1001_10000}개");
+                    break;
+            }
+        }
+        else if(type.IsEventRewardPostItem())
+        {
+            switch (type)
+            {
+                case Item_Type.EventReward_HotTime_0:
+                    title.SetText("핫타임 보상!");
+                    var str = "";
+                    str += $"{CommonString.GetItemName(Item_Type.Marble)} {Utils.ConvertNum(GameBalance.PostReward_Marble)}개";
+                    str += $"\n{CommonString.GetItemName(Item_Type.PeachReal)} {Utils.ConvertNum(GameBalance.PostReward_Peach)}개";
+                    str += $"\n{CommonString.GetItemName(Item_Type.SmithFire)} {Utils.ConvertNum(GameBalance.PostReward_SmithFire)}개";
+                    description.SetText(str);
+                    break;
+            }
+        }
         else if(type.IsMergePartyRaidRankFrameItem_0())
         {
             switch (type)

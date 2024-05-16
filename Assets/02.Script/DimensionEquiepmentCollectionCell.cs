@@ -10,20 +10,23 @@ public class DimensionEquiepmentCollectionCell : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gradeText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI equipEffectText;
+    
 
     [SerializeField] private Image equipmentImage;
     [SerializeField] private Image bgImage;
     [SerializeField] private ItemView itemView;
 
+    [Header("reward")]
+    [SerializeField] private TextMeshProUGUI rewardText;
     private DimensionEquipData tableData;
-
-    public void Initialize(DimensionEquipData _tableData)
+    [SerializeField] private Animator animator;
+    public void Initialize(DimensionEquipData _tableData, bool isChangeCell=false)
     {
         tableData = _tableData;
         
-       nameText.SetText($"{tableData.Name} {tableData.Level}");
-       gradeText.SetText($"{CommonUiContainer.Instance.ItemGradeName_Weapon[tableData.Grade]}");
-       levelText.SetText($"{tableData.Level}등급");
+       nameText.SetText($"{tableData.Name}");
+       gradeText.SetText($"{CommonUiContainer.Instance.ItemGradeName_SealSword[tableData.Grade]}");
+       levelText.SetText($"{5-tableData.Level}등급");
        bgImage.sprite = CommonUiContainer.Instance.itemGradeFrame[tableData.Grade];
        string effect = "";
        var type1 = (DimensionStatusType)tableData.Equipeffecttype1;
@@ -66,9 +69,28 @@ public class DimensionEquiepmentCollectionCell : MonoBehaviour
        }
 
        equipEffectText.SetText(effect);
-       
-       itemView.Initialize((Item_Type)tableData.Decompositiontype,tableData.Decompositionvalue);
+
+       var buffValue = 1 + PlayerStats.GetDimensionCubeGainPer();
+
+
+       itemView.Initialize((Item_Type)tableData.Decompositiontype, (int)(tableData.Decompositionvalue * buffValue));
        
        equipmentImage.sprite=CommonResourceContainer.GetDimensionEquipmentSprite(tableData.Id);
+       
+       if (rewardText == null) return;
+       if (isChangeCell)
+       {
+           rewardText.SetText("교체");
+           animator.enabled = false;
+           itemView.gameObject.SetActive(false);
+           equipmentImage.color=new Color(1f,1f,1f,1f);
+       }
+       else
+       {
+           rewardText.SetText("분해");
+           animator.enabled = true;
+           itemView.gameObject.SetActive(true);
+       }
+
     }
 }

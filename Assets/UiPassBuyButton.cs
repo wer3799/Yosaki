@@ -39,7 +39,14 @@ public class UiPassBuyButton : PassBuyButton
         ServerData.iapServerTable.TableDatas[seasonPassKey].buyCount.AsObservable().Subscribe(e =>
         {
             descText.SetText(e >= 1 ? "구매완료" : "패스권 구매");
-            this.gameObject.SetActive(e <= 0);
+            if (passKey == PassKey.Dimension)
+            {
+                
+            }
+            else
+            {
+                this.gameObject.SetActive(e <= 0);
+            }
         }).AddTo(disposable);
 
         IAPManager.Instance.WhenBuyComplete.AsObservable().Subscribe(e =>

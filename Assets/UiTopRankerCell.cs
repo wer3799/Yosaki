@@ -34,6 +34,8 @@ public class UiTopRankerCell : MonoBehaviour
 
     [SerializeField]
     private Image horn;
+    [SerializeField]
+    private Image dimension;
 
 
     [SerializeField]
@@ -115,7 +117,7 @@ public class UiTopRankerCell : MonoBehaviour
         }
     }
 
-    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx, int suhoAnimal,int guildIcon)
+    public void Initialize(string nickName, string rankText, int costumeId, int petId, int weaponId, int magicBookId, int gumgiIdx, string guildName, int maskIdx, int hornIdx, int suhoAnimal,int guildIcon,int dimensionIdx=-1)
     {
         this.recNickName = nickName;
         this.nickName.SetText(nickName);
@@ -296,6 +298,20 @@ public class UiTopRankerCell : MonoBehaviour
         {
             masterText.gameObject.SetActive(PartyRaidManager.Instance.NetworkManager.IsMasterClient(nickName));
         }
+
+        if (dimension != null)
+        {
+            if (dimensionIdx < 0)
+            {
+                dimension.gameObject.SetActive(false);
+            }
+            else
+            {
+                dimension.sprite = CommonResourceContainer.GetDimensionEquipmentSprite(dimensionIdx);
+                dimension.gameObject.SetActive(true);
+            }
+        }
+    
     }
 
     public void OnPlayerLeftInPartyRaid()

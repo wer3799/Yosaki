@@ -202,6 +202,7 @@ public static class GameBalance
     public static ObscuredInt shadowCostumeGetLevel = 12;
 
     public static ObscuredInt addDay = 0;
+    public static ObscuredDouble addMinutes = 0;
     
     public static ObscuredInt dosulUnlockStage = 300;
     public static ObscuredInt dailyDosulClearTicketGetValue = 2;
@@ -396,7 +397,25 @@ public static class GameBalance
     public readonly static ObscuredInt rankReward_200_500_new_boss = 800;
     public readonly static ObscuredInt rankReward_500_1000_new_boss = 600;
     public readonly static ObscuredInt rankReward_1000_3000_new_boss = 400;
+    
+    
+    
+    public readonly static ObscuredInt Dimension_Ranking_Reward_1          = 25;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_2          = 23;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_3          = 21;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_4          = 19;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_5          = 17;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_6_20       = 15;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_21_100     = 10;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_101_1000   = 5;
+    public readonly static ObscuredInt Dimension_Ranking_Reward_1001_10000 = 3;
 
+    public static List<float> Dimension_Ranking_Rewards = new List<float>() { Dimension_Ranking_Reward_1, Dimension_Ranking_Reward_2,Dimension_Ranking_Reward_3, Dimension_Ranking_Reward_4,Dimension_Ranking_Reward_5,
+        Dimension_Ranking_Reward_6_20,Dimension_Ranking_Reward_21_100,Dimension_Ranking_Reward_101_1000,Dimension_Ranking_Reward_1001_10000};
+    public static List<string> Dimension_Ranking_Rewards_Range = new List<string>() {"1","2","3","4","5",
+        "6-20","21-100","101-1000","1001-10000" };
+
+    
     #endregion
     
     #region Post_UpdateReward
@@ -422,6 +441,10 @@ public static class GameBalance
     public readonly static ObscuredFloat HotTime_Gold_Weekend = 30;
     public readonly static ObscuredFloat HotTime_GrowthStone_Weekend = 60;
     public readonly static ObscuredFloat HotTime_Marble_Weekend = 8;
+    
+    public readonly static ObscuredFloat PostReward_Marble = 500000000;
+    public readonly static ObscuredFloat PostReward_Peach = 30000000;
+    public readonly static ObscuredFloat PostReward_SmithFire = 50000;
     
 
     #endregion
@@ -478,6 +501,8 @@ public static class GameBalance
     public static ObscuredFloat MeditationTicketDailyGetAmount = 2; // 심득 
     public static ObscuredFloat SinsuClearDailyGetAmount = 1; // 신수소탕권 
     public static ObscuredFloat HyulClearDailyGetAmount = 2; // 혈자리소탕권 
+    public static ObscuredFloat DCTDailyGetAmount = 5; // 차원소탕권 
+    public static ObscuredFloat DCTDailyPassGetAmount = 2; // 차원소탕권 
     public static ObscuredFloat TJCTDailyGetAmount = 1; // 혈자리소탕권 
     public static ObscuredInt GachaTicketDailyGetAmount = 10; // 
     public static ObscuredInt WeeklyTicketWeeklyGetAmount = 3; // 
@@ -644,6 +669,8 @@ public static class GameBalance
     public static ObscuredFloat BackguiGraduatePlusValue = 1.5f; 
     public static ObscuredFloat BackguiGraduateGainSoulKey = 2000; 
 
+    public static ObscuredDouble smithGraduateScore = 20000;
+    public static ObscuredDouble smithGraduateAfterScore = 30000;
     #endregion
 
     #region Contents_GoldAwake
@@ -773,12 +800,14 @@ public static class GameBalance
 
     #region dimension
 
-    public readonly static ObscuredFloat dimensionHp = 3;
+    public readonly static ObscuredFloat dimensionHp = 5;
     public readonly static ObscuredFloat dimensionBaseSkillDamage = 1;
     public readonly static ObscuredFloat dimensionBaseAttackDamage = 100;
     public readonly static ObscuredFloat dimensionBaseAttackCoolTime = 1;
     public readonly static ObscuredFloat dimensionStatusGetPointByLevelUp = 3;
+    public readonly static ObscuredFloat dimensionAttackRange = 15;
 
+    public static List<float> dimensionGachaProbs = new List<float>() { 0.1f, 0.15f, 0.2f, 0.25f,0.3f};
 
     
 

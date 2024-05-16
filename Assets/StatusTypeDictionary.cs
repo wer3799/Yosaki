@@ -42,11 +42,11 @@ public class StatusTypeDictionary : EditorWindow
     splitView.Add(secondPane);
     
     firstPane.selectionType = SelectionType.Single;
-    firstPane.onSelectionChanged += objects =>
+    firstPane.onSelectionChange += objects =>
     {
-      if (objects != null && objects.Count > 0)
+      if (objects != null && objects.Any())
       {
-        m_SelectedIndex = (int)objects[0];
+        m_SelectedIndex = (int)objects.First();
         Debug.Log($"Selected index: {m_SelectedIndex}");
       }
     };

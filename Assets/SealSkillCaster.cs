@@ -35,10 +35,12 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
     {
         if (GameManager.contentsType.IsDimensionContents())
         {
-            
+            gaugeRoot.SetActive(false);
+
         }
         else
-        {
+        {   
+            
             currentHitCount.Value = 0;
 
             StartCoroutine(UserFourSkillRoutine());
@@ -64,8 +66,6 @@ public class SealSkillCaster : SingletonMono<SealSkillCaster>
             {
                 gaugeRoot.SetActive(false);
             }
-                
-              
         }).AddTo(this);
 
         PlayerSkillCaster.Instance.sealChargeCount.AsObservable().Subscribe(e =>

@@ -261,29 +261,75 @@ public static class ServerData
     public static void SendTransaction(List<TransactionValue> transactionList, bool retry = true,
         Action completeCallBack = null, Action successCallBack = null)
     {
-        SendQueue.Enqueue(Backend.GameData.TransactionWrite, transactionList, (bro) =>
+        if (transactionList.Count > 10)
         {
-            if (bro.IsSuccess())
-            {
-                successCallBack?.Invoke();
-            }
-            else
-            {
-                Debug.LogError($"SendTransaction error!!! {bro.GetMessage()}");
+            List<List<TransactionValue>> dividedLists = DivideList(transactionList, 10);
+            using var e = dividedLists.GetEnumerator();
 
-                if (retry)
+            while (e.MoveNext())
+            {
+                SendQueue.Enqueue(Backend.GameData.TransactionWrite, e.Current, (bro) =>
                 {
-                    CoroutineExecuter.Instance.StartCoroutine(TransactionRetryRoutine(transactionList));
+                    if (bro.IsSuccess())
+                    {
+                        successCallBack?.Invoke();
+                    }
+                    else
+                    {
+                        Debug.LogError($"SendTransaction error!!! {bro.GetMessage()}");
+
+                        if (retry)
+                        {
+                            CoroutineExecuter.Instance.StartCoroutine(TransactionRetryRoutine(transactionList));
+                        }
+                        else
+                        {
+                            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n앱을 재실행 합니다.",
+                                () => { Utils.RestartApplication(); });
+                        }
+                    }
+
+                    completeCallBack?.Invoke();
+                });
+            }
+        }
+        else
+        {
+            SendQueue.Enqueue(Backend.GameData.TransactionWrite, transactionList, (bro) =>
+            {
+                if (bro.IsSuccess())
+                {
+                    successCallBack?.Invoke();
                 }
                 else
                 {
-                    PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n앱을 재실행 합니다.",
-                        () => { Utils.RestartApplication(); });
+                    Debug.LogError($"SendTransaction error!!! {bro.GetMessage()}");
+
+                    if (retry)
+                    {
+                        CoroutineExecuter.Instance.StartCoroutine(TransactionRetryRoutine(transactionList));
+                    }
+                    else
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "네트워크가 불안정 합니다.\n앱을 재실행 합니다.",
+                            () => { Utils.RestartApplication(); });
+                    }
                 }
+
+                completeCallBack?.Invoke();
+            });
+        }
+        List<List<TransactionValue>> DivideList(List<TransactionValue> list, int chunkSize)
+        {
+            List<List<TransactionValue>> dividedList = new List<List<TransactionValue>>();
+
+            for (int i = 0; i < list.Count; i += chunkSize)
+            {
+                dividedList.Add(list.GetRange(i, Mathf.Min(chunkSize, list.Count - i)));
             }
 
-            completeCallBack?.Invoke();
-        });
+            return dividedList;
+        }
     }
     public static void SendTransactionV2(List<TransactionValue> transactionList, bool retry = true,
         Action completeCallBack = null, Action successCallBack = null)
@@ -3707,6 +3753,80 @@ public static class ServerData
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             SendTransaction(transactionList, successCallBack: () =>
+            {
+                //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
+            });
+        }
+        else if (type.IsDimensionPostItem())
+        {
+            switch (type)
+            {
+                case Item_Type.Dimension_Ranking_Reward_1:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_1;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_2:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_2;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_3:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_3;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_4:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_4;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_5:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_5;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_6_20:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_6_20;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_21_100:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_21_100;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_101_1000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_101_1000;
+                    break;
+                case Item_Type.Dimension_Ranking_Reward_1001_10000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value += GameBalance.Dimension_Ranking_Reward_1001_10000;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.ClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value);
+
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransactionV2(transactionList, successCallBack: () =>
+            {
+                //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
+            });
+        }
+        else if (type.IsEventRewardPostItem())
+        {
+            switch (type)
+            {
+                case Item_Type.EventReward_HotTime_0:
+                    ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value += GameBalance.PostReward_Marble;
+                    ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value += GameBalance.PostReward_Peach;
+                    ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value += GameBalance.PostReward_SmithFire;
+                    break;
+            }
+
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+
+            Param goodsParam = new Param();
+            goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
+            goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
+            goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
+
+
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            SendTransactionV2(transactionList, successCallBack: () =>
             {
                 //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
             });

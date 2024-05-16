@@ -19,11 +19,9 @@ public class UiDimensionRankingSpecialReward : MonoBehaviour
 
     private DimensionRewardData tableData;
 
-    private int currentScore;
-    public void Initialize(DimensionRewardData _tableData, int score)
+    public void Initialize(DimensionRewardData _tableData)
     {
         this.tableData = _tableData;
-        currentScore = score;
         itemView.Initialize((Item_Type)tableData.Rewardtype,tableData.Rewardvalue);
         text.SetText($"최고 {tableData.Dungeoncondition}단계 달성");
         Subscribe();
@@ -31,21 +29,21 @@ public class UiDimensionRankingSpecialReward : MonoBehaviour
         
     private bool CanGetReward()
     {
-        return currentScore >= tableData.Dungeoncondition;
+        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value >= tableData.Dungeoncondition;
     }
     private bool IsBeforeRewarded()
     {
         //0일때 1
-        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.demnsionSpecialRewardIdx).Value + 1 == tableData.Id;
+        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionSpecialRewardIdx).Value + 1 == tableData.Rewardidx;
     }
 
     private bool IsRewarded()
     {
-        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.demnsionSpecialRewardIdx).Value >= tableData.Id;
+        return (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionSpecialRewardIdx).Value >= tableData.Rewardidx;
     }
     private void Subscribe()
     {
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.demnsionSpecialRewardIdx)
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionSpecialRewardIdx)
             .AsObservable()
             .Subscribe(e =>
             {
@@ -53,11 +51,15 @@ public class UiDimensionRankingSpecialReward : MonoBehaviour
                 rewardedMask.SetActive(IsRewarded()==true);
             })
             .AddTo(this);
-        GuildManager.Instance.guildPetExp.AsObservable().Subscribe(e =>
-        {
-            //얻는게 불가능하면 true
-            canGetMask.SetActive(CanGetReward() == false);
-        }).AddTo(this);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade)
+            .AsObservable()
+            .Subscribe(e =>
+            {
+                //받은적이 있다면 true
+                canGetMask.SetActive(CanGetReward() == false);
+            })
+            .AddTo(this);
+        
     }
     public void OnClickButton()
     {
@@ -85,12 +87,14 @@ public class UiDimensionRankingSpecialReward : MonoBehaviour
         ServerData.goodsTable.GetTableData(stringId).Value += tableData.Rewardvalue;
         goodsParam.Add(stringId, ServerData.goodsTable.GetTableData(stringId).Value);
 
-        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.demnsionSpecialRewardIdx).Value++;
-        userInfo2Param.Add(UserInfoTable_2.demnsionSpecialRewardIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.demnsionSpecialRewardIdx].Value);
+        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionSpecialRewardIdx).Value++;
+        userInfo2Param.Add(UserInfoTable_2.dimensionSpecialRewardIdx, ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dimensionSpecialRewardIdx].Value);
 
         transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
         transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
+        PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
+        
         ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
         });

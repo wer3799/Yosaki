@@ -42,7 +42,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public class RankInfo
     {
-        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int gumgiIdx, int maskIdx, int hornIdx,int suhoAnimal)
+        public RankInfo(string NickName, string GuildName, int Rank, double Score, int costumeIdx, int petIddx, int weaponIdx, int magicbookIdx, int gumgiIdx, int maskIdx, int hornIdx,int suhoAnimal,int dimensionIdx=-1)
         {
 #if UNITY_ANDROID
             this.NickName = NickName;
@@ -62,6 +62,7 @@ public class RankManager : SingletonMono<RankManager>
             this.maskIdx = maskIdx;
             this.hornIdx = hornIdx;
             this.suhoAnimal = suhoAnimal;
+            this.dimensionIdx = dimensionIdx;
         }
 
         public string NickName;
@@ -76,6 +77,7 @@ public class RankManager : SingletonMono<RankManager>
         public int maskIdx;
         public int hornIdx;
         public int suhoAnimal;
+        public int dimensionIdx;
 
     }
 
@@ -626,6 +628,11 @@ public class RankManager : SingletonMono<RankManager>
                 int maskIdx = int.Parse(splitData[6]);
                 int hornIdx = -1;
                 int suhoAnimal = -1;
+                int dimensionIdx = -1;
+                if (splitData.Length >= 11)
+                {
+                    dimensionIdx = int.Parse(splitData[10]);
+                }
                 if (splitData.Length >= 10)
                 {
                     suhoAnimal = int.Parse(splitData[9]);
@@ -641,7 +648,8 @@ public class RankManager : SingletonMono<RankManager>
                 }
 
 
-                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx,suhoAnimal);
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx,suhoAnimal,dimensionIdx:dimensionIdx);
+
             }
         }
 
@@ -651,6 +659,10 @@ public class RankManager : SingletonMono<RankManager>
             WhenMyDimensionRankLoadComplete.Execute(myRankInfo);
 
             this.myRankInfo[RankType.Dimension] = myRankInfo;
+        }
+        else
+        {
+            WhenMyDimensionRankLoadComplete.Execute(null);
         }
     }
     //차원
@@ -675,8 +687,9 @@ public class RankManager : SingletonMono<RankManager>
         int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
         int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
         int suhoAnimal = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value;
+        int dimension = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DimensionEquipment].Value;
 
-        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}{CommonString.ChatSplitChar}{suhoAnimal}");
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}{CommonString.ChatSplitChar}{suhoAnimal}{CommonString.ChatSplitChar}{dimension}");
 
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Dimension_Uuid, Rank_Dimension, RankTable_Dimension.Indate, param, bro =>
         {

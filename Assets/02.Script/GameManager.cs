@@ -4,6 +4,8 @@ using UnityEngine;
 using UniRx;
 using CodeStage.AntiCheat.ObscuredTypes;
 using System;
+using System.Globalization;
+using System.Threading;
 using Photon.Pun;
 
 //
@@ -184,8 +186,17 @@ public class GameManager : SingletonMono<GameManager>
     {
         base.Awake();
         SettingData.InitFirst();
+        SetCultureInfo();
     }
 
+    private void SetCultureInfo()
+    {
+        CultureInfo customCulture = (CultureInfo)CultureInfo.InvariantCulture.Clone();
+        Thread.CurrentThread.CurrentCulture = customCulture;
+        Thread.CurrentThread.CurrentUICulture = customCulture;
+        CultureInfo.DefaultThreadCurrentCulture = customCulture;
+        CultureInfo.DefaultThreadCurrentUICulture = customCulture;
+    }
     private void RandomizeKey()
     {
         this.bossId.RandomizeCryptoKey();

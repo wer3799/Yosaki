@@ -179,8 +179,10 @@ public class UserInfoTable_2
     public const string chunguTowerIdx = "cgti";
     public const string haetalGradeIdx = "hgi";
     
-    public const string demnsionSpecialRewardIdx= "dsri";
+    public const string dimensionSpecialRewardIdx= "dsri";
     public const string munhaRefund= "mrf";
+    public const string dimensionGrade= "dg";
+    public const string currentDimensionSeasonIdx= "cdsi";
 
     public bool isInitialize = false;
     private Dictionary<string, double> tableSchema = new Dictionary<string, double>()
@@ -319,8 +321,10 @@ public class UserInfoTable_2
         { guildTower2ClearIndex, 0f },
         { guildPetWeeklyRewardIndex, -1f },
         { haetalGradeIdx, -1f },
-        { demnsionSpecialRewardIdx, -1f },
+        { dimensionSpecialRewardIdx, -1f },
         { munhaRefund, 0f },
+        { dimensionGrade, 0f },
+        { currentDimensionSeasonIdx, 0f },
     };
 
     private Dictionary<string, ReactiveProperty<double>> tableDatas = new Dictionary<string, ReactiveProperty<double>>();

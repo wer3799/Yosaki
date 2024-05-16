@@ -33,7 +33,7 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
     {
         if (GameManager.contentsType.IsDimensionContents())
         {
-            
+            gaugeRoot.SetActive(false);
         }
         else
         {
@@ -51,6 +51,7 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
     {
         ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.munhaLevel).AsObservable().Subscribe(e =>
         {
+        
             if ((int)e != -1)
             {
                 gaugeRoot.SetActive(true);
@@ -59,6 +60,8 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
             {
                 gaugeRoot.SetActive(false);
             }
+            
+    
                 
               
         }).AddTo(this);

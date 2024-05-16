@@ -131,6 +131,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.ChunguTower:
                         return false;
+                    case GameManager.ContentsType.Dimension when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.dimensionGrade).Value <
+                                                                   (TableManager.Instance.DimensionDungeon.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.Dimension:
+                        return false;
                     
                 }
         switch (GameManager.contentsType)
@@ -166,6 +171,7 @@ public class UiContentsExitButton : MonoBehaviour
             case GameManager.ContentsType.RelicTest:
             case GameManager.ContentsType.MeditationTower:
             case GameManager.ContentsType.SpecialRequestBoss:
+            case GameManager.ContentsType.Dimension:
                 return true;
             case GameManager.ContentsType.TwelveDungeon:
             {

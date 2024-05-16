@@ -25,10 +25,6 @@ public class DimensionDungeonData
   public double Requireforce { get {return requireforce; } set { this.requireforce = value;} }
   
   [SerializeField]
-  int spawnequipmaxgrade;
-  public int Spawnequipmaxgrade { get {return spawnequipmaxgrade; } set { this.spawnequipmaxgrade = value;} }
-  
-  [SerializeField]
   float gachalv1;
   public float Gachalv1 { get {return gachalv1; } set { this.gachalv1 = value;} }
   
@@ -51,6 +47,14 @@ public class DimensionDungeonData
   [SerializeField]
   float gachalv6;
   public float Gachalv6 { get {return gachalv6; } set { this.gachalv6 = value;} }
+  
+  [SerializeField]
+  float gachalv7;
+  public float Gachalv7 { get {return gachalv7; } set { this.gachalv7 = value;} }
+  
+  [SerializeField]
+  float gachalv8;
+  public float Gachalv8 { get {return gachalv8; } set { this.gachalv8 = value;} }
   
   [SerializeField]
   int gachacount;

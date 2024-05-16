@@ -194,7 +194,7 @@ public class UiDimensionStatusUpgradeCell : MonoBehaviour
 
             ServerData.dimensionStatusTable.GetTableData(statusData.Needstatuskey).AsObservable().Subscribe(e =>
             {
-                lockMask.SetActive((statusData.Unlocklevel >= e + 2));
+                lockMask.SetActive((statusData.Unlocklevel >= e + 1));
             }).AddTo(this);
 
         }

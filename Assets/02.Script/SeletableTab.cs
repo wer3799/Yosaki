@@ -55,6 +55,9 @@ public class SeletableTab : MonoBehaviour
                     if (idx < 0) return;
                     OnSelect(idx);
                     break;
+                case GameManager.ContentsType.Dimension:
+                    OnSelect(1);
+                    break;
             }
         }
     }

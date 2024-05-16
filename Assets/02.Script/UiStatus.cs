@@ -6,6 +6,7 @@ using TMPro;
 using UniRx;
 using BackEnd;
 using LitJson;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiStatus : SingletonMono<UiStatus>
@@ -20,13 +21,14 @@ public class UiStatus : SingletonMono<UiStatus>
     private int loadedMyRank = -1;
 
     private static bool LevelInit = false;
-    [SerializeField] private List<GameObject> keyPads =new List<GameObject>();
+    [SerializeField] private List<GameObject> normalObjects =new List<GameObject>();
+    [SerializeField] private List<GameObject> dimensionObjects =new List<GameObject>();
 
     void Start()
     {
         if (GameManager.contentsType.IsDimensionContents())
         {
-            nameText[1].SetText($"Test:{Utils.ConvertNum(0)} {PlayerData.Instance.NickName} ({loadedMyRank}등)");
+            nameText[1].SetText($"Lv:{Utils.ConvertNum(ServerData.dimensionStatusTable.GetTableData(DimensionStatusTable.Level).Value)} {PlayerData.Instance.NickName}");
 
         }
         else
@@ -44,22 +46,17 @@ public class UiStatus : SingletonMono<UiStatus>
 
     private void OnEnable()
     {
-        using var e1 = keyPads.GetEnumerator();
+        using var e1 = normalObjects.GetEnumerator();
+        using var e2 = dimensionObjects.GetEnumerator();
 
         while (e1.MoveNext())
         {
-            e1.Current.gameObject.SetActive(false);
+            e1.Current.gameObject.SetActive(!GameManager.contentsType.IsDimensionContents());
         }
-
-        if (GameManager.contentsType.IsDimensionContents())
+        while (e2.MoveNext())
         {
-            keyPads[1].SetActive(true);
-
-        }
-        else
-        {
-            keyPads[0].SetActive(true);
-        }
+            e2.Current.gameObject.SetActive(GameManager.contentsType.IsDimensionContents());
+        }      
     }
 
     private void Subscribe()

@@ -16,4 +16,8 @@ public class DimensionSeasonData
   string enddate;
   public string Enddate { get {return enddate; } set { this.enddate = value;} }
   
+  [SerializeField]
+  string productid;
+  public string Productid { get {return productid; } set { this.productid = value;} }
+  
 }

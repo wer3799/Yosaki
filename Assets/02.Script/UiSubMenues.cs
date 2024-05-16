@@ -69,8 +69,13 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                 case GameManager.ContentsType.GyungRockTower8:
                 case GameManager.ContentsType.MeditationTower:
                 case GameManager.ContentsType.Haetal:
-                case GameManager.ContentsType.Dimension:
                     return;
+                case GameManager.ContentsType.Dimension:
+                {
+                    QuickMoveManager.Instance.OnClickButton(0);
+                    GameManager.Instance.ResetLastContents2();
+                    return;
+                }
                 case GameManager.ContentsType.SealSwordTower:
                 case GameManager.ContentsType.SealAwake:
                 {
@@ -131,6 +136,8 @@ public class UiSubMenues : SingletonMono<UiSubMenues>
                     GameManager.Instance.ResetLastContents2();
                     return;
                 }
+                
+                
             }
 
             _mainTabButtons.OnClickButton();
