@@ -44,7 +44,7 @@ public class StatusTypeDictionary : EditorWindow
     firstPane.selectionType = SelectionType.Single;
     firstPane.onSelectionChange += objects =>
     {
-      if (objects != null && objects.Any())
+      if (objects != null && objects.Count()>0)
       {
         m_SelectedIndex = (int)objects.First();
         Debug.Log($"Selected index: {m_SelectedIndex}");

@@ -183,7 +183,7 @@ public class UiDimensionSweepBoard : MonoBehaviour
     public void OnClickSweepButton()
     {
         
-        if (ServerData.goodsTable.GetTableData(GoodsTable.TransClearTicket).Value < 1)
+        if (ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value < 1)
         {
             PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.DCT)}이 부족합니다!");
             return;

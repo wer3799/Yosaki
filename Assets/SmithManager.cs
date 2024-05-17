@@ -173,7 +173,7 @@ public class SmithManager : SingletonMono<SmithManager>
     [SerializeField]
     private TextMeshProUGUI currentWaveText;
 
-    private WaitForSeconds spawnDelay = new WaitForSeconds(1f);
+    private WaitForSeconds spawnDelay = new WaitForSeconds(0.25f);
 
     private IEnumerator MainGameRoutine()
     {
