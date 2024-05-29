@@ -23,6 +23,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 {
 
     private List<UiMonthlyPassCell> uiPassCellContainer = new List<UiMonthlyPassCell>();
+    //private List<UiMonthlyPassCell> uiPassCellContainer = new List<UiMonthlyPassCell>();
 
     private ObscuredString passShopId;
     
@@ -80,7 +81,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
     {
         textList[0].SetText($"월간 훈련({ServerData.userInfoTable.currentServerTime.Month}월)");
         textList[1].SetText($"월간 훈련 패스");
-        textList[2].SetText($"월간 미션({ServerData.userInfoTable.currentServerTime.Month}월)");
+        textList[2].SetText($"월간 훈련 출석");
         if (ServerData.userInfoTable.currentServerTime.Day < 23)
         {
             textList[3].SetText($"{ServerData.userInfoTable.currentServerTime.Month}월 23일부터 구매 가능");
@@ -274,7 +275,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
 
@@ -438,7 +439,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
 
@@ -461,7 +462,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
                 List<RewardData> rewardData = new List<RewardData>();
-                var e = rewardList.GetEnumerator();
+                using var e = rewardList.GetEnumerator();
                 for (int i = 0 ;  i < rewardList.Count;i++)
                 {
                     if (e.MoveNext())

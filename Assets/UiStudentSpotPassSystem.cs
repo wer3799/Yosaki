@@ -166,7 +166,7 @@ public class UiStudentSpotPassSystem : MonoBehaviour
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);

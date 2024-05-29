@@ -40,7 +40,7 @@ public class DimensionStatusTable
     {
         Param param = new Param();
 
-        var e = tableSchema.GetEnumerator();
+        using var e = tableSchema.GetEnumerator();
         while (e.MoveNext())
         {
             param.Add(e.Current.Key, tableDatas[e.Current.Key].Value);
@@ -144,7 +144,7 @@ public class DimensionStatusTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -187,7 +187,7 @@ public class DimensionStatusTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {

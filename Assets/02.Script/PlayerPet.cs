@@ -256,7 +256,7 @@ public class PlayerPet : SingletonMono<PlayerPet>
 
     private void FindTarget()
     {
-        var e = dropItems.GetEnumerator();
+        using var e = dropItems.GetEnumerator();
 
         float neariestDist = float.MaxValue;
 

@@ -158,7 +158,7 @@ public class UiDosulPassSystem : FancyScrollView<DosulPassData_Fancy>
             ServerData.coldSeasonPassServerTable.TableDatas[ColdSeasonPassServerTable.dosulAd].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())

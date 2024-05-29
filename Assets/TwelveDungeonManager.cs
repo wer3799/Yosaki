@@ -403,6 +403,19 @@ public class TwelveDungeonManager : ContentsManagerBase
                     isRenewal = true;
                 }
             }
+            if (ServerData.etcServerTable.IsBlueGangChulUnlocked(7))
+            {
+                double reqValue = damageAmount.Value * GameBalance.BossScoreSmallizeValue;
+
+                if (reqValue > ServerData.bossScoreTable.TableDatas_Double[BossScoreTable.transJewelScore].Value)
+                {
+                    ServerData.bossScoreTable.TableDatas[BossScoreTable.transJewelScore].Value = reqValue.ToString();
+
+                    ServerData.bossScoreTable.UpdateNumberValue(BossScoreTable.transJewelScore,reqValue);
+                    bossScoreParam.Add(BossScoreTable.transJewelScore,ServerData.bossScoreTable.TableDatas[BossScoreTable.transJewelScore].Value);
+                    isRenewal = true;
+                }
+            }
 
             List<TransactionValue> transactions = new List<TransactionValue>();
             

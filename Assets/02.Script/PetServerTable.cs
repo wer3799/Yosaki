@@ -48,7 +48,7 @@ public class PetServerTable
             int status = (int)statusType;
             var petAwakeLevel = ServerData.statusTable.GetTableData(StatusTable.PetAwakeLevel).Value;
 
-            var e = tableDatas.GetEnumerator();
+            using var e = tableDatas.GetEnumerator();
             while (e.MoveNext())
             {
                 //무료펫 능력치XX
@@ -266,7 +266,7 @@ public class PetServerTable
     public int GetPetDispatchScore()
     {
         int scoreSum = 0;
-        var e = tableDatas.GetEnumerator();
+        using var e = tableDatas.GetEnumerator();
         while (e.MoveNext())
         {
             if (e.Current.Value.hasItem.Value == 0) continue;

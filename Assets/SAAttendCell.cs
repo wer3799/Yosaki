@@ -55,9 +55,9 @@ public class SAAttendCell : MonoBehaviour
 
     private void UpdateUi()
     {
-        bg.sprite = tableData.Id == 2 || tableData.Id == 6 || tableData.Id == 13 ? bg_Special : bg_Normal;
+        bg.sprite = tableData.Id == 2 || tableData.Id == 6 || tableData.Id == 13|| tableData.Id == 19 ? bg_Special : bg_Normal;
 
-        titleText.SetText($"2주년\n{tableData.Unlockday}일차 출석체크");
+        titleText.SetText($"3주년\n{tableData.Unlockday}일차 출석체크");
 
 
         string descrpition = "";

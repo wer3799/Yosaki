@@ -97,7 +97,7 @@ public class UiCostumeCollectionBoard : MonoBehaviour
             
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e =rewards.GetEnumerator();
+            using var e =rewards.GetEnumerator();
             
             Param goodsParam = new Param();
             while (e.MoveNext())
@@ -118,7 +118,7 @@ public class UiCostumeCollectionBoard : MonoBehaviour
                 //LogManager.Instance.SendLogType("LevelPass", "A", "A");
                 
                 List<RewardData> rewardData = new List<RewardData>();
-                var e = rewards.GetEnumerator();
+                using var e = rewards.GetEnumerator();
                 for (int i = 0 ;  i < rewards.Count;i++)
                 {
                     if (e.MoveNext())

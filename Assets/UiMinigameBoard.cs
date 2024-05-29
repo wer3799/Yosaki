@@ -435,7 +435,7 @@ public class UiMinigameBoard : SingletonMono<UiMinigameBoard>
                 rewardArray[itemType] += amount;
             }
 
-            var e = rewardArray.GetEnumerator();
+            using var e = rewardArray.GetEnumerator();
 
             string Description = string.Empty;
 

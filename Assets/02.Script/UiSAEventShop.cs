@@ -1,4 +1,5 @@
-﻿                                                         using BackEnd;
+﻿                                                         using System;
+                                                         using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,13 @@ public class UiSAEventShop : MonoBehaviour
     private void Awake()
     {
         Initialize();
+    }
+
+    private void OnEnable()
+    {
+        PopupManager.Instance.ShowAlarmMessage("다음 업데이트에 오픈됩니다!");
+        this.gameObject.SetActive(false);
+        return;
     }
 
     private void Initialize()

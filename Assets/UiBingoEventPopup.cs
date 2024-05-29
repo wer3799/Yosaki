@@ -137,7 +137,7 @@ public class UiBingoEventPopup : MonoBehaviour
         goodsParam.Add(GoodsTable.GT, ServerData.goodsTable.GetTableData(GoodsTable.GT).Value);
 
 
-        var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
+        using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
         while (e.MoveNext())
         {
             var rewardString = ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType);

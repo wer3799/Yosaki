@@ -154,7 +154,7 @@ public class UiSkillGacha : MonoBehaviour
 
         var skillData = TableManager.Instance.SkillData;
 
-        var e = skillData.GetEnumerator();
+        using var e = skillData.GetEnumerator();
 
         int gachaLevel = UiGachaPopup.GachaLevel(UserInfoTable.gachaNum_Skill);
 

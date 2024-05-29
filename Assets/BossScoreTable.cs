@@ -53,7 +53,7 @@ public class BossScoreTable
     public const string meditationScore = "s14";
     //문하생타워
     public const string munhaScore = "s15";
-    //문하생타워
+    //초월광산
     public const string transJewelScore = "s16";
 
 
@@ -234,7 +234,7 @@ public class BossScoreTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -281,7 +281,7 @@ public class BossScoreTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {

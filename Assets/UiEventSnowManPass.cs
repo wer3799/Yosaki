@@ -172,7 +172,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
 
@@ -195,7 +195,7 @@ public class UiEventSnowManPass : FancyScrollView<SnowPassData_Fancy>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
                 List<RewardData> rewardData = new List<RewardData>();
-                var e = rewards.GetEnumerator();
+                using var e = rewards.GetEnumerator();
                 for (int i = 0 ;  i < rewards.Count;i++)
                 {
                     if (e.MoveNext())

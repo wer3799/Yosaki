@@ -77,7 +77,7 @@ public class UiWeaponDetailView : MonoBehaviour
 
         if (isWeapon)
         {
-            var e = TableManager.Instance.SkillData.GetEnumerator();
+            using var e = TableManager.Instance.SkillData.GetEnumerator();
             while (e.MoveNext())
             {
                 if (weaponData.Id == e.Current.Value.Awakeweaponidx)
@@ -121,7 +121,7 @@ public class UiWeaponDetailView : MonoBehaviour
 
         if (isWeapon)
         {
-            var e = TableManager.Instance.SkillData.GetEnumerator();
+            using var e = TableManager.Instance.SkillData.GetEnumerator();
             while (e.MoveNext())
             {
                 if (weaponData.Id == e.Current.Value.Awakeweaponidx)

@@ -100,8 +100,8 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
 
    private void SetTableData()
    {
-      var userInfoKeys = ServerData.userInfoTable.TableDatas.Keys.GetEnumerator();
-      var userInfoValues = ServerData.userInfoTable.TableDatas.Values.GetEnumerator();
+      using var userInfoKeys = ServerData.userInfoTable.TableDatas.Keys.GetEnumerator();
+      using var userInfoValues = ServerData.userInfoTable.TableDatas.Values.GetEnumerator();
     
       int i = 0;
       while (userInfoKeys.MoveNext()&&userInfoValues.MoveNext())
@@ -113,8 +113,8 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
          }
       }
       
-      var userInfo2Keys = ServerData.userInfoTable_2.TableDatas.Keys.GetEnumerator();
-      var userInfo2Values = ServerData.userInfoTable_2.TableDatas.Values.GetEnumerator();
+      using var userInfo2Keys = ServerData.userInfoTable_2.TableDatas.Keys.GetEnumerator();
+      using var userInfo2Values = ServerData.userInfoTable_2.TableDatas.Values.GetEnumerator();
     
       i = 0;
       while (userInfo2Keys.MoveNext()&&userInfo2Values.MoveNext())
@@ -126,8 +126,8 @@ public class UiTestBoard : FancyScrollView<TestCellData_Fancy>
          }
       }
       
-      var goodsKeys = ServerData.goodsTable.TableDatas.Keys.GetEnumerator();
-      var goodsValues = ServerData.goodsTable.TableDatas.Values.GetEnumerator();
+      using var goodsKeys = ServerData.goodsTable.TableDatas.Keys.GetEnumerator();
+      using var goodsValues = ServerData.goodsTable.TableDatas.Values.GetEnumerator();
     
       i = 0;
       while (goodsKeys.MoveNext()&&goodsValues.MoveNext())

@@ -78,8 +78,8 @@ public class TwelveBossInitializer : FancyScrollView<TwelveBossData_Fancy>
 
    private void SetTableData()
    {
-      var userInfoKeys = ServerData.userInfoTable.TableDatas.Keys.GetEnumerator();
-      var userInfoValues = ServerData.userInfoTable.TableDatas.Values.GetEnumerator();
+      using var userInfoKeys = ServerData.userInfoTable.TableDatas.Keys.GetEnumerator();
+      using var userInfoValues = ServerData.userInfoTable.TableDatas.Values.GetEnumerator();
     
       int i = 0;
       while (userInfoKeys.MoveNext()&&userInfoValues.MoveNext())

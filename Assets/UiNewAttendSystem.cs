@@ -134,7 +134,7 @@ public class UiNewAttendSystem : MonoBehaviour
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = ItemTypeList.GetEnumerator();
+            using var e = ItemTypeList.GetEnumerator();
             Param goodsParam = new Param();
             while (e.MoveNext())
             {

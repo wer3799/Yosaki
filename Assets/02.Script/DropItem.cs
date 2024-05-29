@@ -368,6 +368,11 @@ public enum Item_Type
     weapon184 = 1070, //무림
     weapon185 = 1071, //무림
     weapon186 = 1072, //특별
+    
+    weapon187 = 1073, //삼천
+    weapon188 = 1074, //무림
+    weapon189 = 1075, //무림
+    weapon190 = 1076, //특별
 
     weapon_end = 1200,
     //
@@ -671,6 +676,13 @@ public enum Item_Type
     costume233 = 1533, //무림1
     costume234 = 1534, //이벤트
     costume235 = 1535, //특별
+    
+    costume236 = 1536, //삼천
+    costume237 = 1537, //무림0
+    costume238 = 1538, //무림1
+    costume239 = 1539, //특별
+    costume240 = 1540, //월간
+    costume241 = 1541, //이벤트
 
     costume_end=1999,
 
@@ -711,6 +723,10 @@ public enum Item_Type
     
     magicBook145 = 2027,//삼천
     magicBook146 = 2028,//특별
+
+    magicBook147 = 2029,//삼천
+    magicBook148 = 2030,//특별
+    magicBook149 = 2031,//월간
 
     magicBook_End=2999,
     //3000~3100스킬

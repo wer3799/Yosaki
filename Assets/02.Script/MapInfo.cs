@@ -50,7 +50,7 @@ public class MapInfo : SingletonMono<MapInfo>
 
     private bool IsEnemyEmpty()
     {
-        var e = spawnedEnemyPlatforms.GetEnumerator();
+        using var e = spawnedEnemyPlatforms.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -249,7 +249,7 @@ public class MapInfo : SingletonMono<MapInfo>
         int platformId = 0;
         int currentEnemyCount = int.MaxValue;
 
-        var e = spawnedEnemyPlatforms.GetEnumerator();
+        using var e = spawnedEnemyPlatforms.GetEnumerator();
 
         while (e.MoveNext())
         {

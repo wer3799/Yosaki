@@ -79,7 +79,7 @@ public class UiSpecialTitleBoard : MonoBehaviour
         {
             var str = "";
             
-            var e =  dictionary.GetEnumerator();
+            using var e =  dictionary.GetEnumerator();
             while (e.MoveNext())
             {
                 if (e.Current.Key.IsPercentStat())

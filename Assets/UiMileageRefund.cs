@@ -2088,8 +2088,6 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         } 
-        #endregion
-
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 77)
         {
             Param userInfoParam = new Param();
@@ -2123,8 +2121,136 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         }
+        #endregion
+
+        //5/28
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 81)
+        {
+            List<TransactionValue> transactions = new List<TransactionValue>();
+            
+            Param userInfoParam = new Param();
+            Param userInfo2Param = new Param();
+            Param goodsParam = new Param();
+            Param eventParam = new Param();
+            Param passParam = new Param();
+            
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 81;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value = 0;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value = 1;
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value = 0;
+
+            
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan1].Value = 0;
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan2].Value = 0;
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan3].Value = 0;
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan4].Value = 0;
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan5].Value = 0;
+            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.exchage_Daesan6].Value = 0;
+            
+            ServerData.eventMissionTable.TableDatas["Mission1"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission2"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission3"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission1"].rewardCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission2"].rewardCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["Mission3"].rewardCount.Value = 0;
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_9).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_10).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_11).Value = 0;
+            
+            
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan_All).Value = 0;
+
+           ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value="-1";
+           ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value="-1";
+           ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event2AttendFree].Value="-1";
+           ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event2AttendAd].Value="-1";
+           
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_9).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_10, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_10).Value);
+            userInfoParam.Add(UserInfoTable.eventMission2_11, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission2_11).Value);
+            
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_0, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_0).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_1, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_1).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_2, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_2).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_3, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_3).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_4, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_4).Value);
+            userInfoParam.Add(UserInfoTable.snow_exchangeCount_5, ServerData.userInfoTable.GetTableData(UserInfoTable.snow_exchangeCount_5).Value);
+            
+            userInfoParam.Add(UserInfoTable.usedSnowManCollectionCount, ServerData.userInfoTable.GetTableData(UserInfoTable.usedSnowManCollectionCount).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            userInfo2Param.Add(UserInfoTable_2.eventMission2AttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission2AttendCount).Value);
+            userInfo2Param.Add(UserInfoTable_2.eventAttendRewarded, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendRewarded).Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Daesan1, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.exchage_Daesan1).Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Daesan2, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.exchage_Daesan2).Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Daesan3, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.exchage_Daesan3).Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Daesan4, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.exchage_Daesan4).Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Daesan5, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.exchage_Daesan5).Value);
+            userInfo2Param.Add(UserInfoTable_2.exchage_Daesan6, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.exchage_Daesan6).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+            
+            goodsParam.Add(GoodsTable.Event_Mission2, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2).Value);
+            goodsParam.Add(GoodsTable.Event_Mission2_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission2_All).Value);
+            goodsParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
+            goodsParam.Add(GoodsTable.Event_Item_SnowMan_All, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan_All).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            
+            eventParam.Add("Mission1", ServerData.eventMissionTable.TableDatas["Mission1"].ConvertToString());
+            eventParam.Add("Mission2", ServerData.eventMissionTable.TableDatas["Mission2"].ConvertToString());
+            eventParam.Add("Mission3", ServerData.eventMissionTable.TableDatas["Mission3"].ConvertToString());
+            transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventParam));
+            
+            
+            passParam.Add(OneYearPassServerTable.childFree_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree_Snow].Value);
+            passParam.Add(OneYearPassServerTable.childAd_Snow, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd_Snow].Value);
+            passParam.Add(OneYearPassServerTable.event2AttendFree, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event2AttendFree].Value);
+            passParam.Add(OneYearPassServerTable.event2AttendAd, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event2AttendAd].Value);
+
+            transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, passParam));
+
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+
+            });
+        }
     }
+
+    #region UnUsed
+
     
+
     private void ShopItemRefundRoutine()
     {
         //월간소탕권소급
@@ -2870,4 +2996,6 @@ public class UiMileageRefund : MonoBehaviour
         }
 
     }
+    #endregion
+
 }

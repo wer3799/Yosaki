@@ -341,7 +341,7 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
                 
         Param goodsParam = new Param();
 
-        var e = types.GetEnumerator();
+        using var e = types.GetEnumerator();
         while (e.MoveNext())
         {
             goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(e.Current), ServerData.goodsTable.GetTableData(e.Current).Value);
@@ -389,7 +389,7 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
 
         goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value);
 
-        var e = _rewardItems.GetEnumerator();
+        using var e = _rewardItems.GetEnumerator();
         while (e.MoveNext())
         {
             goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(e.Current.ItemType), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString(e.Current.ItemType)).Value);
@@ -405,7 +405,7 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
         ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
             List<RewardData> rewardData = new List<RewardData>();
-            var e = _rewardItems.GetEnumerator();
+            using var e = _rewardItems.GetEnumerator();
             for (int i = 0 ;  i < _rewardItems.Count;i++)
             {
                 if (e.MoveNext())
@@ -514,7 +514,7 @@ public class UiYoSaKiMarbleBoard : MonoBehaviour
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
             
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())

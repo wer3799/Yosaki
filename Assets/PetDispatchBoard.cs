@@ -375,7 +375,7 @@ public class PetDispatchBoard : MonoBehaviour
                 
                 Param goodsParam = new Param();
 
-                var e = rewardItems.GetEnumerator();
+                using var e = rewardItems.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -396,7 +396,7 @@ public class PetDispatchBoard : MonoBehaviour
                 {
                     
                     List<RewardData> rewardData = new List<RewardData>();
-                    var e = rewardItems.GetEnumerator();
+                    using var e = rewardItems.GetEnumerator();
                     for (int i = 0 ;  i < rewardItems.Count;i++)
                     {
                         if (e.MoveNext())

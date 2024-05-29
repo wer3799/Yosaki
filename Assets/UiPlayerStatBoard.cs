@@ -39,6 +39,9 @@ public class UiPlayerStatBoard : SingletonMono<UiPlayerStatBoard>
         //공격력증가(%)
         description1 +=
             $"{CommonString.GetStatusName(StatusType.AttackAddPer)} : {Utils.ConvertBigNum(PlayerStats.GetBaseAttackAddPercentValue() * 100f)}\n";
+        //공격력증가(%)
+        description1 +=
+            $"{CommonString.GetStatusName(StatusType.EnhanceAttack)} : {Utils.ConvertNum((PlayerStats.GetEnhanceAttack()) * 100f,2)}\n";
 
         //크리티컬 확률(%)
         description1 +=

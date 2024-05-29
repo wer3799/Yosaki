@@ -273,7 +273,7 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
 
@@ -437,7 +437,7 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
 
@@ -460,7 +460,7 @@ public class UiMonthPassSystem2 : FancyScrollView<MonthlyPass2Data_Fancy>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
                 List<RewardData> rewardData = new List<RewardData>();
-                var e = rewardList.GetEnumerator();
+                using var e = rewardList.GetEnumerator();
                 for (int i = 0 ;  i < rewardList.Count;i++)
                 {
                     if (e.MoveNext())

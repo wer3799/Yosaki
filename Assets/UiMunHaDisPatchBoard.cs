@@ -191,7 +191,7 @@ public class UiMunHaDisPatchBoard : MonoBehaviour
                 
                 Param goodsParam = new Param();
 
-                var e = rewardItems.GetEnumerator();
+                using var e = rewardItems.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -211,7 +211,7 @@ public class UiMunHaDisPatchBoard : MonoBehaviour
                 {
                     
                     List<RewardData> rewardData = new List<RewardData>();
-                    var e = rewardItems.GetEnumerator();
+                    using var e = rewardItems.GetEnumerator();
                     for (int i = 0 ;  i < rewardItems.Count;i++)
                     {
                         if (e.MoveNext())

@@ -110,7 +110,7 @@ public class UiMagicBookEquipmentCollection : MonoBehaviour
             }
         }
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 
@@ -179,7 +179,7 @@ public class UiMagicBookEquipmentCollection : MonoBehaviour
             rewards[rewardType] += rewardValue;
         }
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 

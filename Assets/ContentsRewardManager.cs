@@ -1391,7 +1391,7 @@ public void OnClickSmithReward(bool isPopUp=true)
             bossParam.Add("boss20", ServerData.bossServerTable.TableDatas["boss20"].ConvertToString());
             transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while(e.MoveNext())
@@ -1467,7 +1467,7 @@ public void OnClickSmithReward(bool isPopUp=true)
             bossParam.Add("b53", ServerData.bossServerTable.TableDatas["b53"].ConvertToString());
             transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while(e.MoveNext())

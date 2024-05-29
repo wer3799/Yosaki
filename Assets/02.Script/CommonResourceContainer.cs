@@ -181,10 +181,20 @@ public static class CommonResourceContainer
     }
     public static Sprite GetBeltSprite(int idx)
     {
-        idx = idx / 3;
-        if (idx > 14)
+        if (idx >= 45)
         {
-            idx = 14;
+            if (idx % 5 == 1)
+            {
+                idx = 15;
+            }
+            else
+            {
+                idx = 14;
+            }
+        }
+        else
+        {
+            idx /= 3;
         }
         if (beltSprites == null)
         {

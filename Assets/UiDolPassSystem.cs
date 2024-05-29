@@ -292,7 +292,7 @@ public class UiDolPassSystem : FancyScrollView<DolPassData_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             List<RewardData> rewardDatas = new List<RewardData>();
             Param goodsParam = new Param();

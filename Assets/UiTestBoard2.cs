@@ -88,8 +88,8 @@ public class UiTestBoard2 : FancyScrollView<TestCellData_Fancy2>
    {
       int i = 0;
       
-      var twelveBossKeys = ServerData.bossServerTable.TableDatas.Keys.GetEnumerator();
-      var twelveBossValues = ServerData.bossServerTable.TableDatas.Values.GetEnumerator();
+      using var twelveBossKeys = ServerData.bossServerTable.TableDatas.Keys.GetEnumerator();
+      using var twelveBossValues = ServerData.bossServerTable.TableDatas.Values.GetEnumerator();
     
       while (twelveBossKeys.MoveNext()&&twelveBossValues.MoveNext())
       {

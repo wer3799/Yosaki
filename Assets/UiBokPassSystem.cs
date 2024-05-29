@@ -147,7 +147,7 @@ public class UiBokPassSystem : MonoBehaviour
             List<TransactionValue> transactions = new List<TransactionValue>();
 
             Param goodsParam = new Param();
-            var e = typeList.GetEnumerator();
+            using var e = typeList.GetEnumerator();
             
             while (e.MoveNext())
             {

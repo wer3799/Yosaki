@@ -96,7 +96,7 @@ public class UiEventMission3AttendPass : FancyScrollView<PassData_Fancy>
 
             List<TransactionValue> transactions = new List<TransactionValue>();
             
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())
@@ -114,7 +114,7 @@ public class UiEventMission3AttendPass : FancyScrollView<PassData_Fancy>
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
                 List<RewardData> rewardData = new List<RewardData>();
-                var e2 = rewards.GetEnumerator();
+                using var e2 = rewards.GetEnumerator();
                 for (int i = 0 ;  i < rewards.Count;i++)
                 {
                     if (e2.MoveNext())

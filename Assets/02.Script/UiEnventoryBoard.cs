@@ -70,7 +70,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
     
     private void MakeWeaponBoard()
     {
-        var e = TableManager.Instance.WeaponData.GetEnumerator();
+        using var e = TableManager.Instance.WeaponData.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -165,7 +165,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
     private void MakeMagicBookBoard()
     {
-        var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
+        using var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -215,7 +215,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
     }
     private void MakeNewGachaBoard()
     {
-        var e = TableManager.Instance.NewGachaData.GetEnumerator();
+        using var e = TableManager.Instance.NewGachaData.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -245,7 +245,7 @@ public class UiEnventoryBoard : SingletonMono<UiEnventoryBoard>
 
     private void MakePetBoard()
     {
-        var e = TableManager.Instance.PetDatas.GetEnumerator();
+        using var e = TableManager.Instance.PetDatas.GetEnumerator();
 
         while (e.MoveNext())
         {

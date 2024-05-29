@@ -221,7 +221,7 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
             Utils.AddOrUpdateReward(ref rewardItems,(Item_Type)tableData[i].Reward2,tableData[i].Reward2_Value);
         }
 
-        var e = rewardItems.GetEnumerator();
+        using var e = rewardItems.GetEnumerator();
         var count = rewardItems.Count;
         e.MoveNext();
         for (int i = 0; i < goodsIndicator.Count; i++)
@@ -330,7 +330,7 @@ public class UiPetPassPopup : FancyScrollView<PassData_Fancy>
 
             Param goodsParam = new Param();
 
-            var e = typeList.GetEnumerator();
+            using var e = typeList.GetEnumerator();
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);

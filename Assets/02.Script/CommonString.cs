@@ -124,6 +124,7 @@ public static class CommonString
     public static string RankPrefix_MiniGame = "미니게임";
     public static string RankPrefix_GangChul = "강철이";
     public static string RankPrefix_ChunMaTop = "십만대산(파티)";
+    public static string RankPrefix_Dimension = "시간의 틈";
 
     public static string[] ThemaName = { "마왕성 정원", "이상한 숲", "마법 동굴", "리퍼의 영역", "지옥 입구", "지옥 성곽", "지옥 안채", "지옥숲" };
 
@@ -275,7 +276,7 @@ public static class CommonString
             case Item_Type.SP: return "검조각";
             case Item_Type.Hae_Norigae: return "해태 노리개 조각";
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
-            case Item_Type.Event_Item_SnowMan: return "냉이"; //(구)송편
+            case Item_Type.Event_Item_SnowMan: return "튜브"; //(구)냉이
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
@@ -421,8 +422,8 @@ public static class CommonString
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
             case Item_Type.Event_Mission1: return "봄소풍 바구니";
             case Item_Type.Event_Mission1_All: return "봄소풍 바구니 총 획득량";
-            case Item_Type.Event_Mission2: return "봄바람";
-            case Item_Type.Event_Mission2_All: return "봄바람 총 획득량";
+            case Item_Type.Event_Mission2: return "캠핑 텐트";
+            case Item_Type.Event_Mission2_All: return "캠핑 재화 총 획득량";
             case Item_Type.Event_Mission3: return "보름달";
             case Item_Type.Event_Mission3_All: return "보름달 총 획득량";
             case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;
@@ -868,6 +869,8 @@ public static class CommonString
                 return "[진] 귀살 베기 증폭(%)";
             case StatusType.EnhanceSealSword:
                 return "요도 피해량 증폭(%)";
+            case StatusType.EnhanceAttack:
+                return "공격력 증폭(%)";
             case StatusType.EnhanceDosul:
                 return "도술 피해량 증폭(%)";
             case StatusType.EnhanceVision:

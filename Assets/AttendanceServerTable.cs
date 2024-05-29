@@ -83,7 +83,7 @@ public class AttendanceServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -125,7 +125,7 @@ public class AttendanceServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {

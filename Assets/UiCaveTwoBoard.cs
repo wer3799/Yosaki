@@ -105,7 +105,7 @@ public class UiCaveTwoBoard : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(BossServerTable.tableName, BossServerTable.Indate, bossParam));
 
             Param goodsParam = new Param();
-            var e = rewardTypes.GetEnumerator();
+            using var e = rewardTypes.GetEnumerator();
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString(e.Current), ServerData.goodsTable.GetTableData(ServerData.goodsTable.ItemTypeToServerString(e.Current)).Value);

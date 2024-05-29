@@ -778,7 +778,7 @@ public class UserInfoTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -811,8 +811,9 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            defultValues.Add(e.Current.Key, 77);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(77));
+                            var idx = 81;
+                            defultValues.Add(e.Current.Key, idx);
+                            tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(idx));
                         }
                         else if (e.Current.Key == RefundIdx)
                         {
@@ -874,7 +875,7 @@ public class UserInfoTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -1281,10 +1282,13 @@ public class UserInfoTable
                 
                 ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value = "-1";
                 ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value = "-1";
+                ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAttendFreeReward].Value = "-1";
+                ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAttendAdReward].Value = "-1";
 
 
                 monthpassParam.Add(MonthlyPassServerTable.MonthlypassFreeReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value);
-                monthpassParam.Add(MonthlyPassServerTable.MonthlypassAdReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value);
+                monthpassParam.Add(MonthlyPassServerTable.MonthlypassAttendFreeReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAttendFreeReward].Value);
+                monthpassParam.Add(MonthlyPassServerTable.MonthlypassAttendAdReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAttendAdReward].Value);
 
                 transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable.tableName, MonthlyPassServerTable.Indate, monthpassParam));
 
@@ -1998,11 +2002,11 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    //냉이
+    //튜브
     public bool CanSpawnSnowManItem()
     {
         //targetDate가 am 00시 기준이므로 AddDays해야함
-        DateTime targetDate = new DateTime(2024, 4, 9);
+        DateTime targetDate = new DateTime(2024, 7, 9);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

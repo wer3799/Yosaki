@@ -64,7 +64,7 @@ public class UiSumisanTowerBoard : MonoBehaviour
                 abilContainer[towerTableData[i].Rewardtype] += towerTableData[i].Rewardvalue;
             }
 
-            var e = abilContainer.GetEnumerator();
+            using var e = abilContainer.GetEnumerator();
 
             while (e.MoveNext())
             {

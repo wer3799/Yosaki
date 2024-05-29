@@ -101,7 +101,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public WeaponData GetWeaponDataByStringId(string id)
     {
-        var e = WeaponData.GetEnumerator();
+        using var e = WeaponData.GetEnumerator();
         while (e.MoveNext())
         {
             if (e.Current.Value.Stringid == id) return e.Current.Value;
@@ -387,7 +387,7 @@ public class TableManager : SingletonMono<TableManager>
 
     public MagicBookData GetMagicBookDataByStringId(string id)
     {
-        var e = MagicBoocDatas.GetEnumerator();
+        using var e = MagicBoocDatas.GetEnumerator();
         while (e.MoveNext())
         {
             if (e.Current.Value.Stringid == id) return e.Current.Value;

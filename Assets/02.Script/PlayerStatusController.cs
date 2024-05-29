@@ -145,7 +145,7 @@ public class PlayerStatusController : SingletonMono<PlayerStatusController>
 
             //펫 획득 했을때
 
-            var iter = ServerData.petTable.TableDatas.GetEnumerator();
+            using var iter = ServerData.petTable.TableDatas.GetEnumerator();
             while (iter.MoveNext())
             {
                 iter.Current.Value.hasItem.AsObservable().Subscribe(e =>

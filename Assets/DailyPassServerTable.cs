@@ -28,7 +28,7 @@ public class DailyPassServerTable
 
     public void ResetDailyPassLocal()
     {
-        var e = tableDatas.GetEnumerator();
+        using var e = tableDatas.GetEnumerator();
         while (e.MoveNext())
         {
             e.Current.Value.Value = "-1";
@@ -55,7 +55,7 @@ public class DailyPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -95,7 +95,7 @@ public class DailyPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -143,16 +143,16 @@ public class MonthlyPassServerTable
     public static string MonthlypassAdReward = "a";
     // public static string MonthlypassNewReward = "n10";
 
-    //public static string MonthlypassAttendFreeReward = "af11";
-    //public static string MonthlypassAttendAdReward = "aa11";
+    public static string MonthlypassAttendFreeReward = "af";
+    public static string MonthlypassAttendAdReward = "aa";
 
     private Dictionary<string, string> tableSchema = new Dictionary<string, string>()
     {
         { MonthlypassFreeReward, "-1" },
         { MonthlypassAdReward, "-1" },
         // { MonthlypassNewReward,string.Empty},
-        //{ MonthlypassAttendFreeReward,string.Empty},
-        // { MonthlypassAttendAdReward,string.Empty}
+        { MonthlypassAttendFreeReward,"-1"},
+        { MonthlypassAttendAdReward,"-1"}
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();
@@ -179,7 +179,7 @@ public class MonthlyPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -219,7 +219,7 @@ public class MonthlyPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -361,7 +361,7 @@ public class MonthlyPassServerTable2
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -401,7 +401,7 @@ public class MonthlyPassServerTable2
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -493,7 +493,7 @@ public class SeolPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -533,7 +533,7 @@ public class SeolPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -609,7 +609,7 @@ public class SulPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -649,7 +649,7 @@ public class SulPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -729,7 +729,7 @@ public class ChildPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -769,7 +769,7 @@ public class ChildPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -946,7 +946,7 @@ public class ColdSeasonPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -986,7 +986,7 @@ public class ColdSeasonPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -1068,7 +1068,7 @@ public class BokPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -1108,7 +1108,7 @@ public class BokPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -1236,7 +1236,7 @@ public class OneYearPassServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -1276,7 +1276,7 @@ public class OneYearPassServerTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {

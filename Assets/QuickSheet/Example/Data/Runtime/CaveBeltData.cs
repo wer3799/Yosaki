@@ -37,7 +37,11 @@ public class CaveBeltData
   public double Abilvalue { get {return abilvalue; } set { this.abilvalue = value;} }
   
   [SerializeField]
-  string name;
-  public string Name { get {return name; } set { this.name = value;} }
+  int abiltype2;
+  public int Abiltype2 { get {return abiltype2; } set { this.abiltype2 = value;} }
+  
+  [SerializeField]
+  double abilvalue2;
+  public double Abilvalue2 { get {return abilvalue2; } set { this.abilvalue2 = value;} }
   
 }

@@ -158,7 +158,7 @@ public class UiFoxFirePassSystem : FancyScrollView<FoxFirePassData_Fancy>
             ServerData.coldSeasonPassServerTable.TableDatas[ColdSeasonPassServerTable.foxfireAd].Value = ad;
 
             List<TransactionValue> transactions = new List<TransactionValue>();
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())

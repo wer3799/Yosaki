@@ -26,6 +26,8 @@ public class UiPartyTowerBoard : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI adTicketDescription;
+    [SerializeField]
+    private TextMeshProUGUI abilityText;
 
     private void Start()
     {
@@ -42,7 +44,10 @@ public class UiPartyTowerBoard : MonoBehaviour
         {
             adTicketDescription.SetText(e == 0 ? $"요청권 획득\n(1주 1회)" : $"획득 완료");
         }).AddTo(this);
-
+        ServerData.equipmentTable.TableDatas[EquipmentTable.CaveBelt].AsObservable().Subscribe(e =>
+        {
+            abilityText.SetText($"{CommonString.GetStatusName(StatusType.EnhanceAttack)} {Utils.ConvertNum(PlayerStats.GetCaveBeltEnhanceAttackAdd()*100,2)}");
+        }).AddTo(this);
     }
 
     void OnEnable()

@@ -155,7 +155,7 @@ public class UiPetHomeBoard : MonoBehaviour
             rewards[abilType] += abilValue;
         }
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 
@@ -209,7 +209,7 @@ public class UiPetHomeBoard : MonoBehaviour
             rewards[rewardType] += rewardValue;
         }
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 

@@ -207,8 +207,6 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
                     var cell1 = Instantiate(statusUpgradeCell1, cellParent1);
                     cell1.Initialize(tableData[i]);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
 
         }
@@ -323,6 +321,12 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
             {
                 e = Mathf.Max(0, e);
                 equipmentCell1.Initialize(TableManager.Instance.DimensionEquip.dataArray[e]);
+                Refresh();
+            }).AddTo(this);
+        ServerData.iapServerTable.TableDatas[Utils.GetCurrentDimensionSeasonData().Productid].buyCount
+            .AsObservable()
+            .Subscribe(e =>
+            {
                 Refresh();
             }).AddTo(this);
         ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dimensionGrade]

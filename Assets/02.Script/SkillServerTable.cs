@@ -139,7 +139,7 @@ public class SkillServerTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -147,7 +147,7 @@ public class SkillServerTable
 
                     if (e.Current.Key != SkillSlotIdx_0 && e.Current.Key != SkillSlotIdx_1 && e.Current.Key != SkillSlotIdx_2)
                     {
-                        var tableData = TableManager.Instance.SkillData.GetEnumerator();
+                        using var tableData = TableManager.Instance.SkillData.GetEnumerator();
 
                         if (e.Current.Key != SkillAwakeNum)
                         {

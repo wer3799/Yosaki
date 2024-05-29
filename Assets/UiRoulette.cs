@@ -120,7 +120,7 @@ public class UiRoulette : MonoBehaviour
 
         goodsParam.Add(GoodsTable.BonusSpinKey, ServerData.goodsTable.GetTableData(GoodsTable.BonusSpinKey).Value);
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         while (e.MoveNext())
         {

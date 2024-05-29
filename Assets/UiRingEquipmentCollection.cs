@@ -91,7 +91,7 @@ public class UiRingEquipmentCollection : MonoBehaviour
             }
         }
         
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 
@@ -160,7 +160,7 @@ public class UiRingEquipmentCollection : MonoBehaviour
             rewards[rewardType] += rewardValue;
         }
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 

@@ -16,9 +16,13 @@ public class UiSAMission : MonoBehaviour
 
     private Dictionary<int, UiSecondAnniversaryMissionCell> cellContainer = new Dictionary<int, UiSecondAnniversaryMissionCell>();
 
+
     //string costumeKey = "costume137";
     private void OnEnable()
     {
+        PopupManager.Instance.ShowAlarmMessage("다음 업데이트에 오픈됩니다!");
+        this.gameObject.SetActive(false);
+        return;
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
         {
             string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION6].Stringid;
@@ -185,7 +189,7 @@ public class UiSAMission : MonoBehaviour
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
             
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())

@@ -295,7 +295,7 @@ public class AlarmHitObjectV2 : AlarmHitObject
         alarmObject.SetActive(false);
         predictAlarmObject.SetActive(false);
 
-        var e = _particleSystems.GetEnumerator();
+        using var e = _particleSystems.GetEnumerator();
         while (e.MoveNext())
         {
             e.Current.gameObject.SetActive(true);
@@ -324,7 +324,7 @@ public class AlarmHitObjectV2 : AlarmHitObject
         alarmObject.SetActive(false);
         predictAlarmObject.SetActive(false);
 
-        var e = _particleSystems.GetEnumerator();
+        using var e = _particleSystems.GetEnumerator();
         while (e.MoveNext())
         {
             e.Current.gameObject.SetActive(true);
@@ -369,7 +369,7 @@ public class AlarmHitObjectV2 : AlarmHitObject
         alarmObject.SetActive(false);
         predictAlarmObject.SetActive(false);
 
-        var e = _particleSystems.GetEnumerator();
+        using var e = _particleSystems.GetEnumerator();
         while (e.MoveNext())
         {
             e.Current.gameObject.SetActive(true);

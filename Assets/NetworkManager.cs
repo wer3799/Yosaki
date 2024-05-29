@@ -57,7 +57,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         if (roomPlayerDatas.Count == 0) return false;
 
-        var e = roomPlayerDatas.GetEnumerator();
+        using var e = roomPlayerDatas.GetEnumerator();
         while (e.MoveNext())
         {
             return Utils.GetOriginNickName(e.Current.Value.nickName).Equals(Utils.GetOriginNickName(nickName));
@@ -218,7 +218,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             string recNickName = string.Empty;
 
-            var e = RoomPlayerDatas.GetEnumerator();
+            using var e = RoomPlayerDatas.GetEnumerator();
 
             while (e.MoveNext())
             {
@@ -726,7 +726,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private void PlatformCheck()
     {
 #if UNITY_ANDROID
-        var e = roomPlayerDatas.GetEnumerator();
+        using var e = roomPlayerDatas.GetEnumerator();
 
         bool hasIosPlatformUser = false;
 
@@ -745,7 +745,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
 #endif
 #if UNITY_IOS
-        var e = roomPlayerDatas.GetEnumerator();
+        using var e = roomPlayerDatas.GetEnumerator();
 
         bool hasAndroidPlatformUser = false;
 
@@ -1580,7 +1580,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         bool ret = true;
 
-        var e = roomPlayerDatas.GetEnumerator();
+        using var e = roomPlayerDatas.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -1597,7 +1597,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         double ret = 0f;
 
-        var e = roomPlayerDatas.GetEnumerator();
+        using var e = roomPlayerDatas.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -1611,7 +1611,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         double ret = 0f;
 
-        var e = roomPlayerDatas.GetEnumerator();
+        using var e = roomPlayerDatas.GetEnumerator();
 
         while (e.MoveNext())
         {

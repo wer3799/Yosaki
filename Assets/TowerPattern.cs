@@ -18,7 +18,7 @@ public class TowerPattern : MonoBehaviour
 
     private void SetDamage()
     {
-        var e = _alarmHitObject.GetEnumerator();
+        using var e = _alarmHitObject.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -28,7 +28,7 @@ public class TowerPattern : MonoBehaviour
     
     public void AttackStart()
     {
-        var e = _alarmHitObject.GetEnumerator();
+        using var e = _alarmHitObject.GetEnumerator();
 
         while (e.MoveNext())
         {

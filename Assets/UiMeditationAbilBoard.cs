@@ -40,7 +40,7 @@ public class UiMeditationAbilBoard : MonoBehaviour
         string description = string.Empty;
         
         var dictionary = PlayerStats.GetMeditationDictionary();
-        var e = dictionary.GetEnumerator();
+        using var e = dictionary.GetEnumerator();
 
         while (e.MoveNext())
         {

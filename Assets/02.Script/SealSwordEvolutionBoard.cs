@@ -239,7 +239,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
     //등록된 곳에 생성
     public void RegisterSealSword(SealSwordData sealSwordData)
     {
-        var e = registeredContainer.GetEnumerator();
+        using var e = registeredContainer.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -256,7 +256,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
             registCount++;
             break;
         }
-        var e2 = currentContainer.GetEnumerator();
+        using var e2 = currentContainer.GetEnumerator();
 
         while (e2.MoveNext())
         {
@@ -274,7 +274,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
     //등록된 데이터 감소시키기.
     public void UnRegisterSealSword(SealSwordData sealSwordData)
     {
-        var e = registeredContainer.GetEnumerator();
+        using var e = registeredContainer.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -292,7 +292,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
 
         }
         
-        var e2 = currentContainer.GetEnumerator();
+        using var e2 = currentContainer.GetEnumerator();
         while (e2.MoveNext())
         {
             if (e2.Current != null && e2.Current.GetSealSwordData() == null) continue;
@@ -310,7 +310,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
     {
         float sum = 0f;
         
-        var e = registeredContainer.GetEnumerator();
+        using var e = registeredContainer.GetEnumerator();
         var tableData = TableManager.Instance.sealSwordTable.dataArray;
         while (e.MoveNext())
         {
@@ -471,7 +471,7 @@ public class SealSwordEvolutionBoard : MonoBehaviour
         Param sealSwordParam = new Param();
 
 
-        var e = registeredContainer.GetEnumerator();
+        using var e = registeredContainer.GetEnumerator();
 
         // while (e.MoveNext())
         // {

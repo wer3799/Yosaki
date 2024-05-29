@@ -199,7 +199,7 @@ public class UiLevelPassBoard : MonoBehaviour
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())
@@ -289,7 +289,7 @@ public class UiLevelPassBoard : MonoBehaviour
 
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())
@@ -311,7 +311,7 @@ public class UiLevelPassBoard : MonoBehaviour
                 LogManager.Instance.SendLogType("LevelPass", "A", "A");
 
                 List<RewardData> rewardData = new List<RewardData>();
-                var e = rewardList.GetEnumerator();
+                using var e = rewardList.GetEnumerator();
                 for (int i = 0 ;  i < rewardList.Count;i++)
                 {
                     if (e.MoveNext())

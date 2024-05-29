@@ -1104,7 +1104,7 @@ public class GoodsTable
             {
                 Param defultValues = new Param();
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -1147,7 +1147,7 @@ public class GoodsTable
                     Indate = data[ServerData.inDate_str][ServerData.format_string].ToString();
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {
@@ -1296,7 +1296,7 @@ public class GoodsTable
     {
         Param param = new Param();
 
-        var e = tableDatas.GetEnumerator();
+        using var e = tableDatas.GetEnumerator();
         while (e.MoveNext())
         {
             if (ignoreList != null && ignoreList.Contains(e.Current.Key) == true) continue;

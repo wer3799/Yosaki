@@ -163,7 +163,7 @@ public class CostumeServerTable
     {
         string ret = string.Empty;
 
-        var e = tableDatas.GetEnumerator();
+        using var e = tableDatas.GetEnumerator();
 
         while (e.MoveNext())
         {
@@ -358,7 +358,7 @@ public class CostumeServerTable
 
         abilValues = new Dictionary<int, float>();
 
-        var e = tableDatas.GetEnumerator();
+        using var e = tableDatas.GetEnumerator();
 
         while (e.MoveNext())
         {

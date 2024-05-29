@@ -769,8 +769,8 @@ public static class GameBalance
     #endregion
     
     #region Event_MonthPass
-    public readonly static ObscuredFloat MonthPass_Exp = 10000;
-    public readonly static ObscuredFloat MonthPass_Gold = 20000;
+    public readonly static ObscuredFloat MonthPass_Exp = 15000;
+    public readonly static ObscuredFloat MonthPass_Gold = 30000;
     public readonly static ObscuredFloat MonthPass_GrowthStone = 20;
 
     
@@ -823,7 +823,7 @@ public static class GameBalance
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","미정28","미정29","미정30","미정31","미정32",
+        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","결","맥","미정30","미정31","미정32",
 
     };
     public static int GetSonIdx()

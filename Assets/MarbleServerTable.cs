@@ -29,7 +29,7 @@ public class MarbleServerTable
 
     public bool AllMarblesUnlocked()
     {
-        var e = TableDatas.GetEnumerator();
+        using var e = TableDatas.GetEnumerator();
 
         while (e.MoveNext())
         {

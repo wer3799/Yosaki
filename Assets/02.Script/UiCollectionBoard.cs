@@ -20,7 +20,7 @@ public class UiCollectionBoard : MonoBehaviour
 
     private void Initialize()
     {
-        var e = TableManager.Instance.EnemyData.GetEnumerator();
+        using var e = TableManager.Instance.EnemyData.GetEnumerator();
         //메터리얼인덱스
         int enemyIdx = 0;
         while (e.MoveNext())

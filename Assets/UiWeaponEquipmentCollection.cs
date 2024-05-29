@@ -117,7 +117,7 @@ public class UiWeaponEquipmentCollection : MonoBehaviour
             }
         }
         
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 
@@ -188,7 +188,7 @@ public class UiWeaponEquipmentCollection : MonoBehaviour
             rewards[rewardType] += rewardValue;
         }
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 

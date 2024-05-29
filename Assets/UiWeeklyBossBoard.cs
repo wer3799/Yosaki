@@ -229,7 +229,7 @@ public class UiWeeklyBossBoard : MonoBehaviour
 
         var rewardList = new List<RewardData>();
         
-        var e = rewardDatas.GetEnumerator();
+        using var e = rewardDatas.GetEnumerator();
         while (e.MoveNext())
         {
             ServerData.goodsTable.AddLocalData(ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType), e.Current.amount * sweepCount);

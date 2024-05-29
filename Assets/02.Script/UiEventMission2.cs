@@ -21,7 +21,7 @@ public class UiEventMission2 : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI costumeDesc;
     
-    string costumeKey = "costume206";
+    string costumeKey = "costume241";
     private void OnEnable()
     {
         if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
@@ -237,7 +237,7 @@ public class UiEventMission2 : MonoBehaviour
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
             
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())

@@ -94,7 +94,7 @@ public class UiMonthMission2Board : MonoBehaviour
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
             
-            var e = rewardTypeList.GetEnumerator();
+            using var e = rewardTypeList.GetEnumerator();
 
             Param goodsParam = new Param();
             while (e.MoveNext())

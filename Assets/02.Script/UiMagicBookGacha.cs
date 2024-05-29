@@ -152,7 +152,7 @@ public class UiMagicBookGacha : MonoBehaviour
 
         var magicBookData = TableManager.Instance.MagicBoocDatas;
 
-        var e = magicBookData.GetEnumerator();
+        using var e = magicBookData.GetEnumerator();
 
         int gachaLevel = UiGachaPopup.GachaLevel(UserInfoTable.gachaNum_Norigae);
 

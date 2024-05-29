@@ -17,7 +17,7 @@ public class UiLimitShop : MonoBehaviour
 
     private void Initialize()
     {
-        var e = TableManager.Instance.InAppPurchaseData.GetEnumerator();
+        using var e = TableManager.Instance.InAppPurchaseData.GetEnumerator();
 
         while (e.MoveNext())
         {

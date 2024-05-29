@@ -42,9 +42,18 @@ public class UiBeltView : MonoBehaviour
 
         lockDescription.SetText($"{caveBeltData.Id + 1}단계");
 
-        nameDescription.SetText(caveBeltData.Name);
+        nameDescription.SetText("");
 
-        abilDescription.SetText($"장착효과\n{CommonString.GetStatusName((StatusType)caveBeltData.Abiltype)} {Utils.ConvertBigNum(caveBeltData.Abilvalue)}");
+        var str="";
+
+        str += $"장착효과\n{CommonString.GetStatusName((StatusType)caveBeltData.Abiltype)} {Utils.ConvertBigNum(caveBeltData.Abilvalue)}";
+
+        if (caveBeltData.Abilvalue2 > 0)
+        {
+            str += $"\n{CommonString.GetStatusName((StatusType)caveBeltData.Abiltype2)}{Utils.ConvertNum(caveBeltData.Abilvalue2*100,2)}";
+        }
+
+        abilDescription.SetText(str);
 
         beltIcon.sprite = CommonResourceContainer.GetBeltSprite(caveBeltData.Id);
 

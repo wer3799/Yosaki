@@ -110,7 +110,7 @@ public class UiOldDokebi2Roulette : MonoBehaviour
 
         goodsParam.Add(GoodsTable.DokebiBundle, ServerData.goodsTable.GetTableData(GoodsTable.DokebiBundle).Value);
 
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         while (e.MoveNext())
         {

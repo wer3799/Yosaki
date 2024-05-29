@@ -198,7 +198,7 @@ public class UiNewGacha : MonoBehaviour
 
         var newGachaData = TableManager.Instance.NewGachaData;
 
-        var e = newGachaData.GetEnumerator();
+        using var e = newGachaData.GetEnumerator();
 
         int gachaLevel = UiGachaPopup.GachaLevel(UserInfoTable.gachaNum_NewGacha);
 

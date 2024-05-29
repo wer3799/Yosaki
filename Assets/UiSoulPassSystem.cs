@@ -116,7 +116,7 @@ public class UiSoulPassSystem : MonoBehaviour
 
             Param goodsParam = new Param();
 
-            var e = typeList.GetEnumerator();
+            using  var e = typeList.GetEnumerator();
             while (e.MoveNext())
             {
                 goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);

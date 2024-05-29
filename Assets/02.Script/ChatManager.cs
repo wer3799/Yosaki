@@ -484,7 +484,7 @@ public class ChatManager : SingletonMono<ChatManager>
     {
         RankType rankType = RankType.None;
 
-        var e = RankManager.Instance.MyRankInfo.GetEnumerator();
+        using var e = RankManager.Instance.MyRankInfo.GetEnumerator();
 
         int bestRank = int.MaxValue;
 
@@ -552,6 +552,9 @@ public class ChatManager : SingletonMono<ChatManager>
                 break;
             case RankType.ChunmaTop:
                 return CommonString.RankPrefix_ChunMaTop;
+                break;
+            case RankType.Dimension:
+                return CommonString.RankPrefix_Dimension;
                 break;
         }
 

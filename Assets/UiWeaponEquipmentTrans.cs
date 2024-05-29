@@ -99,7 +99,7 @@ public class UiWeaponEquipmentTrans : MonoBehaviour
             }
         }
         
-        var e = rewards.GetEnumerator();
+        using var e = rewards.GetEnumerator();
 
         string description = "";
 

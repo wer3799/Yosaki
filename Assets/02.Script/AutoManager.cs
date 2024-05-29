@@ -524,7 +524,7 @@ public class AutoManager : Singleton<AutoManager>
 
         Transform neariestTarget = null;
         float minPos = float.MaxValue;
-        var e = enemies.GetEnumerator();
+        using var e = enemies.GetEnumerator();
         while (e.MoveNext())
         {
             float dist = Vector3.Distance(e.Current.Value.transform.position, playerTr.transform.position);

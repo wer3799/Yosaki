@@ -75,7 +75,7 @@ public class YorinPassServerTable
                     tableDatas.Add(table[i].Productid, titleData);
                 }
 
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 while (e.MoveNext())
                 {
@@ -147,7 +147,7 @@ public class YorinPassServerTable
                 
                     }
                 }
-                var e = tableSchema.GetEnumerator();
+                using var e = tableSchema.GetEnumerator();
 
                 for (int i = 0; i < data.Keys.Count; i++)
                 {

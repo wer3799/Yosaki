@@ -33,7 +33,7 @@ public class UiStatusBoard : MonoBehaviour
 
     private void Initialize()
     {
-        var e = TableManager.Instance.StatusDatas.GetEnumerator();
+        using var e = TableManager.Instance.StatusDatas.GetEnumerator();
 
         while (e.MoveNext())
         {

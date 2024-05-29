@@ -146,6 +146,7 @@ public enum StatusType
     SuperCritical37DamPer,//보옥
     SuperCritical38DamPer,//차원 신규 베기
     YOTHasValueUpgrade,//업화 개수
+    EnhanceAttack,//공격력 증폭
 
 }
 
@@ -168,6 +169,7 @@ public static class PlayerStats
     {
         double baseAttack = GetBaseAttackPower();
         double baseAttackPer = GetBaseAttackAddPercentValue();
+        double enhanceBaseAttackPer = GetEnhanceAttack();
         double criProb = GetCriticalProb();
         double criDam = CriticalDam();
         double coolTIme = GetSkillCoolTimeDecreaseValue();
@@ -225,7 +227,7 @@ public static class PlayerStats
         double di = GetSuperCritical38DamPer();
 
         double totalPower =
-            ((baseAttack + baseAttack * baseAttackPer)
+            ((baseAttack + baseAttack * baseAttackPer*(1+enhanceBaseAttackPer))
              * (Mathf.Max((float)criProb, 0.01f) * 100f * Mathf.Max((float)criDam, 0.01f))
              * (Mathf.Max((float)skillDam, 0.01f) * 100f)
              * (Mathf.Max((float)coolTIme, 0.01f)) * 100f)
@@ -609,10 +611,12 @@ public static class PlayerStats
         float baseAttackPower = GetBaseAttackPower();
 
         float baseAttackAddPercentValue = GetBaseAttackAddPercentValue();
+        
+        float baseAttackEnhancePercentValue = GetEnhanceAttack();
 
         ret += baseAttackPower;
 
-        ret += baseAttackPower * baseAttackAddPercentValue;
+        ret += baseAttackPower * baseAttackAddPercentValue*(1+baseAttackEnhancePercentValue);
 
         return ret;
     }
@@ -621,7 +625,7 @@ public static class PlayerStats
     {
         int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon].Value;
 
-        var e = TableManager.Instance.WeaponData.GetEnumerator();
+        using var e = TableManager.Instance.WeaponData.GetEnumerator();
 
         float ret = 0f;
         while (e.MoveNext())
@@ -652,7 +656,7 @@ public static class PlayerStats
 
     public static float GetWeaponHasPercentValue(StatusType type)
     {
-        var e = TableManager.Instance.WeaponData.GetEnumerator();
+        using var e = TableManager.Instance.WeaponData.GetEnumerator();
 
         float ret = 0f;
         while (e.MoveNext())
@@ -868,7 +872,7 @@ public static class PlayerStats
 
     public static float GetMagicBookEquipPercentValue(StatusType type)
     {
-        var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
+        using var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
 
         int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook].Value;
 
@@ -915,7 +919,7 @@ public static class PlayerStats
         }
         else
         {
-            var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
+            using var e = TableManager.Instance.MagicBoocDatas.GetEnumerator();
 
 
             while (e.MoveNext())
@@ -965,7 +969,7 @@ public static class PlayerStats
 
     public static float GetSkillCollectionValue(StatusType type)
     {
-        var e = TableManager.Instance.SkillData.GetEnumerator();
+        using var e = TableManager.Instance.SkillData.GetEnumerator();
 
         float ret = 0f;
         while (e.MoveNext())
@@ -2554,6 +2558,16 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetMunhaHyulAbilValue(StatusType.EnhanceSealSword);
+        
+        
+        return ret;
+    }
+    //공격력 증폭
+    public static float GetEnhanceAttack()
+    {
+        float ret = 0f;
+
+        ret += GetCaveBeltEnhanceAttackAdd();
         
         
         return ret;
@@ -4367,6 +4381,13 @@ public static class PlayerStats
         if (equipId == -1) return 0f;
 
         return (float)TableManager.Instance.CaveBelt.dataArray[equipId].Abilvalue * (1 + GetTwoCaveBeltAbilPlusValue());
+    }
+    public static float GetCaveBeltEnhanceAttackAdd()
+    {
+        int equipId = ServerData.equipmentTable.TableDatas[EquipmentTable.CaveBelt].Value;
+        if (equipId == -1) return 0f;
+
+        return (float)TableManager.Instance.CaveBelt.dataArray[equipId].Abilvalue2;
     }
 
 

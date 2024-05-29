@@ -105,7 +105,7 @@ public class LevelPassCellCreater : FancyScrollView<PassData_Fancy>
 
         if (rewards.Count > 0)
         {
-            var e =rewards.GetEnumerator();
+            using var e =rewards.GetEnumerator();
             string desc = "";
             while (e.MoveNext())
             {
