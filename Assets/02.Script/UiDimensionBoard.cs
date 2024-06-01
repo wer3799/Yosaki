@@ -61,9 +61,8 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
     [SerializeField] private DimensionEquiepmentCollectionCell equipmentCell0;
     [SerializeField] private Transform equipmentParent0;
     [SerializeField] private TextMeshProUGUI cubeGainPerText;
-
-    [SerializeField] private DimensionEquiepmentCollectionCell equipmentCell1
-        ;
+    [SerializeField] private List<DimensionEquiepmentCollectionCell> equipmentCellContainer =new List<DimensionEquiepmentCollectionCell>();
+    [SerializeField] private DimensionEquiepmentCollectionCell equipmentCell1;
     [Header("Dungeon")]
     [SerializeField] private TextMeshProUGUI dungeonLevelText; 
     [SerializeField] private TextMeshProUGUI getClearText; 
@@ -220,8 +219,17 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
         {
             var cell = Instantiate(equipmentCell0, equipmentParent0);
             cell.Initialize(tableData[i]);
+            equipmentCellContainer.Add(cell);
         }
-        
+    }
+
+    private void ReInitializeEquipmentCell()
+    {
+        var tableData = TableManager.Instance.DimensionEquip.dataArray;
+        for (int i = 0; i < equipmentCellContainer.Count; i++)
+        {
+            equipmentCellContainer[i].Initialize(tableData[i]);
+        }
     }
     private void SetSpecialReward()
     {
@@ -328,6 +336,7 @@ public class UiDimensionBoard: SingletonMono<UiDimensionBoard>
             .Subscribe(e =>
             {
                 Refresh();
+                ReInitializeEquipmentCell();
             }).AddTo(this);
         ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.dimensionGrade]
             .AsObservable()

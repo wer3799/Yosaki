@@ -1287,6 +1287,7 @@ public class UserInfoTable
 
 
                 monthpassParam.Add(MonthlyPassServerTable.MonthlypassFreeReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassFreeReward].Value);
+                monthpassParam.Add(MonthlyPassServerTable.MonthlypassAdReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAdReward].Value);
                 monthpassParam.Add(MonthlyPassServerTable.MonthlypassAttendFreeReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAttendFreeReward].Value);
                 monthpassParam.Add(MonthlyPassServerTable.MonthlypassAttendAdReward, ServerData.monthlyPassServerTable.TableDatas[MonthlyPassServerTable.MonthlypassAttendAdReward].Value);
 
