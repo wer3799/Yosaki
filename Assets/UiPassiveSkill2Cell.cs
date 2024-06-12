@@ -141,7 +141,11 @@ public class UiPassiveSkill2Cell : MonoBehaviour
             PopupManager.Instance.ShowAlarmMessage("최고레벨 입니다.");
             return;
         }
-
+        if (ServerData.statusTable.GetTableData(StatusTable.Level).Value < GameBalance.passive2UnlockLevel)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{Utils.ConvertNum(GameBalance.passive2UnlockLevel)} 레벨을 달성해야 합니다!");
+            return;
+        }
 
         //스킬포인트 체크
         var skillPoint = ServerData.statusTable.GetTableData(StatusTable.Skill2Point);

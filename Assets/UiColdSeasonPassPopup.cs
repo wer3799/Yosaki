@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using BackEnd;
+using Spine.Unity;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiColdSeasonPassPopup : MonoBehaviour
 {
     [SerializeField]
     private List<UiBuffPopupView> uiBuffPopupViews;
     
-    string costumeKey = "costume229";
+    string costumeKey = "costume246";
 
     [SerializeField] private GameObject getCostumeButton;
 
@@ -22,6 +24,8 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     private TextMeshProUGUI descText2;
     [SerializeField] private TextMeshProUGUI costumeDesc;
     [SerializeField] private TextMeshProUGUI getCostumeDesc;
+    [SerializeField] private SkeletonGraphic costumeGraphic;
+    [SerializeField] private Image costumeImage;
 
     void Start()
     {
@@ -32,6 +36,27 @@ public class UiColdSeasonPassPopup : MonoBehaviour
         getCostumeDesc.SetText($"{CommonString.GetItemName(ServerData.goodsTable.ServerStringToItemType(costumeKey))} 획득 가능!");
 
     }
+    private void SetCostume()
+    {
+        var idx = ServerData.costumeServerTable.TableDatas[costumeKey].idx;
+        if (costumeGraphic != null)
+        {
+        
+            costumeGraphic.Clear();
+
+            costumeGraphic.gameObject.SetActive(true);
+            costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+            costumeGraphic.Initialize(true);
+            costumeGraphic.SetMaterialDirty();        
+        }
+
+        if (costumeImage != null)
+        {
+            costumeImage.sprite = CommonUiContainer.Instance.GetCostumeThumbnail(idx);
+        }
+
+    }
+    
     private void Subscribe()
     {
         ServerData.iapServerTable.TableDatas[UiHotTimeEventBuyButton.seasonPassKey].buyCount.AsObservable().Subscribe(e =>
@@ -45,6 +70,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
     }
     private void Initialize()
     {
+        SetCostume();
         string desc0 = "";
         string desc1 = "";
 ///////////////////

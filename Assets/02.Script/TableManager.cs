@@ -1041,6 +1041,8 @@ public class TableManager : SingletonMono<TableManager>
     public TransJewelTower TransJewelTower;
     public TransJewelLevel TransJewelLevel;
     
+    public PassiveSkill3 PassiveSkill3;
+    
 }
 
 

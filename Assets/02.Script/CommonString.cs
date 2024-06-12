@@ -100,6 +100,7 @@ public static class CommonString
     public static string ItemGrade_17_Skill = "용인검";
     public static string ItemGrade_18_Skill = "용궁검";
     public static string ItemGrade_19_Skill = "극락검";
+    public static string ItemGrade_20_Skill = "지옥도검";
 
     public static string GoldItemName = "금화";
     public static string BonusSpinCoin = "복주머니 뽑기권";
@@ -369,6 +370,13 @@ public static class CommonString
             case Item_Type.GRSkill3: return "극락 검술4";
             case Item_Type.GRSkill4: return "극락 검술5";
             //
+            //
+            case Item_Type.YOSkill0: return "지옥도 검술1";
+            case Item_Type.YOSkill1: return "지옥도 검술2";
+            case Item_Type.YOSkill2: return "지옥도 검술3";
+            case Item_Type.YOSkill3: return "지옥도 검술4";
+            case Item_Type.YOSkill4: return "지옥도 검술5";
+            //
             case Item_Type.OrochiTooth0: return "오로치 이빨1";
             case Item_Type.OrochiTooth1: return "오로치 이빨2";
 
@@ -511,7 +519,7 @@ public static class CommonString
             case Item_Type.GuildTowerClearTicket: return "전갈굴 소탕권";
             case Item_Type.SoulRingClear: return "영혼석 소탕권";
             case Item_Type.GuildTowerHorn: return "독침";
-            case Item_Type.Event_HotTime: return "어린이날 모자";
+            case Item_Type.Event_HotTime: return "여름 파도";
             case Item_Type.SealWeaponClear: return "요도 해방서";
             case Item_Type.DosulGoods: return "도술꽃";
             case Item_Type.TransGoods: return "초월석";

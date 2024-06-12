@@ -41,7 +41,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
         string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill,
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
-        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill,CommonString.ItemGrade_19_Skill
+        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill,CommonString.ItemGrade_19_Skill,CommonString.ItemGrade_20_Skill
         
     };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
@@ -556,6 +556,13 @@ public Sprite RecommendWeapon22;
     public Sprite GRSkill2;
     public Sprite GRSkill3;
     public Sprite GRSkill4;
+
+    
+    public Sprite YOSkill0;
+    public Sprite YOSkill1;
+    public Sprite YOSkill2;
+    public Sprite YOSkill3;
+    public Sprite YOSkill4;
 
     
     [Header ("Goods")]
@@ -2242,6 +2249,18 @@ public Sprite RecommendWeapon22;
                 return GRSkill3;
             case Item_Type.GRSkill4:
                 return GRSkill4;
+            //
+            //
+            case Item_Type.YOSkill0:
+                return YOSkill0;
+            case Item_Type.YOSkill1:
+                return YOSkill1;
+            case Item_Type.YOSkill2:
+                return YOSkill2;
+            case Item_Type.YOSkill3:
+                return YOSkill3;
+            case Item_Type.YOSkill4:
+                return YOSkill4;
             //
             case Item_Type.GangrimSkill:
                 return GangrimSkill;

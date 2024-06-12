@@ -97,25 +97,23 @@ public class DailyPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -221,23 +219,20 @@ public class MonthlyPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.ContainsKey(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        // 값 로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    else
+                    {
+                        // 새로운 값
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
 
@@ -403,25 +398,23 @@ public class MonthlyPassServerTable2
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -535,25 +528,24 @@ public class SeolPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+                
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -651,25 +643,24 @@ public class SulPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+               
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -771,31 +762,30 @@ public class ChildPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+                
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
 
-                            if (string.IsNullOrEmpty(value) && (e.Current.Key == childFree || e.Current.Key == childAd))
-                            {
-                                value = "-1";
-                            }
-
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
+                        if (string.IsNullOrEmpty(value) && (e.Current.Key == childFree || e.Current.Key == childAd))
                         {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
+                            value = "-1";
                         }
+
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -988,25 +978,24 @@ public class ColdSeasonPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+             
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -1110,25 +1099,24 @@ public class BokPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+            
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {
@@ -1278,25 +1266,23 @@ public class OneYearPassServerTable
 
                 using var e = tableSchema.GetEnumerator();
 
-                for (int i = 0; i < data.Keys.Count; i++)
+                while (e.MoveNext())
                 {
-                    while (e.MoveNext())
+                    if (data.Keys.Contains(e.Current.Key))
                     {
-                        if (data.Keys.Contains(e.Current.Key))
-                        {
-                            //값로드
-                            var value = data[e.Current.Key][ServerData.format_string].ToString();
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
-                        }
-                        //새로운값
-                        else
-                        {
-                            defultValues.Add(e.Current.Key, e.Current.Value);
-                            tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
-                            paramCount++;
-                        }
+                        //값로드
+                        var value = data[e.Current.Key][ServerData.format_string].ToString();
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(value));
+                    }
+                    //새로운값
+                    else
+                    {
+                        defultValues.Add(e.Current.Key, e.Current.Value);
+                        tableDatas.Add(e.Current.Key, new ReactiveProperty<string>(e.Current.Value));
+                        paramCount++;
                     }
                 }
+                
 
                 if (paramCount != 0)
                 {

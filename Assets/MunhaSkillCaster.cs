@@ -89,6 +89,7 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
         }
         useSkillCount = 0;
 
+        useSkillCount_Max = 1 + PlayerStats.GetAddMunhaSkillUseCount();
 
         var skillIdx = TableManager.Instance.StudentTable.dataArray[currentValue].Unlock_Skill_Id;
 
@@ -165,8 +166,8 @@ public class MunhaSkillCaster : SingletonMono<MunhaSkillCaster>
 
                     if (currentSkillData.Requirehit <= currentHitCount.Value)
                     {
-                        //   Debug.LogError("Use Mini Ult SKill");
-                    
+                        Debug.LogError("Use Munha SKill");
+                        
                         PlayerSkillCaster.Instance.UseSkill(skillIdx);
 
                         currentHitCount.Value = 0;

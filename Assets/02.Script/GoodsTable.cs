@@ -219,6 +219,12 @@ public class GoodsTable
     public static string GRSkill3 = "GRSkill3";
     public static string GRSkill4 = "GRSkill4";
 
+    public static string YOSkill0 = "YOSkill0";
+    public static string YOSkill1 = "YOSkill1";
+    public static string YOSkill2 = "YOSkill2";
+    public static string YOSkill3 = "YOSkill3";
+    public static string YOSkill4 = "YOSkill4";
+
     public static string Fw = "Fw";
     public const string Cw = "Cw"; //천계꽃
 
@@ -523,6 +529,12 @@ public class GoodsTable
         { GRSkill2, 0f },
         { GRSkill3, 0f },
         { GRSkill4, 0f },
+
+        { YOSkill0, 0f },
+        { YOSkill1, 0f },
+        { YOSkill2, 0f },
+        { YOSkill3, 0f },
+        { YOSkill4, 0f },
 
         { Fw, 0f },
         { Cw, 0f },

@@ -52,6 +52,7 @@ public static class ServerData
     public static BuffServerTable buffServerTable { get; private set; } = new BuffServerTable();
     public static PassiveServerTable passiveServerTable { get; private set; } = new PassiveServerTable();
     public static Passive2ServerTable passive2ServerTable { get; private set; } = new Passive2ServerTable();
+    public static Passive3ServerTable passive3ServerTable { get; private set; } = new Passive3ServerTable();
     public static CostumeSpecialAbilityServerTable costumeSpecialAbilityServerTable { get; private set; } = new CostumeSpecialAbilityServerTable();
 
     public static MarbleServerTable marbleServerTable { get; private set; } = new MarbleServerTable();
@@ -150,6 +151,7 @@ public static class ServerData
         buffServerTable.Initialize();
         passiveServerTable.Initialize();
         passive2ServerTable.Initialize();
+        passive3ServerTable.Initialize();
         costumeSpecialAbilityServerTable.Initialize();
         //rankTables_Boss1.Initialize();
         marbleServerTable.Initialize();

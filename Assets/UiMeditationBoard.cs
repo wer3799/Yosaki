@@ -161,57 +161,52 @@ public class UiMeditationBoard : MonoBehaviour
                     return;
                 }
 
-                PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
-                    $"{CommonString.GetItemName(Item_Type.MeditationGoods)} {lastMinute * multiplyCost}개를 사용하여 즉시 완료하시겠습니까? ",
-                    () =>
-                    {
-                        if (ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value < lastMinute * multiplyCost)
-                        {
-                            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.MeditationGoods)}이 부족합니다.");
-                            return;
-                        }
-                        
-                        //두번 타는거 방지용
-                        if (timeRemaining.TotalSeconds < 0)
-                        {
-                            PopupManager.Instance.ShowAlarmMessage("명상중이지 않습니다!");
-                            return;
-                        }
-                        
-                        ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value -=
-                        lastMinute * multiplyCost;
+                if (ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value < lastMinute * multiplyCost)
+                {
+                    PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.MeditationGoods)}이 부족합니다.");
+                    return;
+                }
+                
+                //두번 타는거 방지용
+                if (timeRemaining.TotalSeconds < 0)
+                {
+                    PopupManager.Instance.ShowAlarmMessage("명상중이지 않습니다!");
+                    return;
+                }
+                
+                ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value -=
+                lastMinute * multiplyCost;
 
-                        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationIndex).Value++;
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationIndex).Value++;
 
-                        ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationStartTime).Value = -1;
+                ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.meditationStartTime).Value = -1;
 
-                        List<TransactionValue> transactions = new List<TransactionValue>();
+                List<TransactionValue> transactions = new List<TransactionValue>();
 
-                        Param goodsParam = new Param();
+                Param goodsParam = new Param();
 
-                        goodsParam.Add(GoodsTable.MeditationGoods,
-                            ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value);
+                goodsParam.Add(GoodsTable.MeditationGoods,
+                    ServerData.goodsTable.GetTableData(GoodsTable.MeditationGoods).Value);
 
-                        transactions.Add(
-                            TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+                transactions.Add(
+                    TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-                        Param userinfo2Param = new Param();
+                Param userinfo2Param = new Param();
 
-                        userinfo2Param.Add(UserInfoTable_2.meditationIndex,
-                            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationIndex].Value);
-                        userinfo2Param.Add(UserInfoTable_2.meditationStartTime,
-                            ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationStartTime].Value);
+                userinfo2Param.Add(UserInfoTable_2.meditationIndex,
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationIndex].Value);
+                userinfo2Param.Add(UserInfoTable_2.meditationStartTime,
+                    ServerData.userInfoTable_2.TableDatas[UserInfoTable_2.meditationStartTime].Value);
 
-                        transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate,
-                            userinfo2Param));
+                transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate,
+                    userinfo2Param));
 
-                        ServerData.SendTransactionV2(transactions, successCallBack: () =>
-                        {
-                            PlayerStats.ResetMeditationDictionary();
-                            PopupManager.Instance.ShowAlarmMessage("명상 단계 상승");
-                            UpdateTimeText();
-                        });
-                    }, null);
+                ServerData.SendTransactionV2(transactions, successCallBack: () =>
+                {
+                    PlayerStats.ResetMeditationDictionary();
+                    PopupManager.Instance.ShowAlarmMessage("명상 단계 상승");
+                    UpdateTimeText();
+                });
             }
             //시간다됨.
             else

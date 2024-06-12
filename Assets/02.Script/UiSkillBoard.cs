@@ -107,6 +107,16 @@ public class UiSkillBoard : SingletonMono<UiSkillBoard>
             {
                 
             }
+            else if (skillList[i].Skilltype == 17)
+            {
+
+                var cell = Instantiate<UiSkillCell>(skillCellPrefab_Sin, cellParents[13]);
+
+                cell.Initialize(skillList[i], OnCliCkSlotSettingButton, UpdateSkillDescriptionPopup);
+
+                skillCells.Add(cell);
+                 
+            }   
             else if (skillList[i].Skilltype == 16)
             {
 

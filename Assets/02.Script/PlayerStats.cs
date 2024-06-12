@@ -434,6 +434,30 @@ public static class PlayerStats
 
         return ret;
     }
+    public static float GetPassiveSkill3Value(StatusType statusType)
+    {
+        float ret = 0f;
+
+        var tableData = TableManager.Instance.PassiveSkill3.dataArray;
+
+        for (int i = 0; i < tableData.Length; i++)
+        {
+            if (tableData[i].Abilitytype != (int)statusType) continue;
+
+            var serverData = ServerData.passive3ServerTable.TableDatas[tableData[i].Stringid];
+
+            int level = serverData.level.Value;
+
+
+            if (level != 0)
+            {
+                ret += level * tableData[i].Abilityvalue;
+            }
+        }
+
+
+        return ret;
+    }
     public static float GetCostumeSpecialAbilityValue(StatusType statusType)
     {
         float ret = 0f;
@@ -1794,6 +1818,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical3DamPer);
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical3DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical3DamPer);
 
         return ret;
     }
@@ -1827,6 +1853,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical4DamPer);
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical4DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical4DamPer);
 
         return ret;
     }
@@ -1861,6 +1889,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical5DamPer);
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical5DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical5DamPer);
 
         return ret;
     }
@@ -1915,6 +1945,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical7DamPer);
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical7DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical7DamPer);
 
         return ret;
     }
@@ -1993,6 +2025,8 @@ public static class PlayerStats
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Sum_memory);
 
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical10DamPer);
+
         
         return ret;
     }
@@ -2057,7 +2091,8 @@ public static class PlayerStats
 
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Sim_memory);
 
-        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical12DamPer);
+
         return ret;
     }
 
@@ -2120,6 +2155,8 @@ public static class PlayerStats
         ret += GetMeditationAbilValue(StatusType.SuperCritical15DamPer);
         
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Sin_memory);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical15DamPer);
 
         return ret;
     }
@@ -2194,6 +2231,8 @@ public static class PlayerStats
         ret += GetMagicBookEquipPercentValue(StatusType.SuperCritical19DamPer);
         
         ret += GetMeditationAbilValue(StatusType.SuperCritical19DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical19DamPer);
 
         return ret;
     }
@@ -2275,6 +2314,8 @@ public static class PlayerStats
         ret += GetRelicHasEffect(StatusType.SuperCritical24DamPer);
 
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical24DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical24DamPer);
 
         return ret;
     }
@@ -2322,6 +2363,8 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical28DamPer);
         
         ret += GetRelicHasEffect(StatusType.SuperCritical28DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical28DamPer);
 
         
         ret += ServerData.statusTable.GetStatusValue(StatusTable.DragonPlace_memory);
@@ -2381,6 +2424,8 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Murim_memory);
 
         ret += GetRelicHasEffect(StatusType.SuperCritical32DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical32DamPer);
 
         return ret;
     }
@@ -2433,6 +2478,10 @@ public static class PlayerStats
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical35DamPer);
         
         ret += GetStageRelicHasEffect(StatusType.SuperCritical35DamPer);
+        
+        ret += GetRelicHasEffect(StatusType.SuperCritical35DamPer);
+        
+        ret += GetPassiveSkill3Value(StatusType.SuperCritical35DamPer);
 
         return ret;
     }
@@ -4400,6 +4449,7 @@ public static class PlayerStats
         PlayerStats.ResetStageRelicHas();
         PlayerStats.ResetGuimoonRelicHas();
         PlayerStats.ResetBlackFoxHas();
+        PlayerStats.ResetHaetal();
         PlayerStats.ResetMeditationDictionary();
         PlayerStats.ResetSuperCritical11CalculatedValue();
         PlayerStats.ResetMunhaHyulDictionary();
@@ -4452,6 +4502,14 @@ public static class PlayerStats
         ret += (int)GetAwakeAbilityValue(AbilAwakeType.Vision, StatusType.AddVisionSkillUseCount);
         
         ret += GetDragonKingWeaponHasAbility();
+        
+        return ret;
+    }
+    public static int GetAddMunhaSkillUseCount()
+    {
+        int ret = 0;
+        
+        ret += GetMunhaAddAbility();
         
         return ret;
     }
@@ -4930,6 +4988,10 @@ public static class PlayerStats
     public static int GetDragonKingWeaponHasAbility()
     {
         return ServerData.weaponTable.GetWeaponData("weapon155").hasItem.Value > 0 ? 1 : 0;
+    }
+    public static int GetMunhaAddAbility()
+    {
+        return ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.munhaTower).Value >= GameBalance.munhaSkillAddGrade ? 1 : 0;
     }
 
     public static float GetClosedTrainingValue()
@@ -6793,7 +6855,7 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.FlowerHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.FlowerHasValueUpgrade);
-
+        
         ret += GetCostumeSpecialAbilityValue(StatusType.FlowerHasValueUpgrade);
         
         ret += GetSpecialTypeAbility(StatusType.FlowerHasValueUpgrade);
@@ -6813,7 +6875,7 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.DokebiFireHasValueUpgrade);
-
+        
         ret += GetCostumeSpecialAbilityValue(StatusType.DokebiFireHasValueUpgrade);
 
         ret += GetSpecialTypeAbility(StatusType.DokebiFireHasValueUpgrade);
@@ -6832,7 +6894,7 @@ public static class PlayerStats
         ret += GetGradeTestAbilValue(StatusType.SumiHasValueUpgrade);
 
         ret += GetPassiveSkill2Value(StatusType.SumiHasValueUpgrade);
-            
+        
         ret += GetCostumeSpecialAbilityValue(StatusType.SumiHasValueUpgrade);
 
         ret += GetSpecialTypeAbility(StatusType.SumiHasValueUpgrade);
@@ -6970,12 +7032,16 @@ public static class PlayerStats
         
         return ret;
     }
-    //연옥
+    //연옥 업화
     public static float GetYOTHasValueUpgrade()
     {
         float ret = 0f;
         
         ret += GetPassiveSkill2Value(StatusType.YOTHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.YOTHasValueUpgrade);
+        
+        ret += GetSkillHasValue(StatusType.YOTHasValueUpgrade);
 
         return ret;
     }

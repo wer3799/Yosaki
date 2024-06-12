@@ -34,6 +34,8 @@ public class UiFoxFireIndicator : MonoBehaviour
 
     [SerializeField] private List<Color> _colors;
 
+    [SerializeField]
+    private TMP_InputField instantClearNum;
     private void Start()
     {
         Initialize();
@@ -170,7 +172,7 @@ public class UiFoxFireIndicator : MonoBehaviour
         //조건
         if (require > ServerData.goodsTable.GetTableData(GoodsTable.FoxRelic).Value)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, $"{CommonString.GetItemName(Item_Type.FoxRelic)}가 부족합니다.", null);
+            PopupManager.Instance.ShowAlarmMessage( $"{CommonString.GetItemName(Item_Type.FoxRelic)}가 부족합니다.");
             return;
         }
 
@@ -183,7 +185,7 @@ public class UiFoxFireIndicator : MonoBehaviour
 
         if (tableData[fireIdx + 1].Level != tableData[fireIdx].Level)
         {
-            PopupManager.Instance.ShowConfirmPopup("알림",$"여우불 단계 상승!!",null);
+            PopupManager.Instance.ShowAlarmMessage($"여우불 단계 상승!!");
         }
         else
         {
@@ -227,6 +229,137 @@ public class UiFoxFireIndicator : MonoBehaviour
         ServerData.SendTransaction(transactionList, successCallBack: () => { });
     }
 
+    public void OnClickInstantClearButton()
+    {
+        int currentClearStageId = (int)ServerData.userInfoTable.TableDatas[UserInfoTable.foxTowerIdx].Value - 1;
+
+        if (currentClearStageId < 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage("여우전을 클리어 해야 합니다.");
+            return;
+        }
+
+        int remainItemNum = (int)ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value;
+
+        if (remainItemNum <= 0)
+        {
+            PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.FoxRelicClearTicket)}이 없습니다.");
+            return;
+        }
+
+        if (int.TryParse(instantClearNum.text, out var inputNum))
+        {
+            if (inputNum < 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage(CommonString.InstantClear_Minus);
+                return;
+            }
+
+            if (inputNum == 0)
+            {
+                PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
+                return;
+            }
+
+            if (inputNum > 200)
+            {
+                PopupManager.Instance.ShowAlarmMessage("소탕권은 200개 미만으로 사용가능합니다!");
+                return;
+            }
+            else if (remainItemNum < inputNum)
+            {
+                PopupManager.Instance.ShowAlarmMessage(
+                    $"{CommonString.GetItemName(Item_Type.FoxRelicClearTicket)}이 부족합니다!");
+                return;
+            }
+        }
+        else
+        {
+            PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
+            return;
+        }
+
+
+        int instanClearGetNum = (int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue *
+                                inputNum;
+
+        string desc = "";
+        if (PlayerStats.GetFoxRelicGainValue() > 0f)
+        {
+            desc +=
+                $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}(+{Utils.ConvertNum(instanClearGetNum * PlayerStats.GetFoxRelicGainValue())})개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}(+{Utils.ConvertNum((int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue * PlayerStats.GetFoxRelicGainValue())})개 획득)</color>";
+        }
+        else
+        {
+            desc +=
+                $"{currentClearStageId + 1}단계를 {inputNum}번 소탕하여\n{CommonString.GetItemName(Item_Type.FoxRelic)} {instanClearGetNum}개를 획득 하시겠습니까?\n" +
+                $"<color=yellow>({currentClearStageId + 1}단계 소탕 1회당 {CommonString.GetItemName(Item_Type.FoxRelic)} {(int)TableManager.Instance.FoxTowerTable.dataArray[currentClearStageId].Sweepvalue}개 획득)</color>";
+        }
+
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice,
+            desc,
+            () =>
+            {
+                int remainItemNum = (int)ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value;
+
+                if (remainItemNum <= 0)
+                {
+                    PopupManager.Instance.ShowAlarmMessage(
+                        $"{CommonString.GetItemName(Item_Type.FoxRelicClearTicket)}이 없습니다.");
+
+                    return;
+                }
+
+                if (int.TryParse(instantClearNum.text, out var inputNum))
+                {
+                    if (inputNum < 0)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage(CommonString.InstantClear_Minus);
+                        return;
+                    }
+
+                    if (inputNum == 0)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
+                        return;
+                    }
+                    else if (remainItemNum < inputNum)
+                    {
+                        PopupManager.Instance.ShowAlarmMessage(
+                            $"{CommonString.GetItemName(Item_Type.FoxRelicClearTicket)}이 부족합니다!");
+                        return;
+                    }
+                }
+                else
+                {
+                    PopupManager.Instance.ShowAlarmMessage("숫자를 입력해 주세요!");
+                    return;
+                }
+
+                //실제소탕
+                ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value -= inputNum;
+                ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value +=
+                    Mathf.Round(instanClearGetNum + (instanClearGetNum * PlayerStats.GetFoxRelicGainValue()));
+
+                List<TransactionValue> transactions = new List<TransactionValue>();
+
+                Param goodsParam = new Param();
+                goodsParam.Add(GoodsTable.FoxRelicClearTicket,
+                    ServerData.goodsTable.TableDatas[GoodsTable.FoxRelicClearTicket].Value);
+                goodsParam.Add(GoodsTable.FoxRelic, ServerData.goodsTable.TableDatas[GoodsTable.FoxRelic].Value);
+
+                transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+                ServerData.SendTransactionV2(transactions,
+                    successCallBack: () =>
+                    {
+                        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice,
+                            $"소탕 완료!\n{CommonString.GetItemName(Item_Type.FoxRelic)} {Utils.ConvertNum(instanClearGetNum + (instanClearGetNum * PlayerStats.GetFoxRelicGainValue()))}개 획득!",
+                            null);
+                    });
+            }, null);
+    }
 #if UNITY_EDITOR
     private void Update()
     {

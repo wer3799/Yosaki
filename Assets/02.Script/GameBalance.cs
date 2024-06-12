@@ -199,6 +199,9 @@ public static class GameBalance
     public static ObscuredInt passive2UnlockLevel = 1500000;
     public static ObscuredInt passive2PointDivideNum = 10000;
 
+    public static ObscuredInt passive3UnlockLevel = 3000000;
+    public static ObscuredInt passive3PointDivideNum = 500000;
+
     public static ObscuredInt shadowCostumeGetLevel = 12;
 
     public static ObscuredInt addDay = 0;
@@ -233,6 +236,8 @@ public static class GameBalance
     public readonly static ObscuredFloat shadowCaveGuildScoreDevideValue = 1f;
 
     public readonly static ObscuredFloat suhoGraduateValue = 1.5f;
+    
+    public readonly static ObscuredInt munhaSkillAddGrade = 49;
     
     #region Post_RankingReward
 
@@ -531,7 +536,7 @@ public static class GameBalance
         public readonly static ObscuredFloat HotTimeEvent_Ad_TaegeukGoods = 0.4f;
         public readonly static ObscuredFloat HotTimeEvent_Ad_SasinsuGoods = 0.4f;
     
-        public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 6, 11);
+        public static DateTime HotTimeEventEndPeriod = new DateTime(2024, 8, 6);
 
     #endregion
 

@@ -39,7 +39,7 @@ public class UiPassiveSkill2Board : MonoBehaviour
         //포인트 없으면 리턴
         if (GetMaxSkillAwakePoint() <= 0)
         {
-            PopupManager.Instance.ShowAlarmMessage($"{GameBalance.passive2UnlockLevel}만 레벨을 달성해야 합니다!");
+            PopupManager.Instance.ShowAlarmMessage($"{Utils.ConvertNum(GameBalance.passive2UnlockLevel)} 레벨을 달성해야 합니다!");
             return;
         }
         //패시브 스킬 초기화

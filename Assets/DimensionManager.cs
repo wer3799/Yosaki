@@ -209,8 +209,15 @@ public class DimensionManager : ContentsManagerBase
 
         contentsState.Value = (int)ContentsState.Dead;
 
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "플레이어가 사망했습니다.",
-            () => { GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField); });
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "보스 처치에 실패하셨습니다.\n재도전하시겠습니까?",
+            () =>
+            {
+                GameManager.Instance.LoadContents(GameManager.contentsType);
+
+            }, () =>
+            {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField);
+            });
         
         
     }
@@ -228,8 +235,16 @@ public class DimensionManager : ContentsManagerBase
     protected override void TimerEnd()
     {
         base.TimerEnd();
-        PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "실패!",
-            () => { GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField); });
+        PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, "보스 처치에 실패하셨습니다.\n재도전하시겠습니까?",
+            () =>
+            {
+                GameManager.Instance.LoadContents(GameManager.contentsType);
+
+            }, () =>
+            {
+                GameManager.Instance.LoadContents(GameManager.ContentsType.NormalField);
+            });
+        
         contentsState.Value = (int)ContentsState.TimerEnd;
     }
     #endregion

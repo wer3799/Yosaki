@@ -811,7 +811,7 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            var idx = 81;
+                            var idx = 83;
                             defultValues.Add(e.Current.Key, idx);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(idx));
                         }

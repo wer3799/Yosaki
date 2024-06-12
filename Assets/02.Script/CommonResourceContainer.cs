@@ -517,6 +517,10 @@ public static class CommonResourceContainer
     {
         return GetPassiveSkill2IconSprite(TableManager.Instance.PassiveSkill2.dataArray[idx]);
     }
+    public static Sprite GetPassiveSkill3IconSprite(int idx)
+    {
+        return GetPassiveSkill3IconSprite(TableManager.Instance.PassiveSkill3.dataArray[idx]);
+    }
 
     public static Sprite GetCostumeSpecialAbilityIconSprite(int idx)
     {
@@ -530,6 +534,10 @@ public static class CommonResourceContainer
     public static Sprite GetPassiveSkill2IconSprite(PassiveSkill2Data skillData)
     {
         return Resources.Load<Sprite>($"PassiveSkill2Icon/{skillData.Id}");
+    }
+    public static Sprite GetPassiveSkill3IconSprite(PassiveSkill3Data skillData)
+    {
+        return Resources.Load<Sprite>($"PassiveSkill3Icon/{skillData.Id}");
     }
 
     public static Sprite GetCostumeSpecialAbilityIconSprite(CostumeSpecialAbilityData skillData)

@@ -19,6 +19,7 @@ public class StatusTable
     public const string Level = "Level";
     public const string SkillPoint = "SkillPoint";
     public const string Skill2Point = "Skill2Point";
+    public const string Skill3Point = "Skill3Point";
     public const string StatPoint = "StatPoint";
     public const string Memory = "memory";
     public const string CostumeSkillPoint = "CostumeSkillPoint";
@@ -102,6 +103,7 @@ public class StatusTable
         { Level, 1 },
         { SkillPoint, GameBalance.SkillPointGet },
         { Skill2Point, 0 },
+        { Skill3Point, 0 },
         { CostumeSkillPoint, 0 },
         { StatPoint, 0 },
         { Memory, 0 },

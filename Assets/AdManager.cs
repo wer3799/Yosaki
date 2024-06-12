@@ -34,7 +34,8 @@ public class AdManager : SingletonMono<AdManager>,IUnityAdsInitializationListene
     private new void Awake()
     {
         base.Awake();
-#if UNITY_ANDROID
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
         Advertisement.Initialize(AndroidGameId);
 #elif UNITY_IOS
  Advertisement.Initialize(IOSGameId);
