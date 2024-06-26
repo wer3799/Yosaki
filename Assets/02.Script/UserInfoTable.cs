@@ -811,7 +811,7 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            var idx = 83;
+                            var idx = 85;
                             defultValues.Add(e.Current.Key, idx);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(idx));
                         }
@@ -1124,6 +1124,7 @@ public class UserInfoTable
             if (table[i].EVENTMISSIONTYPE == EventMissionType.AFIRST) continue;
             if (table[i].EVENTMISSIONTYPE == EventMissionType.FINISHMARBLE) continue;
             if (table[i].EVENTMISSIONTYPE == EventMissionType.THIRD) continue;
+            if (table[i].EVENTMISSIONTYPE == EventMissionType.ANNIVERSARY) continue;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].clearCount.Value = 0;
             ServerData.eventMissionTable.TableDatas[table[i].Stringid].rewardCount.Value = 0;
 
@@ -1265,9 +1266,13 @@ public class UserInfoTable
 
                 ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value = "-1";
                 ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value = "-1";
-
+                ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value = "-1";
+                ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value = "-1";
+                
                 monthpass2Param.Add(MonthlyPassServerTable2.MonthlypassFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassFreeReward].Value);
                 monthpass2Param.Add(MonthlyPassServerTable2.MonthlypassAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAdReward].Value);
+                monthpass2Param.Add(MonthlyPassServerTable2.MonthlypassAttendFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value);
+                monthpass2Param.Add(MonthlyPassServerTable2.MonthlypassAttendAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value);
 
                 transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, monthpass2Param));
 

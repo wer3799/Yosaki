@@ -223,6 +223,8 @@ public class UiGuildPetBoard : MonoBehaviour
 
                           EventMissionManager.UpdateEventMissionClear(EventMissionKey.TMISSION2, 1);
 
+                          EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION2, 1);
+
                           var memberCell = UiGuildMemberList.Instance.GetMemberCell(PlayerData.Instance.NickName);
 
                           if (memberCell != null)

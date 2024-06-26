@@ -337,11 +337,7 @@ public class StatusTable
                         return level * GameBalance.Stat_Difficulty_Slash;
                     }
                     break;
-                case Murim_memory:
-                    {
-                        return level * GameBalance.Stat_Murim_Slash;
-                    }
-                    break;
+
 
                 #endregion
 
@@ -455,7 +451,12 @@ public class StatusTable
 
                         return level * GameBalance.DragonPlace_memory * spcialAbilRatio;
                     }
+                case Murim_memory:
+                {
+                    float spcialAbilRatio = PlayerStats.GetSpecialAbilRatio();
 
+                    return level * GameBalance.Murim_Memory*spcialAbilRatio;
+                }
                 #endregion
 
                 #region GoldBar

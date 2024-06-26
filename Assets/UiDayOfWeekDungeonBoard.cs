@@ -163,6 +163,7 @@ public class UiDayOfWeekDungeonBoard : MonoBehaviour
 
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION4, 1);
 
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {

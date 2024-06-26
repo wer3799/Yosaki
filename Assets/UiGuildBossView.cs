@@ -195,6 +195,8 @@ public class UiGuildBossView : SingletonMono<UiGuildBossView>
 
                             EventMissionManager.UpdateEventMissionClear(EventMissionKey.TMISSION1, 1);
 
+                            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION1, 1);
+
                             var time = ServerData.userInfoTable.currentServerTime;
 
                             UiGuildChatBoard.Instance.SendRankScore_System($"<color=yellow>{PlayerData.Instance.NickName}님이 {rewardGrade}점을 추가했습니다.({time.Month}월 {time.Day}일 {time.Hour}시)");

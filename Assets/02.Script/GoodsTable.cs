@@ -331,6 +331,7 @@ public class GoodsTable
     public static string DC = "DC";
     public static string DE = "DE";
     public static string DCT = "DCT";
+    public static string CST = "CST";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -638,6 +639,7 @@ public class GoodsTable
         { DC, 0f},
         { DE, 0f},
         { DCT, GameBalance.DCTDailyGetAmount},
+        { CST, 0f},
     };
 
     private ReactiveDictionary<string, ReactiveProperty<float>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<float>>();

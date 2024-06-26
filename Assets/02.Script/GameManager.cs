@@ -108,11 +108,13 @@ public class GameManager : SingletonMono<GameManager>
         SpecialRequestBoss,
         GuildTower2, //황금전갈굴
         GyungRockTower8, //황금전갈굴
+        
         YeonOkTower, //연옥타워
         ChunguTower, 
         Haetal, 
         Dimension, 
         TransJewelTower,
+        ChunSangTower,
     }
     
     public bool SpawnMagicStone => IsNormalField;
@@ -395,6 +397,8 @@ public class GameManager : SingletonMono<GameManager>
             DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 1);
 
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION4, 1);
+
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearBandit, 1);

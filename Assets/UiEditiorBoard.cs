@@ -105,6 +105,8 @@ public class UiEditiorBoard : MonoBehaviour
     private Toggle showMurimToggle;
     [SerializeField]
     private Toggle showYeonOkToggle;
+    [SerializeField]
+    private Toggle showChunSangToggle;
 
 
     private void Awake()
@@ -212,6 +214,8 @@ public class UiEditiorBoard : MonoBehaviour
         showMurimToggle.isOn = PlayerPrefs.GetInt(SettingKey.showMurimUi) == 1;
 
         showYeonOkToggle.isOn = PlayerPrefs.GetInt(SettingKey.showYeonOkUi) == 1;
+
+        showChunSangToggle.isOn = PlayerPrefs.GetInt(SettingKey.showChunSangUi) == 1;
 
 
         initialized = true;
@@ -739,6 +743,17 @@ public class UiEditiorBoard : MonoBehaviour
         }
 
         SettingData.showYeonOkUi.Value = on ? 1 : 0;
+    }
+    public void ChunSangUiOnOff(bool on)
+    {
+        if (initialized == false) return;
+
+        if (on)
+        {
+            SoundManager.Instance.PlayButtonSound();
+        }
+
+        SettingData.showChunSangUi.Value = on ? 1 : 0;
     }
 
 }

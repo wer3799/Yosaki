@@ -378,6 +378,8 @@ public class AgentHpController : MonoBehaviour
         value += value * PlayerStats.GetSuperCritical37DamPer();
         //??피해
         value += value * PlayerStats.GetSuperCritical38DamPer();
+        //??피해
+        value += value * PlayerStats.GetSuperCritical39DamPer();
     }
 
     public void ApplyDimensionPlusDamage(ref double value, bool isCritical=false, bool isSuperCritical=false)

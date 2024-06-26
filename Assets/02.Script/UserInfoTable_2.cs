@@ -178,6 +178,7 @@ public class UserInfoTable_2
     public const string yeonokTowerIdx = "yoti";
     public const string chunguTowerIdx = "cgti";
     public const string haetalGradeIdx = "hgi";
+    public const string chunsangTowerIdx = "csti";
     
     public const string dimensionSpecialRewardIdx= "dsri";
     public const string munhaRefund= "mrf";
@@ -222,6 +223,7 @@ public class UserInfoTable_2
         { DragonPalaceTowerIdx, 0f },
         { MurimTowerIdx, 0f },
         { yeonokTowerIdx, 0f },
+        { chunsangTowerIdx, 0f },
         { chunguTowerIdx, 0f },
         { KingTrialGraduateIdx, 0f },
         { GodTrialGraduateIdx, 0f },

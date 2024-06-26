@@ -147,6 +147,7 @@ public enum StatusType
     SuperCritical38DamPer,//차원 신규 베기
     YOTHasValueUpgrade,//업화 개수
     EnhanceAttack,//공격력 증폭
+    SuperCritical39DamPer=127,
 
 }
 
@@ -225,6 +226,7 @@ public static class PlayerStats
         double haetal = GetSuperCritical36DamPer();
         double bo = GetSuperCritical37DamPer();
         double di = GetSuperCritical38DamPer();
+        double cs = GetSuperCritical39DamPer();
 
         double totalPower =
             ((baseAttack + baseAttack * baseAttackPer*(1+enhanceBaseAttackPer))
@@ -278,6 +280,7 @@ public static class PlayerStats
         totalPower += (totalPower * haetal);
         totalPower += (totalPower * bo);
         totalPower += (totalPower * di);
+        totalPower += (totalPower * cs);
 
         //     float totalPower =
         //((baseAttack + baseAttack * baseAttackPer)
@@ -2515,14 +2518,25 @@ public static class PlayerStats
     public static float GetSuperCritical38DamPer()
     {
         float ret = 0f;
-        
+                
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S0_DC);
         
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S1_DC);
         
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S2_DC);
 
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S3_DC);
         
+        
+        return ret;
+    }
+    //
+    public static float GetSuperCritical39DamPer()
+    {
+        float ret = 0f;
+
+        ret += GetChunsangTreasureAbilHasEffect();
+
         return ret;
     }
     
@@ -3822,6 +3836,11 @@ public static class PlayerStats
     public static float GetYeonOkTreasureAbilHasEffect()
     {
         return ((int)ServerData.goodsTable.GetTableData(GoodsTable.YOT).Value *
+                (GameBalance.yeonOkBossTreasureAbilValue + GetYOTHasValueUpgrade()));
+    }
+    public static float GetChunsangTreasureAbilHasEffect()
+    {
+        return ((int)ServerData.goodsTable.GetTableData(GoodsTable.CST).Value *
                 (GameBalance.yeonOkBossTreasureAbilValue + GetYOTHasValueUpgrade()));
     }
 

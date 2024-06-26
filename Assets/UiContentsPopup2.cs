@@ -5,69 +5,70 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Debug = System.Diagnostics.Debug;
-
+public enum ContentsBoard
+{
+    UiRelicBoard,
+    YoguisogulBoard,
+    GumiHoBoard,
+    SonBoard,
+    SusanoBoard,
+    SinBoard,
+    GangchulBoard,
+    FoxMaskBoard,
+    SuhosinBoard,
+    HellBoard,
+    ChunBoard,
+    YumAndOkBoard,
+    GradeTestBoard,
+    DokebiBoard,
+    SasinsuBoard,
+    SumisanBoard,
+    SahyungsuBoard,
+    UiThiefBoard,
+    SmithBoard,
+    SuhoAnimal,
+    SinsuTower=20,
+    VisionBoard,
+    DarkBoard,
+    FoxTowerBoard,
+    FoxBossBoard,
+    SinsunBoard,
+    GodTrialBoard,
+    TaegeukBoard,
+    SangunBoard,
+    HyunSangBoard,
+    ChunGuBoard,
+    VisionTowerBoard,
+    SinSkillBoard,
+    TransBoard,
+    NewBossBoard,
+    DanjeonBoard,
+    ClosedTrainingBoard,
+    DragonBoard,
+    SuhoBossBoard,
+    BlackFoxBoard,
+    DragonPalaceBoard,
+    MurimBoard,
+    DifficultyBossBoard,
+    HellBoard_Hard,
+    ChunBoard_Hard,
+    DokebiBoard_Hard,
+    SumiBoard_Hard,
+    ThiefBoard_Hard,
+    DarkBoard_Hard,
+    SinsunBoard_Hard,
+    DragonBoard_Hard=50,
+    YeonOkBoard,
+    ChunguBoard,
+    DragonPalaceBoard_Hard,
+    TransJewelTowerBoard,
+    ChunSangBoard,
+}
 public class UiContentsPopup2 : MonoBehaviour
 {
     [SerializeField] private List<MainTabButtons> mainTabButtonsList =new List<MainTabButtons>();
     
-    private enum ContentsBoard
-    {
-        UiRelicBoard,
-        YoguisogulBoard,
-        GumiHoBoard,
-        SonBoard,
-        SusanoBoard,
-        SinBoard,
-        GangchulBoard,
-        FoxMaskBoard,
-        SuhosinBoard,
-        HellBoard,
-        ChunBoard,
-        YumAndOkBoard,
-        GradeTestBoard,
-        DokebiBoard,
-        SasinsuBoard,
-        SumisanBoard,
-        SahyungsuBoard,
-        UiThiefBoard,
-        SmithBoard,
-        SuhoAnimal,
-        SinsuTower=20,
-        VisionBoard,
-        DarkBoard,
-        FoxTowerBoard,
-        FoxBossBoard,
-        SinsunBoard,
-        GodTrialBoard,
-        TaegeukBoard,
-        SangunBoard,
-        HyunSangBoard,
-        ChunGuBoard,
-        VisionTowerBoard,
-        SinSkillBoard,
-        TransBoard,
-        NewBossBoard,
-        DanjeonBoard,
-        ClosedTrainingBoard,
-        DragonBoard,
-        SuhoBossBoard,
-        BlackFoxBoard,
-        DragonPalaceBoard,
-        MurimBoard,
-        DifficultyBossBoard,
-        HellBoard_Hard,
-        ChunBoard_Hard,
-        DokebiBoard_Hard,
-        SumiBoard_Hard,
-        ThiefBoard_Hard,
-        DarkBoard_Hard,
-        SinsunBoard_Hard,
-        DragonBoard_Hard=50,
-        YeonOkBoard,
-        ChunguBoard,
-        DragonPalaceBoard_Hard,
-        TransJewelTowerBoard,
-    }
+  
     //한계돌파
     private enum GrowthContentsDoor
     {
@@ -132,6 +133,7 @@ public class UiContentsPopup2 : MonoBehaviour
         DragonPalace,
         Murim,
         YeonOk,
+        ChunSang,
 
     }
     
@@ -514,6 +516,10 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 361:
                     case 362:
                     case 363:
+                    case 365:
+                    case 366:
+                    case 367:
+                    case 368:
                         lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                     case 221:
@@ -630,6 +636,9 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 351:
                     case 352:
                         lastBoards[(int)ContentsBoard.DragonPalaceBoard_Hard].SetActive(true);
+                        break;
+                    case 369:
+                        lastBoards[(int)ContentsBoard.ChunSangBoard].SetActive(true);
                         break;
                         
                 }
@@ -750,6 +759,10 @@ public class UiContentsPopup2 : MonoBehaviour
                 break;
             case GameManager.ContentsType.ChunguTower :
                 lastBoards[(int)ContentsBoard.ChunguBoard].SetActive(true);
+                break;
+
+            case GameManager.ContentsType.ChunSangTower :
+                lastBoards[(int)ContentsBoard.ChunSangBoard].SetActive(true);
                 break;
 
             case GameManager.ContentsType.TransJewelTower :
@@ -1029,6 +1042,11 @@ public class UiContentsPopup2 : MonoBehaviour
         {
             newAdventureDoors[(int)AdventureDoor.YeonOk].SetActive(e == 1);
             oldAdventureDoors[(int)AdventureDoor.YeonOk].SetActive(e == 1);
+        }).AddTo(this);
+        SettingData.showChunSangUi.AsObservable().Subscribe(e =>
+        {
+            newAdventureDoors[(int)AdventureDoor.ChunSang].SetActive(e == 1);
+            oldAdventureDoors[(int)AdventureDoor.ChunSang].SetActive(e == 1);
         }).AddTo(this);
     }
     void Start()

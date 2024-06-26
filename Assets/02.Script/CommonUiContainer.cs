@@ -18,7 +18,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         CommonString.ItemGrade_21 , CommonString.ItemGrade_22 , CommonString.ItemGrade_23 , CommonString.ItemGrade_24, CommonString.ItemGrade_25,
         CommonString.ItemGrade_26, CommonString.ItemGrade_27, CommonString.ItemGrade_28, CommonString.ItemGrade_29, CommonString.ItemGrade_30,
         CommonString.ItemGrade_31,CommonString.ItemGrade_32,CommonString.ItemGrade_33,CommonString.ItemGrade_34,CommonString.ItemGrade_35,
-        CommonString.ItemGrade_36,CommonString.ItemGrade_37, };
+        CommonString.ItemGrade_36,CommonString.ItemGrade_37,CommonString.ItemGrade_38, };
     public List<string> ItemGradeName_Weapon => itemGradeName_Weapon;
 
     private List<string> itemGradeName_Norigae = new List<string>() { CommonString.ItemGrade_0, 
@@ -29,7 +29,7 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty, CommonString.ItemGrade_22_Norigae, string.Empty,CommonString.ItemGrade_24_Norigae ,string.Empty, //21~25,
         CommonString.ItemGrade_26_Norigae, CommonString.ItemGrade_27_Norigae,CommonString.ItemGrade_28_Norigae,CommonString.ItemGrade_29_Norigae,CommonString.ItemGrade_30_Norigae,
         CommonString.ItemGrade_31_Norigae, string.Empty,string.Empty,CommonString.ItemGrade_34_Norigae,CommonString.ItemGrade_35_Norigae
-        , string.Empty,CommonString.ItemGrade_37_Norigae,
+        , string.Empty,CommonString.ItemGrade_37_Norigae,CommonString.ItemGrade_38_Norigae,
     }; 
     public List<string> ItemGradeName_Norigae => itemGradeName_Norigae;
 
@@ -41,7 +41,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
         string.Empty,CommonString.ItemGrade_12_Skill,CommonString.ItemGrade_13_Skill,CommonString.ItemGrade_14_Skill,CommonString.ItemGrade_15_Skill,
         string.Empty,string.Empty,string.Empty,string.Empty,string.Empty,
-        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill,CommonString.ItemGrade_19_Skill,CommonString.ItemGrade_20_Skill
+        CommonString.ItemGrade_16_Skill,CommonString.ItemGrade_17_Skill,CommonString.ItemGrade_18_Skill,CommonString.ItemGrade_19_Skill,CommonString.ItemGrade_20_Skill,
+        CommonString.ItemGrade_21_Skill
         
     };
     public List<string> ItemGradeName_Skill => itemGradeName_Skill;
@@ -654,6 +655,7 @@ public Sprite RecommendWeapon22;
     [FormerlySerializedAs("MurimTreasure")] public Sprite MRT;
     public Sprite DBT;
     public Sprite YOT;
+    public Sprite CST;
     public Sprite RJ;
     public Sprite YJ;
     public Sprite BJ;
@@ -1283,6 +1285,8 @@ public Sprite RecommendWeapon22;
                 return DBT;   
             case Item_Type.YOT:
                 return YOT;   
+            case Item_Type.CST:
+                return CST;   
             case Item_Type.RJ:
                 return RJ;    
             case Item_Type.YJ:

@@ -11,6 +11,7 @@ public enum EventMissionType
     NORMALMARBLE,
     FINISHMARBLE,
     FOURTH,
+    ANNIVERSARY,
 
 }
 public enum EventMissionKey
@@ -96,6 +97,15 @@ public enum EventMissionKey
     FMISSION10,//문파점수등록
     FMISSION11,//견공
     FMISSION12,//견공
+    
+    ANMISSION1=71,
+    ANMISSION2,
+    ANMISSION3,
+    ANMISSION4,
+    ANMISSION5,
+    ANMISSION6,
+    ANMISSION7,
+    ANMISSION8=78,
 }
 public enum MonthMissionKey
 {

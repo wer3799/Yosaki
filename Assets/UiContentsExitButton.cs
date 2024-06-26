@@ -126,6 +126,11 @@ public class UiContentsExitButton : MonoBehaviour
                         return true;
                     case GameManager.ContentsType.YeonOkTower:
                         return false;
+                    case GameManager.ContentsType.ChunSangTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.chunsangTowerIdx).Value <
+                                                                   (TableManager.Instance.SkyTowerTable.dataArray.Length):
+                        return true;
+                    case GameManager.ContentsType.ChunSangTower:
+                        return false;
                     case GameManager.ContentsType.ChunguTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.chunguTowerIdx).Value <
                                                                    (TableManager.Instance.TowerTable16.dataArray.Length):
                         return true;

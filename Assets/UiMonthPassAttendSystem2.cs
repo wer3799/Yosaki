@@ -76,167 +76,82 @@ public class UiMonthPassAttendSystem2 : MonoBehaviour
 
     public void OnClickAllReceiveButton()
     {
+        
         string freeKey = MonthlyPassServerTable2.MonthlypassAttendFreeReward;
         string adKey = MonthlyPassServerTable2.MonthlypassAttendAdReward;
 
-        List<int> splitData_Free = GetSplitData(MonthlyPassServerTable2.MonthlypassAttendFreeReward);
-        List<int> splitData_Ad = GetSplitData(MonthlyPassServerTable2.MonthlypassAttendAdReward);
-
-        List<int> rewardTypeList = new List<int>();
 
         var tableData = TableManager.Instance.MonthlyPassAttend2.dataArray;
 
         int rewardedNum = 0;
 
-        string free = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value;
-        string ad = ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value;
+        var free = int.Parse(ServerData.monthlyPassServerTable2.TableDatas[freeKey].Value);
+        var ad = int.Parse(ServerData.monthlyPassServerTable2.TableDatas[adKey].Value);
+ 
+        UiRewardResultPopUp.Instance.Clear();
 
-        bool hasCostumeItem = false;
-        bool hasPassItem = false;
-
-        for (int i = 0; i < tableData.Length; i++)
+        for (int i = free + 1; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward(tableData[i].Unlockamount);
 
             if (canGetReward == false) break;
 
             //무료보상
-            if (HasReward(splitData_Free, tableData[i].Id) == false)
+            if (HasReward(freeKey, tableData[i].Id) == false)
             {
-                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
-                {
-                    hasCostumeItem = true;
-                    break;
-                }
-                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
-                {
-                    hasPassItem = true;
-                    break;
-                }
+                free = tableData[i].Id;
+                UiRewardResultPopUp.Instance.AddOrUpdateReward((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
             }
+        }
 
-            //유료보상
-            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
+        if (HasPassItem())
+        {
+            for (int i = ad + 1; i < tableData.Length; i++)
             {
-                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                bool canGetReward = CanGetReward(tableData[i].Unlockamount);
+
+                if (canGetReward == false) break;
+
+                //무료보상
+                if (HasReward(adKey, tableData[i].Id) == false)
                 {
-                    hasCostumeItem = true;
-                    break;
-                }
-                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
-                {
-                    hasPassItem = true;
-                    break;
+                    ad = tableData[i].Id;
+                    UiRewardResultPopUp.Instance.AddOrUpdateReward((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
                 }
             }
         }
 
-        if (hasCostumeItem)
+
+        if ( UiRewardResultPopUp.Instance.RewardList.Count> 0)
         {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
-            return;
-        }
-        if (hasPassItem)
-        {
-            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
-            return;
-        }
-        for (int i = 0; i < tableData.Length; i++)
-        {
-            bool canGetReward = CanGetReward(tableData[i].Unlockamount);
-
-            if (canGetReward == false) break;
-
-            //무료보상
-            if (HasReward(splitData_Free, tableData[i].Id) == false)
-            {
-                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
-                {
-                    hasCostumeItem = true;
-                    break;
-                }
-                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
-                {
-                    hasPassItem = true;
-                    break;
-                }
-                free += $",{tableData[i].Id}";
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward1, tableData[i].Reward1_Value);
-                if (rewardTypeList.Contains(tableData[i].Reward1) == false)
-                {
-                    rewardTypeList.Add(tableData[i].Reward1);
-                }
-
-                rewardedNum++;
-            }
-
-            //유료보상
-            if (HasPassItem() && HasReward(splitData_Ad, tableData[i].Id) == false)
-            {
-                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
-                {
-                    hasCostumeItem = true;
-                    break;
-                }
-                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
-                {
-                    hasPassItem = true;
-                    break;
-                }
-                ad += $",{tableData[i].Id}";
-                ServerData.AddLocalValue((Item_Type)(int)tableData[i].Reward2, tableData[i].Reward2_Value);
-                if (rewardTypeList.Contains(tableData[i].Reward2) == false)
-                {
-                    rewardTypeList.Add(tableData[i].Reward2);
-                }
-
-                rewardedNum++;
-            }
-        }
-
-   
-
-        if (rewardedNum > 0)
-        {
-            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value = free;
-            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value = ad;
-
             List<TransactionValue> transactions = new List<TransactionValue>();
 
-            using var e = rewardTypeList.GetEnumerator();
-
             Param goodsParam = new Param();
+            Param passParam = new Param();
+            
+            ServerData.monthlyPassServerTable2.TableDatas[freeKey].Value = $"{free}";
+            ServerData.monthlyPassServerTable2.TableDatas[adKey].Value = $"{ad}";
+            
+            passParam.Add(freeKey, ServerData.monthlyPassServerTable2.TableDatas[freeKey].Value);
+            passParam.Add(adKey, ServerData.monthlyPassServerTable2.TableDatas[adKey].Value);
+            transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
+
+            using var e = UiRewardResultPopUp.Instance.RewardList.GetEnumerator();
 
             while (e.MoveNext())
             {
-                goodsParam.Add(ServerData.goodsTable.ItemTypeToServerString((Item_Type)e.Current), ServerData.goodsTable.GetTableData((Item_Type)e.Current).Value);
-            }
+                var goodsName = ServerData.goodsTable.ItemTypeToServerString(e.Current.itemType);
+                ServerData.AddLocalValue(e.Current.itemType,e.Current.amount);
 
-            //goodsParam.Add(GoodsTable.Jade, ServerData.goodsTable.GetTableData(GoodsTable.Jade).Value);
-            //goodsParam.Add(GoodsTable.MarbleKey, ServerData.goodsTable.GetTableData(GoodsTable.MarbleKey).Value);
-            //goodsParam.Add(GoodsTable.RelicTicket, ServerData.goodsTable.GetTableData(GoodsTable.RelicTicket).Value);
-            //goodsParam.Add(GoodsTable.Peach, ServerData.goodsTable.GetTableData(GoodsTable.Peach).Value);
-            //goodsParam.Add(GoodsTable.SmithFire, ServerData.goodsTable.GetTableData(GoodsTable.SmithFire).Value);
-            //goodsParam.Add(GoodsTable.SwordPartial, ServerData.goodsTable.GetTableData(GoodsTable.SwordPartial).Value);
-            //goodsParam.Add(GoodsTable.Hel, ServerData.goodsTable.GetTableData(GoodsTable.Hel).Value);
-            //goodsParam.Add(GoodsTable.Cw, ServerData.goodsTable.GetTableData(GoodsTable.Cw).Value);
-            //goodsParam.Add(GoodsTable.DokebiFire, ServerData.goodsTable.GetTableData(GoodsTable.DokebiFire).Value);
-            //goodsParam.Add(GoodsTable.SumiFire, ServerData.goodsTable.GetTableData(GoodsTable.SumiFire).Value);
-            //goodsParam.Add(GoodsTable.NewGachaEnergy, ServerData.goodsTable.GetTableData(GoodsTable.NewGachaEnergy).Value);
+                goodsParam.Add(goodsName, ServerData.goodsTable.GetTableData(goodsName).Value);
+            }
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
-            Param passParam = new Param();
 
-            passParam.Add(MonthlyPassServerTable2.MonthlypassAttendFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value);
-            passParam.Add(MonthlyPassServerTable2.MonthlypassAttendAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value);
-
-            transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
-
-            ServerData.SendTransaction(transactions, successCallBack: () =>
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
-                PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
-              //  LogManager.Instance.SendLogType("MonthPass", "A", "A");
+                UiRewardResultPopUp.Instance.Show().Clear();
             });
         }
         else
@@ -248,19 +163,17 @@ public class UiMonthPassAttendSystem2 : MonoBehaviour
 
     private bool CanGetReward(int require)
     {
-        int killCountTotal = (int)ServerData.userInfoTable.GetTableData(UserInfoTable.monthAttendCount).Value;
-        return killCountTotal >= require;
+        return (int)ServerData.userInfoTable.GetTableData(UserInfoTable.monthAttendCount).Value >= require;
+
     }
-    public bool HasReward(List<int> splitData, int id)
+    public bool HasReward(string key, int id)
     {
-        return splitData.Contains(id);
+        return int.Parse(ServerData.monthlyPassServerTable2.TableDatas[key].Value) >= id;
     }
 
     private bool HasPassItem()
     {
-        bool hasIapProduct = ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0;
-
-        return hasIapProduct;
+        return ServerData.iapServerTable.TableDatas[UiMonthPassBuyButton2.monthPassKey].buyCount.Value > 0;
     }
 
     public List<int> GetSplitData(string key)

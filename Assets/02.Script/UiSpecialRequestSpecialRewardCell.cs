@@ -123,7 +123,7 @@ public class UiSpecialRequestSpecialRewardCell : MonoBehaviour
             var key = ServerData.goodsTable.ItemTypeToServerString(rewardType);
             var serverData = ServerData.goodsTable.TableDatas[key];
 
-            serverData.Value += 1;
+            serverData.Value += tableData.Rewardvalue;
 
             rewardParam.Add(key, serverData.Value);
             transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, rewardParam));

@@ -52,10 +52,10 @@ public class UiSpecialProductBoard : MonoBehaviour
     private int GetEventPackageBuyCount()
     {
         var sum = 0;
-        sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[0]].buyCount.Value;
-        sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[1]].buyCount.Value;
-        sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[2]].buyCount.Value;
-        
+        for (int i = 0; i < GameBalance.specialProductId.Count; i++)
+        {
+            sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[i]].buyCount.Value;
+        }
         return sum;
     }
     

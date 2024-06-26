@@ -60,7 +60,7 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
         //무료보상 데이터 변경시
         ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Subscribe(e =>
         {
-            bool rewarded = HasReward(passInfo.rewardType_Free_Key, passInfo.id);
+            bool rewarded = HasReward(passInfo.rewardType_Free_Key);
             rewardedObject_Free.SetActive(rewarded);
 
         }).AddTo(disposables);
@@ -68,7 +68,7 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
         //광고보상 데이터 변경시
         ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_IAP_Key].Subscribe(e =>
         {
-            bool rewarded = HasReward(passInfo.rewardType_IAP_Key, passInfo.id);
+            bool rewarded = HasReward(passInfo.rewardType_IAP_Key);
             rewardedObject_Ad.SetActive(rewarded);
 
         }).AddTo(disposables);
@@ -121,31 +121,34 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
         descriptionText.SetText($"{Utils.ConvertBigNum(passInfo.require)}일차");
     }
 
-    public List<string> GetSplitData(string key)
+    public bool HasReward(string key)
     {
-        return ServerData.monthlyPassServerTable2.TableDatas[key].Value.Split(',').ToList();
-    }
+        return int.Parse(ServerData.monthlyPassServerTable2.TableDatas[key].Value) >= passInfo.id;
 
-    public bool HasReward(string key, int data)
+    }
+    private bool IsBeforeRewarded(string key)
     {
-        var splitData = GetSplitData(key);
-        return splitData.Contains(data.ToString());
+        //0일때 1
+        return int.Parse(ServerData.monthlyPassServerTable2.TableDatas[key].Value) + 1 == passInfo.id;
     }
-
     public void OnClickFreeRewardButton()
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("출석이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Can);
             return;
         }
 
-        if (HasReward(passInfo.rewardType_Free_Key, passInfo.id))
+        if (HasReward(passInfo.rewardType_Free_Key))
         {
-            PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Has);
             return;
         }
-
+        if (IsBeforeRewarded(passInfo.rewardType_Free_Key)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Before);
+            return;
+        }
         PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
 
         GetFreeReward();
@@ -157,16 +160,20 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
     {
         if (CanGetReward() == false)
         {
-            PopupManager.Instance.ShowAlarmMessage("출석이 부족합니다.");
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Can);
             return;
         }
 
-        if (HasReward(passInfo.rewardType_IAP_Key, passInfo.id))
+        if (HasReward(passInfo.rewardType_IAP_Key))
         {
-            PopupManager.Instance.ShowAlarmMessage("이미 보상을 받았습니다!");
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Has);
             return;
         }
-
+        if (IsBeforeRewarded(passInfo.rewardType_IAP_Key)==false)
+        {
+            PopupManager.Instance.ShowAlarmMessage(CommonString.Reward_Before);
+            return;
+        }
         if (HasPassItem())
         {
             GetAdReward();
@@ -186,22 +193,22 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
 
     private void GetFreeReward()
     {
-            //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value += $",{passInfo.id}";
-            ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
+        //로컬
+        ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value= $"{passInfo.id}";
+        ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_Free, passInfo.rewardTypeValue_Free);
 
-            List<TransactionValue> transactionList = new List<TransactionValue>();
+        List<TransactionValue> transactionList = new List<TransactionValue>();
 
-            //패스 보상
-            Param passParam = new Param();
-            passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
-            transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
+        //패스 보상
+        Param passParam = new Param();
+        passParam.Add(passInfo.rewardType_Free_Key, ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_Free_Key].Value);
+        transactionList.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, passParam));
 
-            var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
-            transactionList.Add(rewardTransactionValue);
+        var rewardTransactionValue = ServerData.GetItemTypeTransactionValue((Item_Type)(int)passInfo.rewardType_Free);
+        transactionList.Add(rewardTransactionValue);
 
-            ServerData.SendTransaction(transactionList, successCallBack: () =>
-            {
+        ServerData.SendTransaction(transactionList, successCallBack: () =>
+        {
             // LogManager.Instance.SendLogType("월간", "무료", $"{passInfo.id}");
         });
         
@@ -209,7 +216,7 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
     private void GetAdReward()
     {
             //로컬
-            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_IAP_Key].Value += $",{passInfo.id}";
+            ServerData.monthlyPassServerTable2.TableDatas[passInfo.rewardType_IAP_Key].Value = $"{passInfo.id}";
             ServerData.AddLocalValue((Item_Type)(int)passInfo.rewardType_IAP, passInfo.rewardTypeValue_IAP);
 
             List<TransactionValue> transactionList = new List<TransactionValue>();
@@ -224,8 +231,8 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
 
             ServerData.SendTransaction(transactionList, successCallBack: () =>
             {
-            // LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
-             });
+                // LogManager.Instance.SendLogType("월간", "유료", $"{passInfo.id}");
+            });
 
             PopupManager.Instance.ShowAlarmMessage("보상을 수령했습니다!");
         
@@ -249,7 +256,7 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
 
         if (HasPassItem() == false)
         {
-            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false)
+            if (CanGetReward() == true && HasReward(passInfo.rewardType_Free_Key) == false)
             {
                 this.transform.SetAsFirstSibling();
             }
@@ -257,7 +264,7 @@ public class UiMonthlyPassAttendCell2 : MonoBehaviour
         else
         {
             if (CanGetReward() == true &&
-                (HasReward(passInfo.rewardType_Free_Key, passInfo.id) == false || HasReward(passInfo.rewardType_IAP_Key, passInfo.id) == false))
+                (HasReward(passInfo.rewardType_Free_Key) == false || HasReward(passInfo.rewardType_IAP_Key) == false))
             {
                 this.transform.SetAsFirstSibling();
             }

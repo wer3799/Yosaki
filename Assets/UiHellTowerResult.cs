@@ -156,6 +156,12 @@ public class UiHellTowerResult : MonoBehaviour
                     case GameManager.ContentsType.ChunguTower:
                         stageChangeButton.SetActive(false);
                         break;
+                    case GameManager.ContentsType.ChunSangTower when (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.chunsangTowerIdx).Value < (TableManager.Instance.SkyTowerTable.dataArray.Length):
+                        stageChangeText.SetText("다음 스테이지");
+                        break;
+                    case GameManager.ContentsType.ChunSangTower:
+                        stageChangeButton.SetActive(false);
+                        break;
                 }
                 
                 return "클리어!!";

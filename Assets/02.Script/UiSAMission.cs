@@ -17,84 +17,6 @@ public class UiSAMission : MonoBehaviour
     private Dictionary<int, UiSecondAnniversaryMissionCell> cellContainer = new Dictionary<int, UiSecondAnniversaryMissionCell>();
 
 
-    //string costumeKey = "costume137";
-    private void OnEnable()
-    {
-        PopupManager.Instance.ShowAlarmMessage("다음 업데이트에 오픈됩니다!");
-        this.gameObject.SetActive(false);
-        return;
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateChun).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION6].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }    
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.graduateDokebiFire).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION7].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.bonusDungeonEnterCount).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION1].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDayOfWeek).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION1].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.dokebiNewEnterCount).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION2].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.dailySleepRewardReceiveCount).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION3].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getGumGi).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION4].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSmith).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION5].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getFlower).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION6].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getDokebiFire).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION7].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getSumiFire).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION8].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.getRingGoods).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION9].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.SendGuildPoint).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION10].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-        if (ServerData.userInfoTable.GetTableData(UserInfoTable.sendPetExp).Value > 0)
-        {
-            string key = TableManager.Instance.EventMissionDatas[(int)EventMissionKey.TMISSION11].Stringid;
-            ServerData.eventMissionTable.UpdateMissionClearToCount(key, 1);
-        }
-    }
 
 
     private void Awake()
@@ -109,7 +31,7 @@ public class UiSAMission : MonoBehaviour
 
         for (int i = 0; i < tableData.Length; i++)
         {
-            if (tableData[i].EVENTMISSIONTYPE != EventMissionType.THIRD) continue;
+            if (tableData[i].EVENTMISSIONTYPE != EventMissionType.ANNIVERSARY) continue;
             var cell = Instantiate<UiSecondAnniversaryMissionCell>(missionCell, cellParent);
 
             cell.Initialize(tableData[i]);

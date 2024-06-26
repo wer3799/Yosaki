@@ -17,6 +17,7 @@ public class UiTreasureBoard : MonoBehaviour
         DragonPalace,
         Murim,
         YeonOk,
+        ChunSang,
     }
 
     [SerializeField] private treasureType _treasureType;
@@ -40,6 +41,9 @@ public class UiTreasureBoard : MonoBehaviour
                 break;
             case treasureType.YeonOk:
                 abilDesc += $"{CommonString.GetStatusName(StatusType.SuperCritical35DamPer)} {Utils.ConvertNum(PlayerStats.GetYeonOkTreasureAbilHasEffect() * 100f, 2)}";
+                break;
+            case treasureType.ChunSang:
+                abilDesc += $"{CommonString.GetStatusName(StatusType.SuperCritical39DamPer)} {Utils.ConvertNum(PlayerStats.GetChunsangTreasureAbilHasEffect() * 100f, 2)}";
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

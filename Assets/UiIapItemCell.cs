@@ -268,6 +268,11 @@ public class UiIapItemCell : MonoBehaviour
             UiShop.Instance.GetPackageItem(productData.Productid);
             Debug.LogError("Get SeolFreePackage");
         }
+        else if (productData.Productid.Equals("thirdpackage0"))
+        {
+            UiShop.Instance.GetPackageItem(productData.Productid);
+            Debug.LogError("Get SeolFreePackage");
+        }
         else if (productData.Needlevel == 0)
         {
 

@@ -48,6 +48,11 @@ public class UiTowerRewardView : MonoBehaviour
                 rewardType = (Item_Type)chunGu.Rewardtype;
                 rewardValue = chunGu.Rewardvalue;
                 break;
+            case GameManager.ContentsType.ChunSangTower :
+                var chunsang = TableManager.Instance.SkyTowerTable.dataArray[idx];
+                rewardType = (Item_Type)chunsang.Rewardtype;
+                rewardValue = chunsang.Rewardvalue;
+                break;
         }
 
         rewardIcon.sprite = CommonUiContainer.Instance.GetItemIcon(rewardType);
@@ -63,6 +68,8 @@ public class UiTowerRewardView : MonoBehaviour
                 return TableManager.Instance.YeonokTowerTable.dataArray.Length - 1;
             case GameManager.ContentsType.ChunguTower:
                 return TableManager.Instance.TowerTable16.dataArray.Length - 1;
+            case GameManager.ContentsType.ChunSangTower:
+                return TableManager.Instance.SkyTowerTable.dataArray.Length - 1;
             default:
                 return 0;
         }

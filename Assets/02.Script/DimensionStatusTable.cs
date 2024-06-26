@@ -19,6 +19,7 @@ public class DimensionStatusTable
     public const string S0_DC = "S0_DC";
     public const string S1_DC = "S1_DC";
     public const string S2_DC = "S2_DC";
+    public const string S3_DC = "S3_DC";
 
 
     private Dictionary<string, float> tableSchema = new Dictionary<string, float>()
@@ -31,6 +32,7 @@ public class DimensionStatusTable
         { S0_DC, 0 },
         { S1_DC, 0 },
         { S2_DC, 0 },
+        { S3_DC, 0 },
 
     };
 
@@ -73,6 +75,7 @@ public class DimensionStatusTable
                 case S0_DC:
                 case S1_DC:
                 case S2_DC:
+                case S3_DC:
                 {
                     return level * data.Addvalue;
                 }
@@ -102,6 +105,7 @@ public class DimensionStatusTable
                 case S0_DC:
                 case S1_DC:
                 case S2_DC:
+                case S3_DC:
                 {
                     var level = tableDatas[key].Value;
                     

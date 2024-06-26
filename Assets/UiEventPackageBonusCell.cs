@@ -58,9 +58,10 @@ public class UiEventPackageBonusCell : ItemView
     private int GetEventPackageBuyCount()
     {
         var sum = 0;
-        sum += (int)ServerData.iapServerTable.TableDatas["childpackage0"].buyCount.Value;
-        sum += (int)ServerData.iapServerTable.TableDatas["childpackage1"].buyCount.Value;
-        sum += (int)ServerData.iapServerTable.TableDatas["childpackage2"].buyCount.Value;
+        for (int i = 0; i < GameBalance.specialProductId.Count; i++)
+        {
+            sum += (int)ServerData.iapServerTable.TableDatas[GameBalance.specialProductId[i]].buyCount.Value;
+        }
         
         return sum;
     }
@@ -99,7 +100,7 @@ public class UiEventPackageBonusCell : ItemView
         
         ServerData.SendTransactionV2(transactions, successCallBack: () =>
         {
-            PopupManager.Instance.ShowAlarmMessage("어린이날 한정 보너스 보상 획득!");
+            PopupManager.Instance.ShowAlarmMessage("3주년 전야제 스폐셜 세트 보상 획득!");
         });
     }
 }

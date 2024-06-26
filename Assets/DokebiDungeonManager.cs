@@ -48,6 +48,8 @@ public class DokebiDungeonManager : ContentsManagerBase
     protected override void TimerEnd()
     {
         EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION7, 1);
+        EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION5, 1);
+
         if (ServerData.userInfoTable.IsMonthlyPass2() == false)
         {
             EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearOni, 1);

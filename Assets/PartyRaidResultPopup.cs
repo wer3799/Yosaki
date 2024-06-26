@@ -89,6 +89,7 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.MISSION3, 1);
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.AMISSION3, 1);
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.TMISSION3, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION3, 1);
                 RecordPartyRaidScore();
                 LeaveRoom();
 

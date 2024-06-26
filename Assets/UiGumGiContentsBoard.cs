@@ -136,6 +136,7 @@ public class UiGumGiContentsBoard : MonoBehaviour
 
             
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION4, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION7, 1);
 
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {

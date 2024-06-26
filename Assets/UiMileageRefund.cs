@@ -2313,6 +2313,46 @@ public class UiMileageRefund : MonoBehaviour
 
             });
         }
+                
+        if (ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value < 85)
+        {
+            Param userInfoParam = new Param();
+            Param userInfo2Param = new Param();
+            Param goodsParam = new Param();
+            Param passParam = new Param();
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 85;
+            
+            ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value = GameBalance.DCTDailyGetAmount;
+            
+            ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
+
+            //이벤트상품 초기화
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventPackageRewardIdx).Value = -1;
+            
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
+            ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";
+            
+            passParam.Add(ChildPassServerTable.childFree, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value);
+            passParam.Add(ChildPassServerTable.childAd, ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value);
+            transactions.Add(TransactionValue.SetUpdate(ChildPassServerTable.tableName, ChildPassServerTable.Indate, passParam));
+            
+            userInfoParam.Add(UserInfoTable.killCountTotalWinterPass, ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value);
+            userInfoParam.Add(UserInfoTable.eventMissionInitialize, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+            userInfo2Param.Add(UserInfoTable_2.eventPackageRewardIdx, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventPackageRewardIdx).Value);
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+
+            goodsParam.Add(GoodsTable.DCT, ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value);
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            });
+        }
     }
 
     #region UnUsed

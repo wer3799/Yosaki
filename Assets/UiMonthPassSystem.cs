@@ -297,7 +297,6 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
                 PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "보상을 전부 수령했습니다", null);
-              //  LogManager.Instance.SendLogType("MonthPass", "A", "A");
             });
         }
         else

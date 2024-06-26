@@ -378,6 +378,9 @@ public enum Item_Type
     weapon192 = 1078, //무림
     weapon193 = 1079, //무림
     weapon194 = 1080, //특별
+    
+    weapon195 = 1081, 
+    weapon196 = 1082, 
 
     weapon_end = 1200,
     //
@@ -694,6 +697,11 @@ public enum Item_Type
     costume244 = 1544, 
     costume245 = 1545, 
     costume246 = 1546, 
+    
+    costume247 = 1547, 
+    costume248 = 1548, 
+    costume249 = 1549, 
+    costume250 = 1550, 
 
     costume_end=1999,
 
@@ -741,6 +749,9 @@ public enum Item_Type
 
     magicBook150 = 2032,
     magicBook151 = 2033,
+
+    magicBook152 = 2034,
+    magicBook153 = 2035,
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -1287,6 +1298,7 @@ public enum Item_Type
     MRT=10001, //무림유물
     DBT=10002, //난이도유물
     YOT=10003, //연옥유물
+    CST=10004, //천상
     Treasure_End=10100,
     
     //VisionSkill=10001~10100

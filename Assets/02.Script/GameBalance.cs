@@ -61,7 +61,7 @@ public static class GameBalance
     #endregion
     
     public static List<string> samchunTitle = new List<string>() { "요괴지옥", "천상계","도깨비나라","수미산", "도적단", "심연","신선계","용인계","용궁"  };
-    public static List<string> specialProductId = new List<string>() { "childpackage0", "childpackage1","childpackage2" };
+    public static List<string> specialProductId = new List<string>() { "thirdpackage0", "thirdpackage1","thirdpackage2" };
     public static List<float> warMarkAbils = new List<float>() { 0f, 400f, 500f, 600f, 700f, 800f, 900f, 1000f };
     public readonly static List<ObscuredFloat> potion_Option = new List<ObscuredFloat>() { 0.3f, 0.6f, 0.9f };
 
@@ -550,11 +550,10 @@ public static class GameBalance
 
     public readonly static ObscuredFloat HpLevel_Gold = 5000f;
     public readonly static ObscuredFloat HpPer_StatPoint = 0.005f;
-    public readonly static ObscuredFloat Stat_Sin_Slash = 0.00001f;
-    public readonly static ObscuredFloat Stat_Hyung_Slash =  0.000001f;
-    public readonly static ObscuredFloat Stat_Chungu_Slash =  0.0000003f;
-    public readonly static ObscuredFloat Stat_Difficulty_Slash =  0.000001f;
-    public readonly static ObscuredFloat Stat_Murim_Slash =  0.000001f;
+    public readonly static ObscuredFloat Stat_Sin_Slash = 0.00015f;
+    public readonly static ObscuredFloat Stat_Hyung_Slash =  0.00004f;
+    public readonly static ObscuredFloat Stat_Chungu_Slash =  0.0000045f;
+    public readonly static ObscuredFloat Stat_Difficulty_Slash =  0.0002f;
 
     #endregion
     
@@ -703,11 +702,12 @@ public static class GameBalance
     #region StatusSetting_Memory
     public static ObscuredFloat Gum_memory = 0.0000010f;
     public static ObscuredFloat Sum_memory = 0.0000008f;
-    public static ObscuredFloat Sim_memory = 0.0000004f;
-    public static ObscuredFloat Sin_memory = 0.0000003f;
-    public static ObscuredFloat Dragon_memory = 0.00000003f;
-    public static ObscuredFloat DragonPlace_memory = 0.000000005f;
-    
+    public static ObscuredFloat Sim_memory = 0.000008f;
+    public static ObscuredFloat Sin_memory = 0.0000015f;
+    public static ObscuredFloat Dragon_memory = 0.000001f;
+    public static ObscuredFloat DragonPlace_memory = 0.000000025f;
+    public static ObscuredFloat Murim_Memory =  0.000000025f;
+
 
     #endregion
 
@@ -828,7 +828,7 @@ public static class GameBalance
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","결","맥","미정30","미정31","미정32",
+        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","결","맥","토","산","미정32",
 
     };
     public static int GetSonIdx()

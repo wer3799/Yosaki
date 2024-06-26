@@ -188,6 +188,8 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
 
                  transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
                  EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION2, 1);
+                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION5, 1);
+
                  if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                  {
                      EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearOni, 1);
@@ -250,6 +252,8 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
 
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION2, 1);
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION5, 1);
+
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearOni, 1);
@@ -323,6 +327,8 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMission2Key.ClearSwordPartial, 1);
                 }
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION7, 1);
+
                 ServerData.SendTransaction(transactions, successCallBack: () =>
                 {
                     LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
@@ -361,6 +367,8 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMission2Key.ClearSwordPartial, 1);
                 }
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION7, 1);
+
                 ServerData.SendTransaction(transactions, successCallBack: () =>
                 {
                     LogManager.Instance.SendLogType("GumGi", "_", score.ToString());
@@ -452,6 +460,7 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
                 DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
 
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION4, 1);
 
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
@@ -502,6 +511,7 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
                 DailyMissionManager.UpdateDailyMission(DailyMissionKey.ClearBonusDungeon, 10);
 
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, 1);
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION4, 1);
 
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
@@ -606,6 +616,7 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
                         });
 
                     EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, clearCount);
+                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION4, clearCount);
 
                     if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                     {
@@ -675,6 +686,7 @@ public class ContentsRewardManager : SingletonMono<ContentsRewardManager>
                         });
 
                     EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION1, clearCount);
+                    EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION4, clearCount);
 
                     if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                     {
@@ -1075,7 +1087,8 @@ public void OnClickSmithReward(bool isPopUp=true)
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION9, 1);
-            
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION8, 1);
+
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearSoulStone, 1);
@@ -1112,7 +1125,8 @@ public void OnClickSmithReward(bool isPopUp=true)
                 transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
                 EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION9, 1);
-                
+                EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION8, 1);
+
                 if (ServerData.userInfoTable.IsMonthlyPass2() == false)
                 {
                     EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearSoulStone, 1);

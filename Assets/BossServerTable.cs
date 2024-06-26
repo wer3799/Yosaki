@@ -116,6 +116,8 @@ public class BossServerTable
             else
             {
                 Param defultValues = new Param();
+                Param defultValues2 = new Param();
+
                 int paramCount = 0;
 
                 JsonData data = rows[0];
@@ -146,16 +148,30 @@ public class BossServerTable
                     }
                     else
                     {
+                        if (paramCount < 280)
+                        {
+                            var bossData = new BossServerData();
+                            bossData.idx = table[i].Id;
+                            bossData.score = new ReactiveProperty<string>(string.Empty);
+                            bossData.rewardedId = new ReactiveProperty<string>(string.Empty);
 
-                        var bossData = new BossServerData();
-                        bossData.idx = table[i].Id;
-                        bossData.score = new ReactiveProperty<string>(string.Empty);
-                        bossData.rewardedId = new ReactiveProperty<string>(string.Empty);
+                            defultValues.Add(table[i].Stringid, bossData.ConvertToString());
 
-                        defultValues.Add(table[i].Stringid, bossData.ConvertToString());
+                            tableDatas.Add(table[i].Stringid, bossData);
+                            paramCount++;
+                        }
+                        else
+                        {
+                            var bossData = new BossServerData();
+                            bossData.idx = table[i].Id;
+                            bossData.score = new ReactiveProperty<string>(string.Empty);
+                            bossData.rewardedId = new ReactiveProperty<string>(string.Empty);
 
-                        tableDatas.Add(table[i].Stringid, bossData);
-                        paramCount++;
+                            defultValues2.Add(table[i].Stringid, bossData.ConvertToString());
+
+                            tableDatas.Add(table[i].Stringid, bossData);
+                            paramCount++;
+                        }
                     }
                 }
 
@@ -167,6 +183,16 @@ public class BossServerTable
                     {
                         ServerData.ShowCommonErrorPopup(bro, Initialize);
                         return;
+                    }
+                    if (paramCount >= 280) 
+                    {
+                        var bro2 = Backend.GameData.Update(tableName, Indate, defultValues2);
+
+                        if (bro2.IsSuccess() == false)
+                        {
+                            ServerData.ShowCommonErrorPopup(bro, Initialize);
+                            return;
+                        }
                     }
                 }
 

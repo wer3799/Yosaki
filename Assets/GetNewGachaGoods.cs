@@ -94,7 +94,8 @@ public class GetNewGachaGoods : MonoBehaviour
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             EventMissionManager.UpdateEventMissionClear(EventMissionKey.SMISSION9, 1);
-            
+            EventMissionManager.UpdateEventMissionClear(EventMissionKey.ANMISSION8, 1);
+
             if (ServerData.userInfoTable.IsMonthlyPass2() == false)
             {
                 EventMissionManager.UpdateEventMissionClear(MonthMissionKey.ClearSoulStone, 1);

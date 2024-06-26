@@ -1182,4 +1182,9 @@ public static class Utils
     {
         return ServerData.iapServerTable.TableDatas[GetCurrentDimensionSeasonData().Productid].buyCount.Value > 0;
     }
+
+    public static bool IsAnniversaryMission(this EventMissionKey key)
+    {
+        return key is >= EventMissionKey.ANMISSION1 and <= EventMissionKey.ANMISSION8;
+    }
 }
