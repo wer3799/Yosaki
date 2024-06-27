@@ -2318,7 +2318,7 @@ public class UiMileageRefund : MonoBehaviour
         {
             Param userInfoParam = new Param();
             Param userInfo2Param = new Param();
-            Param goodsParam = new Param();
+         //   Param goodsParam = new Param();
             Param passParam = new Param();
             Param monthpass2Param = new Param();
             
@@ -2326,7 +2326,7 @@ public class UiMileageRefund : MonoBehaviour
 
             ServerData.userInfoTable.GetTableData(UserInfoTable.eventMissionInitialize).Value = 85;
             
-            ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value = GameBalance.DCTDailyGetAmount;
+         //   ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value = GameBalance.DCTDailyGetAmount;
             
             ServerData.userInfoTable.GetTableData(UserInfoTable.killCountTotalWinterPass).Value = 0;
 
@@ -2356,8 +2356,8 @@ public class UiMileageRefund : MonoBehaviour
             userInfo2Param.Add(UserInfoTable_2.eventPackageRewardIdx, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventPackageRewardIdx).Value);
             transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
 
-            goodsParam.Add(GoodsTable.DCT, ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value);
-            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+           // goodsParam.Add(GoodsTable.DCT, ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value);
+          //  transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {
