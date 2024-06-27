@@ -114,18 +114,18 @@ public class UiSecondAnniversaryMissionCell : MonoBehaviour
 
     public void OnClickGetButton()
     {
-        
-
         int amountFactor = getAmountFactor;
         int rewardGemNum = tableData.Rewardvalue * amountFactor;
 
         //로컬 갱신
         EventMissionManager.UpdateEventMissionClear((EventMissionKey)(tableData.Id), -tableData.Rewardrequire * amountFactor);
         EventMissionManager.UpdateEventMissionReward((EventMissionKey)(tableData.Id), amountFactor);
-        
-        ServerData.goodsTable.AddLocalData(GoodsTable.Event_SA, rewardGemNum);
 
-        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName(Item_Type.Event_SA)} {rewardGemNum}개 획득!!");
+        var goods = ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Rewardtype);
+        
+        ServerData.goodsTable.AddLocalData(goods, rewardGemNum);
+
+        PopupManager.Instance.ShowAlarmMessage($"{CommonString.GetItemName((Item_Type)tableData.Rewardtype)} {rewardGemNum}개 획득!!");
         SoundManager.Instance.PlaySound("GoldUse");
 
         if (SyncRoutine != null)
@@ -144,13 +144,14 @@ public class UiSecondAnniversaryMissionCell : MonoBehaviour
 
         Param eventMissionParam = new Param();
         Param goodsParam = new Param();
-
+        var goods = ServerData.goodsTable.ItemTypeToServerString((Item_Type)tableData.Rewardtype);
+        
         //미션 카운트 차감
         eventMissionParam.Add(tableData.Stringid, ServerData.eventMissionTable.TableDatas[tableData.Stringid].ConvertToString());
         transactionList.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventMissionParam));
 
         //재화 추가
-        goodsParam.Add(GoodsTable.Event_SA, ServerData.goodsTable.GetTableData(GoodsTable.Event_SA).Value);
+        goodsParam.Add(goods, ServerData.goodsTable.GetTableData(goods).Value);
         transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
 
         ServerData.SendTransactionV2(transactionList);

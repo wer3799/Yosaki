@@ -2320,6 +2320,7 @@ public class UiMileageRefund : MonoBehaviour
             Param userInfo2Param = new Param();
             Param goodsParam = new Param();
             Param passParam = new Param();
+            Param monthpass2Param = new Param();
             
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -2331,6 +2332,15 @@ public class UiMileageRefund : MonoBehaviour
 
             //이벤트상품 초기화
             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventPackageRewardIdx).Value = -1;
+            
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.oddMonthKillCount).Value = 0;
+
+            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value = "-1";
+            ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value = "-1";
+                
+            monthpass2Param.Add(MonthlyPassServerTable2.MonthlypassAttendFreeReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendFreeReward].Value);
+            monthpass2Param.Add(MonthlyPassServerTable2.MonthlypassAttendAdReward, ServerData.monthlyPassServerTable2.TableDatas[MonthlyPassServerTable2.MonthlypassAttendAdReward].Value);
+            transactions.Add(TransactionValue.SetUpdate(MonthlyPassServerTable2.tableName, MonthlyPassServerTable2.Indate, monthpass2Param));
             
             ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childFree].Value = "-1";
             ServerData.childPassServerTable.TableDatas[ChildPassServerTable.childAd].Value = "-1";

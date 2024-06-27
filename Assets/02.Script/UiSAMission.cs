@@ -82,7 +82,7 @@ public class UiSAMission : MonoBehaviour
         for (int i = 0; i < tableData.Length; i++)
         {
             //3주년이 아니라면
-             if (tableData[i].EVENTMISSIONTYPE != EventMissionType.THIRD) continue;
+             if (tableData[i].EVENTMISSIONTYPE != EventMissionType.ANNIVERSARY) continue;
             //Enable을 껐다면
             if (tableData[i].Enable == false) continue;
             //보상을 받았다면
