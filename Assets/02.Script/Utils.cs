@@ -1185,6 +1185,6 @@ public static class Utils
 
     public static bool IsAnniversaryMission(this EventMissionKey key)
     {
-        return key is >= EventMissionKey.ANMISSION1 and <= EventMissionKey.ANMISSION8;
+        return key >= EventMissionKey.ANMISSION1 && key <= EventMissionKey.ANMISSION8;
     }
 }
