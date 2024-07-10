@@ -6,15 +6,17 @@ using UnityEngine;
 
 public class UiFullMoonCostumeBuyButton : MonoBehaviour
 {
-    string costumeKey = "costume154";
+    string costumeKey = "costume252";
+    [SerializeField] private CharacterView characterView;
     private void Start()
     {
         Subscribe();
+        characterView.Initialize(costumeKey);
     }
 
     private void Subscribe()
     {
-        ServerData.costumeServerTable.TableDatas["costume154"].hasCostume.AsObservable().Subscribe(e =>
+        ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.AsObservable().Subscribe(e =>
         {
             this.gameObject.SetActive(!e);
         }).AddTo(this);
@@ -22,7 +24,7 @@ public class UiFullMoonCostumeBuyButton : MonoBehaviour
     
     public void OnClickGetCostumeButton()
     {
-        if (ServerData.iapServerTable.TableDatas["fullmoonpass"].buyCount.Value < 1)
+        if (ServerData.iapServerTable.TableDatas[UiEvent2PassBuyButton.productKey].buyCount.Value < 1)
         {
             PopupManager.Instance.ShowAlarmMessage("패스권이 필요합니다!");
             return;

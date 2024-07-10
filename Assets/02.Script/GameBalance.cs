@@ -761,6 +761,7 @@ public static class GameBalance
     public static ObscuredFloat newTopGyungRockAwakeValue = 1f;
     public static ObscuredFloat newGeukGyungRockAwakeValue = 0.5f;
     public static ObscuredFloat newGeukGyungRock2AwakeValue = 1f;
+    public static ObscuredFloat newGeukGyungRock3AwakeValue = 2f;
     
 
     #endregion

@@ -80,7 +80,9 @@ public class UiOneYearPassCell : FancyCell<PassData_Fancy>
         //킬카운트 변경될때
         ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).AsObservable().Subscribe(e =>
         {
-
+            lockIcon_Free.SetActive(!CanGetReward());
+            lockIcon_Ad.SetActive(!CanGetReward());
+            gaugeImage.SetActive(CanGetReward());
         }).AddTo(disposables);
     }
 

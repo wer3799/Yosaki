@@ -1044,6 +1044,7 @@ public class TableManager : SingletonMono<TableManager>
     public PassiveSkill3 PassiveSkill3;
     
     public SkyTowerTable SkyTowerTable;
+    public TowerTable17 gyungRockTowerTable9;
     
 }
 

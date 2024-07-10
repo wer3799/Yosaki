@@ -379,6 +379,7 @@ public class UiDimensionSweepBoard : MonoBehaviour
 
             transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
             transactions.Add(TransactionValue.SetUpdate(EquipmentTable.tableName, EquipmentTable.Indate, equipParam));
+            LogManager.Instance.SendLogType("DCT","use",$"1");
 
             ServerData.SendTransactionV2(transactions, successCallBack: () =>
             {

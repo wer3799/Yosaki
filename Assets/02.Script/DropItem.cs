@@ -382,6 +382,8 @@ public enum Item_Type
     weapon195 = 1081, 
     weapon196 = 1082, 
 
+    weapon197 = 1083, 
+
     weapon_end = 1200,
     //
 
@@ -701,7 +703,12 @@ public enum Item_Type
     costume247 = 1547, 
     costume248 = 1548, 
     costume249 = 1549, 
-    costume250 = 1550, 
+    costume250 = 1550,
+    
+    costume251 = 1551, 
+    costume252 = 1552, 
+    costume253 = 1553, 
+    costume254 = 1554, 
 
     costume_end=1999,
 
@@ -752,6 +759,8 @@ public enum Item_Type
 
     magicBook152 = 2034,
     magicBook153 = 2035,
+    
+    magicBook154 = 2036,
 
     magicBook_End=2999,
     //3000~3100스킬
@@ -1213,10 +1222,10 @@ public enum Item_Type
     Event_Collection_All =8804,//봄나물 총습득량
     Event_Item_SnowMan_All=8805,
 
-    Event_Mission3 = 8806,//미션 3- 보름달
+    Event_Mission3 = 8806,//미션 3
     Event_Mission3_All = 8807, // 총 습득량
     
-    Event_Mission1 = 8808,//미션 1 - 할로윈
+    Event_Mission1 = 8808,//미션 1
     Event_Mission1_All = 8809, 
     
     Mileage = 9000,

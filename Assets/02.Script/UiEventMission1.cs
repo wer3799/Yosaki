@@ -19,16 +19,16 @@ public class UiEventMission1 : MonoBehaviour
     private Dictionary<int, UiEventMission1Cell> cellContainer = new Dictionary<int, UiEventMission1Cell>();
 
     [SerializeField] private GameObject getCostumeButton;
+    [SerializeField] private CharacterView characterView;
     
-    string costumeKey = "costume218";
+    string costumeKey = "costume252";
 
-    [SerializeField] private TextMeshProUGUI costumeDescText;
     
     private void Start()
     {
         Subscribe();
-        
-        costumeDescText.SetText($"한정 외형\n{CommonString.GetItemName(ServerData.goodsTable.ServerStringToItemType(costumeKey))}");
+     
+        characterView.Initialize(costumeKey);
     }
     
     

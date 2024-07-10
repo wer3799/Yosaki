@@ -248,6 +248,10 @@ public class UiPensionObjectView : MonoBehaviour
         {
             itemType = Item_Type.TJCT;
         }
+        else if (pensionKey == "masterpension")
+        {
+            itemType = Item_Type.ClearTicket;
+        }
 
         return itemType;
     }

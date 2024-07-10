@@ -1197,8 +1197,8 @@ public class OneYearPassServerTable
         { event1AttendAd, "-1" },
         { event2AttendFree, "-1" },
         { event2AttendAd, "-1" },
-        { event3AttendFree, string.Empty },
-        { event3AttendAd, string.Empty },
+        { event3AttendFree,"-1" },
+        { event3AttendAd, "-1" },
     };
 
     private ReactiveDictionary<string, ReactiveProperty<string>> tableDatas = new ReactiveDictionary<string, ReactiveProperty<string>>();

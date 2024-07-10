@@ -236,7 +236,7 @@ public static class CommonString
             case Item_Type.Relic: return "영혼 조각";
             case Item_Type.RelicTicket: return "영혼 열쇠";
             case Item_Type.RabitBossStone: return "영혼의 증표";
-            case Item_Type.Event_Item_0: return "윷가락";
+            case Item_Type.Event_Item_0: return "주사위";
             case Item_Type.Event_Item_1: return "벚꽃";
             case Item_Type.StageRelic: return "유물 파편";
             case Item_Type.GuimoonRelic: return "귀문석";
@@ -280,7 +280,7 @@ public static class CommonString
             case Item_Type.SP: return "검조각";
             case Item_Type.Hae_Norigae: return "해태 노리개 조각";
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
-            case Item_Type.Event_Item_SnowMan: return "튜브"; //(구)냉이
+            case Item_Type.Event_Item_SnowMan: return "수박 화채"; //(구)냉이
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
@@ -426,17 +426,17 @@ public static class CommonString
             case Item_Type.du: return "저승 명부";
             case Item_Type.Fw: return "분홍 꽃";
             case Item_Type.Cw: return "천계 꽃";
-            case Item_Type.Event_Kill1_Item: return "벌꿀"; //봄나물
-            case Item_Type.Event_Collection_All: return "벌꿀 총 획득량";
+            case Item_Type.Event_Kill1_Item: return "수박 화채"; //봄나물
+            case Item_Type.Event_Collection_All: return "수박 화채 총 획득량";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
-            case Item_Type.Event_Mission1: return "봄소풍 바구니";
-            case Item_Type.Event_Mission1_All: return "봄소풍 바구니 총 획득량";
+            case Item_Type.Event_Mission1: return "모래성";
+            case Item_Type.Event_Mission1_All: return "모래성 총 획득량";
             case Item_Type.Event_Mission2: return "캠핑 텐트";
             case Item_Type.Event_Mission2_All: return "캠핑 재화 총 획득량";
-            case Item_Type.Event_Mission3: return "보름달";
-            case Item_Type.Event_Mission3_All: return "보름달 총 획득량";
+            case Item_Type.Event_Mission3: return "빈 재화";
+            case Item_Type.Event_Mission3_All: return "빈 재화 총 획득량";
             case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;
             case Item_Type.pet53: return TableManager.Instance.PetTable.dataArray[53].Name;
             case Item_Type.pet54: return TableManager.Instance.PetTable.dataArray[54].Name;

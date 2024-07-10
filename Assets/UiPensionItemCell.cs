@@ -311,6 +311,10 @@ public class UiPensionItemCell : MonoBehaviour
         {
             return Item_Type.TJCT;
         }
+        else if (key == "masterpension")
+        {
+            return Item_Type.ClearTicket;
+        }
         else
         {
             return Item_Type.SmithFire;

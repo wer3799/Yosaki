@@ -31,7 +31,7 @@ public class UiEventMission2AttendPass : FancyScrollView<PassData_Fancy>
 
     public void OnClickAllReceiveButton()
     {
-     var tableData = TableManager.Instance.CommonEventAttend2.dataArray;
+        var tableData = TableManager.Instance.CommonEventAttend2.dataArray;
         //현재 index가 -1이라면 0번째 보상을 받아야하기 때문에 +1
 
         var freeKey = OneYearPassServerTable.event2AttendFree;

@@ -135,6 +135,7 @@ public class UserInfoTable
     public const string blacksoulpension = "blacksoulpension";
     public const string studentspotpension = "studentspotpension";
     public const string transjeweltpension = "transjeweltpension";
+    public const string masterpension = "masterpension";
 
     public const string marblePackChange = "marblePackChange";
 
@@ -497,6 +498,7 @@ public class UserInfoTable
         { blacksoulpension, 0f },
         { studentspotpension, 0f },
         { transjeweltpension, 0f },
+        { masterpension, 0f },
 
         { marblePackChange, 0f },
         { yoguiSogulLastClear, 0f },
@@ -811,7 +813,7 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            var idx = 85;
+                            var idx = 88;
                             defultValues.Add(e.Current.Key, idx);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(idx));
                         }
@@ -1408,6 +1410,11 @@ public class UserInfoTable
                 ServerData.userInfoTable.GetTableData(UserInfoTable.transjeweltpension).Value++;
             }
 
+            if (ServerData.iapServerTable.TableDatas[UserInfoTable.masterpension].buyCount.Value > 0f)
+            {
+                ServerData.userInfoTable.GetTableData(UserInfoTable.masterpension).Value++;
+            }
+
             if (ServerData.iapServerTable.TableDatas[UserInfoTable.relicpensionAttendance].buyCount.Value > 0f)
             {
                 ServerData.userInfoTable.GetTableData(UserInfoTable.relicpensionAttendance).Value++;
@@ -1476,6 +1483,7 @@ public class UserInfoTable
         userInfoParam.Add(UserInfoTable.blacksoulpension, ServerData.userInfoTable.GetTableData(UserInfoTable.blacksoulpension).Value);
         userInfoParam.Add(UserInfoTable.studentspotpension, ServerData.userInfoTable.GetTableData(UserInfoTable.studentspotpension).Value);
         userInfoParam.Add(UserInfoTable.transjeweltpension, ServerData.userInfoTable.GetTableData(UserInfoTable.transjeweltpension).Value);
+        userInfoParam.Add(UserInfoTable.masterpension, ServerData.userInfoTable.GetTableData(UserInfoTable.masterpension).Value);
 
 
         userInfoParam.Add(UserInfoTable.freeWeapon, ServerData.userInfoTable.GetTableData(UserInfoTable.freeWeapon).Value);
@@ -1730,6 +1738,7 @@ public class UserInfoTable
         if (ServerData.statusTable.GetTableData(StatusTable.Level).Value >= 3000000)
         {
             ServerData.goodsTable.GetTableData(GoodsTable.HYC).Value += GameBalance.HyulClearDailyGetAmount;
+            
             if (currentServerTime.Day!=1)
             {
                 var amount = GameBalance.DCTDailyGetAmount;
@@ -1739,6 +1748,7 @@ public class UserInfoTable
                     amount += GameBalance.DCTDailyPassGetAmount;
                 }
                 ServerData.goodsTable.GetTableData(GoodsTable.DCT).Value += amount;
+                LogManager.Instance.SendLogType("DCT","gain",$"{amount}");
 
             }
 
@@ -2020,15 +2030,15 @@ public class UserInfoTable
     //벌꿀 이벤트
     public bool CanSpawnSpringEventItem()
     {
-        DateTime targetDate = new DateTime(2024, 5, 28);
+        DateTime targetDate = new DateTime(2024, 8, 20);
 
         return currentServerTime <= targetDate.AddDays(1);
     }
 
-    //봄소풍 이벤트
+    //미션1 이벤트
     public bool IsMissionEventPeriod()
     {
-        DateTime targetDate = new DateTime(2024, 5, 28);
+        DateTime targetDate = new DateTime(2024, 8, 20);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

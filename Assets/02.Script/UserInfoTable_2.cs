@@ -64,6 +64,7 @@ public class UserInfoTable_2
     public const string gyungRockTower6 = "grt6";
     public const string gyungRockTower7 = "grt7";
     public const string gyungRockTower8 = "grt8";
+    public const string gyungRockTower9 = "grt9";
     public const string graduateSeolEvent = "gse";
     public const string hyunsangTowerScore = "hts";
     
@@ -236,6 +237,7 @@ public class UserInfoTable_2
         { gyungRockTower6, 0f },
         { gyungRockTower7, 0f },
         { gyungRockTower8, 0f },
+        { gyungRockTower9, 0f },
         { hyunsangTowerScore, 0f },
         { graduateSeolEvent, 0f },
         { towerFloorAdjust, 0f },

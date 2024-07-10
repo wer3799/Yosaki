@@ -2441,6 +2441,8 @@ public static class PlayerStats
         
         ret += GetGeukGyungRock2AwakeAbilValue();
         
+        ret += GetGeukGyungRock3AwakeAbilValue();
+        
         ret += GetGyungRockEffect7(StatusType.SuperCritical33DamPer);
 
         ret += GetGyungRockEffect7(StatusType.SuperCritical33DamPer) * GetGuildTowerChimUpgradeValue();
@@ -2448,6 +2450,11 @@ public static class PlayerStats
         ret += GetGyungRockEffect8(StatusType.SuperCritical33DamPer);
 
         ret += GetGyungRockEffect8(StatusType.SuperCritical33DamPer) * GetGuildTowerChimUpgradeValue();
+
+        ret += GetGyungRockEffect9(StatusType.SuperCritical33DamPer);
+
+        ret += GetGyungRockEffect9(StatusType.SuperCritical33DamPer) * GetGuildTowerChimUpgradeValue();
+
 
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical33DamPer);
 
@@ -2496,6 +2503,8 @@ public static class PlayerStats
         
         ret += GetHaetalValue(StatusType.SuperCritical36DamPer);
         
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical36DamPer);
+
         return ret;
     }
     //보옥베기
@@ -2510,6 +2519,8 @@ public static class PlayerStats
         ret += GetTransJewelAbility(StatusType.SuperCritical37DamPer, 2);
         
         ret += GetTransJewelAbility(StatusType.SuperCritical37DamPer, 3);
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical37DamPer);
         
         return ret;
     }
@@ -2536,6 +2547,8 @@ public static class PlayerStats
         float ret = 0f;
 
         ret += GetChunsangTreasureAbilHasEffect();
+        
+        ret += GetGuimoonHasEffect1(StatusType.SuperCritical39DamPer);
 
         return ret;
     }
@@ -7299,6 +7312,17 @@ public static class PlayerStats
             return 0f;
         }
     }
+    private static float GetGeukGyungRock3AwakeAbilValue()
+    {
+        if (ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower9).Value >= 10)
+        {
+            return GameBalance.newGeukGyungRock3AwakeValue;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
 
 
     //독침
@@ -7440,6 +7464,29 @@ public static class PlayerStats
         var tableDatas = TableManager.Instance.gyungRockTowerTable8.dataArray;
 
         int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower8).Value;
+
+        if (currentLevel == 0)
+        {
+            return 0f;
+        }
+
+        for (int i = 0; i < currentLevel; i++)
+        {
+            if ((StatusType)tableDatas[i].Rewardtype == statusType)
+            {
+                ret += tableDatas[i].Rewardvalue;
+            }
+        }
+
+        return ret;
+    }
+        public static float GetGyungRockEffect9(StatusType statusType, int addLevel = 0)
+    {
+        float ret = 0f;
+
+        var tableDatas = TableManager.Instance.gyungRockTowerTable9.dataArray;
+
+        int currentLevel = (int)ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.gyungRockTower9).Value;
 
         if (currentLevel == 0)
         {
