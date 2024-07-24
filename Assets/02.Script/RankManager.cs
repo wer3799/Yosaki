@@ -154,7 +154,7 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_ChunmaV2 = "PartyRaid_IOS"; // 십만대산V2
     public const string Rank_Dimension = "DimensionRanking_IOS"; // 십만대산V2
     
-        public const string Rank_WeeklyStage_Uuid = "6dc95810-489a-11ef-bcf8-5b1b2e68e387";
+        public const string Rank_WeeklyStage_Uuid = "0e1a8090-49b9-11ef-a673-01d923a3a13c";
 
 #endif
 
