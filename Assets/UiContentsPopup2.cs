@@ -524,6 +524,10 @@ public class UiContentsPopup2 : MonoBehaviour
                     case 371:
                     case 372:
                     case 373:
+                    case 375:
+                    case 376:
+                    case 377:
+                    case 378:
                         lastBoards[(int)ContentsBoard.DifficultyBossBoard].SetActive(true);
                         break;
                     case 221:
@@ -643,6 +647,7 @@ public class UiContentsPopup2 : MonoBehaviour
                         break;
                     case 369:
                     case 374:
+                    case 379:
                         lastBoards[(int)ContentsBoard.ChunSangBoard].SetActive(true);
                         break;
                         

@@ -508,6 +508,11 @@ public static class Utils
         return type >= Item_Type.MergePartyRaidRankFrame_1_1 && type <= Item_Type.MergePartyRaidRankFrame_1_1001_5000;
     }
 
+    public static bool IsWeeklyStangRankItem_1(this Item_Type type)
+    {
+        return type >= Item_Type.WeeklyRankingReward_1_1 && type <= Item_Type.WeeklyRankingReward_1_1001_5000;
+    }
+
     public static bool IsRelicRewardItem(this Item_Type type)
     {
         return type >= Item_Type.RankFrame1_relic && type <= Item_Type.RankFrame1001_10000_relic;

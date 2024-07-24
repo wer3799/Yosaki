@@ -101,10 +101,8 @@ public class PartyRaidResultPopup : SingletonMono<PartyRaidResultPopup>
 
             PopupManager.Instance.ShowYesNoPopup(CommonString.Notice, $"{totalScore}점을 갱신하고 나갈가요?\n<color=red>(주의)현재 결과화면에 기록된 점수의 합을 기반으로 계산 됩니다.", () =>
             {
-
                 RecordGuildRaidScore();
                 LeaveRoom();
-
             }, () => { });
         }
 

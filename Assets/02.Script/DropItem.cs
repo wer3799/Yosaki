@@ -305,6 +305,19 @@ public enum Item_Type
     MergePartyRaidRankFrame_1_501_1000 = 920,
     MergePartyRaidRankFrame_1_1001_5000 = 921,
 
+    WeeklyRankingReward_1_1 = 930,
+    WeeklyRankingReward_1_2 = 931,
+    WeeklyRankingReward_1_3 = 932,
+    WeeklyRankingReward_1_4 = 933,
+    WeeklyRankingReward_1_5 = 934,
+    WeeklyRankingReward_1_6_10 = 935,
+    WeeklyRankingReward_1_11_20 = 936,
+    WeeklyRankingReward_1_21_50 = 937,
+    WeeklyRankingReward_1_51_100 = 938,
+    WeeklyRankingReward_1_101_500 = 939,
+    WeeklyRankingReward_1_501_1000 = 940,
+    WeeklyRankingReward_1_1001_5000 = 941,
+
     //1000~1200 무기
     weapon0 = 1000,
     weapon1 = 1001,
@@ -383,6 +396,8 @@ public enum Item_Type
     weapon196 = 1082, 
 
     weapon197 = 1083, 
+
+    weapon198 = 1084, 
 
     weapon_end = 1200,
     //
@@ -709,6 +724,11 @@ public enum Item_Type
     costume252 = 1552, 
     costume253 = 1553, 
     costume254 = 1554, 
+    
+    costume255 = 1555, 
+    costume256 = 1556, 
+    costume257 = 1557, 
+    costume258 = 1558, 
 
     costume_end=1999,
 
@@ -761,6 +781,11 @@ public enum Item_Type
     magicBook153 = 2035,
     
     magicBook154 = 2036,
+
+    magicBook155 = 2037,
+    magicBook156 = 2038,
+    magicBook157 = 2039,
+    magicBook158 = 2040,
 
     magicBook_End=2999,
     //3000~3100스킬

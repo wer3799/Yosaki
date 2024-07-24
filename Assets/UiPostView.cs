@@ -345,6 +345,60 @@ public class UiPostView : MonoBehaviour
                     break;
             }
         }
+        else if(type.IsWeeklyStangRankItem_1())
+        {
+            switch (type)
+            {
+                case Item_Type.WeeklyRankingReward_1_1:
+                    title.SetText("스테이지(주간) 랭킹보상(1위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_1}개\n채팅 아이콘(1등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_2:
+                    title.SetText("스테이지(주간) 랭킹보상(2위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_2}개\n채팅 아이콘(2등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_3:
+                    title.SetText("스테이지(주간) 랭킹보상(3위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_3}개\n채팅 아이콘(3등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_4:
+                    title.SetText("스테이지(주간) 랭킹보상(4위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_4}개\n채팅 아이콘(4등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_5:
+                    title.SetText("스테이지(주간) 랭킹보상(5위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_5}개\n채팅 아이콘(5등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_6_10:
+                    title.SetText("스테이지(주간) 랭킹보상(6~10위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_6_10}개\n채팅 아이콘(6등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_11_20:
+                    title.SetText("스테이지(주간) 랭킹보상(11~20위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_11_20}개\n채팅 아이콘(6등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_21_50:
+                    title.SetText("스테이지(주간) 랭킹보상(21~50위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_21_50}개\n채팅 아이콘(7등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_51_100:
+                    title.SetText("스테이지(주간) 랭킹보상(51~100위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_51_100}개\n채팅 아이콘(7등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_101_500:
+                    title.SetText("스테이지(주간) 랭킹보상(101~500위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_101_500}개\n채팅 아이콘(8등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_501_1000:
+                    title.SetText("스테이지(주간) 랭킹보상(501~1000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_501_1000}개\n채팅 아이콘(8등급)");
+                    break;
+                case Item_Type.WeeklyRankingReward_1_1001_5000:
+                    title.SetText("스테이지(주간) 랭킹보상(1001~5000위)");
+                    description.SetText($"{CommonString.GetItemName(Item_Type.ClearTicket)} {GameBalance.murgePartyRaidRankRewardTicket_1_1001_5000}개\n채팅 아이콘(9등급)");
+                    break;
+            }
+        }
         else if (type.IsRelicRewardItem())
         {
             switch (type)

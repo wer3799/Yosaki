@@ -236,6 +236,9 @@ public static class ServerData
         bossScoreTable.Initialize();
         
         specialRequestBossServerTable.Initialize();    
+        
+        RankManager.Instance.UpdateStageRanking_Score(ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
+
     }
     
     
@@ -3774,6 +3777,150 @@ public static class ServerData
                     ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
                     break;
                 case Item_Type.MergePartyRaidRankFrame_1_1001_5000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_1001_5000;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 0;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 9;
+                    break;
+            }
+
+
+            userInfoParam.Add(UserInfoTable.hellMark,
+                ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value);
+            userInfoParam.Add(UserInfoTable.chatFrame,
+                ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value);
+
+            goodsParam.Add(GoodsTable.ClearTicket, ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value);
+
+
+            transactionList.Add(
+                TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactionList.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+
+            if (costumeParam.Count > 0)
+            {
+                transactionList.Add(TransactionValue.SetUpdate(CostumeServerTable.tableName, CostumeServerTable.Indate, costumeParam));
+            }
+
+            SendTransaction(transactionList, successCallBack: () =>
+            {
+                //LogManager.Instance.SendLogType("RankReward", type.ToString(), "");
+            });
+        }        
+        else if (type.IsWeeklyStangRankItem_1())
+        {
+            List<TransactionValue> transactionList = new List<TransactionValue>();
+
+            Param userInfoParam = new Param();
+            Param costumeParam = new Param();
+            Param goodsParam = new Param();
+
+            var rank1CostumeKey = "costume253";
+            var rank1_10CostumeKey = "costume254";
+            switch (type)
+            {
+                case Item_Type.WeeklyRankingReward_1_1:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_1;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 8;
+                    if (ServerData.costumeServerTable.TableDatas[rank1CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1CostumeKey, ServerData.costumeServerTable.TableDatas[rank1CostumeKey].ConvertToString());
+                    }
+                    if (ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1_10CostumeKey, ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].ConvertToString());
+                    }
+                    break;
+                case Item_Type.WeeklyRankingReward_1_2:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_2;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 7;
+                    if (ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1_10CostumeKey, ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].ConvertToString());
+                    }
+                    break;
+                case Item_Type.WeeklyRankingReward_1_3:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_3;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 6;
+                    if (ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1_10CostumeKey, ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].ConvertToString());
+                    }
+                    break;
+                case Item_Type.WeeklyRankingReward_1_4:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 5;
+                    if (ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1_10CostumeKey, ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].ConvertToString());
+                    }
+                    break;
+                case Item_Type.WeeklyRankingReward_1_5:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_5;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 7;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 4;
+                    if (ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1_10CostumeKey, ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].ConvertToString());
+                    }
+                    break;
+                case Item_Type.WeeklyRankingReward_1_6_10:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_6_10;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 6;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 3;
+                    if (ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value == false)
+                    {
+                        ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].hasCostume.Value = true;
+                        costumeParam.Add(rank1_10CostumeKey, ServerData.costumeServerTable.TableDatas[rank1_10CostumeKey].ConvertToString());
+                    }
+                    break;
+                case Item_Type.WeeklyRankingReward_1_11_20:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_11_20;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 5;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 3;
+                    break;
+                case Item_Type.WeeklyRankingReward_1_21_50:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_21_50;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 4;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 2;
+                    break;
+                case Item_Type.WeeklyRankingReward_1_51_100:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_51_100;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 3;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 2;
+                    break;
+                case Item_Type.WeeklyRankingReward_1_101_500:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_101_500;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 2;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
+                    break;
+                case Item_Type.WeeklyRankingReward_1_501_1000:
+                    ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
+                        GameBalance.murgePartyRaidRankRewardTicket_1_501_1000;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 1;
+                    ServerData.userInfoTable.GetTableData(UserInfoTable.chatFrame).Value = 1;
+                    break;
+                case Item_Type.WeeklyRankingReward_1_1001_5000:
                     ServerData.goodsTable.GetTableData(GoodsTable.ClearTicket).Value +=
                         GameBalance.murgePartyRaidRankRewardTicket_1_1001_5000;
                     ServerData.userInfoTable.GetTableData(UserInfoTable.hellMark).Value = 0;

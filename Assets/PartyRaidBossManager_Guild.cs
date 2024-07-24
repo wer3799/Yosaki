@@ -214,7 +214,7 @@ public class PartyRaidBossManager_Guild : ContentsManagerBase
         ShowResultPopup();
 
         //개인랭킹 등록
-        SendPrivateScore();
+        //SendPrivateScore();
     }
 
     private void SendLastScore()

@@ -1045,6 +1045,8 @@ public class TableManager : SingletonMono<TableManager>
     
     public SkyTowerTable SkyTowerTable;
     public TowerTable17 gyungRockTowerTable9;
+    public TransJewelPass TransJewelPass;
+    public AnniversaryPass AnniversaryPass;
     
 }
 

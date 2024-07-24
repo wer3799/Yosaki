@@ -2193,6 +2193,8 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special8_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special9_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special10_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special11_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special12_GoldBar);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical17DamPer);
 

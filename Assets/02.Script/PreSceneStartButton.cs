@@ -37,6 +37,6 @@ public class PreSceneStartButton : SingletonMono<PreSceneStartButton>
 
     private void RequestOneTime() 
     {
-        RankManager.Instance.RequestMyRealBossRank();
+        RankManager.Instance.RequestMyWeeklyStageRank();
     }
 }

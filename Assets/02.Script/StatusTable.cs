@@ -81,6 +81,8 @@ public class StatusTable
     public const string Special8_GoldBar = "Special8_GoldBar";
     public const string Special9_GoldBar = "Special9_GoldBar";
     public const string Special10_GoldBar = "Special10_GoldBar";
+    public const string Special11_GoldBar = "Special11_GoldBar";
+    public const string Special12_GoldBar = "Special12_GoldBar";
     
     public const string Sin_StatPoint = "Sin_StatPoint";
     public const string Hyung_StatPoint = "Hyung_StatPoint";
@@ -162,6 +164,9 @@ public class StatusTable
         { Special8_GoldBar, 0 },
         { Special9_GoldBar, 0 },
         { Special10_GoldBar, 0 },
+        
+        { Special11_GoldBar, 0 },
+        { Special12_GoldBar, 0 },
         
         { Sin_StatPoint, 0 },
         { Hyung_StatPoint, 0 },
@@ -545,6 +550,18 @@ public class StatusTable
                     float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
                     return level * GameBalance.Special10_GoldBar * specialAbilityRatio * goldAbilRatio;
                 }
+                case Special11_GoldBar:
+                {
+                    float specialAbilityRatio = Mathf.Max(1, PlayerStats.GetNorigaeSoulGradeValue() / 100);
+                    float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
+                    return level * GameBalance.Special11_GoldBar * specialAbilityRatio * goldAbilRatio;
+                }
+                case Special12_GoldBar:
+                {
+                    float specialAbilityRatio = Mathf.Max(1, PlayerStats.GetNorigaeSoulGradeValue() / 100);
+                    float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
+                    return level * GameBalance.Special12_GoldBar * specialAbilityRatio * goldAbilRatio;
+                }
 
                 #endregion
                 default:
@@ -576,7 +593,10 @@ public class StatusTable
         var soul8 = tableDatas[Special8_GoldBar].Value;
         var soul9 = tableDatas[Special9_GoldBar].Value;
         var soul10 = tableDatas[Special10_GoldBar].Value;
-        var sum = soul0 + soul1 + soul2 + soul3 + soul4 + soul5 + soul6+ soul7+ soul8+ soul9+ soul10;
+        var soul11 = tableDatas[Special11_GoldBar].Value;
+        var soul12 = tableDatas[Special12_GoldBar].Value;
+        var sum = soul0 + soul1 + soul2 + soul3 + soul4 + soul5 + soul6 + soul7 + soul8 + soul9 + soul10 + soul11 +
+                  soul2;
         
         return sum;
     }

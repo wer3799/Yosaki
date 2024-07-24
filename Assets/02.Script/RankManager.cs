@@ -9,7 +9,7 @@ using LitJson;
 
 public enum RankType
 {
-    Level, Stage, Boss, Real_Boss, Relic, MiniGame, GangChul, ChunmaTop, Dimension, None
+    Level, Stage, Boss, Real_Boss, Relic, MiniGame, GangChul, ChunmaTop, Dimension, WeeklyStage,None
 }
 
 public class RankManager : SingletonMono<RankManager>
@@ -93,13 +93,15 @@ public class RankManager : SingletonMono<RankManager>
     public const string Rank_Guild_Reset_Uuid_Feed = "0fdf35b0-9115-11ec-a581-736e2455e958";
 
     public const string Rank_GangChul_Boss_Uuid = "9d88e4d0-b76f-11ec-8ef8-7f0c591b422a";
-    public const string Rank_GangChul_Guild_Boss_Uuid = "a16b1790-559d-11ed-9936-adc34f7d653d";
+    public const string Rank_GangChul_Guild_Boss_Uuid = "a16b1790-559d-11ed-9936-adc34f7d653d"; //대산군
     public const string Rank_Party_Guild_Uuid = "a16b1790-559d-11ed-9936-adc34f7d653d";
     public const string Rank_ChunmaTop_Uuid = "8f5ebfc0-4341-11ed-844a-55337d4fa4d7";
     
     
     public const string Rank_ChunmaV2_Uuid = "fb16c4d0-4195-11ee-b1bd-f5f3eef03a18";
     public const string Rank_Dimension_Uuid = "1dd2fc90-060e-11ef-bac6-9bb9472c3406";
+    
+    public const string Rank_WeeklyStage_Uuid = "4e5e96c0-489a-11ef-921d-a15482c8f621";
     
     
 
@@ -136,6 +138,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public const string Rank_ChunmaV2_Uuid = "0a4296a0-4196-11ee-b1bd-f5f3eef03a18";
     public const string Rank_Dimension_Uuid = "3ab16db0-060e-11ef-bac6-9bb9472c3406";
+    public const string Rank_StageReward_Uuid = "6dc95810-489a-11ef-bcf8-5b1b2e68e387";
 
 
     public const string Rank_Level_TableName = "Level_Rank_IOS";
@@ -156,6 +159,7 @@ public class RankManager : SingletonMono<RankManager>
 
     public ReactiveCommand<RankInfo> WhenMyLevelRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyStageRankLoadComplete = new ReactiveCommand<RankInfo>();
+    public ReactiveCommand<RankInfo> WhenMyWeeklyStageRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyRealBossRankLoadComplete = new ReactiveCommand<RankInfo>();
     public ReactiveCommand<RankInfo> WhenMyDimensionRankLoadComplete = new ReactiveCommand<RankInfo>();
@@ -358,11 +362,42 @@ public class RankManager : SingletonMono<RankManager>
             // 이후처리
             if (bro.IsSuccess())
             {
-                Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
+                Debug.LogError($"랭킹 등록 성공! UpdateStage_Score");
             }
             else
             {
-                Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
+                Debug.LogError($"랭킹 등록 실패 UpdateStage_Score {bro.GetStatusCode()}");
+            }
+
+        });
+    }
+    //주간초기화스테이지랭킹
+    public void UpdateStageRanking_Score(double score)
+    {
+        if (UpdateRank() == false) return;
+        Param param = new Param();
+        param.Add("Score", score);
+
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
+        int suhoAnimal = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value;
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}{CommonString.ChatSplitChar}{suhoAnimal}");
+
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_WeeklyStage_Uuid, Rank_Stage, RankTable_Stage.Indate, param, bro =>
+        {
+            // 이후처리
+            if (bro.IsSuccess())
+            {
+                Debug.LogError($"랭킹 등록 성공! UpdateStageRanking_Score");
+            }
+            else
+            {
+                Debug.LogError($"랭킹 등록 실패 UpdateStageRanking_Score {bro.GetStatusCode()}");
             }
 
         });
@@ -551,7 +586,6 @@ public class RankManager : SingletonMono<RankManager>
         }
 
         score *= GameBalance.BossScoreSmallizeValue / GameBalance.BossScoreAdjustValue;
-//122
         
         Param param = new Param();
         param.Add("Score", score);
@@ -567,18 +601,6 @@ public class RankManager : SingletonMono<RankManager>
 
         param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}{CommonString.ChatSplitChar}{suhoAnimal}");
 
-        // SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_Real_Boss_Uuid, Rank_Real_Boss, RankTable_Real_Boss.Indate, param, bro =>
-        // {
-        //     // 이후처리
-        //     if (bro.IsSuccess())
-        //     {
-        //         Debug.LogError($"랭킹 등록 성공! UpdateBoss0_Score");
-        //     }
-        //     else
-        //     {
-        //         Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
-        //     }
-        // });
         SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_ChunmaV2_Uuid, Rank_ChunmaV2, RankTable_ChunmaV2.Indate, param, bro =>
         {
             // 이후처리
@@ -590,6 +612,102 @@ public class RankManager : SingletonMono<RankManager>
             {
                 Debug.LogError($"랭킹 등록 실패 UpdateBoss0_Score {bro.GetStatusCode()}");
             }
+        });
+    }
+
+    #endregion
+    #region WeeklyStage
+    private Action<RankInfo> whenLoadSuccess_Weekly_Stage;
+    public void RequestMyWeeklyStageRank(Action<RankInfo> whenLoadSuccess = null)
+    {
+        this.whenLoadSuccess_Weekly_Stage = whenLoadSuccess;
+
+        Backend.URank.User.GetMyRank(RankManager.Rank_WeeklyStage_Uuid, MyWeeklyStageRankLoadComplete);
+    }
+    private void MyWeeklyStageRankLoadComplete(BackendReturnObject bro)
+    {
+        RankInfo myRankInfo = null;
+
+        if (bro.IsSuccess())
+        {
+            var rows = bro.Rows();
+
+            if (rows.Count > 0)
+            {
+                JsonData data = rows[0];
+
+                var splitData = data["NickName"][ServerData.format_string].ToString().Split(CommonString.ChatSplitChar);
+
+                string nickName = data["nickname"][ServerData.format_string].ToString();
+                int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
+                double score = double.Parse(data["score"][ServerData.format_Number].ToString());
+                int costumeId = int.Parse(splitData[0]);
+                int petId = int.Parse(splitData[1]);
+                int weaponId = int.Parse(splitData[2]);
+                int magicBookId = int.Parse(splitData[3]);
+                int gumgiIdx = int.Parse(splitData[4]);
+                int maskIdx = int.Parse(splitData[6]);
+
+                int hornIdx = -1;
+                
+                int suhoAnimal = -1;
+                if (splitData.Length >= 10)
+                {
+                    suhoAnimal = int.Parse(splitData[9]);
+                }
+
+                if (splitData.Length >= 9)
+                {
+                    hornIdx = int.Parse(splitData[8]);
+                }
+
+                string guildName = string.Empty;
+                if (splitData.Length >= 8)
+                {
+                    guildName = splitData[7];
+                }
+
+                myRankInfo = new RankInfo(nickName, guildName, rank, score, costumeId, petId, weaponId, magicBookId, gumgiIdx, maskIdx, hornIdx,suhoAnimal);
+            }
+        }
+
+        if (myRankInfo != null)
+        {
+            whenLoadSuccess_Weekly_Stage?.Invoke(myRankInfo);
+            WhenMyWeeklyStageRankLoadComplete.Execute(myRankInfo);
+
+            this.myRankInfo[RankType.WeeklyStage] = myRankInfo;
+        }
+    }
+    //
+    public void UpdateWeeklyStage_Score(double score)
+    {
+        if (UpdateRank() == false) return;
+        Param param = new Param();
+        param.Add("Score", score);
+
+        int costumeIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].Value;
+        int petIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Pet].Value;
+        int weaponIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.Weapon_View].Value;
+        int magicBookIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.MagicBook_View].Value;
+        int gumgiIdx = ServerData.equipmentTable.TableDatas[EquipmentTable.WeaponE_View].Value;
+        int wingIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.FoxMaskView].Value;
+        int hornIdx = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.DokebiHornView].Value;
+        int suhoAnimal = (int)ServerData.equipmentTable.TableDatas[EquipmentTable.SuhoAnimal].Value;
+        param.Add("NickName", $"{costumeIdx}{CommonString.ChatSplitChar}{petIdx}{CommonString.ChatSplitChar}{weaponIdx}{CommonString.ChatSplitChar}{magicBookIdx}{CommonString.ChatSplitChar}{gumgiIdx}{CommonString.ChatSplitChar}{PlayerData.Instance.NickName}{CommonString.ChatSplitChar}{wingIdx}{CommonString.ChatSplitChar}{GuildManager.Instance.myGuildName}{CommonString.ChatSplitChar}{hornIdx}{CommonString.ChatSplitChar}{suhoAnimal}");
+
+        SendQueue.Enqueue(Backend.URank.User.UpdateUserScore, Rank_WeeklyStage_Uuid, Rank_Stage, RankTable_Stage.Indate, param, bro =>
+        {
+            // 이후처리
+            if (bro.IsSuccess())
+            {
+                Debug.LogError($"랭킹 등록 성공! UpdateStageRanking_Score");
+            }
+            else
+            {
+                Debug.LogError($"랭킹 등록 실패 UpdateStageRanking_Score {bro.GetStatusCode()}");
+            }
+
         });
     }
 

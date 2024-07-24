@@ -123,7 +123,7 @@ public static class CommonString
     public static string RankPrefix_Level = "레벨";
     public static string RankPrefix_Stage = "스테이지";
     public static string RankPrefix_Boss = "지옥탈환전(지옥)";
-    public static string RankPrefix_Real_Boss = "십만대산(개인)";
+    public static string RankPrefix_Weekly_Stage = "스테이지(주간)";
     public static string RankPrefix_Relic = "영혼의숲(지옥)";
     public static string RankPrefix_MiniGame = "미니게임";
     public static string RankPrefix_GangChul = "강철이";

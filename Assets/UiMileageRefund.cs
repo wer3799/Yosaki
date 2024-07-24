@@ -3267,6 +3267,28 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         }
+        if (ServerData.userInfoTable.GetTableData(initKey).Value < 89)
+        {
+            Param userInfoParam = new Param();
+            Param userInfo2Param = new Param();
+            
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.userInfoTable.GetTableData(initKey).Value = 89;
+            userInfoParam.Add(initKey, ServerData.userInfoTable.GetTableData(initKey).Value);
+            
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value =1;
+            userInfo2Param.Add(UserInfoTable_2.eventAttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventAttendCount).Value);
+
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            });
+        }
     }
 
 

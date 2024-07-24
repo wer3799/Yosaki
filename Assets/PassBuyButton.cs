@@ -24,6 +24,8 @@ public class PassBuyButton : MonoBehaviour
     public static readonly string studentPassKey = "studentpass0";
     public static readonly string studentSpotPassKey = "studentspotpass0";
     public static readonly string haetalPassKey = "haetalpass0";
+    public static readonly string transJewelPassKey = "transjewelpass";
+    public static readonly string anniversaryPassKey = "anniversarypass";
     public static readonly string yorinsealswordpass0key = "yorinsealswordpass0";
     public static readonly string yorinsealswordpass1key = "yorinsealswordpass1";
     public static readonly string yorinsealswordpass2key = "yorinsealswordpass2";
@@ -62,6 +64,8 @@ public class PassBuyButton : MonoBehaviour
         YorinRing3,
         YorinRing4,
         Dimension,
+        TransJewel,
+        Anniversary,
     }
 
     [SerializeField] protected PassKey passKey = PassKey.None;
@@ -95,6 +99,8 @@ public class PassBuyButton : MonoBehaviour
                 PassKey.YorinRing3 => yorinringpass3key,
                 PassKey.YorinRing4 => yorinringpass4key,
                 PassKey.Dimension => Utils.GetCurrentDimensionSeasonData().Productid,
+                PassKey.TransJewel => transJewelPassKey,
+                PassKey.Anniversary => anniversaryPassKey,
                 _ => throw new ArgumentOutOfRangeException()
             };
 

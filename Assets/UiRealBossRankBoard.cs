@@ -6,7 +6,7 @@ using UnityEngine;
 using UniRx;
 using TMPro;
 
-//십만대산
+//주간스테이지
 public class UiRealBossRankBoard : MonoBehaviour
 {
     [SerializeField]
@@ -41,7 +41,7 @@ public class UiRealBossRankBoard : MonoBehaviour
 
     private void SetTitle()
     {
-        title.SetText($"랭킹({CommonString.RankPrefix_Real_Boss})");
+        title.SetText($"랭킹({CommonString.RankPrefix_Weekly_Stage})");
     }
 
     private void Start()
@@ -64,11 +64,11 @@ public class UiRealBossRankBoard : MonoBehaviour
 
     private void Subscribe()
     {
-        RankManager.Instance.WhenMyRealBossRankLoadComplete.AsObservable().Subscribe(e =>
+        RankManager.Instance.WhenMyWeeklyStageRankLoadComplete.AsObservable().Subscribe(e =>
         {
             if (e != null)
             {
-                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertBigNum(e.Score)}", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx,e.suhoAnimal);
+                myRankView.Initialize($"{e.Rank}", e.NickName, $"{Utils.ConvertStage((int)e.Score)}단계", e.Rank, e.costumeIdx, e.petIddx, e.weaponIdx, e.magicbookIdx, e.gumgiIdx, e.GuildName,e.maskIdx,e.hornIdx,e.suhoAnimal);
             }
             else
             {
@@ -84,9 +84,9 @@ public class UiRealBossRankBoard : MonoBehaviour
         loadingMask.SetActive(false);
         failObject.SetActive(false);
         
-        LoadRank(RankType.Real_Boss);
+        LoadRank(RankType.WeeklyStage);
         
-        RankManager.Instance.RequestMyRealBossRank();
+        RankManager.Instance.RequestMyWeeklyStageRank();
     }
 
     private void LoadRank(RankType type)
@@ -95,7 +95,7 @@ public class UiRealBossRankBoard : MonoBehaviour
         if (RankManager.Instance.RankList.ContainsKey(type)==false)
         {
             RankManager.Instance.RankList[type] = new List<RankManager.RankInfo>();
-            RankManager.Instance.GetRankerList(RankManager.Rank_ChunmaV2_Uuid, 100, WhenAllRankerLoadComplete);
+            RankManager.Instance.GetRankerList(RankManager.Rank_WeeklyStage_Uuid, 100, WhenAllRankerLoadComplete);
         }
         else
         {
@@ -107,7 +107,7 @@ public class UiRealBossRankBoard : MonoBehaviour
         UiRankView.rank1Count = 0;
 
         rankViewParent.gameObject.SetActive(true);
-        var rankList = RankManager.Instance.RankList[RankType.Real_Boss];
+        var rankList = RankManager.Instance.RankList[RankType.WeeklyStage];
         int interval = rankList.Count - rankViewContainer.Count;
 
         for (int i = 0; i < interval; i++)
@@ -121,7 +121,7 @@ public class UiRealBossRankBoard : MonoBehaviour
             {
                 rankViewContainer[i].gameObject.SetActive(true);
                 
-                rankViewContainer[i].Initialize($"{rankList[i].Rank}", $"{rankList[i].NickName}", $"{Utils.ConvertBigNum(rankList[i].Score)}", rankList[i].Rank, rankList[i].costumeIdx, rankList[i].petIddx, rankList[i].weaponIdx, rankList[i].magicbookIdx, rankList[i].gumgiIdx,rankList[i].GuildName, rankList[i].maskIdx,rankList[i].hornIdx,rankList[i].suhoAnimal);
+                rankViewContainer[i].Initialize($"{rankList[i].Rank}", $"{rankList[i].NickName}", $"{Utils.ConvertStage((int)rankList[i].Score)}단계", rankList[i].Rank, rankList[i].costumeIdx, rankList[i].petIddx, rankList[i].weaponIdx, rankList[i].magicbookIdx, rankList[i].gumgiIdx,rankList[i].GuildName, rankList[i].maskIdx,rankList[i].hornIdx,rankList[i].suhoAnimal);
             }
             else
             {
@@ -161,8 +161,7 @@ public class UiRealBossRankBoard : MonoBehaviour
                         rankViewContainer[i].gameObject.SetActive(true);
                         string nickName = data["nickname"][ServerData.format_string].ToString();
                         int rank = int.Parse(data["rank"][ServerData.format_Number].ToString());
-                        double score = double.Parse(data["score"][ServerData.format_Number].ToString());
-                        score *= GameBalance.BossScoreConvertToOrigin * GameBalance.BossScoreAdjustValue;
+                        int level = int.Parse(data["score"][ServerData.format_Number].ToString());
                         int costumeId = int.Parse(splitData[0]);
                         int petId = int.Parse(splitData[1]);
                         int weaponId = int.Parse(splitData[2]);
@@ -170,6 +169,7 @@ public class UiRealBossRankBoard : MonoBehaviour
                         int gumgiIdx = int.Parse(splitData[4]);
                         int maskIdx = int.Parse(splitData[6]);
                         int hornIdx = -1;
+
 
                         if (splitData.Length >= 9)
                         {
@@ -211,9 +211,8 @@ public class UiRealBossRankBoard : MonoBehaviour
                         {
                             guildName = splitData[7];
                         }
-                        //myRankView.Initialize($"{e.Rank}", e.NickName, $"Lv {e.Score}");
-                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertBigNum(score)}", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx, guildName, maskIdx,hornIdx,suhoAnimal);
-                        RankManager.Instance.RankList[RankType.Real_Boss].Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: score, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
+                        rankViewContainer[i].Initialize($"{rank}", $"{nickName}", $"{Utils.ConvertStage(level+2)}단계", rank, costumeId, petId, weaponId, magicBookId, gumgiIdx,guildName, maskIdx,hornIdx,suhoAnimal);
+                        RankManager.Instance.RankList[RankType.WeeklyStage].Add(new RankManager.RankInfo(NickName: nickName, GuildName: guildName, Rank: rank, Score: level, costumeIdx: costumeId, petIddx: petId, weaponIdx: weaponId, magicbookIdx: magicBookId, gumgiIdx: gumgiIdx, maskIdx: maskIdx, hornIdx: hornIdx, suhoAnimal: suhoAnimal));
 
                     }
                     else

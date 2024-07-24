@@ -12,6 +12,7 @@ public class UiRankBoard : MonoBehaviour
     private void OnEnable()
     {
         RankManager.Instance.UpdateStage_Score(ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
+        RankManager.Instance.UpdateStageRanking_Score(ServerData.userInfoTable.GetTableData(UserInfoTable.topClearStageId).Value);
         RankManager.Instance.UpdateUserRank_Level();
     }
 

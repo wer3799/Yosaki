@@ -237,6 +237,8 @@ public class BossEnemyMoveController : MonoBehaviour
             case 338:
             case 339:
             case 340:
+            case 377:
+            case 378:
                 moveSpeed = 20f; //이동속도
                 idleDelay = 0.5f; // 정지 
                 moveDelay = 0.3f; // 이동
@@ -385,6 +387,12 @@ public class BossEnemyMoveController : MonoBehaviour
                 idleDelay = 0.5f; // 정지 
                 moveDelay = 0.3f; // 이동
                 attack1Delay = 1.55f; // 공격
+                break;
+            case 379:
+                moveSpeed = 20f; //이동속도
+                idleDelay = 0.5f; // 정지 
+                moveDelay = 0.3f; // 이동
+                attack1Delay = 1.9f; // 공격
                 break;
             default:
                 moveSpeed = 20f; //이동속도

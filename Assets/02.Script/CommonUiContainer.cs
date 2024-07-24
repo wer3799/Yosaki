@@ -918,6 +918,31 @@ public Sprite RecommendWeapon22;
             case Item_Type.MergePartyRaidRankFrame_1_1001_5000:
                 return rankFrame[9];
 
+            case Item_Type.WeeklyRankingReward_1_1:
+                return HellMark7;
+            case Item_Type.WeeklyRankingReward_1_2:
+                return HellMark7;
+            case Item_Type.WeeklyRankingReward_1_3:
+                return HellMark7;
+            case Item_Type.WeeklyRankingReward_1_4:
+                return HellMark7;
+            case Item_Type.WeeklyRankingReward_1_5:
+                return HellMark7;
+            case Item_Type.WeeklyRankingReward_1_6_10:
+                return HellMark6;
+            case Item_Type.WeeklyRankingReward_1_11_20:
+                return HellMark4;
+            case Item_Type.WeeklyRankingReward_1_21_50:
+                return HellMark3;
+            case Item_Type.WeeklyRankingReward_1_51_100:
+                return HellMark1;
+            case Item_Type.WeeklyRankingReward_1_101_500:
+                return HellMark5;
+            case Item_Type.WeeklyRankingReward_1_501_1000:
+                return HellMark0;
+            case Item_Type.WeeklyRankingReward_1_1001_5000:
+                return rankFrame[9];
+
             case Item_Type.RankFrame1_relic:
             case Item_Type.RankFrame2_relic:
             case Item_Type.RankFrame3_relic:

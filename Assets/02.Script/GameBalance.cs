@@ -204,7 +204,7 @@ public static class GameBalance
 
     public static ObscuredInt shadowCostumeGetLevel = 12;
 
-    public static ObscuredInt addDay = 0;
+    public static ObscuredInt addDay = 10;
     public static ObscuredDouble addMinutes = 0;
     
     public static ObscuredInt dosulUnlockStage = 300;
@@ -696,6 +696,8 @@ public static class GameBalance
     public static ObscuredFloat Special8_GoldBar = 0.00000006f;
     public static ObscuredFloat Special9_GoldBar = 0.00000008f;
     public static ObscuredFloat Special10_GoldBar = 0.0000001f;
+    public static ObscuredFloat Special11_GoldBar = 0.00000012f;
+    public static ObscuredFloat Special12_GoldBar = 0.00000014f;
     
     #endregion
 
@@ -829,7 +831,7 @@ public static class GameBalance
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",
         "갈", "라", "가", "언", "승", "마", "살", "섬", "찰", "교","위","설","적","고","화","명","월","후","단","절","격","창","공","채",
-        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","결","맥","토","산","미정32",
+        "피","동","멸","향","증","쾌","우","팽","관","한","혈","연","난","군","결","맥","토","산","강",
 
     };
     public static int GetSonIdx()
