@@ -101,7 +101,7 @@ public class UiAnniversaryPassSystem : MonoBehaviour
         bool hasPassItem = false;
 
         //받아야할 곳 부터 체크
-        for (int i = freeValue; i < tableData.Length; i++)
+        for (int i = freeValue+1; i < tableData.Length; i++)
         {
             //요구 조건 안되면 break.
             if (CanGetReward((int)tableData[i].Unlockamount) == false) break;
@@ -124,7 +124,7 @@ public class UiAnniversaryPassSystem : MonoBehaviour
             }
         }
         //받은적 있는지 체크
-        for (int i = adValue; i < tableData.Length; i++)
+        for (int i = adValue+1; i < tableData.Length; i++)
         {
             if (HasPassItem() == false) break;
             if (HasReward(adKey, tableData[i].Id) == false)
