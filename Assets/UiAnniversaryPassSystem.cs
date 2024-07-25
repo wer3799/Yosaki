@@ -98,7 +98,64 @@ public class UiAnniversaryPassSystem : MonoBehaviour
         int rewardedNum = 0;
 
         bool hasCostumeItem = false;
+        bool hasPassItem = false;
 
+        //받아야할 곳 부터 체크
+        for (int i = freeValue; i < tableData.Length; i++)
+        {
+            //요구 조건 안되면 break.
+            if (CanGetReward((int)tableData[i].Unlockamount) == false) break;
+
+            //받은적 있는지 체크
+            if (HasReward(freeKey, tableData[i].Id) == false)
+            {
+                //코스튬이나 노리개가 있다면?
+                if (((Item_Type)(tableData[i].Reward1)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+
+                if (((Item_Type)(tableData[i].Reward1)).IsNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+            }
+        }
+        //받은적 있는지 체크
+        for (int i = adValue; i < tableData.Length; i++)
+        {
+            if (HasPassItem() == false) break;
+            if (HasReward(adKey, tableData[i].Id) == false)
+            {
+                //코스튬이나 노리개가 있다면?
+                if (((Item_Type)(tableData[i].Reward2)).IsCostumeItem())
+                {
+                    hasCostumeItem = true;
+                    break;
+                }
+
+                if (((Item_Type)(tableData[i].Reward2)).IsNorigaeItem())
+                {
+                    hasPassItem = true;
+                    break;
+                }
+            }
+        }
+        if (hasCostumeItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "외형 아이템은 직접 수령해야 합니다.", null);
+            return;
+        }
+
+        if (hasPassItem)
+        {
+            PopupManager.Instance.ShowConfirmPopup(CommonString.Notice, "패스 보상 장비는 직접 수령해야 합니다.", null);
+            return;
+        }
+        
+        
         for (int i = freeValue+1; i < tableData.Length; i++)
         {
             bool canGetReward = CanGetReward((int)tableData[i].Unlockamount);
