@@ -2540,6 +2540,8 @@ public static class PlayerStats
 
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S3_DC);
         
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S4_DC);
+        
         
         return ret;
     }
