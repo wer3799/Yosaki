@@ -2030,7 +2030,7 @@ public class UserInfoTable
     //벌꿀 이벤트
     public bool CanSpawnSpringEventItem()
     {
-        DateTime targetDate = new DateTime(2024, 8, 20);
+        DateTime targetDate = new DateTime(2024, 8, 28);
 
         return currentServerTime <= targetDate.AddDays(1);
     }
@@ -2038,7 +2038,7 @@ public class UserInfoTable
     //미션1 이벤트
     public bool IsMissionEventPeriod()
     {
-        DateTime targetDate = new DateTime(2024, 8, 20);
+        DateTime targetDate = new DateTime(2024, 8, 28);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

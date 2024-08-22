@@ -204,7 +204,7 @@ public static class GameBalance
 
     public static ObscuredInt shadowCostumeGetLevel = 12;
 
-    public static ObscuredInt addDay = 10;
+    public static ObscuredInt addDay = 0;
     public static ObscuredDouble addMinutes = 0;
     
     public static ObscuredInt dosulUnlockStage = 300;
