@@ -21,7 +21,7 @@ public class UiBattleContestSpecialShopCell : MonoBehaviour
     {
         var idx = ServerData.costumeServerTable.TableDatas[((Item_Type)tableData.Itemtype).ToString()].idx;
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
     }

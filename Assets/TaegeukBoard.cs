@@ -35,7 +35,7 @@ public class TaegeukBoard : MonoBehaviour
         ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
         {
 
-            skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[e];
+            skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(e);
 
         }).AddTo(this);
 

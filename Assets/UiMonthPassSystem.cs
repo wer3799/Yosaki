@@ -143,7 +143,7 @@ public class UiMonthPassSystem : FancyScrollView<MonthlyPassData_Fancy>
         costumeGraphic.Clear();
 
         costumeGraphic.gameObject.SetActive(true);
-        costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
         costumeGraphic.Initialize(true);
         costumeGraphic.SetMaterialDirty();
     }

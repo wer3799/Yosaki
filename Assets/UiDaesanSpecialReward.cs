@@ -50,7 +50,7 @@ public class UiDaesanSpecialReward : MonoBehaviour
         var itemType = (Item_Type)_itemType;
         var idx = ServerData.costumeServerTable.TableDatas[itemType.ToString()].idx;
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
 

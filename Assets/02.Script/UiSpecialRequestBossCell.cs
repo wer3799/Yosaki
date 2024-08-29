@@ -32,7 +32,7 @@ public class UiSpecialRequestBossCell : MonoBehaviour
         costumeGraphic.Clear();
 
         costumeGraphic.gameObject.SetActive(true);
-        costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[tableData.Costumeid];
+        costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(tableData.Costumeid);
         costumeGraphic.Initialize(true);
         costumeGraphic.SetMaterialDirty();
 

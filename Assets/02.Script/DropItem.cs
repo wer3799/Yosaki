@@ -734,6 +734,8 @@ public enum Item_Type
     
     costume259 = 1559, 
 
+    costume260 = 1560, 
+
     costume_end=1999,
 
     //2000~2999 마도서
@@ -792,6 +794,8 @@ public enum Item_Type
     magicBook158 = 2040,
     
     magicBook159 = 2041,
+
+    magicBook160 = 2042,
 
     magicBook_End=2999,
     //3000~3100스킬

@@ -29,7 +29,7 @@ public class BattleContestViewController : PoolItem
         if (skeletonAnimation != null)
         {
             skeletonAnimation.skeletonDataAsset.Clear();
-            skeletonAnimation.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+            skeletonAnimation.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
             skeletonAnimation.Initialize(true);
         }
         

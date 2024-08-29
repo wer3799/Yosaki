@@ -45,7 +45,7 @@ public class UiColdSeasonPassPopup : MonoBehaviour
             costumeGraphic.Clear();
 
             costumeGraphic.gameObject.SetActive(true);
-            costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+            costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
             costumeGraphic.Initialize(true);
             costumeGraphic.SetMaterialDirty();        
         }

@@ -84,7 +84,7 @@ public class UiAdRewardCell : MonoBehaviour
             string itemKey = ((Item_Type)tableData.Itemtype).ToString();
             var idx = ServerData.costumeServerTable.TableDatas[itemKey].idx;
             skeletonGraphic.Clear();
-            skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+            skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
             skeletonGraphic.Initialize(true);
             skeletonGraphic.SetMaterialDirty();
 

@@ -20,7 +20,7 @@ public class HaetalSkeleton : MonoBehaviour
     {
         ServerData.equipmentTable.TableDatas[EquipmentTable.CostumeLook].AsObservable().Subscribe(e =>
         {
-            skeletonAnimation.skeletonDataAsset = CommonUiContainer.Instance.costumeList[e];
+            skeletonAnimation.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(e);
             skeletonAnimation.Initialize(true);
         }).AddTo(this);
     }

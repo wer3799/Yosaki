@@ -1,6 +1,8 @@
+using System;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -60,8 +62,8 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
     public List<Color> itemGradeColor;
 
-    [SerializeField]
     private List<Sprite> costumeThumbnail;
+    private List<SkeletonDataAsset> costumeList;
 
     [SerializeField]
     private List<Sprite> rankFrame;
@@ -72,11 +74,73 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
     [SerializeField]
     public List<Color> petEquipColor;
 
+    private void Start()
+    {
+        LoadCostumeThumbnail();
+        LoadCostume();
+    }
+
+    private void LoadCostumeThumbnail()
+    {
+        if (costumeThumbnail == null)
+        {
+            var icons = Resources.LoadAll<Sprite>("ChatIcon/");
+            costumeThumbnail = icons.ToList();
+
+
+            costumeThumbnail.Sort((a, b) =>
+            {
+                int numA = int.Parse(a.name);
+                int numB = int.Parse(b.name);
+
+                return numA.CompareTo(numB);
+
+            });
+        }
+    }
+    private void LoadCostume()
+    {
+        if (costumeList == null)
+        {
+            var icons = Resources.LoadAll<SkeletonDataAsset>("Costume/");
+            costumeList = icons.ToList();
+
+
+            costumeList.Sort((a, b) =>
+            {
+                int numA = int.Parse(a.name);
+                int numB = int.Parse(b.name);
+
+                return numA.CompareTo(numB);
+
+            });
+        }
+    }
     public Sprite GetCostumeThumbnail(int idx)
     {
-        if (idx >= costumeThumbnail.Count) return null;
 
-        return costumeThumbnail[idx];
+        if (idx < costumeThumbnail.Count)
+        {
+            return costumeThumbnail[idx];
+        }
+        else
+        {
+            Debug.LogError($"Costume {idx} is not exist");
+            return null;
+        }
+    }
+    public SkeletonDataAsset GetCostumeAsset(int idx)
+    {
+
+        if (idx < costumeList.Count)
+        {
+            return costumeList[idx];
+        }
+        else
+        {
+            Debug.LogError($"Costume {idx} is not exist");
+            return null;
+        }
     }
 
 
@@ -740,7 +804,6 @@ public Sprite RecommendWeapon22;
     public Sprite HellMark6;
     public Sprite HellMark7;
     public Sprite SleepRewardItem;
-
 
     public Sprite GetItemIcon(Item_Type type)
     {
@@ -2694,7 +2757,8 @@ public Sprite RecommendWeapon22;
         if (type.IsCostumeItem())
         {
             var idx= int.Parse(type.ToString().Substring("costume".Length));
-            return costumeThumbnail[idx];
+            
+            return GetCostumeThumbnail(idx);;
 
         }
         else if (type.IsWeaponItem())
@@ -2726,7 +2790,6 @@ public Sprite RecommendWeapon22;
 
     public List<Sprite> bossIcon;
 
-    public List<SkeletonDataAsset> costumeList;
 
     public List<SkeletonDataAsset> petCostumeList;
 

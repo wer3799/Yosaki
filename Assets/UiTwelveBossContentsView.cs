@@ -133,7 +133,7 @@ public class UiTwelveBossContentsView : MonoBehaviour
 
                 petGraphic.gameObject.SetActive(false);
                 costumeGraphic.gameObject.SetActive(true);
-                costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[costume];
+                costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(costume);
                 costumeGraphic.Initialize(true);
                 costumeGraphic.SetMaterialDirty();
             }

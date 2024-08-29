@@ -30,7 +30,7 @@ public class PlayerCostumeView : MonoBehaviour
     private void WhenCostumeChanged(int idx)
     {
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
 

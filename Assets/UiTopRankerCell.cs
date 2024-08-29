@@ -452,7 +452,7 @@ public class UiTopRankerCell : MonoBehaviour
     private void SetCostumeSpine(int idx)
     {
         costumeGraphic.Clear();
-        costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
         costumeGraphic.Initialize(true);
         costumeGraphic.SetMaterialDirty();
 

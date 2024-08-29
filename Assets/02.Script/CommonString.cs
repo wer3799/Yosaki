@@ -280,7 +280,7 @@ public static class CommonString
             case Item_Type.SP: return "검조각";
             case Item_Type.Hae_Norigae: return "해태 노리개 조각";
             case Item_Type.Hae_Pet: return "아기 해태 구슬";
-            case Item_Type.Event_Item_SnowMan: return "수박 화채"; //(구)냉이
+            case Item_Type.Event_Item_SnowMan: return "팥빙수"; //(구)냉이
             case Item_Type.NataSkill: return "나타 베기";
             case Item_Type.OrochiSkill: return "오로치 베기";
             case Item_Type.GangrimSkill: return "강림 베기";
@@ -433,8 +433,8 @@ public static class CommonString
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
             case Item_Type.Event_Mission1: return "모래성";
             case Item_Type.Event_Mission1_All: return "모래성 총 획득량";
-            case Item_Type.Event_Mission2: return "캠핑 텐트";
-            case Item_Type.Event_Mission2_All: return "캠핑 재화 총 획득량";
+            case Item_Type.Event_Mission2: return "불꽃놀이";
+            case Item_Type.Event_Mission2_All: return "불꽃놀이 재화 총 획득량";
             case Item_Type.Event_Mission3: return "빈 재화";
             case Item_Type.Event_Mission3_All: return "빈 재화 총 획득량";
             case Item_Type.pet52: return TableManager.Instance.PetTable.dataArray[52].Name;

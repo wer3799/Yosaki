@@ -33,7 +33,7 @@ public class CharacterView : MonoBehaviour
         costumeId = costumeIdx;
         
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[costumeId];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(costumeId);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
         skeletonGraphic.gameObject.SetActive(true);
@@ -47,7 +47,7 @@ public class CharacterView : MonoBehaviour
         costumeId = int.Parse(costumeKey.Replace("costume", ""));
         
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[costumeId];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(costumeId);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
         skeletonGraphic.gameObject.SetActive(true);

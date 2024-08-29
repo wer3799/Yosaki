@@ -40,7 +40,7 @@ public class MunHaCostumeView : MonoBehaviour
         var data= TableManager.Instance.StudentTable.dataArray[0];
 
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[data.Change_Costume];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(data.Change_Costume);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
         
@@ -101,7 +101,7 @@ public class MunHaCostumeView : MonoBehaviour
         var data= TableManager.Instance.StudentTable.dataArray[grade];
 
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[data.Change_Costume];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(data.Change_Costume);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
         boneFollowerGraphic_weapon.SetBone("bone14");

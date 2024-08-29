@@ -813,7 +813,7 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            var idx = 89;
+                            var idx = 90;
                             defultValues.Add(e.Current.Key, idx);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(idx));
                         }
@@ -2018,11 +2018,11 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    //튜브
+    //미션2 이벤트
     public bool CanSpawnSnowManItem()
     {
         //targetDate가 am 00시 기준이므로 AddDays해야함
-        DateTime targetDate = new DateTime(2024, 7, 9);
+        DateTime targetDate = new DateTime(2024, 10, 9);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

@@ -43,7 +43,7 @@ public class UiCostumeCell : MonoBehaviour
     private void SetCostumeSpine(int idx)
     {
         skeletonGraphic.Clear();
-        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[idx];
+        skeletonGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(idx);
         skeletonGraphic.Initialize(true);
         skeletonGraphic.SetMaterialDirty();
     }

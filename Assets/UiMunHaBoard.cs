@@ -67,7 +67,7 @@ public class UiMunHaBoard : MonoBehaviour
       costumeGraphic.Clear();
 
       costumeGraphic.gameObject.SetActive(true);
-      costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.costumeList[data.Change_Costume];
+      costumeGraphic.skeletonDataAsset = CommonUiContainer.Instance.GetCostumeAsset(data.Change_Costume);
       costumeGraphic.Initialize(true);
       costumeGraphic.SetMaterialDirty();
    }
