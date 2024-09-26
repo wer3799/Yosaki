@@ -93,19 +93,41 @@ public static class Utils
 
     public static bool IsWeaponItem(this Item_Type type)
     {
-        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon_end)||
+        return (type >= Item_Type.weapon0 && type <= Item_Type.weapon_end) ||
                type == Item_Type.weapon81 ||
-               type == Item_Type.weapon90||
-               type == Item_Type.weapon131||
-               type == Item_Type.weapon146||
-               type == Item_Type.weapon149||
-               type == Item_Type.weapon150||
-               type == Item_Type.weapon151||
-               type == Item_Type.weapon152||
-               type == Item_Type.weapon153||
-               type == Item_Type.weapon154||
-               type == Item_Type.weapon155||
-               type == Item_Type.weapon156;
+               type == Item_Type.weapon90 ||
+               type == Item_Type.weapon131 ||
+               type == Item_Type.weapon146 ||
+               type == Item_Type.weapon149 ||
+               type == Item_Type.weapon150 ||
+               type == Item_Type.weapon151 ||
+               type == Item_Type.weapon152 ||
+               type == Item_Type.weapon153 ||
+               type == Item_Type.weapon154 ||
+               type == Item_Type.weapon155 ||
+               type == Item_Type.weapon156 ||
+               type == Item_Type.weapon26 ||
+               type == Item_Type.weapon27 ||
+               type == Item_Type.weapon28 ||
+               type == Item_Type.weapon30 ||
+               type == Item_Type.weapon33 ||
+               type == Item_Type.weapon34||
+               type == Item_Type.weapon36||
+               type == Item_Type.weapon43||
+               type == Item_Type.weapon44||
+               type == Item_Type.weapon50||
+               type == Item_Type.weapon51||
+               type == Item_Type.weapon57||
+               type == Item_Type.weapon58||
+               type == Item_Type.weapon59||
+               type == Item_Type.weapon63||
+               type == Item_Type.weapon64||
+               type == Item_Type.weapon65||
+               type == Item_Type.weapon66||
+               type == Item_Type.weapon67||
+               type == Item_Type.weapon68||
+               type == Item_Type.weapon69||
+               type == Item_Type.weapon70;
     }
     
 
@@ -340,14 +362,14 @@ public static class Utils
                type == Item_Type.ChunSun0 ||
                type == Item_Type.ChunSun1 ||
                type == Item_Type.ChunSun2 ||
-               type == Item_Type.YeaRaeWeapon ||
-               type == Item_Type.GangrimWeapon ||
-               type == Item_Type.HaeWeapon ||
+               type == Item_Type.weapon33 ||
+               type == Item_Type.weapon34 ||
+               type == Item_Type.weapon36 ||
                type == Item_Type.SmithFire ||
                type == Item_Type.Event_Item_SnowMan ||
                type == Item_Type.Event_Item_SnowMan_All ||
                type == Item_Type.MihoNorigae ||
-               type == Item_Type.MihoWeapon ||
+               type == Item_Type.weapon30 ||
                type == Item_Type.ChunMaNorigae ||
                type == Item_Type.Hel || type == Item_Type.Ym ||
                type == Item_Type.du ||

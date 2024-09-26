@@ -140,7 +140,7 @@ public enum StatusType
     EnhanceDosul,//도술증폭
     EnhanceVision,//궁극증폭
     DBTHasValueUpgrade,//무림구슬
-    DokChimHasValueUpgrade=120,//극락 재화당 개수증가
+    DokChimHasValueUpgrade=120,
     SuperCritical35DamPer=121,
     SuperCritical36DamPer=122,//해탈피해
     SuperCritical37DamPer,//보옥
@@ -148,7 +148,7 @@ public enum StatusType
     YOTHasValueUpgrade,//업화 개수
     EnhanceAttack,//공격력 증폭
     SuperCritical39DamPer=127,
-
+    CSTHasValueUpgrade=128,
 }
 
 public enum DimensionStatusType
@@ -2195,6 +2195,7 @@ public static class PlayerStats
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special10_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special11_GoldBar);
         ret += ServerData.statusTable.GetStatusValue(StatusTable.Special12_GoldBar);
+        ret += ServerData.statusTable.GetStatusValue(StatusTable.Special13_GoldBar);
         
         ret += GetGuimoonHasEffect1(StatusType.SuperCritical17DamPer);
 
@@ -2541,6 +2542,10 @@ public static class PlayerStats
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S3_DC);
         
         ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S4_DC);
+
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S5_DC);
+        
+        ret += ServerData.dimensionStatusTable.GetStatusValue(DimensionStatusTable.S6_DC);
         
         
         return ret;
@@ -3858,7 +3863,7 @@ public static class PlayerStats
     public static float GetChunsangTreasureAbilHasEffect()
     {
         return ((int)ServerData.goodsTable.GetTableData(GoodsTable.CST).Value *
-                (GameBalance.yeonOkBossTreasureAbilValue + GetYOTHasValueUpgrade()));
+                (GameBalance.chunSangTreasureAbilValue + GetCSTHasValueUpgrade()));
     }
 
     public static float GetGwisalTreasureAbilHasEffect(StatusType statusType, int addLevel = 0)
@@ -7078,6 +7083,18 @@ public static class PlayerStats
         ret += GetCostumeSpecialAbilityValue(StatusType.YOTHasValueUpgrade);
         
         ret += GetSkillHasValue(StatusType.YOTHasValueUpgrade);
+
+        return ret;
+    }
+    public static float GetCSTHasValueUpgrade()
+    {
+        float ret = 0f;
+        
+        ret += GetPassiveSkill2Value(StatusType.CSTHasValueUpgrade);
+        
+        ret += GetCostumeSpecialAbilityValue(StatusType.CSTHasValueUpgrade);
+        
+        ret += GetSkillHasValue(StatusType.CSTHasValueUpgrade);
 
         return ret;
     }

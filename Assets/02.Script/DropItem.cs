@@ -64,32 +64,32 @@ public enum Item_Type
     Indra0,
     Indra1,
     Indra2,
-    IndraWeapon,
+    weapon26,
     KirinNorigae,
     Kirin_Pet,
     IndraPower,
     Event_Item_SnowMan, //눈사람
-    NataWeapon,
+    weapon27,
     RabitNorigae,
     RabitPet,
     NataSkill,
-    OrochiWeapon,
+    weapon28,
     OrochiSkill,
     OrochiTooth0,
     OrochiTooth1,
     DogNorigae,
     DogPet,
 
-    MihoWeapon,
+    weapon30,
     MihoNorigae,
     ChunMaNorigae,
     ChunMaPet,
     Hel,
     Ym,
-    YeaRaeWeapon,
+    weapon33,
     YeaRaeNorigae,
 
-    GangrimWeapon,
+    weapon34,
     GangrimNorigae,
     GangrimSkill,
     //이덕춘 두루마리
@@ -100,7 +100,7 @@ public enum Item_Type
     Sun2,
     Sun3,
     Sun4,
-    HaeWeapon,
+    weapon36,
     Fw,
     Cw,
     ChunNorigae0,
@@ -400,6 +400,8 @@ public enum Item_Type
     weapon198 = 1084, 
 
     weapon199 = 1085, 
+    
+    weapon200 = 1086, 
 
     weapon_end = 1200,
     //
@@ -736,6 +738,9 @@ public enum Item_Type
 
     costume260 = 1560, 
 
+    costume261 = 1561, 
+    costume262 = 1562, 
+
     costume_end=1999,
 
     //2000~2999 마도서
@@ -797,6 +802,9 @@ public enum Item_Type
 
     magicBook160 = 2042,
 
+    magicBook161 = 2043,
+    magicBook162 = 2044,
+
     magicBook_End=2999,
     //3000~3100스킬
     skill0 = 3000,
@@ -853,22 +861,22 @@ public enum Item_Type
     c5 = 7005,
     c6 = 7006,
 
-    ChunWeapon0 = 7007,
+    weapon43 = 7007,
     ChunPet0 = 7008,
-    ChunWeapon1 = 7009,
+    weapon44 = 7009,
     ChunPet1 = 7010,
-    ChunWeapon2 = 7011,
+    weapon50 = 7011,
     ChunPet2 = 7012,
-    ChunWeapon3 = 7013,
+    weapon51 = 7013,
     ChunPet3 = 7014,
 
-    DokebiWeapon0 = 7020,
-    DokebiWeapon1 = 7021,
-    DokebiWeapon2 = 7022,
-    DokebiWeapon3 = 7023,
-    DokebiWeapon4 = 7024,
-    DokebiWeapon5 = 7025,
-    DokebiWeapon6 = 7026,
+    weapon57 = 7020,
+    weapon58 = 7021,
+    weapon59 = 7022,
+    weapon63 = 7023,
+    weapon64 = 7024,
+    weapon65 = 7025,
+    weapon66 = 7026,
 
     DokebiWeapon7 = 7027,
     DokebiWeapon8 = 7028,
@@ -886,10 +894,10 @@ public enum Item_Type
     DokebiNorigae8 = 7038,
     DokebiNorigae9 = 7039,
 
-    SasinsuWeapon0 = 7040,
-    SasinsuWeapon1 = 7041,
-    SasinsuWeapon2 = 7042,
-    SasinsuWeapon3 = 7043,
+    weapon67 = 7040,
+    weapon68 = 7041,
+    weapon69 = 7042,
+    weapon70 = 7043,
     
     //사신수 진
     SasinsuPet0 = 7050,

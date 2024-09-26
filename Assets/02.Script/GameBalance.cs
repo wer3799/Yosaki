@@ -698,6 +698,7 @@ public static class GameBalance
     public static ObscuredFloat Special10_GoldBar = 0.0000001f;
     public static ObscuredFloat Special11_GoldBar = 0.00000012f;
     public static ObscuredFloat Special12_GoldBar = 0.00000014f;
+    public static ObscuredFloat Special13_GoldBar = 0.00000016f;
     
     #endregion
 
@@ -752,6 +753,7 @@ public static class GameBalance
     public static ObscuredFloat murimTreasureAbilValue = 0.02f; 
     public static ObscuredFloat difficultyBossTreasureAbilValue = 0.01f; 
     public static ObscuredFloat yeonOkBossTreasureAbilValue = 0.01f; //연옥보물당
+    public static ObscuredFloat chunSangTreasureAbilValue = 0.01f; //윤회기운당
     public static ObscuredFloat VisionTreasurePerDamage = 1; // 비전보물 1개당 스킬 데미지 증가량
 
     #endregion

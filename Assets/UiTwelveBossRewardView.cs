@@ -8433,7 +8433,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
         }
 
         //
-        else if (type == Item_Type.NataWeapon)
+        else if (type == Item_Type.weapon27)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8465,7 +8465,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.YeaRaeWeapon)
+        else if (type == Item_Type.weapon33)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8497,7 +8497,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.GangrimWeapon)
+        else if (type == Item_Type.weapon34)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8530,7 +8530,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             });
         }
         //
-        else if (type == Item_Type.HaeWeapon)
+        else if (type == Item_Type.weapon36)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8563,7 +8563,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             });
         }
 
-        else if (type == Item_Type.OrochiWeapon)
+        else if (type == Item_Type.weapon28)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8595,7 +8595,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.MihoWeapon)
+        else if (type == Item_Type.weapon30)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8627,7 +8627,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.ChunWeapon0)
+        else if (type == Item_Type.weapon43)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8659,7 +8659,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.ChunWeapon1)
+        else if (type == Item_Type.weapon44)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8691,7 +8691,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.ChunWeapon2)
+        else if (type == Item_Type.weapon50)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8723,7 +8723,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.ChunWeapon3)
+        else if (type == Item_Type.weapon51)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8756,7 +8756,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
             });
         }
         //--------------------------------------
-        else if (type == Item_Type.DokebiWeapon0)
+        else if (type == Item_Type.weapon57)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8788,7 +8788,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.DokebiWeapon1)
+        else if (type == Item_Type.weapon58)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8820,7 +8820,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.DokebiWeapon2)
+        else if (type == Item_Type.weapon59)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8852,7 +8852,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.DokebiWeapon3)
+        else if (type == Item_Type.weapon63)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8884,7 +8884,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.DokebiWeapon4)
+        else if (type == Item_Type.weapon64)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8916,7 +8916,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.DokebiWeapon5)
+        else if (type == Item_Type.weapon65)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -8948,7 +8948,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.DokebiWeapon6)
+        else if (type == Item_Type.weapon66)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 
@@ -11921,7 +11921,7 @@ public class UiTwelveBossRewardView : MonoBehaviour
                 // LogManager.Instance.SendLog("신수제작", $"신수제작 성공 {needPetId}");
             });
         }
-        else if (type == Item_Type.IndraWeapon)
+        else if (type == Item_Type.weapon26)
         {
             List<TransactionValue> transactions = new List<TransactionValue>();
 

@@ -83,6 +83,7 @@ public class StatusTable
     public const string Special10_GoldBar = "Special10_GoldBar";
     public const string Special11_GoldBar = "Special11_GoldBar";
     public const string Special12_GoldBar = "Special12_GoldBar";
+    public const string Special13_GoldBar = "Special13_GoldBar";
     
     public const string Sin_StatPoint = "Sin_StatPoint";
     public const string Hyung_StatPoint = "Hyung_StatPoint";
@@ -167,6 +168,7 @@ public class StatusTable
         
         { Special11_GoldBar, 0 },
         { Special12_GoldBar, 0 },
+        { Special13_GoldBar, 0 },
         
         { Sin_StatPoint, 0 },
         { Hyung_StatPoint, 0 },
@@ -562,6 +564,12 @@ public class StatusTable
                     float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
                     return level * GameBalance.Special12_GoldBar * specialAbilityRatio * goldAbilRatio;
                 }
+                case Special13_GoldBar:
+                {
+                    float specialAbilityRatio = Mathf.Max(1, PlayerStats.GetNorigaeSoulGradeValue() / 100);
+                    float goldAbilRatio = Mathf.Max(1,PlayerStats.GetGoldAbilAddRatio() / 100);
+                    return level * GameBalance.Special13_GoldBar * specialAbilityRatio * goldAbilRatio;
+                }
 
                 #endregion
                 default:
@@ -595,8 +603,9 @@ public class StatusTable
         var soul10 = tableDatas[Special10_GoldBar].Value;
         var soul11 = tableDatas[Special11_GoldBar].Value;
         var soul12 = tableDatas[Special12_GoldBar].Value;
+        var soul13 = tableDatas[Special13_GoldBar].Value;
         var sum = soul0 + soul1 + soul2 + soul3 + soul4 + soul5 + soul6 + soul7 + soul8 + soul9 + soul10 + soul11 +
-                  soul2;
+                  soul12 + soul13;
         
         return sum;
     }

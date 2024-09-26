@@ -147,26 +147,6 @@ public class CommonUiContainer : SingletonMono<CommonUiContainer>
 
 [Header ("Weapon")]
 
-public Sprite IndraWeapon;
-public Sprite NataWeapon;
-public Sprite OrochiWeapon;
-public Sprite MihoWeapon;
-public Sprite YeaRaeWeapon;
-public Sprite GangrimWeapon;
-public Sprite HaeWeapon;
-public Sprite ChunWeapon0;
-public Sprite ChunWeapon1;
-public Sprite ChunWeapon2;
-public Sprite ChunWeapon3;
-
-public Sprite DokebiWeapon0;
-public Sprite DokebiWeapon1;
-public Sprite DokebiWeapon2;
-public Sprite DokebiWeapon3;
-public Sprite DokebiWeapon4;
-public Sprite DokebiWeapon5;
-public Sprite DokebiWeapon6;
-
 public Sprite SasinsuWeapon0;
 public Sprite SasinsuWeapon1;
 public Sprite SasinsuWeapon2;
@@ -1880,19 +1860,9 @@ public Sprite RecommendWeapon22;
 
             //
 
-
-            case Item_Type.GangrimWeapon:
-                return GangrimWeapon;
-
-   
             
-            case Item_Type.YeaRaeWeapon:
-                return YeaRaeWeapon;
 
 
-
-            case Item_Type.HaeWeapon:
-                return HaeWeapon;
 
 
 
@@ -2366,65 +2336,6 @@ public Sprite RecommendWeapon22;
                 return LeeMuGiStone;
 
 
-            case Item_Type.IndraWeapon:
-                return IndraWeapon;
-
-
-            case Item_Type.NataWeapon:
-                return NataWeapon;
-
-
-            case Item_Type.OrochiWeapon:
-                return OrochiWeapon;
-
-
-
-            case Item_Type.MihoWeapon:
-                return MihoWeapon;
-
-
-            case Item_Type.ChunWeapon0:
-                return ChunWeapon0;
-
-
-            case Item_Type.ChunWeapon1:
-                return ChunWeapon1;
-
-
-            case Item_Type.ChunWeapon2:
-                return ChunWeapon2;
-
-
-            case Item_Type.ChunWeapon3:
-                return ChunWeapon3;
-
-
-            case Item_Type.DokebiWeapon0:
-                return DokebiWeapon0;
-
-
-            case Item_Type.DokebiWeapon1:
-                return DokebiWeapon1;
-
-
-            case Item_Type.DokebiWeapon2:
-                return DokebiWeapon2;
-
-
-            case Item_Type.DokebiWeapon3:
-                return DokebiWeapon3;
-
-
-            case Item_Type.DokebiWeapon4:
-                return DokebiWeapon4;
-
-
-            case Item_Type.DokebiWeapon5:
-                return DokebiWeapon5;
-
-
-            case Item_Type.DokebiWeapon6:
-                return DokebiWeapon6;
 
 
             case Item_Type.DokebiWeapon7:
@@ -2642,14 +2553,6 @@ public Sprite RecommendWeapon22;
                 return weapon181;
             case Item_Type.weapon182:
                 return weapon182;
-            case Item_Type.SasinsuWeapon0:
-                return SasinsuWeapon0;
-            case Item_Type.SasinsuWeapon1:
-                return SasinsuWeapon1;
-            case Item_Type.SasinsuWeapon2:
-                return SasinsuWeapon2;
-            case Item_Type.SasinsuWeapon3:
-                return SasinsuWeapon3;
             case Item_Type.SahyungWeapon0:
                 return SahyungWeapon0;
             case Item_Type.SahyungWeapon1:

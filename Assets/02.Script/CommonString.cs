@@ -744,6 +744,8 @@ public static class CommonString
                 return "독침 개수당 효과 증가(%)";
             case StatusType.YOTHasValueUpgrade:
                 return "업화 개수당 효과 증가(%)";
+            case StatusType.CSTHasValueUpgrade:
+                return "윤회의 기운 개수당 효과 증가(%)";
             case StatusType.SuperCritical8DamPer:
                 return "하단전베기 피해(%)";
             case StatusType.SuperCritical9DamPer:
