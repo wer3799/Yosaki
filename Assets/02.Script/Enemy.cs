@@ -220,7 +220,7 @@ public class Enemy : PoolItem
 
     private void GetEventItem()
     {
-        if (ServerData.userInfoTable.CanSpawnSnowManItem() == false) return;
+        if (ServerData.userInfoTable.CanSpawnKill2EventItem() == false) return;
 
         ServerData.goodsTable.GetEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }
@@ -273,7 +273,7 @@ public class Enemy : PoolItem
 
     private void GetSpringEventItem() 
     {
-        if (ServerData.userInfoTable.CanSpawnSpringEventItem() == false) return;
+        if (ServerData.userInfoTable.CanSpawnKill1EventItem() == false) return;
 
         ServerData.goodsTable.GetSpringEventItem(GameManager.Instance.CurrentStageData.Marbleamount);
     }

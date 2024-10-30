@@ -37,12 +37,12 @@ public class UiEventMission1 : MonoBehaviour
     {
         ServerData.costumeServerTable.TableDatas[costumeKey].hasCostume.AsObservable().Subscribe(e =>
         {
-            getCostumeButton.SetActive(!e);
+          //  getCostumeButton.SetActive(!e);
         }).AddTo(this);
     }
     private void OnEnable()
     {
-        if (ServerData.userInfoTable.IsMissionEventPeriod() == false)
+        if (ServerData.userInfoTable.IsMission1EventPeriod() == false)
         {
             this.gameObject.SetActive(false);
             return;

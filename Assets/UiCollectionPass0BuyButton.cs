@@ -14,7 +14,7 @@ public class UiCollectionPass0BuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string PassKey = "killeventpass3";
+    public static readonly string PassKey = GameBalance.kill1EventPassKey;
 
     private Button buyButton;
 

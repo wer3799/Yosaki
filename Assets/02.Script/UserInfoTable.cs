@@ -813,7 +813,7 @@ public class UserInfoTable
                         }
                         else if (e.Current.Key == eventMissionInitialize)
                         {
-                            var idx = 90;
+                            var idx = 91;
                             defultValues.Add(e.Current.Key, idx);
                             tableDatas.Add(e.Current.Key, new ReactiveProperty<double>(idx));
                         }
@@ -2018,27 +2018,25 @@ public class UserInfoTable
         return tableDatas[removeAd].Value == 1;
     }
 
-    //미션2 이벤트
-    public bool CanSpawnSnowManItem()
+    public bool CanSpawnKill2EventItem()
     {
         //targetDate가 am 00시 기준이므로 AddDays해야함
-        DateTime targetDate = new DateTime(2024, 10, 9);
+        DateTime targetDate = GameBalance.GetEventDate(Item_Type.Event_Item_SnowMan);
 
         return currentServerTime <= targetDate.AddDays(1);
     }
 
-    //벌꿀 이벤트
-    public bool CanSpawnSpringEventItem()
+    public bool CanSpawnKill1EventItem()
     {
-        DateTime targetDate = new DateTime(2024, 8, 28);
+        DateTime targetDate = GameBalance.GetEventDate(Item_Type.Event_Kill1_Item);
 
         return currentServerTime <= targetDate.AddDays(1);
     }
 
     //미션1 이벤트
-    public bool IsMissionEventPeriod()
+    public bool IsMission1EventPeriod()
     {
-        DateTime targetDate = new DateTime(2024, 8, 28);
+        DateTime targetDate = GameBalance.GetEventDate(Item_Type.Event_Mission1);
 
         return currentServerTime <= targetDate.AddDays(1);
     }

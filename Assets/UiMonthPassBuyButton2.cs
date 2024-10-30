@@ -13,7 +13,7 @@ public class UiMonthPassBuyButton2 : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string monthPassKey = "monthpass36";
+    public static readonly string monthPassKey = "monthpass38";
 
     private Button buyButton;
 

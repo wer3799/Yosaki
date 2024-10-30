@@ -342,7 +342,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         ServerData.goodsTable.GetTableData(GoodsTable.SG).Value += (int)sleepRewardInfo.sasinsuItem;
 
         //봄나물
-        if (ServerData.userInfoTable.CanSpawnSpringEventItem())
+        if (ServerData.userInfoTable.CanSpawnKill1EventItem())
         {
             ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value += sleepRewardInfo.springItem;
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
@@ -356,7 +356,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
         }
 
         //눈사람
-        if (ServerData.userInfoTable.CanSpawnSnowManItem())
+        if (ServerData.userInfoTable.CanSpawnKill2EventItem())
         {
             ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value += sleepRewardInfo.springItem;
 
@@ -463,7 +463,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
 
         //   goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
         //goodsParam.Add(GoodsTable.Event_Mission, ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission).Value);
-        if (ServerData.userInfoTable.CanSpawnSpringEventItem())
+        if (ServerData.userInfoTable.CanSpawnKill1EventItem())
         {
             goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
@@ -472,7 +472,7 @@ public class SleepRewardReceiver : SingletonMono<SleepRewardReceiver>
             }
         }
 
-        if (ServerData.userInfoTable.CanSpawnSnowManItem())
+        if (ServerData.userInfoTable.CanSpawnKill2EventItem())
         {
             goodsParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
             if (Utils.HasSnowManEventPass() == false)

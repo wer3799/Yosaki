@@ -1373,7 +1373,7 @@ public class GoodsTable
 
         //goodsParam.Add(GoodsTable.Event_Item_1, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_1).Value);
 
-        if (ServerData.userInfoTable.CanSpawnSpringEventItem())
+        if (ServerData.userInfoTable.CanSpawnKill1EventItem())
         {
             goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value);
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value == 0)
@@ -1382,7 +1382,7 @@ public class GoodsTable
             }
         }
 
-        if (ServerData.userInfoTable.CanSpawnSnowManItem())
+        if (ServerData.userInfoTable.CanSpawnKill2EventItem())
         {
             goodsParam.Add(GoodsTable.Event_Item_SnowMan, ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_SnowMan).Value);
           

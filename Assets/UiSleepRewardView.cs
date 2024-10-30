@@ -157,7 +157,7 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         rewards[5].SetText(Utils.ConvertBigNum(reward.yoguiMarble));
         
         //2023 송편
-        if (ServerData.userInfoTable.CanSpawnSnowManItem())
+        if (ServerData.userInfoTable.CanSpawnKill2EventItem())
         {
             
             if (Utils.HasSnowManEventPass() == false)
@@ -184,7 +184,7 @@ public class UiSleepRewardView : SingletonMono<UiSleepRewardView>
         rewards[9].SetText(Utils.ConvertBigNum(reward.springItem));
         
         //봄나물
-        if (ServerData.userInfoTable.CanSpawnSpringEventItem())
+        if (ServerData.userInfoTable.CanSpawnKill1EventItem())
         {
             if (ServerData.iapServerTable.TableDatas[UiCollectionPass0BuyButton.PassKey].buyCount.Value <= 0)
             {

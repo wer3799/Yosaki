@@ -829,6 +829,40 @@ public static class GameBalance
 
 
     #endregion
+
+    #region EventDate
+
+    private static DateTime kill1Event = new DateTime(2024, 12, 28);
+    private static DateTime kill2Event = new DateTime(2024, 10, 28);
+    private static DateTime shop1Event = new DateTime(2024, 12, 28);
+    private static DateTime shop2Event = new DateTime(2024, 10, 28);
+
+    public static readonly string kill1EventPassKey = "killeventpass5";
+    public static readonly string kill2EventPassKey = "killeventpass4";
+
+    public static readonly string shop1EventPassKey = "shopeventpass5";
+    public static readonly string shop2EventPassKey = "shopeventpass4";
+
+
+    #endregion
+
+    public static DateTime GetEventDate(Item_Type type)
+    {
+        switch (type)
+        {
+            case Item_Type.Event_Kill1_Item:
+                return kill1Event;
+            case Item_Type.Event_Mission1:
+                return shop1Event;
+            case Item_Type.Event_Mission2:
+                return shop2Event;
+            case Item_Type.Event_Item_SnowMan:
+                return kill2Event;
+        }
+
+        return DateTime.MinValue;
+    } 
+    
     public readonly static string[] damageUnit = new string[]
     {
         "", "만", "억", "조", "경", "해", "자", "양", "구", "간", "정", "재", "극", "항", "아", "나", "불", "무", "대", "겁", "업", "긍",

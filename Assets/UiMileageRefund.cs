@@ -3113,8 +3113,6 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         }
-        #endregion
-
         if (ServerData.userInfoTable.GetTableData(initKey).Value < 88)
         {
             Param userInfoParam = new Param();
@@ -3289,11 +3287,170 @@ public class UiMileageRefund : MonoBehaviour
             {
             });
         }
+        #endregion
+
 
         InitializeEvent2(90);
+        InitializeEvent1(91);
 
     }
 
+    void InitializeEvent1(int idx){
+    
+        var initKey = UserInfoTable.eventMissionInitialize;
+        if (ServerData.userInfoTable.GetTableData(initKey).Value < idx)
+        {
+            Param userInfoParam = new Param();
+            Param userInfo2Param = new Param();
+            Param oneYearParam = new Param();
+            Param eventParam = new Param();
+            Param goodsParam = new Param();
+            
+            
+            List<TransactionValue> transactions = new List<TransactionValue>();
+
+            ServerData.userInfoTable.GetTableData(initKey).Value = idx;
+            userInfoParam.Add(initKey, ServerData.userInfoTable.GetTableData(initKey).Value);
+            
+            
+            
+            //킬이벤트1 상점교환횟수 초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4).Value = 0;
+            userInfoParam.Add(UserInfoTable.exchangeCount_0, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_0).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_1, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_1).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_2, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_2).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_3, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_3).Value);
+            userInfoParam.Add(UserInfoTable.exchangeCount_4, ServerData.userInfoTable.GetTableData(UserInfoTable.exchangeCount_4).Value);
+            
+            //킬이벤트1 재화 초기화
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item).Value = 0;
+            ServerData.goodsTable.GetTableData(GoodsTable.Event_Kill1_Item_All).Value = 0;
+            goodsParam.Add(GoodsTable.Event_Kill1_Item, ServerData.goodsTable.TableDatas[GoodsTable.Event_Kill1_Item].Value);
+            goodsParam.Add(GoodsTable.Event_Kill1_Item_All, ServerData.goodsTable.TableDatas[GoodsTable.Event_Kill1_Item_All].Value);
+            
+            //킬이벤트1 사용횟수 초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value = 0;
+            userInfoParam.Add(UserInfoTable.usedCollectionCount, ServerData.userInfoTable.GetTableData(UserInfoTable.usedCollectionCount).Value);
+            
+            //킬이벤트1 사용횟수 보상 초기화
+            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value = "-1";
+            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value = "-1";
+            oneYearParam.Add(OneYearPassServerTable.childFree, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childFree].Value);
+            oneYearParam.Add(OneYearPassServerTable.childAd, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.childAd].Value);
+            
+            //미션1 상점 교환횟수 초기화
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_0).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_1).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_2).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_3).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_4).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_5).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_6).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_7).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_8).Value = 0;
+            ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_9).Value = 0;
+            userInfoParam.Add(UserInfoTable.eventMission0_0, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_0).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_1, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_1).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_2, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_2).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_3, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_3).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_4, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_4).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_5, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_5).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_6, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_6).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_7, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_7).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_8, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_8).Value);
+            userInfoParam.Add(UserInfoTable.eventMission0_9, ServerData.userInfoTable.GetTableData(UserInfoTable.eventMission0_9).Value);
+            
+            //미션1 출석일수 초기화
+            ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value = 1;
+            userInfo2Param.Add(UserInfoTable_2.eventMission1AttendCount, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.eventMission1AttendCount).Value);
+
+            //미션1 출석 보상 초기화
+            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event1AttendFree].Value = "-1";
+            ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event1AttendAd].Value = "-1";
+            oneYearParam.Add(OneYearPassServerTable.event1AttendFree, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event1AttendFree].Value);
+            oneYearParam.Add(OneYearPassServerTable.event1AttendAd, ServerData.oneYearPassServerTable.TableDatas[OneYearPassServerTable.event1AttendAd].Value);
+            
+            //미션1 미션 초기화
+            ServerData.eventMissionTable.TableDatas["TMission1"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["TMission2"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["TMission3"].clearCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["TMission1"].rewardCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["TMission2"].rewardCount.Value = 0;
+            ServerData.eventMissionTable.TableDatas["TMission3"].rewardCount.Value = 0;
+            eventParam.Add("TMission1", ServerData.eventMissionTable.TableDatas["TMission1"].ConvertToString());
+            eventParam.Add("TMission2", ServerData.eventMissionTable.TableDatas["TMission2"].ConvertToString());
+            eventParam.Add("TMission3", ServerData.eventMissionTable.TableDatas["TMission3"].ConvertToString());
+         
+            //미션1 이벤트상품 초기화
+             ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1).Value = 0;
+             ServerData.goodsTable.GetTableData(GoodsTable.Event_Mission1_All).Value = 0;
+             goodsParam.Add(GoodsTable.Event_Mission1, ServerData.goodsTable.TableDatas[GoodsTable.Event_Mission1].Value);
+             goodsParam.Add(GoodsTable.Event_Mission1_All, ServerData.goodsTable.TableDatas[GoodsTable.Event_Mission1_All].Value);
+            
+             //마블점수 초기화
+             ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.yosakiMarbleScore).Value = 1;
+             userInfo2Param.Add(UserInfoTable_2.yosakiMarbleScore, ServerData.userInfoTable_2.GetTableData(UserInfoTable_2.yosakiMarbleScore).Value);
+             //마블재화 초기화
+
+             ServerData.goodsTable.GetTableData(GoodsTable.Event_Item_0).Value = 0;
+             goodsParam.Add(GoodsTable.Event_Item_0, ServerData.goodsTable.TableDatas[GoodsTable.Event_Item_0].Value);
+
+            //  //마블 미션 초기화
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission1"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission2"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission3"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission4"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission5"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission6"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission7"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission8"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission9"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission10"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission11"].clearCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission12"].clearCount.Value = 0;
+            //
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission1"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission2"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission3"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission4"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission5"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission6"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission7"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission8"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission9"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission10"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission11"].rewardCount.Value = 0;
+            // ServerData.eventMissionTable.TableDatas["FMarbleMission12"].rewardCount.Value = 0;
+            //  
+            // eventParam.Add("FMarbleMission1", ServerData.eventMissionTable.TableDatas["FMarbleMission1"].ConvertToString());
+            // eventParam.Add("FMarbleMission2", ServerData.eventMissionTable.TableDatas["FMarbleMission2"].ConvertToString());
+            // eventParam.Add("FMarbleMission3", ServerData.eventMissionTable.TableDatas["FMarbleMission3"].ConvertToString());
+            // eventParam.Add("FMarbleMission4", ServerData.eventMissionTable.TableDatas["FMarbleMission4"].ConvertToString());
+            // eventParam.Add("FMarbleMission5", ServerData.eventMissionTable.TableDatas["FMarbleMission5"].ConvertToString());
+            // eventParam.Add("FMarbleMission6", ServerData.eventMissionTable.TableDatas["FMarbleMission6"].ConvertToString());
+            // eventParam.Add("FMarbleMission7", ServerData.eventMissionTable.TableDatas["FMarbleMission7"].ConvertToString());
+            // eventParam.Add("FMarbleMission8", ServerData.eventMissionTable.TableDatas["FMarbleMission8"].ConvertToString());
+            // eventParam.Add("FMarbleMission9", ServerData.eventMissionTable.TableDatas["FMarbleMission9"].ConvertToString());
+            // eventParam.Add("FMarbleMission10", ServerData.eventMissionTable.TableDatas["FMarbleMission10"].ConvertToString());
+            // eventParam.Add("FMarbleMission11", ServerData.eventMissionTable.TableDatas["FMarbleMission11"].ConvertToString());
+            // eventParam.Add("FMarbleMission12", ServerData.eventMissionTable.TableDatas["FMarbleMission12"].ConvertToString());
+            //
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable_2.tableName, UserInfoTable_2.Indate, userInfo2Param));
+            transactions.Add(TransactionValue.SetUpdate(OneYearPassServerTable.tableName, OneYearPassServerTable.Indate, oneYearParam));
+            transactions.Add(TransactionValue.SetUpdate(EventMissionTable.tableName, EventMissionTable.Indate, eventParam));
+            transactions.Add(TransactionValue.SetUpdate(UserInfoTable.tableName, UserInfoTable.Indate, userInfoParam));
+            transactions.Add(TransactionValue.SetUpdate(GoodsTable.tableName, GoodsTable.Indate, goodsParam));
+            
+
+            ServerData.SendTransactionV2(transactions, successCallBack: () =>
+            {
+            });
+        }
+    }
 
     void InitializeEvent2(int idx)
     {

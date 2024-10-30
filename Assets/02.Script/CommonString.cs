@@ -426,13 +426,13 @@ public static class CommonString
             case Item_Type.du: return "저승 명부";
             case Item_Type.Fw: return "분홍 꽃";
             case Item_Type.Cw: return "천계 꽃";
-            case Item_Type.Event_Kill1_Item: return "수박 화채"; //봄나물
-            case Item_Type.Event_Collection_All: return "수박 화채 총 획득량";
+            case Item_Type.Event_Kill1_Item: return "얼음"; //봄나물
+            case Item_Type.Event_Collection_All: return "얼음 총 획득량";
             case Item_Type.Event_Fall_Gold: return "황금 곶감";
             case Item_Type.Event_NewYear: return "떡국";
             case Item_Type.Event_NewYear_All: return "떡국 총 획득량";
-            case Item_Type.Event_Mission1: return "모래성";
-            case Item_Type.Event_Mission1_All: return "모래성 총 획득량";
+            case Item_Type.Event_Mission1: return "눈꽃";
+            case Item_Type.Event_Mission1_All: return "눈꽃 총 획득량";
             case Item_Type.Event_Mission2: return "불꽃놀이";
             case Item_Type.Event_Mission2_All: return "불꽃놀이 재화 총 획득량";
             case Item_Type.Event_Mission3: return "빈 재화";

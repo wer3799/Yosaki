@@ -30,7 +30,7 @@ public class UiEventMission1AttendPass : FancyScrollView<PassData_Fancy>
 
     private void OnEnable()
     {
-        if (ServerData.userInfoTable.IsMissionEventPeriod() == false)
+        if (ServerData.userInfoTable.IsMission1EventPeriod() == false)
         {
             this.gameObject.SetActive(false);
             return;

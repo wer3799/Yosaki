@@ -21,6 +21,11 @@ public class UiMissionBoardTextAdjuster : MonoBehaviour
         texts[6].SetText($"패스 구매시\n{eventName} 미션보상 2배 획득 가능!");
         texts[7].SetText($"구매시\n{CommonString.GetItemName(itemType)} 즉시 획득!");
 
+        if (texts[8] != null)
+        {
+            var date = GameBalance.GetEventDate(itemType);
+            texts[8].SetText($"이벤트 기간 : ~ {date.Month}월 {date.Day}일");
+        }
 
 
     }

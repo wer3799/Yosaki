@@ -22,7 +22,11 @@ public class UiKillBoardTextAdjuster : MonoBehaviour
                          $"\n{itemName} 획득량 2배\n" +
                          $"\n{eventName} 패스 추가보상 획득 가능!");
         texts[5].SetText($"구매시 {itemName} 즉시 획득");
-
+        if (texts[6] != null)
+        {
+            var date = GameBalance.GetEventDate(itemType);
+            texts[6].SetText($"이벤트 종료 : {date.Month}월 {date.Day}일");
+        }
 
 
 

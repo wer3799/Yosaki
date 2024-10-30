@@ -14,7 +14,7 @@ public class UiChuseokPassBuyButton : MonoBehaviour
 
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public static readonly string seasonPassKey = "shopeventpass4";
+    public static readonly string seasonPassKey = GameBalance.shop2EventPassKey;
     
     private Button buyButton;
 
