@@ -556,6 +556,9 @@ public class ChatManager : SingletonMono<ChatManager>
             case RankType.Dimension:
                 return CommonString.RankPrefix_Dimension;
                 break;
+            case RankType.WeeklyStage:
+                return CommonString.RankPrefix_Stage;
+                break;
         }
 
         return "미등록";
