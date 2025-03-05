@@ -119,21 +119,21 @@ public class UiMessageText : MonoBehaviour
 
     private void Subscribe()
     {
-        ChatManager.Instance.WhenBanned.AsObservable().Subscribe(e =>
-        {
-            if (e.Equals(this.nickName))
-            {
-                description.SetText("차단됨");
-            }
-
-        }).AddTo(this);
+        // ChatManager.Instance.WhenBanned.AsObservable().Subscribe(e =>
+        // {
+        //     if (e.Equals(this.nickName))
+        //     {
+        //         description.SetText("차단됨");
+        //     }
+        //
+        // }).AddTo(this);
     }
 
     public void OnClickBanButton()
     {
         description.SetText("차단됨");
 
-        ChatManager.Instance.WhenBanned.Execute(nickName);
+    //    ChatManager.Instance.WhenBanned.Execute(nickName);
     }
 
     public void OnClickReportButton()

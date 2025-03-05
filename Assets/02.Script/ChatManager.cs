@@ -516,7 +516,7 @@ public class ChatManager : SingletonMono<ChatManager>
                 colorPrefix = "<color=#ffffffff>";
             }
 
-            message = $"{colorPrefix}({GetRankName(rankType)}{bestRank}위)</color>{CommonString.ChatSplitChar}{message}";
+            message = $"{colorPrefix}({GetRankName(rankType)} {bestRank}위)</color>{CommonString.ChatSplitChar}{message}";
 
         }
         else

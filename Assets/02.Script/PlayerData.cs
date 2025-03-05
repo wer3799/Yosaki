@@ -75,7 +75,7 @@ public class PlayerData : SingletonMono<PlayerData>
     {
         Debug.Log("IOS_9");
         PreSceneStartButton.Instance.SetInteractive();
-        ChatManager.Instance.ConnectToChattingServer();
+      //  ChatManager.Instance.ConnectToChattingServer();
         Subscribe();
 
         SaveManager.Instance.StartAutoSave();

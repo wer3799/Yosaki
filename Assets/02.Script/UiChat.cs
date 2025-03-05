@@ -24,19 +24,19 @@ public class UiChat : MonoBehaviour
 
     private void Subscribe()
     {
-        ChatManager.Instance.whenChatReceived.Subscribe(e => { SetMessage(e, false); }).AddTo(this);
+       // ChatManager.Instance.whenChatReceived.Subscribe(e => { SetMessage(e, false); }).AddTo(this);
 
-        ChatManager.Instance.LoadNormalChatHistory();
+   //     ChatManager.Instance.LoadNormalChatHistory();
     }
 
     private void Initialize()
     {
         messagePool.ForEach(e => e.Initialize(string.Empty, true));
 
-        if (ChatManager.Instance.chatConnected)
-        {
-            SetMessage(new ChatInfo(CommonString.ChatConnectString), true);
-        }
+        // if (ChatManager.Instance.chatConnected)
+        // {
+        //     SetMessage(new ChatInfo(CommonString.ChatConnectString), true);
+        // }
     }
 
     private void SetMessage(ChatInfo message, bool isSystem)
@@ -57,7 +57,7 @@ public class UiChat : MonoBehaviour
         {
             chat = chat.Substring(0, 40);
         }
-        ChatManager.Instance.SendChat(chat);
+       // ChatManager.Instance.SendChat(chat);
         inputfield.text = string.Empty;
     }
 }

@@ -40,7 +40,7 @@ public class UiGuildChatBoard : SingletonMono<UiGuildChatBoard>
 
         yield return new WaitForSeconds(1.0f);
 
-        ChatManager.Instance.ConnectToChattingServer_Guild();
+    //    ChatManager.Instance.ConnectToChattingServer_Guild();
 
         if (subscribed == false)
         {
@@ -59,7 +59,7 @@ public class UiGuildChatBoard : SingletonMono<UiGuildChatBoard>
 
     private void Subscribe()
     {
-        ChatManager.Instance.whenChatReceived_Guild.Subscribe(e => { GetMessage(e, false); }).AddTo(this);
+  //      ChatManager.Instance.whenChatReceived_Guild.Subscribe(e => { GetMessage(e, false); }).AddTo(this);
     }
 
     private void GetMessage(ChatInfo message, bool isSystem)
@@ -96,7 +96,7 @@ public class UiGuildChatBoard : SingletonMono<UiGuildChatBoard>
         {
             chat = chat.Substring(0, 40);
         }
-        ChatManager.Instance.SendChat_Guild(chat);
+    //    ChatManager.Instance.SendChat_Guild(chat);
         inputfield.text = string.Empty;
     }
 
@@ -106,13 +106,13 @@ public class UiGuildChatBoard : SingletonMono<UiGuildChatBoard>
         {
             chat = chat.Substring(0, 40);
         }
-        ChatManager.Instance.SendChat_Guild(chat, false);
+     //   ChatManager.Instance.SendChat_Guild(chat, false);
         inputfield.text = string.Empty;
     }
 
     public void SendRankScore_System(string chat)
     {
-        ChatManager.Instance.SendChat_Guild(chat, false);
+    //    ChatManager.Instance.SendChat_Guild(chat, false);
         inputfield.text = string.Empty;
     }
 

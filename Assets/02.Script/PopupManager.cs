@@ -55,8 +55,8 @@ public class PopupManager : SingletonMono<PopupManager>
     }
     public void SetChatBoardMainGameCanvas()
     {
-        chatBoard.SetActive(true);
-        chatBoard.transform.SetParent(MessageBoardParent.Instance.transform);
+        //chatBoard.SetActive(true);
+      //  chatBoard.transform.SetParent(MessageBoardParent.Instance.transform);
 
         var rc = chatBoard.GetComponent<RectTransform>();
         rc.offsetMin = Vector3.zero;

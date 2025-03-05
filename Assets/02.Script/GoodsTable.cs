@@ -765,8 +765,8 @@ public class GoodsTable
 
         int amount_int = (int)(amount + amount * magicStonePlusValue);
 
-        if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{amount_int})");
+        // if (SystemMessage.IsMessageQueueFull() == false)
+        //     SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.GrowthStone)} 획득(+{amount_int})");
 
         growThStoneAddAmount += amount_int;
 
@@ -789,8 +789,8 @@ public class GoodsTable
 
         int amount_int = (int)(amount + amount * magicMarblePlusValue);
 
-        if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{amount_int})");
+        // if (SystemMessage.IsMessageQueueFull() == false)
+        //     SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Marble)} 획득(+{amount_int})");
 
         marbleAddAmount += amount_int;
 
@@ -808,8 +808,8 @@ public class GoodsTable
 
     public void GetPetUpgradeSoul(float amount)
     {
-        if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.PetUpgradeSoul)} 획득(+{(int)amount})");
+        // if (SystemMessage.IsMessageQueueFull() == false)
+        //     SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.PetUpgradeSoul)} 획득(+{(int)amount})");
 
         soulAddAmount += (int)amount;
 
@@ -1031,8 +1031,8 @@ public class GoodsTable
 
     public void GetSpringEventItem(float amount)
     {
-        if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Kill1_Item)} 획득(+{(int)amount})");
+        // if (SystemMessage.IsMessageQueueFull() == false)
+        //     SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.Event_Kill1_Item)} 획득(+{(int)amount})");
 
         eventItemAddNum_Spring += (int)amount;
 
@@ -1063,8 +1063,8 @@ public class GoodsTable
 
     public void GetsulItem(float amount)
     {
-        if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.SulItem)} 획득(+{(int)amount})");
+        // if (SystemMessage.IsMessageQueueFull() == false)
+        //     SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.SulItem)} 획득(+{(int)amount})");
 
         sulAddNum += (int)amount;
 
@@ -1082,8 +1082,8 @@ public class GoodsTable
 
     public void GetStageRelic(float amount)
     {
-        if (SystemMessage.IsMessageQueueFull() == false)
-            SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.StageRelic)} 획득(+{(int)amount})");
+        // if (SystemMessage.IsMessageQueueFull() == false)
+        //     SystemMessage.Instance.SetMessage($"{CommonString.GetItemName(Item_Type.StageRelic)} 획득(+{(int)amount})");
 
         stageRelicAddNum += amount;
 
